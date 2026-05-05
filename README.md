@@ -63,19 +63,75 @@ both Preview and Production.
 
 ## Deploy to Cloudflare Pages
 
-Project setup (one-time, in Cloudflare dashboard):
+### First-time deploy (step-by-step)
 
-- Framework preset: **Astro**
-- Build command: `npm run build`
-- Build output: `dist`
-- Node.js version: ≥ 22.12 (matches `package.json` engines)
-- Production branch: `main`
-- Custom domain: `pocket3d.games` (Cloudflare Registrar)
+1. **Acquire the domain** (`pocket3d.games`) at
+   [dash.cloudflare.com → Domain Registration](https://dash.cloudflare.com/?to=/:account/domains/register).
+   Cloudflare Registrar sells at cost (~$10–15/yr for `.games`). Skip if already
+   owned elsewhere — see "Using an external registrar" below.
+2. **Create a GitHub repo** (private or public). From this directory:
+   ```powershell
+   git remote add origin https://github.com/<your-user>/pocket3d-portal.git
+   git push -u origin main
+   ```
+3. **Create the Cloudflare Pages project**: dashboard →
+   *Workers & Pages → Create → Pages → Connect to Git*. Pick the GitHub repo,
+   then on the build settings page:
 
-Sitemap and robots:
+   | Field | Value |
+   |---|---|
+   | Framework preset | **Astro** |
+   | Build command | `npm run build` |
+   | Build output directory | `dist` |
+   | Root directory | (leave blank) |
+   | Node.js version | `22.12` or newer (set in *Settings → Environment variables → NODE_VERSION* if the default is older) |
+   | Production branch | `main` |
 
-- Submit `https://pocket3d.games/sitemap-index.xml` to Google Search Console
-- robots.txt is served at `/robots.txt`
+4. **Set environment variables** (*Settings → Environment variables*) for both
+   Production and Preview:
+
+   | Variable | Value | Notes |
+   |---|---|---|
+   | `PUBLIC_SITE_URL` | `https://pocket3d.games` | Used for OGP, canonical, sitemap. Omit trailing slash. |
+   | `NODE_VERSION` | `22.12` | Only if Cloudflare's default is older. |
+
+5. **Attach the custom domain**: Pages project → *Custom domains → Set up a
+   custom domain → `pocket3d.games`* (and `www.pocket3d.games` if desired). If
+   the domain is on Cloudflare Registrar, DNS records are added automatically.
+6. **First deploy**: pushing to `main` triggers a build. Watch the *Deployments*
+   tab; first build takes ~1–2 min.
+7. **Post-deploy verification**:
+   - Visit `https://pocket3d.games/` and `https://pocket3d.games/games/arrow-pop/`
+   - Confirm `https://pocket3d.games/sitemap-index.xml` lists all pages
+   - Submit the sitemap at
+     [Google Search Console → Sitemaps](https://search.google.com/search-console)
+   - Check `View Source` on a game detail page: `og:image`, canonical, JSON-LD
+     should all use the production URL
+
+### Preview deploys
+
+Cloudflare Pages auto-builds every push to non-production branches and every PR.
+Preview URLs look like `https://<commit-hash>.pocket3d-portal.pages.dev`. Use
+this to QA changes before merging to `main`.
+
+### Using an external registrar (e.g. you bought the domain elsewhere)
+
+1. Add the domain in Cloudflare → *Websites → Add site* (free plan is fine).
+2. Cloudflare gives you two nameservers — set those at your registrar's panel.
+3. Wait for activation (minutes to hours), then attach to Pages as in step 5.
+
+### Adding AdSense / Analytics later
+
+When AdSense and analytics IDs are issued, add them as Pages env vars and the
+`<AdSlot>` component will pick them up on the next build:
+
+| Variable | Used by |
+|---|---|
+| `PUBLIC_ADSENSE_ID` | `<AdSlot>` (display ads on portal pages) |
+| `PUBLIC_GA_ID` | (future) GA4 tag |
+
+Cloudflare Web Analytics can be enabled separately from the Pages project's
+*Web Analytics* tab — no code change required.
 
 ## Quality bar (per SHARED_SPEC §16)
 
