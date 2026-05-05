@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import { gameAssetUrl, gameUrl } from "@utils/site";
+import { pickNextGames, type Strategy } from "@utils/recommend";
+import en from "@locales/en.json";
+
+type Props = {
+  currentSlug: string;
+  count?: number;
+  strategy?: Strategy;
+};
+
+const { currentSlug, count = 3, strategy = "random" } = Astro.props;
+
+const all = await getCollection("games");
+const picks = pickNextGames(all, currentSlug, count, strategy);
+---
+
+{
+  picks.length > 0 && (
+    <section
+      data-next-game-suggest
+      data-strategy={strategy}
+      class="mt-10"
+    >
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="text-lg font-extrabold uppercase tracking-widest opacity-70">
+          {en["ui.nextGame"]}
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {picks.map((g) => (
+          <a
+            href={gameUrl(g.data.slug)}
+            class="pop-card group block overflow-hidden"
+          >
+            <div class="aspect-[3/2] overflow-hidden bg-[#1a0a30]">
+              <img
+                src={gameAssetUrl(g.data.slug, g.data.thumbnail)}
+                alt={g.data.title}
+                width="600"
+                height="400"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-3">
+              <div class="text-base font-extrabold leading-tight">
+                {g.data.title}
+              </div>
+              <div class="mt-1 line-clamp-1 text-xs opacity-70">
+                {g.data.tagline}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

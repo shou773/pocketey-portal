@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fredoka", "Baloo 2", system-ui, sans-serif;
+  --color-brand: #ffb020;
+  --color-brand-dark: #b96f00;
+  --color-ink: #1a0a30;
+  --color-ink-soft: #2a1a40;
+  --color-paper: #fff7ea;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-display);
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  body {
+    min-height: 100dvh;
+  }
+  a {
+    color: inherit;
+  }
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-amber-300 px-6 py-3 font-extrabold text-zinc-900 shadow-[0_5px_0_#a86b00] transition active:translate-y-[2px] active:shadow-[0_3px_0_#a86b00];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white/70 px-5 py-2 font-bold text-zinc-900 backdrop-blur transition hover:bg-white;
+  }
+  .pop-card {
+    @apply rounded-3xl border-4 border-[#1a0a30] bg-white shadow-[0_8px_0_#1a0a30] transition;
+  }
+  .pop-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 0 #1a0a30;
+  }
+  .text-stroke-ink {
+    -webkit-text-stroke: 2px #1a0a30;
+    paint-order: stroke fill;
+  }
+}
+
+@layer utilities {
+  .safe-x {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+}

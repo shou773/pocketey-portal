@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import GameCard from "@components/GameCard.astro";
+import AdSlot from "@components/AdSlot.astro";
+import { SITE } from "@utils/site";
+
+const games = (await getCollection("games")).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) {
+    return a.data.featured ? -1 : 1;
+  }
+  return (
+    new Date(b.data.releaseDate).getTime() -
+    new Date(a.data.releaseDate).getTime()
+  );
+});
+---
+
+<BaseLayout
+  pageType="home"
+  title={SITE.name}
+  description={SITE.description}
+>
+  <section class="mb-10 text-center">
+    <h1
+      class="text-5xl font-extrabold tracking-tight text-amber-400 text-stroke-ink sm:text-6xl"
+    >
+      Pocket3D
+    </h1>
+    <p class="mx-auto mt-3 max-w-xl text-base opacity-80 sm:text-lg">
+      Polished 3D games made for your phone. Tap, swipe, pop — every game runs
+      portrait, in your browser, in under 3 minutes.
+    </p>
+  </section>
+
+  <section>
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="text-2xl font-extrabold">All Games</h2>
+      <span class="text-sm opacity-60">
+        {games.length} game{games.length === 1 ? "" : "s"}
+      </span>
+    </div>
+    {
+      games.length === 0 ? (
+        <div class="pop-card p-10 text-center opacity-70">
+          <p class="text-lg font-bold">Games are loading their engines.</p>
+          <p class="mt-1 text-sm">Check back soon.</p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {games.map((g, i) => (
+            <GameCard game={g} loading={i < 3 ? "eager" : "lazy"} />
+          ))}
+        </div>
+      )
+    }
+  </section>
+
+  <section class="mt-12 flex justify-center">
+    <AdSlot slot="portal-grid-1" format="rectangle" network="auto" />
+  </section>
+</BaseLayout>

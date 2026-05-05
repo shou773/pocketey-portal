@@ -1,0 +1,42 @@
+---
+type Format = "banner" | "rectangle" | "rewarded-video";
+type Network = "adsense" | "crazygames" | "gamemonetize" | "auto";
+
+type Props = {
+  slot: string;
+  format?: Format;
+  network?: Network;
+  fallback?: string;
+  className?: string;
+};
+
+const {
+  slot,
+  format = "banner",
+  network = "auto",
+  fallback,
+  className = "",
+} = Astro.props;
+
+const SIZES: Record<Format, { w: number; h: number; label: string }> = {
+  banner: { w: 320, h: 50, label: "320×50 banner" },
+  rectangle: { w: 300, h: 250, label: "300×250 rectangle" },
+  "rewarded-video": { w: 240, h: 64, label: "rewarded video" },
+};
+const size = SIZES[format];
+const isProd = import.meta.env.PROD;
+---
+
+{
+  isProd ? (
+    <div
+      data-adslot={slot}
+      data-adformat={format}
+      data-adnetwork={network}
+      style={`width:${size.w}px;height:${size.h}px`}
+      class={`mx-auto flex items-center justify-center rounded-md border border-[#1a0a30]/15 bg-[#1a0a30]/5 text-[10px] uppercase tracking-widest text-[#1a0a30]/55 ${className}`}
+    >
+      {fallback ?? size.label}
+    </div>
+  ) : null
+}

@@ -1,0 +1,81 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { SITE } from "@utils/site";
+---
+
+<BaseLayout
+  title="Contact"
+  description="How to get in touch with Pocket3D for press, partnerships, bug reports, accessibility feedback, or just to say hello."
+  pageType="static"
+>
+  <article class="prose-page mx-auto max-w-3xl">
+    <h1 class="text-4xl font-extrabold tracking-tight text-amber-400 text-stroke-ink">
+      Contact
+    </h1>
+
+    <p class="mt-6 leading-relaxed">
+      {SITE.name} is run by a single developer, so the contact channels are
+      simple. The fastest way to reach a real person is by email. Please give
+      us a few business days to reply, especially during heavy development
+      sprints. We try not to leave anything unanswered, even if a response
+      arrives a little later than you might expect.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Email</h2>
+    <p class="mt-3 leading-relaxed">
+      For any of the following, email
+      <a class="underline" href="mailto:hello@pocket3d.games">hello@pocket3d.games</a>:
+    </p>
+    <ul class="ml-6 mt-3 list-disc leading-relaxed">
+      <li>Bug reports — please tell us which game, your device, and what you saw</li>
+      <li>Accessibility feedback — color, motion, sound, input</li>
+      <li>Press, podcasts, or interviews</li>
+      <li>Business partnerships, ad networks, sponsorships</li>
+      <li>Localization offers (we welcome volunteers and paid translators)</li>
+      <li>General feedback and feature ideas</li>
+    </ul>
+
+    <h2 class="mt-10 text-2xl font-extrabold">What helps us reply faster</h2>
+    <p class="mt-3 leading-relaxed">
+      Including the URL of the page or game you were on, a one-line summary in
+      the subject, and screenshots if relevant. For bugs in a specific game,
+      tell us the operating system and the browser you used. For business
+      inquiries, a short paragraph about what you actually want is more useful
+      than a 30-page deck — we are a tiny operation and prefer to talk in
+      plain language.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Privacy of your message</h2>
+    <p class="mt-3 leading-relaxed">
+      Messages you send by email are kept only for as long as it takes to
+      handle the request, plus a reasonable backup window. We do not pass them
+      to third parties for advertising or analytics. If you would like a
+      message deleted from our records after we resolve it, mention that in the
+      mail and we will confirm once it is done.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">No phone, no office</h2>
+    <p class="mt-3 leading-relaxed">
+      {SITE.name} does not maintain a phone line or a physical office for
+      visitors. Everything operational happens online. This keeps the studio
+      cost-light and lets us spend the time on games rather than on logistics.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Response times</h2>
+    <p class="mt-3 leading-relaxed">
+      During typical weeks we reply within two to three business days. During
+      a launch week, when a new game is being polished off, replies may take
+      up to a week. We will always reply, even if it is just to acknowledge
+      that the queue is long. If you do not hear back within ten days, please
+      send a polite follow-up; messages occasionally get filtered.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Thanks</h2>
+    <p class="mt-3 leading-relaxed">
+      Thank you for taking the time to write to a small game site. Even short
+      messages — a sentence saying that you enjoyed a game, a screenshot of a
+      high score, a typo on a page — go a long way. They are the entire
+      motivation behind keeping this thing alive.
+    </p>
+  </article>
+</BaseLayout>

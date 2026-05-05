@@ -1,0 +1,23 @@
+{
+  "site.title": "Pocket3D — 1-Minute 3D Browser Games",
+  "site.tagline": "Polished 3D games in your pocket. No download. No login.",
+  "site.description": "Hand-crafted 3D browser games made for your phone. Tap, swipe, pop — every game runs portrait, in your browser, in under 3 minutes.",
+  "nav.home": "Games",
+  "nav.blog": "Blog",
+  "nav.about": "About",
+  "nav.contact": "Contact",
+  "nav.privacy": "Privacy",
+  "nav.terms": "Terms",
+  "ui.play": "Play",
+  "ui.playFullscreen": "Play Fullscreen",
+  "ui.howToPlay": "How to play",
+  "ui.aboutGame": "About this game",
+  "ui.tags": "Tags",
+  "ui.category": "Category",
+  "ui.released": "Released",
+  "ui.playTime": "Play time",
+  "ui.orientation": "Orientation",
+  "ui.nextGame": "Try next",
+  "ui.featured": "Featured",
+  "ui.allGames": "All Games"
+}

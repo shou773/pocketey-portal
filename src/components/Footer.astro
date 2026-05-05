@@ -1,0 +1,36 @@
+---
+import { SITE } from "@utils/site";
+import en from "@locales/en.json";
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-16 border-t-4 border-[#1a0a30] bg-[#1a0a30] text-amber-100">
+  <div
+    class="mx-auto grid max-w-6xl gap-6 px-5 py-10 safe-x sm:grid-cols-3"
+  >
+    <div>
+      <div class="text-2xl font-extrabold text-amber-300 text-stroke-ink">
+        {SITE.name}
+      </div>
+      <p class="mt-2 max-w-xs text-sm opacity-80">{SITE.description}</p>
+    </div>
+    <nav class="flex flex-col gap-1 text-sm">
+      <span class="text-xs uppercase tracking-widest opacity-60">Site</span>
+      <a href="/" class="hover:text-amber-300">{en["nav.home"]}</a>
+      <a href="/blog/" class="hover:text-amber-300">{en["nav.blog"]}</a>
+      <a href="/about/" class="hover:text-amber-300">{en["nav.about"]}</a>
+    </nav>
+    <nav class="flex flex-col gap-1 text-sm">
+      <span class="text-xs uppercase tracking-widest opacity-60">Legal</span>
+      <a href="/privacy/" class="hover:text-amber-300">{en["nav.privacy"]}</a>
+      <a href="/terms/" class="hover:text-amber-300">{en["nav.terms"]}</a>
+      <a href="/contact/" class="hover:text-amber-300">{en["nav.contact"]}</a>
+      <a href="/rss.xml" class="hover:text-amber-300">RSS</a>
+    </nav>
+  </div>
+  <div
+    class="border-t border-amber-100/15 px-5 py-4 text-center text-xs opacity-60"
+  >
+    © {year} {SITE.name}. All games are made with love.
+  </div>
+</footer>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ecbff"/>
+      <stop offset="100%" stop-color="#cdeaff"/>
+    </linearGradient>
+    <radialGradient id="snow" cx="0.5" cy="1" r="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dceaff"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#sky)"/>
+  <!-- mountains -->
+  <polygon points="0,420 90,310 180,400 260,260 360,420" fill="#5fa7e8" opacity="0.7"/>
+  <polygon points="100,420 220,300 320,420" fill="#4d8fcf" opacity="0.7"/>
+  <!-- snow ground -->
+  <rect x="0" y="380" width="512" height="132" fill="url(#snow)"/>
+  <!-- penguin -->
+  <g transform="translate(256 290)">
+    <!-- sled -->
+    <rect x="-110" y="80" width="220" height="28" rx="14" fill="#1a73e8"/>
+    <rect x="-115" y="75" width="14" height="38" rx="3" fill="#ffd84d"/>
+    <rect x="101" y="75" width="14" height="38" rx="3" fill="#ffd84d"/>
+    <!-- body -->
+    <ellipse cx="0" cy="20" rx="68" ry="78" fill="#1a1f3d"/>
+    <ellipse cx="0" cy="38" rx="46" ry="54" fill="#ffffff"/>
+    <!-- head -->
+    <circle cx="0" cy="-58" r="56" fill="#1a1f3d"/>
+    <ellipse cx="0" cy="-50" rx="36" ry="34" fill="#ffffff"/>
+    <!-- eyes -->
+    <circle cx="-18" cy="-62" r="9" fill="#ffffff"/>
+    <circle cx="18" cy="-62" r="9" fill="#ffffff"/>
+    <circle cx="-18" cy="-60" r="4" fill="#1a1f3d"/>
+    <circle cx="18" cy="-60" r="4" fill="#1a1f3d"/>
+    <!-- beak -->
+    <polygon points="-14,-40 14,-40 0,-22" fill="#ff9a3a"/>
+    <!-- wings -->
+    <ellipse cx="-66" cy="20" rx="14" ry="36" fill="#1a1f3d" transform="rotate(-15 -66 20)"/>
+    <ellipse cx="66" cy="20" rx="14" ry="36" fill="#1a1f3d" transform="rotate(15 66 20)"/>
+  </g>
+  <!-- speed lines -->
+  <g stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity="0.7">
+    <line x1="40" y1="450" x2="120" y2="450"/>
+    <line x1="380" y1="445" x2="470" y2="445"/>
+    <line x1="60" y1="475" x2="160" y2="475"/>
+    <line x1="370" y1="475" x2="460" y2="475"/>
+  </g>
+</svg>

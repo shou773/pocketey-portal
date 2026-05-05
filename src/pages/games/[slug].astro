@@ -1,0 +1,111 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import GameEmbed from "@components/GameEmbed.astro";
+import AdSlot from "@components/AdSlot.astro";
+import NextGameSuggest from "@components/NextGameSuggest.astro";
+import { gameAssetUrl, gameUrl } from "@utils/site";
+import categories from "@data/categories.json";
+import en from "@locales/en.json";
+
+export const getStaticPaths = (async () => {
+  const games = await getCollection("games");
+  return games.map((g) => ({
+    params: { slug: g.data.slug },
+    props: { game: g },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { game } = Astro.props as Props;
+const data = game.data;
+const cat = categories.find((c) => c.slug === data.category);
+const ogImage = data.ogImage
+  ? gameAssetUrl(data.slug, data.ogImage)
+  : gameAssetUrl(data.slug, data.thumbnail);
+---
+
+<BaseLayout
+  pageType="game"
+  title={data.title}
+  description={data.description.slice(0, 160)}
+  ogImage={ogImage}
+  canonical={gameUrl(data.slug)}
+  game={{
+    slug: data.slug,
+    category: data.category,
+    releaseDate: data.releaseDate,
+    version: data.version,
+  }}
+>
+  <article class="space-y-10">
+    <header class="text-center">
+      <div class="mb-2 flex justify-center gap-2 text-xs font-bold uppercase tracking-widest opacity-70">
+        {cat && <span style={`color:${cat.color}`}>{cat.name.en}</span>}
+        <span>•</span>
+        <span>{data.playTime}</span>
+        <span>•</span>
+        <span class="capitalize">{data.orientation}</span>
+      </div>
+      <h1 class="text-4xl font-extrabold tracking-tight text-amber-400 text-stroke-ink sm:text-5xl">
+        {data.title}
+      </h1>
+      <p class="mx-auto mt-2 max-w-xl text-base opacity-80">{data.tagline}</p>
+    </header>
+
+    <GameEmbed
+      slug={data.slug}
+      title={data.title}
+      orientation={data.orientation}
+    />
+
+    <section class="grid gap-6 sm:grid-cols-3">
+      <div class="pop-card p-5 sm:col-span-2">
+        <h2 class="mb-2 text-lg font-extrabold uppercase tracking-widest">
+          {en["ui.aboutGame"]}
+        </h2>
+        <p class="whitespace-pre-line text-sm leading-relaxed opacity-90">
+          {data.description}
+        </p>
+      </div>
+      <aside class="pop-card space-y-3 p-5 text-sm">
+        <div>
+          <div class="text-xs uppercase tracking-widest opacity-60">
+            {en["ui.howToPlay"]}
+          </div>
+          <p class="mt-1 font-bold">{data.controls.en}</p>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-widest opacity-60">
+            {en["ui.released"]}
+          </div>
+          <p class="mt-1 font-bold nums">{data.releaseDate}</p>
+        </div>
+        <div>
+          <div class="text-xs uppercase tracking-widest opacity-60">
+            {en["ui.tags"]}
+          </div>
+          <div class="mt-1 flex flex-wrap gap-1">
+            {data.tags.map((t) => (
+              <span class="rounded-full bg-[#1a0a30]/8 px-2 py-0.5 text-xs">
+                #{t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="flex justify-center">
+      <AdSlot slot="game-detail-bottom" format="rectangle" network="auto" />
+    </div>
+
+    <NextGameSuggest
+      currentSlug={data.slug}
+      count={3}
+      strategy="same-category"
+    />
+  </article>
+</BaseLayout>

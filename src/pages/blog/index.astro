@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { SITE } from "@utils/site";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort(
+    (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+  );
+---
+
+<BaseLayout
+  title="Blog"
+  description={`Development notes, game design write-ups, and release announcements from ${SITE.name}.`}
+  pageType="static"
+>
+  <header class="mb-10 text-center">
+    <h1 class="text-4xl font-extrabold tracking-tight text-amber-400 text-stroke-ink">
+      Blog
+    </h1>
+    <p class="mt-2 opacity-80">
+      Development notes, design write-ups, and release announcements.
+    </p>
+  </header>
+
+  {
+    posts.length === 0 ? (
+      <div class="pop-card mx-auto max-w-xl p-10 text-center opacity-70">
+        <p class="text-lg font-bold">No posts yet.</p>
+        <p class="mt-1 text-sm">First entry will land with our first launch.</p>
+      </div>
+    ) : (
+      <div class="space-y-4">
+        {posts.map((p) => (
+          <a
+            href={`/blog/${p.id}/`}
+            class="pop-card block p-5"
+          >
+            <div class="text-xs uppercase tracking-widest opacity-60 nums">
+              {p.data.publishDate.toISOString().slice(0, 10)}
+            </div>
+            <h2 class="mt-1 text-xl font-extrabold">{p.data.title}</h2>
+            <p class="mt-1 text-sm opacity-80">{p.data.description}</p>
+          </a>
+        ))}
+      </div>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,95 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About Pocket3D"
+  description="Pocket3D is a tiny independent studio crafting polished 3D games made for portrait phone screens. Learn what we make, why we make it, and how the site is run."
+  pageType="static"
+>
+  <article class="prose-page mx-auto max-w-3xl">
+    <h1 class="text-4xl font-extrabold tracking-tight text-amber-400 text-stroke-ink">
+      About Pocket3D
+    </h1>
+
+    <p class="mt-6 text-lg opacity-90">
+      Pocket3D is a one-person studio that makes free, polished 3D games for the
+      browser. Every game on this site is hand-crafted to run on a phone held in
+      portrait, load in under three seconds, and deliver a satisfying loop in
+      under three minutes. No accounts, no installs, no trackers that follow you
+      around the web.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Why portrait, why three minutes?</h2>
+    <p class="mt-3 leading-relaxed">
+      Most 3D browser games on the big aggregators are designed for landscape
+      desktop play first, and only later squeezed onto a phone. We do the
+      opposite. We start every prototype on a 9:16 canvas, with the assumption
+      that the player is holding the phone with one thumb on the screen, while
+      waiting for a coffee, a friend, or a bus. That single constraint changes
+      almost every design decision: cameras get pulled in tighter, controls
+      become a single tap or a swipe, scoring loops compress into bite-sized
+      sessions, and every level has to teach itself in seconds. The result is a
+      kind of game that, in our opinion, almost nobody else is making for the
+      web today.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">What you will find here</h2>
+    <p class="mt-3 leading-relaxed">
+      Right now the catalog is small and curated on purpose. You will find tap
+      puzzles where every move is a tiny chain reaction, endless runners where
+      you backflip down a snowy slope, and short experiments that try a single
+      idea well rather than a dozen ideas badly. The plan is to grow to roughly
+      ten games over the first year, then thirty, then up to fifty if reception
+      stays strong. Each game ships as a static bundle; we never stream content
+      from a remote server during play, which means the game keeps working even
+      when your connection drops mid-session.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">How the games are built</h2>
+    <p class="mt-3 leading-relaxed">
+      The technical backbone is Next.js with React Three Fiber for 3D rendering,
+      and the portal that wraps everything is built on Astro for raw speed. All
+      audio is generated on the fly using the Web Audio API rather than relying
+      on licensed sample packs, which keeps the download size under a megabyte
+      for most games. Visual style leans on bold cartoon colors, chunky
+      outlines, post-processing bloom, and the Fredoka typeface — a deliberate
+      counterweight to the muted minimalism of so many web puzzle games. The
+      whole site is hosted on Cloudflare Pages and ships as static HTML, so it
+      stays fast even from the other side of the planet.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">How the site makes money</h2>
+    <p class="mt-3 leading-relaxed">
+      Pocket3D is supported by display advertising and game-network rewarded
+      video. Ads are deliberately placed where they cannot interrupt the play
+      itself: a small banner under the game frame, a single rectangle in the
+      end-of-round modal, and an optional rewarded video for players who choose
+      to watch one in exchange for a continue or a bonus. We do not run
+      auto-playing video, full-page interstitials before play, or any ad
+      placement that could be mistaken for the game UI. Honest, gentle ads are a
+      conscious commitment; if a game stops feeling fun because of them, we
+      change the placement, not the game.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Who runs Pocket3D</h2>
+    <p class="mt-3 leading-relaxed">
+      Pocket3D is operated as a solo project. Game design, programming, art
+      direction, sound, copy, and the website itself are all handled by one
+      person, with help from open-source tools and open-license fonts. If you
+      want to talk about a partnership, a feature request, a bug report, or
+      simply want to say hello, the contact page has the latest channels open
+      to the public. We try to read everything that arrives, even if a personal
+      reply takes a while.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">A note on language</h2>
+    <p class="mt-3 leading-relaxed">
+      The site and every game ship in English by default and add Japanese where
+      practical, in line with our current main audiences. Other locales will
+      be added as the catalog grows and as community demand makes itself
+      heard. Thanks for stopping by — we hope at least one of these tiny worlds
+      stays with you long after you close the tab.
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a1a6a"/>
+      <stop offset="0.55" stop-color="#7a2a8c"/>
+      <stop offset="1" stop-color="#ff7a3d"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe066"/>
+      <stop offset="1" stop-color="#ff8a3d"/>
+    </linearGradient>
+    <linearGradient id="rose" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b8c"/>
+      <stop offset="1" stop-color="#ff3b5c"/>
+    </linearGradient>
+    <linearGradient id="aqua" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6dffce"/>
+      <stop offset="1" stop-color="#28a3ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <g transform="translate(256 256)">
+    <g transform="rotate(-15) translate(-90 -10)">
+      <path d="M-50 -45 H30 L30 -75 L80 -10 L30 55 L30 25 L-50 25 Z" fill="url(#rose)" stroke="#1a0a30" stroke-width="10" stroke-linejoin="round"/>
+    </g>
+    <g transform="rotate(20) translate(40 -70)">
+      <path d="M-45 -35 H25 L25 -65 L70 -10 L25 45 L25 15 L-45 15 Z" fill="url(#amber)" stroke="#1a0a30" stroke-width="10" stroke-linejoin="round" transform="rotate(-90)"/>
+    </g>
+    <g transform="rotate(-25) translate(60 60)">
+      <path d="M-40 -30 H20 L20 -55 L60 -8 L20 38 L20 12 L-40 12 Z" fill="url(#aqua)" stroke="#1a0a30" stroke-width="10" stroke-linejoin="round" transform="rotate(135)"/>
+    </g>
+  </g>
+</svg>

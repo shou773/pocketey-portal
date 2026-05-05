@@ -1,0 +1,108 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { SITE } from "@utils/site";
+const updated = "2026-05-06";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Pocket3D handles cookies, analytics, and advertising data. We use a cookieless analytics tool and disclose every third-party script we run."
+  pageType="static"
+>
+  <article class="prose-page mx-auto max-w-3xl">
+    <h1 class="text-4xl font-extrabold tracking-tight text-amber-400 text-stroke-ink">
+      Privacy Policy
+    </h1>
+    <p class="mt-2 text-sm opacity-60">Last updated: {updated}</p>
+
+    <p class="mt-6 leading-relaxed">
+      This page explains what data {SITE.name} collects when you visit the
+      site or play one of the games, what we use it for, and what choices you
+      have. Plain English first, formal language second.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Who we are</h2>
+    <p class="mt-3 leading-relaxed">
+      {SITE.name} is a small, independently operated game site reachable at
+      {SITE.url}. It is run by a solo developer rather than a company, and is
+      hosted on Cloudflare Pages.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">What we collect</h2>
+    <p class="mt-3 leading-relaxed">
+      The site itself uses Cloudflare Web Analytics, which is a cookieless
+      analytics product. It records aggregate page views, country-level
+      geography, the referring site, and basic information about your browser
+      such as the user agent string. It does not assign you a persistent
+      identifier, does not build a behavior profile, and does not share your
+      data with third-party advertising networks. We do not run any other
+      first-party analytics tool by default.
+    </p>
+    <p class="mt-3 leading-relaxed">
+      Each individual game stores a small amount of progress data inside your
+      browser using <code>localStorage</code>. This typically includes high
+      scores, the level you reached, your sound preference, and similar
+      gameplay state. None of this leaves your device. You can clear it at any
+      time by clearing site data for {SITE.url} in your browser settings.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Advertising</h2>
+    <p class="mt-3 leading-relaxed">
+      Some pages display advertising provided by Google AdSense and game-focused
+      ad networks such as CrazyGames SDK, GameMonetize and AdinPlay. These
+      partners are independent companies and may set their own cookies, web
+      beacons, or device identifiers in order to serve, measure, and report on
+      ads. They may also use that information to personalize ads on other sites
+      you visit.
+    </p>
+    <p class="mt-3 leading-relaxed">
+      You can review and adjust the choices Google makes about your ads at
+      <a class="underline" href="https://adssettings.google.com/">adssettings.google.com</a>.
+      You can opt out of personalized advertising from many third-party
+      networks at the
+      <a class="underline" href="https://optout.networkadvertising.org/">Network Advertising Initiative</a>
+      and the
+      <a class="underline" href="https://optout.aboutads.info/">Digital Advertising Alliance</a>.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Children</h2>
+    <p class="mt-3 leading-relaxed">
+      The site is not directed at children under 13. We do not knowingly collect
+      personal information from children. If you believe a child has provided
+      personal information to us, please reach out via the contact page and we
+      will delete it.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">International transfers</h2>
+    <p class="mt-3 leading-relaxed">
+      Because the site is delivered through Cloudflare's global content delivery
+      network, requests are routed to the data center closest to the visitor.
+      Cloudflare and Google operate infrastructure across many countries; their
+      respective privacy policies cover how they handle traffic data in transit.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Your choices</h2>
+    <p class="mt-3 leading-relaxed">
+      You can disable JavaScript or use an ad blocker to opt out of advertising
+      on the site. You can clear local game progress at any time via your
+      browser. You can request information about data we hold by emailing the
+      address on the contact page; because we operate at a small scale, we
+      typically have very little data attached to any one visitor.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Changes to this policy</h2>
+    <p class="mt-3 leading-relaxed">
+      When we change anything material on this page, we will update the date at
+      the top of the document and, where the change affects how data is
+      collected, post a short notice on the home page. Continued use of the
+      site after such a change means you accept the updated policy.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Contact</h2>
+    <p class="mt-3 leading-relaxed">
+      Questions about this policy can be sent through the
+      <a class="underline" href="/contact/">contact page</a>. We try to respond
+      within a few business days.
+    </p>
+  </article>
+</BaseLayout>
