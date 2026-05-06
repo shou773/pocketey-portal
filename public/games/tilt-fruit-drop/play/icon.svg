@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1c2768"/>
+      <stop offset="60%" stop-color="#5a4f9c"/>
+      <stop offset="100%" stop-color="#ffb86b"/>
+    </linearGradient>
+    <radialGradient id="melon" cx="0.4" cy="0.35" r="0.7">
+      <stop offset="0%" stop-color="#74cf72"/>
+      <stop offset="60%" stop-color="#2c8c3c"/>
+      <stop offset="100%" stop-color="#1c5d24"/>
+    </radialGradient>
+    <radialGradient id="cherry" cx="0.35" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#ff9aa3"/>
+      <stop offset="80%" stop-color="#e84855"/>
+    </radialGradient>
+    <radialGradient id="grape" cx="0.35" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#d29bf2"/>
+      <stop offset="80%" stop-color="#a35cd6"/>
+    </radialGradient>
+    <radialGradient id="orange" cx="0.35" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="#ffd2a3"/>
+      <stop offset="80%" stop-color="#ff9a3c"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- jar tilt ~ -10deg -->
+  <g transform="translate(256 280) rotate(-10) translate(-256 -280)">
+    <!-- glass jar silhouette -->
+    <path d="M120 196 L180 156 L332 156 L392 196 L392 408 L120 408 Z"
+          fill="rgba(244,236,255,0.15)" stroke="rgba(255,255,255,0.7)" stroke-width="6" stroke-linejoin="round"/>
+    <!-- rim -->
+    <path d="M180 156 L332 156" stroke="#ffd97a" stroke-width="14" stroke-linecap="round"/>
+    <!-- fruits -->
+    <circle cx="200" cy="370" r="48" fill="url(#melon)"/>
+    <circle cx="290" cy="372" r="42" fill="url(#orange)"/>
+    <circle cx="240" cy="300" r="36" fill="url(#grape)"/>
+    <circle cx="306" cy="306" r="28" fill="url(#cherry)"/>
+    <circle cx="180" cy="312" r="22" fill="#ff7a8e"/>
+    <circle cx="338" cy="248" r="20" fill="#ffd83d"/>
+  </g>
+</svg>
