@@ -1,7 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { SITE } from "@utils/site";
+import { SITE, FEATURES } from "@utils/site";
+
+if (!FEATURES.blog) {
+  return Astro.redirect("/", 302);
+}
 
 const posts = (await getCollection("blog"))
   .filter((p) => !p.data.draft)

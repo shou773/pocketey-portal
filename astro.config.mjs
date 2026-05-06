@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { FEATURES } from './src/utils/site.ts';
 
 const SITE = process.env.PUBLIC_SITE_URL || 'https://pocketey.com';
 
@@ -15,5 +16,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => (FEATURES.blog ? true : !/\/blog(\/|$)/.test(page)),
+    }),
+  ],
 });

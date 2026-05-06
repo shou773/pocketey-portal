@@ -1,5 +1,5 @@
 ---
-import { SITE } from "@utils/site";
+import { SITE, FEATURES } from "@utils/site";
 import en from "@locales/en.json";
 ---
 
@@ -22,12 +22,14 @@ import en from "@locales/en.json";
       >
         {en["nav.home"]}
       </a>
-      <a
-        href="/blog/"
-        class="rounded-full px-3 py-1.5 hover:bg-[#1a0a30] hover:text-amber-300"
-      >
-        {en["nav.blog"]}
-      </a>
+      {FEATURES.blog && (
+        <a
+          href="/blog/"
+          class="rounded-full px-3 py-1.5 hover:bg-[#1a0a30] hover:text-amber-300"
+        >
+          {en["nav.blog"]}
+        </a>
+      )}
       <a
         href="/about/"
         class="rounded-full px-3 py-1.5 hover:bg-[#1a0a30] hover:text-amber-300"

@@ -1,11 +1,13 @@
 import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
-import { SITE, gameUrl } from "@utils/site";
+import { SITE, FEATURES, gameUrl } from "@utils/site";
 import type { APIContext } from "astro";
 
 export async function GET(context: APIContext) {
   const games = await getCollection("games");
-  const blog = (await getCollection("blog")).filter((p) => !p.data.draft);
+  const blog = FEATURES.blog
+    ? (await getCollection("blog")).filter((p) => !p.data.draft)
+    : [];
 
   const items = [
     ...games.map((g) => ({

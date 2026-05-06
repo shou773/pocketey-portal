@@ -15,6 +15,10 @@ export const SITE = {
   locale: "en",
 } as const;
 
+export const FEATURES = {
+  blog: false,
+} as const;
+
 export function absoluteUrl(path: string): string {
   if (/^https?:/i.test(path)) return path;
   return `${SITE.url}${path.startsWith("/") ? "" : "/"}${path}`;

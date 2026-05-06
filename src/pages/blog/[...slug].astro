@@ -2,8 +2,10 @@
 import { getCollection, render } from "astro:content";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { FEATURES } from "@utils/site";
 
 export const getStaticPaths = (async () => {
+  if (!FEATURES.blog) return [];
   const posts = (await getCollection("blog")).filter((p) => !p.data.draft);
   return posts.map((p) => ({ params: { slug: p.id }, props: { post: p } }));
 }) satisfies GetStaticPaths;
