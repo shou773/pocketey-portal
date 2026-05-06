@@ -13,6 +13,8 @@ export const SITE = {
   defaultOgImage: "/og-default.png",
   twitter: "@pocketey",
   locale: "en",
+  adsenseId:
+    import.meta.env.PUBLIC_ADSENSE_ID || "ca-pub-3863821336817317",
 } as const;
 
 export const FEATURES = {

@@ -4,12 +4,15 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import SEO from "@components/SEO.astro";
 import type { Props as SEOProps } from "@components/SEO.astro";
+import { SITE } from "@utils/site";
 
 type Props = SEOProps & {
   bodyClass?: string;
 };
 
 const { bodyClass = "", ...seo } = Astro.props;
+const isProd = import.meta.env.PROD;
+const adsenseId = SITE.adsenseId;
 ---
 
 <!doctype html>
@@ -31,6 +34,16 @@ const { bodyClass = "", ...seo } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
     />
     <link rel="alternate" type="application/rss+xml" title="Pocketey" href="/rss.xml" />
+    {isProd && adsenseId && (
+      <script
+        async
+        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+        crossorigin="anonymous"
+      />
+    )}
+    {isProd && adsenseId && (
+      <meta name="google-adsense-account" content={adsenseId} />
+    )}
     <SEO {...seo} />
   </head>
   <body class={`bg-[#fff7ea] text-[#1a0a30] ${bodyClass}`}>
