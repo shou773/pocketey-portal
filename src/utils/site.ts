@@ -8,7 +8,7 @@ export const SITE = {
   description:
     "Hand-crafted 3D browser games made for your phone. Tap, swipe, pop — every game runs portrait, in your browser, in under 3 minutes.",
   url: (
-    import.meta.env.PUBLIC_SITE_URL || "https://pocket3d.games"
+    import.meta.env.PUBLIC_SITE_URL || "https://pocketey.com"
   ).replace(/\/$/, ""),
   defaultOgImage: "/og-default.png",
   twitter: "@pocket3d",

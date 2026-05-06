@@ -56,7 +56,7 @@ at build time, so a malformed `game.json` fails the build before deploy.
 
 | Var | Purpose | Default |
 |---|---|---|
-| `PUBLIC_SITE_URL` | Used for OGP, canonical, sitemap | `https://pocket3d.games` |
+| `PUBLIC_SITE_URL` | Used for OGP, canonical, sitemap | `https://pocketey.com` |
 
 Set this in Cloudflare Pages → Project → Settings → Environment Variables for
 both Preview and Production.
@@ -65,9 +65,9 @@ both Preview and Production.
 
 ### First-time deploy (step-by-step)
 
-1. **Acquire the domain** (`pocket3d.games`) at
+1. **Acquire the domain** (`pocketey.com`) at
    [dash.cloudflare.com → Domain Registration](https://dash.cloudflare.com/?to=/:account/domains/register).
-   Cloudflare Registrar sells at cost (~$10–15/yr for `.games`). Skip if already
+   Cloudflare Registrar sells at cost (~$10–15/yr for `.com`). Skip if already
    owned elsewhere — see "Using an external registrar" below.
 2. **Create a GitHub repo** (private or public). From this directory:
    ```powershell
@@ -92,17 +92,17 @@ both Preview and Production.
 
    | Variable | Value | Notes |
    |---|---|---|
-   | `PUBLIC_SITE_URL` | `https://pocket3d.games` | Used for OGP, canonical, sitemap. Omit trailing slash. |
+   | `PUBLIC_SITE_URL` | `https://pocketey.com` | Used for OGP, canonical, sitemap. Omit trailing slash. |
    | `NODE_VERSION` | `22.12` | Only if Cloudflare's default is older. |
 
 5. **Attach the custom domain**: Pages project → *Custom domains → Set up a
-   custom domain → `pocket3d.games`* (and `www.pocket3d.games` if desired). If
+   custom domain → `pocketey.com`* (and `www.pocketey.com` if desired). If
    the domain is on Cloudflare Registrar, DNS records are added automatically.
 6. **First deploy**: pushing to `main` triggers a build. Watch the *Deployments*
    tab; first build takes ~1–2 min.
 7. **Post-deploy verification**:
-   - Visit `https://pocket3d.games/` and `https://pocket3d.games/games/arrow-pop/`
-   - Confirm `https://pocket3d.games/sitemap-index.xml` lists all pages
+   - Visit `https://pocketey.com/` and `https://pocketey.com/games/arrow-pop/`
+   - Confirm `https://pocketey.com/sitemap-index.xml` lists all pages
    - Submit the sitemap at
      [Google Search Console → Sitemaps](https://search.google.com/search-console)
    - Check `View Source` on a game detail page: `og:image`, canonical, JSON-LD
@@ -111,7 +111,7 @@ both Preview and Production.
 ### Preview deploys
 
 Cloudflare Pages auto-builds every push to non-production branches and every PR.
-Preview URLs look like `https://<commit-hash>.pocket3d-portal.pages.dev`. Use
+Preview URLs look like `https://<commit-hash>.pocketey-portal.pages.dev`. Use
 this to QA changes before merging to `main`.
 
 ### Using an external registrar (e.g. you bought the domain elsewhere)
