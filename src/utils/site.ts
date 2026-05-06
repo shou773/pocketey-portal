@@ -15,6 +15,9 @@ export const SITE = {
   locale: "en",
   adsenseId:
     import.meta.env.PUBLIC_ADSENSE_ID || "ca-pub-3863821336817317",
+  searchConsoleVerification:
+    import.meta.env.PUBLIC_GSC_VERIFICATION ||
+    "dI3TAtbUdwdQOWLGwOfcRGYRp2Qgpgkgjok_1XaaQx8",
 } as const;
 
 export const FEATURES = {

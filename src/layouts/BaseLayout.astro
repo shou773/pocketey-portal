@@ -13,6 +13,8 @@ type Props = SEOProps & {
 const { bodyClass = "", ...seo } = Astro.props;
 const isProd = import.meta.env.PROD;
 const adsenseId = SITE.adsenseId;
+const fundingChoicesId = adsenseId.replace(/^ca-/, "");
+const gscVerification = SITE.searchConsoleVerification;
 ---
 
 <!doctype html>
@@ -34,6 +36,9 @@ const adsenseId = SITE.adsenseId;
       href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
     />
     <link rel="alternate" type="application/rss+xml" title="Pocketey" href="/rss.xml" />
+    {gscVerification && (
+      <meta name="google-site-verification" content={gscVerification} />
+    )}
     {isProd && adsenseId && (
       <script
         async
@@ -43,6 +48,33 @@ const adsenseId = SITE.adsenseId;
     )}
     {isProd && adsenseId && (
       <meta name="google-adsense-account" content={adsenseId} />
+    )}
+    {isProd && fundingChoicesId && (
+      <script
+        async
+        data-cfasync="false"
+        src={`https://fundingchoicesmessages.google.com/i/${fundingChoicesId}?ers=1`}
+      />
+    )}
+    {isProd && fundingChoicesId && (
+      <script is:inline>
+        (function() {
+          function signalGooglefcPresent() {
+            if (!window.frames['googlefcPresent']) {
+              if (document.body) {
+                const iframe = document.createElement('iframe');
+                iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
+                iframe.style.display = 'none';
+                iframe.name = 'googlefcPresent';
+                document.body.appendChild(iframe);
+              } else {
+                setTimeout(signalGooglefcPresent, 0);
+              }
+            }
+          }
+          signalGooglefcPresent();
+        })();
+      </script>
     )}
     <SEO {...seo} />
   </head>
