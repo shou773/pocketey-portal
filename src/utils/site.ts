@@ -3,7 +3,7 @@
  * Single source of truth for the site brand and URL.
  */
 export const SITE = {
-  name: "Pocket3D",
+  name: "Pocketey",
   tagline: "1-Minute 3D Browser Games",
   description:
     "Hand-crafted 3D browser games made for your phone. Tap, swipe, pop — every game runs portrait, in your browser, in under 3 minutes.",
@@ -11,7 +11,7 @@ export const SITE = {
     import.meta.env.PUBLIC_SITE_URL || "https://pocketey.com"
   ).replace(/\/$/, ""),
   defaultOgImage: "/og-default.png",
-  twitter: "@pocket3d",
+  twitter: "@pocketey",
   locale: "en",
 } as const;
 

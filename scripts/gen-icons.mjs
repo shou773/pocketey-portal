@@ -10,7 +10,7 @@ const publicDir = resolve(__dirname, "../public");
 const ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect width="512" height="512" rx="96" fill="#1a0a30"/>
   <circle cx="256" cy="256" r="170" fill="#ffb020"/>
-  <text x="256" y="338" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-size="220" font-weight="800" fill="#1a0a30">P3</text>
+  <text x="256" y="338" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-size="220" font-weight="800" fill="#1a0a30">Pe</text>
 </svg>`;
 
 const OG_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
@@ -23,8 +23,8 @@ const OG_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect x="40" y="40" width="1120" height="550" rx="36" fill="#1a0a30"/>
   <circle cx="240" cy="315" r="160" fill="#ffb020"/>
-  <text x="240" y="385" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-size="180" font-weight="800" fill="#1a0a30">P3</text>
-  <text x="460" y="280" font-family="Fredoka, system-ui, sans-serif" font-size="92" font-weight="800" fill="#ffb020">Pocket3D</text>
+  <text x="240" y="385" text-anchor="middle" font-family="Fredoka, system-ui, sans-serif" font-size="180" font-weight="800" fill="#1a0a30">Pe</text>
+  <text x="460" y="280" font-family="Fredoka, system-ui, sans-serif" font-size="92" font-weight="800" fill="#ffb020">Pocketey</text>
   <text x="460" y="360" font-family="Fredoka, system-ui, sans-serif" font-size="42" font-weight="500" fill="#fff7ea">1-Minute 3D Browser Games</text>
   <text x="460" y="430" font-family="Fredoka, system-ui, sans-serif" font-size="28" font-weight="400" fill="#fff7ea" opacity="0.85">Tap. Swipe. Pop. No download.</text>
 </svg>`;

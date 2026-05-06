@@ -1,6 +1,6 @@
-# Pocket3D — Portal
+# Pocketey — Portal
 
-The Astro-built portal site for Pocket3D. Hosts game listings, detail pages,
+The Astro-built portal site for Pocketey. Hosts game listings, detail pages,
 blog and AdSense-required static pages. Each game lives in its own repo at
 `../games/<slug>/` and is brought in via `scripts/import-game.mjs`.
 
@@ -71,7 +71,7 @@ both Preview and Production.
    owned elsewhere — see "Using an external registrar" below.
 2. **Create a GitHub repo** (private or public). From this directory:
    ```powershell
-   git remote add origin https://github.com/<your-user>/pocket3d-portal.git
+   git remote add origin https://github.com/<your-user>/pocketey-portal.git
    git push -u origin main
    ```
 3. **Create the Cloudflare Pages project**: dashboard →
