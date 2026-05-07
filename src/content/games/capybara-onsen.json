@@ -1,0 +1,39 @@
+{
+  "slug": "capybara-onsen",
+  "title": "Capybara Onsen",
+  "tagline": "Tap to Soak. Sleep to Earn.",
+  "description": "Build the cosiest hot spring on the internet. Tap to drop sleepy capybaras into a steaming bath, upgrade onsen tiers, and unlock zen gardens. Capybara Onsen is a free idle clicker browser game blending capybara hot spring vibes with classic incremental progression. Watch your spa fill up with bobbing capybaras, earn coins while you sleep, and prestige into new onsen towns to chase spirit charms that boost your earnings forever. Plays portrait on mobile, no install required.",
+  "category": "idle",
+  "tags": [
+    "idle",
+    "clicker",
+    "capybara",
+    "onsen",
+    "casual",
+    "cozy",
+    "japanese",
+    "offline-progression"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/capybara-onsen/",
+  "controls": {
+    "en": "Tap the bath to drop capybaras and earn coins. Open the shop to upgrade.",
+    "ja": "湯舟をタップしてカピバラを呼ぶ。ショップで強化。"
+  },
+  "playTime": "10min+",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-22",
+  "version": "0.1.0",
+  "featured": false,
+  "longTailKeyword": "capybara onsen idle clicker game",
+  "engineNotes": "Next.js 16 + R3F + Zustand + break_infinity.js"
+}
