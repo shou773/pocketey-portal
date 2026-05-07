@@ -67,14 +67,20 @@ export const onRequestPost = async ({ request, env }: Ctx): Promise<Response> =>
     expirationTtl: REPORT_TTL_SECONDS,
   });
 
-  // Email is best-effort — KV storage above is the source of truth.
-  sendEmail(env, report).catch((err) => console.error("email failed", err));
+  // Email is best-effort. Awaited so the Workers runtime doesn't tear down
+  // the in-flight fetch when the response returns.
+  await sendEmail(env, report).catch((err) =>
+    console.error("email failed", err)
+  );
 
   return jsonResponse({ ok: true, id });
 };
 
 async function sendEmail(env: Env, report: StoredReport): Promise<void> {
-  if (!env.RESEND_API_KEY) return;
+  if (!env.RESEND_API_KEY) {
+    console.warn("sendEmail: RESEND_API_KEY missing, skipping");
+    return;
+  }
   const to = env.REPORT_TO_EMAIL || "shishiyo1@gmail.com";
   const from =
     env.RESEND_FROM || "Pocketey Reports <onboarding@resend.dev>";
@@ -103,7 +109,9 @@ async function sendEmail(env: Env, report: StoredReport): Promise<void> {
     },
     body: JSON.stringify({ from, to, subject, text }),
   });
-  if (!res.ok) {
+  if (res.ok) {
+    console.log("resend delivered", report.id);
+  } else {
     const errText = await res.text();
     console.error("resend failed", res.status, errText);
   }
