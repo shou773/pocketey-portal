@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import GameEmbed from "@components/GameEmbed.astro";
+import GameFeedback from "@components/GameFeedback.astro";
 import AdSlot from "@components/AdSlot.astro";
 import NextGameSuggest from "@components/NextGameSuggest.astro";
 import { gameAssetUrl, gameUrl } from "@utils/site";
@@ -60,6 +61,8 @@ const ogImage = data.ogImage
       title={data.title}
       orientation={data.orientation}
     />
+
+    <GameFeedback slug={data.slug} title={data.title} />
 
     <section class="grid gap-6 sm:grid-cols-3">
       <div class="pop-card p-5 sm:col-span-2">

@@ -57,9 +57,14 @@ at build time, so a malformed `game.json` fails the build before deploy.
 | Var | Purpose | Default |
 |---|---|---|
 | `PUBLIC_SITE_URL` | Used for OGP, canonical, sitemap | `https://pocketey.com` |
+| `IP_HASH_SALT` | Salt for hashing visitor IPs in `/api/vote` & `/api/report` (set this in production!) | falls back to a hardcoded default |
+| `RESEND_API_KEY` | Resend API key for emailing bug reports. Reports still save to KV without it | unset → email skipped |
+| `REPORT_TO_EMAIL` | Recipient address for bug-report emails | `shishiyo1@gmail.com` |
+| `RESEND_FROM` | Sender address (verify your domain on Resend, or use the default) | `Pocketey Reports <onboarding@resend.dev>` |
 
-Set this in Cloudflare Pages → Project → Settings → Environment Variables for
-both Preview and Production.
+Set these in Cloudflare Pages → Project → Settings → Environment Variables for
+both Preview and Production. `IP_HASH_SALT` should be a random string and
+should NOT be exposed publicly (don't prefix it with `PUBLIC_`).
 
 ## Deploy to Cloudflare Pages
 
@@ -119,6 +124,57 @@ this to QA changes before merging to `main`.
 1. Add the domain in Cloudflare → *Websites → Add site* (free plan is fine).
 2. Cloudflare gives you two nameservers — set those at your registrar's panel.
 3. Wait for activation (minutes to hours), then attach to Pages as in step 5.
+
+### Game feedback API (votes + bug reports)
+
+Each game detail page renders a 👍 / 👎 / 🐛 Report widget under the embed.
+The data lives in **Cloudflare KV** and is served by **Pages Functions** under
+`functions/api/`. One-time setup on the Cloudflare dashboard:
+
+1. **Create a KV namespace**: dashboard → *Workers & Pages → KV → Create
+   namespace*. Name it e.g. `pocketey-feedback`. Copy the namespace ID.
+2. **Bind it to the Pages project**: Pages project → *Settings → Functions →
+   KV namespace bindings → Add binding*. Set:
+   - **Variable name**: `FEEDBACK_KV` (must match exactly — the code reads
+     `env.FEEDBACK_KV`)
+   - **KV namespace**: the one created above
+   - Add the same binding for both **Production** and **Preview**.
+3. **Set environment variables** under *Settings → Environment variables*:
+   - `IP_HASH_SALT` — random string, e.g. output of `openssl rand -hex 32`
+   - `RESEND_API_KEY` — sign up at [resend.com](https://resend.com), free tier
+     is 100 emails/day. The default sender `onboarding@resend.dev` works
+     without domain verification (Resend will only deliver to the verified
+     account email until you verify your own domain).
+   - `REPORT_TO_EMAIL` — your inbox (or skip; defaults to `shishiyo1@gmail.com`)
+
+#### API surface
+
+| Method | Path | Body / Query | Returns |
+|---|---|---|---|
+| `GET`  | `/api/votes?slug=foo` | — | `{ slug, up, down }` |
+| `GET`  | `/api/votes?slugs=a,b,c` | — | `{ counts: { a: { up, down }, ... } }` |
+| `POST` | `/api/vote` | `{ slug, value: "up" \| "down" }` | `{ slug, up, down, your }` |
+| `POST` | `/api/report` | `{ slug, message, browserNote?, url? }` | `{ ok, id }` |
+
+Per-IP dedup: voting again with the same value toggles the vote off; switching
+sides moves the vote. Reports are rate-limited to 5 per IP per hour and kept
+in KV for 1 year (visible in the Cloudflare KV namespace browser).
+
+#### Local dev
+
+`astro dev` does **not** run Pages Functions. The widget will render but the
+`/api/*` calls return 404, and the UI degrades gracefully (counts stay at 0,
+reports show a network error).
+
+To exercise the API end-to-end locally, build and run via Wrangler:
+
+```powershell
+npm run build
+npx wrangler pages dev dist --kv FEEDBACK_KV
+```
+
+This serves the built `dist/` plus the `functions/` folder, with an in-memory
+KV. Pass `--var IP_HASH_SALT=test` etc. to set env vars locally.
 
 ### Adding AdSense / Analytics later
 
