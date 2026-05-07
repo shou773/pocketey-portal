@@ -1,0 +1,43 @@
+{
+  "slug": "shiba-cafe",
+  "title": "Shiba Cafe",
+  "tagline": "Run the cosiest shiba inu cafe online.",
+  "description": "Welcome to the fluffiest cafe on the internet. Shiba Cafe is a free idle clicker browser game where you tap to serve up cuddles to sleepy shiba inu customers, hire baristas to keep them coming on their own, and earn coins while you sleep. Brew aromatic hojicha to boost shiba happiness, hang fairy lights for tip multipliers, and recruit a tanuki accountant who works miracles on the books. When your cafe reaches the next neighborhood, prestige and earn rosette badges that permanently boost coffee sales forever. Featuring smooth tap-to-serve mechanics, cosy autumn palette, lo-fi background music, and a full offline-progress system that pays you up to 12 hours of away time, Shiba Cafe is a relaxing idle game perfect for short breaks. Plays portrait on mobile.",
+  "category": "idle",
+  "tags": [
+    "idle",
+    "clicker",
+    "shiba",
+    "shiba-inu",
+    "cafe",
+    "cozy",
+    "casual",
+    "animal",
+    "offline-progression"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/shiba-cafe/",
+  "controls": {
+    "en": "Tap the bath to drop capybaras and earn coins. Open the shop to upgrade.",
+    "ja": "湯舟をタップしてカピバラを呼ぶ。ショップで強化。"
+  },
+  "playTime": "10min+",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-09",
+  "version": "0.1.0",
+  "featured": false,
+  "longTailKeyword": "shiba inu cafe idle clicker game",
+  "engineNotes": "Next.js 16 + R3F + Zustand + break_infinity.js",
+  "auto": true,
+  "archetype": "idle-clicker",
+  "generated_at": "2026-05-07T15:39:11.796Z"
+}

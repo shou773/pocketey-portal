@@ -1,0 +1,17 @@
+{
+  "name": "Shiba Cafe",
+  "short_name": "Shiba Cafe",
+  "description": "Run the cosiest shiba inu cafe online. Serve cuddles, hire baristas, and earn coins while you sleep. A free idle clicker browser game.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e89c5e",
+  "theme_color": "#e89c5e",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "categories": ["games", "casual"]
+}

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#e8dfca"/>
+      <stop offset="100%" stop-color="#7ea35b"/>
+    </radialGradient>
+    <linearGradient id="bowl" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#a37422"/>
+      <stop offset="100%" stop-color="#5a3e15"/>
+    </linearGradient>
+    <linearGradient id="matcha" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#a4ce3f"/>
+      <stop offset="100%" stop-color="#3d6a3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- Tatami floor -->
+  <rect x="40" y="380" width="432" height="80" rx="6" fill="#cbb47e"/>
+  <line x1="40" y1="420" x2="472" y2="420" stroke="#a89762" stroke-width="2"/>
+  <line x1="256" y1="380" x2="256" y2="460" stroke="#a89762" stroke-width="2"/>
+  <!-- Chawan (tea bowl) -->
+  <ellipse cx="256" cy="380" rx="160" ry="22" fill="#3d2a17" opacity="0.3"/>
+  <path d="M 110 270 L 130 380 Q 256 405 382 380 L 402 270 Z" fill="url(#bowl)" stroke="#1a0f04" stroke-width="3"/>
+  <ellipse cx="256" cy="270" rx="146" ry="32" fill="url(#matcha)" stroke="#1a0f04" stroke-width="3"/>
+  <!-- Matcha foam ripples -->
+  <ellipse cx="256" cy="262" rx="120" ry="16" fill="#c5e870" opacity="0.7"/>
+  <ellipse cx="220" cy="258" rx="38" ry="6" fill="#fff" opacity="0.4"/>
+  <ellipse cx="290" cy="256" rx="28" ry="5" fill="#fff" opacity="0.4"/>
+  <!-- Bamboo whisk (chasen) -->
+  <g transform="translate(310 100) rotate(20)">
+    <rect x="-6" y="0" width="12" height="180" fill="#c89a6a" stroke="#3d2a17" stroke-width="2"/>
+    <g stroke="#dcc398" stroke-width="2">
+      <line x1="-22" y1="180" x2="-12" y2="220"/>
+      <line x1="-12" y1="180" x2="-6" y2="225"/>
+      <line x1="0" y1="180" x2="0" y2="228"/>
+      <line x1="12" y1="180" x2="6" y2="225"/>
+      <line x1="22" y1="180" x2="12" y2="220"/>
+    </g>
+  </g>
+  <!-- Steam -->
+  <g fill="#fff" opacity="0.6">
+    <circle cx="200" cy="180" r="14"/>
+    <circle cx="240" cy="160" r="18"/>
+    <circle cx="280" cy="170" r="14"/>
+  </g>
+  <!-- Bamboo accents top corners -->
+  <g stroke="#5a8266" stroke-width="6" stroke-linecap="round">
+    <line x1="60" y1="80" x2="60" y2="180"/>
+    <line x1="452" y1="80" x2="452" y2="180"/>
+  </g>
+</svg>

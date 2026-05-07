@@ -1,0 +1,43 @@
+{
+  "slug": "matcha-master",
+  "title": "Matcha Master",
+  "tagline": "Whisk your way to tea ceremony mastery.",
+  "description": "Step into a quiet chashitsu tea room and master the way of matcha. Matcha Master is a free idle clicker browser game where you tap the chawan to whisk fresh matcha for arriving guests, hire apprentice tea servers to keep the ceremony flowing, and earn coins while you sleep. Heat the iron kettle for warmth bonuses, light incense to summon honored guests, and find the spirit of Sen no Rikyu to multiply your earnings forever. When your tea room earns enough renown, prestige and earn tea master scrolls that boost every future ceremony permanently. With portrait-first mobile design, lo-fi koto background music, gentle tap-to-whisk feedback, and a 12-hour offline progression system, Matcha Master is a meditative idle game built for short, relaxing sessions.",
+  "category": "idle",
+  "tags": [
+    "idle",
+    "clicker",
+    "matcha",
+    "tea",
+    "japanese",
+    "cozy",
+    "casual",
+    "ceremony",
+    "offline-progression"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/matcha-master/",
+  "controls": {
+    "en": "Tap the bath to drop capybaras and earn coins. Open the shop to upgrade.",
+    "ja": "湯舟をタップしてカピバラを呼ぶ。ショップで強化。"
+  },
+  "playTime": "10min+",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-09",
+  "version": "0.1.0",
+  "featured": false,
+  "longTailKeyword": "matcha tea master idle clicker game",
+  "engineNotes": "Next.js 16 + R3F + Zustand + break_infinity.js",
+  "auto": true,
+  "archetype": "idle-clicker",
+  "generated_at": "2026-05-07T15:39:12.605Z"
+}
