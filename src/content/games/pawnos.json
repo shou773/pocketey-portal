@@ -1,0 +1,41 @@
+{
+  "slug": "pawnos",
+  "title": "Pawnos",
+  "tagline": "Cute crazy eights card game vs 3 animal CPUs. Stack Draw 2 chains, share daily challenge runs.",
+  "description": "Pawnos is a cute UNO-style crazy eights card game you play in your browser against three animal CPU opponents — a strawberry bunny, a matcha frog, a blueberry cat, and a lemon chick. Match the discard by color or number, drop Skip / Reverse / Draw 2 / Wild / Wild Draw 4 specials at the perfect moment, and chain Draw 2 stacks across the table to dump your hand on the next player. Play casual single-player matches in 3 to 5 minutes, or take on the Daily Challenge: a fixed shuffle and CPU script seeded fresh every midnight that everyone in the world plays the same. Compare your turns-to-clear with friends and share a tidy result card. Designed mobile-first in portrait, fully offline-capable PWA, free, no download, and friendly enough to teach kids the rules of crazy eights / UNO style card games. Includes Stack rules (Draw 2 and Wild Draw 4 can be chained), an UNO call button, soft pastel candy art, four pet mascot avatars, procedural Web Audio SFX and chill BGM, English and Japanese UI, and a clean shareable result image for the daily run.",
+  "category": "casual",
+  "tags": [
+    "cards",
+    "uno",
+    "crazy-eights",
+    "card-game",
+    "casual",
+    "vs-cpu",
+    "1-3min",
+    "daily",
+    "cute",
+    "animals"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/pawnos/",
+  "controls": {
+    "en": "Tap a card in your hand to play it. Tap the deck to draw. Tap UNO when you have one card left.",
+    "ja": "手札のカードをタップして出す。山札タップでドロー。残り1枚で UNO ボタン。"
+  },
+  "playTime": "3-10min",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-07",
+  "version": "1.0.0",
+  "featured": false,
+  "longTailKeyword": "crazy eights online card game",
+  "engineNotes": "Next.js 16 App Router (Turbopack). 2D Canvas / DOM card UI (no R3F). Procedural Web Audio. Daily challenge uses date-seeded RNG so every player gets the same shuffle and CPU script. Stack rules for Draw 2 / Wild Draw 4 chains."
+}
