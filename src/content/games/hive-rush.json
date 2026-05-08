@@ -1,0 +1,40 @@
+{
+  "slug": "hive-rush",
+  "title": "Hive Rush",
+  "tagline": "Daily word hive — find every hidden word, chase the queen bee.",
+  "description": "Hive Rush is a daily 7-letter word hive game for short browser sessions. Every day a fresh seven-letter honeycomb opens up: every word must use the gold center letter and be at least four letters long, and a single word that uses all seven letters earns a +7 pangram bonus. The 10-step rank ladder runs from Beginner up to Queen Bee, and your daily streak counts the consecutive days you climb back to the hive. If you love NYT Spelling Bee but want unlimited plays without an account, this is your hive — three modes are baked in: Daily for the shared puzzle of the day with shareable rank cards, Sprint 60s for a fast score-attack burst, and Endless for as many random hives as you want. Built mobile-first for portrait phones, installable as a PWA on your home screen, fully procedural Web Audio sound effects, dark amber-and-navy premium look, no logins, no downloads. Adults playing during short breaks will love the rhythm: open the daily hive, find a few words, share your rank, and come back tomorrow with the streak still alive.",
+  "category": "puzzle",
+  "tags": [
+    "puzzle",
+    "word",
+    "spelling-bee",
+    "anagram",
+    "daily",
+    "pangram",
+    "casual",
+    "1-minute",
+    "high-score"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/hive-rush/",
+  "controls": {
+    "en": "Tap or type letters from the hive. The center (gold) letter is required. Press Enter to submit. Words must be 4+ letters.",
+    "ja": "ハニカムの文字をタップまたは入力。中央（金色）の文字を必ず使う。Enterで提出、4文字以上が有効。"
+  },
+  "playTime": "1-3min",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-06",
+  "version": "1.0.0",
+  "featured": false,
+  "longTailKeyword": "spelling bee unlimited daily word hive",
+  "engineNotes": "Next.js 16 App Router (Turbopack) + Zustand + Tailwind v4. SVG-based hex board, no 3D. Procedural Web Audio. Pre-baked puzzle pool of 500 hives generated from ENABLE word list."
+}
