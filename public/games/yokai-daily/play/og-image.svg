@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#241f1b"/>
+      <stop offset="100%" stop-color="#13110f"/>
+    </linearGradient>
+    <radialGradient id="moon" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f1e7d0" stop-opacity="0.96"/>
+      <stop offset="80%" stop-color="#f1e7d0" stop-opacity="0.0"/>
+    </radialGradient>
+    <pattern id="seigaiha" x="0" y="0" width="80" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 40 Q20 20 40 40 T80 40" stroke="#f1e7d0" stroke-opacity="0.06" fill="none" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#seigaiha)"/>
+  <!-- moon -->
+  <circle cx="990" cy="170" r="120" fill="url(#moon)"/>
+  <circle cx="990" cy="170" r="92" fill="#f1e7d0"/>
+  <!-- vermilion brush -->
+  <path d="M40 540 C220 510 480 530 720 510 C880 498 1020 506 1160 524 L1132 568 C988 542 836 552 668 580 C512 604 296 618 84 588 Z" fill="#c64236"/>
+
+  <!-- title -->
+  <g font-family="serif" fill="#f1e7d0">
+    <text x="80" y="220" font-size="100" font-weight="800" letter-spacing="6">Yokai Daily</text>
+    <text x="80" y="282" font-size="40" font-weight="500" fill="#d8a328">— Guess Today’s Spirit —</text>
+    <text x="80" y="360" font-size="28" fill="#e6d6b0">One yokai a day. Six guesses. Six hundred years of folklore.</text>
+  </g>
+
+  <!-- silhouette tengu -->
+  <g transform="translate(820 360)">
+    <path d="M0 0 C-40 0 -60 36 -60 64 C-60 80 -52 96 -44 104 L-52 134 C-92 162 -110 208 -98 258 L-78 258 L-72 234 C-64 222 -52 218 -44 222 L-44 268 L-4 268 L-4 222 C 4 218 16 222 24 234 L30 258 L50 258 C 60 208 44 162 4 134 L-4 104 C 4 96 12 80 12 64 C 12 36 -8 0 -44 0 Z" fill="#f1e7d0"/>
+    <path d="M-28 64 L-72 76 L-28 86 Z" fill="#c64236"/>
+  </g>
+
+  <!-- hanko -->
+  <g transform="translate(1080 540) rotate(-6)">
+    <rect x="-58" y="-30" width="116" height="60" rx="10" fill="#c64236"/>
+    <text x="0" y="10" text-anchor="middle" font-family="serif" font-weight="900" font-size="32" fill="#f1e7d0">妖</text>
+  </g>
+</svg>
