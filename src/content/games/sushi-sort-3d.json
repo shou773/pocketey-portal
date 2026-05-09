@@ -1,0 +1,41 @@
+{
+  "slug": "sushi-sort-3d",
+  "title": "Sushi Sort 3D",
+  "tagline": "Tap plates to sort sushi by color. 30 chibi-cute levels for short browser breaks.",
+  "description": "Sushi Sort 3D is a cute 3D color-sort puzzle for short browser sessions. Tap a sushi plate to pick up its top piece, then tap another plate to drop it — but only on an empty plate or one whose top sushi already matches. Your goal: sort every plate so each one holds only one type of sushi. Featuring 30 hand-tuned levels of escalating difficulty (4 to 7 plates, 2 to 5 sushi types), a daily challenge plate seeded fresh every midnight, par-based 3-star ratings, an undo button for fearless experimenting, juicy 3D rice-and-topping models, soft Japanese izakaya wood-and-paper backdrop, procedural Web Audio koto-and-pad ambient music, satisfying clink-and-pop SFX, gentle bloom and vignette post-processing, full screen-shake on completed plates, mobile portrait safe-area support, and one-tap PWA install. Designed for adults during short breaks: one level lasts 30 seconds to 2 minutes, plays beautifully on portrait mobile, and never wastes your time with forced ads. Find the seed plate, watch the rainbow stack collapse into orderly monochrome towers.",
+  "category": "puzzle",
+  "tags": [
+    "puzzle",
+    "3d",
+    "sort",
+    "ball-sort",
+    "sushi",
+    "color-sort",
+    "casual",
+    "1-minute",
+    "daily",
+    "japanese"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/sushi-sort-3d/",
+  "controls": {
+    "en": "Tap a plate to pick up the top sushi. Tap another plate to drop it (must be empty or top must match).",
+    "ja": "皿をタップして一番上の寿司をつまむ。別の皿をタップで置く（空、または一番上が同じ種類のときだけ）。"
+  },
+  "playTime": "1-3min",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-13",
+  "version": "1.0.0",
+  "featured": false,
+  "longTailKeyword": "sushi sort puzzle 3d",
+  "engineNotes": "Next.js 16 App Router (Turbopack) + React Three Fiber + drei + postprocessing. 30 procedurally seeded levels with reverse-shuffle solvability guarantee. Procedural Web Audio. No external assets except Google Fonts."
+}

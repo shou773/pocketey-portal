@@ -1,0 +1,17 @@
+{
+  "name": "Matcha Master",
+  "short_name": "Matcha Master",
+  "description": "Whisk matcha and master the way of tea. A meditative idle clicker browser game with apprentice servers, kettle warmth, and lasting tea master scrolls.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#7ea35b",
+  "theme_color": "#7ea35b",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "categories": ["games", "casual"]
+}

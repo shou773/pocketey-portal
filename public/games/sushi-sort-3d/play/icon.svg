@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.4" r="0.7">
+      <stop offset="0%" stop-color="#3a230d"/>
+      <stop offset="55%" stop-color="#22150a"/>
+      <stop offset="100%" stop-color="#15090a"/>
+    </radialGradient>
+    <linearGradient id="rice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff8e8"/>
+      <stop offset="1" stop-color="#e7d6b8"/>
+    </linearGradient>
+    <linearGradient id="salmon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff9d6b"/>
+      <stop offset="1" stop-color="#e85a2c"/>
+    </linearGradient>
+    <linearGradient id="tuna" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6b6b"/>
+      <stop offset="1" stop-color="#b81e1e"/>
+    </linearGradient>
+    <linearGradient id="tamago" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffea7a"/>
+      <stop offset="1" stop-color="#e8b91c"/>
+    </linearGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(220,255,255,0.8)"/>
+      <stop offset="1" stop-color="rgba(140,200,230,0.6)"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <!-- soft warm glow -->
+  <circle cx="256" cy="240" r="190" fill="#ff8a3c" opacity="0.10"/>
+  <!-- sparkles -->
+  <g fill="#fff7d6" opacity="0.6">
+    <circle cx="74" cy="92" r="2.4"/>
+    <circle cx="430" cy="74" r="2.0"/>
+    <circle cx="100" cy="430" r="2.2"/>
+    <circle cx="448" cy="420" r="1.8"/>
+    <circle cx="380" cy="180" r="1.6"/>
+    <circle cx="120" cy="220" r="1.6"/>
+  </g>
+  <!-- plate (ellipse) -->
+  <g filter="url(#glow)">
+    <ellipse cx="256" cy="396" rx="170" ry="40" fill="url(#plate)" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+    <ellipse cx="256" cy="388" rx="155" ry="32" fill="rgba(255,255,255,0.20)"/>
+  </g>
+  <!-- 3 sushi pieces stacked: tamago bottom, tuna mid, salmon top -->
+  <!-- bottom: tamago -->
+  <g filter="url(#glow)">
+    <rect x="116" y="336" width="280" height="56" rx="16" fill="url(#rice)" stroke="rgba(180,140,80,0.4)" stroke-width="2"/>
+    <rect x="124" y="324" width="264" height="22" rx="8" fill="url(#tamago)" stroke="rgba(160,110,30,0.5)" stroke-width="2"/>
+  </g>
+  <!-- mid: tuna -->
+  <g filter="url(#glow)">
+    <rect x="116" y="270" width="280" height="56" rx="16" fill="url(#rice)" stroke="rgba(180,140,80,0.4)" stroke-width="2"/>
+    <rect x="124" y="258" width="264" height="22" rx="8" fill="url(#tuna)" stroke="rgba(140,30,30,0.5)" stroke-width="2"/>
+  </g>
+  <!-- top: salmon -->
+  <g filter="url(#glow)">
+    <rect x="116" y="204" width="280" height="56" rx="16" fill="url(#rice)" stroke="rgba(180,140,80,0.4)" stroke-width="2"/>
+    <rect x="124" y="192" width="264" height="22" rx="8" fill="url(#salmon)" stroke="rgba(180,80,40,0.5)" stroke-width="2"/>
+    <!-- salmon stripes -->
+    <line x1="135" y1="200" x2="380" y2="200" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+    <line x1="135" y1="208" x2="380" y2="208" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+  </g>
+</svg>
