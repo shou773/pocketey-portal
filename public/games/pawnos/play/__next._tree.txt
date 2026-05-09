@@ -1,3 +1,3 @@
-:HL["/games/pawnos/play/_next/static/chunks/0qp_8pxfugk2y.css","style"]
+:HL["/games/pawnos/play/_next/static/chunks/0o21jepm-ms~f.css","style"]
 :HL["/games/pawnos/play/_next/static/media/5d52bd6c4cb3f315-s.p.04niyqph9_pxk.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"oq_DdJIisN4_ilv8HVkIR"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"t1epgFTbo-WQH0gsflH11"}
