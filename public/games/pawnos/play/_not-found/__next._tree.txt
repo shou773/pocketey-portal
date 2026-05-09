@@ -1,2 +1,2 @@
-:HL["/games/pawnos/play/_next/static/chunks/11_a.3.rcpapf.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"QUDjVZ84WWYWtU2-KwYYl"}
+:HL["/games/pawnos/play/_next/static/chunks/0qp_8pxfugk2y.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"oq_DdJIisN4_ilv8HVkIR"}
