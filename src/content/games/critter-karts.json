@@ -1,0 +1,39 @@
+{
+  "slug": "critter-karts",
+  "title": "Critter Karts: 3-Min Battle Arena",
+  "tagline": "Cute animals, toy weapons, 3-minute kart battles.",
+  "description": "Critter Karts is a free 3D kart battle game in the browser. Drive an adorable critter kart — capybara, fox, panda, penguin, hedgehog and more — into a 3-minute deathmatch arena packed with seven AI bots. Drive over question-mark boxes to grab one of eleven toy weapons (acorn machine gun, carrot rocket, pinecone mines, glowworm nuke, snowball blaster and more) and rack up the most KOs before the clock runs out. Earn XP, coins and character tokens every match, then spin the Prize Machine to unlock new critters, hats and wheels. Five hand-crafted arenas — Picnic Park, Toy Workshop, Bamboo Forest, Frozen Pond and Cookie Bakery — keep every match fresh. Plays portrait-friendly on mobile with a virtual stick and an auto-fire toggle for one-handed play; full WASD + Space + Shift on desktop. No downloads, no signup.",
+  "category": "action",
+  "tags": [
+    "3d",
+    "kart",
+    "battle",
+    "io",
+    "arena",
+    "deathmatch",
+    "casual",
+    "1-minute"
+  ],
+  "thumbnail": "thumbnail.webp",
+  "ogImage": "og-image.png",
+  "playUrl": "/games/critter-karts/",
+  "controls": {
+    "en": "WASD/arrows to drive · Space to fire · Shift to drift · Drag to steer on mobile",
+    "ja": "WASD/矢印で運転 · スペースで攻撃 · Shiftでドリフト · モバイルはドラッグ操作"
+  },
+  "playTime": "1-3min",
+  "orientation": "portrait",
+  "platforms": [
+    "mobile-web",
+    "desktop-web"
+  ],
+  "languages": [
+    "en",
+    "ja"
+  ],
+  "releaseDate": "2026-05-10",
+  "version": "1.0.0",
+  "featured": true,
+  "longTailKeyword": "animal kart battle online",
+  "engineNotes": "Next.js 16 + React Three Fiber + Zustand · bot-only multiplayer simulation"
+}
