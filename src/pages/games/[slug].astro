@@ -56,11 +56,19 @@ const ogImage = data.ogImage
       <p class="mx-auto mt-2 max-w-xl text-base opacity-80">{data.tagline}</p>
     </header>
 
+    <div class="flex justify-center">
+      <AdSlot slot="game-detail-above-game" format="banner" network="adsense" />
+    </div>
+
     <GameEmbed
       slug={data.slug}
       title={data.title}
       orientation={data.orientation}
     />
+
+    <div class="flex justify-center">
+      <AdSlot slot="game-detail-below-game" format="banner" network="adsense" />
+    </div>
 
     <GameFeedback slug={data.slug} title={data.title} />
 

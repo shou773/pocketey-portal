@@ -33,6 +33,10 @@ const games = (await getCollection("games")).sort((a, b) => {
     </p>
   </section>
 
+  <section class="mb-8 flex justify-center">
+    <AdSlot slot="home-top-banner" format="banner" network="adsense" />
+  </section>
+
   <section>
     <div class="mb-4 flex items-center justify-between">
       <h2 class="text-2xl font-extrabold">All Games</h2>
@@ -57,6 +61,6 @@ const games = (await getCollection("games")).sort((a, b) => {
   </section>
 
   <section class="mt-12 flex justify-center">
-    <AdSlot slot="portal-grid-1" format="rectangle" network="auto" />
+    <AdSlot slot="home-grid-bottom" format="rectangle" network="auto" />
   </section>
 </BaseLayout>
