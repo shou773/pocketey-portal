@@ -1,12 +1,12 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { SITE } from "@utils/site";
-const updated = "2026-05-06";
+const updated = "2026-05-13";
 ---
 
 <BaseLayout
   title="Privacy Policy"
-  description="How Pocketey handles cookies, analytics, and advertising data. We use a cookieless analytics tool and disclose every third-party script we run."
+  description="How Pocketey handles cookies, analytics, and advertising data. We list every third-party vendor we use and what kind of cookie each one sets."
   pageType="static"
 >
   <article class="prose-page mx-auto max-w-3xl">
@@ -46,14 +46,68 @@ const updated = "2026-05-06";
       time by clearing site data for {SITE.url} in your browser settings.
     </p>
 
+    <h2 class="mt-10 text-2xl font-extrabold">Cookies and similar technologies</h2>
+    <p class="mt-3 leading-relaxed">
+      We group cookies and similar storage (localStorage, web beacons, pixel
+      tags, device identifiers) into three categories so it is clear what each
+      one does and who sets it.
+    </p>
+
+    <div class="mt-4 overflow-x-auto">
+      <table class="w-full border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-b border-[#1a0a30]/20">
+            <th class="py-2 pr-3 font-extrabold">Category</th>
+            <th class="py-2 pr-3 font-extrabold">Purpose</th>
+            <th class="py-2 font-extrabold">Set by</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Strictly necessary</td>
+            <td class="py-2 pr-3">
+              Keep the site working: deliver pages, remember your sound /
+              language preference, store local game progress.
+            </td>
+            <td class="py-2">{SITE.name} (localStorage), Cloudflare</td>
+          </tr>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Statistics</td>
+            <td class="py-2 pr-3">
+              Aggregate, anonymous traffic measurement only. No persistent
+              identifier, no cross-site tracking, no profile.
+            </td>
+            <td class="py-2">Cloudflare Web Analytics (cookieless)</td>
+          </tr>
+          <tr class="align-top">
+            <td class="py-2 pr-3 font-bold">Advertising</td>
+            <td class="py-2 pr-3">
+              Serve ads, measure performance, and (with your consent in
+              regions where required) personalize ads based on your interests.
+            </td>
+            <td class="py-2">Google AdSense, Google Funding Choices</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h2 class="mt-10 text-2xl font-extrabold">Advertising</h2>
     <p class="mt-3 leading-relaxed">
-      Some pages display advertising provided by Google AdSense and game-focused
-      ad networks such as CrazyGames SDK, GameMonetize and AdinPlay. These
-      partners are independent companies and may set their own cookies, web
-      beacons, or device identifiers in order to serve, measure, and report on
-      ads. They may also use that information to personalize ads on other sites
-      you visit.
+      Some pages display advertising provided by Google AdSense. As an
+      independent ad network, Google and its partners may set their own
+      cookies, web beacons or device identifiers in order to serve, measure
+      and report on ads, and — depending on the consent you give — to
+      personalize ads on other sites you visit. Pocketey itself never receives
+      personal data from these networks; we only see aggregate revenue and
+      performance reports.
+    </p>
+    <p class="mt-3 leading-relaxed">
+      For visitors in the European Economic Area, the UK, and Switzerland, we
+      use Google's <strong>Funding Choices</strong> consent management
+      platform to ask whether you accept personalized ads before any
+      advertising cookies are set. You can change that choice at any time by
+      clearing site cookies and reloading the page, or via the link in the
+      consent dialog.
     </p>
     <p class="mt-3 leading-relaxed">
       You can review and adjust the choices Google makes about your ads at
@@ -63,37 +117,132 @@ const updated = "2026-05-06";
       <a class="underline" href="https://optout.networkadvertising.org/">Network Advertising Initiative</a>
       and the
       <a class="underline" href="https://optout.aboutads.info/">Digital Advertising Alliance</a>.
+      California residents have additional rights, including the right to opt
+      out of the sale or sharing of personal information, which you can
+      exercise via the links above.
+    </p>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Third-party vendors</h2>
+    <p class="mt-3 leading-relaxed">
+      The following independent companies process limited data when you use
+      the site. Each link goes to that vendor's own privacy policy, which
+      governs how they handle the data they receive.
+    </p>
+
+    <div class="mt-4 overflow-x-auto">
+      <table class="w-full border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-b border-[#1a0a30]/20">
+            <th class="py-2 pr-3 font-extrabold">Vendor</th>
+            <th class="py-2 pr-3 font-extrabold">What it does</th>
+            <th class="py-2 font-extrabold">Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Cloudflare Pages</td>
+            <td class="py-2 pr-3">Static site hosting and global CDN delivery.</td>
+            <td class="py-2">
+              <a class="underline" href="https://www.cloudflare.com/privacypolicy/">cloudflare.com</a>
+            </td>
+          </tr>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Cloudflare Web Analytics</td>
+            <td class="py-2 pr-3">
+              Cookieless, aggregate traffic measurement. No persistent
+              identifier.
+            </td>
+            <td class="py-2">
+              <a class="underline" href="https://www.cloudflare.com/privacypolicy/">cloudflare.com</a>
+            </td>
+          </tr>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Google AdSense</td>
+            <td class="py-2 pr-3">
+              Display advertising. May set cookies for ad delivery,
+              measurement and (with consent) personalization.
+            </td>
+            <td class="py-2">
+              <a class="underline" href="https://policies.google.com/technologies/ads">policies.google.com</a>
+            </td>
+          </tr>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Google Funding Choices</td>
+            <td class="py-2 pr-3">
+              Consent management platform shown to EEA / UK / Swiss visitors
+              before advertising cookies are set.
+            </td>
+            <td class="py-2">
+              <a class="underline" href="https://policies.google.com/privacy">policies.google.com</a>
+            </td>
+          </tr>
+          <tr class="border-b border-[#1a0a30]/10 align-top">
+            <td class="py-2 pr-3 font-bold">Google Fonts</td>
+            <td class="py-2 pr-3">
+              Serves the Fredoka web font. Receives the standard request
+              headers a font asset request entails (IP, user agent, referer).
+            </td>
+            <td class="py-2">
+              <a class="underline" href="https://policies.google.com/privacy">policies.google.com</a>
+            </td>
+          </tr>
+          <tr class="align-top">
+            <td class="py-2 pr-3 font-bold">Resend</td>
+            <td class="py-2 pr-3">
+              Used only when you submit player feedback through the in-game
+              widget; relays the message to the operator's email.
+            </td>
+            <td class="py-2">
+              <a class="underline" href="https://resend.com/legal/privacy-policy">resend.com</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="mt-10 text-2xl font-extrabold">Player feedback widget</h2>
+    <p class="mt-3 leading-relaxed">
+      Each game has an optional 👍 / 👎 / 🐛 feedback widget. If you choose to
+      submit feedback, the rating and any free-text comment you write are sent
+      through Cloudflare Functions to the site operator's email via Resend.
+      We do not collect your name, email, or any other identifier unless you
+      include it in the comment yourself.
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold">Children</h2>
     <p class="mt-3 leading-relaxed">
-      The site is not directed at children under 13. We do not knowingly collect
-      personal information from children. If you believe a child has provided
-      personal information to us, please reach out via the contact page and we
-      will delete it.
+      The site is not directed at children under 13 (or the equivalent
+      minimum age in your jurisdiction). We do not knowingly collect personal
+      information from children. If you believe a child has provided personal
+      information to us, please reach out via the contact page and we will
+      delete it.
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold">International transfers</h2>
     <p class="mt-3 leading-relaxed">
-      Because the site is delivered through Cloudflare's global content delivery
-      network, requests are routed to the data center closest to the visitor.
-      Cloudflare and Google operate infrastructure across many countries; their
-      respective privacy policies cover how they handle traffic data in transit.
+      Because the site is delivered through Cloudflare's global content
+      delivery network, requests are routed to the data center closest to the
+      visitor. Cloudflare and Google operate infrastructure across many
+      countries; their respective privacy policies (linked above) cover how
+      they handle traffic data in transit and at rest.
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold">Your choices</h2>
     <p class="mt-3 leading-relaxed">
-      You can disable JavaScript or use an ad blocker to opt out of advertising
-      on the site. You can clear local game progress at any time via your
-      browser. You can request information about data we hold by emailing the
-      address on the contact page; because we operate at a small scale, we
-      typically have very little data attached to any one visitor.
+      You can disable JavaScript or use an ad blocker to opt out of
+      advertising on the site. You can withdraw consent for personalized ads
+      at any time by clearing cookies for {SITE.url} and reloading; the
+      Funding Choices dialog will appear again. You can clear local game
+      progress at any time via your browser. You can request information
+      about data we hold by emailing the address on the contact page; because
+      we operate at a small scale, we typically have very little data
+      attached to any one visitor.
     </p>
 
     <h2 class="mt-10 text-2xl font-extrabold">Changes to this policy</h2>
     <p class="mt-3 leading-relaxed">
-      When we change anything material on this page, we will update the date at
-      the top of the document and, where the change affects how data is
+      When we change anything material on this page, we will update the date
+      at the top of the document and, where the change affects how data is
       collected, post a short notice on the home page. Continued use of the
       site after such a change means you accept the updated policy.
     </p>
@@ -101,8 +250,8 @@ const updated = "2026-05-06";
     <h2 class="mt-10 text-2xl font-extrabold">Contact</h2>
     <p class="mt-3 leading-relaxed">
       Questions about this policy can be sent through the
-      <a class="underline" href="/contact/">contact page</a>. We try to respond
-      within a few business days.
+      <a class="underline" href="/contact/">contact page</a>. We try to
+      respond within a few business days.
     </p>
   </article>
 </BaseLayout>
