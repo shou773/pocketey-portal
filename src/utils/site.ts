@@ -38,13 +38,13 @@ export const FEATURES = {
  */
 export const ADSENSE_SLOTS: Record<string, string> = {
   // Top of the home page — every visitor sees this
-  "home-top-banner": "",
+  "home-top-banner": "9492562428",
   // Bottom of the home page grid (legacy "portal-grid-1" replacement)
   "home-grid-bottom": "",
   // Game detail page — directly above the embedded game (highest CTR position)
-  "game-detail-above-game": "",
+  "game-detail-above-game": "8033359681",
   // Game detail page — below the game iframe, in the post-play attention area
-  "game-detail-below-game": "",
+  "game-detail-below-game": "6720278019",
   // Game detail page — bottom of the article (existing GameEmbed-adjacent slot)
   "game-detail-bottom": "",
   // Inside the game iframe at the end-of-run modal (currently unused but
