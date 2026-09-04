@@ -27,6 +27,9 @@ jobs:
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
         run: python scripts/editorial_engine.py
 
+      - name: Apply deterministic candidate quality guard
+        run: python scripts/editorial_guard.py
+
       - name: Generate or refresh unpublished article drafts
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
