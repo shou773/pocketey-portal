@@ -2,7 +2,7 @@
   "site": "Pocketey Japan",
   "audience": "International travelers to Japan",
   "candidate_limit": 8,
-  "lookback_days": 3,
+  "lookback_days": 7,
   "score_weights": {
     "traveler_value": 35,
     "trip_impact": 20,
@@ -23,6 +23,26 @@
     "attraction openings, closures and rule changes",
     "luggage, batteries and travel rules",
     "major seasonal events useful for trip planning"
+  ],
+  "official_sources": [
+    {
+      "name": "Japan Meteorological Agency - Weather Warnings/Advisories",
+      "type": "atom",
+      "url": "https://www.data.jma.go.jp/developer/xml/feed/extra.xml",
+      "max_items": 20
+    },
+    {
+      "name": "Japan Meteorological Agency - Earthquakes/Volcanoes",
+      "type": "atom",
+      "url": "https://www.data.jma.go.jp/developer/xml/feed/eqvol.xml",
+      "max_items": 20
+    },
+    {
+      "name": "Japan Meteorological Agency - Regular Information",
+      "type": "atom",
+      "url": "https://www.data.jma.go.jp/developer/xml/feed/regular.xml",
+      "max_items": 20
+    }
   ],
   "preferred_domains": [
     "japan.travel",
