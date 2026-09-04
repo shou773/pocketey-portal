@@ -109,12 +109,12 @@
       "include_keywords": ["battery", "charge", "terminal", "security", "baggage", "parking", "service", "international", "passenger", "closure", "notice"]
     },
     {
-      "name": "Kansai Airport - Notices",
+      "name": "Kansai Airport - News",
       "type": "html",
-      "url": "https://www.kansai-airport.or.jp/en/notices/",
+      "url": "https://www.kansai-airports.co.jp/en/news/?news_topic=kix",
       "max_items": 15,
       "min_title_length": 14,
-      "include_keywords": ["terminal", "security", "baggage", "flight", "international", "passenger", "transport", "closure", "service", "notice"]
+      "include_keywords": ["terminal", "security", "baggage", "flight", "international", "passenger", "transport", "closure", "service", "notice", "airport operations", "facilities"]
     },
     {
       "name": "Tokyo Metro - English",
@@ -143,10 +143,10 @@
     {
       "name": "Kyoto City - Tourism News",
       "type": "html",
-      "url": "https://www.city.kyoto.lg.jp/sankan/category/102-2-2-0-0-0-0-0-0-0.html",
+      "url": "https://www.city.kyoto.lg.jp/menu2/category/22-1-0-0-0-0-0-0-0-0.html",
       "max_items": 18,
       "min_title_length": 12,
-      "include_keywords": ["観光", "混雑", "市バス", "マナー", "宿泊", "旅行", "イベント", "暑さ", "分散", "料金"]
+      "include_keywords": ["観光", "混雑", "市バス", "マナー", "宿泊", "旅行", "イベント", "暑さ", "分散", "料金", "手荷物", "民泊"]
     }
   ],
   "preferred_domains": [
@@ -161,7 +161,7 @@
     "jrhokkaido.co.jp",
     "narita-airport.jp",
     "tokyo-haneda.com",
-    "kansai-airport.or.jp",
+    "kansai-airports.co.jp",
     "tokyometro.jp",
     "city.kyoto.lg.jp"
   ],
