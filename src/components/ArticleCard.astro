@@ -6,9 +6,15 @@ const date = data.date.toLocaleDateString('en-US',{month:'short',day:'numeric',y
 const numerals=['一','二','三','四','五','六','七','八','九'];
 ---
 <article class="card">
-  <a href={href} class="visual" aria-label={data.title}>
-    <span class="num">{numerals[index % numerals.length]}</span>
-    <span class="place">{data.location || 'Japan'}</span>
+  <a href={href} class={`visual ${data.image ? 'has-image' : ''}`} aria-label={data.title}>
+    {data.image ? (
+      <img src={data.image} alt={data.imageAlt || data.title} loading="lazy" />
+    ) : (
+      <>
+        <span class="num">{numerals[index % numerals.length]}</span>
+        <span class="place">{data.location || 'Japan'}</span>
+      </>
+    )}
   </a>
   <div class="meta"><span>{data.category}</span><span>{date}</span></div>
   <h3><a href={href}>{data.title}</a></h3>
@@ -16,5 +22,5 @@ const numerals=['一','二','三','四','五','六','七','八','九'];
   <a class="read" href={href}>Read update <span>↗</span></a>
 </article>
 <style>
-.card{display:flex;flex-direction:column}.visual{aspect-ratio:4/3;background:linear-gradient(145deg,#d9d3c5,#c0c5b8);border-radius:18px;padding:18px;display:flex;justify-content:space-between;align-items:flex-end;overflow:hidden;position:relative}.visual:before{content:'';position:absolute;width:58%;height:58%;border:1px solid rgba(23,24,19,.22);border-radius:50%;left:21%;top:18%}.num{font:italic 4.2rem/1 Georgia;color:rgba(23,24,19,.7)}.place{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase}.meta{display:flex;justify-content:space-between;gap:10px;margin-top:16px;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}.card h3{font:400 1.5rem/1.12 Georgia;margin:.7rem 0 .5rem}.card p{color:var(--muted);font-size:.9rem;margin:0 0 .7rem}.read{font-size:.78rem;margin-top:auto;padding-top:.3rem}.read span{margin-left:.3rem}
+.card{display:flex;flex-direction:column}.visual{aspect-ratio:4/3;background:linear-gradient(145deg,#d9d3c5,#c0c5b8);border-radius:18px;padding:18px;display:flex;justify-content:space-between;align-items:flex-end;overflow:hidden;position:relative}.visual:before{content:'';position:absolute;width:58%;height:58%;border:1px solid rgba(23,24,19,.22);border-radius:50%;left:21%;top:18%}.visual.has-image{padding:0;background:#d4d0c6}.visual.has-image:before{display:none}.visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .25s ease}.visual:hover img{transform:scale(1.015)}.num{font:italic 4.2rem/1 Georgia;color:rgba(23,24,19,.7)}.place{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase}.meta{display:flex;justify-content:space-between;gap:10px;margin-top:16px;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}.card h3{font:400 1.5rem/1.12 Georgia;margin:.7rem 0 .5rem}.card p{color:var(--muted);font-size:.9rem;margin:0 0 .7rem}.read{font-size:.78rem;margin-top:auto;padding-top:.3rem}.read span{margin-left:.3rem}
 </style>
