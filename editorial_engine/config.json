@@ -3,7 +3,7 @@
   "audience": "International travelers to Japan",
   "candidate_limit": 8,
   "lookback_days": 7,
-  "max_source_items_for_ai": 120,
+  "max_source_items_for_ai": 140,
   "score_weights": {
     "traveler_value": 35,
     "trip_impact": 20,
@@ -53,22 +53,6 @@
       "exclude_keywords": ["facebook", "instagram", "youtube", "privacy", "terms"]
     },
     {
-      "name": "JR East - Important Notices",
-      "type": "html",
-      "url": "https://www.jreast.co.jp/e/",
-      "max_items": 12,
-      "min_title_length": 16,
-      "include_keywords": ["suica", "service", "station", "train", "ticket", "travel", "airport", "notice", "pass", "luggage"]
-    },
-    {
-      "name": "JR East - Press Releases",
-      "type": "html",
-      "url": "https://www.jreast.co.jp/e/press/",
-      "max_items": 15,
-      "min_title_length": 18,
-      "include_keywords": ["travel", "suica", "station", "train", "rail", "ticket", "service", "shinkansen", "airport", "pass"]
-    },
-    {
       "name": "JR Central - Global News Releases",
       "type": "html",
       "url": "https://global.jr-central.co.jp/en/news/",
@@ -115,6 +99,54 @@
       "max_items": 12,
       "min_title_length": 16,
       "include_keywords": ["facility", "terminal", "international", "service", "transport", "opening", "closure", "airport"]
+    },
+    {
+      "name": "Narita Airport - Notifications",
+      "type": "html",
+      "url": "https://www.narita-airport.jp/en/news/",
+      "max_items": 15,
+      "min_title_length": 14,
+      "include_keywords": ["battery", "charge", "terminal", "security", "baggage", "parking", "service", "international", "passenger", "closure", "notice"]
+    },
+    {
+      "name": "Kansai Airport - Notices",
+      "type": "html",
+      "url": "https://www.kansai-airport.or.jp/en/notices/",
+      "max_items": 15,
+      "min_title_length": 14,
+      "include_keywords": ["terminal", "security", "baggage", "flight", "international", "passenger", "transport", "closure", "service", "notice"]
+    },
+    {
+      "name": "Tokyo Metro - English",
+      "type": "html",
+      "url": "https://www.tokyometro.jp/lang_en/index.html",
+      "max_items": 15,
+      "min_title_length": 12,
+      "include_keywords": ["fare", "station", "service", "line", "train", "ticket", "travel", "notice", "crowd"]
+    },
+    {
+      "name": "Tokyo Metro - Japanese News Releases",
+      "type": "html",
+      "url": "https://www.tokyometro.jp/news/2026/index.html",
+      "max_items": 18,
+      "min_title_length": 12,
+      "include_keywords": ["運賃", "駅", "列車", "運行", "サービス", "混雑", "乗車券", "開業", "路線"]
+    },
+    {
+      "name": "Japan Tourism Agency - 2026 Press Releases",
+      "type": "html",
+      "url": "https://www.mlit.go.jp/kankocho/news_2026_00002.html",
+      "max_items": 18,
+      "min_title_length": 14,
+      "include_keywords": ["インバウンド", "宿泊", "観光", "民泊", "旅行", "料金", "空港", "訪日", "地域"]
+    },
+    {
+      "name": "Kyoto City - Tourism News",
+      "type": "html",
+      "url": "https://www.city.kyoto.lg.jp/sankan/category/102-2-2-0-0-0-0-0-0-0.html",
+      "max_items": 18,
+      "min_title_length": 12,
+      "include_keywords": ["観光", "混雑", "市バス", "マナー", "宿泊", "旅行", "イベント", "暑さ", "分散", "料金"]
     }
   ],
   "preferred_domains": [
@@ -130,8 +162,8 @@
     "narita-airport.jp",
     "tokyo-haneda.com",
     "kansai-airport.or.jp",
-    "city.kyoto.lg.jp",
-    "metro.tokyo.lg.jp"
+    "tokyometro.jp",
+    "city.kyoto.lg.jp"
   ],
   "minimum_publish_recommendation_score": 70
 }
