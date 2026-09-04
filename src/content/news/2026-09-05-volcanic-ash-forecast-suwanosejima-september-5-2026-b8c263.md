@@ -6,6 +6,8 @@ category: "Weather & Disruptions"
 location: "Suwanosejima, Kagoshima Prefecture"
 featured: false
 draft: true
+eventKey: "suwanosejima-kagoshima-prefecture-volcanic-activity-2026-09"
+reviewStatus: "needs-review"
 sourceLabel: "Japan Meteorological Agency - Earthquakes/Volcanoes"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260904140048_0_VFVO53_010000.xml"
 updated: 2026-09-05
