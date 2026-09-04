@@ -20,7 +20,7 @@ jobs:
 
       - name: Commit editorial queue
         run: |
-          if git diff --quiet -- data/editorial; then
+          if [ -z "$(git status --porcelain -- data/editorial)" ]; then
             echo "No editorial queue changes to commit."
             exit 0
           fi
