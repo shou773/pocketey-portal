@@ -3,6 +3,7 @@
   "audience": "International travelers to Japan",
   "candidate_limit": 8,
   "lookback_days": 7,
+  "max_source_items_for_ai": 120,
   "score_weights": {
     "traveler_value": 35,
     "trip_impact": 20,
@@ -41,7 +42,79 @@
       "name": "Japan Meteorological Agency - Regular Information",
       "type": "atom",
       "url": "https://www.data.jma.go.jp/developer/xml/feed/regular.xml",
-      "max_items": 20
+      "max_items": 15
+    },
+    {
+      "name": "JNTO - Japan Travel Media Releases",
+      "type": "html",
+      "url": "https://www.japan.travel/en/au/media-releases/",
+      "max_items": 15,
+      "min_title_length": 16,
+      "exclude_keywords": ["facebook", "instagram", "youtube", "privacy", "terms"]
+    },
+    {
+      "name": "JR East - Important Notices",
+      "type": "html",
+      "url": "https://www.jreast.co.jp/e/",
+      "max_items": 12,
+      "min_title_length": 16,
+      "include_keywords": ["suica", "service", "station", "train", "ticket", "travel", "airport", "notice", "pass", "luggage"]
+    },
+    {
+      "name": "JR East - Press Releases",
+      "type": "html",
+      "url": "https://www.jreast.co.jp/e/press/",
+      "max_items": 15,
+      "min_title_length": 18,
+      "include_keywords": ["travel", "suica", "station", "train", "rail", "ticket", "service", "shinkansen", "airport", "pass"]
+    },
+    {
+      "name": "JR Central - Global News Releases",
+      "type": "html",
+      "url": "https://global.jr-central.co.jp/en/news/",
+      "max_items": 15,
+      "min_title_length": 18,
+      "include_keywords": ["shinkansen", "rail", "pass", "ticket", "fare", "service", "wifi", "travel", "train", "reservation"]
+    },
+    {
+      "name": "JR Central - Japanese News Releases",
+      "type": "html",
+      "url": "https://jr-central.co.jp/news/release/2026.html",
+      "max_items": 18,
+      "min_title_length": 14,
+      "include_keywords": ["新幹線", "列車", "運行", "きっぷ", "商品・サービス", "駅", "予約", "運賃", "旅行", "イベント"]
+    },
+    {
+      "name": "JR West - Travel Information",
+      "type": "html",
+      "url": "https://www.westjr.co.jp/global/en/",
+      "max_items": 15,
+      "min_title_length": 16,
+      "include_keywords": ["train", "status", "ticket", "pass", "travel", "shinkansen", "service", "station", "news", "suspension"]
+    },
+    {
+      "name": "JR West - Japanese News Releases",
+      "type": "html",
+      "url": "https://www.westjr.co.jp/press/",
+      "max_items": 18,
+      "min_title_length": 14,
+      "include_keywords": ["列車", "運行", "きっぷ", "駅", "観光", "イベント", "サービス", "新幹線", "旅行"]
+    },
+    {
+      "name": "Haneda Airport - Notices",
+      "type": "html",
+      "url": "https://tokyo-haneda.com/en/information/index.html",
+      "max_items": 15,
+      "min_title_length": 16,
+      "include_keywords": ["important", "notice", "international", "terminal", "closure", "check-in", "flight", "security", "baggage"]
+    },
+    {
+      "name": "Haneda Airport - Topics",
+      "type": "html",
+      "url": "https://tokyo-haneda.com/en/whats_new/index.html",
+      "max_items": 12,
+      "min_title_length": 16,
+      "include_keywords": ["facility", "terminal", "international", "service", "transport", "opening", "closure", "airport"]
     }
   ],
   "preferred_domains": [
