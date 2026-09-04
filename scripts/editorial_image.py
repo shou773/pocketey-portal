@@ -62,7 +62,7 @@ def yaml_string(value):
 
 
 def patch_frontmatter(path, updates):
-    meta, text, end = parse_frontmatter(path)
+    _, text, end = parse_frontmatter(path)
     if end is None:
         return False
     block = text[4:end]
@@ -119,23 +119,32 @@ def build_query(meta):
     location = clean_text(meta.get("location") or "Japan")
     category = clean_text(meta.get("category") or "")
     title = clean_text(meta.get("title") or "")
+    lower = title.lower()
 
     # For safety/disruption stories, use a neutral place image rather than an
     # unrelated disaster photo that could imply it depicts the current event.
     if category == "Weather & Disruptions":
         return f'"{location}" Japan'
 
-    operator = ""
-    for name in ("JR Central", "JR East", "JR West", "Tokyo Metro", "Haneda", "Narita", "Kansai Airport"):
-        if name.lower() in title.lower():
-            operator = name
-            break
-    if category == "Transportation" and operator:
-        return f'"{operator}" {location} Japan'
+    if category == "Transportation":
+        # Prefer current-era equipment for Nozomi coverage. Historical rolling
+        # stock may be legally reusable but would be editorially misleading.
+        if "nozomi" in lower or "shinkansen" in lower:
+            return 'N700S Shinkansen Japan'
+        if "japan rail pass" in lower or "rail pass" in lower:
+            return 'Japan Rail Pass Shinkansen Japan'
+
+        operator = ""
+        for name in ("JR Central", "JR East", "JR West", "Tokyo Metro", "Haneda", "Narita", "Kansai Airport"):
+            if name.lower() in lower:
+                operator = name
+                break
+        if operator:
+            return f'"{operator}" {location} Japan'
 
     useful = [w for w in re.findall(r"[A-Za-z0-9'-]+", title) if len(w) > 3]
     useful = [w for w in useful if w.lower() not in {"japan", "travel", "update", "latest", "what", "should", "know", "warning", "alert", "advisory"}]
-    suffix = " ".join(useful[:3])
+    suffix = " ".join(useful[:4])
     return f'"{location}" Japan {suffix}'.strip()
 
 
@@ -147,7 +156,7 @@ def commons_search(query):
         "generator": "search",
         "gsrnamespace": "6",
         "gsrsearch": query,
-        "gsrlimit": "14",
+        "gsrlimit": "30",
         "prop": "imageinfo",
         "iiprop": "url|size|mime|extmetadata",
         "iiurlwidth": "1600",
@@ -177,23 +186,55 @@ def candidate_score(page, meta):
     if width < 900 or height < 500:
         return None
 
-    title = clean_text(page.get("title") or "")
+    page_title = clean_text(page.get("title") or "")
     desc = meta_value(ext, "ImageDescription")
-    haystack = f"{title} {desc}".lower()
-    if any(x in haystack for x in (" map ", "diagram", "logo", "coat of arms", "flag of", "poster", "screenshot", "scan of", "route map")):
+    haystack = f" {page_title} {desc} ".lower()
+
+    # Exclude non-photographic or document-like media that can be technically
+    # open-license while being visually irrelevant to a travel news article.
+    blocked = (
+        " map ", "diagram", "logo", "coat of arms", "flag of", "poster",
+        "screenshot", "scan of", "route map", ".djvu", "book", "manuscript",
+        "illustration", "painting", "drawing", "engraving", "child stories",
+    )
+    if any(term in haystack for term in blocked):
         return None
 
-    location = clean_text(meta.get("location") or "Japan").lower()
-    score = 0
-    if location and location != "japan" and location in haystack:
-        score += 8
-    if "japan" in haystack:
-        score += 2
-
+    title = clean_text(meta.get("title") or "")
+    title_lower = title.lower()
     category = clean_text(meta.get("category") or "")
-    if category == "Transportation" and any(x in haystack for x in ("train", "station", "rail", "shinkansen", "airport", "metro")):
-        score += 4
-    if category == "Events" and any(x in haystack for x in ("festival", "event", "shrine", "temple")):
+    location = clean_text(meta.get("location") or "Japan").lower()
+
+    score = 0
+
+    if category == "Transportation":
+        transport_terms = ("train", "railway", "railroad", "station", "shinkansen", "airport", "metro", "subway", "bus")
+        if not any(term in haystack for term in transport_terms):
+            return None
+
+        if "nozomi" in title_lower or "shinkansen" in title_lower:
+            # Nozomi in 2026 should not be illustrated with retired 0/100/300/500 series stock.
+            if any(term in haystack for term in ("300 series", "series 300", "500 series", "series 500", "100 series", "series 100", "0 series", "series 0")):
+                return None
+            if not any(term in haystack for term in ("n700s", "n700a", " n700 ", "nozomi")):
+                return None
+            score += 10
+
+        elif "japan rail pass" in title_lower or "rail pass" in title_lower:
+            if not any(term in haystack for term in ("japan rail pass", "rail pass", "shinkansen", "train", "railway", "station")):
+                return None
+            score += 6
+
+        else:
+            score += 4
+
+    elif category == "Events":
+        if any(term in haystack for term in ("festival", "event", "shrine", "temple", "matsuri")):
+            score += 3
+
+    if location and location != "japan" and location in haystack:
+        score += 6
+    if "japan" in haystack:
         score += 2
 
     ratio = width / max(height, 1)
@@ -205,7 +246,7 @@ def candidate_score(page, meta):
     if width >= 1600:
         score += 2
 
-    return score
+    return score if score >= 8 else None
 
 
 def pick_image(meta):
@@ -304,7 +345,7 @@ def main():
             )
             if changed:
                 fallback += 1
-                print(f"No verified open-license image found; AI fallback flagged: {path.relative_to(ROOT)}")
+                print(f"No sufficiently relevant open-license image found; AI fallback flagged: {path.relative_to(ROOT)}")
             continue
 
         try:
