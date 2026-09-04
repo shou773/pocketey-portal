@@ -2,16 +2,16 @@
   "run_date": "2026-09-04",
   "status": "candidate_queue_only",
   "human_review_required": true,
-  "run_summary": "The Japan Meteorological Agency has issued severe weather warnings for Typhoon No. 24, specifically impacting Miyazaki and the Kyushu/Amami regions. Several volcanic ash forecasts for various mountains remain in effect. No major transport infrastructure closures were explicitly detailed in the provided feed, but travelers in affected areas should monitor local conditions.",
+  "run_summary": "The research desk identified a significant weather-related disruption in Kyushu and several operational updates from JR Central, including security camera trials and new seasonal event information.",
   "candidates": [
     {
-      "title": "Travel Alert: Typhoon No. 24 Impacts Kyushu and Miyazaki",
+      "title": "Travel Alert: Typhoon No. 24 Impacting Kyushu and Miyazaki Prefecture",
       "category": "Weather & Disruptions",
-      "location": "Miyazaki, Kyushu, and Amami regions",
-      "what_changed": "The Japan Meteorological Agency has issued severe weather warnings due to Typhoon No. 24, with risks of landslides, flooding, and high waves.",
-      "why_it_matters": "Travelers in these regions may face transport delays, safety risks, and potential disruption to outdoor activities or regional travel plans.",
-      "effective_date": "2026-09-05",
-      "traveler_action": "Monitor local weather reports, follow instructions from local authorities, and check with transport providers (rail/airlines) for potential service suspensions.",
+      "location": "Kyushu, Miyazaki Prefecture",
+      "what_changed": "Typhoon No. 24 is causing severe weather conditions, including heavy rain and potential landslides, with warnings issued for Miyazaki and surrounding Kyushu areas.",
+      "why_it_matters": "Travelers in or planning to visit Kyushu may face transport delays, safety risks, and potential closures of outdoor attractions or regional rail lines.",
+      "effective_date": "2026-09-04 through 2026-09-05",
+      "traveler_action": "Monitor local transport websites, check JMA weather warnings, and avoid travel to mountainous or low-lying areas in Miyazaki and southern Kyushu.",
       "primary_source_name": "Japan Meteorological Agency",
       "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml",
       "secondary_source_url": null,
@@ -24,37 +24,63 @@
         "monetization_fit": 0,
         "total": 85
       },
-      "related_guide_opportunity": "How to handle travel disruptions in Japan",
+      "related_guide_opportunity": "How to stay safe during Japan's typhoon season",
       "monetization_relevance": "none",
       "monetization_note": "Safety-critical information; monetization is inappropriate.",
       "recommendation": "publish",
-      "reason": "High traveler value due to immediate safety and potential travel disruption."
+      "reason": "High traveler value due to immediate safety and disruption risks."
     },
     {
-      "title": "Volcanic Activity Update: Ash Forecasts for Kyushu and Hokkaido",
-      "category": "Weather & Disruptions",
-      "location": "Sakurajima, Suwanose-jima, Kirishima, Aso, Satsuma-Iwo-jima, Kuchinoerabu-jima, Me-Akan-dake",
-      "what_changed": "The JMA has issued ongoing volcanic ash forecasts for several mountains, most of which are at alert levels 2 or 3.",
-      "why_it_matters": "Travelers visiting these areas may experience ashfall, which can affect visibility, respiratory health, and local transport operations.",
-      "effective_date": "2026-09-04 to 2026-09-05",
-      "traveler_action": "Check local volcanic activity levels before visiting these specific regions and carry a mask if ashfall is reported.",
-      "primary_source_name": "Japan Meteorological Agency",
-      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904140037_0_VFVO53_010000.xml",
+      "title": "Shiga Destination Campaign 'Pre-Campaign' Begins",
+      "category": "Events",
+      "location": "Shiga Prefecture",
+      "what_changed": "JR Central announced the start of a 'Pre-Campaign' for a major tourism initiative in Shiga Prefecture, the first in 27 years.",
+      "why_it_matters": "Travelers visiting the Kansai region may find new promotional events, improved local tourism services, and special travel opportunities in Shiga.",
+      "effective_date": "2026-08-31 onwards",
+      "traveler_action": "Check local tourism boards for special events or travel passes associated with the Shiga Destination Campaign.",
+      "primary_source_name": "JR Central",
+      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00587.html",
       "secondary_source_url": null,
       "scores": {
         "traveler_value": 25,
-        "trip_impact": 15,
+        "trip_impact": 10,
+        "source_reliability": 20,
+        "freshness": 8,
+        "seo_evergreen": 5,
+        "monetization_fit": 3,
+        "total": 71
+      },
+      "related_guide_opportunity": "Off the beaten track: Exploring Shiga Prefecture",
+      "monetization_relevance": "low",
+      "monetization_note": "Potential for affiliate links to local tours or accommodation in Shiga.",
+      "recommendation": "publish",
+      "reason": "Useful for travelers looking for unique, less-crowded destinations in Japan."
+    },
+    {
+      "title": "JR Central Expands Security Camera Trials on Tokaido Shinkansen",
+      "category": "Transportation",
+      "location": "Tokaido Shinkansen",
+      "what_changed": "JR Central is conducting additional verification of security camera usage inside Tokaido Shinkansen trains to improve passenger safety and convenience.",
+      "why_it_matters": "Travelers should be aware of increased security monitoring on the Tokaido Shinkansen line, which is a primary route for international visitors.",
+      "effective_date": "2026-09-04",
+      "traveler_action": "No direct action required; be aware of enhanced security measures.",
+      "primary_source_name": "JR Central",
+      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00594.html",
+      "secondary_source_url": null,
+      "scores": {
+        "traveler_value": 20,
+        "trip_impact": 5,
         "source_reliability": 20,
         "freshness": 10,
         "seo_evergreen": 5,
         "monetization_fit": 0,
-        "total": 75
+        "total": 60
       },
-      "related_guide_opportunity": "Safety guide for visiting volcanic regions in Japan",
+      "related_guide_opportunity": "Guide to using the Tokaido Shinkansen",
       "monetization_relevance": "none",
-      "monetization_note": "Safety-critical information.",
+      "monetization_note": "Operational update; no commercial angle.",
       "recommendation": "watch",
-      "reason": "Important safety information, but requires synthesis of multiple specific volcano reports to be useful."
+      "reason": "Relevant operational update for the most popular tourist rail route. Score is below Pocketey's 70-point publish threshold."
     }
   ]
 }
