@@ -21,6 +21,59 @@ def downgrade(item, message):
     append_reason(item, message)
 
 
+def candidate_rank(item):
+    recommendation = str(item.get("recommendation") or "").lower()
+    recommendation_rank = {"publish": 2, "watch": 1, "skip": 0}.get(recommendation, 0)
+    try:
+        score = int((item.get("scores") or {}).get("total", 0))
+    except (TypeError, ValueError):
+        score = 0
+    return recommendation_rank, score
+
+
+def deduplicate_candidates(candidates):
+    """Keep one strongest candidate for each underlying event_key.
+
+    Candidates without an event_key are retained so the quality guard can
+    downgrade them explicitly instead of silently hiding them.
+    """
+    result = []
+    positions = {}
+    removed = 0
+
+    for item in candidates:
+        event_key = str(item.get("event_key") or "").strip().lower()
+        if not event_key:
+            result.append(item)
+            continue
+
+        if event_key not in positions:
+            positions[event_key] = len(result)
+            result.append(item)
+            continue
+
+        removed += 1
+        index = positions[event_key]
+        existing = result[index]
+        if candidate_rank(item) > candidate_rank(existing):
+            # Preserve a useful Japanese verification aid if the discarded
+            # version happened to contain one and the stronger version did not.
+            if not item.get("japanese_verification_summary") and existing.get("japanese_verification_summary"):
+                item["japanese_verification_summary"] = existing.get("japanese_verification_summary")
+            if not item.get("japanese_source_url") and existing.get("japanese_source_url"):
+                item["japanese_source_url"] = existing.get("japanese_source_url")
+                item["japanese_source_name"] = existing.get("japanese_source_name")
+            result[index] = item
+        else:
+            if not existing.get("japanese_verification_summary") and item.get("japanese_verification_summary"):
+                existing["japanese_verification_summary"] = item.get("japanese_verification_summary")
+            if not existing.get("japanese_source_url") and item.get("japanese_source_url"):
+                existing["japanese_source_url"] = item.get("japanese_source_url")
+                existing["japanese_source_name"] = item.get("japanese_source_name")
+
+    return result, removed
+
+
 def main():
     queues = sorted(QUEUE_DIR.glob("*.json"))
     if not queues:
@@ -29,9 +82,13 @@ def main():
 
     json_path = queues[-1]
     queue = json.loads(json_path.read_text(encoding="utf-8"))
+    candidates = list(queue.get("candidates", []))
+    candidates, duplicates_removed = deduplicate_candidates(candidates)
+    queue["candidates"] = candidates
+
     downgraded = 0
 
-    for item in queue.get("candidates", []):
+    for item in candidates:
         before = str(item.get("recommendation") or "").lower()
         title = str(item.get("title") or "")
         location = str(item.get("location") or "")
@@ -77,8 +134,10 @@ def main():
 
     queue["quality_guard"] = {
         "enabled": True,
+        "duplicates_removed": duplicates_removed,
         "downgraded_publish_candidates": downgraded,
         "rules": [
+            "deduplicate by stable event_key",
             "single event only",
             "no vague multi-location publish candidates",
             "no apparent multi-event headlines",
@@ -91,7 +150,11 @@ def main():
     json_path.write_text(json.dumps(queue, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     md_path = json_path.with_suffix(".md")
     write_markdown(queue, md_path)
-    print(f"Editorial quality guard complete. Downgraded publish candidates: {downgraded}")
+    print(
+        "Editorial quality guard complete. "
+        f"Duplicates removed: {duplicates_removed}. "
+        f"Downgraded publish candidates: {downgraded}"
+    )
     return 0
 
 
