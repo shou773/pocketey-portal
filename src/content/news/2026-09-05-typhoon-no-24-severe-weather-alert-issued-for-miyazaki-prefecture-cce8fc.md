@@ -1,47 +1,45 @@
 ---
-title: "Typhoon No. 24: JMA Urges Vigilance in Miyazaki Prefecture"
-description: "JMA is urging vigilance for landslides, heavy rain and high waves in Miyazaki as Typhoon No. 24 affects the region."
+title: "Typhoon No. 24: JMA Urges Strict Vigilance for Landslides in Miyazaki"
+description: "Travelers in Miyazaki should monitor JMA and local guidance as Typhoon No. 24 and a front keep landslide and heavy-rain risks elevated."
 date: 2026-09-05
 category: "Weather & Disruptions"
 location: "Miyazaki Prefecture"
 featured: false
 draft: true
-eventKey: "typhoon-24-miyazaki-prefecture-2026"
+eventKey: "typhoon-24-miyazaki-2026"
 reviewStatus: "needs-review"
-sourceLabel: "Japan Meteorological Agency"
+sourceLabel: "Japan Meteorological Agency - Miyazaki Local Meteorological Office"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml"
 updated: 2026-09-05
 ---
 
-<!-- AI-generated Pocketey draft. Human verification and approval are required before publication. -->
+<!-- AI-assisted Pocketey draft. Human approval is required before publication. -->
 
-The Japan Meteorological Agency (JMA) is urging strict vigilance in Miyazaki Prefecture as Typhoon No. 24 brings unstable atmospheric conditions to the region. Particular attention is being called for landslide risk in the southern plains, northern plains and southern mountainous areas from the evening of September 5.
+The Japan Meteorological Agency (JMA) is urging strict vigilance for landslides in parts of Miyazaki Prefecture as Typhoon No. 24 and a front continue to bring unstable weather to the region.
+
+For travelers, the important point is that conditions may change quickly. The cited JMA weather information does **not** by itself confirm blanket rail, bus or flight cancellations, so check each operator's current status before changing plans.
 
 ## What travelers need to know
 
-Heavy, localized rain accompanied by thunderstorms is expected to continue through September 7. JMA says conditions could reach warning-level severity for heavy rain and related hazards in parts of the prefecture.
+JMA's late September 4 weather information says landslide risk remains a major concern in parts of Miyazaki, including the southern plains, northern plains and southern mountainous areas. Heavy rain, high waves, lightning and sudden severe gusts are also among the hazards travelers should monitor.
 
-In addition to rainfall, coastal areas may see high waves accompanied by swells. Travelers should also be aware of the risk of lightning and sudden gusts, including possible tornadoes.
+As of 9:00 p.m. on September 4, Typhoon No. 24 was about 200 kilometers west of Amami City and moving south at roughly 20 km/h.
 
-### Forecast rainfall
-
-The official bulletin gives the following 24-hour rainfall forecasts:
-
-- **September 5 to September 6:** Up to 150 mm in the southern and northern plains and southern mountainous areas; up to 120 mm in northern mountainous areas.
-- **September 6 to September 7:** Up to 200 mm across the listed regions.
-- **September 7 to September 8:** Up to 120 mm across the listed regions.
-
-Coastal areas in the southern and northern plains are forecast to see waves of up to 3 meters through September 6.
+Weather and risk information can change faster than a travel article can be updated. If you are already in Miyazaki, or traveling there on September 5, use current JMA and local-authority information as your primary reference.
 
 ## What you should do
 
-- **Monitor official updates:** Check the JMA website and its risk maps for the latest local conditions.
-- **Prioritize safety:** If severe weather develops where you are staying, follow instructions from local authorities and avoid unnecessary travel into exposed or mountainous areas.
-- **Check transport before leaving:** Severe weather can lead to service changes. Check your airline, rail or bus operator for the current status before heading to a station or airport.
-- **Follow local guidance:** Pay attention to evacuation information or other instructions issued by local municipal authorities if any are announced for your area.
+- **Check JMA before setting out.** Review the latest weather and hazard information for the specific municipality you are visiting.
+- **Check transport operators directly.** Confirm the current status of your airline, railway or bus service before leaving for a station or airport.
+- **Be cautious with mountain and coastal plans.** If local authorities advise against travel or access, follow that guidance rather than relying on an earlier itinerary.
+- **Follow local instructions.** Pay attention to municipal evacuation or safety information if it is issued for your area.
 
 ## What is confirmed so far
 
-As of late September 4, the typhoon was located about 200 kilometers west of Amami City and moving south at about 20 km/h. Significant rainfall had already been recorded in parts of Miyazaki since September 2, including totals above 380 mm at some observation points cited in the bulletin. The Miyazaki Local Meteorological Office indicated that another update was expected around 5:30 AM on September 5.
+- JMA is urging strict vigilance for landslides in parts of Miyazaki Prefecture into September 5.
+- Typhoon No. 24 remained west of Amami City late on September 4 and was moving south.
+- The cited JMA weather information does not confirm a prefecture-wide shutdown of transport services.
 
-*Source: Japan Meteorological Agency, Miyazaki Local Meteorological Office weather information issued September 4, 2026.*
+Pocketey will update or retire this article when the underlying official information materially changes.
+
+*Source: Japan Meteorological Agency, Miyazaki Local Meteorological Office weather information issued late September 4, 2026.*
