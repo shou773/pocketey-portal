@@ -39,14 +39,17 @@ jobs:
           DRAFT_LIMIT: 2
         run: python scripts/editorial_draft.py
 
-      - name: Commit editorial queue and drafts
+      - name: Attach safely licensed editorial images
+        run: python scripts/editorial_image.py
+
+      - name: Commit editorial queue, drafts and images
         run: |
-          if [ -z "$(git status --porcelain -- data/editorial src/content/news)" ]; then
-            echo "No editorial queue or draft changes to commit."
+          if [ -z "$(git status --porcelain -- data/editorial src/content/news public/images/news)" ]; then
+            echo "No editorial queue, draft or image changes to commit."
             exit 0
           fi
           git config user.name "pocketey-editorial-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/editorial src/content/news
-          git commit -m "Add Pocketey editorial queue and drafts"
+          git add data/editorial src/content/news public/images/news
+          git commit -m "Add Pocketey editorial queue, drafts and images"
           git push
