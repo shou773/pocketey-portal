@@ -6,6 +6,8 @@ category: "Weather & Disruptions"
 location: "Miyazaki Prefecture"
 featured: false
 draft: true
+eventKey: "typhoon-24-miyazaki-prefecture-2026"
+reviewStatus: "needs-review"
 sourceLabel: "Japan Meteorological Agency"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml"
 updated: 2026-09-05
