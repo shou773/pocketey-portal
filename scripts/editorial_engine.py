@@ -6,6 +6,7 @@ import os
 import pathlib
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -180,22 +181,91 @@ def extract_json(text):
     return json.loads(text[start:end + 1])
 
 
-def gemini_analyze(prompt, model, api_key):
+def gemini_request(prompt, model, api_key):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
-    body = {"contents": [{"parts": [{"text": prompt}]}], "generationConfig": {"temperature": 0.15, "responseMimeType": "application/json"}}
-    req = urllib.request.Request(url, data=json.dumps(body).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST")
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            payload = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        detail = e.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Gemini API HTTP {e.code}: {detail}") from e
-    candidates = payload.get("candidates") or []
-    if not candidates:
-        raise RuntimeError(f"Gemini returned no candidates: {payload}")
-    parts = candidates[0].get("content", {}).get("parts", [])
-    text = "".join(p.get("text", "") for p in parts if isinstance(p, dict))
-    return extract_json(text)
+    body = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.15, "responseMimeType": "application/json"},
+    }
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(body).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def gemini_analyze(prompt, model, api_key):
+    fallback = os.getenv("GEMINI_FALLBACK_MODEL", "gemini-3.5-flash-lite").strip()
+    models = [model]
+    if fallback and fallback not in models:
+        models.append(fallback)
+
+    retryable = {429, 500, 502, 503, 504}
+    delays = [5, 15, 30]
+    last_error = None
+
+    for model_index, active_model in enumerate(models):
+        for attempt in range(len(delays) + 1):
+            try:
+                payload = gemini_request(prompt, active_model, api_key)
+                if active_model != model:
+                    print(f"Gemini fallback model succeeded: {active_model}")
+                candidates = payload.get("candidates") or []
+                if not candidates:
+                    raise RuntimeError(f"Gemini returned no candidates: {payload}")
+                parts = candidates[0].get("content", {}).get("parts", [])
+                text = "".join(p.get("text", "") for p in parts if isinstance(p, dict))
+                return extract_json(text)
+            except urllib.error.HTTPError as exc:
+                detail = exc.read().decode("utf-8", errors="replace")
+                last_error = RuntimeError(f"Gemini API HTTP {exc.code} on {active_model}: {detail}")
+                if exc.code not in retryable:
+                    raise last_error from exc
+
+                if attempt < len(delays):
+                    wait_seconds = delays[attempt]
+                    retry_after = exc.headers.get("Retry-After") if exc.headers else None
+                    if retry_after and retry_after.isdigit():
+                        wait_seconds = max(wait_seconds, int(retry_after))
+                    print(
+                        f"Gemini temporary error {exc.code} on {active_model}; "
+                        f"retrying in {wait_seconds}s (attempt {attempt + 1}/{len(delays)}).",
+                        file=sys.stderr,
+                    )
+                    time.sleep(wait_seconds)
+                    continue
+
+                if model_index + 1 < len(models):
+                    print(
+                        f"Gemini model {active_model} remained unavailable; "
+                        f"trying fallback model {models[model_index + 1]}.",
+                        file=sys.stderr,
+                    )
+                break
+            except urllib.error.URLError as exc:
+                last_error = RuntimeError(f"Gemini network error on {active_model}: {exc}")
+                if attempt < len(delays):
+                    wait_seconds = delays[attempt]
+                    print(
+                        f"Gemini network error on {active_model}; retrying in {wait_seconds}s.",
+                        file=sys.stderr,
+                    )
+                    time.sleep(wait_seconds)
+                    continue
+                if model_index + 1 < len(models):
+                    print(
+                        f"Gemini network requests for {active_model} kept failing; "
+                        f"trying fallback model {models[model_index + 1]}.",
+                        file=sys.stderr,
+                    )
+                break
+
+    if last_error:
+        raise last_error
+    raise RuntimeError("Gemini analysis failed without a reported error")
 
 
 def normalize(result, config, run_date):
