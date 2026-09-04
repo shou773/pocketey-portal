@@ -1,0 +1,44 @@
+{
+  "site": "Pocketey Japan",
+  "audience": "International travelers to Japan",
+  "candidate_limit": 8,
+  "lookback_days": 3,
+  "score_weights": {
+    "traveler_value": 35,
+    "trip_impact": 20,
+    "source_reliability": 20,
+    "freshness": 10,
+    "seo_evergreen": 10,
+    "monetization_fit": 5
+  },
+  "priority_topics": [
+    "rail and train changes",
+    "buses and local transport",
+    "airports and entry procedures",
+    "IC cards, tickets, fares and reservations",
+    "weather and transport disruptions",
+    "earthquakes and traveler impacts",
+    "tourism taxes and local visitor rules",
+    "overtourism measures",
+    "attraction openings, closures and rule changes",
+    "luggage, batteries and travel rules",
+    "major seasonal events useful for trip planning"
+  ],
+  "preferred_domains": [
+    "japan.travel",
+    "mlit.go.jp",
+    "mofa.go.jp",
+    "jma.go.jp",
+    "jr-central.co.jp",
+    "jreast.co.jp",
+    "westjr.co.jp",
+    "jrkyushu.co.jp",
+    "jrhokkaido.co.jp",
+    "narita-airport.jp",
+    "tokyo-haneda.com",
+    "kansai-airport.or.jp",
+    "city.kyoto.lg.jp",
+    "metro.tokyo.lg.jp"
+  ],
+  "minimum_publish_recommendation_score": 70
+}
