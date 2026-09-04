@@ -11,7 +11,15 @@ reviewStatus: "needs-review"
 sourceLabel: "JAPAN RAIL PASS (JR Group)"
 sourceUrl: "https://japanrailpass.net/en/purchase/price/"
 updated: 2026-09-05
-imageStatus: "needs-reselect"
+image: "/images/news/2026-09-05-japan-rail-pass-overseas-agency-price-change-october-2026-commons.jpg"
+imageAlt: "Gifu-Hashima Station in Gifu Prefecture, Japan"
+imageCredit: "Dr.yellow"
+imageSourceUrl: "https://commons.wikimedia.org/wiki/File:Kuwabara_river_to_pass_through_Gifu-hashima_station,_Tokaido_Shinkansen_01.jpg"
+imageLicense: "CC BY-SA 4.0"
+imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+imageProvider: "Wikimedia Commons"
+imageContext: "illustrative"
+imageStatus: "open-license-needs-review"
 imageGenerated: false
 ---
 

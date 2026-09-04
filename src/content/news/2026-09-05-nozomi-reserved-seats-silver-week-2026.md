@@ -11,7 +11,15 @@ reviewStatus: "needs-review"
 sourceLabel: "JR Central"
 sourceUrl: "https://global.jr-central.co.jp/en/nozomi/"
 updated: 2026-09-05
-imageStatus: "needs-reselect"
+image: "/images/news/2026-09-05-nozomi-reserved-seats-silver-week-2026-commons.jpg"
+imageAlt: "東京駅に入線中のN700S（試運転）、隣のホームに停車するN700Aとのフォルムの違いが比較できる"
+imageCredit: "電車(新幹線)でゴー！"
+imageSourceUrl: "https://commons.wikimedia.org/wiki/File:Tokaido_Shinkansen_N700S_%26_N700A_in_Tokyo_Station.jpg"
+imageLicense: "CC BY-SA 4.0"
+imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+imageProvider: "Wikimedia Commons"
+imageContext: "illustrative"
+imageStatus: "open-license-needs-review"
 imageGenerated: false
 ---
 
