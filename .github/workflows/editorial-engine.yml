@@ -2,15 +2,24 @@ name: Pocketey Editorial Engine
 
 on:
   workflow_dispatch:
+  schedule:
+    # 07:17 Japan Standard Time every day (22:17 UTC on the previous date).
+    # A non-round minute reduces the chance of GitHub's scheduled-run peak delay.
+    - cron: '17 22 * * *'
 
 permissions:
   contents: write
 
+concurrency:
+  group: pocketey-editorial-engine
+  cancel-in-progress: false
+
 jobs:
   research:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Run editorial research
         env:
@@ -18,7 +27,7 @@ jobs:
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
         run: python scripts/editorial_engine.py
 
-      - name: Generate unpublished article drafts
+      - name: Generate or refresh unpublished article drafts
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
