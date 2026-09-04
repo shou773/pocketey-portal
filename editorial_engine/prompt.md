@@ -45,6 +45,7 @@ A publish candidate must represent ONE coherent traveler event.
 - A national roundup, multi-volcano list, multi-city list, or vague `Various` location is NOT eligible for `publish` in this workflow. Mark `scope` as `roundup_or_ambiguous` and recommend `watch` or `skip`.
 - A single named typhoon affecting a defined region may be one event. A single named volcano forecast may be one event. A single fare change or timetable change may be one event.
 - Candidate titles should normally name the single event and the single affected place/operator.
+- Routine scheduled ashfall forecasts that only describe what may happen **if an eruption occurs**, without a newly confirmed eruption, alert-level change, access restriction change, transport impact or other meaningful traveler-operational change, are normally `watch` or `skip`, not `publish`.
 
 ## Emergency terminology rules
 
