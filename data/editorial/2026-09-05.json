@@ -1,0 +1,60 @@
+{
+  "run_date": "2026-09-05",
+  "status": "candidate_queue_only",
+  "human_review_required": true,
+  "run_summary": "The research desk identified a critical weather alert for Miyazaki Prefecture due to Typhoon No. 24, requiring immediate traveler awareness. Other items include routine JR Central event announcements and minor administrative updates that do not currently warrant urgent traveler action.",
+  "candidates": [
+    {
+      "title": "Severe Weather Alert: Typhoon No. 24 Impacting Miyazaki Prefecture",
+      "category": "Weather & Disruptions",
+      "location": "Miyazaki Prefecture",
+      "what_changed": "The Japan Meteorological Agency has issued a severe warning for landslides in southern and northern plains and southern mountainous areas of Miyazaki Prefecture due to Typhoon No. 24.",
+      "why_it_matters": "Travelers in or planning to visit Miyazaki may face transport disruptions, safety risks, and potential closures of outdoor attractions.",
+      "effective_date": "2026-09-05",
+      "traveler_action": "Monitor local transport updates, avoid mountainous areas, and follow instructions from local authorities. Check with your airline or rail operator if traveling in the region.",
+      "primary_source_name": "Japan Meteorological Agency - Weather Warnings/Advisories",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml",
+      "secondary_source_url": null,
+      "scores": {
+        "traveler_value": 35,
+        "trip_impact": 20,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 0,
+        "monetization_fit": 0,
+        "total": 85
+      },
+      "related_guide_opportunity": "General guide on 'Staying Safe During Typhoons in Japan'",
+      "monetization_relevance": "none",
+      "monetization_note": "Safety-critical information; monetization is inappropriate.",
+      "recommendation": "publish",
+      "reason": "High-priority safety information for travelers currently in or heading to the affected region."
+    },
+    {
+      "title": "JR Central Announces 'Go to Hamamatsu Factory' Tour",
+      "category": "Events",
+      "location": "Hamamatsu",
+      "what_changed": "JR Central has announced a new tour event for the 2026 fiscal year at the Hamamatsu Factory.",
+      "why_it_matters": "This is a niche event for railway enthusiasts visiting the Shizuoka area.",
+      "effective_date": "2026-09-04",
+      "traveler_action": "Interested travelers should check the official JR Central website for booking details if they wish to participate.",
+      "primary_source_name": "JR Central - Japanese News Releases",
+      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00595.html",
+      "secondary_source_url": null,
+      "scores": {
+        "traveler_value": 10,
+        "trip_impact": 5,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 5,
+        "monetization_fit": 5,
+        "total": 55
+      },
+      "related_guide_opportunity": "Guide to Railway Museums and Experiences in Japan",
+      "monetization_relevance": "low",
+      "monetization_note": "Potential to link to regional rail passes or local accommodation.",
+      "recommendation": "watch",
+      "reason": "Low impact on general travelers; only relevant to a specific enthusiast demographic."
+    }
+  ]
+}
