@@ -228,6 +228,18 @@ def write_draft(candidate, draft, run_date, event_key, existing_path=None, exist
         raise ValueError("Draft body is empty")
 
     existing_meta = existing_meta or {}
+    japanese_source_name = str(
+        candidate.get("japanese_source_name") or existing_meta.get("japaneseSourceName") or ""
+    ).strip()
+    japanese_source_url = str(
+        candidate.get("japanese_source_url") or existing_meta.get("japaneseSourceUrl") or ""
+    ).strip()
+    japanese_verification_summary = str(
+        candidate.get("japanese_verification_summary")
+        or existing_meta.get("japaneseVerificationSummary")
+        or ""
+    ).strip()
+
     original_date = str(existing_meta.get("date") or run_date)
     if existing_path is not None:
         path = existing_path
@@ -237,6 +249,17 @@ def write_draft(candidate, draft, run_date, event_key, existing_path=None, exist
         path = NEWS_DIR / f"{run_date}-{slug}-{digest}.md"
 
     NEWS_DIR.mkdir(parents=True, exist_ok=True)
+    japanese_source_lines = []
+    if japanese_source_url.startswith("https://"):
+        japanese_source_lines = [
+            f"japaneseSourceName: {yaml_string(japanese_source_name or '日本語の公式ソース')}",
+            f"japaneseSourceUrl: {yaml_string(japanese_source_url)}",
+        ]
+        if japanese_verification_summary:
+            japanese_source_lines.append(
+                f"japaneseVerificationSummary: {yaml_string(japanese_verification_summary)}"
+            )
+
     content = "\n".join(
         [
             "---",
@@ -251,6 +274,7 @@ def write_draft(candidate, draft, run_date, event_key, existing_path=None, exist
             f"reviewStatus: {yaml_string('needs-review')}",
             f"sourceLabel: {yaml_string(source_label)}",
             f"sourceUrl: {yaml_string(source_url)}",
+            *japanese_source_lines,
             f"updated: {run_date}",
             "---",
             "",
