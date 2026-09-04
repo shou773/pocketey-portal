@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.pocketey.com/sitemap-index.xml

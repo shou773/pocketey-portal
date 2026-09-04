@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+const posts=(await getCollection('news',({data})=>!data.draft)).sort((a,b)=>b.data.date.getTime()-a.data.date.getTime());
+---
+<BaseLayout title="Latest Japan Travel Updates | Pocketey Japan" description="Japan travel news, transport changes, events, disruptions and practical updates for international visitors.">
+<section class="container intro"><div class="kicker">Latest updates</div><h1 class="display">Japan, as it changes.</h1><p>Practical travel updates from Japan, translated into what they mean for your trip.</p></section>
+<section class="container"><div class="chips"><span class="pill">All</span><span class="pill">Transportation</span><span class="pill">Events</span><span class="pill">Weather & Disruptions</span><span class="pill">Travel Updates</span></div><div class="grid">{posts.map((p,i)=><ArticleCard post={p} index={i}/>)}</div></section>
+</BaseLayout>
+<style>.intro{padding:82px 0 38px;border-bottom:1px solid var(--line)}.intro h1{font-size:clamp(4rem,9vw,8rem);margin:.4rem 0 1rem}.intro p{color:var(--muted);max-width:620px}.chips{display:flex;flex-wrap:wrap;gap:8px;padding:28px 0 38px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:42px 24px;padding-bottom:70px}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.grid{grid-template-columns:1fr}}</style>

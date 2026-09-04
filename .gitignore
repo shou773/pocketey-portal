@@ -1,4 +1,0 @@
-# Nothing to ignore: dist/ is committed on purpose.
-# Cloudflare Pages serves it directly with no build step.
-__pycache__/
-.DS_Store

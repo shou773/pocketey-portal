@@ -1,56 +1,86 @@
-# pocketey.com
+# Pocketey Japan
 
-A single tool: the volumetric weight calculator for parcels sent from Japan,
-in five languages (en, fr, zh, ko, ja).
+Minimal Astro + GitHub Pages MVP for **pocketey.com**.
 
-## How this is deployed
+## What is included
 
-Cloudflare Pages project `pocketey-portal`, connected to this repo.
+- Editorial-style responsive homepage
+- Markdown-based travel news collection
+- Individual article pages
+- News index and Guides placeholder
+- About / Privacy / Affiliate Disclosure
+- Canonical URLs, meta descriptions, Open Graph, robots.txt
+- Automatic sitemap via `@astrojs/sitemap`
+- GitHub Pages deployment workflow
+- `draft: true` publishing gate for human approval
 
-- **Build command:** *(empty — no build step)*
-- **Build output directory:** `dist`
+## Local setup
 
-`dist/` is committed to the repository on purpose. Pages serves those files
-directly. There is no Node, no npm, and nothing that can break on its own in
-two years' time. That is the point.
+```bash
+npm install
+npm run dev
+```
 
-## Making a change
+Build check:
 
-Text lives in `strings.json`, one object per language.
-Layout lives in `build.py`. Calculator logic lives in `calc.js`.
-Styling lives in `site.css` (inlined into each page at build time).
+```bash
+npm run build
+```
 
-    python3 build.py      # regenerates dist/
-    git add -A && git commit -m "..." && git push
+## Add an article
 
-Pages redeploys automatically on push to `main`.
+Create a Markdown file in `src/content/news/`, for example:
 
-## Structure
+```md
+---
+title: "JR announces ..."
+description: "One-sentence traveler-focused summary."
+date: 2026-09-05
+category: "Transportation"
+location: "Tokyo"
+featured: false
+draft: true
+sourceLabel: "JR East"
+sourceUrl: "https://example.com/official-source"
+---
 
-    /                       redirects to the visitor's language
-    /en/ /fr/ /zh/ /ko/ /ja/
-        index.html          the calculator
-        privacy.html
-        disclosure.html
-    /sitemap.xml            15 pages, with hreflang alternates
-    /robots.txt
+## What changed?
+...
 
-Every page carries hreflang alternates for all five languages plus
-x-default, and a self-referencing canonical.
+## Who is affected?
+...
 
-## What deliberately isn't here
+## What should travelers do?
+...
+```
 
-Duty thresholds, carrier prices and proxy-service fees. All three moved
-during 2025-2026 — the US suspended its $800 de minimis, and the EU replaced
-its €150 threshold with a per-item charge from July 2026. Publishing figures
-like these means maintaining them forever.
+Keep `draft: true` while reviewing. Change to `draft: false` to publish on the next GitHub push.
 
-The divisors — 6000 for Japan Post, 5000 for the express couriers — are the
-only numbers on this site that stay true without upkeep. That is why they are
-the only numbers on this site.
+## GitHub Pages
 
-## Analytics
+1. Create a public GitHub repository.
+2. Push this project to the `main` branch.
+3. In **Settings → Pages**, set the source to **GitHub Actions**.
+4. The included workflow will build and deploy the site.
 
-Cloudflare Web Analytics. The privacy pages promise a cookieless script that
-does not identify visitors; keep that promise or change the wording in
-`build.py` (the `PRIVACY` table).
+## Custom domain: pocketey.com
+
+This project is configured for `https://www.pocketey.com`.
+
+Recommended setup:
+
+- `www.pocketey.com` → CNAME to `<your-github-username>.github.io`
+- Configure the apex `pocketey.com` using the current GitHub Pages DNS instructions from your registrar.
+- Add `www.pocketey.com` as the custom domain in GitHub Pages settings.
+- Turn on **Enforce HTTPS** after DNS resolves.
+
+Do not change DNS records until you confirm where `pocketey.com` currently points.
+
+## Before commercial launch
+
+- Replace demo articles with verified real reporting.
+- Review Privacy Policy and Affiliate Disclosure for actual services used.
+- Add a public contact method.
+- Connect Google Search Console.
+- Add analytics only when you are ready to update privacy/cookie handling.
+- Verify each affiliate program's terms before inserting affiliate links.

@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+const posts=(await getCollection('news',({data})=>!data.draft)).sort((a,b)=>b.data.date.getTime()-a.data.date.getTime());
+const featured=posts.find(p=>p.data.featured) ?? posts[0];
+const latest=posts.slice(0,6);
+---
+<BaseLayout>
+  <section class="hero container">
+    <div class="hero-copy">
+      <div class="kicker">Japan Travel Intelligence</div>
+      <h1 class="display">Know Japan<br/>before you arrive.</h1>
+      <p>Fresh, practical updates for international travelers — transport changes, seasonal events, new rules, disruptions and useful context from Japan.</p>
+      <div class="hero-actions"><a class="button" href="/news/">Explore latest updates</a><span>Updated from Japan · Clear English · Official sources</span></div>
+    </div>
+    <div class="hero-art" aria-hidden="true"><div class="sun"></div><div class="arch a1"></div><div class="arch a2"></div><span class="jp">旅</span><span class="caption">TRAVEL LIGHTLY<br/>KNOW MORE</span></div>
+  </section>
+
+  <section class="latest-strip">
+    <div class="container latest-compact">
+      <div class="latest-title"><div class="kicker">Latest updates</div><h2 class="display">What travelers should know now.</h2></div>
+      <div class="latest-list">
+        {latest.slice(0,4).map((post)=><a class="latest-row" href={`/news/${post.id}/`}><span class="latest-date">{post.data.date.toLocaleDateString('en-US',{month:'short',day:'2-digit'})}</span><span class="latest-category">{post.data.category}</span><strong>{post.data.title}</strong><span class="arrow">↗</span></a>)}
+      </div>
+      <a class="view-all" href="/news/">View all updates →</a>
+    </div>
+  </section>
+
+  {featured && <section class="feature-wrap">
+    <div class="container feature">
+      <div class="feature-label"><span class="kicker">Featured update</span><span>{featured.data.location || 'Japan'}</span></div>
+      <div class="feature-main">
+        <h2 class="display"><a href={`/news/${featured.id}/`}>{featured.data.title}</a></h2>
+        <div><p>{featured.data.description}</p><a class="button" href={`/news/${featured.id}/`}>Read the update</a></div>
+      </div>
+    </div>
+  </section>}
+
+  <section class="container latest-cards">
+    <div class="section-head"><div><div class="kicker">More from Japan</div><h2 class="display">Fresh context for a smoother trip.</h2></div><a href="/news/">Browse all →</a></div>
+    <div class="grid">{latest.map((post,i)=><ArticleCard post={post} index={i} />)}</div>
+  </section>
+
+  <section class="container principles">
+    <div><span class="kicker">The Pocketey standard</span><h2 class="display">Less noise.<br/>More useful context.</h2></div>
+    <div class="principle-grid"><article><b>01</b><h3>What changed?</h3><p>We strip news down to the facts that actually affect a trip.</p></article><article><b>02</b><h3>Why it matters</h3><p>We explain the practical impact on international visitors.</p></article><article><b>03</b><h3>What to do next</h3><p>Dates, alternatives and official sources whenever possible.</p></article></div>
+  </section>
+
+  <section id="dispatch" class="dispatch-section"><div class="container dispatch-inner"><div><div class="kicker">Pocketey Dispatch</div><h2 class="display">A quieter way to keep up with Japan.</h2></div><div><p>Newsletter signup can be connected later. For the MVP, this section establishes the future retention channel without adding a paid service.</p><a class="button" href="/news/">Browse this week’s updates</a></div></div></section>
+</BaseLayout>
+<style>
+.hero{display:grid;grid-template-columns:1.06fr .94fr;gap:54px;align-items:center;min-height:520px;padding-block:58px}.hero h1{font-size:clamp(3.6rem,7.2vw,6.7rem);margin:.4rem 0 1.2rem}.hero-copy>p{max-width:650px;color:var(--muted);font-size:1.02rem}.hero-actions{display:flex;align-items:center;gap:20px;margin-top:24px}.hero-actions span{font-size:.7rem;color:var(--muted);max-width:210px}.hero-art{aspect-ratio:5/4.7;max-height:500px;background:#d6d0c3;border-radius:150px 150px 24px 24px;position:relative;overflow:hidden}.sun{width:32%;aspect-ratio:1;border-radius:50%;background:#b96e46;position:absolute;right:11%;top:11%}.arch{position:absolute;border:1px solid rgba(23,24,19,.3);border-bottom:0;border-radius:200px 200px 0 0}.a1{width:76%;height:62%;left:12%;bottom:0}.a2{width:50%;height:44%;left:25%;bottom:0}.jp{position:absolute;left:10%;bottom:8%;font:400 5.3rem Georgia}.caption{position:absolute;right:8%;bottom:8%;font-size:.6rem;letter-spacing:.2em;line-height:1.7}
+.latest-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.18)}.latest-compact{display:grid;grid-template-columns:.75fr 1.8fr auto;gap:36px;align-items:start;padding-block:34px}.latest-title h2{font-size:clamp(2rem,3vw,3rem);margin:.35rem 0 0;max-width:420px}.latest-list{border-top:1px solid var(--line)}.latest-row{display:grid;grid-template-columns:72px 120px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:.83rem}.latest-date,.latest-category{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}.latest-row strong{font-weight:600}.arrow{font-size:.9rem}.view-all{font-size:.8rem;white-space:nowrap;padding-top:4px}
+.feature-wrap{background:#20211d;color:#f1eee5;padding:52px 0}.feature-label{display:flex;justify-content:space-between;color:#aaa99f;font-size:.72rem;text-transform:uppercase;letter-spacing:.12em}.feature-main{display:grid;grid-template-columns:1.35fr .65fr;gap:50px;align-items:end;margin-top:24px}.feature h2{font-size:clamp(2.7rem,5.4vw,5.2rem);margin:0}.feature-main p{color:#aaa99f}.feature .button{border-color:#ece9df}.feature .button:hover{background:#ece9df;color:#20211d}
+.latest-cards{padding-block:78px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:38px}.section-head h2{font-size:clamp(2.6rem,4.5vw,4.5rem);margin:.4rem 0 0;max-width:760px}.section-head>a{font-size:.82rem;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:42px 24px}.principles{padding:68px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}.principles h2{font-size:clamp(2.8rem,4.5vw,4.6rem);margin:.6rem 0}.principle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.principle-grid article{padding-top:16px;border-top:1px solid var(--ink)}.principle-grid b{font-size:.66rem;letter-spacing:.15em}.principle-grid h3{font:400 1.3rem Georgia;margin:2.4rem 0 .5rem}.principle-grid p{font-size:.82rem;color:var(--muted)}.dispatch-section{background:#d9d3c5;padding:70px 0}.dispatch-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:80px;align-items:end}.dispatch-inner h2{font-size:clamp(2.8rem,4.5vw,4.8rem);margin:.7rem 0 0}.dispatch-inner p{color:#585b53;max-width:520px}
+@media(max-width:980px){.hero{grid-template-columns:1fr 1fr;gap:34px}.latest-compact{grid-template-columns:1fr}.view-all{padding-top:0}.feature-main,.principles,.dispatch-inner{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.hero{grid-template-columns:1fr;min-height:0;padding-block:42px}.hero h1{font-size:clamp(3.2rem,14vw,5rem)}.hero-art{max-width:520px;width:100%;margin:auto;aspect-ratio:4/3.5}.latest-row{grid-template-columns:62px 1fr auto}.latest-category{display:none}.feature-main{gap:20px}.grid,.principle-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.latest-cards{padding-block:58px}.latest-compact{padding-block:28px}}
+@media(max-width:520px){.hero-actions{align-items:flex-start;flex-direction:column}.hero-art{border-radius:110px 110px 20px 20px}.jp{font-size:4.2rem}.feature-wrap{padding:44px 0}.feature h2{font-size:clamp(2.5rem,12vw,4rem)}}
+</style>

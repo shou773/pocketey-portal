@@ -1,0 +1,23 @@
+---
+const path = Astro.url.pathname;
+const nav = [
+  ['Latest','/news/'], ['Transport','/news/?category=Transportation'], ['Events','/news/?category=Events'], ['Guides','/guides/'], ['About','/about/']
+];
+---
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label="Pocketey Japan home">
+      <span class="mark">P</span>
+      <span><b>POCKETEY</b><small>JAPAN</small></span>
+    </a>
+    <nav aria-label="Main navigation">
+      {nav.map(([label, href]) => <a class={path.startsWith(href.split('?')[0]) ? 'active' : ''} href={href}>{label}</a>)}
+    </nav>
+    <a class="dispatch" href="#dispatch">Weekly Dispatch</a>
+  </div>
+</header>
+<style>
+.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%, transparent);backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.bar{height:78px;display:flex;align-items:center;gap:28px}.brand{display:flex;align-items:center;gap:11px;min-width:210px}.mark{width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:italic 20px Georgia}.brand b{font-size:.86rem;letter-spacing:.15em}.brand small{display:block;font-size:.58rem;letter-spacing:.28em;color:var(--muted);margin-top:-2px}nav{display:flex;gap:24px;margin-left:auto}nav a{font-size:.83rem;color:var(--muted);position:relative}nav a:hover,nav a.active{color:var(--ink)}.dispatch{font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:.58rem .85rem}
+@media(max-width:850px){nav{display:none}.dispatch{margin-left:auto}.brand{min-width:0}}@media(max-width:480px){.dispatch{display:none}}
+</style>
