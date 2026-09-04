@@ -4,6 +4,9 @@ import { getCollection, render } from 'astro:content';
 export async function getStaticPaths(){const posts=await getCollection('news',({data})=>!data.draft);return posts.map(post=>({params:{slug:post.id},props:{post}}));}
 const { post }=Astro.props; const { Content }=await render(post);
 const d=post.data; const published=d.date.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+const publicSourceUrl = d.sourceUrl?.includes('data.jma.go.jp/developer/xml/')
+  ? 'https://www.jma.go.jp/bosai/'
+  : d.sourceUrl;
 ---
 <BaseLayout title={`${d.title} | Pocketey Japan`} description={d.description}>
 <article>
@@ -11,7 +14,7 @@ const d=post.data; const published=d.date.toLocaleDateString('en-US',{month:'lon
   <div class="hero-image"><div class="circle"></div><span>{d.location || 'JAPAN'}</span></div>
   <div class="container article-grid">
     <aside><div class="kicker">At a glance</div><p><b>Published</b><br/>{published}</p>{d.updated && <p><b>Updated</b><br/>{d.updated.toLocaleDateString('en-US')}</p>}<p><b>Category</b><br/>{d.category}</p></aside>
-    <div class="prose"><Content />{d.sourceUrl && <div class="source"><span class="kicker">Official source</span><a href={d.sourceUrl} rel="nofollow noopener" target="_blank">{d.sourceLabel || 'View official information'} ↗</a></div>}</div>
+    <div class="prose"><Content />{publicSourceUrl && <div class="source"><span class="kicker">Official source</span><a href={publicSourceUrl} rel="nofollow noopener" target="_blank">{d.sourceLabel || 'View official information'} ↗</a></div>}</div>
   </div>
 </article>
 </BaseLayout>
