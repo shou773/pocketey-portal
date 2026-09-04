@@ -15,6 +15,16 @@ const news = defineCollection({
     reviewStatus: z.enum(['needs-review', 'approved']).optional(),
     sourceLabel: z.string().optional(),
     sourceUrl: z.string().url().optional(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    imageCredit: z.string().optional(),
+    imageSourceUrl: z.string().url().optional(),
+    imageLicense: z.string().optional(),
+    imageLicenseUrl: z.string().url().optional(),
+    imageProvider: z.string().optional(),
+    imageContext: z.enum(['illustrative', 'event-specific']).optional(),
+    imageStatus: z.enum(['open-license-needs-review', 'needs-ai-fallback', 'approved']).optional(),
+    imageGenerated: z.boolean().optional(),
     updated: z.coerce.date().optional()
   })
 });
