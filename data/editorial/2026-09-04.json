@@ -1,0 +1,60 @@
+{
+  "run_date": "2026-09-04",
+  "status": "candidate_queue_only",
+  "human_review_required": true,
+  "run_summary": "The Japan Meteorological Agency has issued severe weather warnings for Typhoon No. 24, specifically impacting Miyazaki and the Kyushu/Amami regions. Several volcanic ash forecasts for various mountains remain in effect. No major transport infrastructure closures were explicitly detailed in the provided feed, but travelers in affected areas should monitor local conditions.",
+  "candidates": [
+    {
+      "title": "Travel Alert: Typhoon No. 24 Impacts Kyushu and Miyazaki",
+      "category": "Weather & Disruptions",
+      "location": "Miyazaki, Kyushu, and Amami regions",
+      "what_changed": "The Japan Meteorological Agency has issued severe weather warnings due to Typhoon No. 24, with risks of landslides, flooding, and high waves.",
+      "why_it_matters": "Travelers in these regions may face transport delays, safety risks, and potential disruption to outdoor activities or regional travel plans.",
+      "effective_date": "2026-09-05",
+      "traveler_action": "Monitor local weather reports, follow instructions from local authorities, and check with transport providers (rail/airlines) for potential service suspensions.",
+      "primary_source_name": "Japan Meteorological Agency",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml",
+      "secondary_source_url": null,
+      "scores": {
+        "traveler_value": 35,
+        "trip_impact": 20,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 0,
+        "monetization_fit": 0,
+        "total": 85
+      },
+      "related_guide_opportunity": "How to handle travel disruptions in Japan",
+      "monetization_relevance": "none",
+      "monetization_note": "Safety-critical information; monetization is inappropriate.",
+      "recommendation": "publish",
+      "reason": "High traveler value due to immediate safety and potential travel disruption."
+    },
+    {
+      "title": "Volcanic Activity Update: Ash Forecasts for Kyushu and Hokkaido",
+      "category": "Weather & Disruptions",
+      "location": "Sakurajima, Suwanose-jima, Kirishima, Aso, Satsuma-Iwo-jima, Kuchinoerabu-jima, Me-Akan-dake",
+      "what_changed": "The JMA has issued ongoing volcanic ash forecasts for several mountains, most of which are at alert levels 2 or 3.",
+      "why_it_matters": "Travelers visiting these areas may experience ashfall, which can affect visibility, respiratory health, and local transport operations.",
+      "effective_date": "2026-09-04 to 2026-09-05",
+      "traveler_action": "Check local volcanic activity levels before visiting these specific regions and carry a mask if ashfall is reported.",
+      "primary_source_name": "Japan Meteorological Agency",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904140037_0_VFVO53_010000.xml",
+      "secondary_source_url": null,
+      "scores": {
+        "traveler_value": 25,
+        "trip_impact": 15,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 5,
+        "monetization_fit": 0,
+        "total": 75
+      },
+      "related_guide_opportunity": "Safety guide for visiting volcanic regions in Japan",
+      "monetization_relevance": "none",
+      "monetization_note": "Safety-critical information.",
+      "recommendation": "watch",
+      "reason": "Important safety information, but requires synthesis of multiple specific volcano reports to be useful."
+    }
+  ]
+}
