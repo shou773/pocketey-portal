@@ -11,6 +11,8 @@ const news = defineCollection({
     location: z.string().optional(),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
+    eventKey: z.string().optional(),
+    reviewStatus: z.enum(['needs-review', 'approved']).optional(),
     sourceLabel: z.string().optional(),
     sourceUrl: z.string().url().optional(),
     updated: z.coerce.date().optional()
