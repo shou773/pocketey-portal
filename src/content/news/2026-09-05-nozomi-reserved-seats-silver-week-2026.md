@@ -11,6 +11,16 @@ reviewStatus: "needs-review"
 sourceLabel: "JR Central"
 sourceUrl: "https://global.jr-central.co.jp/en/nozomi/"
 updated: 2026-09-05
+image: "/images/news/2026-09-05-nozomi-reserved-seats-silver-week-2026-commons.jpg"
+imageAlt: "The 300 series is a Japanese high-speed Shinkansen train type which operated on the Tōkaidō and Sanyō Shinkansen lines in Japan between 1992 and 2012. When first introduced, they w"
+imageCredit: "Peter Broster"
+imageSourceUrl: "https://commons.wikimedia.org/wiki/File:ShinKanSen_Series_300_(8062066931).jpg"
+imageLicense: "CC BY 2.0"
+imageLicenseUrl: "https://creativecommons.org/licenses/by/2.0"
+imageProvider: "Wikimedia Commons"
+imageContext: "illustrative"
+imageStatus: "open-license-needs-review"
+imageGenerated: false
 ---
 
 <!-- Manually curated Pocketey draft from official JR Central information. Human approval is required before publication. -->

@@ -11,6 +11,16 @@ reviewStatus: "needs-review"
 sourceLabel: "JAPAN RAIL PASS (JR Group)"
 sourceUrl: "https://japanrailpass.net/en/purchase/price/"
 updated: 2026-09-05
+image: "/images/news/2026-09-05-japan-rail-pass-overseas-agency-price-change-october-2026-commons.jpg"
+imageAlt: "Provides a glimpse of different aspects of child life in nineteenth century Japan interwoven with some popular tales"
+imageCredit: "Matilda Chaplin Ayrton"
+imageSourceUrl: "https://commons.wikimedia.org/wiki/File:Child-life_in_Japan_and_Japanese_child_stories_(Ayrton,_Matilida_Chaplin._,_1901).djvu"
+imageLicense: "Public domain"
+imageLicenseUrl: ""
+imageProvider: "Wikimedia Commons"
+imageContext: "illustrative"
+imageStatus: "open-license-needs-review"
+imageGenerated: false
 ---
 
 <!-- Manually curated Pocketey draft from official JR Group information. Human approval is required before publication. -->
