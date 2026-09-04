@@ -38,6 +38,8 @@ def main():
         scope = str(item.get("scope") or "").lower()
         formal_status = str(item.get("formal_status") or "").lower()
         event_key = str(item.get("event_key") or "").strip()
+        what_changed = str(item.get("what_changed") or "")
+        why_it_matters = str(item.get("why_it_matters") or "")
 
         if before != "publish":
             continue
@@ -55,6 +57,17 @@ def main():
         if risky_terms and formal_status != "confirmed_formal_status":
             downgrade(item, "Quality guard: formal emergency terminology is not confirmed by the candidate metadata.")
 
+        combined = f"{title} {what_changed} {why_it_matters}".lower()
+        routine_ash = (
+            "ash forecast" in combined
+            or "ashfall forecast" in combined
+            or "volcanic ash forecast" in combined
+        )
+        conditional_eruption = bool(re.search(r"\bif (?:an )?eruption occurs\b|\bif .*erupts\b|\bin the event of an eruption\b", combined))
+        confirmed_change = bool(re.search(r"\b(has erupted|eruption occurred|confirmed eruption|alert level (?:raised|lowered|changed)|access (?:closed|restricted)|closure|transport (?:impact|disruption))\b", combined))
+        if routine_ash and conditional_eruption and not confirmed_change:
+            downgrade(item, "Quality guard: routine conditional ash forecasts stay on WATCH unless a new eruption or traveler-operational change is confirmed.")
+
         if not event_key:
             downgrade(item, "Quality guard: stable event_key is required before automatic drafting.")
 
@@ -70,6 +83,7 @@ def main():
             "no vague multi-location publish candidates",
             "no apparent multi-event headlines",
             "formal alert terminology must be explicitly confirmed",
+            "routine conditional ash forecasts require a new operational change",
             "stable event_key required"
         ]
     }
