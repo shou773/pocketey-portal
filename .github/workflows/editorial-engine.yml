@@ -3,9 +3,11 @@ name: Pocketey Editorial Engine
 on:
   workflow_dispatch:
   schedule:
-    # 07:17 Japan Standard Time every day (22:17 UTC on the previous date).
-    # A non-round minute reduces the chance of GitHub's scheduled-run peak delay.
-    - cron: '17 22 * * *'
+    # Early-stage monitoring cadence: 07:17 / 14:17 / 21:17 JST.
+    # Non-round minutes reduce the chance of GitHub's scheduled-run peak delay.
+    - cron: '17 22 * * *' # 07:17 JST (previous date in UTC)
+    - cron: '17 5 * * *'  # 14:17 JST
+    - cron: '17 12 * * *' # 21:17 JST
 
 permissions:
   contents: write
