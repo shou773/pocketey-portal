@@ -1,6 +1,7 @@
 ---
 import EditorialLayout from '../../../layouts/EditorialLayout.astro';
 import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
 import path from 'node:path';
 
 export async function getStaticPaths() {
@@ -18,6 +19,29 @@ const githubUrl = `https://github.com/shou773/pocketey-portal/blob/main/${repoPa
 const publishUrl = 'https://github.com/shou773/pocketey-portal/actions/workflows/publish-draft.yml';
 const updated = (d.updated ?? d.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 const reviewKey = d.eventKey || post.id;
+
+const queueDir = path.resolve(process.cwd(), 'data/editorial');
+let matchedCandidate = null;
+if (fs.existsSync(queueDir)) {
+  const queueFiles = fs.readdirSync(queueDir).filter((name) => name.endsWith('.json')).sort().reverse();
+  for (const name of queueFiles) {
+    try {
+      const queue = JSON.parse(fs.readFileSync(path.join(queueDir, name), 'utf-8'));
+      const candidates = Array.isArray(queue.candidates) ? queue.candidates : [];
+      matchedCandidate = candidates.find((item) =>
+        (d.eventKey && item.event_key === d.eventKey) ||
+        (d.sourceUrl && item.primary_source_url === d.sourceUrl)
+      ) ?? null;
+      if (matchedCandidate) break;
+    } catch {
+      // Ignore malformed historical queue files and continue to older runs.
+    }
+  }
+}
+
+const jaVerificationSummary = matchedCandidate?.japanese_verification_summary || '';
+const jaSourceUrl = matchedCandidate?.japanese_source_url || '';
+const jaSourceName = matchedCandidate?.japanese_source_name || '日本語の公式ソース';
 ---
 <EditorialLayout title={`Review: ${d.title} — Pocketey Editorial Desk`}>
   <div class="desk-wrap review-shell" data-review-key={reviewKey}>
@@ -25,6 +49,7 @@ const reviewKey = d.eventKey || post.id;
       <a href="/editorial/">← Back to dashboard</a>
       <div class="review-actions">
         {d.sourceUrl && <a class="desk-button" href={d.sourceUrl} target="_blank" rel="noopener">Official source ↗</a>}
+        {jaSourceUrl && <a class="desk-button ja-button" href={jaSourceUrl} target="_blank" rel="noopener">日本語公式ソース ↗</a>}
         <a class="desk-button" href={githubUrl} target="_blank" rel="noopener">Edit in GitHub ↗</a>
       </div>
     </div>
@@ -56,6 +81,20 @@ const reviewKey = d.eventKey || post.id;
               <span class="desk-kicker">Primary official source</span>
               <a href={d.sourceUrl} target="_blank" rel="noopener">{d.sourceLabel || 'Open official source'} ↗</a>
             </div>
+          )}
+
+          {jaVerificationSummary && (
+            <section class="ja-verification">
+              <div class="desk-kicker">Japanese verification aid</div>
+              <h3>日本語で根拠を確認</h3>
+              <p>{jaVerificationSummary}</p>
+              {jaSourceUrl ? (
+                <a href={jaSourceUrl} target="_blank" rel="noopener">{jaSourceName}を開く ↗</a>
+              ) : (
+                <small>一致する日本語の公式ページは今回の収集データでは確認できませんでした。</small>
+              )}
+              <div class="ja-caution">この日本語メモはAIによる確認補助です。公開判断では必ず一次情報の原文・日付・対象範囲を確認してください。</div>
+            </section>
           )}
         </div>
       </article>
@@ -144,5 +183,5 @@ const reviewKey = d.eventKey || post.id;
 </script>
 
 <style>
-  .review-shell{padding-top:24px}.review-topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;color:#6f7168;font-size:.75rem}.review-actions{display:flex;gap:8px}.review-head{padding:38px 0 26px;border-bottom:1px solid #d0ccc1}.review-head-grid{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:28px;align-items:end}.review-head h1{font:400 clamp(2.5rem,5vw,5rem)/.98 Georgia,serif;letter-spacing:-.04em;margin:.7rem 0 .8rem;max-width:950px}.review-head p{margin:0;color:#66685f;max-width:760px;font-size:1.04rem}.review-state{display:grid;gap:8px;justify-items:start}.review-state small{color:#85877e}.review-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(310px,.65fr);gap:24px;margin-top:24px}.preview-card,.check-panel,.publish-panel,.meta-panel{background:#faf8f2;border:1px solid #d6d1c6;border-radius:20px}.preview-label{display:flex;justify-content:space-between;gap:16px;padding:12px 18px;border-bottom:1px solid #dedad0;color:#84867d;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em}.article-preview{padding:clamp(24px,5vw,58px);max-width:900px;margin-inline:auto}.article-meta{display:flex;gap:16px;flex-wrap:wrap;color:#888a81;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}.article-preview>h2{font:400 clamp(2.4rem,5vw,4.8rem)/1 Georgia,serif;letter-spacing:-.04em;margin:.8rem 0 1rem}.article-dek{font:400 1.2rem/1.45 Georgia,serif;color:#5c5e56;border-bottom:1px solid #dfdbd1;padding-bottom:26px}.prose :global(h2){font:400 2rem/1.12 Georgia,serif;margin:2.1rem 0 .7rem}.prose :global(h3){font:400 1.35rem/1.2 Georgia,serif;margin:1.7rem 0 .6rem}.prose :global(p),.prose :global(li){font-size:.98rem;color:#41433d}.prose :global(a){text-decoration:underline;text-underline-offset:3px}.prose :global(ul),.prose :global(ol){padding-left:1.25rem}.source-box{display:flex;justify-content:space-between;gap:18px;margin-top:38px;padding-top:18px;border-top:1px solid #d9d5cb;font-size:.76rem}.review-sidebar{display:grid;gap:14px;align-content:start;position:sticky;top:88px}.check-panel,.publish-panel,.meta-panel{padding:20px}.check-panel h2,.publish-panel h2{font:400 1.65rem Georgia,serif;margin:.25rem 0}.hint{font-size:.7rem;color:#8a8c84;margin:0 0 13px}.check-panel label{display:grid;grid-template-columns:20px 1fr;gap:10px;padding:13px 0;border-top:1px solid #e0dcd2;cursor:pointer}.check-panel input{accent-color:#596353;margin-top:3px}.check-panel label span{display:grid}.check-panel label b{font-size:.77rem}.check-panel label small{font-size:.68rem;color:#81837a;line-height:1.4;margin-top:2px}.check-progress{height:6px;background:#e1ddd3;border-radius:999px;margin-top:15px;overflow:hidden}.check-progress span{display:block;width:0;height:100%;background:#596353;transition:width .2s ease}.check-count{font-size:.65rem;color:#808279;margin-top:7px}.publish-panel>p{font-size:.74rem;color:#72746b;line-height:1.5}.path-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;background:#ece9e0;border-radius:10px;padding:10px;margin:13px 0}.path-box code{font-size:.63rem;word-break:break-all}.path-box button{border:0;background:#fff;border-radius:8px;padding:6px 9px;font-size:.65rem;cursor:pointer}.publish-button{width:100%;opacity:.45;pointer-events:none}.publish-button[data-ready="true"]{opacity:1;pointer-events:auto}.publish-help{display:block;color:#85877e;font-size:.65rem;line-height:1.45;margin-top:9px}.meta-panel{display:grid;gap:0}.meta-panel>div{display:grid;gap:3px;padding:10px 0;border-bottom:1px solid #e2ded4}.meta-panel>div:last-child{border-bottom:0}.meta-panel span{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#8b8d84}.meta-panel b,.meta-panel code{font-size:.7rem;word-break:break-all}@media(max-width:1000px){.review-grid{grid-template-columns:1fr}.review-sidebar{position:static;grid-template-columns:repeat(2,1fr)}.meta-panel{grid-column:1/-1}}@media(max-width:720px){.review-head-grid{grid-template-columns:1fr}.review-topbar{align-items:flex-start}.review-actions{flex-wrap:wrap;justify-content:flex-end}.review-sidebar{grid-template-columns:1fr}.meta-panel{grid-column:auto}.preview-label{display:grid}.source-box{display:grid}}@media(max-width:520px){.review-topbar{display:grid}.review-actions{justify-content:flex-start}.article-preview{padding:24px 18px}}
+  .review-shell{padding-top:24px}.review-topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;color:#6f7168;font-size:.75rem}.review-actions{display:flex;gap:8px}.ja-button{font-weight:700}.review-head{padding:38px 0 26px;border-bottom:1px solid #d0ccc1}.review-head-grid{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:28px;align-items:end}.review-head h1{font:400 clamp(2.5rem,5vw,5rem)/.98 Georgia,serif;letter-spacing:-.04em;margin:.7rem 0 .8rem;max-width:950px}.review-head p{margin:0;color:#66685f;max-width:760px;font-size:1.04rem}.review-state{display:grid;gap:8px;justify-items:start}.review-state small{color:#85877e}.review-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(310px,.65fr);gap:24px;margin-top:24px}.preview-card,.check-panel,.publish-panel,.meta-panel{background:#faf8f2;border:1px solid #d6d1c6;border-radius:20px}.preview-label{display:flex;justify-content:space-between;gap:16px;padding:12px 18px;border-bottom:1px solid #dedad0;color:#84867d;font-size:.65rem;text-transform:uppercase;letter-spacing:.08em}.article-preview{padding:clamp(24px,5vw,58px);max-width:900px;margin-inline:auto}.article-meta{display:flex;gap:16px;flex-wrap:wrap;color:#888a81;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}.article-preview>h2{font:400 clamp(2.4rem,5vw,4.8rem)/1 Georgia,serif;letter-spacing:-.04em;margin:.8rem 0 1rem}.article-dek{font:400 1.2rem/1.45 Georgia,serif;color:#5c5e56;border-bottom:1px solid #dfdbd1;padding-bottom:26px}.prose :global(h2){font:400 2rem/1.12 Georgia,serif;margin:2.1rem 0 .7rem}.prose :global(h3){font:400 1.35rem/1.2 Georgia,serif;margin:1.7rem 0 .6rem}.prose :global(p),.prose :global(li){font-size:.98rem;color:#41433d}.prose :global(a){text-decoration:underline;text-underline-offset:3px}.prose :global(ul),.prose :global(ol){padding-left:1.25rem}.source-box{display:flex;justify-content:space-between;gap:18px;margin-top:38px;padding-top:18px;border-top:1px solid #d9d5cb;font-size:.76rem}.ja-verification{margin-top:26px;padding:22px;border:1px solid #d8d2c5;background:#f1eee5;border-radius:16px}.ja-verification h3{font:400 1.45rem Georgia,serif;margin:.35rem 0 .7rem}.ja-verification p{font-size:.9rem;line-height:1.75;color:#454740;margin:.4rem 0 1rem}.ja-verification>a{font-size:.78rem;text-decoration:underline;text-underline-offset:3px}.ja-verification>small{display:block;color:#777970;font-size:.72rem}.ja-caution{margin-top:14px;padding-top:12px;border-top:1px solid #d9d4c9;color:#7b7d74;font-size:.68rem;line-height:1.55}.review-sidebar{display:grid;gap:14px;align-content:start;position:sticky;top:88px}.check-panel,.publish-panel,.meta-panel{padding:20px}.check-panel h2,.publish-panel h2{font:400 1.65rem Georgia,serif;margin:.25rem 0}.hint{font-size:.7rem;color:#8a8c84;margin:0 0 13px}.check-panel label{display:grid;grid-template-columns:20px 1fr;gap:10px;padding:13px 0;border-top:1px solid #e0dcd2;cursor:pointer}.check-panel input{accent-color:#596353;margin-top:3px}.check-panel label span{display:grid}.check-panel label b{font-size:.77rem}.check-panel label small{font-size:.68rem;color:#81837a;line-height:1.4;margin-top:2px}.check-progress{height:6px;background:#e1ddd3;border-radius:999px;margin-top:15px;overflow:hidden}.check-progress span{display:block;width:0;height:100%;background:#596353;transition:width .2s ease}.check-count{font-size:.65rem;color:#808279;margin-top:7px}.publish-panel>p{font-size:.74rem;color:#72746b;line-height:1.5}.path-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;background:#ece9e0;border-radius:10px;padding:10px;margin:13px 0}.path-box code{font-size:.63rem;word-break:break-all}.path-box button{border:0;background:#fff;border-radius:8px;padding:6px 9px;font-size:.65rem;cursor:pointer}.publish-button{width:100%;opacity:.45;pointer-events:none}.publish-button[data-ready="true"]{opacity:1;pointer-events:auto}.publish-help{display:block;color:#85877e;font-size:.65rem;line-height:1.45;margin-top:9px}.meta-panel{display:grid;gap:0}.meta-panel>div{display:grid;gap:3px;padding:10px 0;border-bottom:1px solid #e2ded4}.meta-panel>div:last-child{border-bottom:0}.meta-panel span{font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:#8b8d84}.meta-panel b,.meta-panel code{font-size:.7rem;word-break:break-all}@media(max-width:1000px){.review-grid{grid-template-columns:1fr}.review-sidebar{position:static;grid-template-columns:repeat(2,1fr)}.meta-panel{grid-column:1/-1}}@media(max-width:720px){.review-head-grid{grid-template-columns:1fr}.review-topbar{align-items:flex-start}.review-actions{flex-wrap:wrap;justify-content:flex-end}.review-sidebar{grid-template-columns:1fr}.meta-panel{grid-column:auto}.preview-label{display:grid}.source-box{display:grid}}@media(max-width:520px){.review-topbar{display:grid}.review-actions{justify-content:flex-start}.article-preview{padding:24px 18px}}
 </style>
