@@ -37,9 +37,9 @@ if (fs.existsSync(queueDir)) {
   }
 }
 
-const jaVerificationSummary = matchedCandidate?.japanese_verification_summary || '';
-const jaSourceUrl = matchedCandidate?.japanese_source_url || '';
-const jaSourceName = matchedCandidate?.japanese_source_name || '日本語の公式ソース';
+const jaVerificationSummary = d.japaneseVerificationSummary || matchedCandidate?.japanese_verification_summary || '';
+const jaSourceUrl = d.japaneseSourceUrl || matchedCandidate?.japanese_source_url || '';
+const jaSourceName = d.japaneseSourceName || matchedCandidate?.japanese_source_name || '日本語の公式ソース';
 const reviewCheckCount = d.image ? 5 : 4;
 ---
 <EditorialLayout title={`Review: ${d.title} — Pocketey Editorial Desk`}>
