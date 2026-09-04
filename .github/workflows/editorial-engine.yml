@@ -18,14 +18,21 @@ jobs:
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
         run: python scripts/editorial_engine.py
 
-      - name: Commit editorial queue
+      - name: Generate unpublished article drafts
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
+          DRAFT_LIMIT: 2
+        run: python scripts/editorial_draft.py
+
+      - name: Commit editorial queue and drafts
         run: |
-          if [ -z "$(git status --porcelain -- data/editorial)" ]; then
-            echo "No editorial queue changes to commit."
+          if [ -z "$(git status --porcelain -- data/editorial src/content/news)" ]; then
+            echo "No editorial queue or draft changes to commit."
             exit 0
           fi
           git config user.name "pocketey-editorial-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/editorial
-          git commit -m "Add Pocketey editorial queue"
+          git add data/editorial src/content/news
+          git commit -m "Add Pocketey editorial queue and drafts"
           git push
