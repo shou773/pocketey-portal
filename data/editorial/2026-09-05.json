@@ -2,17 +2,17 @@
   "run_date": "2026-09-05",
   "status": "candidate_queue_only",
   "human_review_required": true,
-  "run_summary": "The primary travel-impacting event is a severe weather warning for Miyazaki Prefecture due to Typhoon No. 24, requiring immediate caution for travelers in that region. Other updates include minor operational notices for JR Central and Kyoto City, which are of lower immediate urgency for the average international traveler.",
+  "run_summary": "The primary travel-impacting developments identified are severe weather warnings in Miyazaki Prefecture due to Typhoon No. 24 and ongoing volcanic activity alerts. Other items include minor corporate announcements and local tourism initiatives that do not currently require urgent traveler action.",
   "candidates": [
     {
-      "title": "Severe Weather Warning: Typhoon No. 24 Impacts Miyazaki Prefecture",
+      "title": "Severe Weather Alert: Typhoon No. 24 Impacts in Miyazaki Prefecture",
       "category": "Weather & Disruptions",
       "location": "Miyazaki Prefecture",
-      "what_changed": "The Japan Meteorological Agency has issued severe warnings for landslides and heavy rain in Miyazaki Prefecture due to Typhoon No. 24.",
-      "why_it_matters": "Travelers currently in or planning to visit Miyazaki should expect potential transport disruptions and safety risks. Landslide warnings are in effect for southern and northern plains and southern mountainous areas.",
+      "what_changed": "The Japan Meteorological Agency has issued severe warnings for landslides, high waves, and flooding in southern and northern plains and southern mountainous areas of Miyazaki Prefecture due to Typhoon No. 24.",
+      "why_it_matters": "Travelers in or planning to visit Miyazaki should expect potential transport disruptions, safety risks, and the need to adjust itineraries.",
       "effective_date": "2026-09-05",
-      "traveler_action": "Monitor local weather reports, check transport operator websites for delays or cancellations, and follow instructions from local authorities.",
-      "primary_source_name": "Japan Meteorological Agency",
+      "traveler_action": "Monitor local weather reports, follow instructions from local authorities, and check with transport providers for potential delays or cancellations.",
+      "primary_source_name": "Japan Meteorological Agency - Weather Warnings/Advisories",
       "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml",
       "secondary_source_url": null,
       "scores": {
@@ -20,41 +20,41 @@
         "trip_impact": 20,
         "source_reliability": 20,
         "freshness": 10,
-        "seo_evergreen": 0,
+        "seo_evergreen": 2,
         "monetization_fit": 0,
-        "total": 85
+        "total": 87
       },
-      "related_guide_opportunity": "General guide on how to handle typhoons and travel disruptions in Japan.",
+      "related_guide_opportunity": "General guide on 'How to handle weather disruptions in Japan'",
       "monetization_relevance": "none",
-      "monetization_note": "Safety-critical information; monetization is inappropriate.",
+      "monetization_note": "Safety-critical information; not appropriate for monetization.",
       "recommendation": "publish",
       "reason": "High traveler value and immediate safety impact."
     },
     {
-      "title": "JR Central Expands Security Camera Verification on Tokaido Shinkansen",
-      "category": "Transportation",
-      "location": "Tokaido Shinkansen",
-      "what_changed": "JR Central is conducting additional verification of security camera usage inside Tokaido Shinkansen trains to improve passenger safety and comfort.",
-      "why_it_matters": "While this does not change travel routes or fares, it informs passengers about increased security measures on the Shinkansen.",
-      "effective_date": "2026-09-04",
-      "traveler_action": "No specific action required; be aware of enhanced security monitoring.",
-      "primary_source_name": "JR Central",
-      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00594.html",
+      "title": "Volcanic Activity Alerts: Suwanosejima, Kirishima, Aso, and Sakurajima",
+      "category": "Weather & Disruptions",
+      "location": "Various (Kyushu/Kagoshima)",
+      "what_changed": "The JMA has issued ongoing volcanic ash forecasts for Suwanosejima, Kirishima (Shinmoedake), Aso, and Sakurajima, all currently at Alert Level 2 or 3.",
+      "why_it_matters": "Travelers in these regions may experience ashfall or restricted access to volcanic areas.",
+      "effective_date": "2026-09-05",
+      "traveler_action": "Check local volcanic activity status before visiting these specific mountains and avoid restricted zones.",
+      "primary_source_name": "Japan Meteorological Agency - Earthquakes/Volcanoes",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904140048_0_VFVO53_010000.xml",
       "secondary_source_url": null,
       "scores": {
-        "traveler_value": 10,
-        "trip_impact": 5,
+        "traveler_value": 25,
+        "trip_impact": 15,
         "source_reliability": 20,
         "freshness": 10,
         "seo_evergreen": 5,
         "monetization_fit": 0,
-        "total": 50
+        "total": 75
       },
-      "related_guide_opportunity": "Guide to Shinkansen etiquette and safety features.",
+      "related_guide_opportunity": "Guide to Japan's volcanic alert levels and safety",
       "monetization_relevance": "none",
-      "monetization_note": "Operational update with no commercial angle.",
-      "recommendation": "watch",
-      "reason": "Low impact on actual travel planning."
+      "monetization_note": "Safety-critical information.",
+      "recommendation": "publish",
+      "reason": "Important safety information for travelers visiting Kyushu."
     }
   ]
 }
