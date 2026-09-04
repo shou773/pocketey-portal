@@ -54,6 +54,24 @@ A news/update article should make it easy to answer:
 
 Prefer primary and official sources. Important claims should be verified before publication. AI-generated drafts remain drafts until human review.
 
+## Editorial image policy
+Pocketey should prefer real photographs over generated imagery, but image licensing and accuracy come before aesthetics.
+
+Automatic image selection may use only images whose reuse terms can be identified and recorded. The first automated source is Wikimedia Commons, restricted to Public Domain, CC0, CC BY and CC BY-SA material. Images carrying NonCommercial, NoDerivatives, non-free, unclear, personality-rights or trademark restrictions are not automatically accepted.
+
+Every automatically attached image must retain:
+- the image source page
+- creator/credit information when available
+- license name and license link when available
+- alt text
+- whether the image is illustrative or event-specific
+
+For weather, disasters and other safety-sensitive updates, a generic location photograph must never imply that it depicts the current event. Such images are labeled as illustrative.
+
+If no photograph passes the automated license/relevance filter, the draft is flagged for an AI-image fallback rather than silently using an uncertain web image. AI fallback imagery should be natural-looking, clearly reviewed by a human before publication, and must not fabricate documentary evidence of a real event.
+
+Image selection remains part of the human publication gate. The editor should open the image source, check attribution/license requirements, and confirm that the image is not misleading before publishing.
+
 ## Content model
 Use a NEWS → GUIDE → MONEY model without forcing every article through every stage.
 
