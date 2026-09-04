@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   title="Contact Pocketey Japan"
   description="Report a site problem, flag incorrect travel information, or contact Pocketey Japan."
 >
-  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 
   <section class="contact-hero container">
     <div class="kicker">Contact Pocketey</div>
@@ -59,13 +59,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </label>
 
         <div class="turnstile-wrap">
-          <div
-            class="cf-turnstile"
-            data-sitekey="0x4AAAAAAAEnkLqsp7oNIcKXj"
-            data-action="contact"
-            data-theme="light"
-          ></div>
+          <div id="turnstile-widget"></div>
         </div>
+        <p class="security-note" id="security-note">The security check normally completes automatically.</p>
 
         <div class="form-actions">
           <button class="button" id="submit-button" type="submit">Send message</button>
@@ -94,6 +90,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const pageUrl = document.querySelector('#page-url');
     const submitButton = document.querySelector('#submit-button');
     const status = document.querySelector('#form-status');
+    const securityNote = document.querySelector('#security-note');
 
     const params = new URLSearchParams(window.location.search);
     const typeMap = {
@@ -107,9 +104,60 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
     if (params.get('url')) pageUrl.value = params.get('url');
 
-    const resetTurnstile = () => {
+    let widgetId = null;
+    let turnstileToken = '';
+
+    const setSecurityMessage = (message, isError = false) => {
+      if (!securityNote) return;
+      securityNote.textContent = message;
+      securityNote.classList.toggle('error', isError);
+    };
+
+    const renderTurnstile = () => {
+      if (!window.turnstile || widgetId !== null) return;
+
+      widgetId = window.turnstile.render('#turnstile-widget', {
+        sitekey: '0x4AAAAAAAEnkLqsp7oNIcKXj',
+        action: 'contact',
+        theme: 'light',
+        size: 'flexible',
+        retry: 'auto',
+        'retry-interval': 3000,
+        'refresh-expired': 'auto',
+        'refresh-timeout': 'auto',
+        'feedback-enabled': false,
+        callback: (token) => {
+          turnstileToken = token;
+          setSecurityMessage('Security check complete.');
+        },
+        'expired-callback': () => {
+          turnstileToken = '';
+          setSecurityMessage('Security check expired. It is refreshing automatically.');
+        },
+        'timeout-callback': () => {
+          turnstileToken = '';
+          setSecurityMessage('Security check timed out. It is refreshing automatically.', true);
+        },
+        'error-callback': (errorCode) => {
+          turnstileToken = '';
+          setSecurityMessage(`Security check could not complete (Cloudflare code ${errorCode}). Please refresh the page. If it continues, try a private window or temporarily disable a content blocker/VPN.`, true);
+        }
+      });
+    };
+
+    const waitForTurnstile = () => {
       if (window.turnstile) {
-        try { window.turnstile.reset(); } catch {}
+        renderTurnstile();
+      } else {
+        window.setTimeout(waitForTurnstile, 150);
+      }
+    };
+    waitForTurnstile();
+
+    const resetTurnstile = () => {
+      turnstileToken = '';
+      if (window.turnstile && widgetId !== null) {
+        try { window.turnstile.reset(widgetId); } catch {}
       }
     };
 
@@ -123,11 +171,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         return;
       }
 
-      const tokenInput = form.querySelector('input[name="cf-turnstile-response"]');
-      const turnstileToken = tokenInput?.value || '';
-
       if (!turnstileToken) {
-        status.textContent = 'Please complete the security check and try again.';
+        status.textContent = 'Please wait for the security check to complete and try again.';
         status.classList.add('error');
         return;
       }
@@ -180,5 +225,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  .contact-hero{padding:76px 0 40px}.contact-hero h1{font-size:clamp(3.3rem,7vw,7.4rem);max-width:970px;margin:.8rem 0 1.2rem}.lede{font:400 clamp(1.12rem,1.8vw,1.45rem)/1.5 Georgia;max-width:760px;color:#55574f}.contact-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr);gap:28px;align-items:start}.contact-panel,.contact-aside{background:#faf8f2;border:1px solid var(--line);border-radius:24px;padding:30px}.panel-head h2,.contact-aside h2{font:400 2rem/1.1 Georgia;margin:1rem 0 .7rem}.panel-head p{color:var(--muted);max-width:680px}.contact-panel form{display:grid;gap:18px;margin-top:28px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.contact-panel label{display:grid;gap:8px;font-size:.78rem;font-weight:700;letter-spacing:.02em}.contact-panel label span{font-weight:400;color:var(--muted)}.contact-panel input,.contact-panel select,.contact-panel textarea{width:100%;border:1px solid #cfcabd;background:#fffdf8;color:var(--ink);border-radius:14px;padding:13px 14px;font:inherit;font-weight:400;letter-spacing:0;outline:none}.contact-panel textarea{resize:vertical;min-height:170px}.contact-panel input:focus,.contact-panel select:focus,.contact-panel textarea:focus{border-color:#7c8175;box-shadow:0 0 0 3px rgba(89,99,83,.08)}.honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.turnstile-wrap{min-height:66px;display:flex;align-items:center}.form-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.button:disabled{opacity:.55;cursor:wait;transform:none}.direct,.form-status{font-size:.78rem;color:var(--muted);margin:0}.direct a{text-decoration:underline;text-underline-offset:3px}.form-status{min-height:1.3em;font-weight:650}.form-status.success{color:#48604a}.form-status.error{color:#9a3e32}.help-list{margin-top:18px}.help-list article{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:17px 0;border-top:1px solid var(--line)}.help-list article>span{font:400 .85rem Georgia;color:#8b8d84}.help-list b{font-size:.84rem}.help-list p{font-size:.78rem;color:var(--muted);margin:.3rem 0 0}.privacy-box{margin-top:18px;background:var(--paper-2);border-radius:14px;padding:16px;font-size:.76rem;line-height:1.55;color:#66685f}@media(max-width:850px){.contact-grid{grid-template-columns:1fr}.contact-hero{padding-top:52px}}@media(max-width:620px){.field-row{grid-template-columns:1fr}}@media(max-width:520px){.contact-panel,.contact-aside{padding:22px}.form-actions{align-items:flex-start;flex-direction:column}}
+  .contact-hero{padding:76px 0 40px}.contact-hero h1{font-size:clamp(3.3rem,7vw,7.4rem);max-width:970px;margin:.8rem 0 1.2rem}.lede{font:400 clamp(1.12rem,1.8vw,1.45rem)/1.5 Georgia;max-width:760px;color:#55574f}.contact-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.75fr);gap:28px;align-items:start}.contact-panel,.contact-aside{background:#faf8f2;border:1px solid var(--line);border-radius:24px;padding:30px}.panel-head h2,.contact-aside h2{font:400 2rem/1.1 Georgia;margin:1rem 0 .7rem}.panel-head p{color:var(--muted);max-width:680px}.contact-panel form{display:grid;gap:18px;margin-top:28px}.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.contact-panel label{display:grid;gap:8px;font-size:.78rem;font-weight:700;letter-spacing:.02em}.contact-panel label span{font-weight:400;color:var(--muted)}.contact-panel input,.contact-panel select,.contact-panel textarea{width:100%;border:1px solid #cfcabd;background:#fffdf8;color:var(--ink);border-radius:14px;padding:13px 14px;font:inherit;font-weight:400;letter-spacing:0;outline:none}.contact-panel textarea{resize:vertical;min-height:170px}.contact-panel input:focus,.contact-panel select:focus,.contact-panel textarea:focus{border-color:#7c8175;box-shadow:0 0 0 3px rgba(89,99,83,.08)}.honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}.turnstile-wrap{min-height:66px;display:flex;align-items:center;max-width:100%}.turnstile-wrap>div{width:100%}.security-note{font-size:.74rem;color:var(--muted);margin:-10px 0 0}.security-note.error{color:#9a3e32}.form-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.button:disabled{opacity:.55;cursor:wait;transform:none}.direct,.form-status{font-size:.78rem;color:var(--muted);margin:0}.direct a{text-decoration:underline;text-underline-offset:3px}.form-status{min-height:1.3em;font-weight:650}.form-status.success{color:#48604a}.form-status.error{color:#9a3e32}.help-list{margin-top:18px}.help-list article{display:grid;grid-template-columns:38px 1fr;gap:12px;padding:17px 0;border-top:1px solid var(--line)}.help-list article>span{font:400 .85rem Georgia;color:#8b8d84}.help-list b{font-size:.84rem}.help-list p{font-size:.78rem;color:var(--muted);margin:.3rem 0 0}.privacy-box{margin-top:18px;background:var(--paper-2);border-radius:14px;padding:16px;font-size:.76rem;line-height:1.55;color:#66685f}@media(max-width:850px){.contact-grid{grid-template-columns:1fr}.contact-hero{padding-top:52px}}@media(max-width:620px){.field-row{grid-template-columns:1fr}}@media(max-width:520px){.contact-panel,.contact-aside{padding:22px}.form-actions{align-items:flex-start;flex-direction:column}}
 </style>
