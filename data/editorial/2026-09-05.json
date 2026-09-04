@@ -2,17 +2,21 @@
   "run_date": "2026-09-05",
   "status": "candidate_queue_only",
   "human_review_required": true,
-  "run_summary": "The primary travel-impacting developments identified are severe weather warnings in Miyazaki Prefecture due to Typhoon No. 24 and ongoing volcanic activity alerts. Other items include minor corporate announcements and local tourism initiatives that do not currently require urgent traveler action.",
+  "run_summary": "The latest run identified a high-priority JMA weather information update for Miyazaki related to Typhoon No. 24 and a focused volcanic ash forecast for Suwanosejima. Both remain subject to human verification before publication.",
   "candidates": [
     {
-      "title": "Severe Weather Alert: Typhoon No. 24 Impacts in Miyazaki Prefecture",
+      "title": "Typhoon No. 24: JMA Urges Vigilance in Miyazaki Prefecture",
+      "event_key": "typhoon-24-miyazaki-2026",
+      "scope": "single_event",
+      "formal_status": "neutral_information",
+      "formal_status_basis": "The discovery source is JMA prefectural weather information; the candidate does not treat the bulletin itself as a formal warning or alert.",
       "category": "Weather & Disruptions",
       "location": "Miyazaki Prefecture",
-      "what_changed": "The Japan Meteorological Agency has issued severe warnings for landslides, high waves, and flooding in southern and northern plains and southern mountainous areas of Miyazaki Prefecture due to Typhoon No. 24.",
-      "why_it_matters": "Travelers in or planning to visit Miyazaki should expect potential transport disruptions, safety risks, and the need to adjust itineraries.",
+      "what_changed": "The Japan Meteorological Agency's Miyazaki Local Meteorological Office issued weather information urging vigilance for landslides, heavy rain and high waves as Typhoon No. 24 affects the region.",
+      "why_it_matters": "Travelers in or planning to visit Miyazaki should monitor conditions closely and be prepared for possible changes to transport or outdoor plans if the weather worsens.",
       "effective_date": "2026-09-05",
-      "traveler_action": "Monitor local weather reports, follow instructions from local authorities, and check with transport providers for potential delays or cancellations.",
-      "primary_source_name": "Japan Meteorological Agency - Weather Warnings/Advisories",
+      "traveler_action": "Monitor JMA and local-authority updates, and check current airline, rail or bus status before travel.",
+      "primary_source_name": "Japan Meteorological Agency - Miyazaki Local Meteorological Office",
       "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml",
       "secondary_source_url": null,
       "scores": {
@@ -24,20 +28,24 @@
         "monetization_fit": 0,
         "total": 87
       },
-      "related_guide_opportunity": "General guide on 'How to handle weather disruptions in Japan'",
+      "related_guide_opportunity": "General guide on how to handle weather disruptions in Japan",
       "monetization_relevance": "none",
       "monetization_note": "Safety-critical information; not appropriate for monetization.",
       "recommendation": "publish",
-      "reason": "High traveler value and immediate safety impact."
+      "reason": "High traveler value and immediate safety relevance; human verification of terminology and current conditions is still required."
     },
     {
-      "title": "Volcanic Activity Alerts: Suwanosejima, Kirishima, Aso, and Sakurajima",
+      "title": "Suwanosejima Volcanic Ash Forecast for September 5, 2026",
+      "event_key": "suwanosejima-volcanic-ash-2026-09",
+      "scope": "single_event",
+      "formal_status": "confirmed_formal_status",
+      "formal_status_basis": "The JMA source is a volcanic ash forecast for Suwanosejima; any volcanic alert level must be verified directly from the source before publication.",
       "category": "Weather & Disruptions",
-      "location": "Various (Kyushu/Kagoshima)",
-      "what_changed": "The JMA has issued ongoing volcanic ash forecasts for Suwanosejima, Kirishima (Shinmoedake), Aso, and Sakurajima, all currently at Alert Level 2 or 3.",
-      "why_it_matters": "Travelers in these regions may experience ashfall or restricted access to volcanic areas.",
+      "location": "Suwanosejima, Kagoshima Prefecture",
+      "what_changed": "JMA published a volcanic ash forecast for Suwanosejima covering September 5 and describing possible ash and small volcanic-rock dispersal if an eruption occurs.",
+      "why_it_matters": "Travelers near Suwanosejima may need to monitor ashfall information, local restrictions and municipal guidance if volcanic activity occurs.",
       "effective_date": "2026-09-05",
-      "traveler_action": "Check local volcanic activity status before visiting these specific mountains and avoid restricted zones.",
+      "traveler_action": "Check the latest JMA volcanic information and local guidance before visiting the area, and follow any access restrictions in force.",
       "primary_source_name": "Japan Meteorological Agency - Earthquakes/Volcanoes",
       "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904140048_0_VFVO53_010000.xml",
       "secondary_source_url": null,
@@ -54,7 +62,7 @@
       "monetization_relevance": "none",
       "monetization_note": "Safety-critical information.",
       "recommendation": "publish",
-      "reason": "Important safety information for travelers visiting Kyushu."
+      "reason": "Focused, source-specific safety information with potential traveler relevance; human verification is required before publication."
     }
   ]
 }
