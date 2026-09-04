@@ -2,17 +2,17 @@
   "run_date": "2026-09-05",
   "status": "candidate_queue_only",
   "human_review_required": true,
-  "run_summary": "The research desk identified a critical weather alert for Miyazaki Prefecture due to Typhoon No. 24, requiring immediate traveler awareness. Other items include routine JR Central event announcements and minor administrative updates that do not currently warrant urgent traveler action.",
+  "run_summary": "The primary travel-impacting event is a severe weather warning for Miyazaki Prefecture due to Typhoon No. 24, requiring immediate caution for travelers in that region. Other updates include minor operational notices for JR Central and Kyoto City, which are of lower immediate urgency for the average international traveler.",
   "candidates": [
     {
-      "title": "Severe Weather Alert: Typhoon No. 24 Impacting Miyazaki Prefecture",
+      "title": "Severe Weather Warning: Typhoon No. 24 Impacts Miyazaki Prefecture",
       "category": "Weather & Disruptions",
       "location": "Miyazaki Prefecture",
-      "what_changed": "The Japan Meteorological Agency has issued a severe warning for landslides in southern and northern plains and southern mountainous areas of Miyazaki Prefecture due to Typhoon No. 24.",
-      "why_it_matters": "Travelers in or planning to visit Miyazaki may face transport disruptions, safety risks, and potential closures of outdoor attractions.",
+      "what_changed": "The Japan Meteorological Agency has issued severe warnings for landslides and heavy rain in Miyazaki Prefecture due to Typhoon No. 24.",
+      "why_it_matters": "Travelers currently in or planning to visit Miyazaki should expect potential transport disruptions and safety risks. Landslide warnings are in effect for southern and northern plains and southern mountainous areas.",
       "effective_date": "2026-09-05",
-      "traveler_action": "Monitor local transport updates, avoid mountainous areas, and follow instructions from local authorities. Check with your airline or rail operator if traveling in the region.",
-      "primary_source_name": "Japan Meteorological Agency - Weather Warnings/Advisories",
+      "traveler_action": "Monitor local weather reports, check transport operator websites for delays or cancellations, and follow instructions from local authorities.",
+      "primary_source_name": "Japan Meteorological Agency",
       "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml",
       "secondary_source_url": null,
       "scores": {
@@ -24,22 +24,22 @@
         "monetization_fit": 0,
         "total": 85
       },
-      "related_guide_opportunity": "General guide on 'Staying Safe During Typhoons in Japan'",
+      "related_guide_opportunity": "General guide on how to handle typhoons and travel disruptions in Japan.",
       "monetization_relevance": "none",
       "monetization_note": "Safety-critical information; monetization is inappropriate.",
       "recommendation": "publish",
-      "reason": "High-priority safety information for travelers currently in or heading to the affected region."
+      "reason": "High traveler value and immediate safety impact."
     },
     {
-      "title": "JR Central Announces 'Go to Hamamatsu Factory' Tour",
-      "category": "Events",
-      "location": "Hamamatsu",
-      "what_changed": "JR Central has announced a new tour event for the 2026 fiscal year at the Hamamatsu Factory.",
-      "why_it_matters": "This is a niche event for railway enthusiasts visiting the Shizuoka area.",
+      "title": "JR Central Expands Security Camera Verification on Tokaido Shinkansen",
+      "category": "Transportation",
+      "location": "Tokaido Shinkansen",
+      "what_changed": "JR Central is conducting additional verification of security camera usage inside Tokaido Shinkansen trains to improve passenger safety and comfort.",
+      "why_it_matters": "While this does not change travel routes or fares, it informs passengers about increased security measures on the Shinkansen.",
       "effective_date": "2026-09-04",
-      "traveler_action": "Interested travelers should check the official JR Central website for booking details if they wish to participate.",
-      "primary_source_name": "JR Central - Japanese News Releases",
-      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00595.html",
+      "traveler_action": "No specific action required; be aware of enhanced security monitoring.",
+      "primary_source_name": "JR Central",
+      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00594.html",
       "secondary_source_url": null,
       "scores": {
         "traveler_value": 10,
@@ -47,14 +47,14 @@
         "source_reliability": 20,
         "freshness": 10,
         "seo_evergreen": 5,
-        "monetization_fit": 5,
-        "total": 55
+        "monetization_fit": 0,
+        "total": 50
       },
-      "related_guide_opportunity": "Guide to Railway Museums and Experiences in Japan",
-      "monetization_relevance": "low",
-      "monetization_note": "Potential to link to regional rail passes or local accommodation.",
+      "related_guide_opportunity": "Guide to Shinkansen etiquette and safety features.",
+      "monetization_relevance": "none",
+      "monetization_note": "Operational update with no commercial angle.",
       "recommendation": "watch",
-      "reason": "Low impact on general travelers; only relevant to a specific enthusiast demographic."
+      "reason": "Low impact on actual travel planning."
     }
   ]
 }
