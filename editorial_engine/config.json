@@ -27,7 +27,7 @@
   ],
   "official_sources": [
     {
-      "name": "Japan Meteorological Agency - Weather Warnings/Advisories",
+      "name": "Japan Meteorological Agency - Weather Information",
       "type": "atom",
       "url": "https://www.data.jma.go.jp/developer/xml/feed/extra.xml",
       "max_items": 20
