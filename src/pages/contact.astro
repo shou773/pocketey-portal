@@ -154,8 +154,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     };
     waitForTurnstile();
 
-    const resetTurnstile = () => {
+    const resetTurnstile = (message = 'Security check is refreshing. Please wait for it to complete before trying again.') => {
       turnstileToken = '';
+      setSecurityMessage(message);
       if (window.turnstile && widgetId !== null) {
         try { window.turnstile.reset(widgetId); } catch {}
       }
@@ -208,12 +209,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           type.value = typeMap[params.get('type')];
         }
         if (params.get('url')) pageUrl.value = params.get('url');
-        resetTurnstile();
+        resetTurnstile('Security check reset. It will complete automatically if you send another message.');
 
         status.textContent = 'Thanks — your message has been sent.';
         status.classList.add('success');
       } catch (error) {
-        resetTurnstile();
+        resetTurnstile('Security check is refreshing. Please wait for it to complete before trying again.');
         status.textContent = error?.message || 'Something went wrong. Please try again or email contact@pocketey.com.';
         status.classList.add('error');
       } finally {
