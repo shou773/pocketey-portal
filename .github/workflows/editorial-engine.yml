@@ -15,7 +15,7 @@ jobs:
       - name: Run editorial research
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.6-flash' }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
         run: python scripts/editorial_engine.py
 
       - name: Commit editorial queue
