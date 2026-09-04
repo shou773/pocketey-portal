@@ -41,12 +41,20 @@ def fetch_source(url, timeout=35):
     req = urllib.request.Request(
         url,
         headers={
-            "User-Agent": "PocketeyJapanDraftBot/1.0 (+https://www.pocketey.com)",
+            "User-Agent": "PocketeyJapanDraftBot/1.1 (+https://www.pocketey.com)",
             "Accept-Language": "en-US,en;q=0.8,ja;q=0.7",
         },
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         raw = resp.read().decode("utf-8", errors="replace")
+        content_type = str(resp.headers.get("Content-Type") or "").lower()
+
+    # JMA and some other official sources publish structured XML. Keeping the
+    # XML hierarchy intact makes it much harder for the model to associate a
+    # rainfall amount, date window or affected area with the wrong field.
+    if url.lower().endswith(".xml") or "xml" in content_type or raw.lstrip().startswith("<?xml"):
+        return raw[:40000]
+
     return clean_source_text(raw)[:25000]
 
 
