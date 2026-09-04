@@ -1,52 +1,61 @@
-# Pocketey Editorial Engine v1
+# Pocketey Editorial Engine
 
 ## Purpose
 
-Editorial Engine v1 creates a human-review queue of fresh Japan travel developments. It does **not** publish articles.
+Pocketey Editorial Engine is a traveler-first research and drafting pipeline for fresh Japan travel developments.
+
+It can automatically collect official information, score candidate stories and create unpublished English article drafts. It **does not automatically publish factual travel articles**.
 
 The engine follows `EDITORIAL_PRINCIPLES.md` and uses the scoring model in `editorial_engine/config.json`.
 
-## Current flow
+## Current production flow
 
-1. GitHub Actions starts the Editorial Engine manually.
-2. Gemini uses Google Search grounding to research recent Japan travel developments, including Japanese-language official sources.
-3. Candidates are scored for traveler value, trip impact, source reliability, freshness, evergreen/SEO value and natural monetization fit.
-4. The script validates the scores and requires an HTTPS primary source.
-5. It writes two review files to `data/editorial/YYYY-MM-DD.json` and `.md`.
-6. GitHub Actions commits the queue to the repository.
-7. A human decides which candidates should become article drafts.
-
-No candidate is automatically published.
+1. GitHub Actions runs the Editorial Engine every day at approximately **07:17 JST**. It can also be started manually.
+2. The collector reads approved official feeds and web pages such as JMA, JNTO, rail, airport, tourism-agency and local-government sources.
+3. Gemini analyzes only the supplied official-source items. Open-web Google Search grounding is not required for this workflow.
+4. Candidates are scored for traveler value, trip impact, source reliability, freshness, evergreen/SEO value and natural monetization fit.
+5. The queue is written to `data/editorial/YYYY-MM-DD.json` and `.md`.
+6. Strong `publish` candidates may be turned into Markdown drafts under `src/content/news/`.
+7. Generated articles always remain `draft: true` with `reviewStatus: "needs-review"` until a human approves them.
+8. Stable `eventKey` metadata is used to detect the same underlying event across follow-up official bulletins. A new bulletin can refresh an existing unpublished draft instead of creating another article.
+9. A human reviews facts, terminology, dates, numbers and traveler advice.
+10. The separate **Publish Pocketey Draft** workflow can publish a selected reviewed draft only after explicit human confirmation and a successful Astro production build.
 
 ## Required secret
 
 In the repository, open:
 
-**Settings → Secrets and variables → Actions → New repository secret**
+**Settings → Secrets and variables → Actions**
 
-Create:
+The following repository secret is required:
 
-- Name: `GEMINI_API_KEY`
-- Value: a Gemini API key from Google AI Studio / Gemini API
+- `GEMINI_API_KEY` — Gemini API key from Google AI Studio / Gemini API
 
 Do not store the key in repository files.
 
-## Running v1
+## Models and reliability
+
+The default model is `gemini-3.1-flash-lite`. Temporary 429/5xx Gemini errors are retried, with a Flash Lite fallback available if the primary model remains unavailable.
+
+The workflow is intentionally low-volume: candidate analysis plus at most two article drafts per run.
+
+## Running manually
 
 Open:
 
 **Actions → Pocketey Editorial Engine → Run workflow**
 
-After completion, review the newest file in `data/editorial/`.
+After completion, review:
 
-## Why the workflow is manual first
+- the newest queue in `data/editorial/`
+- any new or refreshed `draft: true` files in `src/content/news/`
 
-The first several runs should be inspected for editorial quality. Once the candidate selection is consistently useful, add a daily schedule. This avoids automating low-quality or irrelevant AI output before the editorial filter has been calibrated.
+## Human publishing
 
-## Planned v2
+See `EDITORIAL_REVIEW.md` for the review checklist and the **Publish Pocketey Draft** workflow.
 
-After calibration:
+The publication guardrail is deliberate:
 
-`daily research → candidate queue → human selects → AI creates draft:true Markdown → human fact check/edit → publish`
+`official sources → AI research → scoring → draft:true article → human verification → approved publication`
 
-Then add related-content recommendations and contextual affiliate/ad modules without changing the traveler-first editorial priority.
+Automation assists the editorial desk; it does not replace the final editorial decision.
