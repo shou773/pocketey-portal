@@ -1,0 +1,163 @@
+---
+import EditorialLayout from '../../layouts/EditorialLayout.astro';
+import { getCollection } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const posts = await getCollection('news');
+const byNewest = [...posts].sort((a, b) => {
+  const ad = (a.data.updated ?? a.data.date).getTime();
+  const bd = (b.data.updated ?? b.data.date).getTime();
+  return bd - ad;
+});
+const drafts = byNewest.filter((post) => post.data.draft);
+const published = byNewest.filter((post) => !post.data.draft);
+
+const queueDir = path.resolve(process.cwd(), 'data/editorial');
+const queueFiles = fs.existsSync(queueDir)
+  ? fs.readdirSync(queueDir).filter((name) => name.endsWith('.json')).sort().reverse()
+  : [];
+const queues = queueFiles.map((name) => {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(queueDir, name), 'utf-8'));
+  } catch {
+    return null;
+  }
+}).filter(Boolean);
+const latestQueue = queues[0] ?? { run_date: '—', run_summary: '', candidates: [] };
+const candidates = Array.isArray(latestQueue.candidates) ? latestQueue.candidates : [];
+const publishCandidates = candidates.filter((item) => String(item.recommendation).toLowerCase() === 'publish');
+const watchCandidates = candidates.filter((item) => String(item.recommendation).toLowerCase() === 'watch');
+
+function formatDate(value) {
+  if (!value) return '—';
+  const d = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(d.getTime())) return String(value);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function repoPath(post) {
+  const filePath = post.filePath;
+  if (filePath) return path.relative(process.cwd(), filePath).replaceAll('\\', '/');
+  return `src/content/news/${post.id}${post.id.endsWith('.md') || post.id.endsWith('.mdx') ? '' : '.md'}`;
+}
+
+function reviewHref(post) {
+  return `/editorial/review/${post.id}/`;
+}
+
+function githubHref(post) {
+  return `https://github.com/shou773/pocketey-portal/blob/main/${repoPath(post)}`;
+}
+---
+<EditorialLayout title="Pocketey Editorial Desk — Review Dashboard">
+  <section class="hero desk-wrap">
+    <div>
+      <div class="desk-kicker">Editorial operations</div>
+      <h1>Review what matters.<br /><em>Publish only what helps.</em></h1>
+      <p>Daily official-source monitoring, AI-assisted drafting, and a human gate before anything reaches travelers.</p>
+    </div>
+    <div class="hero-note">
+      <b>Daily run</b>
+      <span>07:17 JST</span>
+      <small>Automatic · Gemini Flash Lite · max 2 drafts</small>
+    </div>
+  </section>
+
+  <section class="stats desk-wrap" aria-label="Editorial status overview">
+    <article><span>Needs review</span><strong>{drafts.length}</strong><small>Unpublished drafts</small></article>
+    <article><span>Publish candidates</span><strong>{publishCandidates.length}</strong><small>Latest editorial queue</small></article>
+    <article><span>Watch list</span><strong>{watchCandidates.length}</strong><small>Not strong enough yet</small></article>
+    <article><span>Published</span><strong>{published.length}</strong><small>Content collection total</small></article>
+  </section>
+
+  <section class="desk-wrap section-block">
+    <div class="section-head">
+      <div><div class="desk-kicker">Priority</div><h2>Drafts waiting for review</h2></div>
+      <span class="section-caption">Read → verify source → approve → publish</span>
+    </div>
+
+    {drafts.length === 0 ? (
+      <div class="empty-state">
+        <b>No drafts are waiting.</b>
+        <p>The Editorial Engine will add a draft when a candidate clears the publish threshold.</p>
+      </div>
+    ) : (
+      <div class="draft-list">
+        {drafts.map((post, index) => (
+          <article class="draft-card">
+            <div class="draft-index">{String(index + 1).padStart(2, '0')}</div>
+            <div class="draft-main">
+              <div class="draft-meta">
+                <span class="desk-badge">{post.data.reviewStatus === 'approved' ? 'Approved' : 'Needs review'}</span>
+                <span>{post.data.category}</span>
+                <span>{post.data.location || 'Japan'}</span>
+                <span>Updated {formatDate(post.data.updated ?? post.data.date)}</span>
+              </div>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              <div class="draft-source">Source: <b>{post.data.sourceLabel || 'Official source'}</b></div>
+            </div>
+            <div class="draft-actions">
+              <a class="desk-button primary" href={reviewHref(post)}>Review draft</a>
+              {post.data.sourceUrl && <a class="desk-button" href={post.data.sourceUrl} target="_blank" rel="noopener">Official source ↗</a>}
+              <a class="desk-button" href={githubHref(post)} target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </section>
+
+  <section class="desk-wrap section-block split-grid">
+    <div class="queue-panel">
+      <div class="section-head compact">
+        <div><div class="desk-kicker">Latest research run</div><h2>{latestQueue.run_date}</h2></div>
+        <a class="desk-button" href="https://github.com/shou773/pocketey-portal/tree/main/data/editorial" target="_blank" rel="noopener">Queue files ↗</a>
+      </div>
+      {latestQueue.run_summary && <p class="queue-summary">{latestQueue.run_summary}</p>}
+      <div class="candidate-list">
+        {candidates.length === 0 ? <p class="muted">No candidates in the latest queue.</p> : candidates.map((item, index) => (
+          <article class="candidate">
+            <div class="score">{item.scores?.total ?? 0}<small>/100</small></div>
+            <div>
+              <div class="candidate-top"><span class={`desk-badge ${String(item.recommendation).toLowerCase() === 'publish' ? '' : 'watch'}`}>{String(item.recommendation || 'watch').toUpperCase()}</span><span>{item.category}</span></div>
+              <h3>{index + 1}. {item.title}</h3>
+              <p>{item.why_it_matters}</p>
+              {item.primary_source_url && <a href={item.primary_source_url} target="_blank" rel="noopener">Open primary source ↗</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <aside class="ops-panel">
+      <div class="desk-kicker">Operating guardrails</div>
+      <h2>Before publish</h2>
+      <ol>
+        <li><span>01</span><div><b>Open the official source</b><p>Confirm date, scope, numbers and formal terminology.</p></div></li>
+        <li><span>02</span><div><b>Read for traveler impact</b><p>Keep only what changes a real travel decision.</p></div></li>
+        <li><span>03</span><div><b>Separate fact from possibility</b><p>Do not turn possible disruption into confirmed disruption.</p></div></li>
+        <li><span>04</span><div><b>Approve deliberately</b><p>Use the Publish workflow only after the review checklist is complete.</p></div></li>
+      </ol>
+      <div class="privacy-note"><b>Unlisted, not private.</b><br />This page is excluded from indexing and the sitemap, but GitHub Pages does not provide authentication. Do not place secrets here.</div>
+    </aside>
+  </section>
+
+  <section class="desk-wrap section-block">
+    <div class="section-head"><div><div class="desk-kicker">Recently live</div><h2>Published articles</h2></div></div>
+    <div class="published-row">
+      {published.slice(0, 6).map((post) => (
+        <a class="published-card" href={`/news/${post.id}/`} target="_blank">
+          <span class="desk-badge published">Published</span>
+          <h3>{post.data.title}</h3>
+          <small>{formatDate(post.data.updated ?? post.data.date)} · {post.data.category}</small>
+        </a>
+      ))}
+    </div>
+  </section>
+</EditorialLayout>
+
+<style>
+  .hero{padding:54px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:38px}.hero h1{font:400 clamp(2.7rem,6vw,5.7rem)/.94 Georgia,serif;letter-spacing:-.045em;margin:.7rem 0 1rem;max-width:850px}.hero h1 em{font-weight:400;color:#687264}.hero p{max-width:690px;color:#66685f;margin:0;font-size:1rem}.hero-note{min-width:220px;border-left:1px solid #ccc8bc;padding-left:24px;display:grid;gap:3px}.hero-note b{text-transform:uppercase;letter-spacing:.13em;font-size:.65rem;color:#74766e}.hero-note span{font:400 2rem Georgia,serif}.hero-note small{color:#777970}.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #d6d1c5;border-radius:18px;overflow:hidden;background:#faf8f2}.stats article{padding:20px 22px;border-right:1px solid #ddd8cd;display:grid}.stats article:last-child{border-right:0}.stats span{text-transform:uppercase;letter-spacing:.1em;font-size:.63rem;color:#797b72}.stats strong{font:400 2.7rem Georgia,serif;line-height:1.15;margin:6px 0}.stats small{font-size:.68rem;color:#888981}.section-block{margin-top:54px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:18px}.section-head.compact{align-items:center}.section-head h2{font:400 2rem Georgia,serif;margin:.2rem 0 0}.section-caption{color:#85867e;font-size:.72rem}.empty-state{border:1px dashed #c5c0b4;border-radius:18px;padding:30px;background:#faf8f2}.empty-state p{margin:.35rem 0 0;color:#777970}.draft-list{border-top:1px solid #ccc8bd}.draft-card{display:grid;grid-template-columns:48px minmax(0,1fr) 160px;gap:22px;padding:26px 0;border-bottom:1px solid #d3cfc4}.draft-index{font:400 1rem Georgia,serif;color:#999a92;padding-top:5px}.draft-meta{display:flex;align-items:center;gap:11px;flex-wrap:wrap;color:#7e8077;font-size:.66rem}.draft-main h3{font:400 clamp(1.45rem,2.5vw,2.15rem)/1.08 Georgia,serif;letter-spacing:-.02em;margin:.65rem 0 .55rem}.draft-main>p{margin:0;color:#64665e;max-width:760px}.draft-source{font-size:.68rem;color:#878980;margin-top:12px}.draft-actions{display:grid;align-content:start;gap:8px}.split-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(280px,.7fr);gap:24px}.queue-panel,.ops-panel{background:#faf8f2;border:1px solid #d5d0c4;border-radius:20px;padding:24px}.queue-summary{color:#63655d;border-bottom:1px solid #dedad0;padding-bottom:18px}.candidate{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid #e1ddd3}.candidate:last-child{border-bottom:0}.score{width:56px;height:56px;border:1px solid #bbb8ae;border-radius:50%;display:grid;place-content:center;text-align:center;font:400 1.05rem Georgia,serif}.score small{font:500 .5rem sans-serif;color:#8b8c84}.candidate-top{display:flex;gap:10px;align-items:center;color:#85877e;font-size:.64rem}.candidate h3{font:400 1.25rem/1.2 Georgia,serif;margin:.5rem 0}.candidate p{font-size:.8rem;color:#696b63;margin:.3rem 0}.candidate a{font-size:.7rem;text-decoration:underline;text-underline-offset:3px}.ops-panel h2{font:400 1.8rem Georgia,serif;margin:.25rem 0 14px}.ops-panel ol{list-style:none;padding:0;margin:0}.ops-panel li{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 0;border-top:1px solid #dfdbd1}.ops-panel li>span{font:400 .75rem Georgia,serif;color:#989991}.ops-panel b{font-size:.78rem}.ops-panel p{font-size:.73rem;line-height:1.45;color:#777970;margin:.25rem 0 0}.privacy-note{margin-top:18px;padding:14px;border-radius:12px;background:#ece8de;color:#777970;font-size:.7rem;line-height:1.55}.published-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.published-card{background:#faf8f2;border:1px solid #d7d2c7;border-radius:16px;padding:18px;min-height:150px;display:flex;flex-direction:column}.published-card h3{font:400 1.15rem/1.2 Georgia,serif;margin:.8rem 0 auto}.published-card small{color:#85867e;margin-top:14px}.published-card:hover{border-color:#8a8c82;transform:translateY(-1px)}@media(max-width:980px){.stats{grid-template-columns:repeat(2,1fr)}.stats article:nth-child(2){border-right:0}.stats article:nth-child(-n+2){border-bottom:1px solid #ddd8cd}.split-grid{grid-template-columns:1fr}.published-row{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.hero{display:grid;padding-top:38px}.hero-note{border-left:0;border-top:1px solid #ccc8bc;padding:16px 0 0}.draft-card{grid-template-columns:32px 1fr}.draft-actions{grid-column:2;display:flex;flex-wrap:wrap}.published-row{grid-template-columns:1fr}}@media(max-width:520px){.stats{grid-template-columns:1fr}.stats article{border-right:0!important;border-bottom:1px solid #ddd8cd!important}.stats article:last-child{border-bottom:0!important}.section-head{display:grid}.draft-card{grid-template-columns:1fr}.draft-index{display:none}.draft-actions{grid-column:1}}
+</style>
