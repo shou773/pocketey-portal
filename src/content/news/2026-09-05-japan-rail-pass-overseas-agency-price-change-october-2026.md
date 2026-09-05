@@ -5,9 +5,9 @@ date: 2026-09-05
 category: "Transportation"
 location: "Japan"
 featured: false
-draft: true
+draft: false
 eventKey: "japan-rail-pass-overseas-agency-price-change-2026-10"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "JAPAN RAIL PASS (JR Group)"
 sourceUrl: "https://japanrailpass.net/en/purchase/price/"
 japaneseSourceName: "JAPAN RAIL PASS（JRグループ）- 種類と価格"
