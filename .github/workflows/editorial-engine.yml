@@ -3,11 +3,15 @@ name: Pocketey Editorial Engine
 on:
   workflow_dispatch:
   schedule:
-    # Early-stage monitoring cadence: 07:17 / 14:17 / 21:17 JST.
-    # Non-round minutes reduce the chance of GitHub's scheduled-run peak delay.
+    # Primary early-stage monitoring cadence: 07:17 / 14:17 / 21:17 JST.
     - cron: '17 22 * * *' # 07:17 JST (previous date in UTC)
     - cron: '17 5 * * *'  # 14:17 JST
     - cron: '17 12 * * *' # 21:17 JST
+    # Backup triggers 30 minutes later. A persisted run-window gate prevents
+    # duplicate research when the primary trigger already completed.
+    - cron: '47 22 * * *' # 07:47 JST backup
+    - cron: '47 5 * * *'  # 14:47 JST backup
+    - cron: '47 12 * * *' # 21:47 JST backup
 
 permissions:
   contents: write
@@ -23,16 +27,71 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Determine scheduled run window
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import pathlib
+
+          event_name = os.environ.get('EVENT_NAME', '')
+          schedule = os.environ.get('EVENT_SCHEDULE', '')
+          out = pathlib.Path(os.environ['GITHUB_OUTPUT'])
+
+          if event_name == 'workflow_dispatch':
+              out.write_text('should_run=true\nwindow=manual\n', encoding='utf-8')
+              raise SystemExit(0)
+
+          window_map = {
+              '17 22 * * *': '07', '47 22 * * *': '07',
+              '17 5 * * *': '14',  '47 5 * * *': '14',
+              '17 12 * * *': '21', '47 12 * * *': '21',
+          }
+          slot = window_map.get(schedule, '')
+          if not slot:
+              out.write_text('should_run=false\nwindow=unknown\n', encoding='utf-8')
+              raise SystemExit(0)
+
+          jst = dt.timezone(dt.timedelta(hours=9))
+          date = dt.datetime.now(dt.timezone.utc).astimezone(jst).date().isoformat()
+          window = f'{date}-{slot}'
+          state_path = pathlib.Path('data/editorial/.schedule-state.json')
+          last_window = ''
+          if state_path.exists():
+              try:
+                  last_window = json.loads(state_path.read_text(encoding='utf-8')).get('last_completed_window', '')
+              except Exception:
+                  pass
+
+          should_run = last_window != window
+          with out.open('w', encoding='utf-8') as fh:
+              fh.write(f"should_run={'true' if should_run else 'false'}\n")
+              fh.write(f'window={window}\n')
+          print(f'Schedule window: {window}; previous completed window: {last_window or "none"}; should_run={should_run}')
+          PY
+
+      - name: Skip duplicate backup trigger
+        if: steps.gate.outputs.should_run != 'true'
+        run: echo "This monitoring window already completed successfully; skipping duplicate backup trigger."
+
       - name: Run editorial research
+        if: steps.gate.outputs.should_run == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
         run: python scripts/editorial_engine_safe.py
 
       - name: Apply deterministic candidate quality guard
+        if: steps.gate.outputs.should_run == 'true'
         run: python scripts/editorial_guard.py
 
       - name: Generate or refresh unpublished article drafts
+        if: steps.gate.outputs.should_run == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
@@ -40,12 +99,35 @@ jobs:
         run: python scripts/editorial_draft.py
 
       - name: Attach safely licensed editorial images
+        if: steps.gate.outputs.should_run == 'true'
         run: python scripts/editorial_image.py
 
+      - name: Mark scheduled window complete
+        if: steps.gate.outputs.should_run == 'true' && github.event_name == 'schedule'
+        env:
+          RUN_WINDOW: ${{ steps.gate.outputs.window }}
+        run: |
+          python - <<'PY'
+          import datetime as dt
+          import json
+          import os
+          import pathlib
+
+          path = pathlib.Path('data/editorial/.schedule-state.json')
+          payload = {
+              'last_completed_window': os.environ['RUN_WINDOW'],
+              'completed_at_utc': dt.datetime.now(dt.timezone.utc).isoformat(),
+          }
+          path.parent.mkdir(parents=True, exist_ok=True)
+          path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          print(f"Marked {payload['last_completed_window']} complete.")
+          PY
+
       - name: Commit editorial queue, drafts and images
+        if: steps.gate.outputs.should_run == 'true'
         run: |
           if [ -z "$(git status --porcelain -- data/editorial src/content/news public/images/news)" ]; then
-            echo "No editorial queue, draft or image changes to commit."
+            echo "No editorial queue, draft, image, or schedule-state changes to commit."
             exit 0
           fi
           git config user.name "pocketey-editorial-bot"
