@@ -1,0 +1,90 @@
+{
+  "run_date": "2026-09-06",
+  "status": "candidate_queue_only",
+  "human_review_required": true,
+  "run_summary": "The JMA has issued warnings for heavy rain and landslides in the Amami region (Kagoshima) and Okinawa Main Island. Several volcanoes (Kirishima/Shinmon-dake, Aso, Sakurajima, Suwanosejima, Kuchinoerabu-jima, Meakan-dake) remain at Alert Level 2 or 3 with ongoing ashfall forecasts. No major transport disruptions were reported in the provided feeds, but travelers in these regions should monitor local weather and volcanic activity.",
+  "candidates": [
+    {
+      "title": "Heavy Rain and Landslide Warnings: Amami and Okinawa Regions",
+      "event_key": "jma-heavy-rain-amami-okinawa-2026-09",
+      "scope": "single_event",
+      "formal_status": "confirmed_formal_status",
+      "formal_status_basis": "JMA issued formal landslide and heavy rain warnings for the Amami and Okinawa regions.",
+      "category": "Weather & Disruptions",
+      "location": "Amami (Kagoshima) and Okinawa Main Island",
+      "what_changed": "The Japan Meteorological Agency has issued formal warnings for heavy rain and landslides in the Amami and Okinawa regions due to Typhoon No. 24.",
+      "why_it_matters": "Travelers in these areas face potential risks from landslides, flooding, and transport delays. Safety should be the priority.",
+      "effective_date": "2026-09-05 to 2026-09-06",
+      "traveler_action": "Check local weather updates, follow instructions from local authorities, and verify transport status before traveling.",
+      "primary_source_name": "Japan Meteorological Agency - Weather Information",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260905142640_0_VPWW54_460040.xml",
+      "secondary_source_url": null,
+      "japanese_verification_summary": "気象庁が奄美地方および沖縄本島地方に対し、大雨および土砂災害に関する警報・注意報を発表。地盤の緩みや浸水への警戒を呼びかけている。",
+      "japanese_source_name": "Japan Meteorological Agency - Weather Information",
+      "japanese_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260905142640_0_VPWW54_460040.xml",
+      "scores": {
+        "traveler_value": 35,
+        "trip_impact": 20,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 0,
+        "monetization_fit": 0,
+        "total": 85
+      },
+      "related_guide_opportunity": "Japan Travel Safety Guide",
+      "monetization_relevance": "none",
+      "monetization_note": "Safety-critical information; monetization is inappropriate.",
+      "recommendation": "publish",
+      "reason": "High traveler value due to immediate safety impact."
+    },
+    {
+      "title": "Volcanic Activity Update: Multiple Volcanoes in Japan",
+      "event_key": "japan-volcano-activity-roundup-2026-09",
+      "scope": "roundup_or_ambiguous",
+      "formal_status": "neutral_information",
+      "formal_status_basis": "Routine JMA ashfall forecasts for multiple volcanoes currently at Alert Level 2 or 3.",
+      "category": "Weather & Disruptions",
+      "location": "Various (Kirishima, Aso, Sakurajima, Suwanosejima, Kuchinoerabu-jima, Meakan-dake)",
+      "what_changed": "The JMA has released routine ashfall forecasts for several volcanoes currently under active monitoring.",
+      "why_it_matters": "Travelers near these volcanoes may experience minor ashfall or access restrictions. It is important to be aware of the current alert levels.",
+      "effective_date": "2026-09-06",
+      "traveler_action": "Check the JMA website for specific volcano alert levels and local access restrictions before visiting mountainous areas.",
+      "primary_source_name": "Japan Meteorological Agency - Earthquakes/Volcanoes",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260905140053_0_VFVO53_010000.xml",
+      "secondary_source_url": null,
+      "japanese_verification_summary": "霧島山、阿蘇山、桜島、諏訪之瀬島、口永良部島、雌阿寒岳の降灰予報。各火山は噴火警戒レベル2または3を維持。",
+      "japanese_source_name": "Japan Meteorological Agency - Earthquakes/Volcanoes",
+      "japanese_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260905140053_0_VFVO53_010000.xml",
+      "scores": {
+        "traveler_value": 20,
+        "trip_impact": 10,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 5,
+        "monetization_fit": 0,
+        "total": 65
+      },
+      "related_guide_opportunity": "Japan Volcano Safety Guide",
+      "monetization_relevance": "none",
+      "monetization_note": "Safety-critical information.",
+      "recommendation": "watch",
+      "reason": "This is a roundup of multiple volcanoes; human verification is required to determine if any specific site requires a dedicated alert."
+    }
+  ],
+  "quality_guard": {
+    "enabled": true,
+    "duplicates_removed": 0,
+    "downgraded_publish_candidates": 0,
+    "japanese_sources_backfilled": 0,
+    "rules": [
+      "deduplicate by stable event_key",
+      "single event only",
+      "no vague multi-location publish candidates",
+      "no apparent multi-event headlines",
+      "formal alert terminology must be explicitly confirmed",
+      "routine conditional ash forecasts require a new operational change",
+      "stable event_key required",
+      "mirror Japanese primary sources into Japanese-source metadata"
+    ]
+  }
+}
