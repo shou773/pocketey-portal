@@ -1,0 +1,66 @@
+name: Reject Pocketey Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft_path:
+        description: 'Repository path, e.g. src/content/news/2026-09-06-example.md'
+        required: true
+        type: string
+      reason:
+        description: 'Why this draft is being rejected'
+        required: false
+        default: 'Not suitable for publication'
+        type: string
+      suppression:
+        description: 'Prevent the same event from being drafted again for:'
+        required: true
+        default: '90_days'
+        type: choice
+        options:
+          - '30_days'
+          - '90_days'
+          - 'permanent'
+      confirm:
+        description: 'Confirm rejection'
+        required: true
+        default: 'NO'
+        type: choice
+        options:
+          - 'NO'
+          - 'YES'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pocketey-reject
+  cancel-in-progress: false
+
+jobs:
+  reject:
+    if: ${{ inputs.confirm == 'YES' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Reject selected draft
+        run: python scripts/reject_draft.py "${{ inputs.draft_path }}" "${{ inputs.reason }}" "${{ inputs.suppression }}"
+
+      - name: Validate site build
+        run: |
+          npm install --no-audit --no-fund
+          npm run build
+
+      - name: Commit rejection record
+        run: |
+          if [ -z "$(git status --porcelain -- data/editorial src/content/news public/images/news)" ]; then
+            echo "No rejection change was produced."
+            exit 1
+          fi
+          git config user.name "pocketey-editorial-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/editorial src/content/news public/images/news
+          git commit -m "Reject reviewed Pocketey draft"
+          git push
