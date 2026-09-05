@@ -74,6 +74,10 @@ def patch_frontmatter(path, updates):
         lines.append(line)
 
     for key, value in updates.items():
+        # Optional URL/string metadata must be omitted when missing. Writing an
+        # empty quoted string can fail Astro's z.string().url() validation.
+        if value is None or (isinstance(value, str) and not value.strip()):
+            continue
         if isinstance(value, bool):
             lines.append(f"{key}: {'true' if value else 'false'}")
         else:
@@ -89,6 +93,14 @@ def patch_frontmatter(path, updates):
 def meta_value(extmetadata, key):
     node = extmetadata.get(key) or {}
     return clean_text(node.get("value", "")) if isinstance(node, dict) else ""
+
+
+def valid_http_url(value):
+    try:
+        parsed = urllib.parse.urlparse(str(value or "").strip())
+    except Exception:
+        return False
+    return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
 def license_allowed(extmetadata):
@@ -176,8 +188,9 @@ def build_queries(meta):
         # Neutral place imagery only: never search for disaster terms that could
         # imply an older photo depicts the current weather event.
         for location in locations[:4]:
-            queries.append(f'"{location}" Japan')
-            queries.append(f'{location} Japan landscape')
+            queries.append(f'"{location}" Japan landscape')
+            queries.append(f'"{location}" Japan coastline')
+            queries.append(f'"{location}" Japan scenery')
     else:
         for location in locations[:4]:
             if suffix:
@@ -210,7 +223,7 @@ def commons_search(query):
     url = COMMONS_API + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "PocketeyJapanEditorialBot/1.1 (+https://www.pocketey.com)"},
+        headers={"User-Agent": "PocketeyJapanEditorialBot/1.2 (+https://www.pocketey.com)"},
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         payload = json.loads(resp.read().decode("utf-8"))
@@ -255,6 +268,17 @@ def candidate_score(page, meta):
     # actually names the place (including known aliases such as Lake Hamana).
     if non_japan_locations and category != "Transportation" and not location_match:
         return None
+
+    if category == "Weather & Disruptions":
+        # A place name alone is not enough. Reject military, conference and other
+        # people/event-centric images that happen to mention the destination.
+        weather_blocked = (
+            "army", "military", "soldier", "commanding general", "press conference",
+            "u.s. army", "camp amami", "exercise", "interoperability", "ceremony",
+            "meeting", "delegation", "official visit",
+        )
+        if any(term in haystack for term in weather_blocked):
+            return None
 
     score = 0
 
@@ -334,7 +358,7 @@ def download_image(page, draft_path):
         return None, None
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "PocketeyJapanEditorialBot/1.1 (+https://www.pocketey.com)"},
+        headers={"User-Agent": "PocketeyJapanEditorialBot/1.2 (+https://www.pocketey.com)"},
     )
     with urllib.request.urlopen(req, timeout=45) as resp:
         data = resp.read()
@@ -366,18 +390,22 @@ def image_metadata(page, public_path):
     source_url = info.get("descriptionurl") or "https://commons.wikimedia.org/"
 
     alt = description[:180].strip() if description else title[:180]
-    return {
+    metadata = {
         "image": public_path,
         "imageAlt": alt or "Illustrative image for this Japan travel update",
         "imageCredit": artist[:240],
         "imageSourceUrl": source_url,
         "imageLicense": license_name[:120],
-        "imageLicenseUrl": license_url,
         "imageProvider": "Wikimedia Commons",
         "imageContext": "illustrative",
         "imageStatus": "open-license-needs-review",
         "imageGenerated": False,
     }
+    # Public-domain Commons files sometimes have no LicenseUrl. The field is
+    # optional in Astro, so omit it instead of writing an invalid empty URL.
+    if valid_http_url(license_url):
+        metadata["imageLicenseUrl"] = license_url
+    return metadata
 
 
 def main():
