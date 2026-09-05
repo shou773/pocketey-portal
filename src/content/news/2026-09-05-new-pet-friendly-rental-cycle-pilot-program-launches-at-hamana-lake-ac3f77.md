@@ -5,9 +5,9 @@ date: 2026-09-05
 category: "Travel Updates"
 location: "Hamana Lake, Shizuoka Prefecture"
 featured: false
-draft: true
+draft: false
 eventKey: "hamana-lake-pet-rental-cycle-2026"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "JR Central - Japanese News Releases"
 sourceUrl: "https://jr-central.co.jp/news/release/nws000001_00591.html"
 japaneseSourceName: "JR Central - Japanese News Releases"
