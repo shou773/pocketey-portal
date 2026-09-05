@@ -27,7 +27,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL || 'gemini-3.1-flash-lite' }}
-        run: python scripts/editorial_engine.py
+        run: python scripts/editorial_engine_safe.py
 
       - name: Apply deterministic candidate quality guard
         run: python scripts/editorial_guard.py
