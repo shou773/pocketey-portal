@@ -10,6 +10,7 @@ const byNewest = [...posts].sort((a, b) => {
   const bd = (b.data.updated ?? b.data.date).getTime();
   return bd - ad;
 });
+
 const drafts = byNewest.filter((post) => post.data.draft);
 const published = byNewest.filter((post) => !post.data.draft);
 
@@ -24,9 +25,10 @@ const queues = queueFiles.map((name) => {
     return null;
   }
 }).filter(Boolean);
+
 const latestQueue = queues[0] ?? { run_date: '—', run_summary: '', candidates: [] };
 const candidates = Array.isArray(latestQueue.candidates) ? latestQueue.candidates : [];
-const publishCandidates = candidates.filter((item) => String(item.recommendation).toLowerCase() === 'publish');
+const researchCandidates = candidates.filter((item) => String(item.recommendation).toLowerCase() === 'publish');
 const watchCandidates = candidates.filter((item) => String(item.recommendation).toLowerCase() === 'watch');
 
 function formatDate(value) {
@@ -54,33 +56,48 @@ function githubHref(post) {
   <section class="hero desk-wrap">
     <div>
       <div class="desk-kicker">Editorial operations</div>
-      <h1>Review what matters.<br /><em>Publish only what helps.</em></h1>
-      <p>Official-source monitoring three times a day, AI-assisted drafting, and a human gate before anything reaches travelers.</p>
+      <h1>Research first.<br /><em>Review drafts second.</em></h1>
+      <p>The dashboard now separates research candidates from actual drafts that require your approval.</p>
     </div>
     <div class="hero-note">
       <b>Monitoring cadence</b>
       <span>3× daily</span>
-      <small>07:17 · 14:17 · 21:17 JST · Gemini Flash Lite · max 2 drafts/run</small>
+      <small>07:17 · 14:17 · 21:17 JST</small>
     </div>
   </section>
 
+  <section class="workflow desk-wrap" aria-label="Editorial workflow">
+    <div><b>1</b><span>Research candidate</span><small>AI finds a potentially useful story.</small></div>
+    <i>→</i>
+    <div><b>2</b><span>Draft generated</span><small>A reviewable article file is created.</small></div>
+    <i>→</i>
+    <div><b>3</b><span>Human review</span><small>You verify source, wording and image.</small></div>
+    <i>→</i>
+    <div><b>4</b><span>Published</span><small>The article becomes public.</small></div>
+  </section>
+
   <section class="stats desk-wrap" aria-label="Editorial status overview">
-    <article><span>Needs review</span><strong>{drafts.length}</strong><small>Unpublished drafts</small></article>
-    <article><span>Publish candidates</span><strong>{publishCandidates.length}</strong><small>Latest editorial queue</small></article>
-    <article><span>Watch list</span><strong>{watchCandidates.length}</strong><small>Not strong enough yet</small></article>
-    <article><span>Published</span><strong>{published.length}</strong><small>Content collection total</small></article>
+    <article class="important"><span>Drafts needing your review</span><strong>{drafts.length}</strong><small>{drafts.length === 0 ? 'No action required now' : 'Action required'}</small></article>
+    <article><span>Research candidates</span><strong>{researchCandidates.length}</strong><small>Ideas found in latest research run — not review tasks</small></article>
+    <article><span>Watch list</span><strong>{watchCandidates.length}</strong><small>Interesting, but not strong enough to draft</small></article>
+    <article><span>Published</span><strong>{published.length}</strong><small>Articles currently in the content collection</small></article>
+  </section>
+
+  <section class="desk-wrap explainer">
+    <b>How to read these numbers</b>
+    <p><strong>Research candidates</strong> can be greater than zero even when <strong>Drafts needing your review</strong> is zero. A candidate is only a research-stage recommendation. You only need to act when a real draft appears in the first box.</p>
   </section>
 
   <section class="desk-wrap section-block">
     <div class="section-head">
-      <div><div class="desk-kicker">Priority</div><h2>Drafts waiting for review</h2></div>
-      <span class="section-caption">Read → verify source → approve → publish</span>
+      <div><div class="desk-kicker">Your action queue</div><h2>Drafts waiting for review</h2></div>
+      <span class="section-caption">Only items here need your attention</span>
     </div>
 
     {drafts.length === 0 ? (
-      <div class="empty-state">
-        <b>No drafts are waiting.</b>
-        <p>The Editorial Engine will add a draft when a candidate clears the publish threshold.</p>
+      <div class="empty-state success">
+        <b>Nothing to review right now.</b>
+        <p>You do not need to do anything. Research candidates below are informational until the system creates a draft.</p>
       </div>
     ) : (
       <div class="draft-list">
@@ -89,7 +106,7 @@ function githubHref(post) {
             <div class="draft-index">{String(index + 1).padStart(2, '0')}</div>
             <div class="draft-main">
               <div class="draft-meta">
-                <span class="desk-badge">{post.data.reviewStatus === 'approved' ? 'Approved' : 'Needs review'}</span>
+                <span class="desk-badge">Needs review</span>
                 <span>{post.data.category}</span>
                 <span>{post.data.location || 'Japan'}</span>
                 <span>Updated {formatDate(post.data.updated ?? post.data.date)}</span>
@@ -112,7 +129,7 @@ function githubHref(post) {
   <section class="desk-wrap section-block split-grid">
     <div class="queue-panel">
       <div class="section-head compact">
-        <div><div class="desk-kicker">Latest research run</div><h2>{latestQueue.run_date}</h2></div>
+        <div><div class="desk-kicker">Research only — no action required</div><h2>Latest research candidates · {latestQueue.run_date}</h2></div>
         <a class="desk-button" href="https://github.com/shou773/pocketey-portal/tree/main/data/editorial" target="_blank" rel="noopener">Queue files ↗</a>
       </div>
       {latestQueue.run_summary && <p class="queue-summary">{latestQueue.run_summary}</p>}
@@ -121,9 +138,15 @@ function githubHref(post) {
           <article class="candidate">
             <div class="score">{item.scores?.total ?? 0}<small>/100</small></div>
             <div>
-              <div class="candidate-top"><span class={`desk-badge ${String(item.recommendation).toLowerCase() === 'publish' ? '' : 'watch'}`}>{String(item.recommendation || 'watch').toUpperCase()}</span><span>{item.category}</span></div>
+              <div class="candidate-top">
+                <span class={`desk-badge ${String(item.recommendation).toLowerCase() === 'publish' ? 'research' : 'watch'}`}>
+                  {String(item.recommendation).toLowerCase() === 'publish' ? 'RESEARCH CANDIDATE' : 'WATCH'}
+                </span>
+                <span>{item.category}</span>
+              </div>
               <h3>{index + 1}. {item.title}</h3>
               <p>{item.why_it_matters}</p>
+              <div class="candidate-state">Status: <b>{String(item.recommendation).toLowerCase() === 'publish' ? 'Eligible for drafting; not waiting for your review yet' : 'Watch only'}</b></div>
               {item.japanese_verification_summary && (
                 <div class="candidate-ja">
                   <b>日本語検証メモ</b>
@@ -141,16 +164,15 @@ function githubHref(post) {
     </div>
 
     <aside class="ops-panel">
-      <div class="desk-kicker">Operating guardrails</div>
-      <h2>Before publish</h2>
+      <div class="desk-kicker">When action is needed</div>
+      <h2>Review only real drafts</h2>
       <ol>
-        <li><span>01</span><div><b>Open the official source</b><p>Confirm date, scope, numbers and formal terminology.</p></div></li>
-        <li><span>02</span><div><b>Use Japanese aid carefully</b><p>The Japanese memo is a verification aid; the official primary source remains authoritative.</p></div></li>
-        <li><span>03</span><div><b>Read for traveler impact</b><p>Keep only what changes a real travel decision.</p></div></li>
-        <li><span>04</span><div><b>Separate fact from possibility</b><p>Do not turn possible disruption into confirmed disruption.</p></div></li>
-        <li><span>05</span><div><b>Approve deliberately</b><p>Use the Publish workflow only after the review checklist is complete.</p></div></li>
+        <li><span>01</span><div><b>Check the first counter</b><p>If “Drafts needing your review” is 0, there is nothing you need to do.</p></div></li>
+        <li><span>02</span><div><b>Ignore candidate count as a task count</b><p>Research candidates are AI recommendations, not pending approvals.</p></div></li>
+        <li><span>03</span><div><b>Review a generated draft</b><p>When a draft appears, verify the official source, article wording and image.</p></div></li>
+        <li><span>04</span><div><b>Publish deliberately</b><p>Approve only after the review checklist is complete.</p></div></li>
       </ol>
-      <div class="privacy-note"><b>Unlisted, not private.</b><br />This page is excluded from indexing and the sitemap, but GitHub Pages does not provide authentication. Do not place secrets here.</div>
+      <div class="privacy-note"><b>Unlisted, not private.</b><br />This page is excluded from indexing and the sitemap, but GitHub Pages does not provide authentication.</div>
     </aside>
   </section>
 
@@ -169,5 +191,5 @@ function githubHref(post) {
 </EditorialLayout>
 
 <style>
-  .hero{padding:54px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:38px}.hero h1{font:400 clamp(2.7rem,6vw,5.7rem)/.94 Georgia,serif;letter-spacing:-.045em;margin:.7rem 0 1rem;max-width:850px}.hero h1 em{font-weight:400;color:#687264}.hero p{max-width:690px;color:#66685f;margin:0;font-size:1rem}.hero-note{min-width:250px;border-left:1px solid #ccc8bc;padding-left:24px;display:grid;gap:3px}.hero-note b{text-transform:uppercase;letter-spacing:.13em;font-size:.65rem;color:#74766e}.hero-note span{font:400 2rem Georgia,serif}.hero-note small{color:#777970;line-height:1.45}.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #d6d1c5;border-radius:18px;overflow:hidden;background:#faf8f2}.stats article{padding:20px 22px;border-right:1px solid #ddd8cd;display:grid}.stats article:last-child{border-right:0}.stats span{text-transform:uppercase;letter-spacing:.1em;font-size:.63rem;color:#797b72}.stats strong{font:400 2.7rem Georgia,serif;line-height:1.15;margin:6px 0}.stats small{font-size:.68rem;color:#888981}.section-block{margin-top:54px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:18px}.section-head.compact{align-items:center}.section-head h2{font:400 2rem Georgia,serif;margin:.2rem 0 0}.section-caption{color:#85867e;font-size:.72rem}.empty-state{border:1px dashed #c5c0b4;border-radius:18px;padding:30px;background:#faf8f2}.empty-state p{margin:.35rem 0 0;color:#777970}.draft-list{border-top:1px solid #ccc8bd}.draft-card{display:grid;grid-template-columns:48px minmax(0,1fr) 160px;gap:22px;padding:26px 0;border-bottom:1px solid #d3cfc4}.draft-index{font:400 1rem Georgia,serif;color:#999a92;padding-top:5px}.draft-meta{display:flex;align-items:center;gap:11px;flex-wrap:wrap;color:#7e8077;font-size:.66rem}.draft-main h3{font:400 clamp(1.45rem,2.5vw,2.15rem)/1.08 Georgia,serif;letter-spacing:-.02em;margin:.65rem 0 .55rem}.draft-main>p{margin:0;color:#64665e;max-width:760px}.draft-source{font-size:.68rem;color:#878980;margin-top:12px}.draft-actions{display:grid;align-content:start;gap:8px}.split-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(280px,.7fr);gap:24px}.queue-panel,.ops-panel{background:#faf8f2;border:1px solid #d5d0c4;border-radius:20px;padding:24px}.queue-summary{color:#63655d;border-bottom:1px solid #dedad0;padding-bottom:18px}.candidate{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid #e1ddd3}.candidate:last-child{border-bottom:0}.score{width:56px;height:56px;border:1px solid #bbb8ae;border-radius:50%;display:grid;place-content:center;text-align:center;font:400 1.05rem Georgia,serif}.score small{font:500 .5rem sans-serif;color:#8b8c84}.candidate-top{display:flex;gap:10px;align-items:center;color:#85877e;font-size:.64rem}.candidate h3{font:400 1.25rem/1.2 Georgia,serif;margin:.5rem 0}.candidate>div>p{font-size:.8rem;color:#696b63;margin:.3rem 0}.candidate-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.candidate-links a{font-size:.7rem;text-decoration:underline;text-underline-offset:3px}.candidate-ja{margin-top:10px;padding:10px 12px;background:#efebe1;border-radius:10px;border-left:3px solid #8b907f}.candidate-ja b{font-size:.7rem}.candidate-ja p{font-size:.74rem!important;line-height:1.55;margin:.25rem 0 0!important;color:#55574f!important}.ops-panel h2{font:400 1.8rem Georgia,serif;margin:.25rem 0 14px}.ops-panel ol{list-style:none;padding:0;margin:0}.ops-panel li{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 0;border-top:1px solid #dfdbd1}.ops-panel li>span{font:400 .75rem Georgia,serif;color:#989991}.ops-panel b{font-size:.78rem}.ops-panel p{font-size:.73rem;line-height:1.45;color:#777970;margin:.25rem 0 0}.privacy-note{margin-top:18px;padding:14px;border-radius:12px;background:#ece8de;color:#777970;font-size:.7rem;line-height:1.55}.published-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.published-card{background:#faf8f2;border:1px solid #d7d2c7;border-radius:16px;padding:18px;min-height:150px;display:flex;flex-direction:column}.published-card h3{font:400 1.15rem/1.2 Georgia,serif;margin:.8rem 0 auto}.published-card small{color:#85867e;margin-top:14px}.published-card:hover{border-color:#8a8c82;transform:translateY(-1px)}@media(max-width:980px){.stats{grid-template-columns:repeat(2,1fr)}.stats article:nth-child(2){border-right:0}.stats article:nth-child(-n+2){border-bottom:1px solid #ddd8cd}.split-grid{grid-template-columns:1fr}.published-row{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.hero{display:grid;padding-top:38px}.hero-note{border-left:0;border-top:1px solid #ccc8bc;padding:16px 0 0}.draft-card{grid-template-columns:32px 1fr}.draft-actions{grid-column:2;display:flex;flex-wrap:wrap}.published-row{grid-template-columns:1fr}}@media(max-width:520px){.stats{grid-template-columns:1fr}.stats article{border-right:0!important;border-bottom:1px solid #ddd8cd!important}.stats article:last-child{border-bottom:0!important}.section-head{display:grid}.draft-card{grid-template-columns:1fr}.draft-index{display:none}.draft-actions{grid-column:1}}
+.hero{padding:54px 0 28px;display:flex;align-items:flex-end;justify-content:space-between;gap:38px}.hero h1{font:400 clamp(2.7rem,6vw,5.7rem)/.94 Georgia,serif;letter-spacing:-.045em;margin:.7rem 0 1rem;max-width:850px}.hero h1 em{font-weight:400;color:#687264}.hero p{max-width:700px;color:#66685f;margin:0}.hero-note{min-width:250px;border-left:1px solid #ccc8bc;padding-left:24px;display:grid;gap:3px}.hero-note b,.desk-kicker{text-transform:uppercase;letter-spacing:.13em;font-size:.65rem;color:#74766e}.hero-note span{font:400 2rem Georgia,serif}.hero-note small{color:#777970}.workflow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:12px;align-items:center;margin-bottom:24px}.workflow>div{border:1px solid #d8d3c8;border-radius:14px;padding:14px;background:#faf8f2;display:grid;gap:4px}.workflow b{font:400 1.2rem Georgia,serif}.workflow span{font-weight:700;font-size:.78rem}.workflow small{color:#83857d;line-height:1.35}.workflow i{font-style:normal;color:#aaa69d}.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #d6d1c5;border-radius:18px;overflow:hidden;background:#faf8f2}.stats article{padding:20px 22px;border-right:1px solid #ddd8cd;display:grid}.stats article:last-child{border-right:0}.stats article.important{background:#f1f3ec}.stats span{text-transform:uppercase;letter-spacing:.08em;font-size:.61rem;color:#797b72}.stats strong{font:400 2.8rem Georgia,serif;line-height:1.15;margin:6px 0}.stats small{font-size:.68rem;color:#888981;line-height:1.35}.explainer{margin-top:14px;padding:14px 18px;border:1px solid #d6d1c5;border-radius:14px;background:#ecefe7;font-size:.76rem;line-height:1.55}.explainer p{margin:.25rem 0 0;color:#64665e}.section-block{margin-top:50px}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:18px}.section-head.compact{align-items:center}.section-head h2{font:400 2rem Georgia,serif;margin:.2rem 0 0}.section-caption{color:#85867e;font-size:.72rem}.empty-state{border:1px dashed #c5c0b4;border-radius:18px;padding:28px;background:#faf8f2}.empty-state.success{border-style:solid;background:#f1f3ec}.empty-state p{margin:.35rem 0 0;color:#777970}.draft-list{border-top:1px solid #ccc8bd}.draft-card{display:grid;grid-template-columns:48px minmax(0,1fr) 160px;gap:22px;padding:26px 0;border-bottom:1px solid #d3cfc4}.draft-index{font:400 1rem Georgia,serif;color:#999a92;padding-top:5px}.draft-meta{display:flex;gap:11px;flex-wrap:wrap;color:#7e8077;font-size:.66rem}.draft-main h3{font:400 clamp(1.45rem,2.5vw,2.15rem)/1.08 Georgia,serif;margin:.65rem 0 .55rem}.draft-main>p{margin:0;color:#64665e}.draft-source{font-size:.68rem;color:#878980;margin-top:12px}.draft-actions{display:grid;align-content:start;gap:8px}.split-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(280px,.7fr);gap:24px}.queue-panel,.ops-panel{background:#faf8f2;border:1px solid #d5d0c4;border-radius:20px;padding:24px}.queue-summary{color:#63655d;border-bottom:1px solid #dedad0;padding-bottom:18px}.candidate{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid #e1ddd3}.candidate:last-child{border-bottom:0}.score{width:56px;height:56px;border:1px solid #bbb8ae;border-radius:50%;display:grid;place-content:center;text-align:center;font:400 1.05rem Georgia,serif}.score small{font:500 .5rem sans-serif;color:#8b8c84}.candidate-top{display:flex;gap:10px;align-items:center;color:#85877e;font-size:.64rem}.candidate h3{font:400 1.25rem/1.2 Georgia,serif;margin:.5rem 0}.candidate>div>p{font-size:.8rem;color:#696b63;margin:.3rem 0}.candidate-state{margin-top:8px;font-size:.72rem;color:#66685f}.candidate-links{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}.candidate-links a{font-size:.7rem;text-decoration:underline;text-underline-offset:3px}.candidate-ja{margin-top:10px;padding:10px 12px;background:#efebe1;border-radius:10px;border-left:3px solid #8b907f}.candidate-ja b{font-size:.7rem}.candidate-ja p{font-size:.74rem!important;line-height:1.55;margin:.25rem 0 0!important}.ops-panel h2{font:400 1.8rem Georgia,serif;margin:.25rem 0 14px}.ops-panel ol{list-style:none;padding:0;margin:0}.ops-panel li{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:14px 0;border-top:1px solid #dfdbd1}.ops-panel li>span{font:400 .75rem Georgia,serif;color:#989991}.ops-panel b{font-size:.78rem}.ops-panel p{font-size:.73rem;line-height:1.45;color:#777970;margin:.25rem 0 0}.privacy-note{margin-top:18px;padding:14px;border-radius:12px;background:#ece8de;color:#777970;font-size:.7rem;line-height:1.55}.published-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.published-card{background:#faf8f2;border:1px solid #d7d2c7;border-radius:16px;padding:18px;min-height:150px;display:flex;flex-direction:column}.published-card h3{font:400 1.15rem/1.2 Georgia,serif;margin:.8rem 0 auto}.published-card small{color:#85867e;margin-top:14px}.desk-badge{display:inline-flex;width:max-content;padding:4px 7px;border-radius:999px;background:#ddd9cd;font-size:.58rem;letter-spacing:.07em}.desk-badge.research{background:#e5e8dc}.desk-badge.watch{background:#ece7db}.desk-badge.published{background:#e0e8df}.desk-button{display:inline-flex;align-items:center;justify-content:center;border:1px solid #cbc7bb;border-radius:999px;padding:8px 11px;font-size:.7rem}.desk-button.primary{background:#262822;color:#fff;border-color:#262822}@media(max-width:980px){.workflow{grid-template-columns:1fr}.workflow i{display:none}.stats{grid-template-columns:repeat(2,1fr)}.split-grid{grid-template-columns:1fr}.published-row{grid-template-columns:repeat(2,1fr)}}@media(max-width:760px){.hero{display:grid;padding-top:38px}.hero-note{border-left:0;border-top:1px solid #ccc8bc;padding:16px 0 0}.draft-card{grid-template-columns:32px 1fr}.draft-actions{grid-column:2;display:flex;flex-wrap:wrap}.published-row{grid-template-columns:1fr}}@media(max-width:520px){.stats{grid-template-columns:1fr}.stats article{border-right:0;border-bottom:1px solid #ddd8cd}.stats article:last-child{border-bottom:0}.section-head{display:grid}.draft-card{grid-template-columns:1fr}.draft-index{display:none}.draft-actions{grid-column:1}.queue-panel,.ops-panel{padding:18px}}
 </style>
