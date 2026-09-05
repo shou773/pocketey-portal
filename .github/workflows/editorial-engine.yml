@@ -98,6 +98,10 @@ jobs:
           DRAFT_LIMIT: 2
         run: python scripts/editorial_draft.py
 
+      - name: Apply freshness metadata to time-sensitive drafts
+        if: steps.gate.outputs.should_run == 'true'
+        run: python scripts/editorial_freshness.py
+
       - name: Attach safely licensed editorial images
         if: steps.gate.outputs.should_run == 'true'
         run: python scripts/editorial_image.py
