@@ -3,8 +3,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 const posts=(await getCollection('news',({data})=>!data.draft)).sort((a,b)=>b.data.date.getTime()-a.data.date.getTime());
-const featured=posts.find(p=>p.data.featured) ?? posts[0];
-const latest=posts.slice(0,6);
+const now=Date.now();
+const activePosts=posts.filter((p)=>!p.data.expiresAt || p.data.expiresAt.getTime()>now);
+const featured=activePosts.find(p=>p.data.featured) ?? activePosts[0];
+const latest=activePosts.slice(0,6);
 ---
 <BaseLayout>
   <section class="hero container">
