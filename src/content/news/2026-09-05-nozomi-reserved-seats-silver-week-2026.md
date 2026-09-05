@@ -5,9 +5,9 @@ date: 2026-09-05
 category: "Transportation"
 location: "Tokaido and Sanyo Shinkansen"
 featured: false
-draft: true
+draft: false
 eventKey: "nozomi-all-reserved-silver-week-2026"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "JR Central"
 sourceUrl: "https://global.jr-central.co.jp/en/nozomi/"
 japaneseSourceName: "JR東海（日本語公式資料）"
