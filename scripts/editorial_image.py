@@ -115,37 +115,83 @@ def license_allowed(extmetadata):
     return True
 
 
-def build_query(meta):
+def location_variants(meta):
     location = clean_text(meta.get("location") or "Japan")
+    variants = [location]
+
+    if "," in location:
+        variants.append(location.split(",", 1)[0].strip())
+
+    no_prefecture = re.sub(r"\s+Prefecture\b", "", location, flags=re.I).strip()
+    if no_prefecture:
+        variants.append(no_prefecture)
+        if "," in no_prefecture:
+            variants.append(no_prefecture.split(",", 1)[0].strip())
+
+    aliases = {
+        "Hamana Lake": "Lake Hamana",
+    }
+    for source, target in aliases.items():
+        for value in list(variants):
+            if source.lower() in value.lower():
+                variants.append(re.sub(re.escape(source), target, value, flags=re.I))
+
+    seen, unique = set(), []
+    for value in variants:
+        value = clean_text(value)
+        key = value.lower()
+        if value and key not in seen:
+            seen.add(key)
+            unique.append(value)
+    return unique
+
+
+def build_queries(meta):
     category = clean_text(meta.get("category") or "")
     title = clean_text(meta.get("title") or "")
     lower = title.lower()
-
-    # For safety/disruption stories, use a neutral place image rather than an
-    # unrelated disaster photo that could imply it depicts the current event.
-    if category == "Weather & Disruptions":
-        return f'"{location}" Japan'
+    locations = location_variants(meta)
+    queries = []
 
     if category == "Transportation":
-        # Prefer current-era equipment for Nozomi coverage. Historical rolling
-        # stock may be legally reusable but would be editorially misleading.
         if "nozomi" in lower or "shinkansen" in lower:
-            return 'N700S Shinkansen Japan'
-        if "japan rail pass" in lower or "rail pass" in lower:
-            return 'Japan Rail Pass Shinkansen Japan'
-
-        operator = ""
-        for name in ("JR Central", "JR East", "JR West", "Tokyo Metro", "Haneda", "Narita", "Kansai Airport"):
-            if name.lower() in lower:
-                operator = name
-                break
-        if operator:
-            return f'"{operator}" {location} Japan'
+            queries.extend(["N700S Shinkansen Japan", "N700 Shinkansen Japan"])
+        elif "japan rail pass" in lower or "rail pass" in lower:
+            queries.extend(["Japan Rail Pass Shinkansen Japan", "Shinkansen station Japan"])
+        else:
+            operator = ""
+            for name in ("JR Central", "JR East", "JR West", "Tokyo Metro", "Haneda", "Narita", "Kansai Airport"):
+                if name.lower() in lower:
+                    operator = name
+                    break
+            if operator:
+                for location in locations[:2]:
+                    queries.append(f'"{operator}" {location} Japan')
 
     useful = [w for w in re.findall(r"[A-Za-z0-9'-]+", title) if len(w) > 3]
-    useful = [w for w in useful if w.lower() not in {"japan", "travel", "update", "latest", "what", "should", "know", "warning", "alert", "advisory"}]
+    useful = [w for w in useful if w.lower() not in {"japan", "travel", "update", "latest", "what", "should", "know", "warning", "alert", "advisory", "program", "launches"}]
     suffix = " ".join(useful[:4])
-    return f'"{location}" Japan {suffix}'.strip()
+
+    if category == "Weather & Disruptions":
+        # Neutral place imagery only: never search for disaster terms that could
+        # imply an older photo depicts the current weather event.
+        for location in locations[:4]:
+            queries.append(f'"{location}" Japan')
+            queries.append(f'{location} Japan landscape')
+    else:
+        for location in locations[:4]:
+            if suffix:
+                queries.append(f'"{location}" Japan {suffix}')
+            queries.append(f'"{location}" Japan')
+            queries.append(f'{location} Japan')
+
+    seen, unique = set(), []
+    for query in queries:
+        query = re.sub(r"\s+", " ", query).strip()
+        if query and query.lower() not in seen:
+            seen.add(query.lower())
+            unique.append(query)
+    return unique[:10]
 
 
 def commons_search(query):
@@ -164,7 +210,7 @@ def commons_search(query):
     url = COMMONS_API + "?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "PocketeyJapanEditorialBot/1.0 (+https://www.pocketey.com)"},
+        headers={"User-Agent": "PocketeyJapanEditorialBot/1.1 (+https://www.pocketey.com)"},
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
         payload = json.loads(resp.read().decode("utf-8"))
@@ -190,8 +236,6 @@ def candidate_score(page, meta):
     desc = meta_value(ext, "ImageDescription")
     haystack = f" {page_title} {desc} ".lower()
 
-    # Exclude non-photographic or document-like media that can be technically
-    # open-license while being visually irrelevant to a travel news article.
     blocked = (
         " map ", "diagram", "logo", "coat of arms", "flag of", "poster",
         "screenshot", "scan of", "route map", ".djvu", "book", "manuscript",
@@ -203,7 +247,14 @@ def candidate_score(page, meta):
     title = clean_text(meta.get("title") or "")
     title_lower = title.lower()
     category = clean_text(meta.get("category") or "")
-    location = clean_text(meta.get("location") or "Japan").lower()
+    locations = [value.lower() for value in location_variants(meta)]
+    non_japan_locations = [value for value in locations if value != "japan"]
+    location_match = any(value in haystack for value in non_japan_locations)
+
+    # For location-specific non-transport stories, insist that the image metadata
+    # actually names the place (including known aliases such as Lake Hamana).
+    if non_japan_locations and category != "Transportation" and not location_match:
+        return None
 
     score = 0
 
@@ -213,7 +264,6 @@ def candidate_score(page, meta):
             return None
 
         if "nozomi" in title_lower or "shinkansen" in title_lower:
-            # Nozomi in 2026 should not be illustrated with retired 0/100/300/500 series stock.
             if any(term in haystack for term in ("300 series", "series 300", "500 series", "series 500", "100 series", "series 100", "0 series", "series 0")):
                 return None
             if not any(term in haystack for term in ("n700s", "n700a", " n700 ", "nozomi")):
@@ -232,7 +282,7 @@ def candidate_score(page, meta):
         if any(term in haystack for term in ("festival", "event", "shrine", "temple", "matsuri")):
             score += 3
 
-    if location and location != "japan" and location in haystack:
+    if location_match:
         score += 6
     if "japan" in haystack:
         score += 2
@@ -250,19 +300,28 @@ def candidate_score(page, meta):
 
 
 def pick_image(meta):
-    query = build_query(meta)
-    try:
-        pages = commons_search(query)
-    except Exception as exc:
-        print(f"Commons search warning for {query}: {exc}", file=sys.stderr)
-        return None
+    pages_by_key = {}
+    attempted = []
+    for query in build_queries(meta):
+        attempted.append(query)
+        try:
+            pages = commons_search(query)
+        except Exception as exc:
+            print(f"Commons search warning for {query}: {exc}", file=sys.stderr)
+            continue
+        for page in pages:
+            key = str(page.get("pageid") or page.get("title") or "")
+            if key:
+                pages_by_key[key] = page
 
     ranked = []
-    for page in pages:
+    for page in pages_by_key.values():
         score = candidate_score(page, meta)
         if score is not None:
             ranked.append((score, page))
     if not ranked:
+        if attempted:
+            print(f"No safe image candidate after {len(attempted)} Commons queries: {attempted}")
         return None
     ranked.sort(key=lambda x: x[0], reverse=True)
     return ranked[0][1]
@@ -275,7 +334,7 @@ def download_image(page, draft_path):
         return None, None
     req = urllib.request.Request(
         url,
-        headers={"User-Agent": "PocketeyJapanEditorialBot/1.0 (+https://www.pocketey.com)"},
+        headers={"User-Agent": "PocketeyJapanEditorialBot/1.1 (+https://www.pocketey.com)"},
     )
     with urllib.request.urlopen(req, timeout=45) as resp:
         data = resp.read()

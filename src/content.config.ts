@@ -28,7 +28,9 @@ const news = defineCollection({
     imageContext: z.enum(['illustrative', 'event-specific']).optional(),
     imageStatus: z.enum(['open-license-needs-review', 'needs-ai-fallback', 'approved']).optional(),
     imageGenerated: z.boolean().optional(),
-    updated: z.coerce.date().optional()
+    updated: z.coerce.date().optional(),
+    timeSensitive: z.boolean().default(false),
+    expiresAt: z.coerce.date().optional()
   })
 });
 

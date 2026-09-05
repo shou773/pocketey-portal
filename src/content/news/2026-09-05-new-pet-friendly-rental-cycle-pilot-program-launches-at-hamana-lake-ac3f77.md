@@ -14,7 +14,15 @@ japaneseSourceName: "JR Central - Japanese News Releases"
 japaneseSourceUrl: "https://jr-central.co.jp/news/release/nws000001_00591.html"
 japaneseVerificationSummary: "JR東海は、弁天島サイクルゲートにて「わんこと乗れるレンタサイクル」の実証事業を2026年10月1日から開始する。"
 updated: 2026-09-05
-imageStatus: "needs-ai-fallback"
+image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lake_Hamana_Shizuoka%2C_Japan_2.jpg?width=1600"
+imageAlt: "Lake Hamana in Shizuoka Prefecture, Japan"
+imageCredit: "Tx-re"
+imageSourceUrl: "https://commons.wikimedia.org/wiki/File:Lake_Hamana_Shizuoka,_Japan_2.jpg"
+imageLicense: "CC BY-SA 3.0"
+imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/3.0"
+imageProvider: "Wikimedia Commons"
+imageContext: "illustrative"
+imageStatus: "approved"
 imageGenerated: false
 ---
 

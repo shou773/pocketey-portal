@@ -31,6 +31,27 @@ def candidate_rank(item):
     return recommendation_rank, score
 
 
+def backfill_japanese_source(item):
+    """Mirror a Japanese primary source into Japanese-source metadata.
+
+    The model normally supplies this itself, but this deterministic fallback
+    prevents a Japanese official source from being lost because of a formatting
+    omission in the model response.
+    """
+    if item.get("japanese_source_url"):
+        return False
+
+    source_name = str(item.get("primary_source_name") or "").strip()
+    source_url = str(item.get("primary_source_url") or "").strip()
+    looks_japanese = bool(re.search(r"japanese|日本語", source_name, flags=re.I))
+    if not looks_japanese or not source_url.startswith("https://"):
+        return False
+
+    item["japanese_source_url"] = source_url
+    item["japanese_source_name"] = source_name or "Japanese official source"
+    return True
+
+
 def deduplicate_candidates(candidates):
     """Keep one strongest candidate for each underlying event_key.
 
@@ -56,8 +77,6 @@ def deduplicate_candidates(candidates):
         index = positions[event_key]
         existing = result[index]
         if candidate_rank(item) > candidate_rank(existing):
-            # Preserve a useful Japanese verification aid if the discarded
-            # version happened to contain one and the stronger version did not.
             if not item.get("japanese_verification_summary") and existing.get("japanese_verification_summary"):
                 item["japanese_verification_summary"] = existing.get("japanese_verification_summary")
             if not item.get("japanese_source_url") and existing.get("japanese_source_url"):
@@ -87,8 +106,12 @@ def main():
     queue["candidates"] = candidates
 
     downgraded = 0
+    japanese_sources_backfilled = 0
 
     for item in candidates:
+        if backfill_japanese_source(item):
+            japanese_sources_backfilled += 1
+
         before = str(item.get("recommendation") or "").lower()
         title = str(item.get("title") or "")
         location = str(item.get("location") or "")
@@ -136,6 +159,7 @@ def main():
         "enabled": True,
         "duplicates_removed": duplicates_removed,
         "downgraded_publish_candidates": downgraded,
+        "japanese_sources_backfilled": japanese_sources_backfilled,
         "rules": [
             "deduplicate by stable event_key",
             "single event only",
@@ -143,7 +167,8 @@ def main():
             "no apparent multi-event headlines",
             "formal alert terminology must be explicitly confirmed",
             "routine conditional ash forecasts require a new operational change",
-            "stable event_key required"
+            "stable event_key required",
+            "mirror Japanese primary sources into Japanese-source metadata"
         ]
     }
 
@@ -153,7 +178,8 @@ def main():
     print(
         "Editorial quality guard complete. "
         f"Duplicates removed: {duplicates_removed}. "
-        f"Downgraded publish candidates: {downgraded}"
+        f"Downgraded publish candidates: {downgraded}. "
+        f"Japanese sources backfilled: {japanese_sources_backfilled}"
     )
     return 0
 

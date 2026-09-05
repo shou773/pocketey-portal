@@ -11,6 +11,18 @@ reviewStatus: "approved"
 sourceLabel: "Japan Meteorological Agency - Miyazaki Local Meteorological Office"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260904144130_0_VPFJ50_450000.xml"
 updated: 2026-09-05
+timeSensitive: true
+expiresAt: "2026-09-07T00:00:00+09:00"
+image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nichinan_coastline.jpg?width=1600"
+imageAlt: "Nichinan coastline in Miyazaki Prefecture, Japan"
+imageCredit: "STA3816"
+imageSourceUrl: "https://commons.wikimedia.org/wiki/File:Nichinan_coastline.jpg"
+imageLicense: "CC BY-SA 3.0"
+imageLicenseUrl: "https://creativecommons.org/licenses/by-sa/3.0"
+imageProvider: "Wikimedia Commons"
+imageContext: "illustrative"
+imageStatus: "approved"
+imageGenerated: false
 ---
 
 <!-- AI-assisted Pocketey draft. Human approval is required before publication. -->
