@@ -90,6 +90,10 @@ jobs:
         if: steps.gate.outputs.should_run == 'true'
         run: python scripts/editorial_guard.py
 
+      - name: Apply human rejection suppression
+        if: steps.gate.outputs.should_run == 'true'
+        run: python scripts/editorial_rejection_guard.py
+
       - name: Generate or refresh unpublished article drafts
         if: steps.gate.outputs.should_run == 'true'
         env:
