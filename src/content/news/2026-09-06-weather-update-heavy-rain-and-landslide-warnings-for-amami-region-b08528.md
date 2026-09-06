@@ -5,9 +5,9 @@ date: 2026-09-06
 category: "Weather & Disruptions"
 location: "Amami, Kagoshima Prefecture"
 featured: false
-draft: true
+draft: false
 eventKey: "typhoon-24-amami-kagoshima-and-okinawa-main-island-2026"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "Japan Meteorological Agency - Weather Information"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260905142640_0_VPWW54_460040.xml"
 japaneseSourceName: "Japan Meteorological Agency - Weather Information"
