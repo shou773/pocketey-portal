@@ -5,9 +5,9 @@ date: 2026-09-06
 category: "Weather & Disruptions"
 location: "Izu Islands, Tokyo"
 featured: false
-draft: true
+draft: false
 eventKey: "jma-linear-rainband-izu-2026-09-05"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "Japan Meteorological Agency - Weather Information"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260905220832_0_VPBS50_130000.xml"
 japaneseSourceName: "Japan Meteorological Agency - Weather Information"
