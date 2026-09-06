@@ -1,0 +1,57 @@
+{
+  "run_date": "2026-09-07",
+  "status": "candidate_queue_only",
+  "human_review_required": true,
+  "run_summary": "The Japan Meteorological Agency has issued heavy rain and landslide warnings for Chiba and Kanagawa prefectures. Several volcanic ash forecasts remain in effect for Kyushu-area volcanoes. No major transport disruptions were reported in the provided feeds, but travelers in affected areas should monitor local conditions.",
+  "candidates": [
+    {
+      "title": "Heavy Rain and Landslide Warnings in Chiba and Kanagawa Prefectures",
+      "event_key": "jma-heavy-rain-chiba-kanagawa-2026-09-06",
+      "scope": "single_event",
+      "formal_status": "confirmed_formal_status",
+      "formal_status_basis": "JMA issued formal heavy rain and landslide warnings for Chiba and Kanagawa prefectures.",
+      "category": "Weather & Disruptions",
+      "location": "Chiba Prefecture, Kanagawa Prefecture",
+      "what_changed": "The Japan Meteorological Agency (JMA) has issued formal warnings for heavy rain and potential landslides in Chiba and Kanagawa prefectures.",
+      "why_it_matters": "Travelers in these regions may face localized flooding, transport delays, or safety risks in mountainous or low-lying areas.",
+      "effective_date": "2026-09-06",
+      "traveler_action": "Monitor local weather reports, follow instructions from local authorities, and check transport operator websites for potential delays.",
+      "primary_source_name": "Japan Meteorological Agency - Weather Information",
+      "primary_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260906152347_0_VPWW54_120000.xml",
+      "secondary_source_url": null,
+      "japanese_verification_summary": "気象庁より千葉県および神奈川県に対して大雨警報および土砂災害警戒情報が発表されています。",
+      "japanese_source_name": "Japan Meteorological Agency - Weather Information",
+      "japanese_source_url": "https://www.data.jma.go.jp/developer/xml/data/20260906152347_0_VPWW54_120000.xml",
+      "scores": {
+        "traveler_value": 30,
+        "trip_impact": 15,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 0,
+        "monetization_fit": 0,
+        "total": 75
+      },
+      "related_guide_opportunity": "none",
+      "monetization_relevance": "none",
+      "monetization_note": "Safety-critical weather information should not be monetized.",
+      "recommendation": "publish",
+      "reason": "High traveler value for safety and trip planning during active weather events."
+    }
+  ],
+  "quality_guard": {
+    "enabled": true,
+    "duplicates_removed": 0,
+    "downgraded_publish_candidates": 0,
+    "japanese_sources_backfilled": 0,
+    "rules": [
+      "deduplicate by stable event_key",
+      "single event only",
+      "no vague multi-location publish candidates",
+      "no apparent multi-event headlines",
+      "formal alert terminology must be explicitly confirmed",
+      "routine conditional ash forecasts require a new operational change",
+      "stable event_key required",
+      "mirror Japanese primary sources into Japanese-source metadata"
+    ]
+  }
+}
