@@ -5,9 +5,9 @@ date: 2026-09-07
 category: "Transportation"
 location: "Tokaido Shinkansen"
 featured: false
-draft: true
+draft: false
 eventKey: "jr-central-navitime-integration-2026"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "JR Central - Japanese News Releases"
 sourceUrl: "https://jr-central.co.jp/news/release/nws000001_00597.html"
 japaneseSourceName: "JR Central - Japanese News Releases"
