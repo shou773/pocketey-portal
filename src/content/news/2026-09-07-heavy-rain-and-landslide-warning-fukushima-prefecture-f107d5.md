@@ -5,9 +5,9 @@ date: 2026-09-07
 category: "Weather & Disruptions"
 location: "Fukushima Prefecture, Japan"
 featured: false
-draft: true
+draft: false
 eventKey: "fukushima-heavy-rain-2026-09-06"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "Japan Meteorological Agency - Weather Information"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260906234432_0_VPWW54_070000.xml"
 japaneseSourceName: "Japan Meteorological Agency - Weather Information"
