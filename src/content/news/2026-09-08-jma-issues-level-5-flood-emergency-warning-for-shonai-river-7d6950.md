@@ -5,9 +5,9 @@ date: 2026-09-08
 category: "Weather & Disruptions"
 location: "Aichi Prefecture and Gifu Prefecture"
 featured: false
-draft: true
+draft: false
 eventKey: "shonai-river-flood-warning-2026-09-08"
-reviewStatus: "needs-review"
+reviewStatus: "approved"
 sourceLabel: "Japan Meteorological Agency - Weather Information"
 sourceUrl: "https://www.data.jma.go.jp/developer/xml/data/20260908093704_0_VPWW54_230000.xml"
 japaneseSourceName: "Japan Meteorological Agency - Weather Information"
