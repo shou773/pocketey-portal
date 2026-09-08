@@ -1,0 +1,57 @@
+{
+  "run_date": "2026-09-09",
+  "status": "candidate_queue_only",
+  "human_review_required": true,
+  "run_summary": "JR Central has launched real-time Tokaido Shinkansen operation information on the 'Japan Travel by NAVITIME' app for international travelers.",
+  "candidates": [
+    {
+      "title": "JR Central Adds Real-Time Shinkansen Info to NAVITIME App",
+      "event_key": "jr-central-navitime-realtime-info-2026",
+      "scope": "single_event",
+      "formal_status": "not_applicable",
+      "formal_status_basis": "",
+      "category": "Transportation",
+      "location": "Tokaido Shinkansen",
+      "what_changed": "JR Central has begun providing real-time operation information for the Tokaido Shinkansen within the 'Japan Travel by NAVITIME' mobile application.",
+      "why_it_matters": "International travelers can now receive live updates on train status, delays, or disruptions directly within a popular navigation app, improving travel planning and reliability.",
+      "effective_date": "2026-09-07",
+      "traveler_action": "Download or update the 'Japan Travel by NAVITIME' app to access real-time Tokaido Shinkansen status updates.",
+      "primary_source_name": "JR Central - Japanese News Releases",
+      "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00597.html",
+      "secondary_source_url": null,
+      "japanese_verification_summary": "JR東海は、訪日外国人向けナビゲーションアプリ「Japan Travel by NAVITIME」において、東海道新幹線のリアルタイム運行情報の提供を2026年9月7日より開始した。",
+      "japanese_source_name": "JR Central - Japanese News Releases",
+      "japanese_source_url": "https://jr-central.co.jp/news/release/nws000001_00597.html",
+      "scores": {
+        "traveler_value": 30,
+        "trip_impact": 20,
+        "source_reliability": 20,
+        "freshness": 10,
+        "seo_evergreen": 5,
+        "monetization_fit": 2,
+        "total": 87
+      },
+      "related_guide_opportunity": "How to use the Tokaido Shinkansen",
+      "monetization_relevance": "low",
+      "monetization_note": "Potential to link to travel apps or JR Pass services if relevant.",
+      "recommendation": "publish",
+      "reason": "High traveler value for navigation and disruption management."
+    }
+  ],
+  "quality_guard": {
+    "enabled": true,
+    "duplicates_removed": 0,
+    "downgraded_publish_candidates": 0,
+    "japanese_sources_backfilled": 0,
+    "rules": [
+      "deduplicate by stable event_key",
+      "single event only",
+      "no vague multi-location publish candidates",
+      "no apparent multi-event headlines",
+      "formal alert terminology must be explicitly confirmed",
+      "routine conditional ash forecasts require a new operational change",
+      "stable event_key required",
+      "mirror Japanese primary sources into Japanese-source metadata"
+    ]
+  }
+}
