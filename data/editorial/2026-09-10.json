@@ -1,0 +1,23 @@
+{
+  "run_date": "2026-09-10",
+  "status": "candidate_queue_only",
+  "human_review_required": true,
+  "run_summary": "No editorial candidates were recorded in this run because the AI response did not match Pocketey's candidate schema. The next scheduled run will retry automatically.",
+  "candidates": [],
+  "quality_guard": {
+    "enabled": true,
+    "duplicates_removed": 0,
+    "downgraded_publish_candidates": 0,
+    "japanese_sources_backfilled": 0,
+    "rules": [
+      "deduplicate by stable event_key",
+      "single event only",
+      "no vague multi-location publish candidates",
+      "no apparent multi-event headlines",
+      "formal alert terminology must be explicitly confirmed",
+      "routine conditional ash forecasts require a new operational change",
+      "stable event_key required",
+      "mirror Japanese primary sources into Japanese-source metadata"
+    ]
+  }
+}
