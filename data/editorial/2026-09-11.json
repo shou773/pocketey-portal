@@ -2,40 +2,40 @@
   "run_date": "2026-09-11",
   "status": "candidate_queue_only",
   "human_review_required": true,
-  "run_summary": "JR Central has announced the integration of real-time Tokaido Shinkansen operation data into the 'Japan Travel by NAVITIME' app, and is conducting additional security camera trials on Shinkansen trains. Several regional tourism campaigns and minor events were also announced.",
+  "run_summary": "The research desk identified one actionable transport update regarding real-time information for the Tokaido Shinkansen. Other items, including weather alerts and local tourism campaigns, were reviewed but did not meet the criteria for a single-event publishable article.",
   "candidates": [
     {
-      "title": "Tokaido Shinkansen Real-Time Data Now Available on Japan Travel by NAVITIME App",
-      "event_key": "jr-central-navitime-integration-2026",
+      "title": "Tokaido Shinkansen Real-Time Status Now Available on Japan Travel by NAVITIME",
+      "event_key": "jr-central-navitime-realtime-integration",
       "scope": "single_event",
       "formal_status": "not_applicable",
       "formal_status_basis": "",
       "category": "Transportation",
       "location": "Tokaido Shinkansen",
-      "what_changed": "JR Central has enabled real-time operation status for the Tokaido Shinkansen within the 'Japan Travel by NAVITIME' app.",
-      "why_it_matters": "International travelers can now receive more accurate, real-time updates on train delays or service changes directly within a popular navigation app.",
+      "what_changed": "JR Central has integrated real-time operational status information for the Tokaido Shinkansen into the 'Japan Travel by NAVITIME' app.",
+      "why_it_matters": "International travelers can now receive live updates on delays or service changes directly within a popular navigation app, improving trip planning and reliability.",
       "effective_date": "2026-09-07",
-      "traveler_action": "Download or update the 'Japan Travel by NAVITIME' app to access real-time Shinkansen status.",
+      "traveler_action": "Download or update the 'Japan Travel by NAVITIME' app to access real-time Shinkansen status updates.",
       "primary_source_name": "JR Central - Japanese News Releases",
       "primary_source_url": "https://jr-central.co.jp/news/release/nws000001_00597.html",
       "secondary_source_url": null,
-      "japanese_verification_summary": "JR東海は、訪日外国人向けアプリ「Japan Travel by NAVITIME」にて東海道新幹線のリアルタイム運行情報の提供を開始した。",
+      "japanese_verification_summary": "JR東海は、訪日外国人向けナビゲーションアプリ『Japan Travel by NAVITIME』において、東海道新幹線のリアルタイム運行情報の提供を開始した。",
       "japanese_source_name": "JR Central - Japanese News Releases",
       "japanese_source_url": "https://jr-central.co.jp/news/release/nws000001_00597.html",
       "scores": {
         "traveler_value": 30,
-        "trip_impact": 15,
+        "trip_impact": 20,
         "source_reliability": 20,
         "freshness": 10,
         "seo_evergreen": 8,
         "monetization_fit": 2,
-        "total": 85
+        "total": 90
       },
-      "related_guide_opportunity": "How to use Shinkansen and navigation apps in Japan",
+      "related_guide_opportunity": "How to use Japan Travel by NAVITIME for Shinkansen travel",
       "monetization_relevance": "low",
-      "monetization_note": "Potential for affiliate links to travel apps or JR Pass services.",
+      "monetization_note": "Potential for affiliate links to travel apps or JR Pass services if applicable.",
       "recommendation": "publish",
-      "reason": "High utility for international travelers using public transport."
+      "reason": "This is a clear, actionable improvement for international travelers using the Tokaido Shinkansen."
     }
   ],
   "quality_guard": {
