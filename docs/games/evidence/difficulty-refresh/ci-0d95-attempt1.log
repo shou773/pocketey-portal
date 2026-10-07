@@ -1,0 +1,262 @@
+##[group]Run npx playwright test --config playwright.baseline.config.ts
+2026-10-07T19:09:18.7201214Z [36;1mnpx playwright test --config playwright.baseline.config.ts[0m
+2026-10-07T19:09:18.7262905Z shell: /usr/bin/bash -e {0}
+2026-10-07T19:09:18.7263178Z env:
+2026-10-07T19:09:18.7263383Z   ASTRO_TELEMETRY_DISABLED: 1
+2026-10-07T19:09:18.7263626Z   CI: true
+2026-10-07T19:09:18.7263931Z   GAME_BASELINE_DIST: /home/runner/work/_temp/game-baseline/dist
+2026-10-07T19:09:18.7264305Z ##[endgroup]
+2026-10-07T19:09:19.7387726Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:19] "GET / HTTP/1.1" 200 -
+2026-10-07T19:09:20.0234568Z 
+2026-10-07T19:09:20.0235440Z Running 4 tests using 1 worker
+2026-10-07T19:09:20.0235896Z 
+2026-10-07T19:09:20.6195315Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/orbit-ribbon/ HTTP/1.1" 200 -
+2026-10-07T19:09:20.6360120Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 200 -
+2026-10-07T19:09:20.6362808Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+2026-10-07T19:09:20.6371212Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6385818Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6417669Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6454196Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6501444Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/orbit.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6568695Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6572167Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6575656Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.6989794Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+2026-10-07T19:09:20.9567082Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.9575720Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+2026-10-07T19:09:20.9578891Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:20] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+2026-10-07T19:09:35.4043428Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:09:35] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 304 -
+2026-10-07T19:10:09.7122549Z orbit keyboard {
+2026-10-07T19:10:09.7123054Z   fps: 44.88330341113105,
+2026-10-07T19:10:09.7127182Z   p95: 33.400000000001455,
+2026-10-07T19:10:09.7130412Z   p99: 50,
+2026-10-07T19:10:09.7130798Z   max: 66.69999999999709
+2026-10-07T19:10:09.7131186Z }
+2026-10-07T19:10:10.7218347Z   ✘  1 ../../_temp/game-baseline/tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence (49.7s)
+2026-10-07T19:10:11.3442362Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/orbit-ribbon/ HTTP/1.1" 200 -
+2026-10-07T19:10:11.3567326Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.3640006Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.3649205Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+2026-10-07T19:10:11.3659419Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.3661906Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 200 -
+2026-10-07T19:10:11.3664149Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.3942434Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+2026-10-07T19:10:11.3974745Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/orbit.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.4016650Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.4023183Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.4032026Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.6632415Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.6652818Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+2026-10-07T19:10:11.6659164Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:11] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+2026-10-07T19:10:25.6004270Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:25] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 304 -
+2026-10-07T19:10:58.8626061Z orbit touch {
+2026-10-07T19:10:58.8628382Z   fps: 60.00126318448805,
+2026-10-07T19:10:58.8630170Z   p95: 16.700000000004366,
+2026-10-07T19:10:58.8631199Z   p99: 16.80000000000291,
+2026-10-07T19:10:58.8632164Z   max: 16.80000000000291
+2026-10-07T19:10:58.8646062Z }
+2026-10-07T19:10:59.3705534Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/check.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.4657463Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/orbit-ribbon/ HTTP/1.1" 304 -
+2026-10-07T19:10:59.5963758Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.5984850Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.6010745Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 304 -
+2026-10-07T19:10:59.6012496Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 304 -
+2026-10-07T19:10:59.6014108Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.6025491Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/orbit.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.6040352Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.6043249Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.6051296Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 304 -
+2026-10-07T19:10:59.6111897Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 304 -
+2026-10-07T19:10:59.6450396Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:10:59] "GET /games/assets/lucide/play.svg HTTP/1.1" 304 -
+2026-10-07T19:11:00.8649649Z   ✓  2 ../../_temp/game-baseline/tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence (49.6s)
+2026-10-07T19:11:00.9295337Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/amber-step/ HTTP/1.1" 200 -
+2026-10-07T19:11:00.9393507Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9401285Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9464397Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+2026-10-07T19:11:00.9469043Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 200 -
+2026-10-07T19:11:00.9484265Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9486868Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9529992Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/gem.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9573627Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9575400Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9600453Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+2026-10-07T19:11:00.9889375Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:00] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+2026-10-07T19:11:01.0553003Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:01] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+2026-10-07T19:11:01.0603495Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:01] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+2026-10-07T19:11:01.0644308Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:01] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+2026-10-07T19:11:01.0668864Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:01] "GET /games/assets/lucide/footprints.svg HTTP/1.1" 200 -
+2026-10-07T19:11:30.2620237Z amber keyboard {
+2026-10-07T19:11:30.2620750Z   fps: 45.97033703515518,
+2026-10-07T19:11:30.2621180Z   p95: 33.400000000001455,
+2026-10-07T19:11:30.2632945Z   p99: 50.099999999998545,
+2026-10-07T19:11:30.2634396Z   max: 50.10000000000218
+2026-10-07T19:11:30.2634982Z }
+2026-10-07T19:11:31.2287092Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/check.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.3211301Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/amber-step/ HTTP/1.1" 304 -
+2026-10-07T19:11:31.8587590Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.8619343Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 304 -
+2026-10-07T19:11:31.8634130Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.8647774Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 304 -
+2026-10-07T19:11:31.8708970Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.8812947Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 304 -
+2026-10-07T19:11:31.8868666Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/gem.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.8870127Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.8871554Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.8872936Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.9171194Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/footprints.svg HTTP/1.1" 304 -
+2026-10-07T19:11:31.9181235Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:31] "GET /games/assets/lucide/play.svg HTTP/1.1" 304 -
+2026-10-07T19:11:33.6250069Z   ✓  3 ../../_temp/game-baseline/tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence (32.7s)
+2026-10-07T19:11:33.8683813Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/amber-step/ HTTP/1.1" 200 -
+2026-10-07T19:11:33.8869263Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 200 -
+2026-10-07T19:11:33.8874729Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.8888796Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.8901699Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.8913927Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.8915439Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+2026-10-07T19:11:33.9075846Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+2026-10-07T19:11:33.9089974Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/gem.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9136457Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9141157Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9158292Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9746028Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9770548Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9773982Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+2026-10-07T19:11:33.9785496Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:11:33] "GET /games/assets/lucide/footprints.svg HTTP/1.1" 200 -
+2026-10-07T19:12:02.0723440Z amber touch {
+2026-10-07T19:12:02.0724309Z   fps: 60.00126318448813,
+2026-10-07T19:12:02.0725030Z   p95: 16.700000000000728,
+2026-10-07T19:12:02.0725573Z   p99: 16.80000000000291,
+2026-10-07T19:12:02.0726104Z   max: 16.80000000000291
+2026-10-07T19:12:02.0726612Z }
+2026-10-07T19:12:02.5301371Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/check.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.6190716Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/amber-step/ HTTP/1.1" 304 -
+2026-10-07T19:12:02.7185129Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7189786Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 304 -
+2026-10-07T19:12:02.7201657Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7220913Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js HTTP/1.1" 304 -
+2026-10-07T19:12:02.7225231Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7283033Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7285013Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7302016Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/gem.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7323178Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7337539Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 304 -
+2026-10-07T19:12:02.7792271Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/footprints.svg HTTP/1.1" 304 -
+2026-10-07T19:12:02.7839892Z [WebServer] 127.0.0.1 - - [07/Oct/2026 19:12:02] "GET /games/assets/lucide/play.svg HTTP/1.1" 304 -
+2026-10-07T19:12:04.0275750Z   ✓  4 ../../_temp/game-baseline/tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence (30.4s)
+2026-10-07T19:12:04.0918537Z 
+2026-10-07T19:12:04.0925461Z 
+2026-10-07T19:12:04.0942580Z   1) ../../_temp/game-baseline/tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T19:12:04.0943659Z 
+2026-10-07T19:12:04.0944155Z     Error: expect(received).toBeGreaterThanOrEqual(expected)
+2026-10-07T19:12:04.0944516Z 
+2026-10-07T19:12:04.0944628Z     Expected: >= 45
+2026-10-07T19:12:04.0944937Z     Received:    44.88330341113105
+2026-10-07T19:12:04.0945147Z 
+2026-10-07T19:12:04.0945558Z       38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+2026-10-07T19:12:04.0949060Z       39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+2026-10-07T19:12:04.0953084Z     > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+2026-10-07T19:12:04.0955114Z          |                                                                                                                                                                                                                                                                                                            ^
+2026-10-07T19:12:04.0956066Z       41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+2026-10-07T19:12:04.0956805Z       42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+2026-10-07T19:12:04.0957227Z       43 |  }
+2026-10-07T19:12:04.0958484Z         at /home/runner/work/_temp/game-baseline/tests/games/browser.spec.ts:40:300
+2026-10-07T19:12:04.0958873Z 
+2026-10-07T19:12:04.0959400Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T19:12:04.0960184Z     baseline-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T19:12:04.0961008Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T19:12:04.0961308Z 
+2026-10-07T19:12:04.0961762Z     Error Context: baseline-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md
+2026-10-07T19:12:04.0962341Z 
+2026-10-07T19:12:04.0962490Z   1 failed
+2026-10-07T19:12:04.0963682Z     ../../_temp/game-baseline/tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T19:12:04.0964702Z   3 passed (2.7m)
+2026-10-07T19:12:04.1293444Z ##[error]Process completed with exit code 1.
+2026-10-07T19:12:04.1362769Z ##[group]Run npm run test:browser
+2026-10-07T19:12:04.1363102Z [36;1mnpm run test:browser[0m
+2026-10-07T19:12:04.1426008Z shell: /usr/bin/bash -e {0}
+2026-10-07T19:12:04.1426273Z env:
+2026-10-07T19:12:04.1426485Z   ASTRO_TELEMETRY_DISABLED: 1
+2026-10-07T19:12:04.1426744Z   CI: true
+2026-10-07T19:12:04.1426940Z ##[endgroup]
+2026-10-07T19:12:04.2543822Z 
+2026-10-07T19:12:04.2544517Z > pocketey-japan@0.1.0 test:browser
+2026-10-07T19:12:04.2544940Z > playwright test
+2026-10-07T19:12:04.2548148Z 
+2026-10-07T19:12:06.0823690Z 
+2026-10-07T19:12:06.0824374Z Running 20 tests using 1 worker
+2026-10-07T19:12:06.0824749Z 
+2026-10-07T19:12:24.6863349Z   ✓   1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (18.0s)
+2026-10-07T19:13:22.0726107Z orbit keyboard {
+2026-10-07T19:13:22.0730746Z   fps: 45.7853390524845,
+2026-10-07T19:13:22.0731233Z   p95: 33.400000000001455,
+2026-10-07T19:13:22.0736222Z   p99: 50,
+2026-10-07T19:13:22.0736994Z   max: 50.099999999998545
+2026-10-07T19:13:22.0737393Z }
+2026-10-07T19:13:26.4294538Z   ✓   2 tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence (1.0m)
+2026-10-07T19:14:22.5728948Z orbit touch {
+2026-10-07T19:14:22.5729840Z   fps: 60.00126318448813,
+2026-10-07T19:14:22.5730510Z   p95: 16.700000000004366,
+2026-10-07T19:14:22.5731704Z   p99: 16.80000000000291,
+2026-10-07T19:14:22.5732278Z   max: 16.80000000000291
+2026-10-07T19:14:22.5733622Z }
+2026-10-07T19:14:24.8629833Z   ✓   3 tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence (58.4s)
+2026-10-07T19:15:08.4037058Z amber keyboard { fps: 43.34732615440773, p95: 33.400000000001455, p99: 50, max: 50 }
+2026-10-07T19:15:09.5158455Z   ✘   4 tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence (44.1s)
+2026-10-07T19:15:53.2812674Z amber touch {
+2026-10-07T19:15:53.2817337Z   fps: 60.00126318448813,
+2026-10-07T19:15:53.2818439Z   p95: 16.700000000000728,
+2026-10-07T19:15:53.2818885Z   p99: 16.80000000000291,
+2026-10-07T19:15:53.2819306Z   max: 16.80000000000291
+2026-10-07T19:15:53.2819698Z }
+2026-10-07T19:15:55.7129831Z   ✓   5 tests/games/browser.spec.ts:31:2 › amber-touch › three stages through normal input, unlock and persistence (45.6s)
+2026-10-07T19:16:01.7864075Z   ✓   6 tests/games/browser.spec.ts:55:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (6.1s)
+2026-10-07T19:16:04.2853785Z   ✓   7 tests/games/browser.spec.ts:65:1 › corrupt/blocked storage and scoped confirmed reset (2.5s)
+2026-10-07T19:16:10.6518069Z PERFORMANCE {
+2026-10-07T19:16:10.6518551Z   fps: 60.00289669156445,
+2026-10-07T19:16:10.6518968Z   p95: 16.700000000000728,
+2026-10-07T19:16:10.6519852Z   renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+2026-10-07T19:16:10.6520688Z   viewport: [ 390, 844 ],
+2026-10-07T19:16:10.6521769Z   userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36'
+2026-10-07T19:16:10.6522698Z }
+2026-10-07T19:16:11.5011214Z   ✓   8 tests/games/browser.spec.ts:72:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (7.2s)
+2026-10-07T19:16:28.7391099Z   ✓   9 tests/games/browser.spec.ts:83:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (17.2s)
+2026-10-07T19:16:41.6337450Z   ✓  10 tests/games/browser.spec.ts:83:46 › amber: WebGL context loss freezes play until reload and preserves saved data (12.9s)
+2026-10-07T19:17:01.4372058Z   ✓  11 tests/games/browser.spec.ts:128:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (19.8s)
+2026-10-07T19:17:16.5531024Z   ✓  12 tests/games/browser.spec.ts:128:46 › amber: 320x568 menus and clear screen remain scroll-accessible (15.1s)
+2026-10-07T19:17:18.1915058Z   ✓  13 tests/games/browser.spec.ts:166:46 › orbit: simulated notch safe areas keep all controls inside every edge (1.6s)
+2026-10-07T19:17:20.0840108Z   ✓  14 tests/games/browser.spec.ts:166:46 › amber: simulated notch safe areas keep all controls inside every edge (1.9s)
+2026-10-07T19:17:21.4363378Z   ✓  15 tests/games/browser.spec.ts:201:1 › Amber simultaneous touch shows legible held feedback (1.3s)
+2026-10-07T19:17:22.8806997Z   ✓  16 tests/games/browser.spec.ts:215:2 › orbit: selected 3D art loads, animation and normal controls remain usable (1.4s)
+2026-10-07T19:17:38.9698755Z   ✓  17 tests/games/browser.spec.ts:269:2 › orbit: failed GLBs retain fallback, controls, clear and saves (16.1s)
+2026-10-07T19:17:41.0646204Z   ✓  18 tests/games/browser.spec.ts:215:2 › amber: selected 3D art loads, animation and normal controls remain usable (2.1s)
+2026-10-07T19:17:52.8914633Z   ✓  19 tests/games/browser.spec.ts:269:2 › amber: failed GLBs retain fallback, controls, clear and saves (11.8s)
+2026-10-07T19:18:04.2768924Z   ✓  20 tests/games/browser.spec.ts:280:1 › missing shared colormap retains Amber fallback and gameplay (11.4s)
+2026-10-07T19:18:04.3509280Z 
+2026-10-07T19:18:04.3514339Z 
+2026-10-07T19:18:04.3525521Z   1) tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T19:18:04.3526459Z 
+2026-10-07T19:18:04.3526890Z     Error: expect(received).toBeGreaterThanOrEqual(expected)
+2026-10-07T19:18:04.3527376Z 
+2026-10-07T19:18:04.3527568Z     Expected: >= 45
+2026-10-07T19:18:04.3528393Z     Received:    43.34732615440773
+2026-10-07T19:18:04.3528705Z 
+2026-10-07T19:18:04.3529396Z       43 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+2026-10-07T19:18:04.3534090Z       44 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+2026-10-07T19:18:04.3541159Z     > 45 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+2026-10-07T19:18:04.3544750Z          |                                                                                                                                                                                                                                                                                                            ^
+2026-10-07T19:18:04.3546508Z       46 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+2026-10-07T19:18:04.3547811Z       47 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+2026-10-07T19:18:04.3548860Z       48 |  }
+2026-10-07T19:18:04.3549643Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:45:300
+2026-10-07T19:18:04.3550330Z 
+2026-10-07T19:18:04.3551207Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T19:18:04.3552493Z     test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T19:18:04.3553930Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T19:18:04.3554483Z 
+2026-10-07T19:18:04.3555305Z     Error Context: test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/error-context.md
+2026-10-07T19:18:04.3556224Z 
+2026-10-07T19:18:04.3556814Z   1 failed
+2026-10-07T19:18:04.3558333Z     tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T19:18:04.3559274Z   19 passed (6.0m)
+2026-10-07T19:18:04.3786412Z ##[error]Process completed with exit code 1.
+2026-10-07T19:18:04.3857385Z
