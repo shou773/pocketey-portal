@@ -1,24 +1,26 @@
 import * as T from 'three';
 import { stages, type Kind, type State } from './model';
+import { loadArt, batchStatic, placeArt, createSky, type Art } from './art';
 export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const renderer = new T.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
   const scene = new T.Scene();
-  const bg = kind === 'orbit' ? 0x10182f : 0x29213c;
-  scene.background = new T.Color(bg); scene.fog = new T.Fog(bg, 30, 100);
-  scene.add(new T.HemisphereLight(0xe9f5ff, 0x41415f, 2.7));
-  const light = new T.DirectionalLight(0xffead2, 3); light.position.set(-8, 15, 5); scene.add(light);
+  const bg = kind === 'orbit' ? 0x152541 : 0xe9b391;
+  scene.background = new T.Color(bg); scene.fog = new T.Fog(bg, kind === 'orbit' ? 48 : 30, 105);
+  const sky = createSky(kind); scene.add(sky);
+  scene.add(new T.HemisphereLight(0xe9f5ff, kind === 'orbit' ? 0x384b70 : 0x91745b, 2.2));
+  const light = new T.DirectionalLight(0xffe4c5, 2.1); light.position.set(-8, 15, 5); scene.add(light);
   const camera = new T.PerspectiveCamera(54, 1, .1, 160);
   const level = new T.Group(); scene.add(level);
   const geo = new T.BoxGeometry(1, 1, 1);
   const spikeGeometry = new T.ConeGeometry(.4, .65, 4);
   const mats = {
-    floor: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x3b778b : 0xb07e68 }),
+    floor: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x344b60 : 0xaf7858 }),
     edge: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x93f9da : 0xffdc9f, emissive: kind === 'orbit' ? 0x245d5a : 0x794521, emissiveIntensity: .65 }),
     danger: new T.MeshLambertMaterial({ color: 0xff687e, emissive: 0x7b143b, emissiveIntensity: .4 }),
     body: new T.MeshLambertMaterial({ color: 0xfff4de }),
     face: new T.MeshLambertMaterial({ color: 0x162b42 }),
-    decor: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x304967 : 0x685374 })
+    decor: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x304967 : 0x97725d })
   };
   const box = (parent: T.Object3D, x: number, y: number, z: number, w: number, height: number, d: number, material: T.Material) => {
     const mesh = new T.Mesh(geo, material); mesh.position.set(x, y, z); mesh.scale.set(w, height, d); parent.add(mesh); return mesh;
@@ -29,22 +31,68 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   box(courier, 0, .43, .281, .4, .18, .03, mats.face);
   box(courier, 0, .74, 0, .2, .1, .2, mats.edge);
   if (kind === 'amber') courier.scale.setScalar(1.12);
+  let art: Art = new Map();
+  let currentStage = 0;
+  let mixer: T.AnimationMixer | undefined;
+  const actions = new Map<string, T.AnimationAction>();
+  let activeAction: T.AnimationAction | undefined;
+  let previousTime = 0, previousX = 0;
   const celestial = new T.Group(); scene.add(celestial);
-  const moon = new T.Mesh(new T.SphereGeometry(kind === 'orbit' ? 2.2 : 3.5, 24, 16), new T.MeshBasicMaterial({color: kind === 'orbit' ? 0x304962 : 0x896475}));
+  const moon = new T.Mesh(new T.SphereGeometry(kind === 'orbit' ? 2.2 : 3.5, 24, 16), new T.MeshBasicMaterial({color: kind === 'orbit' ? 0x4a7692 : 0xffe6ae}));
   celestial.add(moon);
-  const ring = new T.Mesh(new T.TorusGeometry(kind === 'orbit' ? 4 : 5, .025, 6, 64), new T.MeshBasicMaterial({color: kind === 'orbit' ? 0x527f90 : 0xc4927c}));
-  ring.rotation.x = .4; ring.rotation.y = .3; celestial.add(ring);
+  const ring = new T.Mesh(new T.TorusGeometry(kind === 'orbit' ? 4 : 5, .035, 6, 64), new T.MeshBasicMaterial({color: kind === 'orbit' ? 0x527f90 : 0xc4927c}));
+  ring.rotation.x = .4; ring.rotation.y = .3; if (kind === 'orbit') celestial.add(ring);
+  if (kind === 'orbit') {
+    const bands = new T.Mesh(new T.TorusGeometry(2.18, .11, 4, 40), new T.MeshBasicMaterial({color:0x83b4c2}));
+    bands.rotation.x = 1.3; bands.rotation.y = .2; celestial.add(bands);
+    const satellite = new T.Mesh(new T.SphereGeometry(.65, 12, 8), new T.MeshBasicMaterial({color:0xe9c18f}));
+    satellite.position.set(-9, -2, 2); celestial.add(satellite);
+  }
+  const horizon = new T.Group(); scene.add(horizon);
+  if (kind === 'amber') {
+    const hillGeo = new T.SphereGeometry(1, 12, 8);
+    for (let row = 0; row < 2; row++) for (let i = -4; i < 9; i++) {
+      const hill = new T.Mesh(hillGeo, new T.MeshBasicMaterial({color: row ? 0xb9a29b : 0x93a69a}));
+      hill.scale.set(7 + (i + 4) % 3, 3 + (i + 4) % 4, 3);
+      hill.position.set(i * 12, -2.2, -21 - row * 16); horizon.add(hill);
+    }
+    const cloudGeo = new T.SphereGeometry(1, 10, 6), cloudMat = new T.MeshBasicMaterial({color:0xffedcf});
+    for (let i = 0; i < 6; i++) for (let j = 0; j < 3; j++) {
+      const cloud = new T.Mesh(cloudGeo, cloudMat); cloud.scale.set(1.8, .42 + j * .09, .5);
+      cloud.position.set(i * 12 - 24 + j, 8 + i % 3 + j * .15, -25); horizon.add(cloud);
+    }
+    batchStatic(horizon);
+  }
   const shadow = new T.Mesh(new T.CircleGeometry(.42, 20), new T.MeshBasicMaterial({ color: 0x070f22, transparent: true, opacity: .4 })); shadow.rotation.x = -Math.PI / 2; scene.add(shadow);
   const particles = new T.BufferGeometry(); const points: number[] = [];
   for (let i = 0; i < 220; i++) points.push(Math.sin(i * 82.7) * 80, 4 + ((i * 17) % 35), -100 + ((i * 31) % 170));
-  particles.setAttribute('position', new T.Float32BufferAttribute(points, 3)); scene.add(new T.Points(particles, new T.PointsMaterial({ color: 0xa5bfdc, size: .075 })));
+  particles.setAttribute('position', new T.Float32BufferAttribute(points, 3)); const stars = new T.Points(particles, new T.PointsMaterial({ color: 0xc1d5e8, size: .085, sizeAttenuation:true })); if (kind === 'orbit') scene.add(stars);
   function load(index: number) {
+    currentStage = index;
     level.children.forEach(child => { if (child instanceof T.InstancedMesh) child.dispose(); });
     level.clear();
     const data = stages[kind][index];
     for (const p of data.platforms) {
       const mid = (p.a + p.b) / 2, len = p.b - p.a;
-      box(level, ...coord(mid, p.y - .36, p.z), kind === 'orbit' ? p.w : len, .72, kind === 'orbit' ? len : 3.4, mats.floor);
+      if (kind === 'orbit') {
+        box(level, ...coord(mid, p.y - .38, p.z), p.w, .72, len, mats.floor);
+        for (let a = p.a; a < p.b; a += 5) {
+          const segment = Math.min(5, p.b - a);
+          placeArt(level, art, 'platform_small', coord(a + segment / 2, p.y - .24, p.z), [p.w, 2.4, segment]);
+        }
+        // Structural ribs sit below the runway and never bridge a jump gap.
+        for (let x = p.a + 1; x < p.b; x += 5) box(level, ...coord(x, p.y - .9, 0), p.w * .7, .5, .24, mats.decor);
+      } else {
+        if (!art.has('block-grass-low-long')) box(level, mid, p.y - .36, 0, len, .72, 3.4, mats.floor);
+        for (let a = p.a; a < p.b; a += 3) {
+          const segment = Math.min(3, p.b - a);
+          // Exact visible end faces and top height match the collision surface.
+          placeArt(level, art, 'block-grass-low-long', [a + segment / 2, p.y - .75, 0], [segment / 2.082125, 1.5, 3.4 / 1.082125]);
+          if (segment > 1 && !data.hazards.some(h => Math.abs(h.x - a - segment / 2) < 2)) {
+            placeArt(level, art, 'flowers', [a + segment / 2, p.y, -1.35], [.65, .65, .65]);
+          }
+        }
+      }
       box(level, ...coord(p.b - .1, p.y + .025, p.z), kind === 'orbit' ? p.w : .18, .05, kind === 'orbit' ? .18 : 3.4, mats.edge);
       box(level, ...coord(p.a + .1, p.y + .025, p.z), kind === 'orbit' ? p.w : .18, .05, kind === 'orbit' ? .18 : 3.4, mats.edge);
       if (kind === 'orbit') for (const z of [-3.45, 3.45]) box(level, ...coord(mid, p.y + .025, z), .07, .05, len, mats.edge);
@@ -62,21 +110,43 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     }
     for (const z of [-2.8, 2.8]) box(level, ...coord(data.length + 1, 1.5, z), .15, 3, .15, mats.edge);
     box(level, ...coord(data.length + 1, 3, 0), kind === 'orbit' ? 5.75 : .15, .15, kind === 'orbit' ? .15 : 5.75, mats.edge);
-    for (let i = 0; i < 20; i++) box(level, ...coord(i * 8, -4 - i % 3, i % 2 ? -10 : 10), 2, 2, 2, mats.decor);
-    // Batch static geometry: long courses cost a handful of draw calls instead of one per dash.
-    const batches = new Map<string, T.Mesh[]>();
-    for (const object of level.children) {
-      const mesh = object as T.Mesh<T.BufferGeometry, T.Material>;
-      const key = mesh.geometry.uuid + mesh.material.uuid;
-      const batch = batches.get(key) ?? []; batch.push(mesh); batches.set(key, batch);
+    for (let i = 0; i < 20; i++) {
+      if (kind === 'orbit') {
+        const name = i % 3 ? 'meteor' : 'rock';
+        if (!placeArt(level, art, name, coord(i * 8, -2 - i % 3, i % 2 ? -12 : 12), [2.7, 2.7, 2.7], i * .7))
+          box(level, ...coord(i * 8, -4 - i % 3, i % 2 ? -10 : 10), 2, 2, 2, mats.decor);
+        if (i % 4 === 0) {
+          placeArt(level, art, 'platform_small', coord(i * 8, -1.5, i % 2 ? -16 : 16), [4, 8, 4]);
+          box(level, ...coord(i * 8, .5, i % 2 ? -16 : 16), .15, 3.5, .15, mats.edge);
+        }
+      } else {
+        const x = i * 4 - 7, y = -1.4 - i % 3 * .3, z = -7 - i % 3 * 2;
+        box(level, x, y - .8, z, 3.7, .9, 3.2, mats.decor);
+        placeArt(level, art, 'tree', [x, y - .35, z], [2.2, 2.2 + i % 3 * .25, 2.2], i);
+        placeArt(level, art, 'rocks', [x + 1.5, y - .3, z + .4], [1.5, 1.5, 1.5], i * .6);
+      }
     }
-    level.clear();
-    for (const batch of batches.values()) {
-      const instances = new T.InstancedMesh(batch[0].geometry, batch[0].material, batch.length);
-      batch.forEach((mesh, index) => { mesh.updateMatrix(); instances.setMatrixAt(index, mesh.matrix); });
-      instances.computeBoundingSphere(); level.add(instances);
-    }
+    batchStatic(level);
   }
+  void loadArt(kind, canvas).then(loaded => {
+    art = loaded;
+    const player = art.get(kind === 'orbit' ? 'craft_speederA' : 'character-oodi');
+    if (player) {
+      courier.clear(); courier.scale.setScalar(1);
+      // The ship faces -Z; Oodi faces +Z, rotated toward the side-scrolling +X.
+      player.scene.scale.setScalar(kind === 'orbit' ? .48 : .9);
+      player.scene.position.y = kind === 'orbit' ? .12 : 0;
+      player.scene.rotation.y = kind === 'orbit' ? 0 : Math.PI / 2;
+      courier.add(player.scene);
+      if (kind === 'amber') {
+        mixer = new T.AnimationMixer(player.scene);
+        for (const clip of player.animations) actions.set(clip.name, mixer.clipAction(clip));
+      }
+    }
+    load(currentStage);
+    // Signal only after the objects have been adopted; read-only diagnostics.
+    canvas.dataset.artAdopted = 'true';
+  });
   // ResizeObserver supplies dimensions after layout. Reading clientWidth after HUD
   // mutations forced a synchronous layout on every animation frame.
   let width = canvas.clientWidth, height = canvas.clientHeight, resized = true, pixelRatio = 0;
@@ -89,7 +159,20 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     const ratio = Math.min(devicePixelRatio, 1.6, Math.sqrt(450000 / Math.max(1, width * height)));
     if (resized || ratio !== pixelRatio) { resized = false; pixelRatio = ratio; renderer.setPixelRatio(ratio); renderer.setSize(width, height, false); camera.aspect = width / Math.max(1, height); camera.updateProjectionMatrix(); }
     courier.position.set(...coord(s.x, s.y, s.z));
-    courier.rotation.z = s.grounded ? Math.sin(s.time * 18) * .045 : -.14;
+    const delta = Math.max(0, Math.min(.1, s.time - previousTime));
+    const moving = s.x !== previousX;
+    if (mixer) {
+      const name = s.status === 'dead' ? 'die' : !s.grounded ? (s.vy > 0 ? 'jump' : 'fall') : moving ? 'walk' : 'idle';
+      const action = actions.get(name);
+      if (action && action !== activeAction) {
+        activeAction?.fadeOut(.12); action.reset().fadeIn(.12).play(); activeAction = action; canvas.dataset.artAnimation = name;
+      }
+      mixer.update(delta);
+      if (moving && s.grounded) courier.rotation.y = s.x < previousX ? Math.PI : 0;
+    }
+    previousTime = s.time; previousX = s.x;
+    courier.rotation.z = kind === 'orbit' ? (s.grounded ? Math.sin(s.time * 12) * .025 : -.08) : 0;
+    if (kind === 'amber') horizon.position.x = s.x * .25;
     const under = stages[kind][s.stage].platforms.find(p => s.x >= p.a && s.x <= p.b && Math.abs(s.z - p.z) <= p.w / 2);
     shadow.visible = !!under; shadow.position.set(...coord(s.x, (under?.y ?? 0) + .045, s.z));
     if (kind === 'orbit') {
@@ -100,6 +183,8 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
       const distance = camera.aspect < 1 ? 16 / camera.aspect ** .3 : 12;
       camera.position.set(s.x + 3.2, 5.6, distance); camera.lookAt(s.x + 3.2, 1.3, 0);
     }
+    sky.position.copy(camera.position);
+    stars.position.z = -s.x;
     renderer.render(scene, camera);
   }
   return { load, draw, renderer };

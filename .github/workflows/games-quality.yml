@@ -1,7 +1,7 @@
 name: Games quality
 on:
   push:
-    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, main]
+    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, main]
     paths:
       - 'src/**'
       - 'public/**'
@@ -40,7 +40,7 @@ jobs:
       - name: Compare fixed baseline and candidate on the same runner
         run: |
           mkdir -p "$RUNNER_TEMP/game-baseline"
-          git archive 34ee2de4194180792ddee2ecc6905e634ee95c06 | tar -x -C "$RUNNER_TEMP/game-baseline"
+          git archive aa44ef3a2e6ab853f2c13a168e73dd0e56459907 | tar -x -C "$RUNNER_TEMP/game-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/game-baseline/node_modules"
           (cd "$RUNNER_TEMP/game-baseline" && npm run build)
           node scripts/games-performance.mjs "$RUNNER_TEMP/game-baseline/dist" dist

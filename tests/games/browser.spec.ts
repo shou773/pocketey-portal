@@ -204,3 +204,36 @@ test('Amber simultaneous touch shows legible held feedback',async({page},info)=>
  await page.screenshot({path:info.outputPath('amber-simultaneous-held.png')});fs.writeFileSync(info.outputPath('amber-held-styles.json'),JSON.stringify(styles,null,2));
  await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:points});await expect(page.locator('.controls .held')).toHaveCount(0);await session.detach();
 });
+
+for (const kind of ['orbit','amber'] as const) {
+ const route = `/games/${kind === 'orbit' ? 'orbit-ribbon' : 'amber-step'}/`;
+ test(`${kind}: selected 3D art loads, animation and normal controls remain usable`,async({page},info)=>{
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','ready');
+  await expect(page.locator('canvas')).toHaveAttribute('data-art-adopted','true');
+  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+  if(kind==='amber')await page.keyboard.down('ArrowRight');
+  await page.waitForTimeout(150);await page.keyboard.press('Space');
+  await expect.poll(async()=>Number((await read(page)).y)).toBeGreaterThan(.8);
+  await page.screenshot({path:info.outputPath(`${kind}-art-jump.png`)});
+  if(kind==='amber')await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','jump');
+  await page.keyboard.up('ArrowRight');await page.locator('#pause').click();
+  const frozen=await read(page);await page.waitForTimeout(200);expect((await read(page)).x).toBe(frozen.x);
+  expect(errors).toEqual([]);
+ });
+ test(`${kind}: failed GLBs retain fallback, controls, clear and saves`,async({page},info)=>{
+  await page.route('**/kenney/**/*.glb',route=>route.abort('failed'));
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
+  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+  await play(page,kind,0,true);await page.screenshot({path:info.outputPath(`${kind}-fallback-clear.png`)});
+  const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);expect(saved).toBeTruthy();
+  await page.reload();await expect(page.getByRole('button',{name:/ステージ 2 /})).toBeEnabled();
+  expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);expect(errors).toEqual([]);
+ });
+}
+test('missing shared colormap retains Amber fallback and gameplay',async({page})=>{
+ await page.route('**/kenney/**/colormap.png',route=>route.abort('failed'));
+ await page.goto('/games/amber-step/');await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'amber',0,true);
+});
