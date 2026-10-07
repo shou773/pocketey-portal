@@ -1,0 +1,19 @@
+{
+  "codeSha": "8694330da00a7e87d17675928718b756520e20f8",
+  "run": 37633132482,
+  "qualityJob": 112832300878,
+  "crossBrowserJob": 112832301242,
+  "unit": {
+    "passed": 7
+  },
+  "chromium": {
+    "passed": 15,
+    "failed": 0
+  },
+  "crossBrowser": {
+    "passed": 10,
+    "failed": 0
+  },
+  "separateCloudflareCheck": "failure; unresolved baseline integration, not the GitHub Pages production path",
+  "production": "Not deployed; main remains dce870df42138a03718359149bede54f72d600e3 until independent review."
+}
