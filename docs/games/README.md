@@ -11,7 +11,7 @@ npm run preview -- --host 127.0.0.1 --port 4322
 npm run test:browser
 ```
 
-Browser tests use `/usr/bin/chromium` locally; CI installs its matching Playwright Chromium. Set `ASTRO_TELEMETRY_DISABLED=1` in a cloud sandbox whose home configuration directory is not writable. Screenshots and JSON results go to `test-results/`, which is ignored by Git. The GitHub Games quality workflow uploads these as an artifact.
+Browser tests use `/usr/bin/chromium` locally; CI installs its matching Playwright Chromium. Set `ASTRO_TELEMETRY_DISABLED=1` in a cloud sandbox whose home configuration directory is not writable; use `npm ci --cache /tmp/pocketey-npm` if its npm cache directory is also unwritable. Screenshots and JSON results go to `test-results/`, which is ignored by Git. The GitHub Games quality workflow uploads these as an artifact.
 
 `npm run check` checks the whole legacy site as well. Its 48 existing errors in `src/pages/contact.astro` are documented in RELEASE.md; that source is unchanged from main. `npm run check:games` strictly checks the new TypeScript simulation, rendering, application and test code. The project has no configured lint command; formatting/semantic lint beyond TypeScript is not claimed.
 

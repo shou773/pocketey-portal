@@ -1,5 +1,15 @@
 # Release candidate — not published
 
+## Current mobile-review result
+
+Application fixes are in `25ed2ad`; final synchronized test code is in **`95ed0c65836c5c1ee7cf2ac2b1567a4dc0a24e12`**. On that SHA, local build, strict game types, **7 unit tests and 12 Chromium browser tests pass**. [Games quality run 37613951469](https://github.com/shou773/pocketey-portal/actions/runs/37613951469) also succeeded on **that exact SHA**. Subsequent evidence-only commits do not imply a fresh CI execution. The earlier failed run 37612979382 remains failed; the screenshot wait was removed and the controller now waits explicitly for the new run's first frame before sending inputs.
+
+Current stage-3 measurements: Orbit desktop **52.78fps / p95 33.3ms**, Orbit touch emulation **60.00fps / 16.8ms**, Amber desktop **54.81fps / 33.3ms**, Amber touch emulation **60.00fps / 16.7ms**. Test conditions remain the Chromium/SwiftShader cloud conditions below. [Current machine-readable QA](evidence/qa.json).
+
+[Updated mobile-review images](evidence/mobile-review/) show recovery, 320x568 panel tops/bottoms, 390px controls, synthetic notch insets and screen-guided gap crossings. An additional Chromium CDP **touch swipe**, without scripted scroll writes, moved the 320x568 menu from scrollTop 0 to 109px (Orbit) / 84px (Amber), exposing reset controls in both games; [touch-scroll evidence](evidence/mobile-review/touch-scroll.json).
+
+The Cloudflare Pages integration remains a separate failing check with unresolved cause; Games quality success is not a successful Cloudflare or production deployment. No production access, WebKit/Firefox download retry, DNS change or publication was performed in this review.
+
 ## Deliverable
 
 - Orbit Ribbon: `/games/orbit-ribbon/`
@@ -76,3 +86,8 @@ Orbit's fixed-edge route was reproduced for both signs of z≈3.5 in stages 2/3 
 ### What the play evidence does and does not establish
 
 The completion controller reads read-only internal positions to time **ordinary browser keyboard/touch input**. It never teleports or changes gameplay state. These completions establish reachability, input behavior and UI transitions; they **do not establish novice human reaction time, first-play difficulty, enjoyment or physical phone usability**. Screenshots are inspected for visible gaps, landing surfaces, obstruction contrast, fixed camera framing and readable controls, but this visual inspection is not a first-time human play study. Existing cyan/amber platform edges and contrasting pink obstacles remain the warning cues. No claim of proven first-play accessibility is made.
+
+
+### Screen-guided observation
+
+A separate short observation trial used the rendered 390x844 screen, ordinary keyboard controls and the game's pause/resume buttons, **without reading internal position/status attributes or changing simulation state**. In each game's stage 1, movement/jump timing was chosen after inspecting screenshots of the approaching gap; the airborne frame and successful landing were then inspected. The bright platform edge, dark gap and landing surface were distinguishable in these captures. [Before/jump/landing images](evidence/mobile-review/) are saved for both games. This was a paused, screen-guided observation over the first gap, not a full-stage novice reaction test or physical phone session. The full-stage keyboard/touch evidence remains the separately disclosed coordinate-observing automated controller.

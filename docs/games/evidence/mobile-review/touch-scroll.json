@@ -1,0 +1,25 @@
+{
+  "method": "Chromium CDP touchStart/touchMove/touchEnd, no scripted scroll writes",
+  "results": [
+    {
+      "kind": "orbit-ribbon",
+      "viewport": [
+        320,
+        568
+      ],
+      "before": 0,
+      "after": 109,
+      "resetFullyVisible": true
+    },
+    {
+      "kind": "amber-step",
+      "viewport": [
+        320,
+        568
+      ],
+      "before": 0,
+      "after": 84,
+      "resetFullyVisible": true
+    }
+  ]
+}
