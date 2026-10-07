@@ -1,0 +1,14 @@
+[
+  {
+    "input": "right",
+    "color": "rgb(21, 39, 46)",
+    "background": "rgb(255, 211, 147)",
+    "image": "none"
+  },
+  {
+    "input": "jump",
+    "color": "rgb(21, 39, 46)",
+    "background": "rgb(255, 211, 147)",
+    "image": "none"
+  }
+]
