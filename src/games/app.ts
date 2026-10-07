@@ -89,6 +89,8 @@ export function boot() {
     button('再読み込み', () => window.location.reload(), true);
     $('panel-title').tabIndex = -1; $('panel-title').focus({ preventScroll: true });
   });
+  const stageLabel = $('stage-label'), stageName = $('stage-name'), timer = $('timer'), progressFill = $('progress-fill'), hint = $('hint');
+  function textIfChanged(element: HTMLElement, value: string) { if (element.textContent !== value) element.textContent = value; }
   let last = performance.now(), accumulator = 0;
   function frame(now: number) {
     const elapsed = Math.min((now - last) / 1000, .1); last = now;
@@ -99,9 +101,9 @@ export function boot() {
         if (state.jumps > previousJumps) tone(440);
         if (state.status !== 'running') finish();
       }
-      if (state.time > 5) $('hint').textContent = '';
+      if (state.time > 5) textIfChanged(hint, '');
     }
-    $('stage-label').textContent = `0${selected + 1} / 03`; $('stage-name').textContent = stages[kind][selected].name; $('timer').textContent = state.time.toFixed(2); $('progress-fill').style.width = `${Math.min(100, Math.max(0, state.x / stages[kind][selected].length * 100))}%`;
+    textIfChanged(stageLabel, `0${selected + 1} / 03`); textIfChanged(stageName, stages[kind][selected].name); textIfChanged(timer, state.time.toFixed(2)); progressFill.style.transform = `scaleX(${Math.min(1, Math.max(0, state.x / stages[kind][selected].length))})`;
     // Read-only diagnostics for reproducible browser verification; no state setter or gameplay bypass.
     root.dataset.mode = mode; root.dataset.status = state.status; root.dataset.x = state.x.toFixed(3); root.dataset.y = state.y.toFixed(3); root.dataset.z = state.z.toFixed(3); root.dataset.grounded = String(state.grounded); root.dataset.jumps = String(state.jumps);
     if (mode !== 'recovery') view.draw(state); root.dataset.geometries = String(view.renderer.info.memory.geometries); requestAnimationFrame(frame);

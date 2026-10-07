@@ -10,6 +10,7 @@ on:
       - 'tests/games/**'
       - 'package*.json'
       - 'playwright.config.ts'
+      - 'scripts/games-performance.mjs'
       - '.github/workflows/games-quality.yml'
   workflow_dispatch:
 permissions:
@@ -22,6 +23,8 @@ jobs:
       CI: 'true'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -29,6 +32,13 @@ jobs:
       - run: npm ci
       - run: npm run check:games && npm test && npm run build
       - run: npx playwright install --with-deps chromium
+      - name: Compare fixed baseline and candidate on the same runner
+        run: |
+          mkdir -p "$RUNNER_TEMP/game-baseline"
+          git archive 0cbc1e4ed6059adaa03e6fc49c6902b7d3a58853 | tar -x -C "$RUNNER_TEMP/game-baseline"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/game-baseline/node_modules"
+          (cd "$RUNNER_TEMP/game-baseline" && npm run build)
+          node scripts/games-performance.mjs "$RUNNER_TEMP/game-baseline/dist" dist
       - run: npm run test:browser
       - uses: actions/upload-artifact@v4
         if: always()
@@ -36,3 +46,4 @@ jobs:
           name: games-evidence
           path: |
             test-results/
+            performance-results/

@@ -77,10 +77,17 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
       instances.computeBoundingSphere(); level.add(instances);
     }
   }
-  let width = 0, height = 0;
+  // ResizeObserver supplies dimensions after layout. Reading clientWidth after HUD
+  // mutations forced a synchronous layout on every animation frame.
+  let width = canvas.clientWidth, height = canvas.clientHeight, resized = true, pixelRatio = 0;
+  const resizeObserver = new ResizeObserver(([entry]) => {
+    const { width: w, height: h } = entry.contentRect;
+    if (w !== width || h !== height) { width = w; height = h; resized = true; }
+  });
+  resizeObserver.observe(canvas);
   function draw(s: State) {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if (w !== width || h !== height) { width = w; height = h; renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6, Math.sqrt(450000 / Math.max(1, w * h)))); renderer.setSize(w, h, false); camera.aspect = w / Math.max(1, h); camera.updateProjectionMatrix(); }
+    const ratio = Math.min(devicePixelRatio, 1.6, Math.sqrt(450000 / Math.max(1, width * height)));
+    if (resized || ratio !== pixelRatio) { resized = false; pixelRatio = ratio; renderer.setPixelRatio(ratio); renderer.setSize(width, height, false); camera.aspect = width / Math.max(1, height); camera.updateProjectionMatrix(); }
     courier.position.set(...coord(s.x, s.y, s.z));
     courier.rotation.z = s.grounded ? Math.sin(s.time * 18) * .045 : -.14;
     const under = stages[kind][s.stage].platforms.find(p => s.x >= p.a && s.x <= p.b && Math.abs(s.z - p.z) <= p.w / 2);
