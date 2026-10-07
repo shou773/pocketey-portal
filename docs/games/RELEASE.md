@@ -14,6 +14,19 @@ Cloud Linux x86_64, AMD EPYC 9V74 virtual CPU (5 logical CPUs exposed), Node 24.
 
 Release threshold chosen before final testing: average rendered rAF cadence >=45fps, p95 interval <=40ms on this software-rendered cloud environment; 60fps target. Each game's stage 3 is measured during ordinary-input play (200 rAF samples; first 10 discarded). The renderer batches static meshes, shares geometry, caps target pixels at 450,000 and DPR at 1.6, and uses diffuse lighting. Browser/OS compositing and automation overhead are included. Results are reproducible measurements, not a universal hardware claim.
 
+## Measured result (implementation 2bd6006)
+
+Local final matrix: **7/7 browser tests and 6/6 unit tests passed**; strict game TypeScript and production build passed (21 generated routes). The complete browser run took about 3.1 minutes. Existing global-check failures remain separately disclosed below.
+
+| Stage 3 actual play | Viewport / input | Mean fps | p95 frame interval |
+| --- | --- | ---: | ---: |
+| Orbit Ribbon | 1280x720 / keyboard | 50.00 | 33.4ms |
+| Orbit Ribbon | 390x844 / multi-touch emulation | 59.69 | 16.8ms |
+| Amber Step | 1280x720 / keyboard | 54.55 | 33.3ms |
+| Amber Step | 390x844 / multi-touch emulation | 60.00 | 16.8ms |
+
+All six stages were completed in **both** input modes through normal browser input. The screenshots in [evidence](evidence/) include each touch completion, both portrait scenes, landscape and simultaneous move+jump. Machine-readable measurements: [qa.json](evidence/qa.json). No page JavaScript errors were observed in the completion matrix.
+
 ## Validation status
 
 Final results and screenshots are recorded in the evidence directory and the GitHub quality artifact when available. Browser checks cover all six stages via actual keyboard and touch input, stage unlocking, next/replay, saves across reload/reopen, sound setting, fall/retry, pause/focus input clearing, 20 restarts, constant geometry counts, touch cancellation, simultaneous movement+jump, orientation/layout and existing navigation.
