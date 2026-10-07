@@ -1,0 +1,41 @@
+
+> pocketey-japan@0.1.0 check
+> astro check
+
+19:11:23 [content] Syncing content
+19:11:23 [content] Synced content
+19:11:23 [types] Generated 38ms
+19:11:23 [check] Getting diagnostics for Astro files in /workspace/ball-prototype...
+docs/games/evidence/performance-investigation/local-dpr-diagnostic.mjs:18:106 - warning ts(80007): 'await' has no effect on the type of this expression.
+
+18 await b.close();fs.writeFileSync(process.argv[2]||'/tmp/pocketey-diagnosis.json',JSON.stringify({browser:await b.version(),results},null,2));
+                                                                                                            ~~~~~~~~~~~~~~~~~
+
+docs/games/evidence/ui-refresh/local-initial/effects-probe.mjs:2:124 - warning ts(6133): 'css' is declared but its value is never read.
+
+2 const oldRoot='/tmp/pocketey-before-lighting';const h=fs.readFileSync(oldRoot+'/games/amber-step/index.html','utf8');const css=fs.readFileSync(oldRoot+h.match(/href="([^"]+\.css)"/)[1],'utf8');
+                                                                                                                             ~~~
+
+tests/games/browser.spec.ts:2:33 - warning ts(6133): 'Kind' is declared but its value is never read.
+
+2 import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
+                                  ~~~~
+tests/games/browser.spec.ts:2:10 - warning ts(6133): 'stages' is declared but its value is never read.
+
+2 import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
+           ~~~~~~
+tests/games/browser.spec.ts:1:26 - warning ts(6133): 'Page' is declared but its value is never read.
+
+1 import {test,expect,type Page} from '@playwright/test';
+                           ~~~~
+
+Result (44 files):
+- 0 errors
+- 0 warnings
+- 5 hints
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
