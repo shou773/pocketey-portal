@@ -1,0 +1,63 @@
+{
+  "observed": "2026-10-07",
+  "checks": [
+    {
+      "sha": "63f48b60aefb892ec167f4186b5b593ac1d10e65",
+      "name": "GitHub Pages build",
+      "checkRunId": 103124976137,
+      "conclusion": "success",
+      "url": "https://github.com/shou773/pocketey-portal/runs/103124976137"
+    },
+    {
+      "sha": "63f48b60aefb892ec167f4186b5b593ac1d10e65",
+      "name": "GitHub Pages deploy",
+      "checkRunId": 103125077939,
+      "conclusion": "success",
+      "url": "https://github.com/shou773/pocketey-portal/runs/103125077939"
+    },
+    {
+      "sha": "63f48b60aefb892ec167f4186b5b593ac1d10e65",
+      "name": "Cloudflare Pages",
+      "checkRunId": 103125036234,
+      "conclusion": "failure",
+      "url": "https://github.com/shou773/pocketey-portal/runs/103125036234"
+    },
+    {
+      "sha": "955a79c2eb59d8ebc71f3d763f489846c2756611",
+      "name": "Cloudflare Pages",
+      "checkRunId": 112693652963,
+      "conclusion": "failure",
+      "url": "https://github.com/shou773/pocketey-portal/runs/112693652963"
+    },
+    {
+      "sha": "2bd6006f1d6cc306a0a55f9ad16828bc6e4064b7",
+      "name": "Games quality",
+      "checkRunId": 112755258649,
+      "conclusion": "success",
+      "url": "https://github.com/shou773/pocketey-portal/runs/112755258649"
+    },
+    {
+      "sha": "2bd6006f1d6cc306a0a55f9ad16828bc6e4064b7",
+      "name": "Cloudflare Pages",
+      "checkRunId": 112755310194,
+      "conclusion": "failure",
+      "url": "https://github.com/shou773/pocketey-portal/runs/112755310194"
+    },
+    {
+      "sha": "a1dabb2996c711402f534a4a3bde71e86d3ee2c1",
+      "name": "Cloudflare Pages",
+      "checkRunId": 112756094550,
+      "conclusion": "failure",
+      "url": "https://github.com/shou773/pocketey-portal/runs/112756094550"
+    }
+  ],
+  "documentationOnlyCommit": "a1dabb2996c711402f534a4a3bde71e86d3ee2c1",
+  "applicationAndTestsIdenticalTo": "2bd6006f1d6cc306a0a55f9ad16828bc6e4064b7",
+  "cloudflareOutput": {
+    "summary": "Build failed.",
+    "text": null,
+    "annotationsCount": 0
+  },
+  "rootCause": "Unknown. GitHub exposes no build log body. Detailed logs are linked to the Cloudflare dashboard; no authorized Cloudflare log-reading connector is available in this environment.",
+  "productionImpact": "Cloudflare failure predates these games and coexisted with successful GitHub Pages deployment on baseline main. This does not establish that the failures share a cause or that the current live domain is unaffected. Current origin routing and live delivery remain unverified."
+}

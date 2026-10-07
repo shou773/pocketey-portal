@@ -42,3 +42,25 @@ Both `https://pocketey.com/` and `https://www.pocketey.com/` fail from the execu
 Authorized GitHub read tools verified the existing successful main-to-GitHub-Pages deployment and its www.pocketey.com environment URL (see README). Main integration and publication remain pending until production verification can be performed. No DNS, security, persistent credentials or Sites deployment was changed.
 
 Physical iOS/Android, Safari/WebKit, Firefox, mobile thermal/battery behavior, and live-origin route/asset checks are unverified. The optional WebKit download was denied by the environment with HTTP 403 `Domain forbidden`. Do not label this a universally mobile-ready release.
+
+## Supplemental browser availability and baseline check
+
+The requested additional local WebKit/Firefox verification could not start. Neither engine is installed. Official Playwright installs for WebKit 26.6 (build 2359) and Firefox 155.0 (build 1543) failed with HTTP 403 `Domain forbidden` at `cdn.playwright.dev`; the installer's built-in `playwright.download.prss.microsoft.com` fallback also failed. No custom mirror/proxy or alternate environment was used. [Exact availability evidence](evidence/browser-availability.json). Consequently no new WebKit/Firefox screenshot or pass result exists. Their startup, ordinary touch completion, persistence, audio, focus return and landscape remain unverified; Chromium touch emulation is not iPhone Safari.
+
+For the legacy type errors, baseline main `63f48b6` was extracted into an isolated directory and checked using the same installed checker and strict configuration as candidate `a1dabb2`. All 48 diagnostics match exactly by file, line, column, TypeScript code and message. This substantiates a pre-existing code issue rather than a game-change regression. [Diagnostic comparison](evidence/baseline-typecheck.json).
+
+## CI and deployment status by SHA
+
+| SHA | Check | Observed result |
+| --- | --- | --- |
+| `2bd6006` | Games quality / run 37610172506 | Success: build, game types, 6 unit + 7 Chromium browser tests |
+| `2bd6006` | Cloudflare Pages / check 112755310194 | Failure: Build failed |
+| `a1dabb2` | Games quality | Not rerun: docs/evidence-only commit excluded by workflow path filter |
+| `a1dabb2` | Local checks | Build, game types, 6 unit + 7 browser tests passed; app/tests identical to 2bd6006 |
+| `a1dabb2` | Cloudflare Pages / check 112756094550 | Failure: Build failed |
+| baseline `63f48b6` | GitHub Pages build/deploy | Success |
+| baseline `63f48b6` | Cloudflare Pages / check 103125036234 | Failure: Build failed |
+
+[Machine-readable check ledger](evidence/check-ledger.json). **Do not describe all checks on the final head as successful.** Documentation-only follow-up commits also do not inherit a new CI execution merely because their application tree is identical.
+
+The Cloudflare PR integration and the repository's main-triggered GitHub Pages workflow are separate checks/deployment paths. Cloudflare failures predate this change, but that alone does not prove the same root cause or zero production impact. GitHub exposes only `Build failed`, null log text and zero annotations for the candidate failure. The detailed log link leads to the Cloudflare dashboard; this environment has no authorized Cloudflare log reader. The exact Cloudflare build failure cause remains unresolved. Baseline GitHub Pages deployment success confirms the historical path, not current domain routing or successful game publication. Keep publication pending permitted live-domain verification and investigation of any relevant Cloudflare production configuration.

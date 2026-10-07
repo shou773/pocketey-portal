@@ -1,0 +1,347 @@
+{
+  "baseline": "63f48b60aefb892ec167f4186b5b593ac1d10e65",
+  "candidate": "a1dabb2996c711402f534a4a3bde71e86d3ee2c1",
+  "sameCheckerAndStrictConfig": true,
+  "diagnosticsIdentical": true,
+  "baselineErrorCount": 48,
+  "candidateErrorCount": 48,
+  "sourceSHA256": "b54e6269450b0350902edbfa01a494a0381f1a8a25cc62890de4d79f6b5a73b2",
+  "diagnostics": [
+    {
+      "file": "src/pages/contact.astro",
+      "line": 102,
+      "column": 39,
+      "code": 2538,
+      "message": "Type 'null' cannot be used as an index type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 103,
+      "column": 12,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 103,
+      "column": 28,
+      "code": 2538,
+      "message": "Type 'null' cannot be used as an index type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 103,
+      "column": 7,
+      "code": 18047,
+      "message": "'type' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 105,
+      "column": 28,
+      "code": 18047,
+      "message": "'pageUrl' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 105,
+      "column": 36,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 107,
+      "column": 9,
+      "code": 7034,
+      "message": "Variable 'widgetId' implicitly has type 'any' in some locations where its type cannot be determined."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 110,
+      "column": 33,
+      "code": 7006,
+      "message": "Parameter 'message' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 117,
+      "column": 19,
+      "code": 2339,
+      "message": "Property 'turnstile' does not exist on type 'Window & typeof globalThis'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 117,
+      "column": 32,
+      "code": 7005,
+      "message": "Variable 'widgetId' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 119,
+      "column": 25,
+      "code": 2339,
+      "message": "Property 'turnstile' does not exist on type 'Window & typeof globalThis'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 129,
+      "column": 20,
+      "code": 7006,
+      "message": "Parameter 'token' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 141,
+      "column": 28,
+      "code": 7006,
+      "message": "Parameter 'errorCode' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 149,
+      "column": 18,
+      "code": 2339,
+      "message": "Property 'turnstile' does not exist on type 'Window & typeof globalThis'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 160,
+      "column": 18,
+      "code": 2339,
+      "message": "Property 'turnstile' does not exist on type 'Window & typeof globalThis'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 160,
+      "column": 31,
+      "code": 7005,
+      "message": "Variable 'widgetId' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 161,
+      "column": 22,
+      "code": 2339,
+      "message": "Property 'turnstile' does not exist on type 'Window & typeof globalThis'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 161,
+      "column": 38,
+      "code": 7005,
+      "message": "Variable 'widgetId' implicitly has an 'any' type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 167,
+      "column": 7,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 168,
+      "column": 7,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 170,
+      "column": 17,
+      "code": 2339,
+      "message": "Property 'checkValidity' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 171,
+      "column": 14,
+      "code": 2339,
+      "message": "Property 'reportValidity' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 176,
+      "column": 9,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 177,
+      "column": 9,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 182,
+      "column": 44,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 183,
+      "column": 46,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 184,
+      "column": 25,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 185,
+      "column": 27,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 186,
+      "column": 50,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 187,
+      "column": 50,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 191,
+      "column": 20,
+      "code": 2339,
+      "message": "Property 'disabled' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 191,
+      "column": 7,
+      "code": 18047,
+      "message": "'submitButton' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 192,
+      "column": 7,
+      "code": 18047,
+      "message": "'submitButton' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 207,
+      "column": 14,
+      "code": 2339,
+      "message": "Property 'reset' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 208,
+      "column": 43,
+      "code": 2538,
+      "message": "Type 'null' cannot be used as an index type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 209,
+      "column": 11,
+      "code": 18047,
+      "message": "'type' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 209,
+      "column": 16,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 209,
+      "column": 32,
+      "code": 2538,
+      "message": "Type 'null' cannot be used as an index type."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 211,
+      "column": 32,
+      "code": 18047,
+      "message": "'pageUrl' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 211,
+      "column": 40,
+      "code": 2339,
+      "message": "Property 'value' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 214,
+      "column": 9,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 215,
+      "column": 9,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 218,
+      "column": 37,
+      "code": 2339,
+      "message": "Property 'message' does not exist on type '{}'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 218,
+      "column": 9,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 219,
+      "column": 9,
+      "code": 18047,
+      "message": "'status' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 221,
+      "column": 22,
+      "code": 2339,
+      "message": "Property 'disabled' does not exist on type 'Element'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 221,
+      "column": 9,
+      "code": 18047,
+      "message": "'submitButton' is possibly 'null'."
+    },
+    {
+      "file": "src/pages/contact.astro",
+      "line": 222,
+      "column": 9,
+      "code": 18047,
+      "message": "'submitButton' is possibly 'null'."
+    }
+  ]
+}

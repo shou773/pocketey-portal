@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-07",
+  "playwright": "1.63.0",
+  "platform": "cloud Linux x86_64",
+  "attempts": [
+    {
+      "browser": "WebKit",
+      "version": "26.6",
+      "playwrightBuild": "2359",
+      "installed": false,
+      "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/pocketey-browsers npx playwright install webkit firefox",
+      "primaryURL": "https://cdn.playwright.dev/dbazure/download/playwright/builds/webkit/2359/webkit-debian-13.zip",
+      "result": "Error: Download failed: server returned code 403 body 'Domain forbidden'.",
+      "exitCode": 1
+    },
+    {
+      "browser": "Firefox",
+      "version": "155.0",
+      "playwrightBuild": "1543",
+      "installed": false,
+      "command": "PLAYWRIGHT_BROWSERS_PATH=/tmp/pocketey-browsers npx playwright install firefox",
+      "primaryURL": "https://cdn.playwright.dev/dbazure/download/playwright/builds/firefox/1543/firefox-debian-13.zip",
+      "result": "Error: Download failed: server returned code 403 body 'Domain forbidden'.",
+      "exitCode": 1
+    }
+  ],
+  "installerBuiltInFallbackHosts": [
+    "cdn.playwright.dev",
+    "playwright.download.prss.microsoft.com"
+  ],
+  "fallbackOutcome": "Installer built-in retries also received HTTP 403 Domain forbidden. No custom mirror, proxy, copied binary or alternate execution environment was used.",
+  "webkitTestsRun": false,
+  "firefoxTestsRun": false,
+  "iPhoneHardwareTested": false,
+  "unverified": [
+    "startup",
+    "normal touch stage completion",
+    "save/reopen",
+    "audio",
+    "focus return",
+    "landscape"
+  ],
+  "nextRequirement": "Permit the official browser distribution endpoints in the execution environment before retrying installation. WebKit emulation would still not establish physical iPhone Safari compatibility."
+}
