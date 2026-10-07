@@ -1,0 +1,537 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+      "/home/runner/work/pocketey-portal/pocketey-portal/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.cross.config.ts"
+    ],
+    "configFile": "/home/runner/work/pocketey-portal/pocketey-portal/playwright.cross.config.ts",
+    "rootDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/games",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/shou773/pocketey-portal/commit/165ce973d386e16c174978fab834474a0a507336",
+        "commitHash": "165ce973d386e16c174978fab834474a0a507336",
+        "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37618004427"
+      },
+      "gitCommit": {
+        "shortHash": "165ce97",
+        "hash": "165ce973d386e16c174978fab834474a0a507336",
+        "subject": "Add independent WebKit and Firefox game validation",
+        "body": "Add independent WebKit and Firefox game validation\n",
+        "author": {
+          "name": "しょう",
+          "email": "staniguchi0201@gmail.com",
+          "time": 1791374448000
+        },
+        "committer": {
+          "name": "しょう",
+          "email": "staniguchi0201@gmail.com",
+          "time": 1791374448000
+        },
+        "branch": "codex/orbit-and-amber"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/pocketey-portal/pocketey-portal/cross-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/shou773/pocketey-portal/commit/165ce973d386e16c174978fab834474a0a507336",
+            "commitHash": "165ce973d386e16c174978fab834474a0a507336",
+            "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37618004427"
+          },
+          "gitCommit": {
+            "shortHash": "165ce97",
+            "hash": "165ce973d386e16c174978fab834474a0a507336",
+            "subject": "Add independent WebKit and Firefox game validation",
+            "body": "Add independent WebKit and Firefox game validation\n",
+            "author": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791374448000
+            },
+            "committer": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791374448000
+            },
+            "branch": "codex/orbit-and-amber"
+          },
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/cross-browser.spec.ts"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/home/runner/work/pocketey-portal/pocketey-portal/cross-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/shou773/pocketey-portal/commit/165ce973d386e16c174978fab834474a0a507336",
+            "commitHash": "165ce973d386e16c174978fab834474a0a507336",
+            "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37618004427"
+          },
+          "gitCommit": {
+            "shortHash": "165ce97",
+            "hash": "165ce973d386e16c174978fab834474a0a507336",
+            "subject": "Add independent WebKit and Firefox game validation",
+            "body": "Add independent WebKit and Firefox game validation\n",
+            "author": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791374448000
+            },
+            "committer": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791374448000
+            },
+            "branch": "codex/orbit-and-amber"
+          },
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/cross-browser.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "cross-results/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "ASTRO_TELEMETRY_DISABLED=1 npm run preview -- --host 127.0.0.1 --port 4322",
+      "url": "http://127.0.0.1:4322",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "cross-browser.spec.ts",
+      "file": "cross-browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "orbit: six-stage matrix, saved unlocks, audio and recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 51133,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:01:54.124Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "engine",
+                      "contentType": "application/json",
+                      "body": "eyJicm93c2VyIjoiMjYuNiIsInZpZXdwb3J0Ijp7IndpZHRoIjozOTAsImhlaWdodCI6ODQ0fSwiaW5wdXQiOiJrZXlib2FyZDsgcGhvbmUgZGltZW5zaW9ucywgbm90IHBoeXNpY2FsIHRvdWNoIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-9b2b50cfe9de617788dd",
+          "file": "cross-browser.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "orbit: small menus, pointer input, pause, orientation and restarts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2681,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:02:45.716Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-118d98cb2742c34310a4",
+          "file": "cross-browser.spec.ts",
+          "line": 45,
+          "column": 2
+        },
+        {
+          "title": "amber: six-stage matrix, saved unlocks, audio and recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28920,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:02:48.415Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "engine",
+                      "contentType": "application/json",
+                      "body": "eyJicm93c2VyIjoiMjYuNiIsInZpZXdwb3J0Ijp7IndpZHRoIjozOTAsImhlaWdodCI6ODQ0fSwiaW5wdXQiOiJrZXlib2FyZDsgcGhvbmUgZGltZW5zaW9ucywgbm90IHBoeXNpY2FsIHRvdWNoIn0="
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-1a65d1e392f47fad719b",
+          "file": "cross-browser.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "amber: small menus, pointer input, pause, orientation and restarts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1763,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:03:17.349Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-d5df3e1594d2165f5d45",
+          "file": "cross-browser.spec.ts",
+          "line": 45,
+          "column": 2
+        },
+        {
+          "title": "corrupt storage and scoped reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "webkit",
+              "projectName": "webkit",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 763,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:03:19.128Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-f9a5757eb7a473bc40b7",
+          "file": "cross-browser.spec.ts",
+          "line": 72,
+          "column": 1
+        },
+        {
+          "title": "orbit: six-stage matrix, saved unlocks, audio and recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49658,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:03:20.390Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "engine",
+                      "contentType": "application/json",
+                      "body": "eyJicm93c2VyIjoiMTU1LjAiLCJ2aWV3cG9ydCI6eyJ3aWR0aCI6MzkwLCJoZWlnaHQiOjg0NH0sImlucHV0Ijoia2V5Ym9hcmQ7IHBob25lIGRpbWVuc2lvbnMsIG5vdCBwaHlzaWNhbCB0b3VjaCJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-605071ee430f93c1c6ec",
+          "file": "cross-browser.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "orbit: small menus, pointer input, pause, orientation and restarts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1770,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:10.516Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-168e22acbba9cd25dce0",
+          "file": "cross-browser.spec.ts",
+          "line": 45,
+          "column": 2
+        },
+        {
+          "title": "amber: six-stage matrix, saved unlocks, audio and recovery",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28962,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:12.300Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "engine",
+                      "contentType": "application/json",
+                      "body": "eyJicm93c2VyIjoiMTU1LjAiLCJ2aWV3cG9ydCI6eyJ3aWR0aCI6MzkwLCJoZWlnaHQiOjg0NH0sImlucHV0Ijoia2V5Ym9hcmQ7IHBob25lIGRpbWVuc2lvbnMsIG5vdCBwaHlzaWNhbCB0b3VjaCJ9"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-a0bef711b290a190b201",
+          "file": "cross-browser.spec.ts",
+          "line": 9,
+          "column": 2
+        },
+        {
+          "title": "amber: small menus, pointer input, pause, orientation and restarts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1756,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:41.277Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-7b317b450e3e46d64b1a",
+          "file": "cross-browser.spec.ts",
+          "line": 45,
+          "column": 2
+        },
+        {
+          "title": "corrupt storage and scoped reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 662,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:43.046Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "988e5ab7a922d34581e7-16e5d50e62b8b67b6b70",
+          "file": "cross-browser.spec.ts",
+          "line": 72,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T12:01:52.642Z",
+    "duration": 171411.58299999998,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

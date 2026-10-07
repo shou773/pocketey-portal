@@ -1,0 +1,6 @@
+{"round":0,"variant":"baseline","fps":36.077091047185036,"p95":33.400000000001455}
+{"round":0,"variant":"layer","fps":39.448550784818536,"p95":50}
+{"round":1,"variant":"layer","fps":36.539866917958385,"p95":50}
+{"round":1,"variant":"baseline","fps":38.128875599526395,"p95":50}
+{"round":2,"variant":"baseline","fps":34.65193047728474,"p95":50}
+{"round":2,"variant":"layer","fps":35.62722670166885,"p95":50}

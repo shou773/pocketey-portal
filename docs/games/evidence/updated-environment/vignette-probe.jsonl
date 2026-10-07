@@ -1,0 +1,6 @@
+{"round":0,"variant":"baseline","fps":43.34732615440774,"p95":33.5}
+{"round":0,"variant":"no-vignette","fps":28.935185185185183,"p95":83.29999999999927}
+{"round":1,"variant":"no-vignette","fps":47.701539002284655,"p95":33.400000000000546}
+{"round":1,"variant":"baseline","fps":33.930389127989,"p95":50.100000000000364}
+{"round":2,"variant":"baseline","fps":41.607357932771265,"p95":50}
+{"round":2,"variant":"no-vignette","fps":50.668017813808376,"p95":33.30000000000018}

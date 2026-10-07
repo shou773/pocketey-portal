@@ -1,0 +1,629 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+      "/home/runner/work/pocketey-portal/pocketey-portal/node_modules/.bin/playwright",
+      "test"
+    ],
+    "configFile": "/home/runner/work/pocketey-portal/pocketey-portal/playwright.config.ts",
+    "rootDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/games",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/shou773/pocketey-portal/commit/165ce973d386e16c174978fab834474a0a507336",
+        "commitHash": "165ce973d386e16c174978fab834474a0a507336",
+        "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37618004427"
+      },
+      "gitCommit": {
+        "shortHash": "165ce97",
+        "hash": "165ce973d386e16c174978fab834474a0a507336",
+        "subject": "Add independent WebKit and Firefox game validation",
+        "body": "Add independent WebKit and Firefox game validation\n",
+        "author": {
+          "name": "しょう",
+          "email": "staniguchi0201@gmail.com",
+          "time": 1791374448000
+        },
+        "committer": {
+          "name": "しょう",
+          "email": "staniguchi0201@gmail.com",
+          "time": 1791374448000
+        },
+        "branch": "codex/orbit-and-amber"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/pocketey-portal/pocketey-portal/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/shou773/pocketey-portal/commit/165ce973d386e16c174978fab834474a0a507336",
+            "commitHash": "165ce973d386e16c174978fab834474a0a507336",
+            "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37618004427"
+          },
+          "gitCommit": {
+            "shortHash": "165ce97",
+            "hash": "165ce973d386e16c174978fab834474a0a507336",
+            "subject": "Add independent WebKit and Firefox game validation",
+            "body": "Add independent WebKit and Firefox game validation\n",
+            "author": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791374448000
+            },
+            "committer": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791374448000
+            },
+            "branch": "codex/orbit-and-amber"
+          },
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/browser.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "ASTRO_TELEMETRY_DISABLED=1 npm run preview -- --host 127.0.0.1 --port 4322",
+      "url": "http://localhost:4322",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "failure/retry, pause/focus clears held input, restart cycles, orientation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6741,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:37.495Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-374452dc0e1ba620dca5",
+          "file": "browser.spec.ts",
+          "line": 28,
+          "column": 1
+        },
+        {
+          "title": "corrupt/blocked storage and scoped confirmed reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1422,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:44.246Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-148416c8296f79296b0b",
+          "file": "browser.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6353,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "PERFORMANCE {\n  fps: \u001b[33m60.00165521807502\u001b[39m,\n  p95: \u001b[33m16.800000000000182\u001b[39m,\n  renderer: \u001b[32m'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)'\u001b[39m,\n  viewport: [ \u001b[33m390\u001b[39m, \u001b[33m844\u001b[39m ],\n  userAgent: \u001b[32m'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36'\u001b[39m\n}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:45.676Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-2af26626227d07635d01",
+          "file": "browser.spec.ts",
+          "line": 45,
+          "column": 1
+        },
+        {
+          "title": "orbit: WebGL context loss freezes play until reload and preserves saved data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 14508,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:04:52.040Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-57d8b28bb5baae658dab",
+          "file": "browser.spec.ts",
+          "line": 56,
+          "column": 46
+        },
+        {
+          "title": "amber: WebGL context loss freezes play until reload and preserves saved data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9201,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:05:06.562Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-d721d1e6c584e00c82b6",
+          "file": "browser.spec.ts",
+          "line": 56,
+          "column": 46
+        },
+        {
+          "title": "orbit: 320x568 menus and clear screen remain scroll-accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15613,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:05:15.779Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-965d24c1446921c8fd75",
+          "file": "browser.spec.ts",
+          "line": 101,
+          "column": 46
+        },
+        {
+          "title": "amber: 320x568 menus and clear screen remain scroll-accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10328,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:05:31.407Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-7f52c75e8e5c1b948c71",
+          "file": "browser.spec.ts",
+          "line": 101,
+          "column": 46
+        },
+        {
+          "title": "orbit: simulated notch safe areas keep all controls inside every edge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 924,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:05:41.745Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-5db2a601f014721c2bd8",
+          "file": "browser.spec.ts",
+          "line": 135,
+          "column": 46
+        },
+        {
+          "title": "amber: simulated notch safe areas keep all controls inside every edge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 825,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:05:42.677Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-7885dd410166fcf49c9e",
+          "file": "browser.spec.ts",
+          "line": 135,
+          "column": 46
+        }
+      ],
+      "suites": [
+        {
+          "title": "orbit-keyboard",
+          "file": "browser.spec.ts",
+          "line": 5,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 49288,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "orbit keyboard { fps: \u001b[33m57.28758367002347\u001b[39m, p95: \u001b[33m16.799999999999272\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T12:02:02.311Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-0cccad0b3bd723afeb9b",
+              "file": "browser.spec.ts",
+              "line": 7,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "orbit-touch",
+          "file": "browser.spec.ts",
+          "line": 5,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 47195,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "orbit touch { fps: \u001b[33m60.00126318448805\u001b[39m, p95: \u001b[33m16.799999999999272\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T12:02:51.675Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-622026855dbe0e8b1f41",
+              "file": "browser.spec.ts",
+              "line": 7,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "amber-keyboard",
+          "file": "browser.spec.ts",
+          "line": 5,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 29967,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "amber keyboard { fps: \u001b[33m54.28726535043862\u001b[39m, p95: \u001b[33m16.799999999999272\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T12:03:38.883Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-502e5e4ad567e72425be",
+              "file": "browser.spec.ts",
+              "line": 7,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "amber-touch",
+          "file": "browser.spec.ts",
+          "line": 5,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 28625,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "amber touch { fps: \u001b[33m60.003158060950575\u001b[39m, p95: \u001b[33m16.700000000000728\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T12:04:08.863Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-eb51ee9c71af05d7953b",
+              "file": "browser.spec.ts",
+              "line": 7,
+              "column": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T12:02:01.040Z",
+    "duration": 222534.27000000002,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,721 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/pocketey-portal/node_modules/.bin/playwright",
+      "test"
+    ],
+    "configFile": "/workspace/pocketey-portal/playwright.config.ts",
+    "rootDir": "/workspace/pocketey-portal/tests/games",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/pocketey-portal/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/pocketey-portal/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "ASTRO_TELEMETRY_DISABLED=1 npm run preview -- --host 127.0.0.1 --port 4322",
+      "url": "http://localhost:4322",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "failure/retry, pause/focus clears held input, restart cycles, orientation",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9405,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m5.5\u001b[39m\nReceived:   \u001b[31m5.483\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m5.5\u001b[39m\nReceived:   \u001b[31m5.483\u001b[39m\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:60:202",
+                    "location": {
+                      "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                      "column": 202,
+                      "line": 60
+                    },
+                    "snippet": "  58 |  await page.locator('#sound').click();\n  59 |  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n> 60 |  await play(page,kind,0,true);\n     |                               ^\n  61 |  const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);\n  62 |  await page.getByRole('button',{name:'次のステージ'}).click();\n  63 |  await page.keyboard.down('ArrowRight');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                        "column": 202,
+                        "line": 60
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m5.5\u001b[39m\nReceived:   \u001b[31m5.483\u001b[39m\n\n  58 |  await page.locator('#sound').click();\n  59 |  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n> 60 |  await play(page,kind,0,true);\n     |                               ^\n  61 |  const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);\n  62 |  await page.getByRole('button',{name:'次のステージ'}).click();\n  63 |  await page.keyboard.down('ArrowRight');\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:60:202"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:00:49.438Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/pocketey-portal/test-results/browser-failure-retry-paus-8e853--restart-cycles-orientation/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/pocketey-portal/test-results/browser-failure-retry-paus-8e853--restart-cycles-orientation/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                    "column": 202,
+                    "line": 60
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-374452dc0e1ba620dca5",
+          "file": "browser.spec.ts",
+          "line": 53,
+          "column": 1
+        },
+        {
+          "title": "corrupt/blocked storage and scoped confirmed reset",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6591,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:00:59.573Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-148416c8296f79296b0b",
+          "file": "browser.spec.ts",
+          "line": 63,
+          "column": 1
+        },
+        {
+          "title": "touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9794,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "PERFORMANCE {\n  fps: \u001b[33m58.588225786900495\u001b[39m,\n  p95: \u001b[33m16.800000000000182\u001b[39m,\n  renderer: \u001b[32m'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)'\u001b[39m,\n  viewport: [ \u001b[33m390\u001b[39m, \u001b[33m844\u001b[39m ],\n  userAgent: \u001b[32m'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36'\u001b[39m\n}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:01:06.694Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-2af26626227d07635d01",
+          "file": "browser.spec.ts",
+          "line": 70,
+          "column": 1
+        },
+        {
+          "title": "orbit: WebGL context loss freezes play until reload and preserves saved data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18760,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:01:16.515Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-57d8b28bb5baae658dab",
+          "file": "browser.spec.ts",
+          "line": 81,
+          "column": 46
+        },
+        {
+          "title": "amber: WebGL context loss freezes play until reload and preserves saved data",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12833,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:01:35.313Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-d721d1e6c584e00c82b6",
+          "file": "browser.spec.ts",
+          "line": 81,
+          "column": 46
+        },
+        {
+          "title": "orbit: 320x568 menus and clear screen remain scroll-accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22331,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:01:48.169Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-965d24c1446921c8fd75",
+          "file": "browser.spec.ts",
+          "line": 126,
+          "column": 46
+        },
+        {
+          "title": "amber: 320x568 menus and clear screen remain scroll-accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16812,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:02:10.519Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-7f52c75e8e5c1b948c71",
+          "file": "browser.spec.ts",
+          "line": 126,
+          "column": 46
+        },
+        {
+          "title": "orbit: simulated notch safe areas keep all controls inside every edge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3894,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:02:27.360Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-5db2a601f014721c2bd8",
+          "file": "browser.spec.ts",
+          "line": 160,
+          "column": 46
+        },
+        {
+          "title": "amber: simulated notch safe areas keep all controls inside every edge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3373,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T12:02:31.277Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-7885dd410166fcf49c9e",
+          "file": "browser.spec.ts",
+          "line": 160,
+          "column": 46
+        }
+      ],
+      "suites": [
+        {
+          "title": "orbit-keyboard",
+          "file": "browser.spec.ts",
+          "line": 30,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 56604,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m32.759750336218474\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m32.759750336218474\u001b[39m\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:44:230",
+                        "location": {
+                          "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                          "column": 230,
+                          "line": 44
+                        },
+                        "snippet": "  42 |  await page.locator('#reset').click();await page.getByRole('button',{name:'この2作品をリセット',exact:true}).click();expect(await page.evaluate(()=>localStorage.getItem('unrelated-progress'))).toBe('keep');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!).orbit.unlocked,SAVE_KEY)).toBe(1);\n  43 |  const blocked=await page.context().newPage();await blocked.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}});});await blocked.goto('/games/amber-step/');await blocked.locator('#sound').click();await expect(blocked.locator('#save-note')).toContainText('保存を利用できません');await blocked.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await expect(blocked.locator('#game')).toHaveAttribute('data-mode','play');await blocked.close();\n> 44 | });\n     |    ^\n  45 | test('touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation',async({page,browser},info)=>{\n  46 |  await page.goto('/');await page.getByRole('link',{name:'Games ↗',exact:true}).click();await expect(page).toHaveURL(/\\/games\\//);await page.getByRole('link',{name:/02 \\/ MOVE & JUMP/}).click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n  47 |  const session=await page.context().newCDPSession(page);const right=await page.locator('[data-input=right]').boundingBox(),jump=await page.locator('[data-input=jump]').boundingBox();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                            "column": 230,
+                            "line": 44
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m32.759750336218474\u001b[39m\n\n  42 |  await page.locator('#reset').click();await page.getByRole('button',{name:'この2作品をリセット',exact:true}).click();expect(await page.evaluate(()=>localStorage.getItem('unrelated-progress'))).toBe('keep');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!).orbit.unlocked,SAVE_KEY)).toBe(1);\n  43 |  const blocked=await page.context().newPage();await blocked.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}});});await blocked.goto('/games/amber-step/');await blocked.locator('#sound').click();await expect(blocked.locator('#save-note')).toContainText('保存を利用できません');await blocked.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await expect(blocked.locator('#game')).toHaveAttribute('data-mode','play');await blocked.close();\n> 44 | });\n     |    ^\n  45 | test('touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation',async({page,browser},info)=>{\n  46 |  await page.goto('/');await page.getByRole('link',{name:'Games ↗',exact:true}).click();await expect(page).toHaveURL(/\\/games\\//);await page.getByRole('link',{name:/02 \\/ MOVE & JUMP/}).click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n  47 |  const session=await page.context().newCDPSession(page);const right=await page.locator('[data-input=right]').boundingBox(),jump=await page.locator('[data-input=jump]').boundingBox();\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:44:230"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "orbit keyboard { fps: \u001b[33m32.759750336218474\u001b[39m, p95: \u001b[33m50\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T11:58:08.894Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                        "column": 230,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-0cccad0b3bd723afeb9b",
+              "file": "browser.spec.ts",
+              "line": 32,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "orbit-touch",
+          "file": "browser.spec.ts",
+          "line": 30,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 25340,
+                      "error": {
+                        "message": "Error: orbit/2 {\"kind\":\"orbit\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"14.525\",\"y\":\"0.000\",\"z\":\"-1.167\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"5\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m",
+                        "stack": "Error: orbit/2 {\"kind\":\"orbit\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"14.525\",\"y\":\"0.000\",\"z\":\"-1.167\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"5\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n    at play (/workspace/pocketey-portal/tests/games/browser.spec.ts:28:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:42:3",
+                        "location": {
+                          "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                          "column": 133,
+                          "line": 28
+                        },
+                        "snippet": "  26 |  await page.locator('#stages').getByRole('button',{name:/ステージ 3 /}).click();await page.getByRole('button',{name:'ステージ 3 をはじめる'}).click();await expect(page.locator('#game')).toHaveAttribute('data-mode','play');\n  27 | });});\n> 28 | test('failure/retry, pause/focus clears held input, restart cycles, orientation',async({page},info)=>{\n     |                                                                                                       ^\n  29 |  await page.goto('/games/orbit-ribbon/');await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n  30 |  await expect(page.locator('#game')).toHaveAttribute('data-status','dead',{timeout:10000});await page.getByRole('button',{name:'すぐにリトライ'}).click();await expect.poll(async()=>Number((await read(page)).x)).toBeLessThan(2);\n  31 |  await page.keyboard.down('ArrowRight');await page.waitForTimeout(100);await page.keyboard.press('Escape');await page.keyboard.up('ArrowRight');const before=await read(page);await page.waitForTimeout(250);expect((await read(page)).x).toBe(before.x);"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                            "column": 133,
+                            "line": 28
+                          },
+                          "message": "Error: orbit/2 {\"kind\":\"orbit\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"14.525\",\"y\":\"0.000\",\"z\":\"-1.167\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"5\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n\n  26 |  await page.locator('#stages').getByRole('button',{name:/ステージ 3 /}).click();await page.getByRole('button',{name:'ステージ 3 をはじめる'}).click();await expect(page.locator('#game')).toHaveAttribute('data-mode','play');\n  27 | });});\n> 28 | test('failure/retry, pause/focus clears held input, restart cycles, orientation',async({page},info)=>{\n     |                                                                                                       ^\n  29 |  await page.goto('/games/orbit-ribbon/');await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n  30 |  await expect(page.locator('#game')).toHaveAttribute('data-status','dead',{timeout:10000});await page.getByRole('button',{name:'すぐにリトライ'}).click();await expect.poll(async()=>Number((await read(page)).x)).toBeLessThan(2);\n  31 |  await page.keyboard.down('ArrowRight');await page.waitForTimeout(100);await page.keyboard.press('Escape');await page.keyboard.up('ArrowRight');const before=await read(page);await page.waitForTimeout(250);expect((await read(page)).x).toBe(before.x);\n    at play (/workspace/pocketey-portal/tests/games/browser.spec.ts:28:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:42:3"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T11:59:08.020Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                        "column": 133,
+                        "line": 28
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-622026855dbe0e8b1f41",
+              "file": "browser.spec.ts",
+              "line": 32,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "amber-keyboard",
+          "file": "browser.spec.ts",
+          "line": 30,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 35490,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m26.574541589157587\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m26.574541589157587\u001b[39m\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:44:230",
+                        "location": {
+                          "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                          "column": 230,
+                          "line": 44
+                        },
+                        "snippet": "  42 |  await page.locator('#reset').click();await page.getByRole('button',{name:'この2作品をリセット',exact:true}).click();expect(await page.evaluate(()=>localStorage.getItem('unrelated-progress'))).toBe('keep');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!).orbit.unlocked,SAVE_KEY)).toBe(1);\n  43 |  const blocked=await page.context().newPage();await blocked.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}});});await blocked.goto('/games/amber-step/');await blocked.locator('#sound').click();await expect(blocked.locator('#save-note')).toContainText('保存を利用できません');await blocked.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await expect(blocked.locator('#game')).toHaveAttribute('data-mode','play');await blocked.close();\n> 44 | });\n     |    ^\n  45 | test('touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation',async({page,browser},info)=>{\n  46 |  await page.goto('/');await page.getByRole('link',{name:'Games ↗',exact:true}).click();await expect(page).toHaveURL(/\\/games\\//);await page.getByRole('link',{name:/02 \\/ MOVE & JUMP/}).click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n  47 |  const session=await page.context().newCDPSession(page);const right=await page.locator('[data-input=right]').boundingBox(),jump=await page.locator('[data-input=jump]').boundingBox();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                            "column": 230,
+                            "line": 44
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m26.574541589157587\u001b[39m\n\n  42 |  await page.locator('#reset').click();await page.getByRole('button',{name:'この2作品をリセット',exact:true}).click();expect(await page.evaluate(()=>localStorage.getItem('unrelated-progress'))).toBe('keep');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!).orbit.unlocked,SAVE_KEY)).toBe(1);\n  43 |  const blocked=await page.context().newPage();await blocked.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}});});await blocked.goto('/games/amber-step/');await blocked.locator('#sound').click();await expect(blocked.locator('#save-note')).toContainText('保存を利用できません');await blocked.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await expect(blocked.locator('#game')).toHaveAttribute('data-mode','play');await blocked.close();\n> 44 | });\n     |    ^\n  45 | test('touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation',async({page,browser},info)=>{\n  46 |  await page.goto('/');await page.getByRole('link',{name:'Games ↗',exact:true}).click();await expect(page).toHaveURL(/\\/games\\//);await page.getByRole('link',{name:/02 \\/ MOVE & JUMP/}).click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();\n  47 |  const session=await page.context().newCDPSession(page);const right=await page.locator('[data-input=right]').boundingBox(),jump=await page.locator('[data-input=jump]').boundingBox();\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:44:230"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "amber keyboard { fps: \u001b[33m26.574541589157587\u001b[39m, p95: \u001b[33m66.60000000000218\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T11:59:35.703Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                        "column": 230,
+                        "line": 44
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-502e5e4ad567e72425be",
+              "file": "browser.spec.ts",
+              "line": 32,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "amber-touch",
+          "file": "browser.spec.ts",
+          "line": 30,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 36281,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "amber touch { fps: \u001b[33m59.376855526735184\u001b[39m, p95: \u001b[33m16.700000000000728\u001b[39m }\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-07T12:00:12.791Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-eb51ee9c71af05d7953b",
+              "file": "browser.spec.ts",
+              "line": 32,
+              "column": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T11:58:08.030Z",
+    "duration": 266889.087,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

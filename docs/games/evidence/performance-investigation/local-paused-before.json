@@ -1,0 +1,245 @@
+{
+  "browser": "151.0.7922.173",
+  "results": [
+    {
+      "game": "orbit-ribbon",
+      "scale": 1,
+      "fps": 58.537727565416,
+      "p95": 16.800000000000182,
+      "pixels": [
+        1008,
+        446
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.382454,
+        "ScriptDuration": 0.155049,
+        "LayoutDuration": 0.06947099999999999,
+        "RecalcStyleDuration": 0.011768999999999998,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "orbit-ribbon",
+      "scale": 0.7,
+      "fps": 59.11388289539802,
+      "p95": 16.799999999999955,
+      "pixels": [
+        895,
+        396
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.37759899999999996,
+        "ScriptDuration": 0.152036,
+        "LayoutDuration": 0.064307,
+        "RecalcStyleDuration": 0.011159999999999998,
+        "LayoutCount": 211,
+        "RecalcStyleCount": 211
+      }
+    },
+    {
+      "game": "orbit-ribbon",
+      "scale": 1,
+      "fps": 58.539440948339006,
+      "p95": 16.800000000000182,
+      "pixels": [
+        1008,
+        446
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.36773199999999995,
+        "ScriptDuration": 0.13170500000000002,
+        "LayoutDuration": 0.07266500000000001,
+        "RecalcStyleDuration": 0.010567,
+        "LayoutCount": 211,
+        "RecalcStyleCount": 211
+      }
+    },
+    {
+      "game": "orbit-ribbon",
+      "scale": 0.7,
+      "fps": 58.25468950250501,
+      "p95": 16.800000000000182,
+      "pixels": [
+        895,
+        396
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.41577400000000003,
+        "ScriptDuration": 0.148602,
+        "LayoutDuration": 0.068562,
+        "RecalcStyleDuration": 0.011257,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "orbit-ribbon",
+      "scale": 1,
+      "fps": 57.97437532610585,
+      "p95": 16.800000000000182,
+      "pixels": [
+        1008,
+        446
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.43326200000000004,
+        "ScriptDuration": 0.1570530000000001,
+        "LayoutDuration": 0.090282,
+        "RecalcStyleDuration": 0.012281,
+        "LayoutCount": 211,
+        "RecalcStyleCount": 211
+      }
+    },
+    {
+      "game": "orbit-ribbon",
+      "scale": 0.7,
+      "fps": 53.09828492539693,
+      "p95": 33.399999999999636,
+      "pixels": [
+        895,
+        396
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.449216,
+        "ScriptDuration": 0.144407,
+        "LayoutDuration": 0.088804,
+        "RecalcStyleDuration": 0.013535,
+        "LayoutCount": 212,
+        "RecalcStyleCount": 212
+      }
+    },
+    {
+      "game": "amber-step",
+      "scale": 1,
+      "fps": 58.25468950250504,
+      "p95": 16.800000000000182,
+      "pixels": [
+        1008,
+        446
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.359399,
+        "ScriptDuration": 0.133417,
+        "LayoutDuration": 0.06519,
+        "RecalcStyleDuration": 0.010564,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "amber-step",
+      "scale": 0.7,
+      "fps": 59.703274724618765,
+      "p95": 16.799999999999955,
+      "pixels": [
+        895,
+        396
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.374363,
+        "ScriptDuration": 0.12525,
+        "LayoutDuration": 0.07559,
+        "RecalcStyleDuration": 0.010782,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "amber-step",
+      "scale": 1,
+      "fps": 58.53944094833906,
+      "p95": 16.700000000000728,
+      "pixels": [
+        1008,
+        446
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.4310550000000001,
+        "ScriptDuration": 0.148421,
+        "LayoutDuration": 0.075319,
+        "RecalcStyleDuration": 0.018703,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "amber-step",
+      "scale": 0.7,
+      "fps": 59.40888162780336,
+      "p95": 16.800000000000182,
+      "pixels": [
+        895,
+        396
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.34797600000000006,
+        "ScriptDuration": 0.12404300000000035,
+        "LayoutDuration": 0.06425900000000001,
+        "RecalcStyleDuration": 0.011925000000000002,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "amber-step",
+      "scale": 1,
+      "fps": 55.814472692769236,
+      "p95": 33.30000000000018,
+      "pixels": [
+        1008,
+        446
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.36439200000000005,
+        "ScriptDuration": 0.12932100000000002,
+        "LayoutDuration": 0.084355,
+        "RecalcStyleDuration": 0.010366,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    },
+    {
+      "game": "amber-step",
+      "scale": 0.7,
+      "fps": 60.00240009600394,
+      "p95": 16.799999999999727,
+      "pixels": [
+        895,
+        396
+      ],
+      "geometries": "5",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "delta": {
+        "TaskDuration": 0.31576899999999997,
+        "ScriptDuration": 0.111119,
+        "LayoutDuration": 0.052251000000000006,
+        "RecalcStyleDuration": 0.008246999999999999,
+        "LayoutCount": 210,
+        "RecalcStyleCount": 210
+      }
+    }
+  ]
+}

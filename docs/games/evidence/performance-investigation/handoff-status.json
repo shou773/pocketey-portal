@@ -1,0 +1,41 @@
+{
+  "codeSHA": "9158381e2730436700341f1383bea9798de87ca3",
+  "applicationChangeSHA": "9356e5b520e539e9c2f6bca37a317356244e7c3b",
+  "timestampUTC": "2026-10-07T11:53:37Z",
+  "local": {
+    "gameTypes": "passed",
+    "unitTests": 7,
+    "build": "passed",
+    "browserSuite": "in progress: first three cases passed, rest unverified at handoff",
+    "stage3": {
+      "orbit-keyboard": {
+        "fps": 53.77561417411977,
+        "p95": 33.30000000000291
+      },
+      "orbit-touch": {
+        "fps": 60.00126318448813,
+        "p95": 16.700000000000728
+      },
+      "amber-keyboard": {
+        "fps": 52.056220718375826,
+        "p95": 33.29999999999927
+      }
+    }
+  },
+  "CI": {
+    "run": 37616821830,
+    "job": 112777060207,
+    "status": "in_progress",
+    "comparisonStep": "passed (execution only, no performance assertions)",
+    "buildGameTypesUnit": "passed",
+    "fullBrowserSuite": "in progress"
+  },
+  "supersededCI": 37616759899,
+  "localCPU": {
+    "model": "AMD EPYC 9V74 80-Core Processor",
+    "logical": 5,
+    "availableParallelism": 4,
+    "cgroupCpuMax": "400000 100000"
+  },
+  "publication": "not attempted; parent is migrating to updated environment"
+}

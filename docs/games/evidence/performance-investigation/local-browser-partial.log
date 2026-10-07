@@ -1,0 +1,29 @@
+
+> pocketey-japan@0.1.0 test:browser
+> playwright test
+
+
+Running 13 tests using 1 worker
+
+(node:13152) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+orbit keyboard { fps: 53.77561417411977, p95: 33.30000000000291 }
+  ✓   1 tests/games/browser.spec.ts:32:2 › orbit-keyboard › three stages through normal input, unlock and persistence (52.5s)
+orbit touch { fps: 60.00126318448813, p95: 16.700000000000728 }
+  ✓   2 tests/games/browser.spec.ts:32:2 › orbit-touch › three stages through normal input, unlock and persistence (48.2s)
+amber keyboard { fps: 52.056220718375826, p95: 33.29999999999927 }
+  ✓   3 tests/games/browser.spec.ts:32:2 › amber-keyboard › three stages through normal input, unlock and persistence (33.6s)
+amber touch { fps: 60.003158060950575, p95: 16.799999999999272 }
+  ✓   4 tests/games/browser.spec.ts:32:2 › amber-touch › three stages through normal input, unlock and persistence (30.5s)
+  ✓   5 tests/games/browser.spec.ts:53:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (7.9s)
+  ✓   6 tests/games/browser.spec.ts:63:1 › corrupt/blocked storage and scoped confirmed reset (2.6s)
+PERFORMANCE {
+  fps: 59.18488132410868,
+  p95: 16.799999999999727,
+  renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+  viewport: [ 390, 844 ],
+  userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36'
+}
+  ✓   7 tests/games/browser.spec.ts:70:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (7.5s)
+  ✓   8 tests/games/browser.spec.ts:81:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (16.4s)
+  ✓   9 tests/games/browser.spec.ts:81:46 › amber: WebGL context loss freezes play until reload and preserves saved data (10.5s)

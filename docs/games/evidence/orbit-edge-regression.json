@@ -1,0 +1,43 @@
+{
+  "beforeCommit": "bfafd77df10709be7b863f868aadbd59a53654f5",
+  "afterImplementationCommit": "25ed2ad2976bdd14d1bbb4902a58400d376c9a95",
+  "method": "Fixed-step simulation from createState with lateral axis input until z approaches target, then neutral lateral input; ordinary jump input at gaps. No position writes or invulnerability. This is simulation evidence, not a browser or human first-play assessment.",
+  "runs": [
+    {
+      "stage": 2,
+      "targetZ": -3.5,
+      "beforeStatus": "clear",
+      "afterStatus": "dead",
+      "afterCollisionX": 41.35833333333291,
+      "afterY": 0,
+      "reason": "side pillar collision, not road-edge fall"
+    },
+    {
+      "stage": 2,
+      "targetZ": 3.5,
+      "beforeStatus": "clear",
+      "afterStatus": "dead",
+      "afterCollisionX": 69.35833333333197,
+      "afterY": 0,
+      "reason": "side pillar collision, not road-edge fall"
+    },
+    {
+      "stage": 3,
+      "targetZ": -3.5,
+      "beforeStatus": "clear",
+      "afterStatus": "dead",
+      "afterCollisionX": 58.33333333333194,
+      "afterY": 0,
+      "reason": "side pillar collision, not road-edge fall"
+    },
+    {
+      "stage": 3,
+      "targetZ": 3.5,
+      "beforeStatus": "clear",
+      "afterStatus": "dead",
+      "afterCollisionX": 34.358333333333306,
+      "afterY": 0,
+      "reason": "side pillar collision, not road-edge fall"
+    }
+  ]
+}
