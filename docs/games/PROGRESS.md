@@ -1,6 +1,7 @@
 # Progress
 
 ## 2026-10-07
+- Published PR #3 as d8bb9ca through existing GitHub Pages run 37621058385. Live normal-proxy mobile browser checks pass for both games, simultaneous movement/jump, portrait/landscape, navigation and preserved existing pages. Public JavaScript matches the verified local bundle byte for byte. Deployment/live evidence and rollback are recorded in PUBLISHED.md; physical-device and historical performance limitations remain explicit.
 - Final candidate 5e7b3c6 passes exact-SHA CI 37619942914: build/types, 7 unit, 13 Chromium and 10 WebKit/Firefox tests. Desktop means 53.52/51.35fps, p95 16.8/33.4ms; occasional p99/max stalls remain disclosed. WebKit distorted orientation captures were caused by test synchronization; drawing-buffer aspect assertions and subsequent gameplay screenshots pass without product changes. Preparing existing GitHub Pages publication; older failures remain recorded.
 - Updated-environment owner received exclusive handoff at bc9c627. Normal-proxy pocketey.com/www access now works; existing pages remain available and games are not yet published.
 - Added WebKit/Firefox ordinary-input validation at 165ce97. Exact CI run 37618004427 succeeds: 7 unit, 13 Chromium, 5 WebKit and 5 Firefox tests. Earlier 9158381 CI failed 2 desktop performance cases. The new local Intel/SwiftShader environment passes 9/13, with two performance, one touch-controller and one restart-timing failure; do not represent local checks as all passing. Full evidence and residual risks are in UPDATED-ENVIRONMENT.md.

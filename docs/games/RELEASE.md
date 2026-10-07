@@ -1,4 +1,6 @@
-# Release candidate — not published
+# Release record
+
+**Published 2026-10-07.** [Live URLs, exact deployment commit, public-origin smoke checks and rollback record](PUBLISHED.md). The candidate/investigation sections below retain their historical status and failures.
 
 ## Updated environment candidate (165ce97)
 

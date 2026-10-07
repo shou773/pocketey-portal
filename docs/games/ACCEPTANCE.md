@@ -8,7 +8,7 @@
 - [x] Reload/reopen best/unlock/settings; blocked/corrupt storage safe; reset confirmation scoped to new games.
 - [x] Build and game TypeScript checks, applicable tests at code 5e7b3c6; unavailable/global checks explicitly disclosed.
 - [x] Performance measured with browser/version, viewport, renderer and hardware/emulation limitations. Provisional threshold: >=45 rendered fps and p95 <=40ms on available test browser, with 60fps target. Real phones explicitly unverified unless tested.
-- [ ] Deployment mechanism and material gaps reported before public release; production routes/assets/navigation checked after release. Roll back blocking regression.
+- [x] Deployment mechanism and material gaps reported before public release; exact d8bb9ca Pages deployment and live routes/assets/navigation verified. No blocking regression required rollback. See PUBLISHED.md.
 
 No universal device performance or physical mobile readiness claim from emulation alone.
 
