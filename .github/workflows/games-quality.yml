@@ -21,6 +21,8 @@ on:
       - 'docs/games/ART-REFRESH.md'
       - 'docs/games/evidence/art-refresh/**'
       - 'docs/games/DIFFICULTY-REFRESH.md'
+      - 'docs/games/AMBER-BUDGET.md'
+      - 'docs/games/evidence/amber-budget/**'
       - 'docs/games/evidence/difficulty-refresh/**'
   workflow_dispatch:
 permissions:

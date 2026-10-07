@@ -1,0 +1,33 @@
+{
+  "method": "Normal start button at x=0. rAF callback held before start and drawn once in the same JS task, without writes to physics. Identical camera, viewport and starting state.",
+  "result": [
+    {
+      "game": "amber-step",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "idle",
+        "width": 795,
+        "height": 351
+      },
+      "errors": []
+    }
+  ]
+}

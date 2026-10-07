@@ -1,5 +1,7 @@
 # Three-stage difficulty prototype
 
+The current [Amber-only wide-canvas budget follow-up](AMBER-BUDGET.md) supersedes the350k Amber budget below; earlier results are retained.
+
 This candidate extends the reviewed `df9bc0e` art refresh. It is not published yet. The three stages per game prototype introduction, middle-course combinations and advanced sequences for a future ten-stage progression; ten stages are not added here. Exact-head CI and independent parent review are required before publication.
 
 ## Layouts and intended challenge
