@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-07T19:53:03.277Z",
+  "method": "Independent ordinary-keyboard full3-stage run, legacy save retained, reload/new tab/menu English/restarted normal movement. No fps assertion in this independent persistence check; full browser-suite fps gates remain unchanged.",
+  "save": {
+    "version": 1,
+    "sound": false,
+    "orbit": {
+      "unlocked": 3,
+      "best": [
+        13,
+        16,
+        18
+      ],
+      "challengeBest": [
+        null,
+        null,
+        null
+      ]
+    },
+    "amber": {
+      "unlocked": 3,
+      "best": [
+        10,
+        12,
+        14
+      ],
+      "challengeBest": [
+        10.433333333333382,
+        12.458333333333266,
+        17.24166666666633
+      ]
+    }
+  },
+  "legacyBestPreserved": true,
+  "allChallengeBestSaved": true,
+  "reloadAndNewTabSameSave": true,
+  "stage3Unlocked": true,
+  "restartMovement": true
+}

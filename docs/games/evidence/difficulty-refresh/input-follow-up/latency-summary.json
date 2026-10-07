@@ -1,0 +1,218 @@
+{
+  "note": "Native CDP touch traces, one worker, three independent all-stage runs plus three context-loss cases. Read-to-input-ack wall time includes browser/read/transport work, not exact dispatch-to-simulation latency. No physics writes, retries, layout changes or threshold relaxation.",
+  "runs": [
+    {
+      "run": "browser-amber-touch-three--cc58e-nput-unlock-and-persistence",
+      "samples": 1082,
+      "readToInputAckMs": {
+        "median": 8,
+        "p95": 32,
+        "max": 60
+      },
+      "stage3Jumps": [
+        {
+          "x": "3.167",
+          "y": "0.000",
+          "readToInputAckMs": 31
+        },
+        {
+          "x": "9.083",
+          "y": "0.000",
+          "readToInputAckMs": 30
+        },
+        {
+          "x": "17.750",
+          "y": "0.700",
+          "readToInputAckMs": 28
+        },
+        {
+          "x": "24.333",
+          "y": "0.000",
+          "readToInputAckMs": 44
+        },
+        {
+          "x": "29.250",
+          "y": "0.000",
+          "readToInputAckMs": 42
+        },
+        {
+          "x": "38.750",
+          "y": "0.700",
+          "readToInputAckMs": 40
+        },
+        {
+          "x": "46.083",
+          "y": "0.100",
+          "readToInputAckMs": 35
+        },
+        {
+          "x": "51.083",
+          "y": "0.100",
+          "readToInputAckMs": 34
+        },
+        {
+          "x": "61.750",
+          "y": "0.800",
+          "readToInputAckMs": 32
+        },
+        {
+          "x": "69.667",
+          "y": "0.200",
+          "readToInputAckMs": 32
+        },
+        {
+          "x": "75.083",
+          "y": "0.200",
+          "readToInputAckMs": 32
+        },
+        {
+          "x": "82.167",
+          "y": "0.800",
+          "readToInputAckMs": 31
+        }
+      ]
+    },
+    {
+      "run": "browser-amber-touch-three--cc58e-nput-unlock-and-persistence-repeat1",
+      "samples": 1083,
+      "readToInputAckMs": {
+        "median": 8,
+        "p95": 35,
+        "max": 65
+      },
+      "stage3Jumps": [
+        {
+          "x": "3.083",
+          "y": "0.000",
+          "readToInputAckMs": 31
+        },
+        {
+          "x": "9.167",
+          "y": "0.000",
+          "readToInputAckMs": 29
+        },
+        {
+          "x": "17.750",
+          "y": "0.700",
+          "readToInputAckMs": 31
+        },
+        {
+          "x": "24.250",
+          "y": "0.000",
+          "readToInputAckMs": 31
+        },
+        {
+          "x": "29.250",
+          "y": "0.000",
+          "readToInputAckMs": 45
+        },
+        {
+          "x": "38.750",
+          "y": "0.700",
+          "readToInputAckMs": 41
+        },
+        {
+          "x": "46.167",
+          "y": "0.100",
+          "readToInputAckMs": 32
+        },
+        {
+          "x": "51.167",
+          "y": "0.100",
+          "readToInputAckMs": 35
+        },
+        {
+          "x": "62.000",
+          "y": "0.800",
+          "readToInputAckMs": 65
+        },
+        {
+          "x": "69.667",
+          "y": "0.200",
+          "readToInputAckMs": 33
+        },
+        {
+          "x": "75.167",
+          "y": "0.200",
+          "readToInputAckMs": 30
+        },
+        {
+          "x": "82.167",
+          "y": "0.800",
+          "readToInputAckMs": 43
+        }
+      ]
+    },
+    {
+      "run": "browser-amber-touch-three--cc58e-nput-unlock-and-persistence-repeat2",
+      "samples": 1056,
+      "readToInputAckMs": {
+        "median": 8,
+        "p95": 40,
+        "max": 87
+      },
+      "stage3Jumps": [
+        {
+          "x": "3.167",
+          "y": "0.000",
+          "readToInputAckMs": 33
+        },
+        {
+          "x": "9.167",
+          "y": "0.000",
+          "readToInputAckMs": 32
+        },
+        {
+          "x": "17.833",
+          "y": "0.700",
+          "readToInputAckMs": 62
+        },
+        {
+          "x": "24.417",
+          "y": "0.000",
+          "readToInputAckMs": 44
+        },
+        {
+          "x": "29.083",
+          "y": "0.000",
+          "readToInputAckMs": 32
+        },
+        {
+          "x": "38.750",
+          "y": "0.700",
+          "readToInputAckMs": 44
+        },
+        {
+          "x": "46.083",
+          "y": "0.100",
+          "readToInputAckMs": 35
+        },
+        {
+          "x": "51.167",
+          "y": "0.100",
+          "readToInputAckMs": 56
+        },
+        {
+          "x": "61.833",
+          "y": "0.800",
+          "readToInputAckMs": 28
+        },
+        {
+          "x": "69.667",
+          "y": "0.200",
+          "readToInputAckMs": 31
+        },
+        {
+          "x": "75.167",
+          "y": "0.200",
+          "readToInputAckMs": 48
+        },
+        {
+          "x": "82.083",
+          "y": "0.800",
+          "readToInputAckMs": 32
+        }
+      ]
+    }
+  ]
+}

@@ -23,7 +23,7 @@ for(const kind of ['orbit','amber'] as const){
   await expect(page.locator('#sound')).toHaveText('音 ON');
   await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
   const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);
-  expect(JSON.parse(saved!)[kind].best.every((n:number)=>n>0)).toBe(true);
+  expect(JSON.parse(saved!)[kind].challengeBest.every((n:number)=>n>0)).toBe(true);
   const reopened=await page.context().newPage();await reopened.goto(route);
   await expect(reopened.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();await reopened.close();
   await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();

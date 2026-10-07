@@ -1,0 +1,16 @@
+import {chromium} from '/workspace/pocketey-portal/node_modules/playwright-core/index.mjs';
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+for(const game of ['orbit-ribbon','amber-step']) {
+ const page=await browser.newPage({viewport:{width:844,height:650},deviceScaleFactor:1});
+ await page.addInitScript(()=>{const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>raf(now=>{if(window.freezeFrames)window.pendingFrame=callback;else callback(now);});});
+ await page.goto(`http://127.0.0.1:4322/games/${game}/`);
+ await page.addStyleTag({content:'#view{flex:none!important;width:844px!important;height:390px!important} canvas{width:844px!important;height:390px!important} .hud,#hint,.vignette{visibility:hidden!important}'});
+ await page.waitForFunction(()=>document.querySelector('canvas')?.dataset.artAdopted==='true');
+ await page.waitForTimeout(300);
+ await page.evaluate(()=>window.freezeFrames=true);
+ await page.waitForFunction(()=>!!window.pendingFrame,null,{polling:100});
+ await page.evaluate(()=>{document.querySelector('#actions button').click();window.pendingFrame(performance.now());});
+ await page.locator('canvas').screenshot({path:`/workspace/pocketey-portal/public/games/previews/${game}.png`});
+ await page.close();
+}
+await browser.close();

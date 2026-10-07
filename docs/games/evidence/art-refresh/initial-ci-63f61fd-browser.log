@@ -1,0 +1,196 @@
+##[group]Run npm run test:browser
+2026-10-07T16:09:45.3696827Z [36;1mnpm run test:browser[0m
+2026-10-07T16:09:45.3761663Z shell: /usr/bin/bash -e {0}
+2026-10-07T16:09:45.3762216Z env:
+2026-10-07T16:09:45.3762479Z   ASTRO_TELEMETRY_DISABLED: 1
+2026-10-07T16:09:45.3762801Z   CI: true
+2026-10-07T16:09:45.3763041Z ##[endgroup]
+2026-10-07T16:09:45.4765096Z 
+2026-10-07T16:09:45.4765750Z > pocketey-japan@0.1.0 test:browser
+2026-10-07T16:09:45.4766498Z > playwright test
+2026-10-07T16:09:45.4766724Z 
+2026-10-07T16:09:47.2656188Z 
+2026-10-07T16:09:47.2656875Z Running 20 tests using 1 worker
+2026-10-07T16:09:47.2657154Z 
+2026-10-07T16:09:50.8473229Z   ✓   1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (3.0s)
+2026-10-07T16:10:39.9368429Z orbit keyboard {
+2026-10-07T16:10:39.9394921Z   fps: 34.970826968029314,
+2026-10-07T16:10:39.9413255Z   p95: 50,
+2026-10-07T16:10:39.9444588Z   p99: 66.69999999999709,
+2026-10-07T16:10:39.9445373Z   max: 66.70000000000073
+2026-10-07T16:10:39.9446014Z }
+2026-10-07T16:10:41.2043096Z   ✘   2 tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence (49.7s)
+2026-10-07T16:11:30.2090493Z orbit touch {
+2026-10-07T16:11:30.2104878Z   fps: 44.18810177217546,
+2026-10-07T16:11:30.2107960Z   p95: 50,
+2026-10-07T16:11:30.2117505Z   p99: 50.099999999998545,
+2026-10-07T16:11:30.2124552Z   max: 83.39999999999782
+2026-10-07T16:11:30.2125135Z }
+2026-10-07T16:11:30.9493147Z   ✘   3 tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence (48.9s)
+2026-10-07T16:12:04.6997155Z amber keyboard {
+2026-10-07T16:12:04.6998137Z   fps: 19.322885415289495,
+2026-10-07T16:12:04.7000354Z   p95: 100,
+2026-10-07T16:12:04.7003665Z   p99: 116.59999999999854,
+2026-10-07T16:12:04.7005024Z   max: 116.70000000000073
+2026-10-07T16:12:04.7006797Z }
+2026-10-07T16:12:07.1032460Z   ✘   4 tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence (34.5s)
+2026-10-07T16:12:38.7604031Z amber touch { fps: 39.31224265999047, p95: 50, p99: 50.10000000000218, max: 100 }
+2026-10-07T16:12:39.8556373Z   ✘   5 tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence (31.6s)
+2026-10-07T16:12:49.4003786Z   ✓   6 tests/games/browser.spec.ts:50:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (9.0s)
+2026-10-07T16:12:53.0864932Z   ✓   7 tests/games/browser.spec.ts:60:1 › corrupt/blocked storage and scoped confirmed reset (3.7s)
+2026-10-07T16:13:01.3078629Z PERFORMANCE {
+2026-10-07T16:13:01.3083978Z   fps: 49.57434442203152,
+2026-10-07T16:13:01.3088400Z   p95: 33.399999999999636,
+2026-10-07T16:13:01.3094652Z   renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+2026-10-07T16:13:01.3098699Z   viewport: [ 390, 844 ],
+2026-10-07T16:13:01.3099927Z   userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36'
+2026-10-07T16:13:01.3126891Z }
+2026-10-07T16:13:04.2863453Z   ✓   8 tests/games/browser.spec.ts:67:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (11.2s)
+2026-10-07T16:13:20.8817976Z   ✓   9 tests/games/browser.spec.ts:78:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (16.6s)
+2026-10-07T16:13:32.2556745Z   ✓  10 tests/games/browser.spec.ts:78:46 › amber: WebGL context loss freezes play until reload and preserves saved data (11.4s)
+2026-10-07T16:13:50.3838173Z   ✓  11 tests/games/browser.spec.ts:123:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (18.1s)
+2026-10-07T16:14:06.0346367Z   ✓  12 tests/games/browser.spec.ts:123:46 › amber: 320x568 menus and clear screen remain scroll-accessible (15.6s)
+2026-10-07T16:14:08.3202535Z   ✓  13 tests/games/browser.spec.ts:161:46 › orbit: simulated notch safe areas keep all controls inside every edge (2.3s)
+2026-10-07T16:14:11.5769867Z   ✓  14 tests/games/browser.spec.ts:161:46 › amber: simulated notch safe areas keep all controls inside every edge (3.2s)
+2026-10-07T16:14:13.7742697Z   ✓  15 tests/games/browser.spec.ts:196:1 › Amber simultaneous touch shows legible held feedback (2.2s)
+2026-10-07T16:14:16.0349717Z   ✓  16 tests/games/browser.spec.ts:210:2 › orbit: selected 3D art loads, animation and normal controls remain usable (2.2s)
+2026-10-07T16:14:30.5108912Z   ✓  17 tests/games/browser.spec.ts:224:2 › orbit: failed GLBs retain fallback, controls, clear and saves (14.5s)
+2026-10-07T16:14:38.3780861Z   ✘  18 tests/games/browser.spec.ts:210:2 › amber: selected 3D art loads, animation and normal controls remain usable (7.3s)
+2026-10-07T16:14:49.4011503Z   ✓  19 tests/games/browser.spec.ts:224:2 › amber: failed GLBs retain fallback, controls, clear and saves (10.4s)
+2026-10-07T16:14:58.3085456Z   ✓  20 tests/games/browser.spec.ts:235:1 › missing shared colormap retains Amber fallback and gameplay (8.9s)
+2026-10-07T16:14:58.4008015Z 
+2026-10-07T16:14:58.4015199Z 
+2026-10-07T16:14:58.4026206Z   1) tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4027085Z 
+2026-10-07T16:14:58.4027468Z     Error: expect(received).toBeGreaterThanOrEqual(expected)
+2026-10-07T16:14:58.4027937Z 
+2026-10-07T16:14:58.4028103Z     Expected: >= 45
+2026-10-07T16:14:58.4028543Z     Received:    34.970826968029314
+2026-10-07T16:14:58.4028843Z 
+2026-10-07T16:14:58.4029438Z       38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+2026-10-07T16:14:58.4036934Z       39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+2026-10-07T16:14:58.4044654Z     > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+2026-10-07T16:14:58.4048399Z          |                                                                                                                                                                                                                                                                                                            ^
+2026-10-07T16:14:58.4050289Z       41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+2026-10-07T16:14:58.4051699Z       42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+2026-10-07T16:14:58.4052923Z       43 |  }
+2026-10-07T16:14:58.4053757Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:40:300
+2026-10-07T16:14:58.4054471Z 
+2026-10-07T16:14:58.4055393Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4056497Z     test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T16:14:58.4057884Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4058429Z 
+2026-10-07T16:14:58.4059220Z     Error Context: test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md
+2026-10-07T16:14:58.4060020Z 
+2026-10-07T16:14:58.4061252Z   2) tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4062432Z 
+2026-10-07T16:14:58.4062814Z     Error: expect(received).toBeGreaterThanOrEqual(expected)
+2026-10-07T16:14:58.4063278Z 
+2026-10-07T16:14:58.4063448Z     Expected: >= 45
+2026-10-07T16:14:58.4063867Z     Received:    44.18810177217546
+2026-10-07T16:14:58.4064168Z 
+2026-10-07T16:14:58.4064751Z       38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+2026-10-07T16:14:58.4069441Z       39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+2026-10-07T16:14:58.4076225Z     > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+2026-10-07T16:14:58.4079952Z          |                                                                                                                                                                                                                                                                                                            ^
+2026-10-07T16:14:58.4081659Z       41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+2026-10-07T16:14:58.4083257Z       42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+2026-10-07T16:14:58.4084005Z       43 |  }
+2026-10-07T16:14:58.4084771Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:40:300
+2026-10-07T16:14:58.4085438Z 
+2026-10-07T16:14:58.4086228Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4087334Z     test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T16:14:58.4088714Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4089196Z 
+2026-10-07T16:14:58.4089939Z     Error Context: test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/error-context.md
+2026-10-07T16:14:58.4090781Z 
+2026-10-07T16:14:58.4091715Z   3) tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4092864Z 
+2026-10-07T16:14:58.4093232Z     Error: expect(received).toBeGreaterThanOrEqual(expected)
+2026-10-07T16:14:58.4093671Z 
+2026-10-07T16:14:58.4093833Z     Expected: >= 45
+2026-10-07T16:14:58.4094244Z     Received:    19.322885415289495
+2026-10-07T16:14:58.4094542Z 
+2026-10-07T16:14:58.4095098Z       38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+2026-10-07T16:14:58.4099484Z       39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+2026-10-07T16:14:58.4106510Z     > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+2026-10-07T16:14:58.4110068Z          |                                                                                                                                                                                                                                                                                                            ^
+2026-10-07T16:14:58.4112266Z       41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+2026-10-07T16:14:58.4113456Z       42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+2026-10-07T16:14:58.4114736Z       43 |  }
+2026-10-07T16:14:58.4115474Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:40:300
+2026-10-07T16:14:58.4116091Z 
+2026-10-07T16:14:58.4116838Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4118033Z     test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T16:14:58.4119308Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4119784Z 
+2026-10-07T16:14:58.4120483Z     Error Context: test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/error-context.md
+2026-10-07T16:14:58.4121235Z 
+2026-10-07T16:14:58.4122323Z   4) tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4123073Z 
+2026-10-07T16:14:58.4123408Z     Error: expect(received).toBeGreaterThanOrEqual(expected)
+2026-10-07T16:14:58.4123841Z 
+2026-10-07T16:14:58.4123995Z     Expected: >= 45
+2026-10-07T16:14:58.4124380Z     Received:    39.31224265999047
+2026-10-07T16:14:58.4124654Z 
+2026-10-07T16:14:58.4125221Z       38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+2026-10-07T16:14:58.4129365Z       39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+2026-10-07T16:14:58.4135672Z     > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+2026-10-07T16:14:58.4139259Z          |                                                                                                                                                                                                                                                                                                            ^
+2026-10-07T16:14:58.4140936Z       41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+2026-10-07T16:14:58.4142391Z       42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+2026-10-07T16:14:58.4143092Z       43 |  }
+2026-10-07T16:14:58.4143856Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:40:300
+2026-10-07T16:14:58.4144520Z 
+2026-10-07T16:14:58.4145324Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4146579Z     test-results/browser-amber-touch-three--cc58e-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T16:14:58.4148003Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4148509Z 
+2026-10-07T16:14:58.4149239Z     Error Context: test-results/browser-amber-touch-three--cc58e-nput-unlock-and-persistence/error-context.md
+2026-10-07T16:14:58.4150036Z 
+2026-10-07T16:14:58.4150828Z   5) tests/games/browser.spec.ts:210:2 › amber: selected 3D art loads, animation and normal controls remain usable 
+2026-10-07T16:14:58.4153301Z 
+2026-10-07T16:14:58.4153673Z     Error: expect(locator).toHaveAttribute(expected) failed
+2026-10-07T16:14:58.4154436Z 
+2026-10-07T16:14:58.4154633Z     Locator:  locator('canvas')
+2026-10-07T16:14:58.4155070Z     Expected: "jump"
+2026-10-07T16:14:58.4155422Z     Received: "die"
+2026-10-07T16:14:58.4155758Z     Timeout:  5000ms
+2026-10-07T16:14:58.4155975Z 
+2026-10-07T16:14:58.4156110Z     Call log:
+2026-10-07T16:14:58.4156655Z       - Expect "toHaveAttribute" locator('canvas') with timeout 5000ms
+2026-10-07T16:14:58.4157301Z       - waiting for locator('canvas')
+2026-10-07T16:14:58.4159745Z         4 × locator resolved to <canvas id="scene" width="390" height="690" data-art="ready" data-art-adopted="true" data-art-animation="fall" data-engine="three.js r186" aria-label="Amber Step の3Dゲーム画面" data-art-loaded="block-grass-low-long,character-oodi,flowers,rocks,tree"></canvas>
+2026-10-07T16:14:58.4161640Z           - unexpected value "fall"
+2026-10-07T16:14:58.4164303Z         2 × locator resolved to <canvas id="scene" width="390" height="690" data-art="ready" data-art-adopted="true" data-art-animation="walk" data-engine="three.js r186" aria-label="Amber Step の3Dゲーム画面" data-art-loaded="block-grass-low-long,character-oodi,flowers,rocks,tree"></canvas>
+2026-10-07T16:14:58.4166316Z           - unexpected value "walk"
+2026-10-07T16:14:58.4168990Z         - locator resolved to <canvas id="scene" width="390" height="690" data-art="ready" data-art-adopted="true" data-art-animation="fall" data-engine="three.js r186" aria-label="Amber Step の3Dゲーム画面" data-art-loaded="block-grass-low-long,character-oodi,flowers,rocks,tree"></canvas>
+2026-10-07T16:14:58.4170906Z         - unexpected value "fall"
+2026-10-07T16:14:58.4173382Z         7 × locator resolved to <canvas id="scene" width="390" height="690" data-art="ready" data-art-adopted="true" data-art-animation="die" data-engine="three.js r186" aria-label="Amber Step の3Dゲーム画面" data-art-loaded="block-grass-low-long,character-oodi,flowers,rocks,tree"></canvas>
+2026-10-07T16:14:58.4175450Z           - unexpected value "die"
+2026-10-07T16:14:58.4175750Z 
+2026-10-07T16:14:58.4175758Z 
+2026-10-07T16:14:58.4176283Z       217 |   await expect.poll(async()=>Number((await read(page)).y)).toBeGreaterThan(.8);
+2026-10-07T16:14:58.4177529Z       218 |   await page.screenshot({path:info.outputPath(`${kind}-art-jump.png`)});
+2026-10-07T16:14:58.4178681Z     > 219 |   if(kind==='amber')await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','jump');
+2026-10-07T16:14:58.4179593Z           |                                                          ^
+2026-10-07T16:14:58.4180434Z       220 |   await page.keyboard.up('ArrowRight');await page.locator('#pause').click();
+2026-10-07T16:14:58.4181709Z       221 |   const frozen=await read(page);await page.waitForTimeout(200);expect((await read(page)).x).toBe(frozen.x);
+2026-10-07T16:14:58.4182872Z       222 |   expect(errors).toEqual([]);
+2026-10-07T16:14:58.4183776Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:219:58
+2026-10-07T16:14:58.4184425Z 
+2026-10-07T16:14:58.4185114Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4186449Z     test-results/browser-amber-selected-3D--765f2-rmal-controls-remain-usable/test-failed-1.png
+2026-10-07T16:14:58.4187799Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T16:14:58.4188309Z 
+2026-10-07T16:14:58.4189018Z     Error Context: test-results/browser-amber-selected-3D--765f2-rmal-controls-remain-usable/error-context.md
+2026-10-07T16:14:58.4189780Z 
+2026-10-07T16:14:58.4189921Z   5 failed
+2026-10-07T16:14:58.4190896Z     tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4192542Z     tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4194011Z     tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4195479Z     tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence 
+2026-10-07T16:14:58.4196964Z     tests/games/browser.spec.ts:210:2 › amber: selected 3D art loads, animation and normal controls remain usable 
+2026-10-07T16:14:58.4197809Z   15 passed (5.2m)
+2026-10-07T16:14:58.4324571Z ##[error]Process completed with exit code 1.
+2026-10-07T16:14:58.4409905Z 

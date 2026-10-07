@@ -19,7 +19,7 @@ npm run test:portal
 
 ## Language and storage
 
-The same route supports both languages. Explicit `?lang=ja` / `?lang=en` or the visible language switch takes priority; otherwise the saved preference is used, then Japanese for a Japanese browser language and English for others. Preference key: `pocketey-language-v1`. Existing game saves remain at `pocketey-orbit-amber-v1` without migration.
+The same route supports both languages. Explicit `?lang=ja` / `?lang=en` or the visible language switch takes priority; otherwise the saved preference is used, then Japanese for a Japanese browser language and English for others. Preference key: `pocketey-language-v1`. Existing game saves remain at `pocketey-orbit-amber-v1` without a key/version migration. Unlocks, sound and old-course `best` records are preserved; revised-course times are stored separately in `challengeBest`, with an explicit old-course note in the menu.
 
 ## Contact
 
@@ -32,3 +32,7 @@ Main is built by `.github/workflows/deploy.yml` and deployed to GitHub Pages at 
 There are no scheduled news-generation workflows in the current tracked workflow files. Build retirement checks prevent accidental republishing from this source tree. `/news/*`, `/guides/` and the former affiliate page now return 404 rather than redirecting unrelated articles to the homepage.
 
 See `docs/games/` for game QA, asset licenses and publication evidence; `docs/portal/` for the bilingual migration report. Advertising activation, ads.txt and review submission are outside this update.
+
+The 3D art candidate uses selected Kenney CC0 models, animated players and procedural skies. [Art refresh QA](docs/games/ART-REFRESH.md) records asset provenance, payload, same-view images and performance failures as well as passing checks. Publication requires the candidate's exact-SHA CI and independent review; the PR tracks their current status.
+
+The three stages of each game now prototype introduction, mid-course combinations and advanced sequences for a future ten-stage progression. [Difficulty refresh QA](docs/games/DIFFICULTY-REFRESH.md) describes the layouts, record compatibility and normal-input validation. Automated clears demonstrate feasibility rather than human difficulty; player feedback after release informs the next adjustment.

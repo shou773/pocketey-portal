@@ -1,0 +1,107 @@
+{
+  "method": "Restored valid legacy v1 unlocked-3 save fixture, then native stage selection/start and keyboard or CDP touch movement from x=0. No physics-state writes or teleport. rAF held only for each screenshot, overlay remains hidden; captures are visual/collider diagnostics, not all-stage completion evidence.",
+  "results": [
+    {
+      "game": "orbit-ribbon",
+      "mobile": true,
+      "scene": "hazard-and-gap",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "9.625",
+        "y": "0.000",
+        "z": "-1.667",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "errors": []
+    },
+    {
+      "game": "orbit-ribbon",
+      "mobile": true,
+      "scene": "forgiving-core-close-pass",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "13.067",
+        "y": "0.000",
+        "z": "-1.667",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "errors": []
+    },
+    {
+      "game": "orbit-ribbon",
+      "mobile": false,
+      "scene": "hazard-and-gap",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "9.742",
+        "y": "0.000",
+        "z": "-1.375",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "errors": []
+    },
+    {
+      "game": "orbit-ribbon",
+      "mobile": false,
+      "scene": "forgiving-core-close-pass",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "13.008",
+        "y": "0.000",
+        "z": "-1.375",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "errors": []
+    },
+    {
+      "game": "amber-step",
+      "mobile": true,
+      "scene": "hazard-and-gap",
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "3.667",
+        "y": "0.278",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "errors": []
+    },
+    {
+      "game": "amber-step",
+      "mobile": false,
+      "scene": "hazard-and-gap",
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "3.583",
+        "y": "0.532",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "errors": []
+    }
+  ]
+}

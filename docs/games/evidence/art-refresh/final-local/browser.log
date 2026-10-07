@@ -1,0 +1,67 @@
+
+> pocketey-japan@0.1.0 test:browser
+> playwright test
+
+
+Running 20 tests using 1 worker
+
+(node:22473) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (3.9s)
+orbit keyboard {
+  fps: 50.66936903301506,
+  p95: 33.400000000001455,
+  p99: 49.900000000001455,
+  max: 50
+}
+  ✓   2 tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence (50.7s)
+orbit touch {
+  fps: 59.68836391053027,
+  p95: 16.799999999999272,
+  p99: 16.80000000000291,
+  max: 33.29999999999927
+}
+  ✓   3 tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence (48.8s)
+amber keyboard {
+  fps: 46.532131661442,
+  p95: 33.400000000001455,
+  p99: 50,
+  max: 50.099999999998545
+}
+  ✓   4 tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence (32.0s)
+amber touch {
+  fps: 60.003158060950575,
+  p95: 16.700000000000728,
+  p99: 16.799999999999272,
+  max: 16.80000000000291
+}
+  ✓   5 tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence (30.7s)
+  ✓   6 tests/games/browser.spec.ts:50:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (7.7s)
+  ✓   7 tests/games/browser.spec.ts:60:1 › corrupt/blocked storage and scoped confirmed reset (2.1s)
+PERFORMANCE {
+  fps: 59.592306427749484,
+  p95: 16.799999999999727,
+  renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+  viewport: [ 390, 844 ],
+  userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36'
+}
+  ✓   8 tests/games/browser.spec.ts:67:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (7.2s)
+  ✓   9 tests/games/browser.spec.ts:78:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (15.5s)
+  ✓  10 tests/games/browser.spec.ts:78:46 › amber: WebGL context loss freezes play until reload and preserves saved data (10.6s)
+  ✓  11 tests/games/browser.spec.ts:123:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (17.4s)
+  ✓  12 tests/games/browser.spec.ts:123:46 › amber: 320x568 menus and clear screen remain scroll-accessible (12.4s)
+  ✓  13 tests/games/browser.spec.ts:161:46 › orbit: simulated notch safe areas keep all controls inside every edge (1.7s)
+  ✓  14 tests/games/browser.spec.ts:161:46 › amber: simulated notch safe areas keep all controls inside every edge (1.8s)
+  ✓  15 tests/games/browser.spec.ts:196:1 › Amber simultaneous touch shows legible held feedback (1.5s)
+  ✓  16 tests/games/browser.spec.ts:210:2 › orbit: selected 3D art loads, animation and normal controls remain usable (1.5s)
+  ✓  17 tests/games/browser.spec.ts:248:2 › orbit: failed GLBs retain fallback, controls, clear and saves (14.4s)
+  ✓  18 tests/games/browser.spec.ts:210:2 › amber: selected 3D art loads, animation and normal controls remain usable (2.4s)
+  ✓  19 tests/games/browser.spec.ts:248:2 › amber: failed GLBs retain fallback, controls, clear and saves (9.6s)
+  ✓  20 tests/games/browser.spec.ts:259:1 › missing shared colormap retains Amber fallback and gameplay (8.9s)
+
+  20 passed (4.7m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

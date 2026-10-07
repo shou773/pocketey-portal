@@ -1,0 +1,107 @@
+{
+  "method": "Normal start button at x=0. rAF callback held before start and drawn once in the same JS task, without writes to physics. Identical camera, viewport and starting state.",
+  "result": [
+    {
+      "game": "orbit-ribbon",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "craft_speederA,meteor,platform_small,rock",
+        "artAdopted": "true"
+      },
+      "errors": []
+    },
+    {
+      "game": "orbit-ribbon",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "craft_speederA,meteor,platform_small,rock",
+        "artAdopted": "true"
+      },
+      "errors": []
+    },
+    {
+      "game": "amber-step",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "idle"
+      },
+      "errors": []
+    },
+    {
+      "game": "amber-step",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "idle"
+      },
+      "errors": []
+    }
+  ]
+}

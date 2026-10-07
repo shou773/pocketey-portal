@@ -1,0 +1,40 @@
+
+Running 4 tests using 1 worker
+
+(node:3822) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+orbit keyboard {
+  fps: 53.52414220519467,
+  p95: 33.30000000000291,
+  p99: 33.400000000001455,
+  max: 50
+}
+  ✓  1 tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence (50.5s)
+orbit touch {
+  fps: 59.68648886375775,
+  p95: 16.700000000004366,
+  p99: 16.80000000000291,
+  max: 33.29999999999927
+}
+  ✓  2 tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence (48.5s)
+amber keyboard {
+  fps: 52.780710039446646,
+  p95: 33.30000000000291,
+  p99: 33.400000000001455,
+  max: 50
+}
+  ✓  3 tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence (31.0s)
+amber touch {
+  fps: 60.00126318448805,
+  p95: 16.700000000000728,
+  p99: 16.80000000000291,
+  max: 16.80000000000291
+}
+  ✓  4 tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence (29.8s)
+
+  4 passed (2.7m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

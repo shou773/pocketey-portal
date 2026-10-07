@@ -1,0 +1,86 @@
+{
+  "acquisition": "Official Kenney downloads through normal supported network; no mirror or proxy bypass. Library candidate prepare_materialize + one bounded fresh-URL retry both returned HTTP 403 at sdmntprcentralus.oaiusercontent.com, so no local bytes/hash claim is made for that candidate.",
+  "sources": [
+    {
+      "pack": "space-kit",
+      "page": "https://kenney.nl/assets/space-kit",
+      "url": "https://kenney.nl/media/pages/assets/space-kit/20874c75ac-1677698978/kenney_space-kit.zip",
+      "bytes": 6677531,
+      "sha256": "d5d7cdf2635ed5a43a9187deaf409b6f47484e402321128341d3c3698e9ef4d9",
+      "retrievedAt": "2026-10-07T15:45:00Z",
+      "license": "CC0 1.0 Universal; original License.txt shipped alongside selected files"
+    },
+    {
+      "pack": "platformer-kit",
+      "page": "https://kenney.nl/assets/platformer-kit",
+      "url": "https://kenney.nl/media/pages/assets/platformer-kit/1585cf62b4-1775122253/kenney_platformer-kit.zip",
+      "bytes": 4640135,
+      "sha256": "899605d237367688c6b42e41fff2206c0fb8d626163158294556353f7baa7c1b",
+      "retrievedAt": "2026-10-07T15:45:00Z",
+      "license": "CC0 1.0 Universal; original License.txt shipped alongside selected files"
+    }
+  ],
+  "files": [
+    {
+      "path": "games/assets/kenney/platformer/License.txt",
+      "bytes": 703,
+      "sha256": "e1185354d8f0f055c325c7204602326c8cf0c47ee5ae1db7ed16f0465b91bb9a"
+    },
+    {
+      "path": "games/assets/kenney/platformer/Textures/colormap.png",
+      "bytes": 11140,
+      "sha256": "439dfcac935cfd75dc16f28333a4c8284fffcc4b24f857c61cfb4c8a964a15bd"
+    },
+    {
+      "path": "games/assets/kenney/platformer/block-grass-low-long.glb",
+      "bytes": 10200,
+      "sha256": "022473875e82dfb113e2b34f9fd5e446ae811785a6b78e3006d429291b273715"
+    },
+    {
+      "path": "games/assets/kenney/platformer/character-oodi.glb",
+      "bytes": 202604,
+      "sha256": "3790919a738ed907ebb57dd474174043af843f9571d1856042715ec3ecdb04eb"
+    },
+    {
+      "path": "games/assets/kenney/platformer/flowers.glb",
+      "bytes": 25928,
+      "sha256": "c4d459bf014a534a79a6763e59d9c548902600fe0e0e025654bd58a979139be6"
+    },
+    {
+      "path": "games/assets/kenney/platformer/rocks.glb",
+      "bytes": 9556,
+      "sha256": "40a7cb558466510ca1976b0e007e351e53c89ac6b61f0b6a277b3226026c3326"
+    },
+    {
+      "path": "games/assets/kenney/platformer/tree.glb",
+      "bytes": 42680,
+      "sha256": "632eb83a4359afd110594ea6f69db4db0c9512c79ae2c88741cf68e527253e41"
+    },
+    {
+      "path": "games/assets/kenney/space/License.txt",
+      "bytes": 610,
+      "sha256": "bd4e050e69d41351282c4d53f943cd4d80a80b968593e60653ba5292637941b7"
+    },
+    {
+      "path": "games/assets/kenney/space/craft_speederA.glb",
+      "bytes": 20496,
+      "sha256": "dc48652fa5c59088a5e3902abce7598199f32e0dcb8c91bac25e17bb8ce15876"
+    },
+    {
+      "path": "games/assets/kenney/space/meteor.glb",
+      "bytes": 6496,
+      "sha256": "83c75071d3a48955ff3f719992f7d69dc13e915da988878bff441fd3dbb472f8"
+    },
+    {
+      "path": "games/assets/kenney/space/platform_small.glb",
+      "bytes": 6280,
+      "sha256": "c4aebdfe660289a0e004f5ec20eaba3ade043ed5bd889f11465680926f8c5368"
+    },
+    {
+      "path": "games/assets/kenney/space/rock.glb",
+      "bytes": 13172,
+      "sha256": "dbc02af619e176d10676ceb0e788d0bf8838731bef0d50972f11c7bf5d1f4922"
+    }
+  ],
+  "totalAssetAndLicenseBytes": 349865
+}

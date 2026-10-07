@@ -6,14 +6,14 @@ const p = (a: number, b: number, y = 0, z = 0, w = 7): Platform => ({ a, b, y, z
 const h = (x: number, z = 0, w = 2, d = 1, y = 0, height = 2.8): Hazard => ({ x, z, w, d, y, h: height });
 export const stages: Record<Kind, Stage[]> = {
   orbit: [
-    { name: 'はじめの軌道', hint: '光るふちがジャンプの合図。すき間を飛び越えよう。', length: 91, platforms: [p(-5, 19), p(21, 40), p(42.2, 63), p(65.4, 98)], hazards: [] },
-    { name: 'すれ違う光', hint: '高い柱は左右によける。すき間はジャンプ。', length: 106, platforms: [p(-5, 26), p(28.2, 56), p(58.5, 82), p(84.8, 114)], hazards: [h(15, 0), h(42, -1.7, 3.8), h(70, 1.7, 3.8), h(96, 0)] },
-    { name: '星をつなぐ道', hint: '柱をよけたら、道の中央へ。最後までリズムよく。', length: 119, platforms: [p(-5, 22), p(24.5, 45), p(47.7, 70), p(72.6, 94), p(96.8, 127)], hazards: [h(13, 0), h(35, 1.6, 4), h(59, -1.6, 4), h(83, 0), h(108, 1.6, 4)] }
+    { name: 'はじめの軌道', hint: '柱は左右へ。光るふちではジャンプ。次の危険を見よう。', length: 104, platforms: [p(-5,24),p(26.8,49),p(52,76),p(79.2,111)], hazards: [h(16,0),h(35,-1.6,3.8),h(44,0),h(62,1.6,3.8),h(70,0),h(87,-1.6,3.8),h(97,0)] },
+    { name: 'すれ違う光', hint: '左右の柱を続けて回避。着地したら次のジャンプに備えよう。', length: 125, platforms: [p(-5,25),p(28.2,50),p(53.6,77),p(80.8,104),p(107.9,133)], hazards: [h(16,0,2.6),h(36,-1.6,3.8),h(45,1.6,3.8),h(64,-1.6,3.8),h(73,1.6,3.8),h(91,-1.6,3.8),h(100,1.6,3.8),h(117,0,2.6)] },
+    { name: '星をつなぐ道', hint: '左右の切り返しと長いすき間。先を見て、ふちの近くでジャンプ。', length: 150, platforms: [p(-5,26),p(30,53),p(57.1,80),p(84.2,109),p(113.2,137),p(141.3,158)], hazards: [h(14,0,2.6),h(22,-1.6,3.8),h(39,1.6,3.8),h(47,-1.6,3.8),h(65,1.6,3.8),h(73,-1.6,3.8),h(94,1.6,3.8),h(102,-1.6,3.8),h(122,1.6,3.8),h(130,-1.6,3.8),h(147,1.6,3.8)] }
   ],
   amber: [
-    { name: '小さな一歩', hint: '右へ進んで、すき間の手前でジャンプ。', length: 39, platforms: [p(-5, 8), p(10, 18), p(20.2, 29), p(31.3, 44)], hazards: [] },
-    { name: '空中の階段', hint: '少し高い足場へ。着地してから、次のジャンプ。', length: 43, platforms: [p(-5, 7), p(8.7, 15, .6), p(17, 24, 1.2), p(26, 33, .6), p(35.2, 49)], hazards: [] },
-    { name: '琥珀の庭', hint: '赤いトゲはジャンプ。あせらず足場を確かめよう。', length: 49, platforms: [p(-5, 9), p(11, 20, .5), p(22.2, 31, 1), p(33.1, 40, .4), p(42.3, 55)], hazards: [h(5, 0, 4, .75, 0, .65), h(16, 0, 4, .75, .5, .65), h(27, 0, 4, .75, 1, .65), h(46.5, 0, 4, .75, 0, .65)] }
+    { name: '小さな一歩', hint: 'トゲとすき間はジャンプ。着地してから次へ。止まって考えてもOK。', length: 52, platforms: [p(-5,10),p(12.2,21),p(23.4,32,.45),p(34.6,43,.45),p(45.2,58)], hazards: [h(4,0,4,.9,0,.65),h(16.5,0,4,.9,0,.65),h(27.7,0,4,.9,.45,.65),h(39,0,4,.9,.45,.65),h(50,0,4,.9,0,.65)] },
+    { name: '空中の階段', hint: '高低差とトゲを続けて越えよう。着地先を見て、飛ぶ場所を選ぼう。', length: 62, platforms: [p(-5,8),p(10.1,18,.6),p(20.4,29,1.2),p(31.4,40,.5),p(42.2,51,1.1),p(53.4,69,.2)], hazards: [h(4,0,4,.9,0,.65),h(14.5,0,4,.9,.6,.65),h(24.2,0,4,.9,1.2,.65),h(35.8,0,4,.9,.5,.65),h(46.8,0,4,.9,1.1,.65),h(60,0,4,.9,.2,.65)] },
+    { name: '琥珀の庭', hint: 'ふちのトゲは、次の足場までまとめてジャンプ。上りと下りで間合いを変えよう。', length: 85, platforms: [p(-5,10),p(12.3,20,.7),p(22.1,30),p(32.4,41,.7),p(43.2,52,.1),p(54.6,64,.8),p(66.2,76,.2),p(78.4,92,.8)], hazards: [h(5,0,4,.85,0,.65),h(19.4,0,4,.85,.7,.65),h(26.2,0,4,.85,0,.65),h(40.4,0,4,.85,.7,.65),h(48,0,4,.85,.1,.65),h(63.4,0,4,.85,.8,.65),h(71.5,0,4,.85,.2,.65),h(84,0,4,.85,.8,.65)] }
   ]
 };
 export type State = { kind: Kind; stage: number; x: number; z: number; y: number; vy: number; time: number; grounded: boolean; coyote: number; buffer: number; status: 'running' | 'dead' | 'clear'; jumps: number };
@@ -48,10 +48,10 @@ export function step(s: State, input: Input, dt = DT) {
   if (s.y < -4) s.status = 'dead';
   if (s.status === 'running' && s.x >= level.length && s.grounded) s.status = 'clear';
 }
-export type Save = { version: 1; sound: boolean; orbit: { unlocked: number; best: (number | null)[] }; amber: { unlocked: number; best: (number | null)[] } };
+export type Save = { version: 1; sound: boolean; orbit: { unlocked: number; best: (number | null)[]; challengeBest: (number | null)[] }; amber: { unlocked: number; best: (number | null)[]; challengeBest: (number | null)[] } };
 export const SAVE_KEY = 'pocketey-orbit-amber-v1';
 export function cleanSave(raw: unknown): Save {
-  const out: Save = { version: 1, sound: false, orbit: { unlocked: 1, best: [null, null, null] }, amber: { unlocked: 1, best: [null, null, null] } };
+  const out: Save = { version: 1, sound: false, orbit: { unlocked: 1, best: [null, null, null], challengeBest: [null, null, null] }, amber: { unlocked: 1, best: [null, null, null], challengeBest: [null, null, null] } };
   if (!raw || typeof raw !== 'object') return out;
   const obj = raw as Partial<Save>;
   out.sound = obj.sound === true;
@@ -60,6 +60,7 @@ export function cleanSave(raw: unknown): Save {
     if (!data || typeof data !== 'object') continue;
     out[kind].unlocked = Number.isInteger(data.unlocked) ? Math.max(1, Math.min(3, data.unlocked)) : 1;
     out[kind].best = [0, 1, 2].map(i => { const n = data.best?.[i]; return typeof n === 'number' && Number.isFinite(n) && n > 0 && n < 3600 ? n : null; });
+    out[kind].challengeBest = [0, 1, 2].map(i => { const n = data.challengeBest?.[i]; return typeof n === 'number' && Number.isFinite(n) && n > 0 && n < 3600 ? n : null; });
   }
   return out;
 }

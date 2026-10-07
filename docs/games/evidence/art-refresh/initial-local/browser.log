@@ -1,0 +1,143 @@
+
+> pocketey-japan@0.1.0 test:browser
+> playwright test
+
+
+Running 20 tests using 1 worker
+
+(node:2214) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (3.6s)
+orbit keyboard {
+  fps: 34.235467944790784,
+  p95: 50.099999999998545,
+  p99: 83.30000000000291,
+  max: 83.40000000000146
+}
+  ✘   2 tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence (48.6s)
+(node:2411) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+orbit touch { fps: 47.50237511875599, p95: 33.400000000001455, p99: 50, max: 50 }
+  ✓   3 tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence (50.0s)
+amber keyboard {
+  fps: 22.008316827095705,
+  p95: 100,
+  p99: 150,
+  max: 183.20000000000073
+}
+  ✘   4 tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence (31.3s)
+(node:2722) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+amber touch { fps: 47.50237511875595, p95: 33.400000000001455, p99: 50, max: 50 }
+  ✓   5 tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence (32.1s)
+  ✓   6 tests/games/browser.spec.ts:50:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (7.3s)
+  ✓   7 tests/games/browser.spec.ts:60:1 › corrupt/blocked storage and scoped confirmed reset (2.7s)
+PERFORMANCE {
+  fps: 54.54819050485295,
+  p95: 33.30000000000018,
+  renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+  viewport: [ 390, 844 ],
+  userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36'
+}
+  ✓   8 tests/games/browser.spec.ts:67:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (8.6s)
+  ✓   9 tests/games/browser.spec.ts:78:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (15.5s)
+  ✓  10 tests/games/browser.spec.ts:78:46 › amber: WebGL context loss freezes play until reload and preserves saved data (10.7s)
+  ✓  11 tests/games/browser.spec.ts:123:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (17.6s)
+  ✓  12 tests/games/browser.spec.ts:123:46 › amber: 320x568 menus and clear screen remain scroll-accessible (12.9s)
+  ✓  13 tests/games/browser.spec.ts:161:46 › orbit: simulated notch safe areas keep all controls inside every edge (1.8s)
+  ✓  14 tests/games/browser.spec.ts:161:46 › amber: simulated notch safe areas keep all controls inside every edge (2.0s)
+  ✓  15 tests/games/browser.spec.ts:196:1 › Amber simultaneous touch shows legible held feedback (2.0s)
+  ✓  16 tests/games/browser.spec.ts:210:2 › orbit: selected 3D art loads, animation and normal controls remain usable (1.7s)
+  ✓  17 tests/games/browser.spec.ts:224:2 › orbit: failed GLBs retain fallback, controls, clear and saves (14.4s)
+  ✓  18 tests/games/browser.spec.ts:210:2 › amber: selected 3D art loads, animation and normal controls remain usable (1.8s)
+  ✓  19 tests/games/browser.spec.ts:224:2 › amber: failed GLBs retain fallback, controls, clear and saves (9.8s)
+  ✘  20 tests/games/browser.spec.ts:235:1 › missing shared colormap retains Amber fallback and gameplay (6.0s)
+
+
+  1) tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 45
+    Received:    34.235467944790784
+
+      38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+      39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                            ^
+      41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      43 |  }
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:40:300
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md
+
+  2) tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 45
+    Received:    22.008316827095705
+
+      38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+      39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                            ^
+      41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      43 |  }
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:40:300
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/error-context.md
+
+  3) tests/games/browser.spec.ts:235:1 › missing shared colormap retains Amber fallback and gameplay 
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('canvas')
+    Expected: "fallback"
+    Received: "ready"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toHaveAttribute" locator('canvas') with timeout 5000ms
+      - waiting for locator('canvas')
+        - locator resolved to <canvas id="scene" width="390" height="690" data-art="ready" data-art-adopted="true" data-engine="three.js r186" aria-label="Amber Step の3Dゲーム画面" data-art-loaded="block-grass-low-long,character-oodi,flowers,rocks,tree"></canvas>
+        12 × unexpected value "ready"
+           - locator resolved to <canvas id="scene" width="390" height="690" data-art="ready" data-art-adopted="true" data-art-animation="idle" data-engine="three.js r186" aria-label="Amber Step の3Dゲーム画面" data-art-loaded="block-grass-low-long,character-oodi,flowers,rocks,tree"></canvas>
+        - unexpected value "ready"
+
+
+      235 | test('missing shared colormap retains Amber fallback and gameplay',async({page})=>{
+      236 |  await page.route('**/kenney/**/colormap.png',route=>route.abort('failed'));
+    > 237 |  await page.goto('/games/amber-step/');await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
+          |                                                                             ^
+      238 |  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'amber',0,true);
+      239 | });
+      240 |
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:237:77
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-missing-shared-col-dd3c1-Amber-fallback-and-gameplay/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-missing-shared-col-dd3c1-Amber-fallback-and-gameplay/error-context.md
+
+  3 failed
+    tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence 
+    tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+    tests/games/browser.spec.ts:235:1 › missing shared colormap retains Amber fallback and gameplay 
+  17 passed (4.7m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

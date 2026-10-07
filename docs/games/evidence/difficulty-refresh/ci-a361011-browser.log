@@ -1,0 +1,119 @@
+##[group]Run npm run test:browser
+2026-10-07T18:55:51.5087686Z [36;1mnpm run test:browser[0m
+2026-10-07T18:55:51.5122616Z shell: /usr/bin/bash -e {0}
+2026-10-07T18:55:51.5122953Z env:
+2026-10-07T18:55:51.5123215Z   ASTRO_TELEMETRY_DISABLED: 1
+2026-10-07T18:55:51.5123624Z   CI: true
+2026-10-07T18:55:51.5123971Z ##[endgroup]
+2026-10-07T18:55:51.5866634Z 
+2026-10-07T18:55:51.5867172Z > pocketey-japan@0.1.0 test:browser
+2026-10-07T18:55:51.5867580Z > playwright test
+2026-10-07T18:55:51.5867763Z 
+2026-10-07T18:55:53.1857472Z 
+2026-10-07T18:55:53.1858257Z Running 20 tests using 1 worker
+2026-10-07T18:55:53.1858646Z 
+2026-10-07T18:56:11.1387786Z   ✓   1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (17.5s)
+2026-10-07T18:57:07.6919072Z orbit keyboard {
+2026-10-07T18:57:07.6927713Z   fps: 58.16623297106995,
+2026-10-07T18:57:07.6945971Z   p95: 16.799999999995634,
+2026-10-07T18:57:07.6975768Z   p99: 33.30000000000291,
+2026-10-07T18:57:07.7014756Z   max: 33.400000000001455
+2026-10-07T18:57:07.7015624Z }
+2026-10-07T18:57:10.5115720Z   ✓   2 tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence (59.4s)
+2026-10-07T18:58:06.4020152Z orbit touch {
+2026-10-07T18:58:06.4023784Z   fps: 60.00126318448799,
+2026-10-07T18:58:06.4024542Z   p95: 16.700000000004366,
+2026-10-07T18:58:06.4025466Z   p99: 16.80000000000291,
+2026-10-07T18:58:06.4026048Z   max: 16.80000000000291
+2026-10-07T18:58:06.4026648Z }
+2026-10-07T18:58:08.2046015Z   ✓   3 tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence (57.7s)
+2026-10-07T18:58:51.1706418Z amber keyboard {
+2026-10-07T18:58:51.1707371Z   fps: 55.883996588134984,
+2026-10-07T18:58:51.1735882Z   p95: 33.29999999999927,
+2026-10-07T18:58:51.1765454Z   p99: 33.400000000001455,
+2026-10-07T18:58:51.1770980Z   max: 50
+2026-10-07T18:58:51.1775920Z }
+2026-10-07T18:58:54.4804381Z   ✓   4 tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence (46.3s)
+2026-10-07T18:59:32.4725299Z   ✘   5 tests/games/browser.spec.ts:31:2 › amber-touch › three stages through normal input, unlock and persistence (37.9s)
+2026-10-07T18:59:39.2907330Z   ✓   6 tests/games/browser.spec.ts:55:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (6.4s)
+2026-10-07T18:59:41.4350372Z   ✓   7 tests/games/browser.spec.ts:65:1 › corrupt/blocked storage and scoped confirmed reset (2.1s)
+2026-10-07T18:59:47.6837981Z PERFORMANCE {
+2026-10-07T18:59:47.6838815Z   fps: 60.00165521807503,
+2026-10-07T18:59:47.6839328Z   p95: 16.799999999999727,
+2026-10-07T18:59:47.6840432Z   renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+2026-10-07T18:59:47.6841739Z   viewport: [ 390, 844 ],
+2026-10-07T18:59:47.6845080Z   userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36'
+2026-10-07T18:59:47.6846512Z }
+2026-10-07T18:59:48.3159298Z   ✓   8 tests/games/browser.spec.ts:72:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (6.9s)
+2026-10-07T19:00:05.1167412Z   ✓   9 tests/games/browser.spec.ts:83:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (16.8s)
+2026-10-07T19:00:06.7625960Z   ✘  10 tests/games/browser.spec.ts:83:46 › amber: WebGL context loss freezes play until reload and preserves saved data (1.6s)
+2026-10-07T19:00:26.6313201Z   ✓  11 tests/games/browser.spec.ts:128:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (19.4s)
+2026-10-07T19:00:41.4167340Z   ✓  12 tests/games/browser.spec.ts:128:46 › amber: 320x568 menus and clear screen remain scroll-accessible (14.8s)
+2026-10-07T19:00:42.7050581Z   ✓  13 tests/games/browser.spec.ts:166:46 › orbit: simulated notch safe areas keep all controls inside every edge (1.3s)
+2026-10-07T19:00:44.1128632Z   ✓  14 tests/games/browser.spec.ts:166:46 › amber: simulated notch safe areas keep all controls inside every edge (1.4s)
+2026-10-07T19:00:45.2930194Z   ✓  15 tests/games/browser.spec.ts:201:1 › Amber simultaneous touch shows legible held feedback (1.2s)
+2026-10-07T19:00:46.4797274Z   ✓  16 tests/games/browser.spec.ts:215:2 › orbit: selected 3D art loads, animation and normal controls remain usable (1.2s)
+2026-10-07T19:01:02.3500933Z   ✓  17 tests/games/browser.spec.ts:269:2 › orbit: failed GLBs retain fallback, controls, clear and saves (15.9s)
+2026-10-07T19:01:04.6987689Z   ✓  18 tests/games/browser.spec.ts:215:2 › amber: selected 3D art loads, animation and normal controls remain usable (2.3s)
+2026-10-07T19:01:16.4078639Z   ✓  19 tests/games/browser.spec.ts:269:2 › amber: failed GLBs retain fallback, controls, clear and saves (11.7s)
+2026-10-07T19:01:27.7440825Z   ✓  20 tests/games/browser.spec.ts:280:1 › missing shared colormap retains Amber fallback and gameplay (11.3s)
+2026-10-07T19:01:27.7940098Z 
+2026-10-07T19:01:27.7943799Z 
+2026-10-07T19:01:27.7952794Z   1) tests/games/browser.spec.ts:31:2 › amber-touch › three stages through normal input, unlock and persistence 
+2026-10-07T19:01:27.7953514Z 
+2026-10-07T19:01:27.7954136Z     Error: amber/3 {"kind":"amber","mode":"result","status":"dead","x":"62.792","y":"1.332","z":"0.000","grounded":"false","jumps":"9","geometries":"11"}
+2026-10-07T19:01:27.7954752Z 
+2026-10-07T19:01:27.7955413Z     expect(received).toBe(expected) // Object.is equality
+2026-10-07T19:01:27.7955805Z 
+2026-10-07T19:01:27.7955968Z     Expected: "clear"
+2026-10-07T19:01:27.7956411Z     Received: "dead"
+2026-10-07T19:01:27.7956656Z 
+2026-10-07T19:01:27.7956849Z        at input.ts:29
+2026-10-07T19:01:27.7957087Z 
+2026-10-07T19:01:27.7957298Z       27 |   await page.waitForTimeout(25);
+2026-10-07T19:01:27.7957828Z       28 |  }
+2026-10-07T19:01:27.7958735Z     > 29 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');
+2026-10-07T19:01:27.7959933Z          |                                                                                                                                     ^
+2026-10-07T19:01:27.7960439Z       30 | }
+2026-10-07T19:01:27.7960721Z       31 |
+2026-10-07T19:01:27.7961315Z         at play (/home/runner/work/pocketey-portal/pocketey-portal/tests/games/input.ts:29:133)
+2026-10-07T19:01:27.7962457Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:42:3
+2026-10-07T19:01:27.7962854Z 
+2026-10-07T19:01:27.7963520Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T19:01:27.7964451Z     test-results/browser-amber-touch-three--cc58e-nput-unlock-and-persistence/test-failed-1.png
+2026-10-07T19:01:27.7966636Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T19:01:27.7967131Z 
+2026-10-07T19:01:27.7967756Z     Error Context: test-results/browser-amber-touch-three--cc58e-nput-unlock-and-persistence/error-context.md
+2026-10-07T19:01:27.7968341Z 
+2026-10-07T19:01:27.7968923Z   2) tests/games/browser.spec.ts:83:46 › amber: WebGL context loss freezes play until reload and preserves saved data 
+2026-10-07T19:01:27.7969532Z 
+2026-10-07T19:01:27.7970148Z     Error: amber/1 {"kind":"amber","mode":"result","status":"dead","x":"3.375","y":"0.471","z":"0.000","grounded":"false","jumps":"1","geometries":"11"}
+2026-10-07T19:01:27.7970656Z 
+2026-10-07T19:01:27.7970934Z     expect(received).toBe(expected) // Object.is equality
+2026-10-07T19:01:27.7971227Z 
+2026-10-07T19:01:27.7971882Z     Expected: "clear"
+2026-10-07T19:01:27.7972382Z     Received: "dead"
+2026-10-07T19:01:27.7972569Z 
+2026-10-07T19:01:27.7972728Z        at input.ts:29
+2026-10-07T19:01:27.7972983Z 
+2026-10-07T19:01:27.7973185Z       27 |   await page.waitForTimeout(25);
+2026-10-07T19:01:27.7973711Z       28 |  }
+2026-10-07T19:01:27.7974841Z     > 29 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');
+2026-10-07T19:01:27.7976145Z          |                                                                                                                                     ^
+2026-10-07T19:01:27.7976728Z       30 | }
+2026-10-07T19:01:27.7977084Z       31 |
+2026-10-07T19:01:27.7977726Z         at play (/home/runner/work/pocketey-portal/pocketey-portal/tests/games/input.ts:29:133)
+2026-10-07T19:01:27.7978653Z         at /home/runner/work/pocketey-portal/pocketey-portal/tests/games/browser.spec.ts:87:2
+2026-10-07T19:01:27.7979166Z 
+2026-10-07T19:01:27.7979771Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+2026-10-07T19:01:27.7980757Z     test-results/browser-amber-WebGL-contex-a403a-ad-and-preserves-saved-data/test-failed-1.png
+2026-10-07T19:01:27.7981779Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+2026-10-07T19:01:27.7982243Z 
+2026-10-07T19:01:27.7982819Z     Error Context: test-results/browser-amber-WebGL-contex-a403a-ad-and-preserves-saved-data/error-context.md
+2026-10-07T19:01:27.7983423Z 
+2026-10-07T19:01:27.7983607Z   2 failed
+2026-10-07T19:01:27.7984422Z     tests/games/browser.spec.ts:31:2 › amber-touch › three stages through normal input, unlock and persistence 
+2026-10-07T19:01:27.7986045Z     tests/games/browser.spec.ts:83:46 › amber: WebGL context loss freezes play until reload and preserves saved data 
+2026-10-07T19:01:27.7986724Z   18 passed (5.6m)
+2026-10-07T19:01:27.8121171Z ##[error]Process completed with exit code 1.
+2026-10-07T19:01:27.8196538Z

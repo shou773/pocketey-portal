@@ -1,0 +1,24 @@
+
+> pocketey-japan@0.1.0 test
+> tsx --test tests/games/model.test.ts
+
+✔ fixed-step accumulator yields same movement and jump at 30/60/120 Hz (3.348159ms)
+✔ coyote jump after leaving edge works, late jump cannot fly (0.254117ms)
+✔ buffered jump launches on landing, pressing in air does not double jump (0.308377ms)
+✔ fall and pillar collision fail, raised-platform sides are solid (1.145517ms)
+✔ all stages are feasible with ordinary movement and jumps in simulation (6.949896ms)
+✔ save sanitation tolerates corrupt values and bounds unlocks (0.371621ms)
+✔ Orbit side pillars block fixed-edge bypasses while alternating routes remain feasible (3.053023ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.997252
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

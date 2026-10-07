@@ -1,0 +1,173 @@
+{
+  "method": "Native stage selection from preserved legacy unlocked-3 fixture, then normal keyboard/CDP two-finger input from x=0. Each image has its own run from x=0; rAF is held only for the final screenshot and play is not resumed after it, with no physics-state writes. These views show visibility and combinations; automated route completion is checked separately and does not establish human difficulty.",
+  "results": [
+    {
+      "kind": "orbit",
+      "width": 390,
+      "scene": "switch-and-gap",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "21.525",
+        "y": "0.000",
+        "z": "2.083",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "canvas": {
+        "width": 390,
+        "height": 690
+      },
+      "errors": []
+    },
+    {
+      "kind": "orbit",
+      "width": 390,
+      "scene": "long-gap-airborne",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "54.250",
+        "y": "1.584",
+        "z": "-0.583",
+        "grounded": "false",
+        "jumps": "2",
+        "geometries": "10"
+      },
+      "canvas": {
+        "width": 390,
+        "height": 690
+      },
+      "errors": []
+    },
+    {
+      "kind": "orbit",
+      "width": 1280,
+      "scene": "switch-and-gap",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "20.883",
+        "y": "0.000",
+        "z": "1.833",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "10"
+      },
+      "canvas": {
+        "width": 889,
+        "height": 393
+      },
+      "errors": []
+    },
+    {
+      "kind": "orbit",
+      "width": 1280,
+      "scene": "long-gap-airborne",
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "54.425",
+        "y": "1.681",
+        "z": "-0.833",
+        "grounded": "false",
+        "jumps": "2",
+        "geometries": "10"
+      },
+      "canvas": {
+        "width": 889,
+        "height": 393
+      },
+      "errors": []
+    },
+    {
+      "kind": "amber",
+      "width": 390,
+      "scene": "edge-spike-and-downhill-gap",
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "17.833",
+        "y": "0.700",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "2",
+        "geometries": "11"
+      },
+      "canvas": {
+        "width": 390,
+        "height": 690
+      },
+      "errors": []
+    },
+    {
+      "kind": "amber",
+      "width": 390,
+      "scene": "combined-jump-airborne",
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "21.000",
+        "y": "2.162",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "3",
+        "geometries": "11"
+      },
+      "canvas": {
+        "width": 390,
+        "height": 690
+      },
+      "errors": []
+    },
+    {
+      "kind": "amber",
+      "width": 1280,
+      "scene": "edge-spike-and-downhill-gap",
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "17.708",
+        "y": "0.700",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "2",
+        "geometries": "11"
+      },
+      "canvas": {
+        "width": 889,
+        "height": 393
+      },
+      "errors": []
+    },
+    {
+      "kind": "amber",
+      "width": 1280,
+      "scene": "combined-jump-airborne",
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "21.000",
+        "y": "2.102",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "3",
+        "geometries": "11"
+      },
+      "canvas": {
+        "width": 889,
+        "height": 393
+      },
+      "errors": []
+    }
+  ]
+}

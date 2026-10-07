@@ -8,6 +8,7 @@ test('licensed UI artwork loads and existing progress survives the visual refres
  await page.goto('/games/orbit-ribbon/');
  await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  await expect(page.locator('#sound')).toHaveText('音 ON');
+ await expect(page.locator('#save-note')).toContainText('旧コースBEST 13.00秒');
  for(const name of ['orbit','gem','trophy','flag','lock-keyhole','check','arrow-left','arrow-right','arrow-up-right','play','rotate-ccw','sparkles','footprints']){
   const response=await request.get(`/games/assets/lucide/${name}.svg`);expect(response.status()).toBe(200);expect(await response.text()).toContain('<svg');
  }
@@ -20,6 +21,10 @@ test('licensed UI artwork loads and existing progress survives the visual refres
  await page.locator('#pause').click();await page.getByRole('button',{name:'ステージ選択'}).click();
  await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  const save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(save.orbit.best).toEqual([13,16,18]);
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'orbit',0,true);
+ const updated=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);
+ expect(updated.orbit.best).toEqual([13,16,18]);expect(updated.orbit.challengeBest[0]).toBeGreaterThan(13);
+ expect(updated.orbit.challengeBest.slice(1)).toEqual([null,null]);
 });
 for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])test.describe(`${kind}-${touch?'touch':'keyboard'}`,()=>{
  test.use({isMobile:touch,hasTouch:touch,viewport:touch?{width:390,height:844}:{width:1280,height:720}});
@@ -34,8 +39,8 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
   await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
   await expect(page.locator('#game')).toHaveAttribute('data-status','running');
   const measurement = i===2 ? page.evaluate(async()=>{const samples:number[]=[];let last=performance.now();await new Promise<void>(resolve=>{function sample(now:number){samples.push(now-last);last=now;if(samples.length<200)requestAnimationFrame(sample);else resolve();}requestAnimationFrame(sample);});const sorted=samples.slice(10).sort((a,b)=>a-b);return{fps:1000/(sorted.reduce((a,b)=>a+b)/sorted.length),p95:sorted[Math.floor(sorted.length*.95)],p99:sorted[Math.floor(sorted.length*.99)],max:Math.max(...sorted),rawIntervals:samples,startedAt:performance.timeOrigin+performance.now()-samples.reduce((a,b)=>a+b)};}) : null;
-  await play(page,kind,i,touch,inputTrace);
-  fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+  try { await play(page,kind,i,touch,inputTrace); }
+  finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
@@ -43,7 +48,7 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
  }
  await page.getByRole('button',{name:'ステージ選択'}).click();await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  await page.locator('#sound').click();await page.reload();await expect(page.locator('#sound')).toHaveText('音 ON');await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
- const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(stored[kind].best.every((x:number)=>x>0)).toBeTruthy();
+ const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(stored[kind].challengeBest.every((x:number)=>x>0)).toBeTruthy();
  const reopened=await page.context().newPage();await reopened.goto(page.url());await expect(reopened.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();await reopened.close();expect(errors).toEqual([]);
  await page.locator('#stages').getByRole('button',{name:/ステージ 3 /}).click();await page.getByRole('button',{name:'ステージ 3 をはじめる'}).click();await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
 });});
@@ -203,4 +208,77 @@ test('Amber simultaneous touch shows legible held feedback',async({page},info)=>
  for(const name of ['right','jump']){const control=page.locator(`[data-input=${name}]`);await expect(control).toHaveClass(/held/);await expect(control).toHaveCSS('background-color','rgb(255, 211, 147)');await expect(control).toHaveCSS('background-image','none');await expect(control).toHaveCSS('color','rgb(21, 39, 46)');styles.push(await control.evaluate(e=>{const s=getComputedStyle(e);return{input:(e as HTMLElement).dataset.input,color:s.color,background:s.backgroundColor,image:s.backgroundImage};}));}
  await page.screenshot({path:info.outputPath('amber-simultaneous-held.png')});fs.writeFileSync(info.outputPath('amber-held-styles.json'),JSON.stringify(styles,null,2));
  await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:points});await expect(page.locator('.controls .held')).toHaveCount(0);await session.detach();
+});
+
+for (const kind of ['orbit','amber'] as const) {
+ const route = `/games/${kind === 'orbit' ? 'orbit-ribbon' : 'amber-step'}/`;
+ test(`${kind}: selected 3D art loads, animation and normal controls remain usable`,async({page},info)=>{
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  page.on('console',message=>{if(message.type()==='error' && /Shader Error|shader is not compiled/i.test(message.text()))errors.push(message.text());});
+  if(kind==='amber') await page.addInitScript(()=>{
+   // The inspected Oodi rig has six joints. Capture changing GPU-bound
+   // matrices so clip-label transitions alone cannot hide a frozen pose.
+   const snapshots:number[][]=[];
+   (window as unknown as {artBoneTrace:typeof snapshots}).artBoneTrace=snapshots;
+   const original=WebGL2RenderingContext.prototype.uniformMatrix4fv;
+   WebGL2RenderingContext.prototype.uniformMatrix4fv=function(...args){
+    const values=Array.from(args[2]);const last=snapshots.at(-1);
+    if(values.length===96 && snapshots.length<100 && (!last || values.some((v,i)=>Math.abs(v-last[i])>1e-4)))snapshots.push(values);
+    return original.apply(this,args);
+   };
+  });
+  await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','ready');
+  await expect(page.locator('canvas')).toHaveAttribute('data-art-adopted','true');
+  if(kind==='amber') await page.evaluate(()=>{
+   const clips: {name:string;y:string|undefined;grounded:string|undefined}[]=[];
+   (window as unknown as {artClipTrace:typeof clips}).artClipTrace=clips;
+   new MutationObserver(()=>{
+    const scene=document.querySelector<HTMLCanvasElement>('canvas')!, game=document.querySelector<HTMLElement>('#game')!;
+    clips.push({name:scene.dataset.artAnimation!,y:game.dataset.y,grounded:game.dataset.grounded});
+   }).observe(document.querySelector('canvas')!,{attributes:true,attributeFilter:['data-art-animation']});
+  });
+  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+  if(kind==='amber')await page.keyboard.down('ArrowRight');
+  await page.waitForTimeout(150);await page.keyboard.press('Space');
+  await expect.poll(async()=>Number((await read(page)).y)).toBeGreaterThan(.8);
+  // Observe the transition before a screenshot can wait through the entire jump.
+  // Release movement here so a slow screenshot cannot carry Oodi into a gap.
+  if(kind==='amber'){
+   await expect.poll(()=>page.evaluate(()=>(window as unknown as {artClipTrace:{name:string;grounded:string}[]}).artClipTrace.some(c=>c.name==='jump'&&c.grounded==='false'))).toBe(true);
+   await page.keyboard.up('ArrowRight');
+  }
+  await page.screenshot({path:info.outputPath(`${kind}-art-jump.png`)});
+  if(kind==='amber'){
+   await expect(page.locator('#game')).toHaveAttribute('data-grounded','true');
+   await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','idle');
+   await page.keyboard.down('ArrowRight');await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','walk');await page.keyboard.up('ArrowRight');
+   const trace=await page.evaluate(()=>(window as unknown as {artClipTrace:{name:string;grounded:string}[]}).artClipTrace);
+   expect(trace.some(c=>c.name==='fall'&&c.grounded==='false')).toBe(true);
+   expect(trace.some(c=>c.name==='idle'&&c.grounded==='true')).toBe(true);
+   expect(trace.some(c=>c.name==='walk'&&c.grounded==='true')).toBe(true);
+   fs.writeFileSync(info.outputPath('amber-animation-transitions.json'),JSON.stringify(trace,null,2));
+   const poses=await page.evaluate(()=>(window as unknown as {artBoneTrace:number[][]}).artBoneTrace);
+   expect(poses.length).toBeGreaterThan(2);
+   expect(poses.some(p=>p.some((v,i)=>i%16<12 && Math.abs(v-poses[0][i])>1e-3))).toBe(true);
+   fs.writeFileSync(info.outputPath('amber-bone-matrix-uploads.json'),JSON.stringify(poses));
+  }
+  await page.locator('#pause').click();
+  const frozen=await read(page);await page.waitForTimeout(200);expect((await read(page)).x).toBe(frozen.x);
+  expect(errors).toEqual([]);
+ });
+ test(`${kind}: failed GLBs retain fallback, controls, clear and saves`,async({page},info)=>{
+  await page.route('**/kenney/**/*.glb',route=>route.abort('failed'));
+  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
+  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+  await play(page,kind,0,true);await page.screenshot({path:info.outputPath(`${kind}-fallback-clear.png`)});
+  const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);expect(saved).toBeTruthy();
+  await page.reload();await expect(page.getByRole('button',{name:/ステージ 2 /})).toBeEnabled();
+  expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);expect(errors).toEqual([]);
+ });
+}
+test('missing shared colormap retains Amber fallback and gameplay',async({page})=>{
+ await page.route('**/kenney/**/colormap.png',route=>route.abort('failed'));
+ await page.goto('/games/amber-step/');await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'amber',0,true);
 });

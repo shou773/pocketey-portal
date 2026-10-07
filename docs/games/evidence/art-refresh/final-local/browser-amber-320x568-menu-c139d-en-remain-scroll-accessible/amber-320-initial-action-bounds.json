@@ -1,0 +1,15 @@
+{
+  "button": {
+    "x": 33,
+    "y": 333.109375,
+    "width": 254,
+    "height": 46,
+    "bottom": 379.109375
+  },
+  "overlay": {
+    "top": 59,
+    "bottom": 473
+  },
+  "scrollTop": 0,
+  "visible": true
+}

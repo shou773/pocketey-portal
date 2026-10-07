@@ -53,7 +53,7 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: English full-stage p
   if(stage===0){const save=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);await page.getByRole('button',{name:'日本語',exact:true}).click();await expect(page.getByRole('button',{name:'次のステージ'})).toBeVisible();expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(save);await page.getByRole('button',{name:'English',exact:true}).click();}
  }
  await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});await page.screenshot({path:info.outputPath(`${kind}-english-all-clear.png`)});
- const saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(saved[kind].unlocked).toBe(3);expect(saved[kind].best.every((n:number)=>n>0)).toBe(true);
+ const saved=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(saved[kind].unlocked).toBe(3);expect(saved[kind].challengeBest.every((n:number)=>n>0)).toBe(true);
 });
 
 for(const kind of ['orbit','amber'] as const)test(`${kind}: both languages at 320px, existing saves, pause and recovery translation`,async({page},info)=>{

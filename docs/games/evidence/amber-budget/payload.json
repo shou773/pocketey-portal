@@ -1,0 +1,547 @@
+{
+  "note": "Uncompressed build and theoretical per-file gzip at Node default level. Actual CDN transfer compression is unverified until deployment. Whole build is not a first-load download; games request only their selected models and shared texture. Source preview PNGs live in docs and are not deployed.",
+  "baseline": {
+    "files": [
+      {
+        "path": "404.html",
+        "bytes": 6268,
+        "gzipBytes": 2246
+      },
+      {
+        "path": "CNAME",
+        "bytes": 17,
+        "gzipBytes": 37
+      },
+      {
+        "path": "_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js",
+        "bytes": 546445,
+        "gzipBytes": 140558
+      },
+      {
+        "path": "_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js",
+        "bytes": 46,
+        "gzipBytes": 66
+      },
+      {
+        "path": "_astro/amber-step.BVG8SpgS.css",
+        "bytes": 15155,
+        "gzipBytes": 3877
+      },
+      {
+        "path": "_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js",
+        "bytes": 3988,
+        "gzipBytes": 2003
+      },
+      {
+        "path": "_astro/index.CHgRZ30R.css",
+        "bytes": 4674,
+        "gzipBytes": 1149
+      },
+      {
+        "path": "_astro/index.dP8PT9Th.css",
+        "bytes": 4154,
+        "gzipBytes": 1364
+      },
+      {
+        "path": "_astro/locale.B1rKA6B7.js",
+        "bytes": 1481,
+        "gzipBytes": 660
+      },
+      {
+        "path": "about/index.html",
+        "bytes": 8373,
+        "gzipBytes": 3125
+      },
+      {
+        "path": "contact/index.html",
+        "bytes": 13053,
+        "gzipBytes": 4045
+      },
+      {
+        "path": "favicon.svg",
+        "bytes": 325,
+        "gzipBytes": 238
+      },
+      {
+        "path": "games/amber-step/index.html",
+        "bytes": 5128,
+        "gzipBytes": 2080
+      },
+      {
+        "path": "games/assets/lucide/LICENSE.txt",
+        "bytes": 3208,
+        "gzipBytes": 1504
+      },
+      {
+        "path": "games/assets/lucide/SOURCES.json",
+        "bytes": 3998,
+        "gzipBytes": 984
+      },
+      {
+        "path": "games/assets/lucide/arrow-left.svg",
+        "bytes": 262,
+        "gzipBytes": 188
+      },
+      {
+        "path": "games/assets/lucide/arrow-right.svg",
+        "bytes": 261,
+        "gzipBytes": 185
+      },
+      {
+        "path": "games/assets/lucide/arrow-up-right.svg",
+        "bytes": 260,
+        "gzipBytes": 181
+      },
+      {
+        "path": "games/assets/lucide/check.svg",
+        "bytes": 239,
+        "gzipBytes": 179
+      },
+      {
+        "path": "games/assets/lucide/flag.svg",
+        "bytes": 370,
+        "gzipBytes": 244
+      },
+      {
+        "path": "games/assets/lucide/footprints.svg",
+        "bytes": 520,
+        "gzipBytes": 308
+      },
+      {
+        "path": "games/assets/lucide/gem.svg",
+        "bytes": 425,
+        "gzipBytes": 262
+      },
+      {
+        "path": "games/assets/lucide/lock-keyhole.svg",
+        "bytes": 337,
+        "gzipBytes": 228
+      },
+      {
+        "path": "games/assets/lucide/orbit.svg",
+        "bytes": 418,
+        "gzipBytes": 250
+      },
+      {
+        "path": "games/assets/lucide/play.svg",
+        "bytes": 306,
+        "gzipBytes": 218
+      },
+      {
+        "path": "games/assets/lucide/rotate-ccw.svg",
+        "bytes": 297,
+        "gzipBytes": 210
+      },
+      {
+        "path": "games/assets/lucide/sparkles.svg",
+        "bytes": 567,
+        "gzipBytes": 290
+      },
+      {
+        "path": "games/assets/lucide/trophy.svg",
+        "bytes": 554,
+        "gzipBytes": 286
+      },
+      {
+        "path": "games/index.html",
+        "bytes": 15416,
+        "gzipBytes": 4915
+      },
+      {
+        "path": "games/orbit-ribbon/index.html",
+        "bytes": 5198,
+        "gzipBytes": 2090
+      },
+      {
+        "path": "games/previews/amber-step.png",
+        "bytes": 20714,
+        "gzipBytes": 19486
+      },
+      {
+        "path": "games/previews/orbit-ribbon.png",
+        "bytes": 24177,
+        "gzipBytes": 23690
+      },
+      {
+        "path": "index.html",
+        "bytes": 15536,
+        "gzipBytes": 4913
+      },
+      {
+        "path": "og-default.svg",
+        "bytes": 780,
+        "gzipBytes": 385
+      },
+      {
+        "path": "privacy/index.html",
+        "bytes": 11112,
+        "gzipBytes": 4078
+      },
+      {
+        "path": "robots.txt",
+        "bytes": 75,
+        "gzipBytes": 91
+      },
+      {
+        "path": "sitemap-0.xml",
+        "bytes": 727,
+        "gzipBytes": 244
+      },
+      {
+        "path": "sitemap-index.xml",
+        "bytes": 187,
+        "gzipBytes": 148
+      }
+    ],
+    "totalBytes": 715051,
+    "gzipBytes": 227005,
+    "jsBytes": 551960,
+    "jsGzipBytes": 143287
+  },
+  "candidate": {
+    "files": [
+      {
+        "path": "404.html",
+        "bytes": 6268,
+        "gzipBytes": 2246
+      },
+      {
+        "path": "CNAME",
+        "bytes": 17,
+        "gzipBytes": 37
+      },
+      {
+        "path": "_astro/ActionGame.astro_astro_type_script_index_0_lang.B0zSe2Ve.js",
+        "bytes": 674428,
+        "gzipBytes": 176300
+      },
+      {
+        "path": "_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js",
+        "bytes": 46,
+        "gzipBytes": 66
+      },
+      {
+        "path": "_astro/amber-step.BVG8SpgS.css",
+        "bytes": 15155,
+        "gzipBytes": 3877
+      },
+      {
+        "path": "_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js",
+        "bytes": 3988,
+        "gzipBytes": 2003
+      },
+      {
+        "path": "_astro/index.CHgRZ30R.css",
+        "bytes": 4674,
+        "gzipBytes": 1149
+      },
+      {
+        "path": "_astro/index.dP8PT9Th.css",
+        "bytes": 4154,
+        "gzipBytes": 1364
+      },
+      {
+        "path": "_astro/locale.B1rKA6B7.js",
+        "bytes": 1481,
+        "gzipBytes": 660
+      },
+      {
+        "path": "about/index.html",
+        "bytes": 8373,
+        "gzipBytes": 3125
+      },
+      {
+        "path": "contact/index.html",
+        "bytes": 13053,
+        "gzipBytes": 4045
+      },
+      {
+        "path": "favicon.svg",
+        "bytes": 325,
+        "gzipBytes": 238
+      },
+      {
+        "path": "games/amber-step/index.html",
+        "bytes": 5128,
+        "gzipBytes": 2079
+      },
+      {
+        "path": "games/assets/kenney/SOURCES.json",
+        "bytes": 3419,
+        "gzipBytes": 1312
+      },
+      {
+        "path": "games/assets/kenney/platformer/License.txt",
+        "bytes": 703,
+        "gzipBytes": 408
+      },
+      {
+        "path": "games/assets/kenney/platformer/Textures/colormap.png",
+        "bytes": 11140,
+        "gzipBytes": 8961
+      },
+      {
+        "path": "games/assets/kenney/platformer/block-grass-low-long.glb",
+        "bytes": 10200,
+        "gzipBytes": 2550
+      },
+      {
+        "path": "games/assets/kenney/platformer/character-oodi.glb",
+        "bytes": 202604,
+        "gzipBytes": 41122
+      },
+      {
+        "path": "games/assets/kenney/platformer/flowers.glb",
+        "bytes": 25928,
+        "gzipBytes": 6991
+      },
+      {
+        "path": "games/assets/kenney/platformer/rocks.glb",
+        "bytes": 9556,
+        "gzipBytes": 2643
+      },
+      {
+        "path": "games/assets/kenney/platformer/tree.glb",
+        "bytes": 42680,
+        "gzipBytes": 11521
+      },
+      {
+        "path": "games/assets/kenney/space/License.txt",
+        "bytes": 610,
+        "gzipBytes": 349
+      },
+      {
+        "path": "games/assets/kenney/space/craft_speederA.glb",
+        "bytes": 20496,
+        "gzipBytes": 5527
+      },
+      {
+        "path": "games/assets/kenney/space/meteor.glb",
+        "bytes": 6496,
+        "gzipBytes": 1864
+      },
+      {
+        "path": "games/assets/kenney/space/platform_small.glb",
+        "bytes": 6280,
+        "gzipBytes": 1610
+      },
+      {
+        "path": "games/assets/kenney/space/rock.glb",
+        "bytes": 13172,
+        "gzipBytes": 4394
+      },
+      {
+        "path": "games/assets/lucide/LICENSE.txt",
+        "bytes": 3208,
+        "gzipBytes": 1504
+      },
+      {
+        "path": "games/assets/lucide/SOURCES.json",
+        "bytes": 3998,
+        "gzipBytes": 984
+      },
+      {
+        "path": "games/assets/lucide/arrow-left.svg",
+        "bytes": 262,
+        "gzipBytes": 188
+      },
+      {
+        "path": "games/assets/lucide/arrow-right.svg",
+        "bytes": 261,
+        "gzipBytes": 185
+      },
+      {
+        "path": "games/assets/lucide/arrow-up-right.svg",
+        "bytes": 260,
+        "gzipBytes": 181
+      },
+      {
+        "path": "games/assets/lucide/check.svg",
+        "bytes": 239,
+        "gzipBytes": 179
+      },
+      {
+        "path": "games/assets/lucide/flag.svg",
+        "bytes": 370,
+        "gzipBytes": 244
+      },
+      {
+        "path": "games/assets/lucide/footprints.svg",
+        "bytes": 520,
+        "gzipBytes": 308
+      },
+      {
+        "path": "games/assets/lucide/gem.svg",
+        "bytes": 425,
+        "gzipBytes": 262
+      },
+      {
+        "path": "games/assets/lucide/lock-keyhole.svg",
+        "bytes": 337,
+        "gzipBytes": 228
+      },
+      {
+        "path": "games/assets/lucide/orbit.svg",
+        "bytes": 418,
+        "gzipBytes": 250
+      },
+      {
+        "path": "games/assets/lucide/play.svg",
+        "bytes": 306,
+        "gzipBytes": 218
+      },
+      {
+        "path": "games/assets/lucide/rotate-ccw.svg",
+        "bytes": 297,
+        "gzipBytes": 210
+      },
+      {
+        "path": "games/assets/lucide/sparkles.svg",
+        "bytes": 567,
+        "gzipBytes": 290
+      },
+      {
+        "path": "games/assets/lucide/trophy.svg",
+        "bytes": 554,
+        "gzipBytes": 286
+      },
+      {
+        "path": "games/index.html",
+        "bytes": 15416,
+        "gzipBytes": 4915
+      },
+      {
+        "path": "games/orbit-ribbon/index.html",
+        "bytes": 5198,
+        "gzipBytes": 2089
+      },
+      {
+        "path": "games/previews/amber-step.png",
+        "bytes": 48525,
+        "gzipBytes": 47684
+      },
+      {
+        "path": "games/previews/orbit-ribbon.png",
+        "bytes": 33293,
+        "gzipBytes": 33277
+      },
+      {
+        "path": "index.html",
+        "bytes": 15536,
+        "gzipBytes": 4913
+      },
+      {
+        "path": "og-default.svg",
+        "bytes": 780,
+        "gzipBytes": 385
+      },
+      {
+        "path": "privacy/index.html",
+        "bytes": 11112,
+        "gzipBytes": 4078
+      },
+      {
+        "path": "robots.txt",
+        "bytes": 75,
+        "gzipBytes": 91
+      },
+      {
+        "path": "sitemap-0.xml",
+        "bytes": 727,
+        "gzipBytes": 244
+      },
+      {
+        "path": "sitemap-index.xml",
+        "bytes": 187,
+        "gzipBytes": 148
+      }
+    ],
+    "totalBytes": 1233245,
+    "gzipBytes": 389782,
+    "jsBytes": 679943,
+    "jsGzipBytes": 179029
+  },
+  "delta": {
+    "totalBytes": 518194,
+    "gzipBytes": 162777,
+    "jsBytes": 127983,
+    "jsGzipBytes": 35742
+  },
+  "assetFiles": [
+    {
+      "path": "games/assets/kenney/SOURCES.json",
+      "bytes": 3419,
+      "gzipBytes": 1312
+    },
+    {
+      "path": "games/assets/kenney/platformer/License.txt",
+      "bytes": 703,
+      "gzipBytes": 408
+    },
+    {
+      "path": "games/assets/kenney/platformer/Textures/colormap.png",
+      "bytes": 11140,
+      "gzipBytes": 8961
+    },
+    {
+      "path": "games/assets/kenney/platformer/block-grass-low-long.glb",
+      "bytes": 10200,
+      "gzipBytes": 2550
+    },
+    {
+      "path": "games/assets/kenney/platformer/character-oodi.glb",
+      "bytes": 202604,
+      "gzipBytes": 41122
+    },
+    {
+      "path": "games/assets/kenney/platformer/flowers.glb",
+      "bytes": 25928,
+      "gzipBytes": 6991
+    },
+    {
+      "path": "games/assets/kenney/platformer/rocks.glb",
+      "bytes": 9556,
+      "gzipBytes": 2643
+    },
+    {
+      "path": "games/assets/kenney/platformer/tree.glb",
+      "bytes": 42680,
+      "gzipBytes": 11521
+    },
+    {
+      "path": "games/assets/kenney/space/License.txt",
+      "bytes": 610,
+      "gzipBytes": 349
+    },
+    {
+      "path": "games/assets/kenney/space/craft_speederA.glb",
+      "bytes": 20496,
+      "gzipBytes": 5527
+    },
+    {
+      "path": "games/assets/kenney/space/meteor.glb",
+      "bytes": 6496,
+      "gzipBytes": 1864
+    },
+    {
+      "path": "games/assets/kenney/space/platform_small.glb",
+      "bytes": 6280,
+      "gzipBytes": 1610
+    },
+    {
+      "path": "games/assets/kenney/space/rock.glb",
+      "bytes": 13172,
+      "gzipBytes": 4394
+    }
+  ],
+  "firstLoad": {
+    "space": {
+      "bytes": 46444,
+      "gzipBytes": 13395
+    },
+    "platformer": {
+      "bytes": 302108,
+      "gzipBytes": 73788
+    }
+  }
+}
