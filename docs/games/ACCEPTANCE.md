@@ -12,6 +12,6 @@
 
 No universal device performance or physical mobile readiness claim from emulation alone.
 
-Build + game TypeScript + seven unit tests + twelve browser tests pass. Whole-site Astro check has 48 pre-existing errors in unchanged contact.astro; no configured lint task. Production deployment and live verification remain blocked by outbound domain access. See RELEASE.md for exact conditions and gaps.
+Latest code 0cbc1e4: local build/game TypeScript/seven unit tests/five affected browser tests pass. Full CI passes 11/13 browser tests; two desktop performance assertions fail at 41.31/41.16fps against >=45fps. The earlier 95ed0c6 twelve-test matrix passed, but that does not override the latest failure. Whole-site Astro check has 48 pre-existing errors in unchanged contact.astro; no configured lint task. Production deployment and live verification remain blocked by outbound domain access. See RELEASE.md for exact conditions and gaps.
 
 Mobile-review regression additions: real WebGL loss/restoration injection with reload-only recovery and unchanged saves; both-game 320x568 menu/control scroll reachability; simulated notch insets; fixed-edge Orbit bypass collision test. Completion bots use read-only coordinates and do not demonstrate novice human reaction difficulty.

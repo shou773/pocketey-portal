@@ -43,5 +43,10 @@
   "humanFirstPlayDifficultyEstablished": false,
   "screenGuidedTrial": "Stage 1 first gap in each game, ordinary keyboard input with pause/resume between screenshots; no internal coordinate/status reads. Not a human real-time reaction test.",
   "physicalPhoneTested": false,
-  "liveOriginTested": false
+  "liveOriginTested": false,
+  "latestSafeAreaRevision": {
+    "testedCommit": "0cbc1e4ed6059adaa03e6fc49c6902b7d3a58853",
+    "evidence": "safe-area-regression.json",
+    "note": "Top-level completion/performance measurements remain from testedCommit 95ed0c6; see separate revision evidence for affected local tests and exact-SHA CI."
+  }
 }

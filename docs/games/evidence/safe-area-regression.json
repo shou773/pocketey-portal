@@ -1,0 +1,95 @@
+{
+  "testedCommit": "0cbc1e4ed6059adaa03e6fc49c6902b7d3a58853",
+  "conditions": "Chromium 151.0.7922.173, Linux headless SwiftShader; emulated safe-area insets, not a physical phone",
+  "before": {
+    "viewport": [
+      844,
+      390
+    ],
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "controlBottom": 383,
+    "safeBottom": 369,
+    "assertion": "failed as expected"
+  },
+  "after": {
+    "orbitControlBottom": 369,
+    "amberControlBottom": 369,
+    "allToolbarAndMovementControlsInsideAllFourEdges": true,
+    "portraitViewport": [
+      390,
+      844
+    ],
+    "portraitInsets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    }
+  },
+  "local": {
+    "build": "passed",
+    "gameTypes": "passed",
+    "unitTestsPassed": 7,
+    "affectedBrowserTests": {
+      "startTime": "2026-10-07T11:35:48.694Z",
+      "duration": 42874.114,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "githubQuality": {
+    "runId": 37615165970,
+    "jobId": 112771627370,
+    "status": "completed",
+    "conclusion": "failure",
+    "browserTestsPassed": 11,
+    "browserTestsFailed": 2,
+    "build": "passed",
+    "gameTypes": "passed",
+    "unitTestsPassed": 7,
+    "safeAreaTests": "both passed",
+    "failures": {
+      "orbit-keyboard": {
+        "fps": 41.30614374538027,
+        "requiredMinimumFps": 45,
+        "p95Ms": 50,
+        "requiredMaximumP95Ms": 40,
+        "p95AssertionExecuted": false
+      },
+      "amber-keyboard": {
+        "fps": 41.15761199202844,
+        "requiredMinimumFps": 45,
+        "p95Ms": 50,
+        "requiredMaximumP95Ms": 40,
+        "p95AssertionExecuted": false
+      }
+    },
+    "note": "Both desktop controllers reached stage-3 clear before the performance assertion failed; subsequent persistence assertions in these two cases were not executed. No rerun or threshold relaxation.",
+    "touchMeasurements": {
+      "orbit": {
+        "fps": 59.066745422327145,
+        "p95Ms": 16.799999999999272
+      },
+      "amber": {
+        "fps": 58.7671275246667,
+        "p95Ms": 16.700000000000728
+      }
+    }
+  },
+  "boundsFiles": [
+    "mobile-review/orbit-safe-area-bounds.json",
+    "mobile-review/amber-safe-area-bounds.json"
+  ],
+  "cloudflare": {
+    "checkId": 112771667617,
+    "conclusion": "failure",
+    "cause": "unresolved"
+  }
+}
