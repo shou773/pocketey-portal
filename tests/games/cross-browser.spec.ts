@@ -65,7 +65,7 @@ for(const kind of ['orbit','amber'] as const){
    await page.setViewportSize(size);await expect(page.getByRole('button',{name:'つづける'})).toBeInViewport();
    // WebKit screenshots can arrive before the next ResizeObserver/render frame.
    // Require the actual drawing buffer to match its new CSS aspect ratio first.
-   await expect.poll(()=>page.locator('canvas').evaluate(c=>Math.abs(c.width/c.height-c.clientWidth/c.clientHeight))).toBeLessThan(.02);
+   await expect.poll(()=>page.locator('canvas').evaluate(e=>{const c=e as HTMLCanvasElement;return Math.abs(c.width/c.height-c.clientWidth/c.clientHeight);})).toBeLessThan(.02);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
    await page.screenshot({path:info.outputPath(`layout-${size.width}.png`)});
    await page.getByRole('button',{name:'つづける'}).click();

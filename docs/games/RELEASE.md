@@ -1,5 +1,9 @@
 # Release candidate — not published
 
+## Updated environment candidate (165ce97)
+
+**Current evidence supersedes the historical access/browser blocks below:** normal-proxy production access works. [Updated environment report](UPDATED-ENVIRONMENT.md) records exact-SHA CI success on **165ce973d386e16c174978fab834474a0a507336**: build/types, 7 unit tests, 13 Chromium tests and 10 WebKit/Firefox tests. It also preserves the failed 9158381 CI and 9/13 local run, hardware differences, discarded rendering experiments and material limitations. The shader experiments were not retained. The passing CI is not evidence of universal mobile or cloud performance. Publication is still pending exact deployment and live smoke verification.
+
 ## Performance investigation in progress
 
 Code `9158381` includes frame-layout improvements with unchanged render budget and performance thresholds. Final browser validation and exact-SHA CI are in progress at environment transfer; **no all-pass claim** is made. See [handoff and reproduction commands](PERFORMANCE-HANDOFF.md) and its timestamped evidence. Earlier results below retain their exact SHA.

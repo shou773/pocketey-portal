@@ -1,0 +1,430 @@
+{
+  "browser": "153.0.8010.12",
+  "node": "v22.23.3",
+  "os": "linux",
+  "cpu": "AMD EPYC 9V45 96-Core Processor",
+  "cpuCount": 4,
+  "description": "Three predeclared alternating rounds. Same browser, 1280x720 DPR1, stage 1 first 110 rAF callbacks; first 10 excluded. No threshold assertions or release-completion claim. Fresh closed context per sample.",
+  "results": [
+    {
+      "round": 0,
+      "game": "orbit-ribbon",
+      "variant": "baseline",
+      "fps": 50,
+      "p95": 16.799999999999955,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "14.175",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.36564599999999997,
+        "ScriptDuration": 0.068522,
+        "LayoutDuration": 0.018963,
+        "RecalcStyleDuration": 0.004226,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 0,
+      "game": "orbit-ribbon",
+      "variant": "candidate",
+      "fps": 52.63157894736841,
+      "p95": 16.799999999999955,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "14.292",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.25928300000000004,
+        "ScriptDuration": 0.06976799999999998,
+        "LayoutDuration": 0.010495000000000004,
+        "RecalcStyleDuration": 0.0035629999999999993,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 0,
+      "game": "amber-step",
+      "variant": "baseline",
+      "fps": 58.25468950250495,
+      "p95": 16.799999999999955,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.20602100000000004,
+        "ScriptDuration": 0.06332900000000001,
+        "LayoutDuration": 0.018787000000000005,
+        "RecalcStyleDuration": 0.001936,
+        "LayoutCount": 111,
+        "RecalcStyleCount": 111
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 0,
+      "game": "amber-step",
+      "variant": "candidate",
+      "fps": 56.60911406736485,
+      "p95": 16.799999999999955,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.26270099999999996,
+        "ScriptDuration": 0.077524,
+        "LayoutDuration": 0.011360000000000002,
+        "RecalcStyleDuration": 0.00181,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 1,
+      "game": "orbit-ribbon",
+      "variant": "candidate",
+      "fps": 56.07895917451772,
+      "p95": 16.799999999999955,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "13.417",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.303234,
+        "ScriptDuration": 0.079729,
+        "LayoutDuration": 0.011333000000000003,
+        "RecalcStyleDuration": 0.004771000000000001,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 111
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 1,
+      "game": "orbit-ribbon",
+      "variant": "baseline",
+      "fps": 49.59087527894866,
+      "p95": 33.39999999999998,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "14.117",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.421676,
+        "ScriptDuration": 0.07514400000000002,
+        "LayoutDuration": 0.021365000000000002,
+        "RecalcStyleDuration": 0.004404,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 1,
+      "game": "amber-step",
+      "variant": "candidate",
+      "fps": 55.55864214678593,
+      "p95": 16.700000000000045,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.298619,
+        "ScriptDuration": 0.07053799999999999,
+        "LayoutDuration": 0.009030999999999997,
+        "RecalcStyleDuration": 0.0014399999999999999,
+        "LayoutCount": 109,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 1,
+      "game": "amber-step",
+      "variant": "baseline",
+      "fps": 57.69341718109964,
+      "p95": 16.700000000000045,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.24353399999999997,
+        "ScriptDuration": 0.07292,
+        "LayoutDuration": 0.02106,
+        "RecalcStyleDuration": 0.003301,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 2,
+      "game": "orbit-ribbon",
+      "variant": "baseline",
+      "fps": 57.696745903531024,
+      "p95": 16.799999999999955,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "13.183",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.25489300000000004,
+        "ScriptDuration": 0.076068,
+        "LayoutDuration": 0.018314,
+        "RecalcStyleDuration": 0.0038220000000000003,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 2,
+      "game": "orbit-ribbon",
+      "variant": "candidate",
+      "fps": 57.69674590353104,
+      "p95": 16.700000000000045,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "orbit",
+        "mode": "play",
+        "status": "running",
+        "x": "13.183",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.219503,
+        "ScriptDuration": 0.066916,
+        "LayoutDuration": 0.011006000000000002,
+        "RecalcStyleDuration": 0.0035580000000000004,
+        "LayoutCount": 109,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 2,
+      "game": "amber-step",
+      "variant": "baseline",
+      "fps": 58.25808330905911,
+      "p95": 16.700000000000045,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.226287,
+        "ScriptDuration": 0.069764,
+        "LayoutDuration": 0.018167000000000003,
+        "RecalcStyleDuration": 0.002411,
+        "LayoutCount": 110,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    },
+    {
+      "round": 2,
+      "game": "amber-step",
+      "variant": "candidate",
+      "fps": 58.826989822930756,
+      "p95": 16.700000000000045,
+      "canvas": [
+        1008,
+        446
+      ],
+      "dpr": 1,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "contextsCreated": 1,
+      "drawCalls": 1100,
+      "state": {
+        "kind": "amber",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "5"
+      },
+      "delta": {
+        "TaskDuration": 0.187138,
+        "ScriptDuration": 0.077207,
+        "LayoutDuration": 0.011488999999999996,
+        "RecalcStyleDuration": 0.0016469999999999998,
+        "LayoutCount": 109,
+        "RecalcStyleCount": 110
+      },
+      "browserContexts": 1
+    }
+  ]
+}

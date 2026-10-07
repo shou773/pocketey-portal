@@ -1,6 +1,9 @@
 # Progress
 
 ## 2026-10-07
+- Updated-environment owner received exclusive handoff at bc9c627. Normal-proxy pocketey.com/www access now works; existing pages remain available and games are not yet published.
+- Added WebKit/Firefox ordinary-input validation at 165ce97. Exact CI run 37618004427 succeeds: 7 unit, 13 Chromium, 5 WebKit and 5 Firefox tests. Earlier 9158381 CI failed 2 desktop performance cases. The new local Intel/SwiftShader environment passes 9/13, with two performance, one touch-controller and one restart-timing failure; do not represent local checks as all passing. Full evidence and residual risks are in UPDATED-ENVIRONMENT.md.
+- Canvas/HUD composition and vertex-lighting diagnostics were inconclusive; neither experimental rendering change was retained. Resolution and performance thresholds are unchanged. Official cross-browser dependencies work in existing GitHub Actions; local system-library and Chromium-download restrictions were not bypassed.
 - Cloud execution environment started; clean Astro checkout at 63f48b6.
 - No AGENTS.md or project skills in checkout or mounted .agents/.codex.
 - Prior prototypes verified at 955a79c in separate draft PR #2; preserved.
