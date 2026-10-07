@@ -1,0 +1,12 @@
+---
+import LocaleHead from '../../components/LocaleHead.astro';
+import LanguageSwitch from '../../components/LanguageSwitch.astro';
+import '../../games/prototypes/shooter/style.css';
+---
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="robots" content="noindex,nofollow"/><meta name="theme-color" content="#071323"/><LocaleHead/><title>Pulse Drift · Prototype</title></head><body>
+<main id="pulse"><header><a href="/games/" id="back">Pocketey</a><span class="prototype">PROTOTYPE A</span><LanguageSwitch/></header>
+<section class="game-shell"><div class="title"><div><p class="eyebrow">FOLLOW THE SIGNAL</p><h1>Pulse Drift</h1></div><button id="sound" type="button"></button></div>
+<div class="hud"><span id="stage-label"></span><span id="health"></span><span id="clock"></span><button id="pause" type="button"></button></div>
+<div class="arena"><canvas id="field" aria-label="Pulse Drift 3D game"></canvas><div id="overlay" class="overlay" role="region" aria-live="polite"></div><div id="warning" aria-live="polite"></div><div id="boss-health" hidden><span id="boss-label"></span><progress id="boss-meter" max="32" value="32"></progress></div></div>
+<p id="hint" class="hint"></p><div class="bottom"><span id="score"></span><button id="menu" type="button"></button></div>
+</section><footer id="note"></footer></main><script>import {boot} from '../../games/prototypes/shooter/app';boot();</script></body></html>

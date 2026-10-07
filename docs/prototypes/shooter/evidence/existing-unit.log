@@ -1,0 +1,19 @@
+
+> pocketey-japan@0.1.0 test
+> tsx --test tests/games/model.test.ts
+
+✔ fixed-step accumulator yields same movement and jump at 30/60/120 Hz (4.053889ms)
+✔ coyote jump after leaving edge works, late jump cannot fly (0.236651ms)
+✔ buffered jump launches on landing, pressing in air does not double jump (0.324542ms)
+✔ fall and pillar collision fail, raised-platform sides are solid (1.223677ms)
+✔ all stages are feasible with ordinary movement and jumps in simulation (6.021031ms)
+✔ save sanitation tolerates corrupt values and bounds unlocks (0.365112ms)
+✔ Orbit side pillars block fixed-edge bypasses while alternating routes remain feasible (3.793262ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 157.185345
