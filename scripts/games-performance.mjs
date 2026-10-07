@@ -24,8 +24,8 @@ const environment={browser:browser.version(),node:process.version,os:os.platform
 console.log('ENVIRONMENT',JSON.stringify(environment));
 const results = [];
 try {
- for (let round=0; round<3; round++) for (const game of ['orbit-ribbon','amber-step']) for (const variant of (round%2 ? [1,0] : [0,1])) {
-  const context = await browser.newContext({viewport:{width:1280,height:720},deviceScaleFactor:1});
+ for (let round=0; round<3; round++) for (const mobile of [false,true]) for (const game of ['orbit-ribbon','amber-step']) for (const variant of (round%2 ? [1,0] : [0,1])) {
+  const context = await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1280,height:720},isMobile:mobile,hasTouch:mobile,deviceScaleFactor:1});
   const page = await context.newPage(); const session = await context.newCDPSession(page);
   await page.addInitScript(() => {
    const seen = new WeakSet(); const probe = window.__renderProbe = {contexts:0,drawCalls:0};
@@ -41,18 +41,20 @@ try {
   await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
   const before = await session.send('Performance.getMetrics');
   const sample = await page.evaluate(async () => {
-   const callsBefore=window.__renderProbe.drawCalls; const samples=[];let last=performance.now();
-   await new Promise(resolve=>{function sample(now){samples.push(now-last);last=now;if(samples.length<110)requestAnimationFrame(sample);else resolve();}requestAnimationFrame(sample);});
+   const callsBefore=window.__renderProbe.drawCalls; const samples=[];const start=performance.now();let last=start;
+   await new Promise(resolve=>{function sample(now){samples.push(now-last);last=now;if(now-start<1500)requestAnimationFrame(sample);else resolve();}requestAnimationFrame(sample);});
    const sorted=samples.slice(10).sort((a,b)=>a-b), canvas=document.querySelector('canvas'), gl=canvas.getContext('webgl2'), ext=gl.getExtension('WEBGL_debug_renderer_info');
-   return {fps:1000/(sorted.reduce((a,b)=>a+b)/sorted.length),p95:sorted[Math.floor(sorted.length*.95)],canvas:[canvas.width,canvas.height],dpr:devicePixelRatio,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),contextsCreated:window.__renderProbe.contexts,drawCalls:window.__renderProbe.drawCalls-callsBefore,state:{...document.querySelector('#game').dataset}};
+   return {valid:sorted.length>=10,sampleCount:samples.length,rawIntervals:samples,fps:sorted.length>=10?1000/(sorted.reduce((a,b)=>a+b,0)/sorted.length):null,p95:sorted.length>=10?sorted[Math.floor(sorted.length*.95)]:null,canvas:[canvas.width,canvas.height],dpr:devicePixelRatio,renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),contextsCreated:window.__renderProbe.contexts,drawCalls:window.__renderProbe.drawCalls-callsBefore,state:{...document.querySelector('#game').dataset}};
   });
   const after = await session.send('Performance.getMetrics'), delta={};
   for (const name of ['TaskDuration','ScriptDuration','LayoutDuration','RecalcStyleDuration','LayoutCount','RecalcStyleCount']) delta[name]=after.metrics.find(x=>x.name===name).value-before.metrics.find(x=>x.name===name).value;
-  results.push({round,game,variant:variant?'candidate':'baseline',...sample,delta,browserContexts:browser.contexts().length});
+  if(sample.state.status!=='running') {sample.valid=false;sample.invalidReason='left running state';}
+  if(sample.sampleCount<20) sample.invalidReason='fewer than 10 measured callbacks after warm-up';
+  results.push({round,mobile,game,variant:variant?'candidate':'baseline',...sample,delta,browserContexts:browser.contexts().length});
   console.log(JSON.stringify(results.at(-1)));
   await context.close();
   if(browser.contexts().length!==0) throw new Error('Browser contexts accumulated');
  }
  mkdirSync('performance-results',{recursive:true});
- writeFileSync('performance-results/comparison.json',JSON.stringify({...environment,description:'Three predeclared alternating rounds. Same browser, 1280x720 DPR1, stage 1 first 110 rAF callbacks; first 10 excluded. No threshold assertions or release-completion claim. Fresh closed context per sample.',results},null,2));
+ writeFileSync('performance-results/comparison.json',JSON.stringify({...environment,description:'Three predeclared alternating rounds. Same browser, desktop 1280x720 and mobile 390x844 DPR1, stage 1 first 1500ms; first 10 callbacks excluded. Samples ending outside running state or with fewer than 10 measured callbacks after warm-up are marked invalid and retained, never silently discarded. Static initial segment only, not a stage-3 or touch-animation substitute. No threshold assertions or release-completion claim. Fresh closed context per sample.',results},null,2));
 } finally {await browser.close(); for(const server of servers) server.close();}

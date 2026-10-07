@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:11087) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (7.5s)
+  ✓  2 tests/games/browser.spec.ts:157:46 › orbit: simulated notch safe areas keep all controls inside every edge (6.6s)
+  ✓  3 tests/games/browser.spec.ts:157:46 › amber: simulated notch safe areas keep all controls inside every edge (7.3s)
+
+  3 passed (23.3s)

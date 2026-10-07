@@ -4,6 +4,11 @@ export function boot() {
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const root = $('game'); const kind = root.dataset.kind as Kind;
   const title = kind === 'orbit' ? 'Orbit Ribbon' : 'Amber Step';
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  function icon(name: string, className = '') {
+    const span = document.createElement('span'); span.className = `asset-icon ${className}`;
+    span.setAttribute('aria-hidden', 'true'); span.style.setProperty('--icon', `url('/games/assets/lucide/${name}.svg')`); return span;
+  }
   let save = cleanSave(null), storageOkay = true;
   try { save = cleanSave(JSON.parse(localStorage.getItem(SAVE_KEY) || 'null')); } catch { storageOkay = false; }
   function persist(reset = false) {
@@ -34,18 +39,18 @@ export function boot() {
   function axis() { const inputs = [...pointers.values()]; return Number(keys.has('ArrowRight') || keys.has('KeyD') || inputs.includes('right')) - Number(keys.has('ArrowLeft') || keys.has('KeyA') || inputs.includes('left')); }
   function soundLabel() { $('sound').textContent = save.sound ? '音 ON' : '音 OFF'; $('sound').setAttribute('aria-pressed', String(save.sound)); }
   $('sound').onclick = () => { save.sound = !save.sound; soundLabel(); persist(); tone(660); };
-  function button(text: string, fn: () => void, primary = false) { const b = document.createElement('button'); b.textContent = text; if (primary) b.className = 'primary'; b.onclick = fn; $('actions').append(b); }
+  function button(text: string, fn: () => void, primary = false) { const b = document.createElement('button'); if (primary) { b.className = 'primary'; b.append(icon(mode === 'result' && state.status === 'dead' ? 'rotate-ccw' : 'play')); } b.append(document.createTextNode(text)); b.onclick = fn; $('actions').append(b); }
   function stageButtons() {
     $('stages').replaceChildren();
-    stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', `ステージ ${i + 1} ${stage.name}`); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? 'LOCKED' : save[kind].best[i] ? `${save[kind].best[i]!.toFixed(2)}s` : 'READY'; b.append(n, label); b.onclick = () => { selected = i; state = createState(kind, i); view.load(i); menu(); }; $('stages').append(b); });
+    stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', `ステージ ${i + 1} ${stage.name}`); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? 'LOCKED' : save[kind].best[i] ? `${save[kind].best[i]!.toFixed(2)}s` : 'READY'; const name = document.createElement('span'); name.className = 'stage-name'; name.textContent = stage.name; b.append(icon(b.disabled ? 'lock-keyhole' : save[kind].best[i] ? 'check' : 'flag', 'stage-symbol'), n, name, label); b.onclick = () => { selected = i; state = createState(kind, i); view.load(i); menu(); }; $('stages').append(b); });
   }
   function panel(heading: string, copy: string) {
-    clearInput(); $('overlay').hidden = false; $('overlay').scrollTop = 0; $('panel-title').textContent = heading; $('panel-copy').textContent = copy; $('actions').replaceChildren(); $('stages').hidden = true; $('instructions').hidden = true; $('reset').hidden = true; $<HTMLButtonElement>('pause').disabled = mode !== 'pause'; $('hint').textContent = ''; note();
+    clearInput(); $('overlay').dataset.screen = mode; $('overlay').dataset.result = state.status; $('panel-icon').style.setProperty('--icon', `url('/games/assets/lucide/${mode === 'result' ? state.status === 'clear' ? 'trophy' : 'rotate-ccw' : mode === 'pause' ? 'sparkles' : kind === 'orbit' ? 'orbit' : 'gem'}.svg')`); $('eyebrow').textContent = mode === 'result' && state.status === 'clear' ? `STAGE 0${selected + 1} COMPLETE` : kind === 'orbit' ? 'POCKETEY / COSMIC RUN' : 'POCKETEY / WARM ADVENTURE'; $('overlay').hidden = false; $('overlay').scrollTop = 0; $('panel-title').textContent = heading; $('panel-copy').textContent = copy; $('actions').replaceChildren(); $('stages').hidden = true; $('instructions').hidden = true; $('reset').hidden = true; $<HTMLButtonElement>('pause').disabled = mode !== 'pause'; $('hint').textContent = ''; note();
   }
   function menu() {
     if (mode === 'recovery') return;
     mode = 'menu'; panel(title, stages[kind][selected].hint); stageButtons(); $('stages').hidden = false; $('instructions').hidden = false;
-    $('instructions').textContent = kind === 'orbit' ? '自動で前進。← → で左右移動、JUMPで跳ぶ。PC: A / D・矢印・Space。' : '← → で移動、JUMPで跳ぶ。同時押しOK。PC: A / D・矢印・Space。';
+    $('instructions').replaceChildren(icon(kind === 'orbit' ? 'orbit' : 'footprints'), document.createTextNode(kind === 'orbit' ? '自動で前進。左右でよけて、JUMPで跳ぼう。' : '左右で移動。JUMPは同時押しOK。')); const keyboardHelp = document.createElement('small'); keyboardHelp.className = 'keyboard-help'; keyboardHelp.textContent = 'PC: A / D・矢印・Space'; $('instructions').append(keyboardHelp);
     $('reset').hidden = false; button(`ステージ ${selected + 1} をはじめる`, start, true);
   }
   function start() { if (mode === 'recovery') return; clearInput(); state = createState(kind, selected); view.load(selected); mode = 'play'; $('overlay').hidden = true; $<HTMLButtonElement>('pause').disabled = false; $('pause').textContent = '一時停止'; $('hint').textContent = stages[kind][selected].hint; accumulator = 0; last = performance.now(); tone(520); }
@@ -97,8 +102,9 @@ export function boot() {
     if (mode === 'play') {
       accumulator += elapsed;
       while (accumulator >= DT && mode === 'play') {
-        const previousJumps = state.jumps; step(state, { axis: axis(), jump: jumpQueued }); jumpQueued = false; accumulator -= DT;
+        const previousJumps = state.jumps, wasGrounded = state.grounded; step(state, { axis: axis(), jump: jumpQueued }); jumpQueued = false; accumulator -= DT;
         if (state.jumps > previousJumps) tone(440);
+        if (!wasGrounded && state.grounded && state.status === 'running' && !reducedMotion.matches) $('landing-cue').animate([{ opacity: .6, scale: '.6 1' }, { opacity: 0, scale: '1.3 1' }], { duration: 220 });
         if (state.status !== 'running') finish();
       }
       if (state.time > 5) textIfChanged(hint, '');

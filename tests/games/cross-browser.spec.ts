@@ -15,6 +15,7 @@ for(const kind of ['orbit','amber'] as const){
    await page.getByRole('button',{name:stage?'次のステージ':'ステージ 1 をはじめる'}).click();
    await expect(page.locator('#game')).toHaveAttribute('data-status','running');
    await play(page,kind,stage);
+   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
    await page.screenshot({path:info.outputPath(`${kind}-${stage+1}-clear.png`)});
   }
   await page.getByRole('button',{name:'ステージ選択'}).click();

@@ -2,6 +2,25 @@ import {test,expect,type Page} from '@playwright/test';
 import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
 import fs from 'node:fs';
 import {read,play} from './input';
+test('licensed UI artwork loads and existing progress survives the visual refresh',async({page,request})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.addInitScript(k=>localStorage.setItem(k,JSON.stringify({version:1,sound:true,orbit:{unlocked:3,best:[13,16,18]},amber:{unlocked:2,best:[10,null,null]}})),SAVE_KEY);
+ await page.goto('/games/orbit-ribbon/');
+ await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
+ await expect(page.locator('#sound')).toHaveText('音 ON');
+ for(const name of ['orbit','gem','trophy','flag','lock-keyhole','check','arrow-left','arrow-right','arrow-up-right','play','rotate-ccw','sparkles','footprints']){
+  const response=await request.get(`/games/assets/lucide/${name}.svg`);expect(response.status()).toBe(200);expect(await response.text()).toContain('<svg');
+ }
+ const license=await request.get('/games/assets/lucide/LICENSE.txt');expect(await license.text()).toContain('ISC License');expect(await license.text()).toContain('The MIT License');
+ await expect(page.locator('.hero-mark .asset-icon')).toBeVisible();
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ const animationObservation=page.evaluate(async()=>{let active=false;const start=performance.now();await new Promise<void>(resolve=>{function observe(){active ||= document.querySelector('#landing-cue')!.getAnimations().length>0;if(performance.now()-start<1400)requestAnimationFrame(observe);else resolve();}requestAnimationFrame(observe);});return active;});
+ await page.keyboard.press('Space');await expect(page.locator('#game')).toHaveAttribute('data-grounded','false');await expect(page.locator('#game')).toHaveAttribute('data-grounded','true');
+ expect(await animationObservation).toBe(false);
+ await page.locator('#pause').click();await page.getByRole('button',{name:'ステージ選択'}).click();
+ await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
+ const save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(save.orbit.best).toEqual([13,16,18]);
+});
 for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])test.describe(`${kind}-${touch?'touch':'keyboard'}`,()=>{
  test.use({isMobile:touch,hasTouch:touch,viewport:touch?{width:390,height:844}:{width:1280,height:720}});
  test('three stages through normal input, unlock and persistence',async({page,browser},info)=>{
@@ -19,6 +38,7 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+  await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
  }
  await page.getByRole('button',{name:'ステージ選択'}).click();await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
@@ -117,6 +137,10 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: 320x568 menus and cl
   }
   await page.screenshot({path:info.outputPath(`${kind}-320-${name}-bottom.png`)});
  }
+ // Assert before any scrolling or Playwright auto-scroll can hide an initial-layout regression.
+ const initial=await page.getByRole('button',{name:'ステージ 1 をはじめる'}).evaluate(e=>{const a=e.getBoundingClientRect(),o=document.querySelector('#overlay')!,b=o.getBoundingClientRect();return{button:{x:a.x,y:a.y,width:a.width,height:a.height,bottom:a.bottom},overlay:{top:b.top,bottom:b.bottom},scrollTop:o.scrollTop,visible:a.top>=b.top&&a.bottom<=b.bottom&&a.left>=b.left&&a.right<=b.right};});
+ expect(initial.scrollTop).toBe(0);expect(initial.visible).toBe(true);expect(initial.button.height).toBeGreaterThanOrEqual(44);
+ fs.writeFileSync(info.outputPath(`${kind}-320-initial-action-bounds.json`),JSON.stringify(initial,null,2));
  await accessiblePanel('start');
  await page.locator('#sound').click();await expect(page.locator('#sound')).toHaveText('音 ON');
  await page.locator('#reset').click();await accessiblePanel('reset-confirm');
@@ -139,7 +163,7 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: simulated notch safe
  const measurements:unknown[]=[];
  async function insideSafeArea(insets:{top:number;bottom:number;left:number;right:number}){
   const viewport=page.viewportSize()!;
-  const items=page.locator('.game-bar button, .wordmark, [data-input]');
+  const items=page.locator('.game-bar button, .wordmark, [data-input], .hud, #hint');
   for(let i=0;i<await items.count();i++){
    const item=items.nth(i),box=(await item.boundingBox())!;
    const label=await item.getAttribute('aria-label')??await item.textContent();
@@ -166,4 +190,17 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: simulated notch safe
  expect(await page.locator('.controls').evaluate(e=>parseFloat(getComputedStyle(e).paddingBottom))).toBe(21);
  await page.screenshot({path:info.outputPath(`${kind}-notch-landscape-play.png`)});
  fs.writeFileSync(info.outputPath(`${kind}-safe-area-bounds.json`),JSON.stringify(measurements,null,2));
+});
+
+
+test('Amber simultaneous touch shows legible held feedback',async({page},info)=>{
+ await page.goto('/games/amber-step/');await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
+ const session=await page.context().newCDPSession(page),points=[];
+ for(const [i,name] of ['right','jump'].entries()){const b=(await page.locator(`[data-input=${name}]`).boundingBox())!;points.push({x:b.x+b.width/2,y:b.y+b.height/2,id:i+1});}
+ await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:points});
+ const styles=[];
+ for(const name of ['right','jump']){const control=page.locator(`[data-input=${name}]`);await expect(control).toHaveClass(/held/);await expect(control).toHaveCSS('background-color','rgb(255, 211, 147)');await expect(control).toHaveCSS('background-image','none');await expect(control).toHaveCSS('color','rgb(21, 39, 46)');styles.push(await control.evaluate(e=>{const s=getComputedStyle(e);return{input:(e as HTMLElement).dataset.input,color:s.color,background:s.backgroundColor,image:s.backgroundImage};}));}
+ await page.screenshot({path:info.outputPath('amber-simultaneous-held.png')});fs.writeFileSync(info.outputPath('amber-held-styles.json'),JSON.stringify(styles,null,2));
+ await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:points});await expect(page.locator('.controls .held')).toHaveCount(0);await session.detach();
 });

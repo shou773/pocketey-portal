@@ -1,0 +1,67 @@
+/* Lucide/Feather SVG artwork is shipped locally with its ISC/MIT notices. */
+:root{--ui-panel:#12263a;--ui-panel-low:#101d30;--ui-edge:#8ff6d640;--ui-muted:#a5bbcb}
+.amber{--ui-panel:#3b2c32;--ui-panel-low:#251e2b;--ui-edge:#ffd39345;--ui-muted:#d1bcb5}
+.asset-icon{display:inline-block;flex:none;width:22px;height:22px;background:currentColor;mask:var(--icon) center/contain no-repeat;-webkit-mask:var(--icon) center/contain no-repeat;vertical-align:middle}
+.game-bar{background:#101429f2}.amber .game-bar{background:#201b2bf2}.wordmark{letter-spacing:.18em}.game-bar button{border-radius:11px}
+.overlay{padding:20px 18px;background:#080f1c66;backdrop-filter:none}
+.panel{position:relative;padding:26px 24px 18px;border-radius:28px;border-color:var(--ui-edge);background:linear-gradient(150deg,var(--ui-panel),var(--ui-panel-low) 72%);box-shadow:0 20px 60px #0004;text-align:center}
+.amber .panel{background:linear-gradient(150deg,var(--ui-panel),var(--ui-panel-low) 72%)}
+#eyebrow{font-size:9px;letter-spacing:.21em;margin-bottom:16px;font-weight:600}
+.hero-mark{position:relative;display:grid;place-items:center;width:82px;height:82px;margin:0 auto 16px;border:1px solid var(--ui-edge);border-radius:26px;background:radial-gradient(circle at 35% 25%,#ffffff16,transparent 70%),#8ff6d609;color:var(--accent);box-shadow:inset 0 0 0 6px #10142938;transform:rotate(-7deg)}
+.hero-mark::after{content:'';position:absolute;inset:-6px;border:1px solid var(--ui-edge);border-radius:30px;opacity:.35}
+.hero-mark .asset-icon{width:43px;height:43px;transform:rotate(7deg);mask-size:90%;-webkit-mask-size:90%}
+.amber .hero-mark{border-radius:25px 25px 36px 25px;background:radial-gradient(circle at 30% 20%,#ffe6b529,transparent 75%),#ffd39309;transform:rotate(7deg)}
+.amber .hero-mark .asset-icon{transform:rotate(-7deg)}
+h1{font-size:clamp(30px,8vw,42px);font-weight:750;line-height:1.07;letter-spacing:-.035em;margin-bottom:12px}
+#panel-copy{font-size:12px;line-height:1.8;color:var(--ui-muted);margin:0 auto 22px;max-width:32ch}
+.stages{gap:8px;margin-bottom:18px;position:relative}
+.stages button{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:13px 3px 11px;border-radius:15px;background:#ffffff04;border-color:#ffffff10}
+.stages button[aria-pressed=true]{border-color:var(--accent);background:linear-gradient(#8ff6d618,#8ff6d606);box-shadow:inset 0 -3px var(--accent)}
+.amber .stages button[aria-pressed=true]{background:linear-gradient(#ffd3931c,#ffd39306)}
+.stages button:disabled{opacity:.6;background:#0000000a}
+.stages .stage-symbol{width:15px;height:15px;color:var(--accent);margin-bottom:2px}.stages button:disabled .stage-symbol{color:var(--ui-muted)}
+.stages b{font-size:23px;font-weight:650;line-height:1.15}.stages .stage-name{font-size:9px;white-space:nowrap;letter-spacing:-.025em;color:#edf5fa}.stages small{font-size:8px;letter-spacing:.07em;margin-top:2px;color:var(--ui-muted)}
+#instructions{font-size:11px;line-height:1.8;color:var(--ui-muted);padding:10px 8px;border-radius:10px;background:#00000016;margin:0}
+#instructions .asset-icon{width:15px;height:15px;margin-right:7px;color:var(--accent)}.keyboard-help{display:block;font-size:10px}
+#actions{gap:8px;margin-top:16px}#actions button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:13px;font-size:12px;font-weight:550}
+#actions .primary{box-shadow:0 3px 0 #0003;background:var(--accent);color:#15272e;min-height:48px;font-weight:750;flex-basis:100%}
+#actions .asset-icon{width:17px;height:17px}
+#save-note{font-size:9px;color:var(--ui-muted);margin-top:16px}.text-button{font-size:9px;min-height:32px;color:var(--ui-muted);padding:8px}
+.panel-links{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;margin-top:2px}.panel-links .back-link,.asset-credit{display:block;font-size:10px;padding:7px 0;margin:0;color:var(--ui-muted);text-underline-offset:3px}.asset-credit{font-size:9px;text-decoration:none}
+.controls{gap:12px;background:#101a2c}.amber .controls{background:#231d2d}.controls button{display:flex;align-items:center;justify-content:center;border-radius:18px;border-color:#ffffff21;background:linear-gradient(#ffffff0b,#ffffff04);box-shadow:inset 0 1px #ffffff0d}
+.controls .asset-icon{width:27px;height:27px;margin:0}.controls .jump{gap:10px;background:linear-gradient(#8ff6d622,#8ff6d60a);border-color:var(--ui-edge)}.amber .controls .jump{background:linear-gradient(#ffd39322,#ffd3930a)}
+.controls .jump .asset-icon{width:25px;height:25px;margin:0}.controls button.held,.amber .controls button.held{background:var(--accent);color:#15272e;border-color:var(--accent)}
+.hud{top:19px;left:max(24px,env(safe-area-inset-left));right:max(24px,env(safe-area-inset-right))}#hint{left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right))}.hud strong{font-size:13px;font-weight:600}.hud span{font-size:10px}.time #timer{font-size:25px}.time small{color:var(--ui-muted)}
+button{transition:background-color .12s,border-color .12s,transform .12s}button:active:not(:disabled){transform:translateY(2px)}
+#landing-cue{position:absolute;bottom:7px;left:calc(50% - 28px);width:56px;height:3px;border-radius:3px;background:var(--accent);opacity:0;pointer-events:none}
+.overlay[data-screen=result][data-result=clear] .hero-mark{animation:award-arrive .35s ease-out both}
+.overlay[data-screen=result][data-result=clear] h1{color:var(--accent)}
+.overlay[data-screen=result][data-result=dead] .hero-mark{width:65px;height:65px}.overlay[data-screen=result][data-result=dead] h1{font-size:28px}
+.overlay[data-screen=pause] .hero-mark,.overlay[data-screen=reset] .hero-mark,.overlay[data-screen=recovery] .hero-mark{width:58px;height:58px;margin-bottom:13px}.overlay[data-screen=pause] .hero-mark .asset-icon,.overlay[data-screen=reset] .hero-mark .asset-icon{width:30px;height:30px}
+@keyframes award-arrive{from{opacity:0;scale:.85}to{opacity:1;scale:1}}
+@media(max-width:600px){.keyboard-help{display:none}}
+@media(max-width:380px){.panel{padding:22px 16px 16px}.hero-mark{width:68px;height:68px;margin-bottom:14px}.hero-mark .asset-icon{width:37px;height:37px}.stages{gap:6px}.stages .stage-name{font-size:8px}.stages b{font-size:21px}.controls .jump{gap:6px}.controls .asset-icon{width:24px;height:24px}#eyebrow{font-size:8px;letter-spacing:.15em}.panel-links{gap:10px}}
+@media(max-height:540px) and (orientation:landscape){
+ .overlay{padding:10px}.panel{padding:16px 24px;width:min(580px,80%);border-radius:20px}.hero-mark{display:none}#eyebrow{font-size:8px;margin-bottom:6px}h1{font-size:26px;margin-bottom:7px}#panel-copy{font-size:11px;max-width:none;margin-bottom:10px}.stages{margin-bottom:8px}.stages button{display:grid;grid-template-columns:20px 1fr;gap:2px;padding:6px 12px;min-height:44px}.stages .stage-symbol{grid-row:1/3}.stages .stage-name{display:none}.stages b{font-size:18px}.stages small{margin:0}#instructions{padding:5px;font-size:10px}#actions{margin-top:9px}#actions .primary{flex-basis:auto;min-height:44px}#actions button{min-height:44px}#save-note{margin-top:8px}.text-button{min-height:28px;padding:5px}.panel-links{display:inline-flex;margin-left:8px}.controls{background:transparent}.amber .controls{background:transparent}.controls button{background:#101a2cdd}.amber .controls button{background:#231d2ddd}.hud{top:12px}#landing-cue{bottom:64px}
+}
+@media(prefers-reduced-motion:reduce){button{transition:none}.overlay[data-screen=result][data-result=clear] .hero-mark{animation:none}}
+
+.overlay{padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+/* Keep the first action above the fold on short portrait phones. */
+@media(max-height:650px) and (orientation:portrait){
+ .overlay{padding-top:10px;padding-bottom:10px}
+ .overlay[data-screen=menu] .panel{padding:14px 14px 12px;border-radius:22px}
+ .overlay[data-screen=menu] .hero-mark{display:none}
+ .overlay[data-screen=menu] #eyebrow{margin-bottom:6px;font-size:8px}
+ .overlay[data-screen=menu] h1{font-size:28px;margin-bottom:7px}
+ .overlay[data-screen=menu] #panel-copy{font-size:11px;line-height:1.5;margin-bottom:9px}
+ .overlay[data-screen=menu] .stages{gap:6px;margin-bottom:9px}
+ .overlay[data-screen=menu] .stages button{padding:7px 2px;gap:2px}
+ .overlay[data-screen=menu] .stage-symbol{width:12px;height:12px;margin:0}
+ .overlay[data-screen=menu] .stages b{font-size:19px}
+ .overlay[data-screen=menu] .stages small{font-size:7px;margin:0}
+ .overlay[data-screen=menu] #instructions{font-size:10px;line-height:1.5;padding:6px}
+ .overlay[data-screen=menu] #actions{margin-top:10px}
+ .overlay[data-screen=menu] #actions .primary{min-height:46px}
+ .overlay[data-screen=menu] #save-note{margin-top:10px}
+}

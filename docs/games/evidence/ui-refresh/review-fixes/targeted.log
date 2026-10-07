@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:13014) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/games/browser.spec.ts:123:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (32.7s)
+  ✓  2 tests/games/browser.spec.ts:123:46 › amber: 320x568 menus and clear screen remain scroll-accessible (21.8s)
+  ✓  3 tests/games/browser.spec.ts:196:1 › Amber simultaneous touch shows legible held feedback (5.6s)
+
+  3 passed (1.0m)
