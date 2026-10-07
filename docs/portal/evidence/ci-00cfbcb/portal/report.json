@@ -1,0 +1,543 @@
+{
+  "config": {
+    "argv": [
+      "/opt/hostedtoolcache/node/22.23.3/x64/bin/node",
+      "/home/runner/work/pocketey-portal/pocketey-portal/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.portal.config.ts"
+    ],
+    "configFile": "/home/runner/work/pocketey-portal/pocketey-portal/playwright.portal.config.ts",
+    "rootDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/portal",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/shou773/pocketey-portal/commit/00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+        "commitHash": "00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+        "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37640758247"
+      },
+      "gitCommit": {
+        "shortHash": "00cfbcb",
+        "hash": "00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+        "subject": "Align portal footer and refresh candidate screenshots",
+        "body": "Align portal footer and refresh candidate screenshots\n",
+        "author": {
+          "name": "しょう",
+          "email": "staniguchi0201@gmail.com",
+          "time": 1791384914000
+        },
+        "committer": {
+          "name": "しょう",
+          "email": "staniguchi0201@gmail.com",
+          "time": 1791384914000
+        },
+        "branch": "codex/bilingual-game-portal"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/pocketey-portal/pocketey-portal/portal-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/shou773/pocketey-portal/commit/00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+            "commitHash": "00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+            "buildHref": "https://github.com/shou773/pocketey-portal/actions/runs/37640758247"
+          },
+          "gitCommit": {
+            "shortHash": "00cfbcb",
+            "hash": "00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+            "subject": "Align portal footer and refresh candidate screenshots",
+            "body": "Align portal footer and refresh candidate screenshots\n",
+            "author": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791384914000
+            },
+            "committer": {
+              "name": "しょう",
+              "email": "staniguchi0201@gmail.com",
+              "time": 1791384914000
+            },
+            "branch": "codex/bilingual-game-portal"
+          },
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/runner/work/pocketey-portal/pocketey-portal/tests/portal",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "portal-results/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "ASTRO_TELEMETRY_DISABLED=1 npm run preview -- --host 127.0.0.1 --port 4322",
+      "url": "http://127.0.0.1:4322",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "portal.spec.ts",
+      "file": "portal.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "English default, Japanese selection, navigation and reload retention",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2375,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:01.568Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-15e50c4769d679e6705c",
+          "file": "portal.spec.ts",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "Japanese browser defaults and explicit choice priority",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 401,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:05.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-8d78689cca68b61cedaa",
+          "file": "portal.spec.ts",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "blocked or corrupt language storage keeps selection and links usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 299,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:05.612Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-c6aab8d85fbd8918001d",
+          "file": "portal.spec.ts",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "retired URLs return 404 and sitemap contains only current pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 265,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:05.920Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-f8001568a3fd1cc2f6d2",
+          "file": "portal.spec.ts",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "current pages and both-language internal links work without travel placeholders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1412,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:06.193Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-3ac8dba6320836e81d28",
+          "file": "portal.spec.ts",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "orbit: English full-stage play and translated results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 46180,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:07.613Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-1cdbb5c0c123bcab199c",
+          "file": "portal.spec.ts",
+          "line": 48,
+          "column": 46
+        },
+        {
+          "title": "amber: English full-stage play and translated results",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27938,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:56:53.803Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-7b6e5360b4b13e3fa160",
+          "file": "portal.spec.ts",
+          "line": 48,
+          "column": 46
+        },
+        {
+          "title": "orbit: both languages at 320px, existing saves, pause and recovery translation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 915,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:57:21.751Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-f7c75c5d554aa52f6010",
+          "file": "portal.spec.ts",
+          "line": 59,
+          "column": 46
+        },
+        {
+          "title": "amber: both languages at 320px, existing saves, pause and recovery translation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 777,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:57:22.679Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-dccdb349843711776b52",
+          "file": "portal.spec.ts",
+          "line": 59,
+          "column": 46
+        },
+        {
+          "title": "contact retains Worker payload and localizes success, failure and blocked security",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 438,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:57:23.467Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-fc280edd6a175f493fe4",
+          "file": "portal.spec.ts",
+          "line": 69,
+          "column": 1
+        },
+        {
+          "title": "contact without a challenge cannot send and offers the established email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 173,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:57:23.914Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-31bdb5a07e4fdfd58f9b",
+          "file": "portal.spec.ts",
+          "line": 79,
+          "column": 1
+        },
+        {
+          "title": "unsupported WebGL shows a translated recovery explanation and usable exit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 327,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-07T14:57:24.096Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "291f6c0e7fe47579f0c2-25fae6bbc6c9c6ec1b7b",
+          "file": "portal.spec.ts",
+          "line": 84,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-07T14:56:00.253Z",
+    "duration": 84239.177,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

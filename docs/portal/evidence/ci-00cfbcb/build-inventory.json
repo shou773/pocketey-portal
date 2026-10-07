@@ -1,0 +1,196 @@
+{
+  "codeSha": "00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+  "totalBytes": 715051,
+  "files": [
+    {
+      "path": "404.html",
+      "bytes": 6268,
+      "sha256": "9cd0eccf70b9721d37bce5d773b6c27c347f74654c01004cee789fa8224810ba"
+    },
+    {
+      "path": "CNAME",
+      "bytes": 17,
+      "sha256": "d8dbc52bb80f74ddb968e8a982e1500f52a6c2c63b71dbcf821bec806ab1a93d"
+    },
+    {
+      "path": "_astro/ActionGame.astro_astro_type_script_index_0_lang.CAwMqp38.js",
+      "bytes": 546445,
+      "sha256": "89d42fe726d630debcaf8e737de7be429a7e0dfac09b36cb1885fa6ec5dd6965"
+    },
+    {
+      "path": "_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js",
+      "bytes": 46,
+      "sha256": "7f1cae817c58cb8f1a13f860320b0edd2d7bf3ff23b3e982aff41dd37d043a16"
+    },
+    {
+      "path": "_astro/amber-step.BVG8SpgS.css",
+      "bytes": 15155,
+      "sha256": "d929102164d7363240bcdbf41a9a2cedb62de89f960f72aae1ee63673f15d2e5"
+    },
+    {
+      "path": "_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js",
+      "bytes": 3988,
+      "sha256": "9e3fdc1c76e16a4e193dde86c185160c37d6ddd8e748ed5b5cfe3a7c433ce229"
+    },
+    {
+      "path": "_astro/index.CHgRZ30R.css",
+      "bytes": 4674,
+      "sha256": "e5c8ac394d2127a5e270941a0a01f1352c738111eb75dcb9869de36bf12aeb0f"
+    },
+    {
+      "path": "_astro/index.dP8PT9Th.css",
+      "bytes": 4154,
+      "sha256": "9fc95a83ec2104a9b6e2283b18aae94ed04d61965d20728d5678fe75a032790c"
+    },
+    {
+      "path": "_astro/locale.B1rKA6B7.js",
+      "bytes": 1481,
+      "sha256": "9bc5859e9796f0fe659f6febdabaa6e074dd73939426542c3aa92cbc6884f841"
+    },
+    {
+      "path": "about/index.html",
+      "bytes": 8373,
+      "sha256": "54cde0db484abf862d01ffa6dbd8ca21643b91fb03278159b405c8e6bda1dc45"
+    },
+    {
+      "path": "contact/index.html",
+      "bytes": 13053,
+      "sha256": "3d383c797d671d590fcab6ecf204bea5274b597d437434d886eff2d95a93497b"
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 325,
+      "sha256": "369591a20cb10319cc1f043231a0da70482b00b43e2c8a194b6ae75bc5600a23"
+    },
+    {
+      "path": "games/amber-step/index.html",
+      "bytes": 5128,
+      "sha256": "5565be84850389268444c67c70a547eb2c886f08c40f25ae96fb8356e2373547"
+    },
+    {
+      "path": "games/assets/lucide/LICENSE.txt",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    {
+      "path": "games/assets/lucide/SOURCES.json",
+      "bytes": 3998,
+      "sha256": "2d45240aee3d891f2b9b89a39e473c9080165ec509e4d63289ef28c162af3047"
+    },
+    {
+      "path": "games/assets/lucide/arrow-left.svg",
+      "bytes": 262,
+      "sha256": "c5f4b88076108eb1a0d95336e1aa7e7bb1419a3a92af96f6247d88cd3456f933"
+    },
+    {
+      "path": "games/assets/lucide/arrow-right.svg",
+      "bytes": 261,
+      "sha256": "288397fdb73bb4f783cf9eabb726ff47357df1d4e3f1201dd748090579f108b9"
+    },
+    {
+      "path": "games/assets/lucide/arrow-up-right.svg",
+      "bytes": 260,
+      "sha256": "50b2503b9d11881142255466b7e3461d022b919735841c321d72003ac9959fe1"
+    },
+    {
+      "path": "games/assets/lucide/check.svg",
+      "bytes": 239,
+      "sha256": "7f33acc9a77a61659531044525fc008edebe215bf4dcf1c789c8674ad3277db0"
+    },
+    {
+      "path": "games/assets/lucide/flag.svg",
+      "bytes": 370,
+      "sha256": "e99f1de2fea87cd2e3decc28a1f021a2a8182f907b3b350f604909de2030d8b9"
+    },
+    {
+      "path": "games/assets/lucide/footprints.svg",
+      "bytes": 520,
+      "sha256": "09ddd9fd4ac7cebfdc91e1096f7b75db019a42fffc493c4adb128a49e1dba04f"
+    },
+    {
+      "path": "games/assets/lucide/gem.svg",
+      "bytes": 425,
+      "sha256": "377618223555b2847b553a81f6974c76b7ce14d1207bcc0e98baa27a6a36d40e"
+    },
+    {
+      "path": "games/assets/lucide/lock-keyhole.svg",
+      "bytes": 337,
+      "sha256": "fc0b8b7590d1d9e9bb0112c5c2e15a78ade0bfeca6d6f8c79fbbe149236d74be"
+    },
+    {
+      "path": "games/assets/lucide/orbit.svg",
+      "bytes": 418,
+      "sha256": "e2b8b7d7f82044181860cbc2dab9b7e8d3c4778fbbce9a62f5c4038175f4faf4"
+    },
+    {
+      "path": "games/assets/lucide/play.svg",
+      "bytes": 306,
+      "sha256": "d7c34786135922a92b6896f6c2384ceeb0346afbf6041dc79982011411409833"
+    },
+    {
+      "path": "games/assets/lucide/rotate-ccw.svg",
+      "bytes": 297,
+      "sha256": "622685386ab4017eabfde01cd74550a20b1924df233b353f73b6b155371f2afd"
+    },
+    {
+      "path": "games/assets/lucide/sparkles.svg",
+      "bytes": 567,
+      "sha256": "f5499f33f09d7158151e9bd2ec0faf79ff8fb57292f84fdd7286d96d0f0424d8"
+    },
+    {
+      "path": "games/assets/lucide/trophy.svg",
+      "bytes": 554,
+      "sha256": "c641553befdb899b2eb01075c0962c73b4b0e0d1835d9d407f5d5d4d70f77d03"
+    },
+    {
+      "path": "games/index.html",
+      "bytes": 15416,
+      "sha256": "c292abad5a2876bc66cb2d63e0f49725a6767875c798e48c172800d73cae568e"
+    },
+    {
+      "path": "games/orbit-ribbon/index.html",
+      "bytes": 5198,
+      "sha256": "a0589ed9ff365504c1a4722fceec9ab7b1e1170c952b7f46363262b38237312d"
+    },
+    {
+      "path": "games/previews/amber-step.png",
+      "bytes": 20714,
+      "sha256": "15ba69693f4a46838c457ce31f67a3deb86503065009b5ddb7d6726484eb79a2"
+    },
+    {
+      "path": "games/previews/orbit-ribbon.png",
+      "bytes": 24177,
+      "sha256": "3e95107443dc4c2fb057bd4adbf0c8094fc85e47819307d33d7d9cc80ee2a3e8"
+    },
+    {
+      "path": "index.html",
+      "bytes": 15536,
+      "sha256": "4c16b9fe6561a13925c56255c2915d7184a8eca31c5349f37cd22be6b0967190"
+    },
+    {
+      "path": "og-default.svg",
+      "bytes": 780,
+      "sha256": "f21c737484e8fb3e2334d301f96496eee9968243739385e1a86524950fe2cb28"
+    },
+    {
+      "path": "privacy/index.html",
+      "bytes": 11112,
+      "sha256": "ab78d77619d54ab23b9fef5ef132ea8e2af298730347c0c0b53ec792bf2656af"
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 75,
+      "sha256": "3eb03b3f84f0e4c0cfaa9fff281da885bfd724295fa1562adf3faad7983054ad"
+    },
+    {
+      "path": "sitemap-0.xml",
+      "bytes": 727,
+      "sha256": "b6711f22b8608daa56cf7f03af9d6f171710dcb955b7749344cbc945f1fe8a09"
+    },
+    {
+      "path": "sitemap-index.xml",
+      "bytes": 187,
+      "sha256": "f48e686a451cb45a5b8db5f20cddec53afecdbcee6697f04789438c5fd989376"
+    }
+  ]
+}
