@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-07T12:18:37.087Z",
+  "browser": "151.0.7922.173",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "url": "https://www.pocketey.com/",
+      "overflow": false,
+      "errors": [],
+      "failedResponses": []
+    },
+    {
+      "path": "/about/",
+      "status": 200,
+      "url": "https://www.pocketey.com/about/",
+      "overflow": false,
+      "errors": [],
+      "failedResponses": []
+    },
+    {
+      "path": "/contact/",
+      "status": 200,
+      "url": "https://www.pocketey.com/contact/",
+      "overflow": false,
+      "errors": [],
+      "failedResponses": []
+    }
+  ]
+}

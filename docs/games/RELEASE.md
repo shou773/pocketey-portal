@@ -2,6 +2,8 @@
 
 ## Updated environment candidate (165ce97)
 
+**Final verified code: 5e7b3c6581eb11f88a71da67da2cea2365557b3f.** [Run 37619942914](https://github.com/shou773/pocketey-portal/actions/runs/37619942914) passes build/types, 7 unit, 13 Chromium and 10 WebKit/Firefox tests. Final desktop stage 3: Orbit 53.52fps/p95 16.8ms; Amber 51.35fps/p95 33.4ms. Desktop p99/max still show occasional stalls; physical devices remain unverified. WebKit orientation projection is correct after explicit render-size synchronization. [Full final evidence and unsuccessful diagnostics](UPDATED-ENVIRONMENT.md). Publication/live game verification is the remaining step.
+
 **Current evidence supersedes the historical access/browser blocks below:** normal-proxy production access works. [Updated environment report](UPDATED-ENVIRONMENT.md) records exact-SHA CI success on **165ce973d386e16c174978fab834474a0a507336**: build/types, 7 unit tests, 13 Chromium tests and 10 WebKit/Firefox tests. It also preserves the failed 9158381 CI and 9/13 local run, hardware differences, discarded rendering experiments and material limitations. The shader experiments were not retained. The passing CI is not evidence of universal mobile or cloud performance. Publication is still pending exact deployment and live smoke verification.
 
 ## Performance investigation in progress

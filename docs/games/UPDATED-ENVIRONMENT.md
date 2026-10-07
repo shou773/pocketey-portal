@@ -1,5 +1,24 @@
 # Updated environment verification — 2026-10-07
 
+## Final verified code candidate
+
+**5e7b3c6581eb11f88a71da67da2cea2365557b3f** passes [exact-SHA run 37619942914](https://github.com/shou773/pocketey-portal/actions/runs/37619942914): build/game types, **7 unit**, **13 Chromium**, **5 WebKit** and **5 Firefox** tests. There are no retained product changes from the rendering diagnostics. Subsequent evidence-only commits do not claim a new CI execution.
+
+| Final Chromium stage 3 | Mean fps | p95 ms | p99 ms | Max ms |
+| --- | ---: | ---: | ---: | ---: |
+| Orbit keyboard | 53.52 | 16.8 | 83.4 | 83.4 |
+| Orbit touch | 60.01 | 16.8 | 16.8 | 16.8 |
+| Amber keyboard | 51.35 | 33.4 | 83.3 | 133.3 |
+| Amber touch | 60.00 | 16.7 | 16.8 | 16.8 |
+
+This run uses Chromium 153 / SwiftShader / AMD EPYC 9V74 / 4 CPUs, the same CPU model as the earlier failed 9158381 CI. A CPU model alone therefore does not explain the variation. Raw intervals reveal occasional long desktop frames even in this passing run. The original mean >=45fps and p95 <=40ms criteria are met; no stronger smoothness or physical-device claim follows. The earlier failures and raw diagnostics below remain part of the record. No reproducible product-side regression was isolated by the additional rendering experiments, so none were shipped as a supposed performance fix.
+
+WebKit orientation screenshots were a **test synchronization issue**: the new assertion waits until drawing-buffer and CSS aspect ratios agree, and the subsequent live portrait/landscape captures show correct projection. Both engines pass this assertion. No camera or resize implementation change was necessary. [Gameplay images tagged b9a6741](evidence/updated-environment/) show the same unchanged application; final 5e7b3c6 repeats all checks. These images were visually reviewed for visible player/course/gaps, correct aspect, readable controls and reachable menus.
+
+Final [Chromium artifact](https://github.com/shou773/pocketey-portal/actions/runs/37619942914/artifacts/11482231201), [WebKit/Firefox artifact](https://github.com/shou773/pocketey-portal/actions/runs/37619942914/artifacts/11481572813). Separate Cloudflare check **112787394444** remains failed, not overridden by these passes. Normal-proxy mobile browser smoke confirms existing homepage/About/Contact return 200, with no horizontal overflow, page errors or failed asset responses. Public game routes remain pending deployment.
+
+## Investigation history
+
 Follow-up **b9a6741b3d33d23702a14d6e9e24d0e857ff9a7c** adds explicit drawing-buffer aspect assertions before orientation screenshots, plus live gameplay captures. Its [run 37619282408](https://github.com/shou773/pocketey-portal/actions/runs/37619282408) passes all 10 cross-browser cases. The separate quality job stops at a new test TypeScript error (canvas element needed an HTMLCanvasElement cast); it did not execute Chromium tests. The working follow-up corrects that cast and adds raw rAF/input timing evidence, retaining all thresholds. Final candidate checks remain pending; do not transfer the earlier CI pass to untested changes.
 
 ## Candidate and exact CI evidence
