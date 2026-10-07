@@ -1,0 +1,57 @@
+{
+  "codeSha": "00cfbcb5c2c54970510220d20c0ba1d0a4f284dc",
+  "reviewHead": "b71c64bed7a9ae634c724929249b59486f80a8f9",
+  "browser": "151.0.7922.173",
+  "captures": [
+    {
+      "game": "orbit-ribbon",
+      "lang": "ja",
+      "viewport": [
+        320,
+        568
+      ],
+      "buttons": [
+        {
+          "label": "日本語",
+          "pressed": "true",
+          "background": "rgb(143, 246, 214)"
+        },
+        {
+          "label": "English",
+          "pressed": "false",
+          "background": "rgba(0, 0, 0, 0)"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "game": "amber-step",
+      "lang": "ja",
+      "viewport": [
+        320,
+        568
+      ],
+      "buttons": [
+        {
+          "label": "日本語",
+          "pressed": "true",
+          "background": "rgb(255, 211, 147)"
+        },
+        {
+          "label": "English",
+          "pressed": "false",
+          "background": "rgba(0, 0, 0, 0)"
+        }
+      ],
+      "overflow": false
+    },
+    {
+      "page": "home",
+      "lang": "en",
+      "viewport": [
+        1280,
+        900
+      ]
+    }
+  ]
+}
