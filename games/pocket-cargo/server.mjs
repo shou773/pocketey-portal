@@ -10,7 +10,7 @@ const server = http.createServer(async (request, response) => {
   let relative;
   try { relative = decodeURIComponent(new URL(request.url, 'http://localhost').pathname); }
   catch { response.writeHead(400).end(); return; }
-  const target = path.resolve(root, '.' + (relative === '/' ? '/index.html' : relative));
+  const target = path.resolve(root, '.' + (relative.endsWith('/') ? relative + 'index.html' : relative));
   if (!target.startsWith(root)) { response.writeHead(403).end(); return; }
   try {
     const data = await readFile(target);
