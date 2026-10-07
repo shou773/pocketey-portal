@@ -1,0 +1,7 @@
+{
+  "src/games/prototypes/shooter/app.ts": "02bb9e759ff6b59aa1436997abb6041a2afbe0e0560e0215d5ba9345800173bb",
+  "src/games/prototypes/shooter/model.ts": "2eff2b3b001dced76bcee9aca3394e721eb5181243e920aa8d12efe82365f560",
+  "src/games/prototypes/shooter/style.css": "ab5b5f734ffd3ab24ba3157c7c394c133234807a2ce3ebf16ca07f682299d2a9",
+  "src/games/prototypes/shooter/view.ts": "c8dc12a3b1d97aba4e7e7801a98dffe85b2d4d4bc233694c65c71fcd00db07a8",
+  "src/pages/prototypes/pulse-drift.astro": "2d166e49ee19a5107199e5e86147b406c34fe92c4a851aeaf920da4892440022"
+}
