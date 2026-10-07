@@ -211,9 +211,9 @@
         "gzipBytes": 37
       },
       {
-        "path": "_astro/ActionGame.astro_astro_type_script_index_0_lang.Cq-x7PTA.js",
-        "bytes": 662213,
-        "gzipBytes": 172674
+        "path": "_astro/ActionGame.astro_astro_type_script_index_0_lang.DjuHhGb1.js",
+        "bytes": 668147,
+        "gzipBytes": 174319
       },
       {
         "path": "_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js",
@@ -263,7 +263,7 @@
       {
         "path": "games/amber-step/index.html",
         "bytes": 5128,
-        "gzipBytes": 2080
+        "gzipBytes": 2079
       },
       {
         "path": "games/assets/kenney/SOURCES.json",
@@ -413,7 +413,7 @@
       {
         "path": "games/orbit-ribbon/index.html",
         "bytes": 5198,
-        "gzipBytes": 2091
+        "gzipBytes": 2090
       },
       {
         "path": "games/previews/amber-step.png",
@@ -456,16 +456,16 @@
         "gzipBytes": 148
       }
     ],
-    "totalBytes": 1184103,
-    "gzipBytes": 348374,
-    "jsBytes": 667728,
-    "jsGzipBytes": 175403
+    "totalBytes": 1190037,
+    "gzipBytes": 350017,
+    "jsBytes": 673662,
+    "jsGzipBytes": 177048
   },
   "delta": {
-    "totalBytes": 469052,
-    "gzipBytes": 121369,
-    "jsBytes": 115768,
-    "jsGzipBytes": 32116
+    "totalBytes": 474986,
+    "gzipBytes": 123012,
+    "jsBytes": 121702,
+    "jsGzipBytes": 33761
   },
   "assetFiles": [
     {

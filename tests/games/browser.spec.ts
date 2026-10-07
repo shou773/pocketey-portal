@@ -211,13 +211,36 @@ for (const kind of ['orbit','amber'] as const) {
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','ready');
   await expect(page.locator('canvas')).toHaveAttribute('data-art-adopted','true');
+  if(kind==='amber') await page.evaluate(()=>{
+   const clips: {name:string;y:string|undefined;grounded:string|undefined}[]=[];
+   (window as unknown as {artClipTrace:typeof clips}).artClipTrace=clips;
+   new MutationObserver(()=>{
+    const scene=document.querySelector<HTMLCanvasElement>('canvas')!, game=document.querySelector<HTMLElement>('#game')!;
+    clips.push({name:scene.dataset.artAnimation!,y:game.dataset.y,grounded:game.dataset.grounded});
+   }).observe(document.querySelector('canvas')!,{attributes:true,attributeFilter:['data-art-animation']});
+  });
   await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
   if(kind==='amber')await page.keyboard.down('ArrowRight');
   await page.waitForTimeout(150);await page.keyboard.press('Space');
   await expect.poll(async()=>Number((await read(page)).y)).toBeGreaterThan(.8);
+  // Observe the transition before a screenshot can wait through the entire jump.
+  // Release movement here so a slow screenshot cannot carry Oodi into a gap.
+  if(kind==='amber'){
+   await expect.poll(()=>page.evaluate(()=>(window as unknown as {artClipTrace:{name:string;grounded:string}[]}).artClipTrace.some(c=>c.name==='jump'&&c.grounded==='false'))).toBe(true);
+   await page.keyboard.up('ArrowRight');
+  }
   await page.screenshot({path:info.outputPath(`${kind}-art-jump.png`)});
-  if(kind==='amber')await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','jump');
-  await page.keyboard.up('ArrowRight');await page.locator('#pause').click();
+  if(kind==='amber'){
+   await expect(page.locator('#game')).toHaveAttribute('data-grounded','true');
+   await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','idle');
+   await page.keyboard.down('ArrowRight');await expect(page.locator('canvas')).toHaveAttribute('data-art-animation','walk');await page.keyboard.up('ArrowRight');
+   const trace=await page.evaluate(()=>(window as unknown as {artClipTrace:{name:string;grounded:string}[]}).artClipTrace);
+   expect(trace.some(c=>c.name==='fall'&&c.grounded==='false')).toBe(true);
+   expect(trace.some(c=>c.name==='idle'&&c.grounded==='true')).toBe(true);
+   expect(trace.some(c=>c.name==='walk'&&c.grounded==='true')).toBe(true);
+   fs.writeFileSync(info.outputPath('amber-animation-transitions.json'),JSON.stringify(trace,null,2));
+  }
+  await page.locator('#pause').click();
   const frozen=await read(page);await page.waitForTimeout(200);expect((await read(page)).x).toBe(frozen.x);
   expect(errors).toEqual([]);
  });

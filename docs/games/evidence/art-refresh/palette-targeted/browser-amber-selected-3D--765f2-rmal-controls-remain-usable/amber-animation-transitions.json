@@ -1,0 +1,32 @@
+[
+  {
+    "name": "idle",
+    "y": "0.000",
+    "grounded": "true"
+  },
+  {
+    "name": "walk",
+    "y": "0.000",
+    "grounded": "true"
+  },
+  {
+    "name": "jump",
+    "y": "0.142",
+    "grounded": "false"
+  },
+  {
+    "name": "fall",
+    "y": "1.723",
+    "grounded": "false"
+  },
+  {
+    "name": "idle",
+    "y": "0.000",
+    "grounded": "true"
+  },
+  {
+    "name": "walk",
+    "y": "0.000",
+    "grounded": "true"
+  }
+]

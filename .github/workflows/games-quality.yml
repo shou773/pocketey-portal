@@ -17,6 +17,8 @@ on:
       - 'playwright.cross.config.ts'
       - 'scripts/games-performance.mjs'
       - '.github/workflows/games-quality.yml'
+      - 'docs/games/ART-REFRESH.md'
+      - 'docs/games/evidence/art-refresh/**'
   workflow_dispatch:
 permissions:
   contents: read
