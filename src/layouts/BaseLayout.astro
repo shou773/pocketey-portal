@@ -1,31 +1,10 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import LocaleHead from '../components/LocaleHead.astro';
+import T from '../components/T.astro';
 import '../styles/global.css';
-const { title='Pocketey Japan — Japan Travel News & Updates', description='Practical Japan travel news and updates for international visitors.', image='/og-default.svg' } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const {title='Pocketey Games — Small adventures, one more try',titleJa='Pocketey Games — 小さな冒険を、ポケットに。',description='Two original browser action games. Three stages each. Touch or keyboard. No account required.',descriptionJa='タッチでもキーボードでも遊べる、2つのオリジナルブラウザゲーム。各3ステージ、アカウント不要。',noindex=false}=Astro.props;
+const canonical=new URL(Astro.url.pathname,Astro.site);
 ---
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <meta name="generator" content={Astro.generator} />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <link rel="canonical" href={canonical} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={new URL(image, Astro.site)} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#f5f2ea" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-</head>
-<body>
-  <Header />
-  <main><slot /></main>
-  <Footer />
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><LocaleHead/><title data-ja={titleJa} data-en={title}>{title}</title><meta name="description" content={description} data-ja={descriptionJa} data-en={description}/><link rel="canonical" href={canonical}/>{noindex&&<meta name="robots" content="noindex"/>}<meta property="og:type" content="website"/><meta property="og:title" content={title} data-ja={titleJa} data-en={title}/><meta property="og:description" content={description} data-ja={descriptionJa} data-en={description}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL('/og-default.svg',Astro.site)}/><meta name="theme-color" content="#f4f1e9"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/></head><body><a class="skip-link" href="#main"><T ja="本文へ移動" en="Skip to content"/></a><Header/><main id="main"><slot/></main><Footer/><script>import {installLocale} from '../lib/locale';installLocale();</script></body></html>

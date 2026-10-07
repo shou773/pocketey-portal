@@ -5,7 +5,7 @@ const label=process.argv[2];if(!['before','after'].includes(label))throw new Err
 const out=`docs/games/evidence/ui-refresh/${label}`;fs.mkdirSync(out,{recursive:true});
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 try{for(const kind of ['orbit','amber'] as const){
- const c=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});const p=await c.newPage();
+ const c=await browser.newContext({locale:'ja-JP',viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});const p=await c.newPage();
  await p.goto(`http://127.0.0.1:4322/games/${kind==='orbit'?'orbit-ribbon':'amber-step'}/`);
  await p.waitForFunction(()=>document.querySelector('#game')?.getAttribute('data-mode')==='menu');
  await p.waitForTimeout(350);await p.screenshot({path:`${out}/${kind}-390-start.png`});

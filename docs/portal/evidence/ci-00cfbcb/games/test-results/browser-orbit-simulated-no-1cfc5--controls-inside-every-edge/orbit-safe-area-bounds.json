@@ -1,0 +1,306 @@
+[
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "POCKETEY  / PLAY",
+    "box": {
+      "x": 18,
+      "y": 65.5,
+      "width": 146.421875,
+      "height": 15
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "音を切り替え",
+    "box": {
+      "x": 224.921875,
+      "y": 54,
+      "width": 65.078125,
+      "height": 38
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "一時停止",
+    "box": {
+      "x": 298,
+      "y": 54,
+      "width": 74,
+      "height": 38
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "01 / 03はじめの軌道0.00SECONDS",
+    "box": {
+      "x": 24,
+      "y": 122,
+      "width": 342,
+      "height": 43
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "",
+    "box": {
+      "x": 14,
+      "y": 705,
+      "width": 362,
+      "height": 0
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "左へ移動",
+    "box": {
+      "x": 20,
+      "y": 744,
+      "width": 72,
+      "height": 66
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "右へ移動",
+    "box": {
+      "x": 102,
+      "y": 744,
+      "width": 72,
+      "height": 66
+    }
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "insets": {
+      "top": 44,
+      "bottom": 34,
+      "left": 0,
+      "right": 0
+    },
+    "label": "ジャンプ",
+    "box": {
+      "x": 238,
+      "y": 744,
+      "width": 132,
+      "height": 66
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "POCKETEY  / PLAY",
+    "box": {
+      "x": 44,
+      "y": 16.5,
+      "width": 146.421875,
+      "height": 15
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "音を切り替え",
+    "box": {
+      "x": 652.921875,
+      "y": 5,
+      "width": 65.078125,
+      "height": 38
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "一時停止",
+    "box": {
+      "x": 726,
+      "y": 5,
+      "width": 74,
+      "height": 38
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "01 / 03はじめの軌道0.09SECONDS",
+    "box": {
+      "x": 44,
+      "y": 61,
+      "width": 756,
+      "height": 43
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "",
+    "box": {
+      "x": 44,
+      "y": 320,
+      "width": 756,
+      "height": 0
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "左へ移動",
+    "box": {
+      "x": 44,
+      "y": 319,
+      "width": 72,
+      "height": 50
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "右へ移動",
+    "box": {
+      "x": 126,
+      "y": 319,
+      "width": 72,
+      "height": 50
+    }
+  },
+  {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "insets": {
+      "top": 0,
+      "bottom": 21,
+      "left": 44,
+      "right": 44
+    },
+    "label": "ジャンプ",
+    "box": {
+      "x": 668,
+      "y": 319,
+      "width": 132,
+      "height": 50
+    }
+  }
+]

@@ -1,27 +1,5 @@
-<footer>
-  <div class="container footer-grid">
-    <div>
-      <div class="eyebrow">POCKETEY JAPAN</div>
-      <h2>Japan, made a little easier.</h2>
-      <p>Calm, practical updates for international travelers — focused on what changed, why it matters, and what to do next.</p>
-    </div>
-    <div class="links">
-      <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-      <a id="report-problem" href="/contact/?type=site">Report a problem</a>
-      <a href="/privacy/">Privacy</a>
-      <a href="/affiliate-disclosure/">Affiliate Disclosure</a>
-      <a href="/news/">Latest Updates</a>
-    </div>
-  </div>
-  <div class="container legal">© {new Date().getFullYear()} Pocketey Japan. Independent travel information.</div>
-  <script>
-    const reportLink = document.querySelector('#report-problem');
-    if (reportLink) {
-      reportLink.setAttribute('href', `/contact/?type=site&url=${encodeURIComponent(window.location.href)}`);
-    }
-  </script>
-</footer>
-<style>
-footer{margin-top:90px;background:#20211d;color:#e9e6dd;padding:58px 0 24px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:60px}.eyebrow{font-size:.68rem;letter-spacing:.2em;color:#aaa99f}.footer-grid h2{font:400 clamp(2rem,4vw,4rem)/1 Georgia;margin:.45rem 0 1rem;max-width:700px}.footer-grid p{color:#aaa99f;max-width:600px}.links{display:grid;align-content:start;gap:12px;padding-top:8px}.links a{color:#c9c5ba}.links a:hover{color:white}.legal{margin-top:45px;padding-top:20px;border-top:1px solid #3b3c36;font-size:.72rem;color:#85867e}@media(max-width:720px){.footer-grid{grid-template-columns:1fr}}
-</style>
+---
+import T from './T.astro';
+---
+<footer><div class="container footer-grid"><div><a class="footer-brand" href="/">POCKETEY GAMES</a><p><T ja="小さな冒険を、ポケットに。" en="Small adventures, one more try."/></p><p class="muted"><T ja="ブラウザで遊べる、オリジナルゲーム。" en="Original games you can play in your browser."/></p></div><nav aria-label="Pocketey information"><a href="/games/"><T ja="ゲーム一覧" en="All games"/></a><a href="/about/"><T ja="このサイトについて" en="About"/></a><a href="/privacy/"><T ja="プライバシー" en="Privacy"/></a><a href="/contact/"><T ja="お問い合わせ" en="Contact"/></a></nav></div><p class="container legal">© {new Date().getFullYear()} Pocketey.</p></footer>
+<style>footer{margin-top:76px;padding:44px 0 20px;border-top:1px solid var(--line)}.footer-grid{display:flex;justify-content:space-between;gap:28px}.footer-brand{font-size:13px;font-weight:800;letter-spacing:.13em}footer p{font-size:13px;margin:10px 0}.footer-grid nav{display:grid;gap:10px;font-size:13px}footer .legal{font-size:11px;color:var(--muted);margin:28px auto 0}@media(max-width:500px){.footer-grid{flex-direction:column}.footer-grid nav{grid-template-columns:1fr 1fr}}</style>

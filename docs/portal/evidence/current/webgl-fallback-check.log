@@ -1,0 +1,8 @@
+
+Running 1 test using 1 worker
+
+(node:17825) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/portal/portal.spec.ts:84:1 › unsupported WebGL shows a translated recovery explanation and usable exit (3.0s)
+
+  1 passed (4.9s)

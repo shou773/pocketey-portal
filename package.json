@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node scripts/check-portal.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test": "tsx --test tests/games/model.test.ts",
     "test:browser": "playwright test",
-    "check:games": "tsc --noEmit -p tsconfig.games.json"
+    "check:games": "tsc --noEmit -p tsconfig.games.json",
+    "test:portal": "playwright test --config playwright.portal.config.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.2",

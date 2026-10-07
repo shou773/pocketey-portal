@@ -1,10 +1,13 @@
 name: Games quality
 on:
   push:
-    branches: [codex/orbit-and-amber, codex/game-ui-refresh, main]
+    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, main]
     paths:
-      - 'src/games/**'
-      - 'public/games/assets/**'
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/check-portal.mjs'
+      - 'tests/portal/**'
+      - 'playwright.portal.config.ts'
       - 'src/pages/games/**'
       - 'src/components/ActionGame.astro'
       - 'src/components/Header.astro'
@@ -32,12 +35,12 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npm run check:games && npm test && npm run build
+      - run: npm run check && npm run check:games && npm test && npm run build
       - run: npx playwright install --with-deps chromium
       - name: Compare fixed baseline and candidate on the same runner
         run: |
           mkdir -p "$RUNNER_TEMP/game-baseline"
-          git archive dce870df42138a03718359149bede54f72d600e3 | tar -x -C "$RUNNER_TEMP/game-baseline"
+          git archive 34ee2de4194180792ddee2ecc6905e634ee95c06 | tar -x -C "$RUNNER_TEMP/game-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/game-baseline/node_modules"
           (cd "$RUNNER_TEMP/game-baseline" && npm run build)
           node scripts/games-performance.mjs "$RUNNER_TEMP/game-baseline/dist" dist
@@ -68,3 +71,24 @@ jobs:
         with:
           name: cross-browser-evidence
           path: cross-results/
+
+  portal:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:portal
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: portal-evidence
+          path: portal-results/

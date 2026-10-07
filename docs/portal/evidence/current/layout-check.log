@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:18488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/portal/portal.spec.ts:8:1 › English default, Japanese selection, navigation and reload retention (9.7s)
+  ✓  2 tests/portal/portal.spec.ts:30:1 › retired URLs return 404 and sitemap contains only current pages (1.2s)
+  ✓  3 tests/portal/portal.spec.ts:36:1 › current pages and both-language internal links work without travel placeholders (9.0s)
+
+  3 passed (21.5s)

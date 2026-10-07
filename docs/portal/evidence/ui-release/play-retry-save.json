@@ -1,0 +1,53 @@
+{
+  "mergeSha": "34ee2de4194180792ddee2ecc6905e634ee95c06",
+  "at": "2026-10-07T14:38:34.236Z",
+  "browser": "151.0.7922.173",
+  "proxy": "normal supported HTTPS_PROXY",
+  "coverage": "Actual public URLs. Ordinary injected multi-touch clear of stage 1 in each game, pause/resume, death/retry and reload persistence. Software-rendered cloud browser, not physical-device performance.",
+  "results": [
+    {
+      "kind": "orbit",
+      "url": "https://www.pocketey.com/games/orbit-ribbon/",
+      "status": 200,
+      "gl": {
+        "webgl2": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "pausedPosition": "0.350",
+      "ordinaryTouchStage1Clear": true,
+      "save": {
+        "unlocked": 2,
+        "best": [
+          12.999999999999902,
+          null,
+          null
+        ]
+      },
+      "soundAndUnlockSurvivedReload": true,
+      "deathAndInstantRetry": true,
+      "errors": []
+    },
+    {
+      "kind": "amber",
+      "url": "https://www.pocketey.com/games/amber-step/",
+      "status": 200,
+      "gl": {
+        "webgl2": true,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "pausedPosition": "0.000",
+      "ordinaryTouchStage1Clear": true,
+      "save": {
+        "unlocked": 2,
+        "best": [
+          7.991666666666854,
+          null,
+          null
+        ]
+      },
+      "soundAndUnlockSurvivedReload": true,
+      "deathAndInstantRetry": true,
+      "errors": []
+    }
+  ]
+}

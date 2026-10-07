@@ -1,86 +1,34 @@
-# Pocketey Japan
+# Pocketey Games
 
-Minimal Astro + GitHub Pages MVP for **pocketey.com**.
+A bilingual browser-game portal built with Astro and Three.js. Current games: Orbit Ribbon and Amber Step, three stages each. Touch and keyboard controls; local progress; no accounts, ads or analytics scripts.
 
-## What is included
+## Development
 
-- Editorial-style responsive homepage
-- Markdown-based travel news collection
-- Individual article pages
-- News index and Guides placeholder
-- About / Privacy / Affiliate Disclosure
-- Canonical URLs, meta descriptions, Open Graph, robots.txt
-- Automatic sitemap via `@astrojs/sitemap`
-- GitHub Pages deployment workflow
-- `draft: true` publishing gate for human approval
-
-## Local setup
-
-```bash
-npm install
+```sh
+npm ci
 npm run dev
+npm run check
+npm run check:games
+npm test
+ASTRO_TELEMETRY_DISABLED=1 npm run build
+npm run test:browser
+npm run test:portal
 ```
 
-Build check:
+`npm run build` verifies public routes and rejects retired travel/news source or build directories. Do not restore news publishing or newsletter placeholders. The former travel articles and images were removed with ordinary Git deletions; history is retained.
 
-```bash
-npm run build
-```
+## Language and storage
 
-## Add an article
+The same route supports both languages. Explicit `?lang=ja` / `?lang=en` or the visible language switch takes priority; otherwise the saved preference is used, then Japanese for a Japanese browser language and English for others. Preference key: `pocketey-language-v1`. Existing game saves remain at `pocketey-orbit-amber-v1` without migration.
 
-Create a Markdown file in `src/content/news/`, for example:
+## Contact
 
-```md
----
-title: "JR announces ..."
-description: "One-sentence traveler-focused summary."
-date: 2026-09-05
-category: "Transportation"
-location: "Tokyo"
-featured: false
-draft: true
-sourceLabel: "JR East"
-sourceUrl: "https://example.com/official-source"
----
+The existing form posts to the existing Cloudflare Worker, protected by the existing Turnstile site key. The payload field names and category values are preserved. No external account, routing, secrets or Worker code is managed by this repository update. Tests mock submission and never send messages to the real endpoint. The page retains `contact@pocketey.com` as its established alternative.
 
-## What changed?
-...
+## Deployment
 
-## Who is affected?
-...
+Main is built by `.github/workflows/deploy.yml` and deployed to GitHub Pages at https://www.pocketey.com. Cloudflare Pages is a separate historical integration; its failing checks must not be reported as GitHub Pages deployment failure or as fixed without evidence.
 
-## What should travelers do?
-...
-```
+There are no scheduled news-generation workflows in the current tracked workflow files. Build retirement checks prevent accidental republishing from this source tree. `/news/*`, `/guides/` and the former affiliate page now return 404 rather than redirecting unrelated articles to the homepage.
 
-Keep `draft: true` while reviewing. Change to `draft: false` to publish on the next GitHub push.
-
-## GitHub Pages
-
-1. Create a public GitHub repository.
-2. Push this project to the `main` branch.
-3. In **Settings → Pages**, set the source to **GitHub Actions**.
-4. The included workflow will build and deploy the site.
-
-## Custom domain: pocketey.com
-
-This project is configured for `https://www.pocketey.com`.
-
-Recommended setup:
-
-- `www.pocketey.com` → CNAME to `<your-github-username>.github.io`
-- Configure the apex `pocketey.com` using the current GitHub Pages DNS instructions from your registrar.
-- Add `www.pocketey.com` as the custom domain in GitHub Pages settings.
-- Turn on **Enforce HTTPS** after DNS resolves.
-
-Do not change DNS records until you confirm where `pocketey.com` currently points.
-
-## Before commercial launch
-
-- Replace demo articles with verified real reporting.
-- Review Privacy Policy and Affiliate Disclosure for actual services used.
-- Add a public contact method.
-- Connect Google Search Console.
-- Add analytics only when you are ready to update privacy/cookie handling.
-- Verify each affiliate program's terms before inserting affiliate links.
+See `docs/games/` for game QA, asset licenses and publication evidence; `docs/portal/` for the bilingual migration report. Advertising activation, ads.txt and review submission are outside this update.

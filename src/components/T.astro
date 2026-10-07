@@ -1,0 +1,5 @@
+---
+interface Props { ja: string; en: string; }
+const {ja,en}=Astro.props;
+---
+<span lang="ja" data-l10n="ja">{ja}</span><span lang="en" data-l10n="en">{en}</span>

@@ -1,0 +1,35 @@
+{
+  "sha": "34ee2de4194180792ddee2ecc6905e634ee95c06",
+  "assets": [
+    {
+      "path": "/_astro/amber-step.oXkkN-z8.css",
+      "bytes": 14536,
+      "sha256": "81123d06b0b4663911fa740dca9a9c04389811b87e41aa10c3e2d6f1c3736cdb",
+      "matchesLocalVerifiedBuild": true
+    },
+    {
+      "path": "/_astro/ActionGame.astro_astro_type_script_index_0_lang.IVE1_BE8.js",
+      "bytes": 543727,
+      "sha256": "ea115006a19bcfe058a901e93db14b7d4d37294f39bca005668e1fe994e1c6a2",
+      "matchesLocalVerifiedBuild": true
+    },
+    {
+      "path": "/games/assets/lucide/orbit.svg",
+      "bytes": 418,
+      "sha256": "e2b8b7d7f82044181860cbc2dab9b7e8d3c4778fbbce9a62f5c4038175f4faf4",
+      "matchesLocalVerifiedBuild": true
+    },
+    {
+      "path": "/games/assets/lucide/gem.svg",
+      "bytes": 425,
+      "sha256": "377618223555b2847b553a81f6974c76b7ce14d1207bcc0e98baa27a6a36d40e",
+      "matchesLocalVerifiedBuild": true
+    },
+    {
+      "path": "/games/assets/lucide/LICENSE.txt",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+      "matchesLocalVerifiedBuild": true
+    }
+  ]
+}
