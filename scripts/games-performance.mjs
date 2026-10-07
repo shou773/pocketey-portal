@@ -20,6 +20,8 @@ for (const root of roots) {
  await new Promise(r => server.listen(0, '127.0.0.1', r)); servers.push(server);
 }
 const browser = await chromium.launch({executablePath:process.env.CI ? undefined : '/usr/bin/chromium',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+const environment={browser:browser.version(),node:process.version,os:os.platform(),cpu:os.cpus()[0]?.model,cpuCount:os.cpus().length};
+console.log('ENVIRONMENT',JSON.stringify(environment));
 const results = [];
 try {
  for (let round=0; round<3; round++) for (const game of ['orbit-ribbon','amber-step']) for (const variant of (round%2 ? [1,0] : [0,1])) {
@@ -52,5 +54,5 @@ try {
   if(browser.contexts().length!==0) throw new Error('Browser contexts accumulated');
  }
  mkdirSync('performance-results',{recursive:true});
- writeFileSync('performance-results/comparison.json',JSON.stringify({browser:browser.version(),node:process.version,os:os.platform(),cpu:os.cpus()[0]?.model,cpuCount:os.cpus().length,description:'Three predeclared alternating rounds. Same browser, 1280x720 DPR1, stage 1 first 110 rAF callbacks; first 10 excluded. No threshold assertions or release-completion claim. Fresh closed context per sample.',results},null,2));
+ writeFileSync('performance-results/comparison.json',JSON.stringify({...environment,description:'Three predeclared alternating rounds. Same browser, 1280x720 DPR1, stage 1 first 110 rAF callbacks; first 10 excluded. No threshold assertions or release-completion claim. Fresh closed context per sample.',results},null,2));
 } finally {await browser.close(); for(const server of servers) server.close();}
