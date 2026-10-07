@@ -209,6 +209,7 @@ for (const kind of ['orbit','amber'] as const) {
  const route = `/games/${kind === 'orbit' ? 'orbit-ribbon' : 'amber-step'}/`;
  test(`${kind}: selected 3D art loads, animation and normal controls remain usable`,async({page},info)=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  page.on('console',message=>{if(message.type()==='error' && /Shader Error|shader is not compiled/i.test(message.text()))errors.push(message.text());});
   await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','ready');
   await expect(page.locator('canvas')).toHaveAttribute('data-art-adopted','true');
   if(kind==='amber') await page.evaluate(()=>{

@@ -66,7 +66,7 @@
         "z": "0.000",
         "grounded": "true",
         "jumps": "0",
-        "geometries": "8"
+        "geometries": "10"
       },
       "art": {
         "engine": "three.js r186",
@@ -92,7 +92,7 @@
         "z": "0.000",
         "grounded": "true",
         "jumps": "0",
-        "geometries": "8"
+        "geometries": "10"
       },
       "art": {
         "engine": "three.js r186",

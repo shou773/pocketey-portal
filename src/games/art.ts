@@ -53,7 +53,16 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
             const m = source as T.MeshStandardMaterial;
             if (kind === 'amber' && !m.map) throw new Error('Required colormap missing');
             const color = name === 'platform_small' ? new T.Color(m.name === 'metalRed' ? 0x426272 : m.name === 'metal' ? 0x708695 : 0x344b60) : m.color;
-            materials.set(source, new T.MeshLambertMaterial({ color, map: kind === 'amber' ? null : m.map, vertexColors: kind === 'amber' || m.vertexColors, side: ['character-oodi', 'block-grass-low-long', 'rocks'].includes(name) ? T.FrontSide : m.side, transparent: m.transparent, opacity: m.opacity }));
+            const result = new T.MeshLambertMaterial({ color, map: kind === 'amber' ? null : m.map, vertexColors: kind === 'amber' || m.vertexColors, side: ['character-oodi', 'block-grass-low-long', 'rocks'].includes(name) ? T.FrontSide : m.side, transparent: m.transparent, opacity: m.opacity });
+            // This exported rig binds every vertex to one bone in channel X.
+            // Validate that fact before omitting the three zero-weight fetches;
+            // a future blended rig keeps Three's normal skinning path.
+            const weights = object.geometry.getAttribute('skinWeight');
+            if (object instanceof T.SkinnedMesh && weights && Array.from({length:weights.count},(_,i)=>i).every(i=>weights.getX(i)===1&&weights.getY(i)===0&&weights.getZ(i)===0&&weights.getW(i)===0)) {
+              result.onBeforeCompile = shader => { shader.vertexShader = shader.vertexShader.replace('#include <skinbase_vertex>', '#ifdef USE_SKINNING\nmat4 boneMatX = getBoneMatrix(skinIndex.x);\nmat4 boneMatY = mat4(0.0);\nmat4 boneMatZ = mat4(0.0);\nmat4 boneMatW = mat4(0.0);\n#endif'); };
+              result.customProgramCacheKey = ()=>'single-bone-bindings-v1';
+            }
+            materials.set(source, result);
           }
           return materials.get(source)!;
         };
@@ -85,7 +94,7 @@ export function clearStatic(group: T.Group) {
   }
   group.clear();
 }
-export function batchStatic(group: T.Group) {
+export function batchStatic(group: T.Group, kind: Kind) {
   group.updateMatrixWorld(true);
   const merged = new Map<string, {material:T.Material; geometries:T.BufferGeometry[]}>();
   const instances = new Map<string, {mesh:T.Mesh; matrices:T.Matrix4[]}>();
@@ -94,10 +103,27 @@ export function batchStatic(group: T.Group) {
     const material = object.material;
     const simple = material instanceof T.MeshLambertMaterial || material instanceof T.MeshBasicMaterial;
     if (simple && !material.map && !material.transparent && (!(material instanceof T.MeshLambertMaterial) || material.emissive.getHex() === 0)) {
-      const style = material.type + ':' + material.side + ':' + material.fog;
-      if (!batchMaterials.has(style)) batchMaterials.set(style, material instanceof T.MeshLambertMaterial
-        ? new T.MeshLambertMaterial({vertexColors:true,side:material.side,fog:material.fog})
-        : new T.MeshBasicMaterial({vertexColors:true,side:material.side,fog:material.fog}));
+      const style = kind + ':' + material.type + ':' + material.side + ':' + material.fog;
+      if (!batchMaterials.has(style)) {
+        const twoSided = material.side === T.DoubleSide;
+        // Low-poly static surfaces have flat face colors. Compute fog/output
+        // transfer at their vertices, then interpolate, instead of repeating
+        // smoothstep and sRGB pow for every background/ground pixel. The same
+        // world lighting, fog limits and palette are retained; fog gradients
+        // use vertex interpolation, so verify them in gameplay captures.
+        const painted = new T.ShaderMaterial({vertexColors:true,side:material.side,
+          uniforms:{paintFog:{value:new T.Color(kind==='orbit'?0x152541:0xe9b391)}},
+          vertexShader:`uniform vec3 paintFog; varying vec3 frontColor; ${twoSided?'attribute vec3 colorBack; varying vec3 backColor;':''}
+          vec3 outputColor(vec3 c) { return mix(pow(max(c,vec3(0.0)),vec3(0.41666))*1.055-vec3(0.055), c*12.92,vec3(lessThanEqual(c,vec3(0.0031308)))); }
+          void main() { vec4 viewPosition=modelViewMatrix*vec4(position,1.0);
+          float fogAmount=${material.fog?`smoothstep(${kind==='orbit'?'48.0':'30.0'},105.0,-viewPosition.z)`:'0.0'};
+          frontColor=outputColor(mix(color.rgb,paintFog,fogAmount));
+          ${twoSided?'backColor=outputColor(mix(colorBack,paintFog,fogAmount));':''}
+          gl_Position=projectionMatrix*viewPosition; }`,
+          fragmentShader:`varying vec3 frontColor; ${twoSided?'varying vec3 backColor;':''} void main() { gl_FragColor=vec4(${twoSided?'gl_FrontFacing?frontColor:backColor':'frontColor'},1.0); }`
+        });
+        batchMaterials.set(style,painted);
+      }
       const key = style, geometry = object.geometry.clone();
       const sourceColors = geometry.getAttribute('color');
       const colors = new Float32Array(geometry.getAttribute('position').count * 3);
@@ -107,7 +133,28 @@ export function batchStatic(group: T.Group) {
         colors[i * 3 + 2] = material.color.b * (material.vertexColors && sourceColors ? sourceColors.getZ(i) : 1);
       }
       for (const name of Object.keys(geometry.attributes)) if (!['position','normal'].includes(name)) geometry.deleteAttribute(name);
-      geometry.setAttribute('color', new T.BufferAttribute(colors, 3)); geometry.applyMatrix4(object.matrixWorld);
+      geometry.applyMatrix4(object.matrixWorld);
+      // r186 Lambert evaluates diffuse lighting per fragment. These meshes
+      // never deform and our hemisphere/directional lights are fixed in world
+      // space, so compute the same Lambert irradiance once on their normals.
+      // The batch shader applies the original fog limits and sRGB output at
+      // vertices, retaining inexpensive interpolated flat-face colors.
+      const backColors = new Float32Array(colors.length), normals = geometry.getAttribute('normal');
+      const sky = new T.Color(0xe9f5ff), ground = new T.Color(kind==='orbit'?0x384b70:0x91745b), sun = new T.Color(0xffe4c5);
+      const direction = new T.Vector3(-8,15,5).normalize();
+      for (let i=0;i<colors.length/3;i++) {
+        const r=colors[i*3],g=colors[i*3+1],b=colors[i*3+2];
+        for (const back of [false,true]) {
+          const sign=back?-1:1,nx=normals.getX(i)*sign,ny=normals.getY(i)*sign,nz=normals.getZ(i)*sign;
+          const weight=ny*.5+.5,dot=Math.max(0,nx*direction.x+ny*direction.y+nz*direction.z), target=back?backColors:colors;
+          const lit=material instanceof T.MeshLambertMaterial;
+          target[i*3]=r*(lit?(2.2*(ground.r+(sky.r-ground.r)*weight)+2.1*sun.r*dot)/Math.PI:1);
+          target[i*3+1]=g*(lit?(2.2*(ground.g+(sky.g-ground.g)*weight)+2.1*sun.g*dot)/Math.PI:1);
+          target[i*3+2]=b*(lit?(2.2*(ground.b+(sky.b-ground.b)*weight)+2.1*sun.b*dot)/Math.PI:1);
+        }
+      }
+      geometry.setAttribute('color',new T.BufferAttribute(colors,3));
+      if (material.side===T.DoubleSide) geometry.setAttribute('colorBack',new T.BufferAttribute(backColors,3));
       const batch = merged.get(key) ?? {material:batchMaterials.get(style)!,geometries:[] as T.BufferGeometry[]};
       batch.geometries.push(geometry); merged.set(key,batch);
     } else {

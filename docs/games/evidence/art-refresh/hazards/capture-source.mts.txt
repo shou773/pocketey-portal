@@ -1,0 +1,27 @@
+import {chromium,type Page} from '/workspace/pocketey-portal/node_modules/playwright-core/index.mjs';
+import fs from 'node:fs';
+const root='/workspace/pocketey-portal',out=root+'/docs/games/evidence/art-refresh/hazards';fs.mkdirSync(out,{recursive:true});const results:any[]=[];
+const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+async function freeze(p:Page){await p.evaluate(()=>{(window as any).freezeFrames=true;});await p.waitForFunction(()=>!!(window as any).pendingFrame,null,{polling:50});}
+async function resume(p:Page){await p.evaluate(()=>{(window as any).freezeFrames=false;const callback=(window as any).pendingFrame;(window as any).pendingFrame=null;callback(performance.now());});}
+try{for(const game of ['orbit-ribbon','amber-step'])for(const mobile of [true,false]){
+ const c=await browser.newContext({locale:'ja-JP',viewport:mobile?{width:390,height:844}:{width:1280,height:720},deviceScaleFactor:1,isMobile:mobile,hasTouch:mobile});const p=await c.newPage();const errors:string[]=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.addInitScript(()=>{
+  localStorage.setItem('pocketey-orbit-amber-v1',JSON.stringify({version:1,sound:false,orbit:{unlocked:3,best:[13,16,18]},amber:{unlocked:3,best:[10,12,14]}}));
+  const raf=requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>raf(now=>{if((window as any).freezeFrames)(window as any).pendingFrame=callback;else callback(now);});
+ });
+ await p.goto(`http://127.0.0.1:4322/games/${game}/?lang=ja`);await p.waitForFunction(()=>document.querySelector<HTMLCanvasElement>('canvas')?.dataset.artAdopted==='true');await p.getByRole('button',{name:/ステージ 3 /}).click();await p.getByRole('button',{name:'ステージ 3 をはじめる'}).click();
+ const session=mobile?await c.newCDPSession(p):null;const held=new Set<string>();const points:Record<string,any>={};for(const [i,name] of ['left','right','jump'].entries()){const b=await p.locator(`[data-input=${name}]`).boundingBox();points[name]={x:b!.x+b!.width/2,y:b!.y+b!.height/2,id:i+1};}
+ const keys:Record<string,string>={left:'ArrowLeft',right:'ArrowRight',jump:'Space'};
+ async function input(names:string[]){if(session){const removed=[...held].filter(n=>!names.includes(n)),added=names.filter(n=>!held.has(n));if(removed.length)await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:removed.map(n=>points[n])});if(added.length)await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:names.map(n=>points[n])});}else{for(const n of held)if(!names.includes(n))await p.keyboard.up(keys[n]);for(const n of names)if(!held.has(n))await p.keyboard.down(keys[n]);}held.clear();names.forEach(n=>held.add(n));}
+ let captured=false,near=false,jumped=false;const trace:any[]=[];const start=Date.now();
+ while(Date.now()-start<10000){const s=await p.locator('#game').evaluate(e=>({... (e as HTMLElement).dataset}));trace.push(s);if(s.status!=='running')throw Error(`${game} left running before capture: ${JSON.stringify(s)}`);const x=Number(s.x),z=Number(s.z);
+  if(game==='orbit-ribbon')await input(z> -1.32?['left']:[]);else {if(x>3.1)jumped=true;await input(jumped?['right','jump']:['right']);}
+  if(!captured&&x>(game==='orbit-ribbon'?9.5:3.45)){
+   await freeze(p);if(!await p.locator('#overlay').isHidden())throw Error('Unexpected overlay');await p.screenshot({path:`${out}/${game}-${mobile?390:1280}-hazard-gap.png`});results.push({game,mobile,scene:'hazard-and-gap',state:await p.locator('#game').evaluate(e=>({... (e as HTMLElement).dataset})),errors});captured=true;if(game==='amber-step')break;await resume(p);
+  }
+  if(game==='orbit-ribbon'&&!near&&x>12.85){await freeze(p);await p.screenshot({path:`${out}/${game}-${mobile?390:1280}-close-pass.png`});results.push({game,mobile,scene:'forgiving-core-close-pass',state:await p.locator('#game').evaluate(e=>({... (e as HTMLElement).dataset})),errors});near=true;break;}
+  await p.waitForTimeout(25);
+ }
+ if(!captured||(game==='orbit-ribbon'&&!near))throw Error('Capture not reached');await input([]);fs.writeFileSync(`${out}/${game}-${mobile?390:1280}-input-trace.json`,JSON.stringify(trace));await c.close();
+}fs.writeFileSync(out+'/report.json',JSON.stringify({method:'Restored valid legacy v1 unlocked-3 save fixture, then native stage selection/start and keyboard or CDP touch movement from x=0. No physics-state writes or teleport. rAF held only for each screenshot, overlay remains hidden; captures are visual/collider diagnostics, not all-stage completion evidence.',results},null,2));}finally{await browser.close();}

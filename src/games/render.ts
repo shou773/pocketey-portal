@@ -12,6 +12,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const light = new T.DirectionalLight(0xffe4c5, 2.1); light.position.set(-8, 15, 5); scene.add(light);
   const camera = new T.PerspectiveCamera(54, 1, .1, 160);
   const level = new T.Group(); scene.add(level);
+  const backdrop = new T.Group(); scene.add(backdrop);
   const geo = new T.BoxGeometry(1, 1, 1);
   const spikeGeometry = new T.ConeGeometry(.4, .65, 4);
   const mats = {
@@ -62,7 +63,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
       const cloud = new T.Mesh(cloudGeo, cloudMat); cloud.scale.set(1.8, .42 + j * .09, .5);
       cloud.position.set(i * 12 - 24 + j, 8 + i % 3 + j * .15, -25); horizon.add(cloud);
     }
-    batchStatic(horizon);
+    batchStatic(horizon, kind);
   }
   const shadow = new T.Mesh(new T.CircleGeometry(.42, 20), new T.MeshBasicMaterial({ color: 0x070f22, transparent: true, opacity: .4 })); shadow.rotation.x = -Math.PI / 2; scene.add(shadow);
   const particles = new T.BufferGeometry(); const points: number[] = [];
@@ -70,7 +71,9 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   particles.setAttribute('position', new T.Float32BufferAttribute(points, 3)); const stars = new T.Points(particles, new T.PointsMaterial({ color: 0xc1d5e8, size: .085, sizeAttenuation:true })); if (kind === 'orbit') scene.add(stars);
   function load(index: number) {
     currentStage = index;
-    clearStatic(level);
+    previousTime = 0; previousX = 0; courier.rotation.y = 0;
+    mixer?.stopAllAction(); activeAction = undefined;
+    clearStatic(level); clearStatic(backdrop); backdrop.position.set(0,0,0);
     const data = stages[kind][index];
     for (const p of data.platforms) {
       const mid = (p.a + p.b) / 2, len = p.b - p.a;
@@ -110,7 +113,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     }
     for (const z of [-2.8, 2.8]) box(level, ...coord(data.length + 1, 1.5, z), .15, 3, .15, mats.edge);
     box(level, ...coord(data.length + 1, 3, 0), kind === 'orbit' ? 5.75 : .15, .15, kind === 'orbit' ? .15 : 5.75, mats.edge);
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < (kind === 'orbit' ? 10 : 6); i++) {
       if (kind === 'orbit') {
         const name = i % 3 ? 'meteor' : 'rock';
         if (!placeArt(level, art, name, coord(i * 8, -2 - i % 3, i % 2 ? -12 : 12), [2.7, 2.7, 2.7], i * .7))
@@ -120,13 +123,13 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
           box(level, ...coord(i * 8, .5, i % 2 ? -16 : 16), .15, 3.5, .15, mats.edge);
         }
       } else {
-        const x = i * 8 - 7, y = -1.4 - i % 3 * .3, z = -7 - i % 3 * 2;
-        box(level, x, y - .8, z, 3.7, .9, 3.2, mats.decor);
-        placeArt(level, art, 'tree', [x, y - .35, z], [2.2, 2.2 + i % 3 * .25, 2.2], i);
-        placeArt(level, art, 'rocks', [x + 1.5, y - .3, z + .4], [1.5, 1.5, 1.5], i * .6);
+        const x = i * 9 - 14, y = -1.4 - i % 3 * .3, z = -7 - i % 3 * 2;
+        box(backdrop, x, y - .8, z, 3.7, .9, 3.2, mats.decor);
+        placeArt(backdrop, art, 'tree', [x, y - .35, z], [2.2, 2.2 + i % 3 * .25, 2.2], i);
+        placeArt(backdrop, art, 'rocks', [x + 1.5, y - .3, z + .4], [1.5, 1.5, 1.5], i * .6);
       }
     }
-    batchStatic(level);
+    batchStatic(level, kind); batchStatic(backdrop, kind);
   }
   void loadArt(kind, canvas).then(loaded => {
     art = loaded;
@@ -134,7 +137,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     if (player) {
       courier.clear(); courier.scale.setScalar(1);
       // The ship faces -Z; Oodi faces +Z, rotated toward the side-scrolling +X.
-      player.scene.scale.setScalar(kind === 'orbit' ? .48 : .9);
+      if (kind === 'orbit') player.scene.scale.set(.4, .48, .4); else player.scene.scale.setScalar(.9);
       player.scene.position.y = kind === 'orbit' ? .12 : 0;
       player.scene.rotation.y = kind === 'orbit' ? 0 : Math.PI / 2;
       courier.add(player.scene);
@@ -172,7 +175,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     }
     previousTime = s.time; previousX = s.x;
     courier.rotation.z = kind === 'orbit' ? (s.grounded ? Math.sin(s.time * 12) * .025 : -.08) : 0;
-    if (kind === 'amber') horizon.position.x = s.x * .25;
+    if (kind === 'amber') { horizon.position.x = s.x * .25; backdrop.position.x = s.x * .45; }
     const under = stages[kind][s.stage].platforms.find(p => s.x >= p.a && s.x <= p.b && Math.abs(s.z - p.z) <= p.w / 2);
     shadow.visible = !!under; shadow.position.set(...coord(s.x, (under?.y ?? 0) + .045, s.z));
     if (kind === 'orbit') {

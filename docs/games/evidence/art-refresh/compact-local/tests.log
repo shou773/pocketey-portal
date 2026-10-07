@@ -1,0 +1,89 @@
+
+> pocketey-japan@0.1.0 test:browser
+> playwright test
+
+
+Running 20 tests using 1 worker
+
+(node:13433) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (3.4s)
+orbit keyboard { fps: 45.96922481370366, p95: 33.400000000001455, p99: 50, max: 50 }
+  ✓   2 tests/games/browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence (50.9s)
+orbit touch {
+  fps: 58.465136316081,
+  p95: 16.799999999999272,
+  p99: 33.400000000001455,
+  max: 33.400000000001455
+}
+  ✓   3 tests/games/browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence (48.9s)
+amber keyboard {
+  fps: 37.75009437523595,
+  p95: 50,
+  p99: 50.10000000000218,
+  max: 66.60000000000218
+}
+  ✘   4 tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence (29.8s)
+(node:13751) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+amber touch {
+  fps: 60.00126318448813,
+  p95: 16.700000000000728,
+  p99: 16.799999999999272,
+  max: 16.80000000000291
+}
+  ✓   5 tests/games/browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence (31.4s)
+  ✓   6 tests/games/browser.spec.ts:50:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (7.7s)
+  ✓   7 tests/games/browser.spec.ts:60:1 › corrupt/blocked storage and scoped confirmed reset (2.2s)
+PERFORMANCE {
+  fps: 59.18608922813171,
+  p95: 16.700000000000728,
+  renderer: 'ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)',
+  viewport: [ 390, 844 ],
+  userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36'
+}
+  ✓   8 tests/games/browser.spec.ts:67:1 › touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation (7.4s)
+  ✓   9 tests/games/browser.spec.ts:78:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (15.5s)
+  ✓  10 tests/games/browser.spec.ts:78:46 › amber: WebGL context loss freezes play until reload and preserves saved data (10.6s)
+  ✓  11 tests/games/browser.spec.ts:123:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (17.6s)
+  ✓  12 tests/games/browser.spec.ts:123:46 › amber: 320x568 menus and clear screen remain scroll-accessible (12.7s)
+  ✓  13 tests/games/browser.spec.ts:161:46 › orbit: simulated notch safe areas keep all controls inside every edge (1.8s)
+  ✓  14 tests/games/browser.spec.ts:161:46 › amber: simulated notch safe areas keep all controls inside every edge (1.8s)
+  ✓  15 tests/games/browser.spec.ts:196:1 › Amber simultaneous touch shows legible held feedback (1.6s)
+  ✓  16 tests/games/browser.spec.ts:210:2 › orbit: selected 3D art loads, animation and normal controls remain usable (1.5s)
+  ✓  17 tests/games/browser.spec.ts:247:2 › orbit: failed GLBs retain fallback, controls, clear and saves (14.4s)
+  ✓  18 tests/games/browser.spec.ts:210:2 › amber: selected 3D art loads, animation and normal controls remain usable (2.6s)
+  ✓  19 tests/games/browser.spec.ts:247:2 › amber: failed GLBs retain fallback, controls, clear and saves (9.4s)
+  ✓  20 tests/games/browser.spec.ts:258:1 › missing shared colormap retains Amber fallback and gameplay (8.9s)
+
+
+  1) tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 45
+    Received:    37.75009437523595
+
+      38 |   fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace));
+      39 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 40 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                            ^
+      41 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      42 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      43 |  }
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:40:300
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/error-context.md
+
+  1 failed
+    tests/games/browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+  19 passed (4.7m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
