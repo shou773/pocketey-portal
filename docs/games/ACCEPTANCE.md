@@ -13,3 +13,5 @@
 No universal device performance or physical mobile readiness claim from emulation alone.
 
 Build + game TypeScript + six unit tests + seven browser tests pass. Whole-site Astro check has 48 pre-existing errors in unchanged contact.astro; no configured lint task. Production deployment and live verification remain blocked by outbound domain access. See RELEASE.md for exact conditions and gaps.
+
+Mobile-review regression additions: real WebGL loss/restoration injection with reload-only recovery and unchanged saves; both-game 320x568 menu/control scroll reachability; simulated notch insets; fixed-edge Orbit bypass collision test. Completion bots use read-only coordinates and do not demonstrate novice human reaction difficulty.

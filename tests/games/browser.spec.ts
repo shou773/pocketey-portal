@@ -74,3 +74,100 @@ test('touch simultaneous move+jump, touch cancel, layout, renderer performance a
  fs.writeFileSync(info.outputPath('performance.json'),JSON.stringify({browser:browser.version(),...perf},null,2));console.log('PERFORMANCE',perf);expect(perf.fps).toBeGreaterThanOrEqual(45);expect(perf.p95).toBeLessThanOrEqual(40);
  for(const size of [{width:320,height:568},{width:844,height:390},{width:1440,height:900}]){await page.setViewportSize(size);await expect(page.locator('[data-input=jump]')).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:info.outputPath(`layout-${size.width}.png`)});}
 });
+
+for(const kind of ['orbit','amber'] as const)test(`${kind}: WebGL context loss freezes play until reload and preserves saved data`,async({page},info)=>{
+ await page.goto(`/games/${kind==='orbit'?'orbit-ribbon':'amber-step'}/`);
+ await page.locator('#sound').click();
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ await play(page,kind,0,true);
+ const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);
+ await page.getByRole('button',{name:'次のステージ'}).click();
+ await page.keyboard.down('ArrowRight');
+ await page.waitForTimeout(150);
+ const supported=await page.evaluate(()=>{
+  const gl=document.querySelector('canvas')!.getContext('webgl2')!;
+  const loss=gl.getExtension('WEBGL_lose_context');
+  if(!loss)return false;
+  (window as unknown as {restoreTestContext:()=>void}).restoreTestContext=()=>loss.restoreContext();
+  loss.loseContext();return true;
+ });
+ expect(supported).toBe(true);
+ await expect(page.locator('#game')).toHaveAttribute('data-mode','recovery');
+ await page.keyboard.up('ArrowRight');
+ const frozen=await read(page), time=await page.locator('#timer').textContent();
+ await expect(page.locator('#pause')).toBeDisabled();
+ await expect(page.locator('#sound')).toBeDisabled();
+ await expect(page.locator('[data-input=jump]')).toBeDisabled();
+ await expect(page.getByRole('button',{name:'つづける',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'やり直す',exact:true})).toHaveCount(0);
+ await page.keyboard.press('Escape');await page.keyboard.press('KeyR');await page.keyboard.press('Space');
+ await page.evaluate(()=>window.dispatchEvent(new Event('blur')));
+ await page.waitForTimeout(300);
+ expect((await read(page)).x).toBe(frozen.x);expect((await read(page)).y).toBe(frozen.y);
+ expect(await page.locator('#timer').textContent()).toBe(time);
+ expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);
+ await page.screenshot({path:info.outputPath(`${kind}-context-loss.png`)});
+ // Even an actual restoration must not silently restart the interrupted simulation.
+ await page.evaluate(()=>(window as unknown as {restoreTestContext:()=>void}).restoreTestContext());
+ await expect.poll(()=>page.evaluate(()=>document.querySelector('canvas')!.getContext('webgl2')!.isContextLost())).toBe(false);
+ await expect(page.locator('#game')).toHaveAttribute('data-mode','recovery');
+ expect((await read(page)).x).toBe(frozen.x);
+ await page.getByRole('button',{name:'再読み込み',exact:true}).click();
+ await expect(page.locator('#game')).toHaveAttribute('data-mode','menu');
+ await expect(page.locator('#sound')).toHaveText('音 ON');
+ expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
+});
+
+for(const kind of ['orbit','amber'] as const)test(`${kind}: 320x568 menus and clear screen remain scroll-accessible`,async({page},info)=>{
+ await page.setViewportSize({width:320,height:568});
+ await page.goto(`/games/${kind==='orbit'?'orbit-ribbon':'amber-step'}/`);
+ async function accessiblePanel(name:string){
+  await page.locator('#overlay').evaluate(e=>{e.scrollTop=0;});
+  const top=await page.locator('#overlay').evaluate(e=>{const panel=e.querySelector('.panel')!;return{overlay:e.getBoundingClientRect().top,panel:panel.getBoundingClientRect().top};});
+  expect(top.panel).toBeGreaterThanOrEqual(top.overlay);
+  await expect(page.locator('#panel-title')).toBeInViewport();
+  await page.screenshot({path:info.outputPath(`${kind}-320-${name}-top.png`)});
+  const controls=page.locator('#overlay button:visible, #overlay a:visible');
+  for(let i=0;i<await controls.count();i++){
+   const item=controls.nth(i);await item.scrollIntoViewIfNeeded();
+   const fits=await item.evaluate(e=>{const a=e.getBoundingClientRect(),b=document.querySelector('#overlay')!.getBoundingClientRect();return a.top>=b.top-1&&a.bottom<=b.bottom+1&&a.left>=b.left-1&&a.right<=b.right+1;});
+   expect(fits,`${name} / ${await item.textContent()}`).toBe(true);
+  }
+  await page.screenshot({path:info.outputPath(`${kind}-320-${name}-bottom.png`)});
+ }
+ await accessiblePanel('start');
+ await page.locator('#sound').click();await expect(page.locator('#sound')).toHaveText('音 ON');
+ await page.locator('#reset').click();await accessiblePanel('reset-confirm');
+ await page.getByRole('button',{name:'キャンセル'}).click();
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ await play(page,kind,0,true);await accessiblePanel('clear');
+ await page.getByRole('button',{name:'ステージ選択'}).click();
+ await page.locator('#stages').getByRole('button',{name:/ステージ 2 /}).click();
+ await accessiblePanel('stage-select');
+ await page.getByRole('button',{name:'ステージ 2 をはじめる'}).click();
+ await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
+ await page.locator('#pause').click();await accessiblePanel('pause');
+ await page.setViewportSize({width:390,height:844});await expect(page.locator('.control-note')).toBeHidden();
+ await page.getByRole('button',{name:'つづける'}).click();
+ await page.screenshot({path:info.outputPath(`${kind}-390-controls.png`)});
+});
+
+test('simulated notch safe areas keep toolbar and controls accessible',async({page},info)=>{
+ const session=await page.context().newCDPSession(page);
+ await session.send('Emulation.setSafeAreaInsetsOverride',{insets:{top:44,bottom:34,left:0,right:0}});
+ await page.goto('/games/orbit-ribbon/');
+ expect(await page.locator('.game-bar').evaluate(e=>parseFloat(getComputedStyle(e).paddingTop))).toBe(54);
+ expect((await page.locator('#sound').boundingBox())!.y).toBeGreaterThanOrEqual(44);
+ await page.screenshot({path:info.outputPath('notch-portrait-menu.png')});
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ const jump=await page.locator('[data-input=jump]').boundingBox();expect(jump!.y+jump!.height).toBeLessThanOrEqual(844-34);
+ await page.locator('#pause').click();
+ await page.setViewportSize({width:844,height:390});
+ await session.send('Emulation.setSafeAreaInsetsOverride',{insets:{top:0,bottom:21,left:44,right:44}});
+ expect((await page.locator('.wordmark').boundingBox())!.x).toBeGreaterThanOrEqual(44);
+ await page.getByRole('button',{name:'つづける'}).click();
+ const landscape=await page.locator('[data-input=jump]').boundingBox();expect(landscape!.x+landscape!.width).toBeLessThanOrEqual(800);
+ await page.screenshot({path:info.outputPath('notch-landscape-play.png')});
+});

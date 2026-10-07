@@ -42,3 +42,16 @@ test('save sanitation tolerates corrupt values and bounds unlocks',()=>{
  const save=cleanSave({sound:'yes',orbit:{unlocked:99,best:[-1,Infinity,'bad']},amber:{unlocked:NaN,best:null}});
  assert.equal(save.sound,false);assert.equal(save.orbit.unlocked,3);assert.deepEqual(save.orbit.best,[null,null,null]);assert.equal(save.amber.unlocked,1);
 });
+
+test('Orbit side pillars block fixed-edge bypasses while alternating routes remain feasible',()=>{
+ for(const stage of [1,2])for(const target of [-3.5,3.5]){
+  const s=createState('orbit',stage);let lastJump=-10;
+  for(let tick=0;tick<5000&&s.status==='running';tick++){
+   const tile=stages.orbit[stage].platforms.find(p=>s.x>=p.a-.23&&s.x<=p.b+.23);
+   const jump=!!tile&&tile.b<stages.orbit[stage].length&&tile.b-s.x<1.5&&tile.b-s.x>-.15&&s.grounded&&s.time-lastJump>.3;
+   if(jump)lastJump=s.time;
+   step(s,{axis:Math.abs(s.z-target)<.03?0:Math.sign(target-s.z),jump});
+  }
+  assert.equal(s.status,'dead');assert.ok(s.y>=0,'must hit a side pillar, not fall off the road');
+ }
+});
