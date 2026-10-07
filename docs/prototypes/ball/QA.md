@@ -1,5 +1,11 @@
 # TiltTrail validation
 
+## Final complete rerun
+
+At code SHA `bf5aa9e689dcff1a2e6e7993e565004202abe262`, model tests passed 6/6 and all browser tests passed 6/6 (the original 5 plus the WebGL-loss regression), with 0 failures/skips/flakes. Both keyboard and touch cleared every stage; records persisted independently; normal pause/retry and lost-context freeze/reload passed. No source or rendering configuration changed during this rerun.
+
+[Final summary and exact tested source hashes](evidence/full-final-summary.json), [unit log](evidence/full-final-model-tests.txt), [browser log](evidence/full-final-browser-tests.txt). This final complete run supersedes the earlier focused-only scope below.
+
 Initial prototype verification at `9a88868add37a472e2fb9108b85ee977c4810091` passed. Its tested code hashes, dates, all six stage/mode clears and compact results are in [summary.json](evidence/summary.json). Saved logs normalize terminal color escapes and trailing whitespace only.
 
 ## Context-loss follow-up
@@ -8,7 +14,7 @@ Independent review found that the fallback header and P/Esc could resume simulat
 
 The focused browser rerun passed 3 tests: normal retry/pause/audio, multi-touch cancellation/orientation/page return, and the new regression covering play/fall context loss, attempted header mouse/touch and P/Esc resume, frozen position/time, then successful reload. Game TypeScript, Astro check and build passed. [Follow-up summary and tested source hashes](evidence/context-loss-summary.json), [browser log](evidence/context-loss-browser.txt).
 
-The existing two-finger test exposed a setup-timing assumption: speed was sampled before smooth braking converged. It now waits for braking to settle without steering, retaining the same `<2.2m/s` assertion. No physics or performance threshold changed. The initial six gameplay clears and renderer measurements below are retained because model/render code did not change; the complete stage matrix was not rerun for this UI-only fix.
+The existing two-finger test exposed a setup-timing assumption: speed was sampled before smooth braking converged. It now waits for braking to settle without steering, retaining the same `<2.2m/s` assertion. No physics or performance threshold changed. The initial six gameplay clears and renderer measurements below are retained because model/render code did not change; the complete stage matrix was not rerun at that focused step. The final complete rerun above subsequently verified all six mode/stage combinations at the fixed code SHA.
 
 ## Initial prototype checks — passed
 
