@@ -1,6 +1,9 @@
 import { cleanSave, createState, DT, SAVE_KEY, stages, step, type Kind } from './model';
 import { createView } from './render';
+import {installLocale,LANGUAGE_EVENT,tr} from '../lib/locale';
+import {stageName as localizedStageName,stageHint} from './copy';
 export function boot() {
+  installLocale();
   const $ = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
   const root = $('game'); const kind = root.dataset.kind as Kind;
   const title = kind === 'orbit' ? 'Orbit Ribbon' : 'Amber Step';
@@ -25,10 +28,10 @@ export function boot() {
     } catch { storageOkay = false; }
     note();
   }
-  function note() { $('save-note').textContent = storageOkay ? '記録はこのブラウザに保存されます。' : mode === 'recovery' ? '保存を利用できません。再読み込みすると未保存の記録は失われます。' : '保存を利用できません。この画面では続けて遊べます。'; }
+  function note() { $('save-note').textContent = storageOkay ? tr('記録はこのブラウザに保存されます。', 'Progress is saved in this browser.') : mode === 'recovery' ? tr('保存を利用できません。再読み込みすると未保存の記録は失われます。', 'Storage is unavailable. Reloading loses unsaved progress.') : tr('保存を利用できません。この画面では続けて遊べます。', 'Storage is unavailable. You can keep playing here.'); }
   let selected = 0, state = createState(kind, 0), mode: 'menu' | 'play' | 'pause' | 'result' | 'reset' | 'recovery' = 'menu';
   let view: ReturnType<typeof createView>;
-  try { view = createView($<HTMLCanvasElement>('scene'), kind); } catch { $('panel-title').textContent = '3D画面を起動できません'; $('panel-copy').textContent = 'WebGLに対応したブラウザで開き直してください。'; $('reset').hidden = true; return; }
+  try { view = createView($<HTMLCanvasElement>('scene'), kind); } catch { function unavailable(){ $('panel-title').textContent = tr('3D画面を起動できません', '3D could not start'); $('panel-copy').textContent = tr('WebGLに対応したブラウザで開き直してください。', 'Reopen this game in a browser that supports WebGL 2.'); $('reset').hidden = true; $<HTMLButtonElement>('sound').disabled = true;document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b=>{b.disabled=true;}); }unavailable();window.addEventListener(LANGUAGE_EVENT,unavailable);return; }
   let audio: AudioContext | null = null;
   function tone(frequency: number, duration = .1) {
     if (!save.sound) return;
@@ -37,37 +40,39 @@ export function boot() {
   const keys = new Set<string>(), pointers = new Map<number, string>(); let jumpQueued = false;
   function clearInput() { keys.clear(); pointers.clear(); jumpQueued = false; document.querySelectorAll('.held').forEach(el => el.classList.remove('held')); }
   function axis() { const inputs = [...pointers.values()]; return Number(keys.has('ArrowRight') || keys.has('KeyD') || inputs.includes('right')) - Number(keys.has('ArrowLeft') || keys.has('KeyA') || inputs.includes('left')); }
-  function soundLabel() { $('sound').textContent = save.sound ? '音 ON' : '音 OFF'; $('sound').setAttribute('aria-pressed', String(save.sound)); }
+  function soundLabel() { $('sound').textContent = save.sound ? tr('音 ON', 'Sound ON') : tr('音 OFF', 'Sound OFF'); $('sound').setAttribute('aria-pressed', String(save.sound)); }
   $('sound').onclick = () => { save.sound = !save.sound; soundLabel(); persist(); tone(660); };
   function button(text: string, fn: () => void, primary = false) { const b = document.createElement('button'); if (primary) { b.className = 'primary'; b.append(icon(mode === 'result' && state.status === 'dead' ? 'rotate-ccw' : 'play')); } b.append(document.createTextNode(text)); b.onclick = fn; $('actions').append(b); }
   function stageButtons() {
     $('stages').replaceChildren();
-    stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', `ステージ ${i + 1} ${stage.name}`); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? 'LOCKED' : save[kind].best[i] ? `${save[kind].best[i]!.toFixed(2)}s` : 'READY'; const name = document.createElement('span'); name.className = 'stage-name'; name.textContent = stage.name; b.append(icon(b.disabled ? 'lock-keyhole' : save[kind].best[i] ? 'check' : 'flag', 'stage-symbol'), n, name, label); b.onclick = () => { selected = i; state = createState(kind, i); view.load(i); menu(); }; $('stages').append(b); });
+    stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', tr(`ステージ ${i + 1} ${stage.name}`,`Stage ${i + 1} ${localizedStageName(kind,i)}`)); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? tr('ロック','LOCKED') : save[kind].best[i] ? `${save[kind].best[i]!.toFixed(2)}s` : tr('挑戦可能','READY'); const name = document.createElement('span'); name.className = 'stage-name'; name.textContent = localizedStageName(kind,i); b.append(icon(b.disabled ? 'lock-keyhole' : save[kind].best[i] ? 'check' : 'flag', 'stage-symbol'), n, name, label); b.onclick = () => { selected = i; state = createState(kind, i); view.load(i); menu(); }; $('stages').append(b); });
   }
   function panel(heading: string, copy: string) {
     clearInput(); $('overlay').dataset.screen = mode; $('overlay').dataset.result = state.status; $('panel-icon').style.setProperty('--icon', `url('/games/assets/lucide/${mode === 'result' ? state.status === 'clear' ? 'trophy' : 'rotate-ccw' : mode === 'pause' ? 'sparkles' : kind === 'orbit' ? 'orbit' : 'gem'}.svg')`); $('eyebrow').textContent = mode === 'result' && state.status === 'clear' ? `STAGE 0${selected + 1} COMPLETE` : kind === 'orbit' ? 'POCKETEY / COSMIC RUN' : 'POCKETEY / WARM ADVENTURE'; $('overlay').hidden = false; $('overlay').scrollTop = 0; $('panel-title').textContent = heading; $('panel-copy').textContent = copy; $('actions').replaceChildren(); $('stages').hidden = true; $('instructions').hidden = true; $('reset').hidden = true; $<HTMLButtonElement>('pause').disabled = mode !== 'pause'; $('hint').textContent = ''; note();
   }
   function menu() {
     if (mode === 'recovery') return;
-    mode = 'menu'; panel(title, stages[kind][selected].hint); stageButtons(); $('stages').hidden = false; $('instructions').hidden = false;
-    $('instructions').replaceChildren(icon(kind === 'orbit' ? 'orbit' : 'footprints'), document.createTextNode(kind === 'orbit' ? '自動で前進。左右でよけて、JUMPで跳ぼう。' : '左右で移動。JUMPは同時押しOK。')); const keyboardHelp = document.createElement('small'); keyboardHelp.className = 'keyboard-help'; keyboardHelp.textContent = 'PC: A / D・矢印・Space'; $('instructions').append(keyboardHelp);
-    $('reset').hidden = false; button(`ステージ ${selected + 1} をはじめる`, start, true);
+    mode = 'menu'; panel(title, stageHint(kind,selected)); stageButtons(); $('stages').hidden = false; $('instructions').hidden = false;
+    $('instructions').replaceChildren(icon(kind === 'orbit' ? 'orbit' : 'footprints'), document.createTextNode(kind === 'orbit' ? tr('自動で前進。左右でよけて、JUMPで跳ぼう。', 'Auto-run. Steer left or right. Tap JUMP.') : tr('左右で移動。JUMPは同時押しOK。', 'Move left or right. Hold movement + JUMP.'))); const keyboardHelp = document.createElement('small'); keyboardHelp.className = 'keyboard-help'; keyboardHelp.textContent = tr('PC: A / D・矢印・Space', 'Keyboard: A / D, arrows, Space'); $('instructions').append(keyboardHelp);
+    $('reset').hidden = false; button(tr(`ステージ ${selected + 1} をはじめる`,`Start stage ${selected + 1}`), start, true);
   }
-  function start() { if (mode === 'recovery') return; clearInput(); state = createState(kind, selected); view.load(selected); mode = 'play'; $('overlay').hidden = true; $<HTMLButtonElement>('pause').disabled = false; $('pause').textContent = '一時停止'; $('hint').textContent = stages[kind][selected].hint; accumulator = 0; last = performance.now(); tone(520); }
-  function pause() { if (mode !== 'play') return; mode = 'pause'; panel('ひと休み', '準備ができたら、同じ場所から。'); button('つづける', resume, true); button('やり直す', start); button('ステージ選択', menu); }
+  function start() { if (mode === 'recovery') return; clearInput(); state = createState(kind, selected); view.load(selected); mode = 'play'; $('overlay').hidden = true; $<HTMLButtonElement>('pause').disabled = false; $('pause').textContent = tr('一時停止', 'Pause'); $('hint').textContent = stageHint(kind,selected); accumulator = 0; last = performance.now(); tone(520); }
+  function pause() { if (mode !== 'play') return; mode = 'pause'; renderPause(); }
+  function renderPause() { panel(tr('ひと休み', 'Take a break'), tr('準備ができたら、同じ場所から。', 'Pick up where you left off when you are ready.')); button(tr('つづける', 'Resume'), resume, true); button(tr('やり直す', 'Restart'), start); button(tr('ステージ選択', 'Choose a stage'), menu); }
   function resume() { if (mode !== 'pause') return; clearInput(); mode = 'play'; $('overlay').hidden = true; last = performance.now(); accumulator = 0; }
   $('pause').onclick = () => mode === 'pause' ? resume() : pause();
-  function finish() {
+  function finish(announce = true) {
     mode = 'result';
     if (state.status === 'clear') {
-      const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(3, selected + 2)); progress.best[selected] = Math.min(progress.best[selected] ?? Infinity, state.time); persist();
-      panel(selected === 2 ? 'ALL CLEAR!' : 'STAGE CLEAR', `${stages[kind][selected].name} · ${state.time.toFixed(2)}秒 / BEST ${progress.best[selected]!.toFixed(2)}秒`);
-      tone(880, .25); if (selected < 2) button('次のステージ', () => { selected++; start(); }, true); else button('もう一度', start, true);
-    } else { panel('もう一度、いこう。', 'すき間の光るふちでジャンプ。左右の足場も確かめよう。'); tone(170, .2); button('すぐにリトライ', start, true); }
-    if (state.status === 'clear' && selected < 2) button('もう一度', start);
-    button('ステージ選択', menu);
+      const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(3, selected + 2)); progress.best[selected] = Math.min(progress.best[selected] ?? Infinity, state.time); if (announce) persist();
+      panel(selected === 2 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.best[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.best[selected]!.toFixed(2)}s`));
+      if (announce) tone(880, .25); if (selected < 2) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
+    } else { panel(tr('もう一度、いこう。', 'One more try.'), tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) tone(170, .2); button(tr('すぐにリトライ', 'Retry now'), start, true); }
+    if (state.status === 'clear' && selected < 2) button(tr('もう一度', 'Play again'), start);
+    button(tr('ステージ選択', 'Choose a stage'), menu);
   }
-  $('reset').onclick = () => { mode = 'reset'; panel('記録をリセット？', 'Orbit Ribbon と Amber Step のステージ・自己ベスト・音設定だけを消去します。ほかのゲームの記録は残ります。'); button('キャンセル', menu, true); button('この2作品をリセット', () => { save = cleanSave(null); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); };
+  function renderReset() { mode = 'reset'; panel(tr('記録をリセット？', 'Reset your records?'), tr('Orbit Ribbon と Amber Step のステージ・自己ベスト・音設定だけを消去します。ほかのゲームの記録は残ります。', 'This clears only the stages, personal bests and sound settings for Orbit Ribbon and Amber Step. Other games and your language preference are kept.')); button(tr('キャンセル', 'Cancel'), menu, true); button(tr('この2作品をリセット', 'Reset these two games'), () => { save = cleanSave(null); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); }
+  $('reset').onclick = renderReset;
   document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b => {
     b.addEventListener('pointerdown', e => { e.preventDefault(); if (mode !== 'play') return; b.setPointerCapture(e.pointerId); pointers.set(e.pointerId, b.dataset.input!); b.classList.add('held'); if (b.dataset.input === 'jump') jumpQueued = true; });
     const release = (e: PointerEvent) => { pointers.delete(e.pointerId); if (![...pointers.values()].includes(b.dataset.input!)) b.classList.remove('held'); };
@@ -83,17 +88,17 @@ export function boot() {
   window.addEventListener('blur', () => { clearInput(); pause(); });
   document.addEventListener('visibilitychange', () => { if (document.hidden) { clearInput(); pause(); } });
   window.addEventListener('pagehide', clearInput);
-  $('scene').addEventListener('webglcontextlost', e => {
-    e.preventDefault();
+  $('scene').addEventListener('webglcontextlost', e => { e.preventDefault(); renderRecovery(); });
+  function renderRecovery() {
     // Recovery is deliberately latched until a full reload, even if WebGL restores itself.
     // Never advance an invisible run or mutate a save as a side effect of context loss.
     mode = 'recovery'; accumulator = 0;
-    panel('画面を再読み込み', '3D描画が中断されました。安全に再開するため、ページを再読み込みしてください。今回の途中経過は再開できません。保存済みの記録は変更しません。');
+    panel(tr('画面を再読み込み', 'Reload the game'), tr('3D描画が中断されました。安全に再開するため、ページを再読み込みしてください。今回の途中経過は再開できません。保存済みの記録は変更しません。', '3D rendering stopped. Reload the page to play again. This interrupted run cannot resume. Saved records are unchanged.'));
     $<HTMLButtonElement>('sound').disabled = true;
     document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b => { b.disabled = true; });
-    button('再読み込み', () => window.location.reload(), true);
+    button(tr('再読み込み', 'Reload'), () => window.location.reload(), true);
     $('panel-title').tabIndex = -1; $('panel-title').focus({ preventScroll: true });
-  });
+  }
   const stageLabel = $('stage-label'), stageName = $('stage-name'), timer = $('timer'), progressFill = $('progress-fill'), hint = $('hint');
   function textIfChanged(element: HTMLElement, value: string) { if (element.textContent !== value) element.textContent = value; }
   let last = performance.now(), accumulator = 0;
@@ -109,10 +114,18 @@ export function boot() {
       }
       if (state.time > 5) textIfChanged(hint, '');
     }
-    textIfChanged(stageLabel, `0${selected + 1} / 03`); textIfChanged(stageName, stages[kind][selected].name); textIfChanged(timer, state.time.toFixed(2)); progressFill.style.transform = `scaleX(${Math.min(1, Math.max(0, state.x / stages[kind][selected].length))})`;
+    textIfChanged(stageLabel, `0${selected + 1} / 03`); textIfChanged(stageName, localizedStageName(kind,selected)); textIfChanged(timer, state.time.toFixed(2)); progressFill.style.transform = `scaleX(${Math.min(1, Math.max(0, state.x / stages[kind][selected].length))})`;
     // Read-only diagnostics for reproducible browser verification; no state setter or gameplay bypass.
     root.dataset.mode = mode; root.dataset.status = state.status; root.dataset.x = state.x.toFixed(3); root.dataset.y = state.y.toFixed(3); root.dataset.z = state.z.toFixed(3); root.dataset.grounded = String(state.grounded); root.dataset.jumps = String(state.jumps);
     if (mode !== 'recovery') view.draw(state); root.dataset.geometries = String(view.renderer.info.memory.geometries); requestAnimationFrame(frame);
   }
-  view.load(0); soundLabel(); menu(); requestAnimationFrame(frame);
+  function staticLabels(){
+    $('sound').setAttribute('aria-label',tr('音を切り替え','Toggle sound'));
+    $('pause').textContent=tr('一時停止','Pause');$('reset').textContent=tr('この2作品の記録をリセット','Reset both games’ records');
+    $('scene').setAttribute('aria-label',tr(`${title} の3Dゲーム画面`,`${title} 3D game`));
+    for(const [input,ja,en] of [['left','左へ移動','Move left'],['right','右へ移動','Move right'],['jump','ジャンプ','Jump']])document.querySelector(`[data-input=${input}]`)!.setAttribute('aria-label',tr(ja,en));
+    soundLabel();
+  }
+  window.addEventListener(LANGUAGE_EVENT,()=>{staticLabels();if(mode==='play')pause();else if(mode==='menu')menu();else if(mode==='pause')renderPause();else if(mode==='result')finish(false);else if(mode==='reset')renderReset();else renderRecovery();});
+  view.load(0); staticLabels(); menu(); requestAnimationFrame(frame);
 }

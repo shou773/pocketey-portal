@@ -5,7 +5,7 @@ export default defineConfig({
   site: 'https://www.pocketey.com',
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/editorial/')
+      filter: (page) => !page.includes('/404')
     })
   ],
   output: 'static'

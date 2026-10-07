@@ -25,7 +25,7 @@ console.log('ENVIRONMENT',JSON.stringify(environment));
 const results = [];
 try {
  for (let round=0; round<3; round++) for (const mobile of [false,true]) for (const game of ['orbit-ribbon','amber-step']) for (const variant of (round%2 ? [1,0] : [0,1])) {
-  const context = await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1280,height:720},isMobile:mobile,hasTouch:mobile,deviceScaleFactor:1});
+  const context = await browser.newContext({locale:'ja-JP',viewport:mobile?{width:390,height:844}:{width:1280,height:720},isMobile:mobile,hasTouch:mobile,deviceScaleFactor:1});
   const page = await context.newPage(); const session = await context.newCDPSession(page);
   await page.addInitScript(() => {
    const seen = new WeakSet(); const probe = window.__renderProbe = {contexts:0,drawCalls:0};

@@ -1,0 +1,10 @@
+<script is:inline>
+  (()=>{let saved;try{saved=localStorage.getItem('pocketey-language-v1');}catch{}const explicit=new URLSearchParams(location.search).get('lang');const lang=explicit==='ja'||explicit==='en'?explicit:saved==='ja'||saved==='en'?saved:navigator.language.toLowerCase().startsWith('ja')?'ja':'en';document.documentElement.lang=lang;if(explicit==='ja'||explicit==='en'){try{localStorage.setItem('pocketey-language-v1',lang);}catch{}}})();
+</script>
+<style is:global>
+html[lang="ja"] [data-l10n="en"],html:not([lang="ja"]) [data-l10n="ja"]{display:none!important}
+.language-switch{display:inline-flex;gap:3px;padding:3px;border:1px solid currentColor;border-radius:12px;white-space:nowrap}
+.language-switch button{min-height:38px;padding:6px 10px;border:0;border-radius:8px;background:transparent;color:inherit;font:600 12px/1.2 system-ui;cursor:pointer}
+.language-switch button[aria-pressed="true"]{background:#d5f8ea;color:#163630}
+.language-switch button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+</style>

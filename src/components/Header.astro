@@ -1,24 +1,6 @@
 ---
-const path = Astro.url.pathname;
-const nav = [
-  ['Latest','/news/'], ['Transport','/news/?category=Transportation'], ['Events','/news/?category=Events'], ['Guides','/guides/'], ['About','/about/']
-];
+import T from './T.astro';
+import LanguageSwitch from './LanguageSwitch.astro';
 ---
-<header class="site-header">
-  <div class="container bar">
-    <a class="brand" href="/" aria-label="Pocketey Japan home">
-      <span class="mark">P</span>
-      <span><b>POCKETEY</b><small>JAPAN</small></span>
-    </a>
-    <nav aria-label="Main navigation">
-      {nav.map(([label, href]) => <a class={path.startsWith(href.split('?')[0]) ? 'active' : ''} href={href}>{label}</a>)}
-    </nav>
-    <a class="games-link" href="/games/">Games ↗</a>
-    <a class="dispatch" href="#dispatch">Weekly Dispatch</a>
-  </div>
-</header>
-<style>
-.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--paper) 90%, transparent);backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
-.bar{height:78px;display:flex;align-items:center;gap:28px}.brand{display:flex;align-items:center;gap:11px;min-width:210px}.mark{width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:italic 20px Georgia}.brand b{font-size:.86rem;letter-spacing:.15em}.brand small{display:block;font-size:.58rem;letter-spacing:.28em;color:var(--muted);margin-top:-2px}nav{display:flex;gap:24px;margin-left:auto}nav a{font-size:.83rem;color:var(--muted);position:relative}nav a:hover,nav a.active{color:var(--ink)}.games-link{font-family:system-ui;font-size:.78rem;white-space:nowrap;margin-left:auto}.dispatch{font-size:.75rem;border:1px solid var(--line);border-radius:999px;padding:.58rem .85rem}
-@media(max-width:850px){nav{display:none}.dispatch{margin-left:auto}.brand{min-width:0}}@media(max-width:480px){.dispatch{display:none}}
-</style>
+<header class="site-header"><div class="container bar"><a class="brand" href="/" aria-label="Pocketey Games"><span class="mark" aria-hidden="true">P</span><span><b>POCKETEY</b><small>SMALL WORLDS / BIG PLAY</small></span></a><nav aria-label="Pocketey"><a href="/games/"><T ja="ゲーム" en="Games"/></a><a href="/about/"><T ja="このサイトについて" en="About"/></a></nav><LanguageSwitch/></div></header>
+<style>.site-header{border-bottom:1px solid var(--line);background:var(--paper)}.bar{min-height:84px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-block:16px}.brand{display:flex;align-items:center;gap:10px}.mark{width:37px;height:37px;display:grid;place-items:center;background:var(--ink);color:var(--paper);border-radius:13px;font-weight:800}.brand b{font-size:14px;letter-spacing:.15em}.brand small{display:block;font-size:7px;letter-spacing:.14em;margin-top:2px;color:var(--muted)}nav{display:flex;gap:22px;margin-left:auto;font-size:13px}.bar :global(.language-switch){margin-left:8px}@media(max-width:600px){.bar{gap:12px;justify-content:space-between}.brand small{display:none}.brand b{font-size:12px}.mark{width:30px;height:30px;border-radius:10px}nav{order:3;width:100%;margin:0;justify-content:center;font-size:12px}.bar :global(.language-switch){margin-left:0}}</style>
