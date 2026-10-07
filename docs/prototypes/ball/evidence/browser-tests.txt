@@ -1,0 +1,21 @@
+[WebServer] (node:4683) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:4696) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 5 tests using 1 worker
+
+(node:4709) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/prototypes/ball/browser.spec.ts:64:36 › all three stages clear with ordinary keyboard; bests persist independently (1.9m)
+  ✓  2 tests/prototypes/ball/browser.spec.ts:64:36 › all three stages clear with ordinary multi-touch; bests persist independently (1.5m)
+  ✓  3 tests/prototypes/ball/browser.spec.ts:85:1 › fall → instant retry, pause, input release, mute, language and rapid actions (7.7s)
+  ✓  4 tests/prototypes/ball/browser.spec.ts:105:1 › two-finger controls, touch cancellation, orientation and page return release input (3.5s)
+  ✓  5 tests/prototypes/ball/browser.spec.ts:125:1 › 320 portrait and landscape panels fit; blocked storage and WebGL show honest fallback (8.3s)
+
+  5 passed (3.8m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

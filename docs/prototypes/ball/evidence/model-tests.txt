@@ -1,0 +1,19 @@
+✔ authored trails are continuous and never have an invisible gap (12.808595ms)
+✔ braking reduces forward speed without stopping and counter-steering catches inertia (0.54372ms)
+✔ visible support boundary triggers a fall, failure is delayed, and off-road finish cannot clear (0.251342ms)
+✔ finish on the road clears exactly once; pause and ready freeze simulation (0.808604ms)
+✔ all three trails can be cleared by discrete steering and braking (6.272428ms)
+✔ save validation rejects damaged/non-finite values and retry is clean (0.413451ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 136.568273
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
