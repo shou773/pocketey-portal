@@ -1,6 +1,10 @@
 # Release candidate — not published
 
-## Current landscape safe-area revision
+## Performance investigation in progress
+
+Code `9158381` includes frame-layout improvements with unchanged render budget and performance thresholds. Final browser validation and exact-SHA CI are in progress at environment transfer; **no all-pass claim** is made. See [handoff and reproduction commands](PERFORMANCE-HANDOFF.md) and its timestamped evidence. Earlier results below retain their exact SHA.
+
+## Landscape safe-area revision (0cbc1e4)
 
 Code SHA **`0cbc1e4ed6059adaa03e6fc49c6902b7d3a58853`** fixes the landscape bottom padding override with `max(7px, env(safe-area-inset-bottom))`. At 844x390 with insets top 0 / bottom 21 / left and right 44, the failing control bottom **383px** is now **369px**, exactly the safe boundary, in both games. Regression tests assert the bounds of the wordmark and every toolbar/movement/jump control against all four edges in portrait and landscape. Local build, game TypeScript, 7 unit tests and the 5 affected browser tests pass. [Games quality CI run 37615165970](https://github.com/shou773/pocketey-portal/actions/runs/37615165970) on that exact SHA **failed: 11/13 browser tests passed**. Both safe-area tests passed. The two desktop stage-completion tests reached stage-3 clear, then failed the >=45fps assertion: Orbit **41.31fps**, Amber **41.16fps**. Both also measured p95 50ms (target <=40ms); that assertion and subsequent persistence assertions did not run after the fps failure. Touch-emulated stage-3 results passed at 59.07/58.77fps, p95 16.8/16.7ms. Build/types and all 7 unit tests passed in CI. This is an unmet performance gate; no threshold was relaxed and the run was not retried to obtain a green result. [Exact evidence](evidence/safe-area-regression.json). The separate Cloudflare Pages check `112771667617` also failed with unresolved cause. Publication remains on hold.
 
