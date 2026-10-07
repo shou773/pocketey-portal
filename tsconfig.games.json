@@ -1,0 +1,1 @@
+{"extends":"./tsconfig.json","include":["src/games/**/*.ts","tests/games/**/*.ts","playwright.config.ts"],"exclude":["node_modules","dist"],"compilerOptions":{"types":["node"]}}
