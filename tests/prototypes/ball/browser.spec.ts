@@ -108,9 +108,14 @@ test('two-finger controls, touch cancellation, orientation and page return relea
   const point = async (type: string, id: number) => { const b = (await page.locator(`[data-tt-input="${type}"]`).boundingBox())!; return { id, x: b.x+b.width/2, y: b.y+b.height/2, radiusX: 5, radiusY: 5, force: 1 }; };
   await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [await point('left', 1), await point('brake', 2)] });
   await page.waitForTimeout(200); await expect(page.locator('[data-tt-input="left"]')).toHaveAttribute('aria-pressed', 'true'); await expect(page.locator('[data-tt-input="brake"]')).toHaveAttribute('aria-pressed', 'true');
-  const moving = await snapshot(page); expect(moving.vx).toBeLessThan(0); expect(moving.speed).toBeLessThan(2.2);
+  const moving = await snapshot(page); expect(moving.vx).toBeLessThan(0);
   await session.send('Input.dispatchTouchEvent', { type: 'touchCancel', touchPoints: [] });
   for (const type of ['left', 'right', 'brake']) await expect(page.locator(`[data-tt-input="${type}"]`)).toHaveAttribute('aria-pressed', 'false');
+  // Brake speed converges smoothly, so test its settled value after releasing
+  // steering rather than assuming an instantaneous cap after contact setup.
+  await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [await point('brake', 1)] });
+  await page.waitForTimeout(1000); expect((await snapshot(page)).speed).toBeLessThan(2.2);
+  await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await page.setViewportSize({ width: 844, height: 390 }); await page.waitForTimeout(150); await expect(page.locator('#tilttrail')).toHaveAttribute('data-phase', 'playing');
   // Simulate the pagehide/pageshow pair of a bfcache return; no state is set.
   await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide', { persisted: true })));
@@ -137,4 +142,32 @@ test('320 portrait and landscape panels fit; blocked storage and WebGL show hone
   const p = await blocked.newPage(); await p.goto(`http://127.0.0.1:4335${route}?lang=en`); await expect(p.locator('#tt-save')).toContainText('Storage unavailable'); await blocked.close();
   const noGL = await browser.newContext(); await noGL.addInitScript(() => { const original = HTMLCanvasElement.prototype.getContext; HTMLCanvasElement.prototype.getContext = function(this: HTMLCanvasElement, type: string, ...args: unknown[]) { if (type.includes('webgl')) return null; return original.apply(this, [type, ...args] as never); } as typeof original; });
   const fallback = await noGL.newPage(); await fallback.goto(`http://127.0.0.1:4335${route}?lang=en`); await expect(fallback.locator('#tt-title')).toHaveText('3D view unavailable'); await noGL.close();
+});
+
+test('WebGL loss freezes play and fall; header, P, Esc and touch cannot resume before reload', async ({ page }) => {
+  for (const loseDuringFall of [false, true]) {
+    await page.goto(`${route}?lang=en`); await page.getByRole('button', { name: 'Play this stage' }).click();
+    if (loseDuringFall) {
+      await page.keyboard.down('ArrowRight'); await expect(page.locator('#tilttrail')).toHaveAttribute('data-phase', 'falling'); await page.keyboard.up('ArrowRight');
+    } else await page.waitForTimeout(100);
+    await page.evaluate(() => document.querySelector('canvas')!.getContext('webgl2')!.getExtension('WEBGL_lose_context')!.loseContext());
+    await expect(page.locator('#tt-title')).toHaveText('3D view unavailable');
+    await expect(page.locator('#tilttrail')).toHaveAttribute('data-phase', 'paused');
+    await expect(page.locator('#tt-pause')).toBeDisabled();
+    await expect(page.locator('#tt-actions button')).toHaveText('Reload');
+    const frozen = await snapshot(page), header = (await page.locator('#tt-pause').boundingBox())!;
+    await page.mouse.click(header.x + header.width / 2, header.y + header.height / 2);
+    await page.keyboard.press('KeyP'); await page.keyboard.press('Escape');
+    const session = await page.context().newCDPSession(page);
+    await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ id: 1, x: header.x + header.width / 2, y: header.y + header.height / 2, radiusX: 5, radiusY: 5, force: 1 }] });
+    await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await session.detach();
+    await page.waitForTimeout(800);
+    expect(await snapshot(page)).toEqual(frozen);
+    await expect(page.locator('#tt-title')).toHaveText('3D view unavailable');
+    await page.getByRole('button', { name: 'Reload', exact: true }).click();
+    await expect(page.locator('#tilttrail')).toHaveAttribute('data-phase', 'ready');
+    await page.getByRole('button', { name: 'Play this stage' }).click();
+    await expect(page.locator('#tilttrail')).toHaveAttribute('data-phase', 'playing');
+    await page.waitForTimeout(150); expect((await snapshot(page)).z).toBeGreaterThan(0);
+  }
 });

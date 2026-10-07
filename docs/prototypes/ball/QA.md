@@ -1,8 +1,16 @@
 # TiltTrail validation
 
-Final source checks and browser run passed. Tested code hashes, dates, all six stage/mode clears and compact results are in [summary.json](evidence/summary.json). Saved logs normalize terminal color escapes and trailing whitespace only.
+Initial prototype verification at `9a88868add37a472e2fb9108b85ee977c4810091` passed. Its tested code hashes, dates, all six stage/mode clears and compact results are in [summary.json](evidence/summary.json). Saved logs normalize terminal color escapes and trailing whitespace only.
 
-## Passed
+## Context-loss follow-up
+
+Independent review found that the fallback header and P/Esc could resume simulation after the renderer was disposed. The fix now freezes both ordinary play and falling, clears input, disables the header and guards every resume path when the view is unavailable. Only the explicit Reload action can restore a fresh playable view.
+
+The focused browser rerun passed 3 tests: normal retry/pause/audio, multi-touch cancellation/orientation/page return, and the new regression covering play/fall context loss, attempted header mouse/touch and P/Esc resume, frozen position/time, then successful reload. Game TypeScript, Astro check and build passed. [Follow-up summary and tested source hashes](evidence/context-loss-summary.json), [browser log](evidence/context-loss-browser.txt).
+
+The existing two-finger test exposed a setup-timing assumption: speed was sampled before smooth braking converged. It now waits for braking to settle without steering, retaining the same `<2.2m/s` assertion. No physics or performance threshold changed. The initial six gameplay clears and renderer measurements below are retained because model/render code did not change; the complete stage matrix was not rerun for this UI-only fix.
+
+## Initial prototype checks — passed
 
 | Check | Result | Evidence |
 | --- | --- | --- |

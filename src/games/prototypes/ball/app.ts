@@ -37,14 +37,14 @@ export function boot() {
   }
   function menu() { state = createState(selected); lastPhase = 'ready'; resetInput(); renderUI(); }
   function pause() { if (state.phase !== 'playing') return; state.phase = 'paused'; resetInput(); accumulator = 0; renderUI(); }
-  function resume() { if (state.phase !== 'paused' || document.hidden) return; state.phase = 'playing'; resetInput(); previous = performance.now(); accumulator = 0; unlockAudio(); renderUI(); get<HTMLButtonElement>('pause').focus({ preventScroll: true }); }
+  function resume() { if (!view || state.phase !== 'paused' || document.hidden) return; state.phase = 'playing'; resetInput(); previous = performance.now(); accumulator = 0; unlockAudio(); renderUI(); get<HTMLButtonElement>('pause').focus({ preventScroll: true }); }
   function action(text: string, callback: () => void, primary = false) {
     const b = document.createElement('button'); b.textContent = text; b.type = 'button'; if (primary) b.className = 'primary'; b.addEventListener('click', callback); get('actions').append(b);
   }
   function renderUI() {
     const phase = state.phase, overlay = get('overlay'); overlay.hidden = phase === 'playing' || phase === 'falling';
     get('sound').textContent = tr('音 ', 'Sound ') + (save.muted ? 'OFF' : 'ON'); get('sound').setAttribute('aria-pressed', String(!save.muted));
-    get<HTMLButtonElement>('pause').disabled = phase !== 'playing' && phase !== 'paused'; get('pause').textContent = phase === 'paused' ? tr('再開', 'Resume') : tr('一時停止', 'Pause');
+    get<HTMLButtonElement>('pause').disabled = !view || (phase !== 'playing' && phase !== 'paused'); get('pause').textContent = view && phase === 'paused' ? tr('再開', 'Resume') : tr('一時停止', 'Pause');
     get('back').textContent = tr('ゲーム一覧へ', 'All games'); get('control-note').textContent = tr('左右で転がす\n減速：長押し', 'STEER ← → / A D\nBRAKE: HOLD / SPACE');
     controlButtons.forEach(b => { const type = b.dataset.ttInput!; b.disabled = phase !== 'playing'; b.setAttribute('aria-label', type === 'left' ? tr('左に転がす', 'Steer left') : type === 'right' ? tr('右に転がす', 'Steer right') : tr('長押しで減速', 'Hold to brake')); if (type === 'brake') b.textContent = tr('ブレーキ', 'BRAKE'); });
     get('progress').setAttribute('aria-label', tr('ゴールまでの進行度', 'Progress to goal'));
@@ -101,7 +101,13 @@ export function boot() {
   function visibility() { if (document.hidden) { if (state.phase === 'playing') pause(); resetInput(); previous = 0; accumulator = 0; void audio?.suspend().catch(() => {}); } }
   function blur() { pause(); resetInput(); }
   document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener(LANGUAGE_EVENT, renderUI);
-  get('canvas').addEventListener('webglcontextlost', e => { e.preventDefault(); pause(); view?.dispose(); view = null; renderUI(); });
+  get('canvas').addEventListener('webglcontextlost', e => {
+    e.preventDefault();
+    // Freeze both ordinary play and an in-flight fall before releasing WebGL.
+    if (state.phase === 'playing' || state.phase === 'falling') state.phase = 'paused';
+    resetInput(); accumulator = 0; lastPhase = state.phase;
+    view?.dispose(); view = null; renderUI();
+  });
   function frame(now: number) {
     const elapsed = previous ? Math.max(0, Math.min(0.1, (now - previous) / 1000)) : 0; previous = now;
     if (!document.hidden) {
