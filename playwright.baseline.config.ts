@@ -1,9 +1,11 @@
+import {resolve} from 'node:path';
 import {defineConfig} from '@playwright/test';
 import candidate from './playwright.config';
 const directory=process.env.GAME_BASELINE_DIST;
 if(!directory)throw new Error('GAME_BASELINE_DIST must point to the built public main baseline');
 const quoted="'"+directory.replaceAll("'","'\\''")+"'";
 export default defineConfig({...candidate,
+ testDir:resolve(directory,'..','tests/games'),
  grep:/three stages through normal input, unlock and persistence/,
  reporter:[['list'],['json',{outputFile:'baseline-results/report.json'}]],
  outputDir:'baseline-results',

@@ -161,7 +161,10 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   });
   resizeObserver.observe(canvas);
   function draw(s: State) {
-    const ratio = Math.min(devicePixelRatio, 1.6, Math.sqrt(450000 / Math.max(1, width * height)));
+    // Wide canvases use a modestly smaller render buffer; DOM text/controls
+    // retain native resolution, and narrower canvases keep 450k.
+    const maxPixels = width >= 1000 ? 350000 : 450000;
+    const ratio = Math.min(devicePixelRatio, 1.6, Math.sqrt(maxPixels / Math.max(1, width * height)));
     if (resized || ratio !== pixelRatio) { resized = false; pixelRatio = ratio; renderer.setPixelRatio(ratio); renderer.setSize(width, height, false); camera.aspect = width / Math.max(1, height); camera.updateProjectionMatrix(); }
     courier.position.set(...coord(s.x, s.y, s.z));
     const delta = Math.max(0, Math.min(.1, s.time - previousTime));

@@ -21,14 +21,16 @@ export function boot() {
         try { latest = cleanSave(JSON.parse(localStorage.getItem(SAVE_KEY) || 'null')); } catch { /* Replace malformed saves. */ }
         for (const game of ['orbit', 'amber'] as const) {
           save[game].unlocked = Math.max(save[game].unlocked, latest[game].unlocked);
-          save[game].best = save[game].best.map((n, i) => { const previous = latest[game].best[i]; return n === null ? previous : previous === null ? n : Math.min(n, previous); });
+          for (const key of ['best', 'challengeBest'] as const) {
+            save[game][key] = save[game][key].map((n, i) => { const previous = latest[game][key][i]; return n === null ? previous : previous === null ? n : Math.min(n, previous); });
+          }
         }
       }
       localStorage.setItem(SAVE_KEY, JSON.stringify(save)); storageOkay = true;
     } catch { storageOkay = false; }
     note();
   }
-  function note() { $('save-note').textContent = storageOkay ? tr('記録はこのブラウザに保存されます。', 'Progress is saved in this browser.') : mode === 'recovery' ? tr('保存を利用できません。再読み込みすると未保存の記録は失われます。', 'Storage is unavailable. Reloading loses unsaved progress.') : tr('保存を利用できません。この画面では続けて遊べます。', 'Storage is unavailable. You can keep playing here.'); }
+  function note() { $('save-note').textContent = storageOkay ? tr('記録はこのブラウザに保存されます。', 'Progress is saved in this browser.') : mode === 'recovery' ? tr('保存を利用できません。再読み込みすると未保存の記録は失われます。', 'Storage is unavailable. Reloading loses unsaved progress.') : tr('保存を利用できません。この画面では続けて遊べます。', 'Storage is unavailable. You can keep playing here.'); const oldBest=save[kind].best[selected]; if(storageOkay && oldBest) $('save-note').textContent += tr(` 旧コースBEST ${oldBest.toFixed(2)}秒は別保存。`, ` Previous course BEST ${oldBest.toFixed(2)}s is kept separately.`); }
   let selected = 0, state = createState(kind, 0), mode: 'menu' | 'play' | 'pause' | 'result' | 'reset' | 'recovery' = 'menu';
   let view: ReturnType<typeof createView>;
   try { view = createView($<HTMLCanvasElement>('scene'), kind); } catch { function unavailable(){ $('panel-title').textContent = tr('3D画面を起動できません', '3D could not start'); $('panel-copy').textContent = tr('WebGLに対応したブラウザで開き直してください。', 'Reopen this game in a browser that supports WebGL 2.'); $('reset').hidden = true; $<HTMLButtonElement>('sound').disabled = true;document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b=>{b.disabled=true;}); }unavailable();window.addEventListener(LANGUAGE_EVENT,unavailable);return; }
@@ -45,7 +47,7 @@ export function boot() {
   function button(text: string, fn: () => void, primary = false) { const b = document.createElement('button'); if (primary) { b.className = 'primary'; b.append(icon(mode === 'result' && state.status === 'dead' ? 'rotate-ccw' : 'play')); } b.append(document.createTextNode(text)); b.onclick = fn; $('actions').append(b); }
   function stageButtons() {
     $('stages').replaceChildren();
-    stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', tr(`ステージ ${i + 1} ${stage.name}`,`Stage ${i + 1} ${localizedStageName(kind,i)}`)); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? tr('ロック','LOCKED') : save[kind].best[i] ? `${save[kind].best[i]!.toFixed(2)}s` : tr('挑戦可能','READY'); const name = document.createElement('span'); name.className = 'stage-name'; name.textContent = localizedStageName(kind,i); b.append(icon(b.disabled ? 'lock-keyhole' : save[kind].best[i] ? 'check' : 'flag', 'stage-symbol'), n, name, label); b.onclick = () => { selected = i; state = createState(kind, i); view.load(i); menu(); }; $('stages').append(b); });
+    stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', tr(`ステージ ${i + 1} ${stage.name}`,`Stage ${i + 1} ${localizedStageName(kind,i)}`)); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? tr('ロック','LOCKED') : save[kind].challengeBest[i] ? `${save[kind].challengeBest[i]!.toFixed(2)}s` : tr('挑戦可能','READY'); const name = document.createElement('span'); name.className = 'stage-name'; name.textContent = localizedStageName(kind,i); b.append(icon(b.disabled ? 'lock-keyhole' : save[kind].challengeBest[i] ? 'check' : 'flag', 'stage-symbol'), n, name, label); b.onclick = () => { selected = i; state = createState(kind, i); view.load(i); menu(); }; $('stages').append(b); });
   }
   function panel(heading: string, copy: string) {
     clearInput(); $('overlay').dataset.screen = mode; $('overlay').dataset.result = state.status; $('panel-icon').style.setProperty('--icon', `url('/games/assets/lucide/${mode === 'result' ? state.status === 'clear' ? 'trophy' : 'rotate-ccw' : mode === 'pause' ? 'sparkles' : kind === 'orbit' ? 'orbit' : 'gem'}.svg')`); $('eyebrow').textContent = mode === 'result' && state.status === 'clear' ? `STAGE 0${selected + 1} COMPLETE` : kind === 'orbit' ? 'POCKETEY / COSMIC RUN' : 'POCKETEY / WARM ADVENTURE'; $('overlay').hidden = false; $('overlay').scrollTop = 0; $('panel-title').textContent = heading; $('panel-copy').textContent = copy; $('actions').replaceChildren(); $('stages').hidden = true; $('instructions').hidden = true; $('reset').hidden = true; $<HTMLButtonElement>('pause').disabled = mode !== 'pause'; $('hint').textContent = ''; note();
@@ -64,8 +66,8 @@ export function boot() {
   function finish(announce = true) {
     mode = 'result';
     if (state.status === 'clear') {
-      const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(3, selected + 2)); progress.best[selected] = Math.min(progress.best[selected] ?? Infinity, state.time); if (announce) persist();
-      panel(selected === 2 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.best[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.best[selected]!.toFixed(2)}s`));
+      const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(3, selected + 2)); progress.challengeBest[selected] = Math.min(progress.challengeBest[selected] ?? Infinity, state.time); if (announce) persist();
+      panel(selected === 2 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.challengeBest[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.challengeBest[selected]!.toFixed(2)}s`));
       if (announce) tone(880, .25); if (selected < 2) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
     } else { panel(tr('もう一度、いこう。', 'One more try.'), tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) tone(170, .2); button(tr('すぐにリトライ', 'Retry now'), start, true); }
     if (state.status === 'clear' && selected < 2) button(tr('もう一度', 'Play again'), start);

@@ -2,6 +2,8 @@
 
 Base: published main `aa44ef3a2e6ab853f2c13a168e73dd0e56459907`. Branch: `codex/3d-art-refresh`. Independent review is required before merging; publication remains pending.
 
+This document preserves the art-only review snapshot. The subsequent [difficulty refresh](DIFFICULTY-REFRESH.md) changes layouts, keeps old records separately and introduces a smaller wide-canvas pixel budget. Its current candidate/CI status supersedes the art-only handoff below.
+
 ## Result and scope
 
 Orbit Ribbon replaces the test cube with a Kenney speeder, adds segmented station decks, structural ribs, rock/meteor scenery, small distant docking platforms, a banded planet, satellite and continuous stars. Amber Step replaces the cube with animated Oodi, adds fitted grass blocks, flowers, trees and rocks on separate background islands, layered hills/clouds and a sunset sky. Each grass platform uses one original model whose central span is extended while the authored end bevels remain at their original width; exact outer end bounds and top height retain the original collision surface. The rigid ship is vertex-painted and merged into one draw, and station segments are 12m. Both retain the existing cyan/amber gap edges and red hazard silhouettes. The camera, six stages, collision surfaces, jump/movement physics, input, v1 save key and bilingual UI are unchanged.

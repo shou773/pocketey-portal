@@ -8,6 +8,7 @@ test('licensed UI artwork loads and existing progress survives the visual refres
  await page.goto('/games/orbit-ribbon/');
  await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  await expect(page.locator('#sound')).toHaveText('音 ON');
+ await expect(page.locator('#save-note')).toContainText('旧コースBEST 13.00秒');
  for(const name of ['orbit','gem','trophy','flag','lock-keyhole','check','arrow-left','arrow-right','arrow-up-right','play','rotate-ccw','sparkles','footprints']){
   const response=await request.get(`/games/assets/lucide/${name}.svg`);expect(response.status()).toBe(200);expect(await response.text()).toContain('<svg');
  }
@@ -20,6 +21,10 @@ test('licensed UI artwork loads and existing progress survives the visual refres
  await page.locator('#pause').click();await page.getByRole('button',{name:'ステージ選択'}).click();
  await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  const save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(save.orbit.best).toEqual([13,16,18]);
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'orbit',0,true);
+ const updated=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);
+ expect(updated.orbit.best).toEqual([13,16,18]);expect(updated.orbit.challengeBest[0]).toBeGreaterThan(13);
+ expect(updated.orbit.challengeBest.slice(1)).toEqual([null,null]);
 });
 for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])test.describe(`${kind}-${touch?'touch':'keyboard'}`,()=>{
  test.use({isMobile:touch,hasTouch:touch,viewport:touch?{width:390,height:844}:{width:1280,height:720}});
@@ -43,7 +48,7 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
  }
  await page.getByRole('button',{name:'ステージ選択'}).click();await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  await page.locator('#sound').click();await page.reload();await expect(page.locator('#sound')).toHaveText('音 ON');await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
- const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(stored[kind].best.every((x:number)=>x>0)).toBeTruthy();
+ const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(stored[kind].challengeBest.every((x:number)=>x>0)).toBeTruthy();
  const reopened=await page.context().newPage();await reopened.goto(page.url());await expect(reopened.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();await reopened.close();expect(errors).toEqual([]);
  await page.locator('#stages').getByRole('button',{name:/ステージ 3 /}).click();await page.getByRole('button',{name:'ステージ 3 をはじめる'}).click();await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
 });});

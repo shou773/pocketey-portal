@@ -20,6 +20,8 @@ on:
       - '.github/workflows/games-quality.yml'
       - 'docs/games/ART-REFRESH.md'
       - 'docs/games/evidence/art-refresh/**'
+      - 'docs/games/DIFFICULTY-REFRESH.md'
+      - 'docs/games/evidence/difficulty-refresh/**'
   workflow_dispatch:
 permissions:
   contents: read

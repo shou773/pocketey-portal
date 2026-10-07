@@ -1,0 +1,13 @@
+import {chromium} from '/workspace/pocketey-portal/node_modules/playwright-core/index.mjs';import {createServer} from 'node:http';import fs from 'node:fs';import path from 'node:path';
+const root='/workspace/pocketey-portal',label=process.argv[2];if(!['before','after'].includes(label))throw Error('label');
+const dist=label==='before'?'/workspace/asset-intake/difficulty-450-dist':root+'/dist';
+const server=createServer((req,res)=>{try{const pathname=req.url.split('?')[0];let f=dist+pathname+(pathname.endsWith('/')?'index.html':'');res.setHeader('content-type',({'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.svg':'image/svg+xml'})[path.extname(f)]||'application/octet-stream');res.end(fs.readFileSync(f));}catch{res.writeHead(404);res.end();}});await new Promise(r=>server.listen(4331,'127.0.0.1',r));
+let browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});let out=root+'/docs/games/evidence/difficulty-refresh/resolution-'+label;fs.mkdirSync(out,{recursive:true});let result=[];
+for(let game of ['orbit-ribbon','amber-step'])for(let viewport of [{width:390,height:844},{width:1280,height:720}]){
+ let c=await browser.newContext({locale:'ja-JP',viewport,deviceScaleFactor:1,isMobile:viewport.width===390,hasTouch:viewport.width===390});let p=await c.newPage();let errors=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.addInitScript(()=>{const raf=window.requestAnimationFrame.bind(window);window.requestAnimationFrame=callback=>raf(now=>{if(window.freezeFrames)window.pendingFrame=callback;else callback(now);});});
+ await p.goto('http://127.0.0.1:4331/games/'+game+'/?lang=ja');await p.waitForFunction(()=>document.querySelector('#game')?.dataset.mode==='menu');await p.waitForFunction(()=>document.querySelector('canvas')?.dataset.artAdopted==='true');await p.waitForTimeout(300);
+ await p.evaluate(()=>window.freezeFrames=true);await p.waitForFunction(()=>!!window.pendingFrame,null,{polling:100});
+ await p.evaluate(()=>{document.querySelector('#actions button').click();window.pendingFrame(performance.now());});
+ await p.screenshot({path:out+'/'+game+'-'+viewport.width+'-play.png'});result.push({game,viewport,state:await p.locator('#game').evaluate(e=>({...e.dataset})),art:await p.locator('canvas').evaluate(e=>({...e.dataset})),errors});await c.close();
+}fs.writeFileSync(out+'/capture.json',JSON.stringify({method:'Normal start button at x=0. rAF callback held before start and drawn once in the same JS task, without writes to physics. Identical camera, viewport and starting state.',result},null,2));await browser.close();server.close();
