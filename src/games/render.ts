@@ -1,6 +1,6 @@
 import * as T from 'three';
 import { stages, type Kind, type State } from './model';
-import { loadArt, batchStatic, clearStatic, placeArt, createSky, type Art } from './art';
+import { loadArt, batchStatic, clearStatic, placeArt, placeGrass, createSky, type Art } from './art';
 export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const renderer = new T.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -79,18 +79,17 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
       const mid = (p.a + p.b) / 2, len = p.b - p.a;
       if (kind === 'orbit') {
         box(level, ...coord(mid, p.y - .38, p.z), p.w, .72, len, mats.floor);
-        for (let a = p.a; a < p.b; a += 8) {
-          const segment = Math.min(8, p.b - a);
+        for (let a = p.a; a < p.b; a += 12) {
+          const segment = Math.min(12, p.b - a);
           placeArt(level, art, 'platform_small', coord(a + segment / 2, p.y - .24, p.z), [p.w, 2.4, segment]);
         }
         // Structural ribs sit below the runway and never bridge a jump gap.
         for (let x = p.a + 1; x < p.b; x += 5) box(level, ...coord(x, p.y - .9, 0), p.w * .7, .5, .24, mats.decor);
       } else {
         if (!art.has('block-grass-low-long')) box(level, mid, p.y - .36, 0, len, .72, 3.4, mats.floor);
+        placeGrass(level,art,mid,p.y,len);
         for (let a = p.a; a < p.b; a += 3) {
           const segment = Math.min(3, p.b - a);
-          // Exact visible end faces and top height match the collision surface.
-          placeArt(level, art, 'block-grass-low-long', [a + segment / 2, p.y - .75, 0], [segment / 2.082125, 1.5, 3.4 / 1.082125]);
           if (segment > 1 && Math.floor((a - p.a) / 3) % 3 === 1 && !data.hazards.some(h => Math.abs(h.x - a - segment / 2) < 2)) {
             placeArt(level, art, 'flowers', [a + segment / 2, p.y, -1.35], [.65, .65, .65]);
           }
@@ -136,6 +135,9 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     const player = art.get(kind === 'orbit' ? 'craft_speederA' : 'character-oodi');
     if (player) {
       courier.clear(); courier.scale.setScalar(1);
+      // The rigid ship uses the same lightweight vertex-painted batch as
+      // the station. Its slight banking moves the whole mesh, not a rig.
+      if(kind==='orbit') batchStatic(player.scene,kind);
       // The ship faces -Z; Oodi faces +Z, rotated toward the side-scrolling +X.
       if (kind === 'orbit') player.scene.scale.set(.4, .48, .4); else player.scene.scale.setScalar(.9);
       player.scene.position.y = kind === 'orbit' ? .12 : 0;

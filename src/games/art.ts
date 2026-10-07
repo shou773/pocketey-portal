@@ -14,7 +14,7 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
   canvas.dataset.art = 'loading';
   const loader = new GLTFLoader();
   const art: Art = new Map();
-  const materials = new Map<T.Material, T.MeshLambertMaterial>();
+  const materials = new Map<T.Material, T.Material>();
   const baked = new Set<T.BufferGeometry>();
   let palette: ImageData | undefined;
   function bakePalette(mesh: T.Mesh, map: T.Texture) {
@@ -53,14 +53,55 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
             const m = source as T.MeshStandardMaterial;
             if (kind === 'amber' && !m.map) throw new Error('Required colormap missing');
             const color = name === 'platform_small' ? new T.Color(m.name === 'metalRed' ? 0x426272 : m.name === 'metal' ? 0x708695 : 0x344b60) : m.color;
-            const result = new T.MeshLambertMaterial({ color, map: kind === 'amber' ? null : m.map, vertexColors: kind === 'amber' || m.vertexColors, side: ['character-oodi', 'block-grass-low-long', 'rocks'].includes(name) ? T.FrontSide : m.side, transparent: m.transparent, opacity: m.opacity });
+            let result: T.MeshLambertMaterial | T.ShaderMaterial = new T.MeshLambertMaterial({ color, map: kind === 'amber' ? null : m.map, vertexColors: kind === 'amber' || m.vertexColors, side: ['character-oodi', 'block-grass-low-long', 'rocks'].includes(name) ? T.FrontSide : m.side, transparent: m.transparent, opacity: m.opacity });
             // This exported rig binds every vertex to one bone in channel X.
             // Validate that fact before omitting the three zero-weight fetches;
             // a future blended rig keeps Three's normal skinning path.
             const weights = object.geometry.getAttribute('skinWeight');
             if (object instanceof T.SkinnedMesh && weights && Array.from({length:weights.count},(_,i)=>i).every(i=>weights.getX(i)===1&&weights.getY(i)===0&&weights.getZ(i)===0&&weights.getW(i)===0)) {
-              result.onBeforeCompile = shader => { shader.vertexShader = shader.vertexShader.replace('#include <skinbase_vertex>', '#ifdef USE_SKINNING\nmat4 boneMatX = getBoneMatrix(skinIndex.x);\nmat4 boneMatY = mat4(0.0);\nmat4 boneMatZ = mat4(0.0);\nmat4 boneMatW = mat4(0.0);\n#endif'); };
-              result.customProgramCacheKey = ()=>'single-bone-bindings-v1';
+              const skeleton=object.skeleton, count=skeleton.bones.length;
+              // Small rigs fit comfortably within WebGL2's guaranteed vertex
+              // uniform budget. Read their matrices directly instead of four
+              // texture fetches per vertex. Three updates this shared array
+              // before rendering; its normal skinning/bind transforms remain.
+              if(count<=32) skeleton.computeBoneTexture();
+              const matrices=count<=32?skeleton.boneMatrices?.subarray(0,count*16):undefined;
+              result.onBeforeCompile = shader => {
+                if(matrices) {
+                  shader.uniforms.artBones={value:matrices};
+                  shader.vertexShader=shader.vertexShader.replace('#include <skinning_pars_vertex>', `#ifdef USE_SKINNING\nuniform mat4 bindMatrix; uniform mat4 bindMatrixInverse; uniform mat4 artBones[${count}];\nmat4 getBoneMatrix(const in float i) { return artBones[int(i)]; }\n#endif`);
+                }
+                shader.vertexShader = shader.vertexShader.replace('#include <skinbase_vertex>', '#ifdef USE_SKINNING\nmat4 boneMatX = getBoneMatrix(skinIndex.x);\nmat4 boneMatY = mat4(0.0);\nmat4 boneMatZ = mat4(0.0);\nmat4 boneMatW = mat4(0.0);\n#endif');
+              };
+              result.customProgramCacheKey = ()=>'single-bone-uniforms-v2-'+count;
+              if(kind==='amber' && matrices) {
+                result=new T.ShaderMaterial({vertexColors:true,side:T.FrontSide,
+                  uniforms:{artBones:{value:matrices},artSky:{value:new T.Color(0xe9f5ff)},artGround:{value:new T.Color(0x91745b)},artSun:{value:new T.Color(0xffe4c5)},paintFog:{value:new T.Color(0xe9b391)},tint:{value:color}},
+                  // Animate the original skinned normals/positions, then use
+                  // Gouraud Lambert lighting and vertex fog like the static
+                  // batches. The authored rig is flat-faced and single-bone;
+                  // no texture fetch or fragment lighting is needed.
+                  vertexShader:`#include <common>
+                  uniform mat4 bindMatrix; uniform mat4 bindMatrixInverse; uniform mat4 artBones[${count}];
+                  uniform vec3 artSky,artGround,artSun,paintFog,tint; varying vec3 litColor;
+                  mat4 getBoneMatrix(float i) { return artBones[int(i)]; }
+                  vec3 outputColor(vec3 c) { return mix(pow(max(c,vec3(0.0)),vec3(0.41666))*1.055-vec3(0.055), c*12.92,vec3(lessThanEqual(c,vec3(0.0031308)))); }
+                  void main() {
+                    vec3 objectNormal=normal;
+                    mat4 boneMatX=getBoneMatrix(skinIndex.x),boneMatY=mat4(0.0),boneMatZ=mat4(0.0),boneMatW=mat4(0.0);
+                    #include <skinnormal_vertex>
+                    #include <begin_vertex>
+                    #include <skinning_vertex>
+                    vec3 n=normalize(mat3(modelMatrix)*objectNormal);
+                    float hemi=n.y*.5+.5; float sun=max(0.0,dot(n,normalize(vec3(-8.0,15.0,5.0))));
+                    vec3 irradiance=(2.2*mix(artGround,artSky,hemi)+2.1*artSun*sun)/PI;
+                    vec4 viewPosition=modelViewMatrix*vec4(transformed,1.0);
+                    litColor=outputColor(mix(color.rgb*tint*irradiance,paintFog,smoothstep(30.0,105.0,-viewPosition.z)));
+                    gl_Position=projectionMatrix*viewPosition;
+                  }`,
+                  fragmentShader:'varying vec3 litColor; void main() { gl_FragColor=vec4(litColor,1.0); }'
+                });
+              }
             }
             materials.set(source, result);
           }
@@ -178,6 +219,28 @@ export function batchStatic(group: T.Group, kind: Kind) {
 export function placeArt(parent: T.Group, art: Art, name: string, position: [number, number, number], scale: [number, number, number], rotation = 0) {
   const source = art.get(name); if (!source) return false;
   const object = source.scene.clone(true); object.position.set(...position); object.scale.set(...scale); object.rotation.y = rotation; parent.add(object); return true;
+}
+
+export function placeGrass(parent:T.Group, art:Art, mid:number, top:number, length:number) {
+  const source=art.get('block-grass-low-long'); if(!source)return;
+  const object=source.scene.clone(true);
+  let xScale=1;
+  // This inspected asset is a single centered mesh with identity node
+  // transforms. Stretch its central span while retaining the end bevels;
+  // one authored block per collision platform avoids repeated internal caps.
+  object.traverse(child=>{
+    if(!(child instanceof T.Mesh))return;
+    const geometry=child.geometry.clone();geometry.computeBoundingBox();
+    const bounds=geometry.boundingBox!,width=bounds.max.x-bounds.min.x,center=(bounds.max.x+bounds.min.x)/2;
+    const positions=geometry.getAttribute('position');
+    if(length>=width) for(let i=0;i<positions.count;i++) {
+        const x=positions.getX(i)-center;
+        positions.setX(i,x+Math.sign(x)*(length-width)/2);
+      }
+    else xScale=length/width;
+    geometry.computeBoundingBox();geometry.computeBoundingSphere();child.geometry=geometry;
+  });
+  object.position.set(mid,top-.75,0);object.scale.set(xScale,1.5,3.4/1.082125);parent.add(object);
 }
 
 export function createSky(kind: Kind) {

@@ -210,6 +210,18 @@ for (const kind of ['orbit','amber'] as const) {
  test(`${kind}: selected 3D art loads, animation and normal controls remain usable`,async({page},info)=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   page.on('console',message=>{if(message.type()==='error' && /Shader Error|shader is not compiled/i.test(message.text()))errors.push(message.text());});
+  if(kind==='amber') await page.addInitScript(()=>{
+   // The inspected Oodi rig has six joints. Capture changing GPU-bound
+   // matrices so clip-label transitions alone cannot hide a frozen pose.
+   const snapshots:number[][]=[];
+   (window as unknown as {artBoneTrace:typeof snapshots}).artBoneTrace=snapshots;
+   const original=WebGL2RenderingContext.prototype.uniformMatrix4fv;
+   WebGL2RenderingContext.prototype.uniformMatrix4fv=function(...args){
+    const values=Array.from(args[2]);const last=snapshots.at(-1);
+    if(values.length===96 && snapshots.length<100 && (!last || values.some((v,i)=>Math.abs(v-last[i])>1e-4)))snapshots.push(values);
+    return original.apply(this,args);
+   };
+  });
   await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','ready');
   await expect(page.locator('canvas')).toHaveAttribute('data-art-adopted','true');
   if(kind==='amber') await page.evaluate(()=>{
@@ -240,6 +252,10 @@ for (const kind of ['orbit','amber'] as const) {
    expect(trace.some(c=>c.name==='idle'&&c.grounded==='true')).toBe(true);
    expect(trace.some(c=>c.name==='walk'&&c.grounded==='true')).toBe(true);
    fs.writeFileSync(info.outputPath('amber-animation-transitions.json'),JSON.stringify(trace,null,2));
+   const poses=await page.evaluate(()=>(window as unknown as {artBoneTrace:number[][]}).artBoneTrace);
+   expect(poses.length).toBeGreaterThan(2);
+   expect(poses.some(p=>p.some((v,i)=>i%16<12 && Math.abs(v-poses[0][i])>1e-3))).toBe(true);
+   fs.writeFileSync(info.outputPath('amber-bone-matrix-uploads.json'),JSON.stringify(poses));
   }
   await page.locator('#pause').click();
   const frozen=await read(page);await page.waitForTimeout(200);expect((await read(page)).x).toBe(frozen.x);

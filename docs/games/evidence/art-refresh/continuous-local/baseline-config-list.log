@@ -1,0 +1,11 @@
+Listing tests:
+  browser.spec.ts:26:2 › orbit-keyboard › three stages through normal input, unlock and persistence
+  browser.spec.ts:26:2 › orbit-touch › three stages through normal input, unlock and persistence
+  browser.spec.ts:26:2 › amber-keyboard › three stages through normal input, unlock and persistence
+  browser.spec.ts:26:2 › amber-touch › three stages through normal input, unlock and persistence
+Total: 4 tests in 1 file
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
