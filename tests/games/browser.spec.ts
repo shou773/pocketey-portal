@@ -35,7 +35,7 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
  await expect(page.getByRole('button',{name:/ステージ 2 /})).toBeDisabled();
  for(let i=0;i<3;i++){
   if(i===0)await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();else await page.getByRole('button',{name:'次のステージ'}).click();
-  await page.waitForTimeout(400);await page.screenshot({path:info.outputPath(`${kind}-${i+1}-play.png`)});
+  // Start driving immediately: an awaited screenshot can stall the controller while auto-run advances.
   const measurement = i===2 ? page.evaluate(async()=>{const samples:number[]=[];let last=performance.now();await new Promise<void>(resolve=>{function sample(now:number){samples.push(now-last);last=now;if(samples.length<200)requestAnimationFrame(sample);else resolve();}requestAnimationFrame(sample);});const sorted=samples.slice(10).sort((a,b)=>a-b);return{fps:1000/(sorted.reduce((a,b)=>a+b)/sorted.length),p95:sorted[Math.floor(sorted.length*.95)]};}) : null;
   await play(page,kind,i,touch);
   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',performance);expect(performance.fps).toBeGreaterThanOrEqual(45);expect(performance.p95).toBeLessThanOrEqual(40);}
