@@ -156,20 +156,36 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: 320x568 menus and cl
  await page.screenshot({path:info.outputPath(`${kind}-390-controls.png`)});
 });
 
-test('simulated notch safe areas keep toolbar and controls accessible',async({page},info)=>{
+for(const kind of ['orbit','amber'] as const)test(`${kind}: simulated notch safe areas keep all controls inside every edge`,async({page},info)=>{
  const session=await page.context().newCDPSession(page);
- await session.send('Emulation.setSafeAreaInsetsOverride',{insets:{top:44,bottom:34,left:0,right:0}});
- await page.goto('/games/orbit-ribbon/');
+ const measurements:unknown[]=[];
+ async function insideSafeArea(insets:{top:number;bottom:number;left:number;right:number}){
+  const viewport=page.viewportSize()!;
+  const items=page.locator('.game-bar button, .wordmark, [data-input]');
+  for(let i=0;i<await items.count();i++){
+   const item=items.nth(i),box=(await item.boundingBox())!;
+   const label=await item.getAttribute('aria-label')??await item.textContent();
+   expect(box.x,`${label}: left`).toBeGreaterThanOrEqual(insets.left);
+   expect(box.y,`${label}: top`).toBeGreaterThanOrEqual(insets.top);
+   expect(box.x+box.width,`${label}: right`).toBeLessThanOrEqual(viewport.width-insets.right);
+   expect(box.y+box.height,`${label}: bottom`).toBeLessThanOrEqual(viewport.height-insets.bottom);
+   measurements.push({viewport,insets,label,box});
+  }
+ }
+ const portrait={top:44,bottom:34,left:0,right:0};
+ await session.send('Emulation.setSafeAreaInsetsOverride',{insets:portrait});
+ await page.goto(`/games/${kind==='orbit'?'orbit-ribbon':'amber-step'}/`);
  expect(await page.locator('.game-bar').evaluate(e=>parseFloat(getComputedStyle(e).paddingTop))).toBe(54);
- expect((await page.locator('#sound').boundingBox())!.y).toBeGreaterThanOrEqual(44);
- await page.screenshot({path:info.outputPath('notch-portrait-menu.png')});
+ await insideSafeArea(portrait);
+ await page.screenshot({path:info.outputPath(`${kind}-notch-portrait-menu.png`)});
  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
- const jump=await page.locator('[data-input=jump]').boundingBox();expect(jump!.y+jump!.height).toBeLessThanOrEqual(844-34);
  await page.locator('#pause').click();
  await page.setViewportSize({width:844,height:390});
- await session.send('Emulation.setSafeAreaInsetsOverride',{insets:{top:0,bottom:21,left:44,right:44}});
- expect((await page.locator('.wordmark').boundingBox())!.x).toBeGreaterThanOrEqual(44);
+ const landscape={top:0,bottom:21,left:44,right:44};
+ await session.send('Emulation.setSafeAreaInsetsOverride',{insets:landscape});
  await page.getByRole('button',{name:'つづける'}).click();
- const landscape=await page.locator('[data-input=jump]').boundingBox();expect(landscape!.x+landscape!.width).toBeLessThanOrEqual(800);
- await page.screenshot({path:info.outputPath('notch-landscape-play.png')});
+ await insideSafeArea(landscape);
+ expect(await page.locator('.controls').evaluate(e=>parseFloat(getComputedStyle(e).paddingBottom))).toBe(21);
+ await page.screenshot({path:info.outputPath(`${kind}-notch-landscape-play.png`)});
+ fs.writeFileSync(info.outputPath(`${kind}-safe-area-bounds.json`),JSON.stringify(measurements,null,2));
 });
