@@ -2,6 +2,23 @@ import {test,expect,type Page} from '@playwright/test';
 import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
 import fs from 'node:fs';
 import {read,play} from './input';
+test('licensed UI artwork loads and existing progress survives the visual refresh',async({page,request})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.addInitScript(k=>localStorage.setItem(k,JSON.stringify({version:1,sound:true,orbit:{unlocked:3,best:[13,16,18]},amber:{unlocked:2,best:[10,null,null]}})),SAVE_KEY);
+ await page.goto('/games/orbit-ribbon/');
+ await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
+ await expect(page.locator('#sound')).toHaveText('音 ON');
+ for(const name of ['orbit','gem','trophy','flag','lock-keyhole','check','arrow-left','arrow-right','arrow-up-right','play','rotate-ccw','sparkles','footprints']){
+  const response=await request.get(`/games/assets/lucide/${name}.svg`);expect(response.status()).toBe(200);expect(await response.text()).toContain('<svg');
+ }
+ const license=await request.get('/games/assets/lucide/LICENSE.txt');expect(await license.text()).toContain('ISC License');expect(await license.text()).toContain('The MIT License');
+ await expect(page.locator('.hero-mark .asset-icon')).toBeVisible();
+ await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await page.keyboard.press('Space');await page.waitForTimeout(900);
+ expect(await page.locator('#landing-cue').evaluate(e=>e.getAnimations().length)).toBe(0);
+ await page.locator('#pause').click();await page.getByRole('button',{name:'ステージ選択'}).click();
+ await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
+ const save=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(save.orbit.best).toEqual([13,16,18]);
+});
 for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])test.describe(`${kind}-${touch?'touch':'keyboard'}`,()=>{
  test.use({isMobile:touch,hasTouch:touch,viewport:touch?{width:390,height:844}:{width:1280,height:720}});
  test('three stages through normal input, unlock and persistence',async({page,browser},info)=>{

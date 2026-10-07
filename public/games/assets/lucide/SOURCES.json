@@ -1,0 +1,90 @@
+{
+  "upstream": "b56741cf30c08fc7248bf41ddd3a261367aa9579",
+  "downloaded": "2026-10-07",
+  "files": [
+    {
+      "file": "orbit.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/orbit.svg",
+      "bytes": 418,
+      "sha256": "e2b8b7d7f82044181860cbc2dab9b7e8d3c4778fbbce9a62f5c4038175f4faf4"
+    },
+    {
+      "file": "gem.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/gem.svg",
+      "bytes": 425,
+      "sha256": "377618223555b2847b553a81f6974c76b7ce14d1207bcc0e98baa27a6a36d40e"
+    },
+    {
+      "file": "trophy.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/trophy.svg",
+      "bytes": 554,
+      "sha256": "c641553befdb899b2eb01075c0962c73b4b0e0d1835d9d407f5d5d4d70f77d03"
+    },
+    {
+      "file": "flag.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/flag.svg",
+      "bytes": 370,
+      "sha256": "e99f1de2fea87cd2e3decc28a1f021a2a8182f907b3b350f604909de2030d8b9"
+    },
+    {
+      "file": "lock-keyhole.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/lock-keyhole.svg",
+      "bytes": 337,
+      "sha256": "fc0b8b7590d1d9e9bb0112c5c2e15a78ade0bfeca6d6f8c79fbbe149236d74be"
+    },
+    {
+      "file": "check.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/check.svg",
+      "bytes": 239,
+      "sha256": "7f33acc9a77a61659531044525fc008edebe215bf4dcf1c789c8674ad3277db0"
+    },
+    {
+      "file": "arrow-left.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/arrow-left.svg",
+      "bytes": 262,
+      "sha256": "c5f4b88076108eb1a0d95336e1aa7e7bb1419a3a92af96f6247d88cd3456f933"
+    },
+    {
+      "file": "arrow-right.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/arrow-right.svg",
+      "bytes": 261,
+      "sha256": "288397fdb73bb4f783cf9eabb726ff47357df1d4e3f1201dd748090579f108b9"
+    },
+    {
+      "file": "arrow-up-right.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/arrow-up-right.svg",
+      "bytes": 260,
+      "sha256": "50b2503b9d11881142255466b7e3461d022b919735841c321d72003ac9959fe1"
+    },
+    {
+      "file": "play.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/play.svg",
+      "bytes": 306,
+      "sha256": "d7c34786135922a92b6896f6c2384ceeb0346afbf6041dc79982011411409833"
+    },
+    {
+      "file": "rotate-ccw.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/rotate-ccw.svg",
+      "bytes": 297,
+      "sha256": "622685386ab4017eabfde01cd74550a20b1924df233b353f73b6b155371f2afd"
+    },
+    {
+      "file": "sparkles.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/sparkles.svg",
+      "bytes": 567,
+      "sha256": "f5499f33f09d7158151e9bd2ec0faf79ff8fb57292f84fdd7286d96d0f0424d8"
+    },
+    {
+      "file": "footprints.svg",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/icons/footprints.svg",
+      "bytes": 520,
+      "sha256": "09ddd9fd4ac7cebfdc91e1096f7b75db019a42fffc493c4adb128a49e1dba04f"
+    },
+    {
+      "file": "LICENSE.txt",
+      "source": "https://raw.githubusercontent.com/lucide-icons/lucide/b56741cf30c08fc7248bf41ddd3a261367aa9579/LICENSE",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    }
+  ]
+}
