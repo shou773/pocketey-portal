@@ -42,3 +42,11 @@ Local candidate:20/20 Chromium passed, including all six revised stages with key
 CI's public-baseline control now runs the public baseline's own frozen test/model/input files from its extracted checkout. It cannot use the revised stage layouts or new record assertions against the old game. Baseline failures are retained as diagnostics; the candidate20-case gate remains mandatory. Portal and Firefox/WebKit run the revised layouts and records.
 
 After exact-head CI and parent approval, merge only this PR through the existing GitHub Actions→GitHub Pages route. Verify pocketey.com and www routes, deployed JS/model/texture hashes, bilingual instructions/record note, normal movement/jumps and preserved saves. No other game branches, accounts, paid assets or contracts are included.
+
+## Exact-CI input follow-up
+
+Candidate `a361011` CI37669891692 passed portal12 and Firefox/WebKit10, and desktop stage3 performance reached Orbit58.17fps/p9516.8ms and Amber55.88/p9533.3. Chromium was18/20: Amber touch stage3 died atx62.792/y1.332 near spike63.4; the Amber context-loss test died atx3.375/y0.471 near spike4 during its preparatory stage1 clear, before context loss. [The failed browser log is retained](evidence/difficulty-refresh/ci-a361011-browser.log). Neither failure establishes a recovery-code fault or impossible geometry.
+
+The ordinary native input driver now asks for isolated spike jumps2.0m ahead (previously1.65) and edge-spike/gap jumps1.7m ahead (previously1.35). The latter starts near the early safe takeoff edge; sampled stage3 combo windows are17.6–18.4,38.7–39.4 and61.7–62.4m. Read/poll/CDP delivery consumes part of those windows. Requests are still keyboard or two-finger CDP touch, never physics-state writes. The game layout, collisions, movement and rendering are unchanged in this follow-up. Input traces are written even when route completion fails.
+
+[Three independent local touch runs plus three context-loss cases](evidence/difficulty-refresh/input-follow-up/) passed6/6. Native jump requests atx61.75 reached the safe combo window before spike63.4; read-to-input acknowledgments for those commands were about30–40ms. Full traces and latency summary are retained; these wall-time intervals include reads/transport and do not claim exact simulation-delivery latency.
