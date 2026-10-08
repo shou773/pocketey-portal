@@ -1,0 +1,40 @@
+{
+  "publishedMainSHA": "9538edc3ff8e7c72362e4baab5b0f8331a2c49e8",
+  "initialCandidateSHA": "e93aa8f645dcf16f7674d76fe4329438787a7578",
+  "adjustedViewSHA256": "4739ebf29ff522cc1d81d092ea4e9b980fbb6437617412d411cd7fea568065e3",
+  "records": {
+    "public": {
+      "sampleFrames": 234,
+      "fps": 45.735282620592656,
+      "p95": 33.400000000001455,
+      "wallDurationMs": 5116.399999999994,
+      "bossMaxCalls": 14,
+      "bossMaxTriangles": 3116,
+      "allPlayMaxCalls": 14,
+      "allPlayMaxTriangles": 3116,
+      "warningFrames": 90
+    },
+    "e93": {
+      "sampleFrames": 66,
+      "fps": 9.950098747192104,
+      "p95": 216.6999999999971,
+      "wallDurationMs": 6633.100000000006,
+      "bossMaxCalls": 16,
+      "bossMaxTriangles": 6648,
+      "allPlayMaxCalls": 17,
+      "allPlayMaxTriangles": 6660,
+      "warningFrames": 24
+    },
+    "budget": {
+      "sampleFrames": 222,
+      "fps": 42.019987886129584,
+      "p95": 33.400000000001455,
+      "wallDurationMs": 5283.200000000004,
+      "bossMaxCalls": 16,
+      "bossMaxTriangles": 5752,
+      "allPlayMaxCalls": 16,
+      "allPlayMaxTriangles": 5752,
+      "warningFrames": 90
+    }
+  }
+}

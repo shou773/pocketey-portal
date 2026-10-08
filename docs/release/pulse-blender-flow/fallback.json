@@ -1,0 +1,14 @@
+[
+  {
+    "fail": false,
+    "art": "ready",
+    "normalPlayPauseRetryAndReload": true,
+    "errors": []
+  },
+  {
+    "fail": true,
+    "art": "fallback",
+    "normalPlayPauseRetryAndReload": true,
+    "errors": []
+  }
+]

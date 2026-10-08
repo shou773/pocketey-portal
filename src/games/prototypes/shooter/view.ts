@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import type {State} from './model';
 export function createView(canvas:HTMLCanvasElement) {
  const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor(0x071323);
@@ -69,12 +70,39 @@ export function createView(canvas:HTMLCanvasElement) {
  const core=new THREE.Mesh(new THREE.SphereGeometry(.18,12,8),new THREE.MeshBasicMaterial({color:0xffffff,depthTest:false,depthWrite:false}));core.renderOrder=10;scene.add(core);
  const temp=new THREE.Object3D();
  const terrain=new THREE.MeshLambertMaterial({vertexColors:true});
- const water=new THREE.Mesh(box(13.5,.08,24),new THREE.MeshLambertMaterial({color:0x163d48}));water.position.set(0,-.88,-8);scene.add(water);
- const cliffGeometry=assemble([
-  {geometry:hull([[-1.5,-1.4],[1.2,-1.5],[1.6,-.3],[1.1,1.4],[-1.3,1.5],[-1.7,.2]],1.25,.82),color:0x3f5051},
-  {geometry:hull([[-.9,-1],[.8,-.8],[1,.5],[.4,1],[-.9,.7]],.65,.7),color:0x59645e,position:[.3,1.1,0]}
- ]);
- const cliffs=new THREE.InstancedMesh(cliffGeometry,terrain,16);scene.add(cliffs);
+ // Shallow shelves fade into a quiet, darker channel; static vertex paint only.
+ const waterGeometry=new THREE.PlaneGeometry(13.5,24,6,8);waterGeometry.rotateX(-Math.PI/2);
+ const waterPositions=waterGeometry.getAttribute('position'),waterColors:number[]=[];
+ const deepWater=new THREE.Color(0x173b45),shelfWater=new THREE.Color(0x285559);
+ for(let i=0;i<waterPositions.count;i++){
+  const x=waterPositions.getX(i),z=waterPositions.getZ(i),shelf=THREE.MathUtils.smoothstep(Math.abs(x),3.1,6.7);
+  const drift=.025*Math.sin(z*.72+x*.6)+.018*Math.cos(z*.35-x*1.1);
+  const color=deepWater.clone().lerp(shelfWater,THREE.MathUtils.clamp(shelf*.72+drift,0,1));waterColors.push(color.r,color.g,color.b);
+ }
+ waterGeometry.setAttribute('color',new THREE.Float32BufferAttribute(waterColors,3));
+ const water=new THREE.Mesh(waterGeometry,terrain);water.position.set(0,-.84,-8);scene.add(water);
+ // Two reusable eroded profiles: rounded shoulders, undercut wet toes and
+ // sediment-colored crowns. Fixed seeds keep the authored coast repeatable.
+ function erodedRock(seed:number){
+  const segments=10,rings=[{y:0,r:.78},{y:.34,r:1.05},{y:.96,r:.94},{y:1.46,r:.62}];
+  const positions:number[]=[],colors:number[]=[],indices:number[]=[];
+  const wet=new THREE.Color(0x263b40),side=new THREE.Color(0x4b5852),crown=new THREE.Color(0x727666);
+  for(let row=0;row<rings.length;row++)for(let j=0;j<segments;j++){
+   const angle=j/segments*Math.PI*2,ring=rings[row];
+   const contour=1+.11*Math.sin(angle*3+seed*1.7)+.065*Math.cos(angle*5-seed*.8);
+   const leanX=.12*Math.sin(seed+row*.4),leanZ=.1*Math.cos(seed*.8+row*.6);
+   const y=ring.y+(row? .075*Math.sin(angle*2+seed)+.045*Math.cos(angle*3+seed*.4):0);
+   const x=Math.cos(angle)*1.57*ring.r*contour+leanX,z=Math.sin(angle)*1.42*ring.r*contour+leanZ;
+   positions.push(x,y,z);
+   const color=wet.clone().lerp(side,THREE.MathUtils.smoothstep(y,.22,.75)).lerp(crown,THREE.MathUtils.smoothstep(y,.9,1.5));
+   color.multiplyScalar(1+.035*Math.sin(angle*3+seed));colors.push(color.r,color.g,color.b);
+   if(row<rings.length-1){const a=row*segments+j,b=row*segments+(j+1)%segments,c=a+segments,d=b+segments;indices.push(a,c,b,b,c,d);}
+  }
+  const top=positions.length/3;positions.push(.12*Math.sin(seed+1.6),1.66,.1*Math.cos(seed*.8+2.4));colors.push(crown.r,crown.g,crown.b);
+  for(let j=0;j<segments;j++)indices.push(top,(rings.length-1)*segments+(j+1)%segments,(rings.length-1)*segments+j);
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));geometry.setIndex(indices);geometry.computeVertexNormals();return geometry;
+ }
+ const cliffs=[0,2].map((seed)=>{const mesh=new THREE.InstancedMesh(erodedRock(seed+1),terrain,8);scene.add(mesh);return mesh;});
  const platformGeometry=assemble([
   {geometry:box(1.35,.22,2.8),color:0x626d69},
   {geometry:box(.06,.025,2.3),color:0x98a58c,position:[-.44,.125,0]},
@@ -93,10 +121,11 @@ export function createView(canvas:HTMLCanvasElement) {
  const facilities=new THREE.InstancedMesh(facilityGeometry,painted,3);scene.add(facilities);
  const pipeGeometry=assemble([{geometry:cylinder(.075,2.6),color:0x778981,rotation:[Math.PI/2,0,0]},...[-1,1].map(z=>({geometry:box(.20,.3,.14),color:0x414c4a,position:[0,-.13,z] as [number,number,number]}))]);
  const pipes=new THREE.InstancedMesh(pipeGeometry,painted,5);scene.add(pipes);
- const rippleGeometry=new THREE.PlaneGeometry(.018,1.3);rippleGeometry.rotateX(-Math.PI/2);
- const ripples=new THREE.InstancedMesh(rippleGeometry,new THREE.MeshBasicMaterial({color:0x285059}),12);scene.add(ripples);
- const shoreGeometry=flat([[-.08,-1.35],[.12,-.75],[.02,-.1],[.18,.6],[-.02,1.3],[-.09,1.27],[.11,.58],[-.05,-.09],[.05,-.73],[-.15,-1.34]]);
- const shore=new THREE.InstancedMesh(shoreGeometry,new THREE.MeshBasicMaterial({color:0x72979c,transparent:true,opacity:.48,depthWrite:false}),16);scene.add(shore);
+ // Sparse tapered current marks and broken shore wash stay below projectiles.
+ const rippleGeometry=flat([[-.015,-.7],[.012,-.42],[.02,.08],[.004,.7],[-.012,.16],[-.025,-.35]]);
+ const ripples=new THREE.InstancedMesh(rippleGeometry,new THREE.MeshBasicMaterial({color:0x2b5057}),12);scene.add(ripples);
+ const shoreGeometry=flat([[-.07,-1.24],[.17,-.82],[.30,-.25],[.27,.28],[.10,.82],[-.12,1.18],[-.06,.85],[.20,.28],[.24,-.24],[.11,-.80],[-.13,-1.19]]);
+ const shore=new THREE.InstancedMesh(shoreGeometry,new THREE.MeshBasicMaterial({color:0x6b9190,transparent:true,opacity:.25,depthWrite:false}),16);scene.add(shore);
  // Identical projectile geometry/materials share two draws; grow without dropping bodies.
  function projectilePool(kind:'bullet'|'shot',capacity=32){const pool=new THREE.InstancedMesh(geometries[kind],materials[kind],capacity);pool.count=0;pool.frustumCulled=false;scene.add(pool);return pool;}
  let bulletPool:THREE.InstancedMesh=projectilePool('bullet'),shotPool:THREE.InstancedMesh=projectilePool('shot');
@@ -106,6 +135,25 @@ export function createView(canvas:HTMLCanvasElement) {
   bodies.forEach((b,i)=>{temp.position.set(b.x,.45,-b.y);temp.updateMatrix();pool.setMatrixAt(i,temp.matrix);});pool.instanceMatrix.needsUpdate=true;return pool;
  }
  const meshes=new Map<string,THREE.Mesh>();let dimensions='';
+ // Two authored Blender meshes share the existing inexpensive diffuse paints.
+ // Keep procedural silhouettes if loading fails; never gate gameplay on art.
+ let disposed=false;canvas.dataset.pulseArt='loading';
+ new GLTFLoader().loadAsync('/games/assets/pulse/pulse-vehicles.glb').then(gltf=>{
+  gltf.scene.updateMatrixWorld(true);const imported:THREE.Mesh[]=[];
+  gltf.scene.traverse(o=>{if(o instanceof THREE.Mesh)imported.push(o);});
+  const replacements=new Map<'ship'|'boss',THREE.BufferGeometry>();
+  try{
+   for(const [kind,name] of [['ship','interceptor'],['boss','manta_boss']] as const){
+    const mesh=imported.find(o=>o.name===name);
+    if(!mesh||!mesh.geometry.getAttribute('color')||!mesh.geometry.getAttribute('normal'))throw Error('Missing vehicle geometry');
+    const geometry=mesh.geometry.clone().applyMatrix4(mesh.matrixWorld);geometry.clearGroups();replacements.set(kind,geometry);
+   }
+   if(disposed){for(const g of replacements.values())g.dispose();return;}
+   for(const [kind,geometry] of replacements){const old=geometries[kind];geometries[kind]=geometry;if(kind==='ship')ship.geometry=geometry;else for(const m of meshes.values())if(m.geometry===old)m.geometry=geometry;old.dispose();}
+   canvas.dataset.pulseArt='ready';
+  }catch{for(const g of replacements.values())g.dispose();if(!disposed)canvas.dataset.pulseArt='fallback';}
+  finally{for(const mesh of imported){mesh.geometry.dispose();for(const material of Array.isArray(mesh.material)?mesh.material:[mesh.material])material.dispose();}}
+ }).catch(()=>{if(!disposed)canvas.dataset.pulseArt='fallback';});
  function sync(key:string,kind:keyof typeof geometries,x:number,y:number,scale=1) {let m=meshes.get(key);if(!m){m=new THREE.Mesh(geometries[kind],materials[kind]);meshes.set(key,m);scene.add(m);}m.visible=true;m.position.set(x,kind==='beam'?0:.45,-y);m.scale.setScalar(scale);return m;}
  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(dimensions===`${w},${h}`)return;dimensions=`${w},${h}`;renderer.setSize(w,h,false);camera.aspect=w/h; // Keep the entire combat width visible at 320px and in landscape.
  camera.fov=camera.aspect<.65?64:48;camera.updateProjectionMatrix();}
@@ -118,9 +166,9 @@ export function createView(canvas:HTMLCanvasElement) {
  const scroll=(distance:number)=>-((distance-s.time*1.2)%24+24)%24+2;
  const bankDistances=[.3,2.8,6.5,8.6,12.8,15.1,18.9,22.3];
  for(let i=0;i<16;i++){
-  const side=i%2?1:-1,row=Math.floor(i/2),sx=.73+(i*7%5)*.13,sz=.74+(i*3%4)*.22,angle=(side<0?Math.PI:0)+(.5-(i*3%7)/6)*.28;
+  const side=i%2?1:-1,row=Math.floor(i/2),sx=.73+(i*7%5)*.13,sz=.74+(i*3%4)*.22,angle=(side<0?Math.PI:0)+(.5-(i*3%7)/6)*.8;
   const x=side*(5.62+(i*5%7)*.11),z=scroll(bankDistances[row]+(side<0?1.45:0));
-  temp.position.set(x,-1.25,z);temp.rotation.set(0,angle,0);temp.scale.set(sx,.58+(i*5%7)*.15,sz);temp.updateMatrix();cliffs.setMatrixAt(i,temp.matrix);
+  temp.position.set(x,-1.25,z);temp.rotation.set(0,angle,0);temp.scale.set(sx,.58+(i*5%7)*.15,sz);temp.updateMatrix();cliffs[(i+row)%2].setMatrixAt(row,temp.matrix);
   // Broken, low-contrast waterline strokes follow each rock's inner edge.
   temp.position.set(x-side*1.53*sx,-.83,z);temp.rotation.set(0,side<0?Math.PI:0,0);temp.scale.set(1,1,sz*.8);temp.updateMatrix();shore.setMatrixAt(i,temp.matrix);
  }
@@ -128,11 +176,11 @@ export function createView(canvas:HTMLCanvasElement) {
  for(let i=0;i<pads.length;i++){const {side,distance}=pads[i],z=scroll(distance);temp.position.set(side*4.85,-.42,z);temp.rotation.set(0,0,0);temp.scale.set(1,1,1);temp.updateMatrix();platforms.setMatrixAt(i,temp.matrix);temp.position.set(side*5.08,-.31,z-.75);temp.updateMatrix();facilities.setMatrixAt(i,temp.matrix);}
  for(let i=0;i<5;i++){const side=i%2?1:-1;temp.position.set(side*4.52,-.13,scroll([2.5,10,5.6,13.1,20.2][i]));temp.rotation.set(0,0,0);temp.scale.set(1,1,1);temp.updateMatrix();pipes.setMatrixAt(i,temp.matrix);}
  for(let i=0;i<12;i++){temp.position.set((i%2?1:-1)*(2.8+(i%3)*.35),-.83,scroll(Math.floor(i/2)*4));temp.rotation.set(0,0,0);temp.scale.set(1,1,1);temp.updateMatrix();ripples.setMatrixAt(i,temp.matrix);}
- for(const instanced of [cliffs,platforms,facilities,pipes,ripples,shore])instanced.instanceMatrix.needsUpdate=true;
+ for(const instanced of [...cliffs,platforms,facilities,pipes,ripples,shore])instanced.instanceMatrix.needsUpdate=true;
  renderer.setClearColor(s.hit>0?0x42233b:0x071323);renderer.render(scene,camera);}
  const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),-.4),point=new THREE.Vector3();
  function pointer(x:number,y:number){const r=canvas.getBoundingClientRect();ray.setFromCamera(new THREE.Vector2((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1),camera);if(!ray.ray.intersectPlane(plane,point))return null;return {x:point.x,y:-point.z};}
  function project(x:number,y:number){const p=new THREE.Vector3(x,.4,-y).project(camera),r=canvas.getBoundingClientRect();return {x:r.left+(p.x+1)/2*r.width,y:r.top+(1-p.y)/2*r.height};}
- function dispose(){for(const g of Object.values(geometries))g.dispose();for(const m of Object.values(materials))m.dispose();scene.traverse(o=>{if(o instanceof THREE.Mesh){if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose();if(!Array.isArray(o.material))o.material.dispose();}});renderer.dispose();}
+ function dispose(){disposed=true;for(const g of Object.values(geometries))g.dispose();for(const m of Object.values(materials))m.dispose();scene.traverse(o=>{if(o instanceof THREE.Mesh){if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose();if(!Array.isArray(o.material))o.material.dispose();}});renderer.dispose();}
  return {draw,pointer,project,dispose,stats:()=>({calls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
 }

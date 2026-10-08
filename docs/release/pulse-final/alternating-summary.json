@@ -1,0 +1,126 @@
+{
+  "protocol": "Sequential alternating public/candidate/public/candidate; identical native touch driver, software renderer, stage3; no concurrent game/test/build",
+  "sourceViewSHA256": "9f07bc057a4e2d8013a8e6cf6c6092f8f207bf61ec11d5c441d0d624f182b2ea",
+  "records": [
+    {
+      "phase": "1-public",
+      "variant": "public",
+      "allPlaySampleFrames": 1530,
+      "allPlayFPS": 44.608364797294186,
+      "allPlayP95": 33.400000000001455,
+      "sampleFrames": 240,
+      "fps": 46.00874166091556,
+      "p95": 33.400000000001455,
+      "wallDurationMs": 5216.4000000000015,
+      "bossMaxCalls": 14,
+      "bossMaxTriangles": 3128,
+      "allPlayMaxCalls": 14,
+      "allPlayMaxTriangles": 3128,
+      "warningFrames": 68,
+      "beamPresentFrames": 96,
+      "renderer": {
+        "framebuffer": [
+          364,
+          521
+        ],
+        "dpr": 1,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "art": "procedural-public"
+      }
+    },
+    {
+      "phase": "2-candidate",
+      "variant": "candidate",
+      "allPlaySampleFrames": 1386,
+      "allPlayFPS": 39.905677489569975,
+      "allPlayP95": 50,
+      "sampleFrames": 210,
+      "fps": 40.12917773403911,
+      "p95": 50,
+      "wallDurationMs": 5233.0999999999985,
+      "bossMaxCalls": 15,
+      "bossMaxTriangles": 5752,
+      "allPlayMaxCalls": 15,
+      "allPlayMaxTriangles": 5752,
+      "warningFrames": 60,
+      "beamPresentFrames": 84,
+      "renderer": {
+        "framebuffer": [
+          364,
+          521
+        ],
+        "dpr": 1,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "art": "ready"
+      }
+    },
+    {
+      "phase": "3-public",
+      "variant": "public",
+      "allPlaySampleFrames": 1428,
+      "allPlayFPS": 41.31322833369964,
+      "allPlayP95": 50,
+      "sampleFrames": 246,
+      "fps": 47.31042175510128,
+      "p95": 33.400000000001455,
+      "wallDurationMs": 5199.699999999997,
+      "bossMaxCalls": 14,
+      "bossMaxTriangles": 3116,
+      "allPlayMaxCalls": 15,
+      "allPlayMaxTriangles": 3116,
+      "warningFrames": 70,
+      "beamPresentFrames": 96,
+      "renderer": {
+        "framebuffer": [
+          364,
+          521
+        ],
+        "dpr": 1,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "art": "procedural-public"
+      }
+    },
+    {
+      "phase": "4-candidate",
+      "variant": "candidate",
+      "allPlaySampleFrames": 1626,
+      "allPlayFPS": 47.942963795101136,
+      "allPlayP95": 33.400000000001455,
+      "sampleFrames": 240,
+      "fps": 46.155621370052735,
+      "p95": 33.400000000001455,
+      "wallDurationMs": 5199.799999999996,
+      "bossMaxCalls": 15,
+      "bossMaxTriangles": 5752,
+      "allPlayMaxCalls": 15,
+      "allPlayMaxTriangles": 5752,
+      "warningFrames": 65,
+      "beamPresentFrames": 96,
+      "renderer": {
+        "framebuffer": [
+          364,
+          521
+        ],
+        "dpr": 1,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "art": "ready"
+      }
+    }
+  ],
+  "summary": {
+    "public": {
+      "meanAllPlayFPS": 42.96079656549691,
+      "meanBossFPS": 46.65958170800842,
+      "allSamplePeakCalls": 15,
+      "allSamplePeakTriangles": 3128
+    },
+    "candidate": {
+      "meanAllPlayFPS": 43.92432064233556,
+      "meanBossFPS": 43.14239955204592,
+      "allSamplePeakCalls": 15,
+      "allSamplePeakTriangles": 5752
+    },
+    "candidateVersusPublicBossMeanPercent": -7.537963323316344,
+    "candidateVersusPublicAllPlayMeanPercent": 2.242798443854932
+  }
+}
