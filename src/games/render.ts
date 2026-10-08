@@ -1,6 +1,7 @@
 import * as T from 'three';
 import { stages, type Kind, type State } from './model';
-import { loadArt, batchStatic, clearStatic, placeArt, placeGrass, createSky, type Art } from './art';
+import { loadArt, batchStatic, clearStatic, placeArt, createSky, type Art } from './art';
+import { createAmberCanyon, loadAmberLandmark, placeAmberPlants, placeSandstone } from './amber-scenery';
 export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const renderer = new T.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -51,18 +52,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   }
   const horizon = new T.Group(); scene.add(horizon);
   if (kind === 'amber') {
-    const hillGeo = new T.CircleGeometry(1, 16);
-    const hillMaterials = [0x93a69a, 0xb9a29b].map(color => new T.MeshBasicMaterial({color}));
-    for (let row = 0; row < 2; row++) for (let i = -4; i < 9; i++) {
-      const hill = new T.Mesh(hillGeo, hillMaterials[row]);
-      hill.scale.set(7 + (i + 4) % 3, 3 + (i + 4) % 4, 3);
-      hill.position.set(i * 12, -2.2, -21 - row * 16); horizon.add(hill);
-    }
-    const cloudGeo = new T.CircleGeometry(1, 12), cloudMat = new T.MeshBasicMaterial({color:0xffedcf});
-    for (let i = 0; i < 6; i++) for (let j = 0; j < 3; j++) {
-      const cloud = new T.Mesh(cloudGeo, cloudMat); cloud.scale.set(1.8, .42 + j * .09, .5);
-      cloud.position.set(i * 12 - 24 + j, 8 + i % 3 + j * .15, -25); horizon.add(cloud);
-    }
+    createAmberCanyon(horizon);
     batchStatic(horizon, kind);
   }
   const shadow = new T.Mesh(new T.CircleGeometry(.42, 20), new T.MeshBasicMaterial({ color: 0x070f22, transparent: true, opacity: .4 })); shadow.rotation.x = -Math.PI / 2; scene.add(shadow);
@@ -75,6 +65,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     mixer?.stopAllAction(); activeAction = undefined;
     clearStatic(level); clearStatic(backdrop); backdrop.position.set(0,0,0);
     const data = stages[kind][index];
+    const temporaryGeometry: T.BufferGeometry[] = [];
     for (const p of data.platforms) {
       const mid = (p.a + p.b) / 2, len = p.b - p.a;
       if (kind === 'orbit') {
@@ -86,19 +77,12 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
         // Structural ribs sit below the runway and never bridge a jump gap.
         for (let x = p.a + 1; x < p.b; x += 5) box(level, ...coord(x, p.y - .9, 0), p.w * .7, .5, .24, mats.decor);
       } else {
-        if (!art.has('block-grass-low-long')) box(level, mid, p.y - .36, 0, len, .72, 3.4, mats.floor);
-        placeGrass(level,art,mid,p.y,len);
-        for (let a = p.a; a < p.b; a += 3) {
-          const segment = Math.min(3, p.b - a);
-          if (segment > 1 && Math.floor((a - p.a) / 3) % 3 === 1 && !data.hazards.some(h => Math.abs(h.x - a - segment / 2) < 2)) {
-            placeArt(level, art, 'flowers', [a + segment / 2, p.y, -1.35], [.65, .65, .65]);
-          }
-        }
+        temporaryGeometry.push(placeSandstone(level, mid, p.y, len));
+        placeAmberPlants(level, p.a, p.b, p.y, data.hazards.map(h => h.x));
       }
       box(level, ...coord(p.b - .1, p.y + .025, p.z), kind === 'orbit' ? p.w : .18, .05, kind === 'orbit' ? .18 : 3.4, mats.edge);
       box(level, ...coord(p.a + .1, p.y + .025, p.z), kind === 'orbit' ? p.w : .18, .05, kind === 'orbit' ? .18 : 3.4, mats.edge);
       if (kind === 'orbit') for (const z of [-3.45, 3.45]) box(level, ...coord(mid, p.y + .025, z), .07, .05, len, mats.edge);
-      else { box(level, mid, p.y - 1.3, 0, len * .7, 1.2, 2.1, mats.decor); }
       // Small surface dashes communicate depth and forward speed.
       for (let x = p.a + 2; x < p.b - 1; x += 3) box(level, ...coord(x, p.y + .03, 0), kind === 'orbit' ? .07 : .35, .03, kind === 'orbit' ? .4 : .07, mats.edge);
     }
@@ -121,16 +105,19 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
           placeArt(level, art, 'platform_small', coord(i * 8, -1.5, i % 2 ? -16 : 16), [4, 8, 4]);
           box(level, ...coord(i * 8, .5, i % 2 ? -16 : 16), .15, 3.5, .15, mats.edge);
         }
-      } else {
-        const x = i * 9 - 14, y = -1.4 - i % 3 * .3, z = -7 - i % 3 * 2;
-        box(backdrop, x, y - .8, z, 3.7, .9, 3.2, mats.decor);
-        placeArt(backdrop, art, 'tree', [x, y - .35, z], [2.2, 2.2 + i % 3 * .25, 2.2], i);
-        placeArt(backdrop, art, 'rocks', [x + 1.5, y - .3, z + .4], [1.5, 1.5, 1.5], i * .6);
       }
     }
+    // Amber scenery stays in the distant canyon: near decorative islands
+    // can align with jump gaps and falsely suggest a landing surface.
     batchStatic(level, kind); batchStatic(backdrop, kind);
+    temporaryGeometry.forEach(geometry => geometry.dispose());
   }
-  void loadArt(kind, canvas).then(loaded => {
+  void Promise.all([loadArt(kind, canvas), kind === 'amber' ? loadAmberLandmark() : Promise.resolve(undefined)]).then(([loaded, landmark]) => {
+    if (kind === 'amber' && landmark) {
+      clearStatic(horizon); horizon.position.set(0, 0, 0);
+      createAmberCanyon(horizon, landmark); batchStatic(horizon, kind);
+      canvas.dataset.amberLandmark = 'blender';
+    } else if (kind === 'amber') canvas.dataset.amberLandmark = 'procedural';
     art = loaded;
     const player = art.get(kind === 'orbit' ? 'craft_speederA' : 'character-oodi');
     if (player) {

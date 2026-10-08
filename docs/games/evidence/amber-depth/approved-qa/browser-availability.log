@@ -1,0 +1,30 @@
+firefox Error: browserType.launch: Failed to launch the browser process.
+Browser logs:
+
+<launching> /tmp/amber-pw/firefox-1543/firefox/firefox -no-remote -headless -profile /tmp/playwright_firefoxdev_profile-3K2gXU -juggler-pipe -silent
+<launched> pid=11320
+[pid=11320][err] *** You are running in headless mode.
+[pid=11320][err] Could not find profile folder.
+[pid=11320] <process did exit: exitCode=1, signal=null>
+[pid=11320] starting temporary directories cleanup
+Call log:
+[2m  - <launching> /tmp/amber-pw/firefox-1543/firefox/firefox -no-remote -headless -profile /tmp/playwright_firefoxdev_profile-3K2gXU -juggler-pipe -silent[22m
+[2m  - <launched> pid=11320[22m
+[2m  - [pid=11320][err] *** You are running in headless mode.[22m
+[2m  - [pid=11320][err] Could not find profile folder.[22m
+[2m  - [pid=11320] <process did exit: exitCode=1, signal=null>[22m
+[2m  - [pid=11320] starting temporary directories cleanup[22m
+[2m  - [pid=11320] <gracefully close start>[22m
+[2m  - [pid=11320] <kill>[22m
+[2m  - [pid=11320] <skipped force kill spawnedProcess.killed=false processClosed=true>[2
+webkit Error: browserType.launch: 
+╔══════════════════════════════════════════════════════╗
+║ Host system is missing dependencies to run browsers. ║
+║ Missing libraries:                                   ║
+║     libgtk-4.so.1                                    ║
+║     libgraphene-1.0.so.0                             ║
+║     libharfbuzz-icu.so.0                             ║
+║     libmanette-0.2.so.0                              ║
+║     libhyphen.so.0                                   ║
+║     libGLESv2.so.2                                   ║
+╚══════════════════════════════════════════════════════╝

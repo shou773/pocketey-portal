@@ -1,0 +1,29 @@
+{
+  "art": {
+    "engine": "three.js r186",
+    "art": "ready",
+    "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+    "amberLandmark": "procedural",
+    "artAdopted": "true",
+    "artAnimation": "jump"
+  },
+  "state": {
+    "kind": "amber",
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "mode": "play",
+    "status": "running",
+    "x": "1.500",
+    "y": "0.761",
+    "z": "0.000",
+    "grounded": "false",
+    "jumps": "1",
+    "geometries": "10"
+  },
+  "errors": []
+}

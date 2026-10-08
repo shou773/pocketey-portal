@@ -74,7 +74,11 @@ test('corrupt/blocked storage and scoped confirmed reset',async({page})=>{
 test('touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation',async({page,browser},info)=>{
  await page.goto('/');await page.locator('.site-header').getByRole('link',{name:'ゲーム',exact:true}).click();await expect(page).toHaveURL(/\/games\//);await page.locator('.amber .play-link').click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
  const session=await page.context().newCDPSession(page);const right=await page.locator('[data-input=right]').boundingBox(),jump=await page.locator('[data-input=jump]').boundingBox();
- await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:right!.x+20,y:right!.y+20,id:1},{x:jump!.x+20,y:jump!.y+20,id:2}]});await page.waitForTimeout(200);const s=await read(page);expect(Number(s.x)).toBeGreaterThan(.5);expect(Number(s.y)).toBeGreaterThan(.5);
+ await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:right!.x+20,y:right!.y+20,id:1},{x:jump!.x+20,y:jump!.y+20,id:2}]});
+ const touchTime=Number(await page.locator('#timer').textContent());
+ // Wall time can outpace the capped simulation clock under renderer load.
+ await page.waitForFunction(start=>Number(document.querySelector('#timer')?.textContent)-start>=.2,touchTime,{timeout:3000});
+ const s=await read(page);expect(Number(s.x)).toBeGreaterThan(.5);expect(Number(s.y)).toBeGreaterThan(.5);
  await session.send('Input.dispatchTouchEvent',{type:'touchCancel',touchPoints:[]});const x=(await read(page)).x;await page.waitForTimeout(100);expect((await read(page)).x).toBe(x);
  await page.screenshot({path:info.outputPath('amber-touch.png')});
  const perf=await page.evaluate(async()=>{const samples:number[]=[];let last=performance.now();await new Promise<void>(resolve=>{function frame(now:number){samples.push(now-last);last=now;if(samples.length<300)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});const sorted=samples.slice(10).sort((a,b)=>a-b);const canvas=document.querySelector('canvas')!;const gl=canvas.getContext('webgl2')!;const extension=gl.getExtension('WEBGL_debug_renderer_info');return{fps:1000/(sorted.reduce((a,b)=>a+b)/sorted.length),p95:sorted[Math.floor(sorted.length*.95)],renderer:extension?gl.getParameter(extension.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),viewport:[innerWidth,innerHeight],userAgent:navigator.userAgent};});
