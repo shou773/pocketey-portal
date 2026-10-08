@@ -1,0 +1,117 @@
+{
+  "main": "1e071902bda809c4e0beaabffe7ebb81b99e4342",
+  "orbitCandidate": "2edb47c0d72b2446b5fe110486d1a39828309dcc",
+  "portalApprovedArtwork": "13f26faf286b9afa1d24209f903bef41863f0564",
+  "records": [
+    {
+      "game": "Amber Step",
+      "coverReference": "2bde0bcb31d01b90d2bcccb23769703004f20793",
+      "target": "1e071902bda809c4e0beaabffe7ebb81b99e4342",
+      "files": [
+        {
+          "path": "src/games/render.ts",
+          "referenceBlob": "d4cbea4c6d103e1f12e191c09e612b094ac0e166",
+          "targetBlob": "d4cbea4c6d103e1f12e191c09e612b094ac0e166",
+          "identical": true
+        },
+        {
+          "path": "src/games/amber-scenery.ts",
+          "referenceBlob": "f9bab64e18350d7bb959a69aea810866afaa9a80",
+          "targetBlob": "f9bab64e18350d7bb959a69aea810866afaa9a80",
+          "identical": true
+        },
+        {
+          "path": "src/games/art.ts",
+          "referenceBlob": "86c2823dd68d84d21e66727d599bb9df024c0a18",
+          "targetBlob": "86c2823dd68d84d21e66727d599bb9df024c0a18",
+          "identical": true
+        },
+        {
+          "path": "src/games/model.ts",
+          "referenceBlob": "065ec9431fdc2392a6f32340d4cc10c03b06063e",
+          "targetBlob": "065ec9431fdc2392a6f32340d4cc10c03b06063e",
+          "identical": true
+        },
+        {
+          "path": "public/games/assets/kenney/platformer/character-oodi.glb",
+          "referenceBlob": "ca988b7d5d6aa94fa4a3ef42feb723bb35c9a199",
+          "targetBlob": "ca988b7d5d6aa94fa4a3ef42feb723bb35c9a199",
+          "identical": true
+        },
+        {
+          "path": "public/games/assets/amber/stone-arch.glb",
+          "referenceBlob": "aa1607ddd43558ec812dbd9ab43903bcf14de470",
+          "targetBlob": "aa1607ddd43558ec812dbd9ab43903bcf14de470",
+          "identical": true
+        }
+      ],
+      "landmarkNote": {
+        "correction": "The previous fallback claim was wrong: both reference and main contain the same Blender GLB. Explicit published-main regeneration reports amberLandmark=blender and produces the identical approved PNG.",
+        "verification": "../amber-blender/verification.json"
+      }
+    },
+    {
+      "game": "TiltTrail",
+      "coverReference": "6339f1c54f5e743793e162ef15bce407b0ee5c10",
+      "target": "1e071902bda809c4e0beaabffe7ebb81b99e4342",
+      "files": [
+        {
+          "path": "src/games/prototypes/ball/render.ts",
+          "referenceBlob": "7185d6515f7dd5c7fef2c3d08dc26af3bb23d842",
+          "targetBlob": "7185d6515f7dd5c7fef2c3d08dc26af3bb23d842",
+          "identical": true
+        },
+        {
+          "path": "src/games/prototypes/ball/model.ts",
+          "referenceBlob": "09f0b76aa7d799dc1f5c169f4fc988c14036ee6c",
+          "targetBlob": "09f0b76aa7d799dc1f5c169f4fc988c14036ee6c",
+          "identical": true
+        }
+      ]
+    },
+    {
+      "game": "Orbit Ribbon",
+      "coverReference": "9a066c798d0bdd076084f07772d64527b369100d",
+      "target": "2edb47c0d72b2446b5fe110486d1a39828309dcc",
+      "files": [
+        {
+          "path": "src/games/orbit-art.ts",
+          "referenceBlob": "ddeb221685f9f4ac8a624edbb60e6edd3153237c",
+          "targetBlob": "ddeb221685f9f4ac8a624edbb60e6edd3153237c",
+          "identical": true
+        },
+        {
+          "path": "src/games/art.ts",
+          "referenceBlob": "86c2823dd68d84d21e66727d599bb9df024c0a18",
+          "targetBlob": "86c2823dd68d84d21e66727d599bb9df024c0a18",
+          "identical": true
+        },
+        {
+          "path": "src/games/model.ts",
+          "referenceBlob": "065ec9431fdc2392a6f32340d4cc10c03b06063e",
+          "targetBlob": "065ec9431fdc2392a6f32340d4cc10c03b06063e",
+          "identical": true
+        },
+        {
+          "path": "public/games/assets/kenney/space/craft_speederA.glb",
+          "referenceBlob": "0443218295dfdea1c9063c3dbdad820895d66e5b",
+          "targetBlob": "0443218295dfdea1c9063c3dbdad820895d66e5b",
+          "identical": true
+        },
+        {
+          "path": "public/games/assets/orbit/lunar-relay.glb",
+          "referenceBlob": "9c1bff5cc36776b6d3d6678f6fbf382ee8949c5c",
+          "targetBlob": "9c1bff5cc36776b6d3d6678f6fbf382ee8949c5c",
+          "identical": true
+        }
+      ]
+    },
+    {
+      "game": "Pulse Drift",
+      "coverReference": "8714b3f7724df370326a45a615ca98e21f5607da",
+      "published": "1e071902bda809c4e0beaabffe7ebb81b99e4342",
+      "viewDiff": "pulse-view.diff",
+      "result": "Only damage-core comment and core.visibility behavior changed; ship/enemy/projectile/environment geometry unchanged. The composed cover already declares omission of the collision indicator."
+    }
+  ]
+}

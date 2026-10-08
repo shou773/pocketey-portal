@@ -17,7 +17,7 @@ test("all four games stay directly reachable at narrow and wide widths in both l
         ).toBe(true);
         await expect(page.locator(".game-card")).toHaveCount(4);
         for (const slug of slugs) {
-          const quick = page.locator(`.quick-picks a[href^="/games/${slug}/"]`);
+          const quick = page.locator(`.preview[href^="/games/${slug}/"]`);
           await expect(quick).toBeInViewport();
           await expect(quick).toHaveAttribute(
             "href",
@@ -43,14 +43,13 @@ test("keyboard navigation exposes focus and activates a game while preserving la
   page,
 }) => {
   await page.goto("/?lang=ja");
-  await expect(page.locator(".quick-picks svg[aria-hidden=true]")).toHaveCount(4);
   await expect(page.locator(".play-link svg[aria-hidden=true]")).toHaveCount(4);
   expect(await page.locator(".arcade").innerText()).not.toContain("↗");
   await page.keyboard.press("Tab");
   await expect(page.locator(".skip-link")).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
-  const quick = page.locator(".quick-picks a").first();
+  const quick = page.locator(".preview").first();
   await quick.focus();
   expect(
     await quick.evaluate((e) => getComputedStyle(e).outlineStyle),
@@ -76,7 +75,7 @@ test("portal text and play buttons meet WCAG AA contrast", async ({ page }) => {
         })
         .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
     return [
-      ".card-copy h3",
+      ".card-caption h2",
       ".game-type",
       ".game-tagline",
       ".card-facts",
@@ -88,7 +87,7 @@ test("portal text and play buttons meet WCAG AA contrast", async ({ page }) => {
       Array.from(document.querySelectorAll(selector)).map((e) => {
         const style = getComputedStyle(e);
         const bg = e.closest(".game-card")
-          ? "rgb(23, 41, 50)"
+          ? "rgb(36, 38, 48)"
           : e.closest(".world-detail")
             ? "rgb(22, 38, 46)"
             : "rgb(32, 57, 65)";

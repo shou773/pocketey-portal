@@ -1,0 +1,907 @@
+{
+  "baseMain": "f110bd89cbdaa24b912b419e0f7feac372298b86",
+  "portalHead": "13f26faf286b9afa1d24209f903bef41863f0564",
+  "layouts": [
+    {
+      "route": "/",
+      "lang": "en",
+      "width": 320,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "width": 320,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "width": 320,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "width": 320,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "width": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "width": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "width": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "width": 390,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "width": 1440,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "width": 1440,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "width": 1440,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "width": 1440,
+      "overflow": false,
+      "cards": [
+        {
+          "name": "Orbit Ribbon",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Amber Step",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "Pulse Drift",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        },
+        {
+          "name": "TiltTrail",
+          "visible": true,
+          "titleLoaded": true,
+          "decorative": true,
+          "titleContained": true
+        }
+      ]
+    }
+  ],
+  "navigation": [
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "orbit-ribbon",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "orbit-ribbon",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "orbit-ribbon",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "amber-step",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "amber-step",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "amber-step",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "pulse-drift",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "pulse-drift",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "pulse-drift",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "tilttrail",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "tilttrail",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "slug": "tilttrail",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "orbit-ribbon",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "orbit-ribbon",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "orbit-ribbon",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "amber-step",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "amber-step",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "amber-step",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "pulse-drift",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "pulse-drift",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "pulse-drift",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "tilttrail",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "tilttrail",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/",
+      "lang": "ja",
+      "slug": "tilttrail",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "orbit-ribbon",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "orbit-ribbon",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "orbit-ribbon",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "amber-step",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "amber-step",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "amber-step",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "pulse-drift",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "pulse-drift",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "pulse-drift",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "tilttrail",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "tilttrail",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "en",
+      "slug": "tilttrail",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=en"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "orbit-ribbon",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "orbit-ribbon",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "orbit-ribbon",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "amber-step",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "amber-step",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "amber-step",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "pulse-drift",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "pulse-drift",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "pulse-drift",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "tilttrail",
+      "selector": ".preview",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "tilttrail",
+      "selector": ".card-caption h2 a",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    },
+    {
+      "route": "/games/",
+      "lang": "ja",
+      "slug": "tilttrail",
+      "selector": ".play-link",
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "returnUrl": "http://127.0.0.1:4361/games/?lang=ja"
+    }
+  ],
+  "internalLinks": [
+    {
+      "url": "http://127.0.0.1:4361/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/about/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/contact/?type=site&lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/privacy/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/contact/?lang=en",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/about/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/orbit-ribbon/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/amber-step/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/pulse-drift/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/games/tilttrail/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/contact/?type=site&lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/privacy/?lang=ja",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4361/contact/?lang=ja",
+      "status": 200
+    }
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,25 @@
+
+> pocketey-japan@0.1.0 test:portal
+> playwright test --config playwright.portal.config.ts --grep all four games|keyboard navigation|portal text|English default|current pages and both-language|public metadata and four-card
+
+
+Running 9 tests using 1 worker
+
+(node:17671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/portal/design.spec.ts:4:1 › all four games stay directly reachable at narrow and wide widths in both languages (11.3s)
+  ✓  2 tests/portal/design.spec.ts:42:1 › keyboard navigation exposes focus and activates a game while preserving language (1.6s)
+  ✓  3 tests/portal/design.spec.ts:62:1 › portal text and play buttons meet WCAG AA contrast (473ms)
+  ✓  4 tests/portal/portal.spec.ts:8:1 › English default, Japanese selection, navigation and reload retention (4.7s)
+  ✓  5 tests/portal/portal.spec.ts:36:1 › current pages and both-language internal links work without travel placeholders (2.9s)
+  ✓  6 tests/portal/portal.spec.ts:89:75 › orbit-ribbon: public metadata and four-card portal (2.5s)
+  ✓  7 tests/portal/portal.spec.ts:89:75 › amber-step: public metadata and four-card portal (5.1s)
+  ✓  8 tests/portal/portal.spec.ts:89:75 › pulse-drift: public metadata and four-card portal (6.5s)
+  ✓  9 tests/portal/portal.spec.ts:89:75 › tilttrail: public metadata and four-card portal (15.4s)
+
+  9 passed (52.3s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

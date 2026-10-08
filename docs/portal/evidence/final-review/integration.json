@@ -1,0 +1,8 @@
+{
+  "approvedVisualCommit": "13f26faf286b9afa1d24209f903bef41863f0564",
+  "main": "f110bd89cbdaa24b912b419e0f7feac372298b86",
+  "conflictFreeMergedTree": "4bfe958704ee830ae7e0daa737b8c24e7da809db",
+  "method": "git merge-tree --write-tree, archive into isolated /tmp directory; no branch merge or publication",
+  "testAdaptations": "Use visible footer About link in blocked-storage navigation test; isolated harness port 4360 replaces 4322",
+  "productChangesSinceVisualApproval": []
+}
