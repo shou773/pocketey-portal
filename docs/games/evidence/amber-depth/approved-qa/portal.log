@@ -1,0 +1,40 @@
+
+> pocketey-japan@0.1.0 test:portal
+> playwright test --config playwright.portal.config.ts
+
+[WebServer] (node:14247) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:14260) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 20 tests using 1 worker
+
+(node:14282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 tests/portal/design.spec.ts:4:1 › all four games stay directly reachable at narrow and wide widths in both languages (11.5s)
+  ✓   2 tests/portal/design.spec.ts:42:1 › keyboard navigation exposes focus and activates a game while preserving language (1.2s)
+  ✓   3 tests/portal/design.spec.ts:63:1 › portal text and play buttons meet WCAG AA contrast (532ms)
+  ✓   4 tests/portal/portal.spec.ts:8:1 › English default, Japanese selection, navigation and reload retention (5.5s)
+  ✓   5 tests/portal/portal.spec.ts:20:1 › Japanese browser defaults and explicit choice priority (1.0s)
+  ✓   6 tests/portal/portal.spec.ts:25:1 › blocked or corrupt language storage keeps selection and links usable (771ms)
+  ✓   7 tests/portal/portal.spec.ts:30:1 › retired URLs return 404 and sitemap contains only current pages (642ms)
+  ✓   8 tests/portal/portal.spec.ts:36:1 › current pages and both-language internal links work without travel placeholders (2.9s)
+  ✓   9 tests/portal/portal.spec.ts:48:46 › orbit: English full-stage play and translated results (56.0s)
+  ✓  10 tests/portal/portal.spec.ts:48:46 › amber: English full-stage play and translated results (42.6s)
+  ✓  11 tests/portal/portal.spec.ts:59:46 › orbit: both languages at 320px, existing saves, pause and recovery translation (1.7s)
+  ✓  12 tests/portal/portal.spec.ts:59:46 › amber: both languages at 320px, existing saves, pause and recovery translation (2.1s)
+  ✓  13 tests/portal/portal.spec.ts:69:1 › contact retains Worker payload and localizes success, failure and blocked security (716ms)
+  ✓  14 tests/portal/portal.spec.ts:79:1 › contact without a challenge cannot send and offers the established email (394ms)
+  ✓  15 tests/portal/portal.spec.ts:84:1 › unsupported WebGL shows a translated recovery explanation and usable exit (877ms)
+  ✓  16 tests/portal/portal.spec.ts:89:75 › orbit-ribbon: public metadata and four-card portal (1.8s)
+  ✓  17 tests/portal/portal.spec.ts:89:75 › amber-step: public metadata and four-card portal (2.1s)
+  ✓  18 tests/portal/portal.spec.ts:89:75 › pulse-drift: public metadata and four-card portal (1.8s)
+  ✓  19 tests/portal/portal.spec.ts:89:75 › tilttrail: public metadata and four-card portal (2.3s)
+  ✓  20 tests/portal/portal.spec.ts:102:1 › only the two retired prototypes redirect to their public games (885ms)
+
+  20 passed (2.3m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

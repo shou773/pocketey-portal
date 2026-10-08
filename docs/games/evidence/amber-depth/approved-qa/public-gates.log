@@ -1,0 +1,138 @@
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:30] "GET / HTTP/1.1" 200 -
+
+Running 2 tests using 1 worker
+
+(node:13653) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/amber-step/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.DfSnJRsW.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /_astro/three.module.fqqY8Ba3.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/kenney/platformer/character-oodi.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/kenney/platformer/tree.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/gem.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/kenney/platformer/block-grass-low-long.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/kenney/platformer/rocks.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/kenney/platformer/flowers.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:31] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:32] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:32] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:32] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:32] "GET /games/assets/lucide/footprints.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /favicon.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/assets/kenney/platformer/Textures/colormap.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/click.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/jump.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/land.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/roll.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/clear.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/warning.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/shot.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/damage.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/death.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:39:33] "GET /games/audio/music/amber.ogg HTTP/1.1" 200 -
+amber keyboard {
+  fps: 34.44275251975928,
+  p95: 50,
+  p99: 66.70000000000073,
+  max: 116.80000000000291
+}
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:16] "GET /games/amber-step/ HTTP/1.1" 304 -
+  ✘  1 ../../tmp/amber-public-main/tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence (46.9s)
+(node:13971) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/amber-step/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.DfSnJRsW.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /_astro/three.module.fqqY8Ba3.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/gem.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:19] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/kenney/platformer/block-grass-low-long.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/kenney/platformer/rocks.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/kenney/platformer/tree.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/kenney/platformer/flowers.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/kenney/platformer/character-oodi.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/lucide/footprints.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/assets/kenney/platformer/Textures/colormap.png HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /favicon.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/click.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/land.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/jump.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/roll.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/shot.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/clear.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/warning.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/death.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:20] "GET /games/audio/damage.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:40:21] "GET /games/audio/music/amber.ogg HTTP/1.1" 200 -
+amber touch {
+  fps: 59.69023907511541,
+  p95: 16.799999999999272,
+  p99: 16.80000000000291,
+  max: 33.30000000000291
+}
+[WebServer] 127.0.0.1 - - [08/Oct/2026 07:41:03] "GET /games/amber-step/ HTTP/1.1" 304 -
+  ✓  2 ../../tmp/amber-public-main/tests/games/browser.spec.ts:31:2 › amber-touch › three stages through normal input, unlock and persistence (45.7s)
+
+
+  1) ../../tmp/amber-public-main/tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 45
+    Received:    34.44275251975928
+
+      44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+      45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                                 ^
+      47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      49 |  }
+        at /tmp/amber-public-main/tests/games/browser.spec.ts:46:305
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 40
+    Received:    50
+
+      44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+      45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                                                                                         ^
+      47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      49 |  }
+        at /tmp/amber-public-main/tests/games/browser.spec.ts:46:361
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    baseline-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: baseline-results/browser-amber-keyboard-thr-77ad8-nput-unlock-and-persistence/error-context.md
+
+  1 failed
+    ../../tmp/amber-public-main/tests/games/browser.spec.ts:31:2 › amber-keyboard › three stages through normal input, unlock and persistence 
+  1 passed (1.6m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

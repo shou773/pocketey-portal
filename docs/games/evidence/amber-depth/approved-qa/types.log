@@ -1,0 +1,4 @@
+
+> pocketey-japan@0.1.0 check:games
+> tsc --noEmit -p tsconfig.games.json
+

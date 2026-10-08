@@ -1,5 +1,7 @@
 # Amber Step — visual review checkpoint
 
+The visual direction and [two-point contact/gap revision](contact-review/README.md) are now approved by the parent. [Approved revision integration QA](approved-qa/README.md) supersedes the pending-check status below and retains both positive results and unresolved FPS/CI gates. The historical checkpoint remains unchanged for traceability.
+
 Base: public main `a443ec37c33cae22021c82b7b20f3fb6e62f02c6`. Branch: `codex/amber-step-depth`. This is a draft visual candidate. Merge, publication, full all-stage browser/cross-browser CI and physical-device verification are pending visual approval.
 
 The snapshot below records `258e880`. The subsequent [two-point contact/gap revision](contact-review/README.md) supersedes its scenery images and draw counts. Performance for that revision is pending; the earlier low sample is preserved below.
