@@ -25,7 +25,7 @@ async function drive(page: Page, touch: boolean) {
   }) : null;
   const begin = Date.now();
   while (Date.now() - begin < 110000) {
-    const s = await snapshot(page); samples.push(s);
+    const s = await snapshot(page); samples.push({...s,observedAt:Date.now()});
     if (s.phase !== 'playing') break;
     const road = track(s.stage, s.z), future = track(s.stage, s.z + 0.7);
     const target = (future.x - road.x) / 0.7 * s.speed + (road.x - s.x) * 3;
@@ -45,7 +45,18 @@ async function drive(page: Page, touch: boolean) {
       for (const c of next.filter(a => !active.includes(a))) await page.keyboard.down(key(c));
     }
     active = next;
-    if (!screenshot && s.z > length(s.stage) * 0.3) { await page.screenshot({ path: `${evidence}/${touch ? 'mobile' : 'desktop'}-stage${s.stage + 1}-play.png` }); screenshot = true; }
+    if (!screenshot && s.z > length(s.stage) * 0.3) {
+      // Screenshot font/compositor waits can last seconds on software-GPU CI.
+      // Use the real Pause/Resume controls while capturing; never hold stale
+      // steering through an unbounded screenshot await or alter the simulation.
+      await page.locator('#tt-pause').click();
+      if(session&&active.length)await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
+      else for(const key of ['ArrowLeft','ArrowRight','Space'])await page.keyboard.up(key);
+      active=[];
+      await page.screenshot({ path: `${evidence}/${touch ? 'mobile' : 'desktop'}-stage${s.stage + 1}-paused.png` });
+      await page.getByRole('button',{name:'Resume',exact:true}).last().click();
+      screenshot=true;continue;
+    }
     await page.waitForTimeout(65);
   }
   if (session) { if (active.length) await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] }); await session.detach(); }
@@ -67,6 +78,7 @@ for (const touch of [false, true]) test(`all three stages clear with ordinary ${
   await page.goto(`${route}?lang=en`);
   await page.evaluate(() => localStorage.setItem('pocketey-orbit-amber-v1', 'untouched-sentinel'));
   await page.setViewportSize(touch ? { width: 390, height: 844 } : { width: 1280, height: 800 });
+  await page.locator('#tt-sound').click();
   await page.getByRole('button', { name: 'Play this stage' }).click();
   await drive(page, touch);
   await page.getByRole('button', { name: 'Next stage' }).click();

@@ -16,5 +16,6 @@ production build passed. New route/card/metadata tests and wider gameplay tests
 are being added. Evidence PNGs are real browser gameplay captures and four-card
 portal captures at 320/390/1280px in both languages.
 
-This is not a publish candidate: the user's later four-game music/SFX request
-must be completed and independently reviewed before merging or deploying.
+The four-game music/SFX implementation is now populated. See AUDIO.md for
+source/codec/mix records. Exact-candidate CI and independent parent review remain
+required before merging or deploying.

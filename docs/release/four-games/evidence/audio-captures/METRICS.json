@@ -1,0 +1,78 @@
+[
+  {
+    "file": "amber-music-effects-play.webm",
+    "bytes": 1298628,
+    "sha256": "3d96bea7507679845e630d66590599c25fbfeffc30b89741a7536c3e30624194",
+    "secondsFromPackets": 12.428,
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio"
+      }
+    ],
+    "truePeakDBTP": -24.5,
+    "integratedLUFS": -37.7,
+    "auditoryReview": false
+  },
+  {
+    "file": "orbit-music-effects-play.webm",
+    "bytes": 1728502,
+    "sha256": "219b1183cb87fed25b1ec5f59811086e08b0c8ab3d7a0a2581d36726b130c1dd",
+    "secondsFromPackets": 17.427999999999997,
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio"
+      }
+    ],
+    "truePeakDBTP": -23.6,
+    "integratedLUFS": -36.2,
+    "auditoryReview": false
+  },
+  {
+    "file": "pulse-music-effects-play.webm",
+    "bytes": 922195,
+    "sha256": "26e66bb74d452355dd70aa6905feb344a9c2a3b8f1b3a02f5e4a224159fb3b09",
+    "secondsFromPackets": 8.92,
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio"
+      }
+    ],
+    "truePeakDBTP": -25.6,
+    "integratedLUFS": -36.5,
+    "auditoryReview": false
+  },
+  {
+    "file": "tilt-music-effects-play.webm",
+    "bytes": 711044,
+    "sha256": "d1937ed4bd54fe597eed3324191dea3748154e8b7d3f718ac1c4bddced788fa4",
+    "secondsFromPackets": 7.601,
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "codec_type": "video"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio"
+      }
+    ],
+    "truePeakDBTP": -26.5,
+    "integratedLUFS": -40.8,
+    "auditoryReview": false
+  }
+]

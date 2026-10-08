@@ -1,0 +1,106 @@
+{
+  "retrievedAt": "2026-10-08T01:43:01.363710+00:00",
+  "author": "MintoDog",
+  "license": "CC0 1.0",
+  "legalcode": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+  "legalcodeFile": "../CC0-1.0.txt",
+  "legalcodeRetrieval": "Official web browsing tool; terminal normal proxy returned 403. Text extracted from numbered tool response without wording changes.",
+  "tracks": [
+    {
+      "game": "orbit",
+      "title": "Space Adventure",
+      "source": "https://opengameart.org/content/space-adventure",
+      "originalURL": "https://opengameart.org/sites/default/files/space_adventure_bpm140_0.ogg",
+      "originalSHA256": "30e31ee6da7a24bea35bf22d6c125f8100f803fca20a3f59637e52a4fd764ce3",
+      "originalBytes": 4053301,
+      "originalSeconds": 130.285714,
+      "sourceSnapshot": "docs/release/four-games/evidence/music-sources/orbit.html",
+      "sourceSnapshotSHA256": "5ced4728c6ae46e6fd044d291455a4037b3843b540204f34c83cb87fde50a281",
+      "processing": "FFmpeg 7.1.5: -6 dB gain, stereo 44.1 kHz, libvorbis q5 / libmp3lame 192 kbps. Runtime 3ms buffer edge fades, original loop length preserved.",
+      "delivered": [
+        {
+          "file": "orbit.ogg",
+          "bytes": 2280288,
+          "sha256": "6e67b1b505165284ab807394af9b002ba76bb6c24d63ddc6b041dbdb14fd5075"
+        },
+        {
+          "file": "orbit.mp3",
+          "bytes": 3128467,
+          "sha256": "606ad88fc50b8535e337a4cb2fe982b399975f9ada7815cbea69fa9034b6063d"
+        }
+      ]
+    },
+    {
+      "game": "amber",
+      "title": "Cozy Puzzle In-Game 1",
+      "source": "https://opengameart.org/content/cozy-puzzle-in-game-1",
+      "originalURL": "https://opengameart.org/sites/default/files/cozy_puzzle_in-game_1_bpm118_0.ogg",
+      "originalSHA256": "afa440cb8814907b215b285a0503d39b125b6c83d9fca3f686c969107f04c7f7",
+      "originalBytes": 4036007,
+      "originalSeconds": 130.169501,
+      "sourceSnapshot": "docs/release/four-games/evidence/music-sources/amber.html",
+      "sourceSnapshotSHA256": "0a8004c2e2a231f0c365fa82c27a54a4d1d6d35960018c29dde7b25cfe12a621",
+      "processing": "FFmpeg 7.1.5: -6 dB gain, stereo 44.1 kHz, libvorbis q5 / libmp3lame 192 kbps. Runtime 3ms buffer edge fades, original loop length preserved.",
+      "delivered": [
+        {
+          "file": "amber.ogg",
+          "bytes": 2340572,
+          "sha256": "6957b71ff8b0e1ff6810df325aaeedf62a94b2894a8e3d66a237fa61367db215"
+        },
+        {
+          "file": "amber.mp3",
+          "bytes": 3125959,
+          "sha256": "97abeff0052692e3b7252c7a4d47846142e67364cd9ee3e049d0d5bbfe9a52a6"
+        }
+      ]
+    },
+    {
+      "game": "pulse",
+      "title": "Space Boss Battle",
+      "source": "https://opengameart.org/content/space-boss-battle",
+      "originalURL": "https://opengameart.org/sites/default/files/space_boss_battle_bpm175_0.ogg",
+      "originalSHA256": "4fc0898456099db3d9e63bd97450fedc3f9ff0a05cd65a8d363b3f2904415e60",
+      "originalBytes": 3426555,
+      "originalSeconds": 104.228571,
+      "sourceSnapshot": "docs/release/four-games/evidence/music-sources/pulse.html",
+      "sourceSnapshotSHA256": "a945c88acc97b30e8f075208e33997d2ac29476963802b56e40059583819ebda",
+      "processing": "FFmpeg 7.1.5: -6 dB gain, stereo 44.1 kHz, libvorbis q5 / libmp3lame 192 kbps. Runtime 3ms buffer edge fades, original loop length preserved.",
+      "delivered": [
+        {
+          "file": "pulse.ogg",
+          "bytes": 1885055,
+          "sha256": "e6a39b774a87a854ed3ba93465a47d7bc1c9dc44e3a0436e548b7b0cbbcb19b5"
+        },
+        {
+          "file": "pulse.mp3",
+          "bytes": 2502782,
+          "sha256": "5a9471e8deaf4465eed7d76a99daf7446d1cb9c3d944146d2ffab505f5bd2163"
+        }
+      ]
+    },
+    {
+      "game": "tilt",
+      "title": "Sky Blue Street",
+      "source": "https://opengameart.org/content/sky-blue-street",
+      "originalURL": "https://opengameart.org/sites/default/files/sky_blue_street_bpm165_0.ogg",
+      "originalSHA256": "75cb909a27d16618b0dae01088d3a543fb167ee71dac89663fe3e3029916a0a5",
+      "originalBytes": 3396762,
+      "originalSeconds": 116.363651,
+      "sourceSnapshot": "docs/release/four-games/evidence/music-sources/tilt.html",
+      "sourceSnapshotSHA256": "ccfc499b1a1d06ad066429413ff5f72c3d9aa5cde37cec201acf43874f8a581a",
+      "processing": "FFmpeg 7.1.5: -6 dB gain, stereo 44.1 kHz, libvorbis q5 / libmp3lame 192 kbps. Runtime 3ms buffer edge fades, original loop length preserved.",
+      "delivered": [
+        {
+          "file": "tilt.ogg",
+          "bytes": 2053683,
+          "sha256": "2ecf6a6deb818e2b68d737ba8f2558707485c119f4e24354cbee09bf75921406"
+        },
+        {
+          "file": "tilt.mp3",
+          "bytes": 2794309,
+          "sha256": "6caf5be680af4e48c2c43bf58feafad5efbf6f9f340f67fe2eed2aa22f4a9442"
+        }
+      ]
+    }
+  ]
+}

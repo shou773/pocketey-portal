@@ -33,6 +33,7 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
  const inputTrace:unknown[]=[];
  await page.goto(`/games/${kind==='orbit'?'orbit-ribbon':'amber-step'}/`);await expect(page.locator('#game')).toHaveAttribute('data-mode','menu');
  await expect(page.getByRole('button',{name:/ステージ 2 /})).toBeDisabled();
+ await page.locator('#sound').click();await expect(page.locator('#sound')).toHaveText('音 ON');
  for(let i=0;i<3;i++){
   if(i===0)await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();else await page.getByRole('button',{name:'次のステージ'}).click();
   // Wait for the first new-run frame, not a blocking screenshot, before driving.
@@ -47,7 +48,7 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
  }
  await page.getByRole('button',{name:'ステージ選択'}).click();await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
- await page.locator('#sound').click();await page.reload();await expect(page.locator('#sound')).toHaveText('音 ON');await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
+ await page.reload();await expect(page.locator('#sound')).toHaveText('音 ON');await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(stored[kind].challengeBest.every((x:number)=>x>0)).toBeTruthy();
  const reopened=await page.context().newPage();await reopened.goto(page.url());await expect(reopened.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();await reopened.close();expect(errors).toEqual([]);
  await page.locator('#stages').getByRole('button',{name:/ステージ 3 /}).click();await page.getByRole('button',{name:'ステージ 3 をはじめる'}).click();await expect(page.locator('#game')).toHaveAttribute('data-mode','play');

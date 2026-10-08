@@ -86,13 +86,22 @@ test('unsupported WebGL shows a translated recovery explanation and usable exit'
  await page.goto('/games/orbit-ribbon/?lang=ja');await expect(page.getByRole('heading',{name:'3D画面を起動できません'})).toBeVisible();await expect(page.locator('[data-input=jump]')).toBeDisabled();await page.getByRole('button',{name:'English',exact:true}).click();await expect(page.getByRole('heading',{name:'3D could not start'})).toBeVisible();await page.locator('.back-link').click();await expect(page).toHaveURL(/\/games\/\?lang=en/);
 });
 
-for(const slug of ['pulse-drift','tilttrail'])test(`${slug}: public metadata and four-card portal`,async({page,request})=>{
+for(const slug of ['orbit-ribbon','amber-step','pulse-drift','tilttrail'])test(`${slug}: public metadata and four-card portal`,async({page,request})=>{
  for(const lang of ['en','ja']){
+  await page.goto('/?lang='+lang);await expect(page.locator('.game-card')).toHaveCount(4);
   await page.goto('/games/?lang='+lang);await expect(page.locator('.game-card')).toHaveCount(4);
   await page.goto('/games/'+slug+'/?lang='+lang);await expect(page.locator('html')).toHaveAttribute('lang',lang);
   await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href','https://www.pocketey.com/games/'+slug+'/');
   expect(await page.locator('meta[name=robots]').count()).toBe(0);
+  expect(await page.locator('meta[name=description]').getAttribute('content')).toBe(await page.locator('meta[name=description]').getAttribute('data-'+lang));
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content','https://www.pocketey.com/games/'+slug+'/');
   const image=await page.locator('meta[property="og:image"]').getAttribute('content');expect((await request.get(new URL(image!).pathname)).status()).toBe(200);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }
+});
+test('only the two retired prototypes redirect to their public games',async({page,request})=>{
+ for(const [old,slug] of [['/prototypes/pulse-drift/','pulse-drift'],['/games/prototypes/tilttrail/','tilttrail']]){
+  await page.goto(old);await expect(page).toHaveURL(new RegExp('/games/'+slug+'/'));
+ }
+ expect(await (await request.get('/sitemap-0.xml')).text()).not.toContain('/prototypes/');
 });

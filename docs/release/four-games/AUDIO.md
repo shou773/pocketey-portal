@@ -1,90 +1,102 @@
-# Audio implementation checkpoint (not a publish candidate)
+# Four-game audio release candidate
 
-The four-game release includes real sampled Kenney CC0 effects and a shared
-page-scoped audio owner. Music acquisition is blocked: a normal-proxy request
-for `https://opengameart.org/content/space-adventure` returned
-`URLError(OSError('Tunnel connection failed: 403 Forbidden'))` on 2026-10-08.
-No alternate network route was used. Music URLs remain deliberately unpopulated.
+This replaces the acquisition-blocked checkpoint at `f96144d`. Publication still
+requires exact-candidate CI and independent parent review. Do not merge PRs 7/8
+separately or deploy this branch before that review.
 
-Effects use 9 selected samples, not the full archives. `public/games/audio/SOURCES.json`
-records original and delivered hashes, lengths, sizes and processing. Original
-Kenney license files are included unchanged. Delivered mono 24kHz PCM WAVs total
-259,732 bytes; this format is decoded by Web Audio and requires no OGG support.
+## Sources and delivery
 
-The mix caps effects at ten simultaneous voices, two per cue. Shot/contact
-cooldown is 100ms; warning is prioritized over ordinary contacts. Each WAV is
-normalized to at most -12dBFS before short edge fades; effects bus gain is at
-most .24, music bus at most .2, master .85. Even ten maximum-amplitude effects
-plus a full-scale music sample have a theoretical bound of about .683 (-3.3dBFS),
-before interpolation/codec error. This conservative bound is not a substitute
-for true-peak measurement of actual final play captures.
+On 2026-10-08 all four MintoDog originals and original OpenGameArt submissions
+were obtained through the normal proxy (HTTP 200). Each original submission
+identifies MintoDog, CC0 and loopable music. Full HTML snapshots, retrieval date,
+titles, source URLs and original/delivered SHA256 hashes are retained in
+`evidence/music-sources/` and `public/games/audio/music/SOURCES.json`.
+The CC0 legal text is `public/games/audio/CC0-1.0.txt`. Terminal access to the
+Creative Commons domain returned 403; the official browsing tool successfully
+returned its official plain-text legalcode, saved with line-number prefixes
+removed and wording retained. No alternate terminal proxy or security change
+was used. Voluntary Music by MintoDog / Effects by Kenney credit and source/license
+links are on About. Original Kenney pack license files and hashes remain intact.
 
-Cue map uses actual gameplay events: Orbit/Amber start, jump, land, clear/death;
-Pulse auto-fire, scored enemy hit, warning-lane appearance, shield damage,
-clear/death; Tilt brake engagement, fall and clear. No new gameplay
-features were added for sound. Existing Sound ON/OFF remains one tap. A separate
-volume dialog offers Music/Effects sliders and individual mute, pauses play and
-leaves an explicit Resume action. Preferences are stored per game under
-`pocketey-audio-v1`, initialized from legacy sound/mute flags without changing
-progress keys. Resetting Orbit/Amber also resets their audio preferences only.
+| Game | MintoDog score | Original length | Delivered OGG / MP3 bytes |
+| --- | --- | --- | --- |
+| Orbit Ribbon | Space Adventure | 130.286s | 2,280,288 / 3,128,467 |
+| Amber Step | Cozy Puzzle In-Game 1 | 130.170s | 2,340,572 / 3,125,959 |
+| Pulse Drift | Space Boss Battle | 104.229s | 1,885,055 / 2,502,782 |
+| TiltTrail | Sky Blue Street | 116.364s | 2,053,683 / 2,794,309 |
 
-Paused, hidden, menu, result and WebGL-loss paths stop music. Hidden pages suspend
-the AudioContext; normal navigation disposes it. Asset/context failures are caught
-and never change physics or save progress. Audio begins only after input.
+FFmpeg 7.1.5 applies -6dB gain, stereo 44.1kHz, Vorbis quality 5 or MP3 192kbps.
+The full authored length is retained. Decoded buffer edges receive 3ms fades
+rather than an extra long silence or arbitrary musical cut. Codec support selects
+OGG or MP3; a fetch/decode failure tries the alternate codec. Only the current
+game's score loads after an enabled user gesture starts play. Menus and initial
+mute fetch no music. There is no four-track preload. Nine mono PCM WAV effects
+add 259,732 bytes, decoded by Web Audio without an OGG dependency.
 
-Pending acceptance: acquire and verify licensed BGM originals; assess loop seams,
-codec compatibility and final mix peaks; record actual gameplay with audio; run
-all four gameplay and cross-browser/lifecycle checks on the final candidate.
-No direct auditory quality claim has been made. The reference soundtracks guide
-roles and thematic consistency only; none of their audio is reused.
+## Mix, cues and objective QA
 
-Additional checkpoint evidence: 15 Chromium audio/interaction checks passed,
-including decoding all nine delivered WAVs and simulated hidden-page lifecycle.
-Pulse's three stages cleared using both native keyboard and CDP touch input;
-eight UI/lifecycle cases and idle-loss/retry passed. A 13-second actual Pulse
-canvas capture with VP8 video + Opus audio was produced outside the repository
-at `/workspace/asset-intake/audio/pulse-effects-play.webm`. FFmpeg measured its
-SFX-only mix at -25.6dBTP/-42.8LUFS, max three simultaneous voices. This is a
-technical recorder proof, not a final music mix or auditory quality endorsement.
+Effects peak around -12dBFS, with 100ms shot/contact cooldown, two voices per cue,
+ten overall, and critical warnings/damage/death/clear replacing lower-priority
+contacts. Music/effects have separate volume, mute and per-game stored settings;
+legacy Sound OFF is honored. Effects bus maximum .20, music .20, master .85.
+Four gameplay score identities follow the same composer's consistent palette:
+cosmic exploration, warm puzzle movement, active space combat and forward racing.
+Discrete cues mark actual movement/contact, damage, hazards and outcomes.
 
-Local WebKit/Firefox could not launch in this refreshed environment: WebKit
-reported missing GTK4/Graphene/Harfbuzz ICU/Manette/Hyphen/GLES libraries; Firefox
-reported that its temporary profile folder could not be found. CI installs the
-required browser dependencies and will provide application results. The first audio checkpoint passed nine Chromium and nine WebKit checks in CI.
-Four Firefox checks failed because its AudioContext remained suspended; the CI
-runner now supplies a PulseAudio null sink for a working audio output clock.
-This must be verified rather than accepted as an assumed environment cause.
-The current head must pass the updated tests before acceptance. Tilt's imported 5px backdrop
-blur was removed to comply with the portal's established compositing budget.
+`evidence/audio-metrics.json` is generated by `scripts/check-game-audio.py` using
+FFmpeg/NumPy: delivered tracks measure -6.3 to -7.1dBTP; decoded lengths match
+originals; post-fade boundary step is zero; seam 20ms RMS remains measurable.
+The deliberately conservative ten full-strength effects plus the highest score
+true-peak envelope is -5.61dBTP, including 4x-resampled SFX overshoot. The normal
+per-cue caps and lower shot/land gains are more restrictive. This is a bound,
+not a subjective listening assessment. Actual browser play captures and their
+measured mix levels are separate evidence.
 
-Music transitions now have 40ms entry/exit fades and wait for the previous
-source to end before starting another. BGM transitions remain unverified until
-the originals arrive. Stage selection uses the sampled click cue; the initial
-select/start cue can wait for sample loading. Brake sound occurs on engagement,
-not repeatedly while held. Test output directories are separated so Tilt cannot
-remove Pulse or cross-browser evidence.
+Reference-game direction is thematic score continuity and readable event cues
+(Run 3 / Race the Sun / Celeste); no reference-game music is reused. Celeste's
+composer-published OST was inspected at
+https://radicaldreamland.bandcamp.com/album/celeste-original-soundtrack;
+Run 3's official game page at https://player03.com/run/3/ was reachable but did
+not expose OST detail. Race the Sun official/OST pages were unavailable here.
+Do not represent these unavailable pages as verified listening or sound analysis.
 
-CI with the audio sink passed 15 Chromium tests and 29/30 cross-browser tests.
-The remaining Firefox Orbit settings test waited for sample decode during a live
-auto-run, allowing an idle fall before it asked for Resume. It now pauses through
-the ordinary Pause button before waiting for decoding. Final-head CI remains
-required; no performance or gameplay thresholds were relaxed.
+## Lifecycle and modal regression
 
-## Independent-review fix: volume dialog input isolation
+Pause, hidden, menus, retry, results and WebGL loss stop music. Entry/exit fades
+are 40ms; a previous fading source must end before another starts. Hidden pages
+suspend the context, navigation disposes it, and asset/context failure leaves
+physics and progress working. Decode completion cannot restart inactive play.
 
-Review found that the modal did not intercept global R/P/Escape handlers, so a
-run could restart or resume behind it. The shared audio owner now captures modal
-keyboard input before game handlers, keeps native slider/Tab/Enter behavior,
-and handles Escape as close-only. The game root is inert while the dialog is
-open. Closing restores its previous inert state and clears game controls; keys
-held inside remain blocked until release. Opening from gameplay pauses it, while
-opening an already-paused screen never resumes it. Simulation loops also guard
-against an open settings dialog (including Tilt's in-flight fall).
+The reviewed `f96144d` volume dialog input isolation is preserved: capturing
+keyboard/pointer guards, inert game root, simulation guards and control clearing.
+Escape closes only the dialog; close keeps pause and held modal keys remain
+blocked until physical release. Native sliders, Tab and Enter continue to work.
 
-Four regression cases passed in Chromium: R/P/movement/jump keys and outside
-pointer input cannot change paused position/time; slider arrows still work;
-Escape and Close keep the pause; repeated held keys do not leak after explicit
-Resume. Tilt's existing physical inertia is preserved and decays normally.
-The previous fifteen audio/lifecycle checks also passed with this implementation.
-Astro check, game typecheck and production build passed. CI runs these four cases
-in Chromium, WebKit and Firefox; final-head cross-browser results remain required.
+## Validation and remaining acceptance
+
+Local Astro check, game typecheck, 24 model tests and production generation passed.
+The original 19 Chromium audio/dialog/lifecycle regressions and nine new music
+checks passed independently. New music checks verify both delivered codecs,
+per-game lazy fetching, MP3 fallback, single loops, pause/resume, hidden and mute.
+All 32 Chromium cases passed, including four recorder cases producing real VP8/Opus
+canvas gameplay captures in `evidence/audio-captures/`. The four actual mix
+true-peaks are -24.5dBTP (amber), -23.6dBTP (orbit), -25.6dBTP (pulse), -26.5dBTP (tilt).
+Their LUFS, durations, codecs, hashes and explicit non-listening status are recorded.
+Cross-engine codec/lifecycle checks run in CI with a Linux audio clock.
+Physical iPhone Safari and direct auditory quality remain unverified.
+
+Old exact CI 37713166495 completed: portal and WebKit/Firefox gameplay passed;
+19 Chromium plus 38 WebKit/Firefox audio cases passed. Existing games cleared all
+stages, but desktop Orbit p95=50ms and Amber=43.85fps failed unchanged gates.
+Tilt's keyboard stage1 and touch stage3 fell during its drive. The test previously
+awaited screenshots while holding stale steering. It now uses real Pause/Resume
+and native releases during capture, with timestamped read-only input observations.
+No track, difficulty, physics or performance threshold was relaxed.
+A local concurrent diagnostic cleared Tilt's keyboard/touch stages but its desktop
+performance was affected by overlapping browser/audio processing; it is not
+release performance evidence. Final gates must be run serially and on exact CI.
+
+Candidate CI, four screenshots, captures and metrics are supplied to parent review
+before merge. PR9 stays draft until accepted. Deployment uses the existing main
+GitHub Actions Pages workflow; final merge SHA and public routes/assets, bilingual
+metadata and ordinary play must then be checked.

@@ -7,8 +7,9 @@ type Settings = { music: number; sfx: number; musicMuted: boolean; sfxMuted: boo
 const KEY = 'pocketey-audio-v1';
 const files = ['click','jump','land','roll','clear','shot','warning','damage','death'] as const;
 type Sample = typeof files[number];
-// Music URLs are populated only after the licensed originals are received and verified.
-const music: Partial<Record<AudioGame, string>> = {};
+// Only the current game's score is fetched, after a user gesture starts play.
+// MP3 covers Safari versions without Vorbis; decode failure tries the other codec.
+const music: Record<AudioGame, string> = {orbit:'orbit',amber:'amber',pulse:'pulse',tilt:'tilt'};
 function parse(value: unknown, enabled: boolean): Settings {
   const s = value && typeof value === 'object' ? value as Partial<Settings> : {};
   const volume = (n: unknown, fallback: number) => typeof n === 'number' && Number.isFinite(n) ? Math.max(0,Math.min(1,n)) : fallback;
@@ -29,13 +30,29 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
   let loaded=false,pending:Cue|null=null;
   const enabled=()=>!settings.musicMuted||!settings.sfxMuted;
   function diagnostics(){root.dataset.audio=ctx?.state??'off';root.dataset.music=loop?'playing':musicError?'unavailable':bgm?'ready':'idle';root.dataset.audioSamples=String(buffers.size);root.dataset.audioVoices=String(voices.size);root.dataset.audioMaxVoices=String(maxVoices);root.dataset.audioLoops=String(loop?1:0);root.dataset.audioStarts=String(started);}
-  function gains(){if(!ctx)return;effects.gain.setTargetAtTime(settings.sfxMuted?0:settings.sfx*.24,ctx.currentTime,.02);score.gain.setTargetAtTime(settings.musicMuted?0:settings.music*.2,ctx.currentTime,.06);}
+  function gains(){if(!ctx)return;effects.gain.setTargetAtTime(settings.sfxMuted?0:settings.sfx*.2,ctx.currentTime,.02);score.gain.setTargetAtTime(settings.musicMuted?0:settings.music*.2,ctx.currentTime,.06);}
   function persist(){try{let all:Record<string,unknown>={};try{all=JSON.parse(localStorage.getItem(KEY)||'{}');if(!all||typeof all!=='object'||Array.isArray(all))all={};}catch{/* Replace malformed settings. */}all[game]=settings;localStorage.setItem(KEY,JSON.stringify(all));}catch{/* Storage is optional. */}changed(enabled());gains();labels();}
   async function decode(url:string){const response=await fetch(url);if(!response.ok)throw new Error('Audio asset unavailable');return ctx!.decodeAudioData(await response.arrayBuffer());}
+  async function loadMusic(){
+    const vorbis=!!document.createElement('audio').canPlayType('audio/ogg; codecs="vorbis"');
+    for(const codec of vorbis?['ogg','mp3']:['mp3','ogg']){
+      try{
+        const buffer=await decode(`/games/audio/music/${music[game]}.${codec}`);
+        // Smooth the loop boundary after decoding, including codec rounding/delay.
+        const edge=Math.min(Math.round(buffer.sampleRate*.003),Math.floor(buffer.length/2));
+        for(let channel=0;channel<buffer.numberOfChannels;channel++){
+          const data=buffer.getChannelData(channel);
+          for(let i=0;i<edge;i++){const gain=i/edge;data[i]*=gain;data[data.length-1-i]*=gain;}
+        }
+        root.dataset.musicCodec=codec;return buffer;
+      }catch{/* Try the alternate codec, then leave gameplay running silently. */}
+    }
+    throw new Error('Music unavailable');
+  }
   function ensure(){
     if(disposed||!enabled())return;
     try{
-      if(!ctx){ctx=new AudioContext();master=ctx.createGain();master.gain.value=.85;master.connect(ctx.destination);effects=ctx.createGain();score=ctx.createGain();effects.gain.value=settings.sfxMuted?0:settings.sfx*.24;score.gain.value=settings.musicMuted?0:settings.music*.2;effects.connect(master);score.connect(master);
+      if(!ctx){ctx=new AudioContext();master=ctx.createGain();master.gain.value=.85;master.connect(ctx.destination);effects=ctx.createGain();score=ctx.createGain();effects.gain.value=settings.sfxMuted?0:settings.sfx*.2;score.gain.value=settings.musicMuted?0:settings.music*.2;effects.connect(master);score.connect(master);
         ctx.addEventListener('statechange',()=>{if(ctx?.state==='running')playMusic();diagnostics();});
       }
       if(ctx.state!=='running')void ctx.resume().then(()=>{playMusic();diagnostics();}).catch(()=>diagnostics());
@@ -44,7 +61,7 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
         loaded=true;if(pending&&!disposed&&!document.hidden){const event=pending;pending=null;if(event!=='start'||active)cue(event);}
         diagnostics();
       })();}
-      if(active&&!settings.musicMuted&&!bgm&&!musicError&&music[game]){musicError=true;void decode(music[game]!).then(buffer=>{bgm=buffer;musicError=false;playMusic();diagnostics();}).catch(()=>{musicError=true;diagnostics();});}
+      if(active&&!settings.musicMuted&&!bgm&&!musicError){musicError=true;void loadMusic().then(buffer=>{bgm=buffer;musicError=false;playMusic();diagnostics();}).catch(()=>{musicError=true;diagnostics();});}
     }catch{/* Context creation or resume cannot interrupt gameplay. */}
     diagnostics();
   }
