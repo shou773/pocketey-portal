@@ -100,3 +100,29 @@ Candidate CI, four screenshots, captures and metrics are supplied to parent revi
 before merge. PR9 stays draft until accepted. Deployment uses the existing main
 GitHub Actions Pages workflow; final merge SHA and public routes/assets, bilingual
 metadata and ordinary play must then be checked.
+
+## Follow-up QA corrections
+
+Final-output checks found missing OG tags on existing Orbit/Amber pages. Both now
+use GameMeta, retaining gameplay and adding localized title/description, canonical,
+OG URL/type/image. Five local metadata/prototype redirect checks passed; the
+metadata candidate CI portal job passed. Generated metadata evidence is committed.
+
+Candidate CI 37714994962 passed all 32 Chromium audio/capture cases and 28 WebKit
+audio/music cases. Firefox passed 26/28; its two Orbit failures occurred after
+simulated hidden recovery: the context output clock stayed suspended while the
+normal idle run reached its first pillar and died, then resumed with active=false.
+The music lifecycle test now uses ordinary Resume then Pause while waiting for
+context running, followed by Resume to assert the single music loop. This preserves
+the no-audio-during-pause/hidden assertions, codec/network checks, failure gameplay
+continuity and production physics. No timeout or assertion threshold was relaxed.
+Exact-head Firefox confirmation is still required.
+
+Local Tilt observations in evidence/local-tilt-checks.json show all six keyboard/
+touch stage clears with sound enabled. Desktop performance was 34.00fps/p95 50ms
+and failed the unchanged gate; touch persistence passed at 48.57fps/p95 33.4ms.
+Keyboard's post-performance reload assertions were not reached. Four other cases
+(input/retry, cancellation/return, fallback/layout and latched GL loss) passed.
+The initial layout case overlapped a local production rebuild and timed out;
+rerunning that specific case after output stabilized passed in 9.8s. This local
+suite is not a performance acceptance or complete exact-head result.

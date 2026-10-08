@@ -17,6 +17,11 @@ for(const game of games)for(const fallback of [false,true])test(`${game.slug}: $
  await expect(page.locator(game.root)).toHaveAttribute('data-audio-loops','0');await expect(page.locator(game.root)).toHaveAttribute('data-audio','suspended');
  await page.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,get:()=>false});document.dispatchEvent(new Event('visibilitychange'));});
  await expect(page.locator(game.root)).toHaveAttribute('data-audio-loops','0');
+ // Firefox's Linux output clock may resume asynchronously. Keep the real
+ // simulation paused while waiting, rather than letting an idle Orbit run
+ // collide with its first pillar before testing the resumed music owner.
+ await page.getByRole('button',{name:'Resume',exact:true}).last().click();await page.locator(game.pause).click();
+ await expect(page.locator(game.root)).toHaveAttribute('data-audio','running');
  await page.getByRole('button',{name:'Resume',exact:true}).last().click();await expect(page.locator(game.root)).toHaveAttribute('data-audio-loops','1');
  await page.locator(game.sound).click();await expect(page.locator(game.root)).toHaveAttribute('data-audio-loops','0');
 });
