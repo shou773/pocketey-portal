@@ -1,0 +1,28 @@
+[
+  {
+    "mobile": true,
+    "sameGameplayState": true,
+    "sameCanvas": true,
+    "beforeRender": {
+      "calls": 15,
+      "triangles": 4184
+    },
+    "afterRender": {
+      "calls": 15,
+      "triangles": 4588
+    }
+  },
+  {
+    "mobile": false,
+    "sameGameplayState": true,
+    "sameCanvas": true,
+    "beforeRender": {
+      "calls": 15,
+      "triangles": 4184
+    },
+    "afterRender": {
+      "calls": 15,
+      "triangles": 4588
+    }
+  }
+]
