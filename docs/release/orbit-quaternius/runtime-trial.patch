@@ -1,0 +1,60 @@
+diff --git a/src/games/orbit-art.ts b/src/games/orbit-art.ts
+index ddeb221..0b2505f 100644
+--- a/src/games/orbit-art.ts
++++ b/src/games/orbit-art.ts
+@@ -49,6 +49,19 @@ export function orbitEngine(parent:T.Group) {
+ const hull=new T.MeshLambertMaterial({color:0x29445b});
+ const deck=new T.MeshLambertMaterial({color:0x6b8c9a});
+ const windows=new T.MeshBasicMaterial({color:0x77a9ae});
++export async function loadOrbitCraft() {
++  try {
++    // Original 2021 CC0 Challenger: retain base-color design with diffuse light.
++    const model=await new GLTFLoader().loadAsync('/games/assets/orbit/quaternius-2021/challenger.glb');
++    model.scene.traverse(object=>{
++      if (!(object instanceof T.Mesh)) return;
++      const original=object.material as T.MeshStandardMaterial;
++      object.material=new T.MeshLambertMaterial({color:original.color,map:original.map,side:original.side});
++    });
++    model.scene.position.y=.235;
++    return model.scene;
++  } catch {return undefined;}
++}
+ let relay:T.Group|undefined;
+ export async function loadOrbitRelay() {
+   try {
+diff --git a/src/games/render.ts b/src/games/render.ts
+index 35f9270..bba093e 100644
+--- a/src/games/render.ts
++++ b/src/games/render.ts
+@@ -1,7 +1,7 @@
+ import * as T from 'three';
+ import { stages, type Kind, type State } from './model';
+ import { loadArt, batchStatic, clearStatic, placeArt, createSky, type Art } from './art';
+-import {paintOrbit, orbitPlanet, orbitEngine, orbitStation, loadOrbitRelay} from './orbit-art';
++import {paintOrbit, orbitPlanet, orbitEngine, orbitStation, loadOrbitRelay, loadOrbitCraft} from './orbit-art';
+ import { createAmberCanyon, loadAmberLandmark, placeAmberPlants, placeSandstone } from './amber-scenery';
+ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
+   const renderer = new T.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
+@@ -116,7 +116,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
+     batchStatic(level, kind); batchStatic(backdrop, kind);
+     temporaryGeometry.forEach(geometry => geometry.dispose());
+   }
+-  void Promise.all([loadArt(kind, canvas), kind === 'amber' ? loadAmberLandmark() : Promise.resolve(undefined), kind === 'orbit' ? loadOrbitRelay() : Promise.resolve(false)]).then(([loaded, landmark, relayReady]) => {
++  void Promise.all([loadArt(kind, canvas), kind === 'amber' ? loadAmberLandmark() : Promise.resolve(undefined), kind === 'orbit' ? loadOrbitRelay() : Promise.resolve(false), kind === 'orbit' ? loadOrbitCraft() : Promise.resolve(undefined)]).then(([loaded, landmark, relayReady, orbitCraft]) => {
+     if (kind === 'amber' && landmark) {
+       clearStatic(horizon); horizon.position.set(0, 0, 0);
+       createAmberCanyon(horizon, landmark); batchStatic(horizon, kind);
+@@ -136,7 +136,12 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
+       player.scene.rotation.y = kind === 'orbit' ? 0 : Math.PI / 2;
+       if(kind==='orbit') {
+         // Batch in local space even if asynchronous art arrives after play starts.
+-        const ship=new T.Group();ship.add(player.scene);orbitEngine(ship);batchStatic(ship,kind);courier.add(ship);
++        if (orbitCraft) {
++          courier.add(orbitCraft); canvas.dataset.orbitCraft='challenger';
++        } else {
++          const ship=new T.Group();ship.add(player.scene);orbitEngine(ship);batchStatic(ship,kind);courier.add(ship);
++          canvas.dataset.orbitCraft='kenney-fallback';
++        }
+       } else courier.add(player.scene);
+       if (kind === 'amber') {
+         mixer = new T.AnimationMixer(player.scene);

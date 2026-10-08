@@ -1,0 +1,29 @@
+<canvas id="review" width="800" height="600"></canvas>
+<style is:global>html,body{margin:0;background:#152541}canvas{display:block;width:800px;height:600px}</style>
+<script>
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {loadArt,batchStatic} from '../games/art';
+import {paintOrbit,orbitEngine} from '../games/orbit-art';
+const canvas=document.querySelector('canvas')!;
+const scene=new T.Scene();scene.background=new T.Color(0x152541);
+scene.add(new T.HemisphereLight(0xe9f5ff,0x384b70,2.2));
+const sun=new T.DirectionalLight(0xffe4c5,2.1);sun.position.set(-8,15,5);scene.add(sun);
+const ship=new T.Group();
+if(location.search.includes('candidate')) {
+ const gltf=await new GLTFLoader().loadAsync('/games/assets/orbit/quaternius-2021/challenger.glb');
+ gltf.scene.traverse(o=>{if(o instanceof T.Mesh){const original=o.material as T.MeshStandardMaterial;o.material=new T.MeshLambertMaterial({color:original.color,map:original.map,side:original.side})}});
+ gltf.scene.position.y=.235;ship.add(gltf.scene);
+} else {
+ const art=await loadArt('orbit',canvas);paintOrbit(art);
+ const player=art.get('craft_speederA')!;player.scene.scale.set(.4,.48,.4);player.scene.position.y=.12;
+ ship.add(player.scene);orbitEngine(ship);batchStatic(ship,'orbit');
+}
+scene.add(ship);
+const camera=new T.PerspectiveCamera(38,800/600,.01,20);camera.position.set(1.25,1.15,1.6);camera.lookAt(0,.24,0);
+const renderer=new T.WebGLRenderer({canvas,antialias:false});renderer.setSize(800,600,false);renderer.render(scene,camera);
+const bounds=new T.Box3().setFromObject(ship);let triangles=0,vertices=0;const materials=new Set();
+ship.traverse(o=>{if(o instanceof T.Mesh){triangles+=(o.geometry.index?.count??o.geometry.getAttribute('position').count)/3;vertices+=o.geometry.getAttribute('position').count;materials.add(o.material)}});
+(window as any).review={bounds:{min:bounds.min.toArray(),max:bounds.max.toArray()},triangles,vertices,materials:materials.size,calls:renderer.info.render.calls};
+canvas.dataset.ready='true';
+</script>

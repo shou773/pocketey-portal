@@ -1,0 +1,32 @@
+{
+  "author": "Quaternius",
+  "edition": "Ultimate Spaceships - May 2021, OpenGameArt upload June 19 2021",
+  "retrieved_at_utc": "2026-10-08T13:09:25.229380+00:00",
+  "source_page": "https://opengameart.org/content/lowpoly-spaceships-pack",
+  "archive_url": "https://opengameart.org/sites/default/files/ultimate_spaceships_-_may_2021.zip",
+  "archive_bytes": 103093231,
+  "archive_sha256": "ab7a725a2a1066d1f4c01fe27b2135f6138ca0b8a0a709eb9469957d26777670",
+  "license": "CC0 1.0, designated by author on the download page. ZIP contains no license document. Page capture is project-added evidence; no original bundled license is claimed. Parent authorized this attribution basis. No QAL version used.",
+  "files": [
+    {
+      "name": "Challenger.blend",
+      "bytes": 4167600,
+      "sha256": "d1ddfaff4457d3c7951896d761ccca2326922ad9e27dcf0d0afa1a6a37aa9311"
+    },
+    {
+      "name": "Challenger_Green.png",
+      "bytes": 3609657,
+      "sha256": "53f804f81e2a6c7deac80ca481cb82d42ae793e4039a3966c11c24dbd8407bc4"
+    },
+    {
+      "name": "challenger512.glb (local trial, not shipped)",
+      "bytes": 485248,
+      "sha256": "f98fa48dea5f8b82cc40c547bfb48cce242c9c894c2833815a9040999b762c71"
+    }
+  ],
+  "mesh": {
+    "triangles": 1748,
+    "materials": 1,
+    "geometry_changes": "Center and normalize X width .80 and Y length .84 in Blender, preserving authored proportions in height; glTF +Y-up conversion. No topology simplification, texture repaint or model recreation. Authored -Y nose rotated 180 degrees to runtime -Z. Last bounded pass downsamples original color texture to 512x512 in Blender, retaining identical geometry buffers; runtime Lambert keeps original base-color map and color."
+  }
+}
