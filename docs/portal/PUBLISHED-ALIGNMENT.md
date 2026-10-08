@@ -1,0 +1,26 @@
+# Cover alignment after Amber and Tilt publication
+
+Published main: `1e071902bda809c4e0beaabffe7ebb81b99e4342`. Orbit integrated candidate: `2edb47c0d72b2446b5fe110486d1a39828309dcc`. The approved cover PNGs, title SVGs and portal HTML/CSS remain unchanged. Only provenance and verification evidence are updated.
+
+## Model and scene comparison
+
+| Cover | Comparison result |
+| --- | --- |
+| Amber Step | Shared renderer, scenery module, art loader, stage/model data and character GLB are byte-identical between the cover reference `2bde0bc` and published main. The cover's thick platforms, jumping character, grounded arch supports and canyon are actual published geometry. See the primary-landmark distinction below. |
+| TiltTrail | Ball renderer and model are byte-identical between reference `6339f1c` and published main. The striped ball, turning road, observatory and its island are unchanged. The cover's observatory placement is an already declared introduction composition. |
+| Pulse Drift | The only view change since reference `8714b3f` is the collision core staying visible during damage, plus its comment. Ship, enemies, projectiles and environment geometry are unchanged. The staged cover already explicitly omits that collision indicator. |
+| Orbit Ribbon | Orbit art module, art loader, stage/model data, speeder GLB and Blender relay GLB are byte-identical between reference `9a066c7` and integrated candidate `2edb47c`. The shared renderer diff integrates Amber scenery and does not change Orbit's ship, runway, obstacles or draw branch. |
+
+[Exact source/blob comparison](evidence/published-alignment/model-alignment.json), [Pulse view diff](evidence/published-alignment/pulse-view.diff), [Orbit shared renderer diff](evidence/published-alignment/orbit-shared-renderer.diff).
+
+Amber's cover reference did not contain `stone-arch.glb`: the capture used the procedural arch that remains in the published renderer as its supported fallback. Published normal loading uses the newly added Blender landmark. The character, platform and canyon code are identical, but the background arch should not be described as a capture of that primary Blender model. This is an original composed introduction image of the same world, using retained published geometry; it is not a gameplay screenshot. No new design or background replacement was made in this pass.
+
+## Latest-main preparation and focused checks
+
+The portal head `9da0d19` combines without conflicts with published main `1e07190`: tree `e96cd53534cda78104e5c60b7369073fa3c53506`. Its contents were archived into an isolated temporary directory and tested without merging either branch.
+
+- [Production build](evidence/published-alignment/build.log) and route/retirement guard: pass.
+- [Nine focused portal checks](evidence/published-alignment/portal-focus.log): 9 passed in 35.5s. Both portal routes and languages across 320–1440px, keyboard focus/activation, caption/play contrast, language navigation and retention, real internal links, and all four public game metadata checks pass against the new main content.
+- No game playback, performance or long CI suite was manually repeated. Earlier broader [final validation](FINAL-REVIEW.md) remains available.
+
+Remaining gate: Orbit publication and parent final approval. PR #17 remains a draft; no merge, publication or Library retry was performed. The approved design remains intact.

@@ -1,5 +1,6 @@
 # Cover titles and protagonists: follow-up to the second shelf proposal
 
+Latest publication alignment: [published models and Orbit candidate](PUBLISHED-ALIGNMENT.md).
 The 2×2 shelf, ordinary accessible titles, play controls and page layout are unchanged. This refinement responds to visual review of `ff1f191` and changes only the composed introduction artwork and its decorative title layer. The covers are staged illustrations using actual project models; they are not actual gameplay screenshots.
 
 Each title is an original SVG path drawing, rather than a font with a glow. Orbit uses dense mechanically slanted strokes and a flat folded ribbon; Amber uses thick warm rounded strokes with a slight upward rise; Pulse uses thin angular strokes with cut-ended framing; Tilt uses open rounded strokes and a turning baseline. These drawings use no external lettering, logo, font download or copied brand asset. They live inside the cover and are hidden from assistive technology; the plain game names below remain the accessible text.

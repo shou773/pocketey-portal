@@ -1,5 +1,6 @@
 # Portal final review after visual approval
 
+Latest publication alignment: [published models and Orbit candidate](PUBLISHED-ALIGNMENT.md).
 Parent and independent visual review approved `13f26fa`. This final pass makes no additional change to the portal layout, cover scenes, title artwork or game runtime. The PR remains a draft and must wait for the remaining game-art releases and cover alignment before merge or publication. Library saving was not retried.
 
 ## Integration and tests
