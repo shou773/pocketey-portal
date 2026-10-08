@@ -6,7 +6,7 @@ import type { Kind } from './model';
 // Only the selected files are requested. Physics never waits for art: every
 // object has a procedural fallback, including failed textures or malformed GLBs.
 export const artNames = {
-  orbit: ['craft_speederA', 'platform_small', 'meteor', 'rock'],
+  orbit: ['meteor', 'rock'],
   amber: ['character-oodi', 'block-grass-low-long', 'tree', 'rocks', 'flowers']
 } as const;
 export type Art = Map<string, GLTF>;
@@ -52,7 +52,7 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
           if (!materials.has(source)) {
             const m = source as T.MeshStandardMaterial;
             if (kind === 'amber' && !m.map) throw new Error('Required colormap missing');
-            const color = name === 'platform_small' ? new T.Color(m.name === 'metalRed' ? 0x426272 : m.name === 'metal' ? 0x708695 : 0x344b60) : m.color;
+            const color = m.color;
             let result: T.MeshLambertMaterial | T.ShaderMaterial = new T.MeshLambertMaterial({ color, map: kind === 'amber' ? null : m.map, vertexColors: kind === 'amber' || m.vertexColors, side: ['character-oodi', 'block-grass-low-long', 'rocks'].includes(name) ? T.FrontSide : m.side, transparent: m.transparent, opacity: m.opacity });
             // This exported rig binds every vertex to one bone in channel X.
             // Validate that fact before omitting the three zero-weight fetches;

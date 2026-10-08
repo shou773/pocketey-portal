@@ -1,0 +1,28 @@
+{
+  "base": "http://127.0.0.1:4343",
+  "browser": "151.0.7922.173",
+  "viewport": [
+    390,
+    844
+  ],
+  "method": "Normal start button and ArrowLeft for 370ms; only screenshot-time rAF held at x >= 10. No game-state or camera override.",
+  "state": {
+    "kind": "orbit",
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "mode": "play",
+    "status": "running",
+    "x": "10.092",
+    "y": "0.000",
+    "z": "-1.917",
+    "grounded": "true",
+    "jumps": "0",
+    "geometries": "9"
+  },
+  "errors": []
+}
