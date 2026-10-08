@@ -24,7 +24,7 @@ test('Japanese browser defaults and explicit choice priority',async({browser})=>
 
 test('blocked or corrupt language storage keeps selection and links usable',async({page})=>{
  await page.addInitScript(()=>{Object.defineProperty(Storage.prototype,'getItem',{value(){throw new Error('blocked')}});Object.defineProperty(Storage.prototype,'setItem',{value(){throw new Error('blocked')}});});
- await page.goto('/?lang=ja');await expect(page.locator('html')).toHaveAttribute('lang','ja');await page.getByRole('button',{name:'English',exact:true}).click();await page.locator('.site-header').getByRole('link',{name:'About',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('lang','en');await page.reload();await expect(page.locator('html')).toHaveAttribute('lang','en');
+ await page.goto('/?lang=ja');await expect(page.locator('html')).toHaveAttribute('lang','ja');await page.getByRole('button',{name:'English',exact:true}).click();await page.locator('footer').getByRole('link',{name:'About',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('lang','en');await page.reload();await expect(page.locator('html')).toHaveAttribute('lang','en');
 });
 
 test('retired URLs return 404 and sitemap contains only current pages',async({request,page})=>{
