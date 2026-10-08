@@ -1,4 +1,5 @@
 import {chromium} from '@playwright/test';import fs from 'node:fs/promises';
+await fs.mkdir('test-results/shooter',{recursive:true});
 const launch=()=>chromium.launch({executablePath:process.env.PULSE_BROWSER||(process.env.CI?undefined:'/usr/bin/chromium'),args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const report=[];
 async function play(kind){const browser=await launch();const context=await browser.newContext({viewport:kind==='touch'?{width:390,height:844}:{width:1280,height:900},hasTouch:kind==='touch',isMobile:kind==='touch',deviceScaleFactor:1});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(`http://localhost:4331/games/pulse-drift/?lang=${kind==='touch'?'ja':'en'}`);await page.waitForFunction(()=>document.querySelector('#pulse').dataset.mode==='menu');const cdp=await context.newCDPSession(page);let held=null;

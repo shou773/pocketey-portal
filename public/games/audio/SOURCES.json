@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-08",
+  "license": "CC0 1.0",
+  "author": "Kenney",
+  "packs": [
+    {
+      "name": "sci-fi",
+      "source": "https://kenney.nl/assets/sci-fi-sounds",
+      "archiveSHA256": "119340f351a5098ad814f78719438c0da355a9ce8a4c8a3af6a8d48aa3d49e04",
+      "archiveURL": "https://kenney.nl/media/pages/assets/sci-fi-sounds/6b296f9ecf-1677589334/kenney_sci-fi-sounds.zip"
+    },
+    {
+      "name": "impact",
+      "source": "https://kenney.nl/assets/impact-sounds",
+      "archiveSHA256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8",
+      "archiveURL": "https://kenney.nl/media/pages/assets/impact-sounds/87b4ddecda-1677589768/kenney_impact-sounds.zip"
+    }
+  ],
+  "assets": [
+    {
+      "file": "click.wav",
+      "sourcePack": "impact",
+      "sourceFile": "impactGeneric_light_000.ogg",
+      "originalSHA256": "f0e982611e97512fee5f777986b67e8b435434b601f94992ec044f7e89fb5acb",
+      "sha256": "e531a9ebeb01df133c24843debf9e79ec556ea69ade72b650a279aa54d0181e1",
+      "bytes": 7810,
+      "seconds": 0.16108333333333333,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "jump.wav",
+      "sourcePack": "impact",
+      "sourceFile": "impactSoft_medium_000.ogg",
+      "originalSHA256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+      "sha256": "a2b4dc55644c383a7c9a18b9c0931b3851cc44bea41697e04cc1e7f88e0dfcd9",
+      "bytes": 5604,
+      "seconds": 0.115125,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "land.wav",
+      "sourcePack": "impact",
+      "sourceFile": "footstep_grass_000.ogg",
+      "originalSHA256": "9d49497777405d78d7cf7f2888e28277f3a23192300cfd1d79d54876b20f479f",
+      "sha256": "6ffe88f0f068448bdbf6b8c0a00e323aa5b3f0150821203f57d38034f48ca6b7",
+      "bytes": 37262,
+      "seconds": 0.7746666666666666,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "roll.wav",
+      "sourcePack": "impact",
+      "sourceFile": "impactWood_light_000.ogg",
+      "originalSHA256": "eb45e35b4bed784d3f120de4afec4b0d6ac09d9e143cce8cfcb7d739e1b1f3c3",
+      "sha256": "0e325bc28730ef71fe00eb9fde6e15d184c4181cb36255347639ce6bd90aba31",
+      "bytes": 12688,
+      "seconds": 0.2627083333333333,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "clear.wav",
+      "sourcePack": "impact",
+      "sourceFile": "impactBell_heavy_000.ogg",
+      "originalSHA256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+      "sha256": "4b77356305cdb87d20ee5ad6be51e20f405670aa3cbcb9e1b622645c4a086762",
+      "bytes": 71128,
+      "seconds": 1.4802083333333333,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "shot.wav",
+      "sourcePack": "sci-fi",
+      "sourceFile": "laserSmall_000.ogg",
+      "originalSHA256": "72b589eadd41781257ac859e4f4d030222e623390e4a1a83f6d05329a6e026f1",
+      "sha256": "38729794fb438a8800a5840fc445f274bac27f23793905a60a39a72c1bfd94b2",
+      "bytes": 11420,
+      "seconds": 0.23629166666666668,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "warning.wav",
+      "sourcePack": "sci-fi",
+      "sourceFile": "forceField_000.ogg",
+      "originalSHA256": "c2916f2a062c8ddd1aca2826d134fe90847037db31342726ffb0f9097afe339c",
+      "sha256": "09463732ffd9cbc107caa829493b0f95bd0fa635773b270eefc4bd47113c1457",
+      "bytes": 45870,
+      "seconds": 0.954,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "damage.wav",
+      "sourcePack": "sci-fi",
+      "sourceFile": "impactMetal_000.ogg",
+      "originalSHA256": "956c6612a256aa1a67a2327fffe2454f6b1d82e4c1c2be28fd66916335d5b1d6",
+      "sha256": "51aa6f5c32b927a0597eac57e38b430c66f983b9ada30591510a6f447517ed42",
+      "bytes": 30554,
+      "seconds": 0.6349166666666667,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    },
+    {
+      "file": "death.wav",
+      "sourcePack": "sci-fi",
+      "sourceFile": "explosionCrunch_000.ogg",
+      "originalSHA256": "4b597d658d0ae101f0a030fbeea5fc3a4292ab85f017470a8254a8e7959cbd69",
+      "sha256": "6e97dc713562a68ebe6dd06917a9296db3e41576e1cf0763af8787c59377d1be",
+      "bytes": 37396,
+      "seconds": 0.7774583333333334,
+      "processing": "24kHz mono PCM WAV, 70Hz high-pass/7.5kHz low-pass, peak -12dBFS, 3ms/20ms edge fades"
+    }
+  ]
+}

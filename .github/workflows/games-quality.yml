@@ -108,3 +108,34 @@ jobs:
         with:
           name: portal-evidence
           path: portal-results/
+
+  new-games:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium webkit firefox
+      - run: npx playwright test --config playwright.release.config.ts
+      - run: xvfb-run --auto-servernum env RELEASE_CROSS=1 npx playwright test --config playwright.release.config.ts
+      - run: npx playwright test --config tests/prototypes/ball/playwright.config.ts
+      - name: Pulse Drift ordinary keyboard/touch gameplay and lifecycle
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4331 > /tmp/pulse-preview.log 2>&1 &
+          for i in $(seq 1 30); do curl --silent --fail http://localhost:4331/ > /dev/null && break; sleep 1; done
+          node tests/prototypes/play.mjs
+          node tests/prototypes/ui.mjs
+          node tests/prototypes/loss.mjs
+          node tests/prototypes/performance.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: four-game-audio-evidence
+          path: test-results/

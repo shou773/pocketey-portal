@@ -1,3 +1,4 @@
+import {createGameAudio} from './audio';
 import { cleanSave, createState, DT, SAVE_KEY, stages, step, type Kind } from './model';
 import { createView } from './render';
 import {installLocale,LANGUAGE_EVENT,tr} from '../lib/locale';
@@ -34,16 +35,13 @@ export function boot() {
   let selected = 0, state = createState(kind, 0), mode: 'menu' | 'play' | 'pause' | 'result' | 'reset' | 'recovery' = 'menu';
   let view: ReturnType<typeof createView>;
   try { view = createView($<HTMLCanvasElement>('scene'), kind); } catch { function unavailable(){ $('panel-title').textContent = tr('3D画面を起動できません', '3D could not start'); $('panel-copy').textContent = tr('WebGLに対応したブラウザで開き直してください。', 'Reopen this game in a browser that supports WebGL 2.'); $('reset').hidden = true; $<HTMLButtonElement>('sound').disabled = true;document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b=>{b.disabled=true;}); }unavailable();window.addEventListener(LANGUAGE_EVENT,unavailable);return; }
-  let audio: AudioContext | null = null;
-  function tone(frequency: number, duration = .1) {
-    if (!save.sound) return;
-    try { audio ??= new AudioContext(); void audio.resume(); const osc = audio.createOscillator(), gain = audio.createGain(); osc.frequency.value = frequency; gain.gain.setValueAtTime(.045, audio.currentTime); gain.gain.exponentialRampToValueAtTime(.001, audio.currentTime + duration); osc.connect(gain).connect(audio.destination); osc.start(); osc.stop(audio.currentTime + duration); } catch { /* Audio failure never interrupts play. */ }
-  }
+  const audio=createGameAudio(kind,save.sound,root,enabled=>{save.sound=enabled;persist();soundLabel();});
+  audio.mount($('sound'),pause);
   const keys = new Set<string>(), pointers = new Map<number, string>(); let jumpQueued = false;
   function clearInput() { keys.clear(); pointers.clear(); jumpQueued = false; document.querySelectorAll('.held').forEach(el => el.classList.remove('held')); }
   function axis() { const inputs = [...pointers.values()]; return Number(keys.has('ArrowRight') || keys.has('KeyD') || inputs.includes('right')) - Number(keys.has('ArrowLeft') || keys.has('KeyA') || inputs.includes('left')); }
-  function soundLabel() { $('sound').textContent = save.sound ? tr('音 ON', 'Sound ON') : tr('音 OFF', 'Sound OFF'); $('sound').setAttribute('aria-pressed', String(save.sound)); }
-  $('sound').onclick = () => { save.sound = !save.sound; soundLabel(); persist(); tone(660); };
+  function soundLabel() { $('sound').textContent = audio.enabled() ? tr('音 ON', 'Sound ON') : tr('音 OFF', 'Sound OFF'); $('sound').setAttribute('aria-pressed', String(audio.enabled())); }
+  $('sound').onclick = () => audio.toggle();
   function button(text: string, fn: () => void, primary = false) { const b = document.createElement('button'); if (primary) { b.className = 'primary'; b.append(icon(mode === 'result' && state.status === 'dead' ? 'rotate-ccw' : 'play')); } b.append(document.createTextNode(text)); b.onclick = fn; $('actions').append(b); }
   function stageButtons() {
     $('stages').replaceChildren();
@@ -54,26 +52,26 @@ export function boot() {
   }
   function menu() {
     if (mode === 'recovery') return;
-    mode = 'menu'; panel(title, stageHint(kind,selected)); stageButtons(); $('stages').hidden = false; $('instructions').hidden = false;
+    audio.setPlaying(false);mode = 'menu'; panel(title, stageHint(kind,selected)); stageButtons(); $('stages').hidden = false; $('instructions').hidden = false;
     $('instructions').replaceChildren(icon(kind === 'orbit' ? 'orbit' : 'footprints'), document.createTextNode(kind === 'orbit' ? tr('自動で前進。左右でよけて、JUMPで跳ぼう。', 'Auto-run. Steer left or right. Tap JUMP.') : tr('左右で移動。JUMPは同時押しOK。', 'Move left or right. Hold movement + JUMP.'))); const keyboardHelp = document.createElement('small'); keyboardHelp.className = 'keyboard-help'; keyboardHelp.textContent = tr('PC: A / D・矢印・Space', 'Keyboard: A / D, arrows, Space'); $('instructions').append(keyboardHelp);
     $('reset').hidden = false; button(tr(`ステージ ${selected + 1} をはじめる`,`Start stage ${selected + 1}`), start, true);
   }
-  function start() { if (mode === 'recovery') return; clearInput(); state = createState(kind, selected); view.load(selected); mode = 'play'; $('overlay').hidden = true; $<HTMLButtonElement>('pause').disabled = false; $('pause').textContent = tr('一時停止', 'Pause'); $('hint').textContent = stageHint(kind,selected); accumulator = 0; last = performance.now(); tone(520); }
-  function pause() { if (mode !== 'play') return; mode = 'pause'; renderPause(); }
+  function start() { if (mode === 'recovery') return; clearInput(); state = createState(kind, selected); view.load(selected); mode = 'play'; $('overlay').hidden = true; $<HTMLButtonElement>('pause').disabled = false; $('pause').textContent = tr('一時停止', 'Pause'); $('hint').textContent = stageHint(kind,selected); accumulator = 0; last = performance.now(); audio.setPlaying(true,true);audio.cue('start'); }
+  function pause() { if (mode !== 'play') return; mode = 'pause';audio.setPlaying(false); renderPause(); }
   function renderPause() { panel(tr('ひと休み', 'Take a break'), tr('準備ができたら、同じ場所から。', 'Pick up where you left off when you are ready.')); button(tr('つづける', 'Resume'), resume, true); button(tr('やり直す', 'Restart'), start); button(tr('ステージ選択', 'Choose a stage'), menu); }
-  function resume() { if (mode !== 'pause') return; clearInput(); mode = 'play'; $('overlay').hidden = true; last = performance.now(); accumulator = 0; }
+  function resume() { if (mode !== 'pause') return; clearInput(); mode = 'play'; $('overlay').hidden = true; last = performance.now(); accumulator = 0; audio.setPlaying(true); }
   $('pause').onclick = () => mode === 'pause' ? resume() : pause();
   function finish(announce = true) {
-    mode = 'result';
+    mode = 'result';audio.setPlaying(false);
     if (state.status === 'clear') {
       const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(3, selected + 2)); progress.challengeBest[selected] = Math.min(progress.challengeBest[selected] ?? Infinity, state.time); if (announce) persist();
       panel(selected === 2 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.challengeBest[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.challengeBest[selected]!.toFixed(2)}s`));
-      if (announce) tone(880, .25); if (selected < 2) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
-    } else { panel(tr('もう一度、いこう。', 'One more try.'), tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) tone(170, .2); button(tr('すぐにリトライ', 'Retry now'), start, true); }
+      if (announce) audio.cue('clear'); if (selected < 2) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
+    } else { panel(tr('もう一度、いこう。', 'One more try.'), tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) audio.cue('death'); button(tr('すぐにリトライ', 'Retry now'), start, true); }
     if (state.status === 'clear' && selected < 2) button(tr('もう一度', 'Play again'), start);
     button(tr('ステージ選択', 'Choose a stage'), menu);
   }
-  function renderReset() { mode = 'reset'; panel(tr('記録をリセット？', 'Reset your records?'), tr('Orbit Ribbon と Amber Step のステージ・自己ベスト・音設定だけを消去します。ほかのゲームの記録は残ります。', 'This clears only the stages, personal bests and sound settings for Orbit Ribbon and Amber Step. Other games and your language preference are kept.')); button(tr('キャンセル', 'Cancel'), menu, true); button(tr('この2作品をリセット', 'Reset these two games'), () => { save = cleanSave(null); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); }
+  function renderReset() { mode = 'reset'; panel(tr('記録をリセット？', 'Reset your records?'), tr('Orbit Ribbon と Amber Step のステージ・自己ベスト・音設定だけを消去します。ほかのゲームの記録は残ります。', 'This clears only the stages, personal bests and sound settings for Orbit Ribbon and Amber Step. Other games and your language preference are kept.')); button(tr('キャンセル', 'Cancel'), menu, true); button(tr('この2作品をリセット', 'Reset these two games'), () => { audio.reset(); save = cleanSave(null); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); }
   $('reset').onclick = renderReset;
   document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b => {
     b.addEventListener('pointerdown', e => { e.preventDefault(); if (mode !== 'play') return; b.setPointerCapture(e.pointerId); pointers.set(e.pointerId, b.dataset.input!); b.classList.add('held'); if (b.dataset.input === 'jump') jumpQueued = true; });
@@ -94,7 +92,7 @@ export function boot() {
   function renderRecovery() {
     // Recovery is deliberately latched until a full reload, even if WebGL restores itself.
     // Never advance an invisible run or mutate a save as a side effect of context loss.
-    mode = 'recovery'; accumulator = 0;
+    audio.setPlaying(false);mode = 'recovery'; accumulator = 0;
     panel(tr('画面を再読み込み', 'Reload the game'), tr('3D描画が中断されました。安全に再開するため、ページを再読み込みしてください。今回の途中経過は再開できません。保存済みの記録は変更しません。', '3D rendering stopped. Reload the page to play again. This interrupted run cannot resume. Saved records are unchanged.'));
     $<HTMLButtonElement>('sound').disabled = true;
     document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b => { b.disabled = true; });
@@ -110,7 +108,8 @@ export function boot() {
       accumulator += elapsed;
       while (accumulator >= DT && mode === 'play') {
         const previousJumps = state.jumps, wasGrounded = state.grounded; step(state, { axis: axis(), jump: jumpQueued }); jumpQueued = false; accumulator -= DT;
-        if (state.jumps > previousJumps) tone(440);
+        if (state.jumps > previousJumps) audio.cue('jump');
+        if (!wasGrounded && state.grounded && state.status === 'running') audio.cue('land');
         if (!wasGrounded && state.grounded && state.status === 'running' && !reducedMotion.matches) $('landing-cue').animate([{ opacity: .6, scale: '.6 1' }, { opacity: 0, scale: '1.3 1' }], { duration: 220 });
         if (state.status !== 'running') finish();
       }

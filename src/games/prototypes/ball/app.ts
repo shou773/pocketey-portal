@@ -1,3 +1,4 @@
+import {createGameAudio} from '../../audio';
 import { LANGUAGE_EVENT, installLocale, tr } from '../../../lib/locale';
 import { advance, createState, length, parseSave, SAVE_KEY, STAGES, STEP, type Phase } from './model';
 import { createView } from './render';
@@ -11,39 +12,27 @@ export function boot() {
   let view: ReturnType<typeof createView> | null = null;
   try { view = createView(get<HTMLCanvasElement>('canvas')); } catch { /* A readable fallback replaces the playable menu. */ }
   const pointers = new Map<number, string>(), keys = new Set<string>();
-  let audio: AudioContext | null = null, lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0;
+  let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0;
   function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch { storageOK = false; } }
-  function unlockAudio() {
-    if (save.muted) return;
-    try { audio ??= new AudioContext(); void audio.resume().catch(() => {}); } catch { /* Sound is optional. */ }
-  }
-  function tone(clear: boolean) {
-    if (save.muted || !audio || audio.state !== 'running') return;
-    const now = audio.currentTime;
-    (clear ? [440, 554, 659] : [150, 100]).forEach((frequency, i) => {
-      const osc = audio!.createOscillator(), gain = audio!.createGain(), start = now + i * 0.08;
-      osc.type = 'sine'; osc.frequency.value = frequency; gain.gain.setValueAtTime(0, start); gain.gain.linearRampToValueAtTime(0.09, start + 0.01); gain.gain.exponentialRampToValueAtTime(0.001, start + 0.2);
-      osc.connect(gain); gain.connect(audio!.destination); osc.start(start); osc.stop(start + 0.22);
-    });
-  }
+  const audio=createGameAudio('tilt',!save.muted,root,enabled=>{save.muted=!enabled;persist();renderUI();});audio.mount(get('sound'),pause);
   const controlButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-tt-input]')];
   function held(control: string) { return [...pointers.values()].includes(control) || (control === 'left' ? keys.has('ArrowLeft') || keys.has('KeyA') : control === 'right' ? keys.has('ArrowRight') || keys.has('KeyD') : keys.has('Space') || keys.has('ArrowDown') || keys.has('KeyS')); }
   function reflectControls() { controlButtons.forEach(b => { const on = held(b.dataset.ttInput!); b.classList.toggle('held', on); b.setAttribute('aria-pressed', String(on)); }); }
   function resetInput() { pointers.clear(); keys.clear(); reflectControls(); }
   function start(stage: number) {
     if (!view || document.hidden) return;
-    selected = stage; state = createState(stage); state.phase = 'playing'; lastPhase = 'playing'; accumulator = 0; previous = performance.now(); resetInput(); unlockAudio(); renderUI();
+    selected = stage; state = createState(stage); state.phase = 'playing'; lastPhase = 'playing'; accumulator = 0; previous = performance.now(); resetInput(); audio.setPlaying(true,true);audio.cue('start'); renderUI();
     get<HTMLButtonElement>('pause').focus({ preventScroll: true });
   }
-  function menu() { state = createState(selected); lastPhase = 'ready'; resetInput(); renderUI(); }
-  function pause() { if (state.phase !== 'playing') return; state.phase = 'paused'; resetInput(); accumulator = 0; renderUI(); }
-  function resume() { if (!view || state.phase !== 'paused' || document.hidden) return; state.phase = 'playing'; resetInput(); previous = performance.now(); accumulator = 0; unlockAudio(); renderUI(); get<HTMLButtonElement>('pause').focus({ preventScroll: true }); }
+  function menu() { audio.setPlaying(false);state = createState(selected); lastPhase = 'ready'; resetInput(); renderUI(); }
+  function pause() { if (state.phase !== 'playing') return; state.phase = 'paused';audio.setPlaying(false); resetInput(); accumulator = 0; renderUI(); }
+  function resume() { if (!view || state.phase !== 'paused' || document.hidden) return; state.phase = 'playing'; resetInput(); previous = performance.now(); accumulator = 0; audio.setPlaying(true); renderUI(); get<HTMLButtonElement>('pause').focus({ preventScroll: true }); }
   function action(text: string, callback: () => void, primary = false) {
     const b = document.createElement('button'); b.textContent = text; b.type = 'button'; if (primary) b.className = 'primary'; b.addEventListener('click', callback); get('actions').append(b);
   }
   function renderUI() {
     const phase = state.phase, overlay = get('overlay'); overlay.hidden = phase === 'playing' || phase === 'falling';
-    get('sound').textContent = tr('音 ', 'Sound ') + (save.muted ? 'OFF' : 'ON'); get('sound').setAttribute('aria-pressed', String(!save.muted));
+    get('sound').textContent = tr('音 ', 'Sound ') + (audio.enabled() ? 'ON' : 'OFF'); get('sound').setAttribute('aria-pressed', String(audio.enabled()));
     get<HTMLButtonElement>('pause').disabled = !view || (phase !== 'playing' && phase !== 'paused'); get('pause').textContent = view && phase === 'paused' ? tr('再開', 'Resume') : tr('一時停止', 'Pause');
     get('back').textContent = tr('ゲーム一覧へ', 'All games'); get('control-note').textContent = tr('左右で転がす\n減速：長押し', 'STEER ← → / A D\nBRAKE: HOLD / SPACE');
     controlButtons.forEach(b => { const type = b.dataset.ttInput!; b.disabled = phase !== 'playing'; b.setAttribute('aria-label', type === 'left' ? tr('左に転がす', 'Steer left') : type === 'right' ? tr('右に転がす', 'Steer right') : tr('長押しで減速', 'Hold to brake')); if (type === 'brake') b.textContent = tr('ブレーキ', 'BRAKE'); });
@@ -75,7 +64,7 @@ export function boot() {
   function hud() {
     root.dataset.phase = state.phase; root.dataset.stage = String(state.stage); root.dataset.x = state.x.toFixed(4); root.dataset.z = state.z.toFixed(4); root.dataset.vx = state.vx.toFixed(4); root.dataset.time = state.time.toFixed(4); root.dataset.speed = state.speed.toFixed(4);
     root.dataset.drawCalls = String(view?.renderer.info.render.calls ?? 0); root.dataset.triangles = String(view?.renderer.info.render.triangles ?? 0);
-    root.dataset.audio = audio?.state ?? 'off';
+    root.dataset.audio = audio.status().context;
     get('stage').textContent = `0${state.stage + 1} / 03`; get('name').textContent = tr(...STAGES[state.stage].name); get('time').textContent = state.time.toFixed(2);
     get('speed').textContent = `${tr('速度', 'SPEED')} ${state.speed.toFixed(1)} m/s`;
     get<HTMLProgressElement>('progress').value = Math.min(1, state.z / length(state.stage));
@@ -83,13 +72,13 @@ export function boot() {
     get('hint').textContent = state.phase === 'falling' ? tr('道の外へ！', 'Over the edge!') : held('brake') ? tr('減速中 · 左右で進路を合わせよう', 'BRAKING · Line up your next turn') : tr(...STAGES[state.stage].hint);
   }
   controlButtons.forEach(b => {
-    b.addEventListener('pointerdown', e => { if (state.phase !== 'playing') return; e.preventDefault(); pointers.set(e.pointerId, b.dataset.ttInput!); b.setPointerCapture(e.pointerId); unlockAudio(); reflectControls(); });
+    b.addEventListener('pointerdown', e => { if (state.phase !== 'playing') return; e.preventDefault(); pointers.set(e.pointerId, b.dataset.ttInput!); b.setPointerCapture(e.pointerId); audio.unlock(); reflectControls(); });
     const release = (e: PointerEvent) => { pointers.delete(e.pointerId); reflectControls(); };
     b.addEventListener('pointerup', release); b.addEventListener('pointercancel', release); b.addEventListener('lostpointercapture', release); b.addEventListener('contextmenu', e => e.preventDefault());
   });
   function keydown(e: KeyboardEvent) {
     if (e.target instanceof HTMLButtonElement && (e.code === 'Space' || e.code === 'Enter')) return;
-    if (['ArrowLeft','ArrowRight','ArrowDown','KeyA','KeyD','Space','KeyS'].includes(e.code) && state.phase === 'playing') { e.preventDefault(); keys.add(e.code); unlockAudio(); reflectControls(); }
+    if (['ArrowLeft','ArrowRight','ArrowDown','KeyA','KeyD','Space','KeyS'].includes(e.code) && state.phase === 'playing') { e.preventDefault(); keys.add(e.code); audio.unlock(); reflectControls(); }
     if (!e.repeat && (e.code === 'Escape' || e.code === 'KeyP')) { if (state.phase === 'paused') resume(); else pause(); }
   }
   // Space remains a brake while the pause button has focus after starting.
@@ -97,8 +86,8 @@ export function boot() {
   function keyup(e: KeyboardEvent) { keys.delete(e.code); reflectControls(); }
   window.addEventListener('keydown', keydown); window.addEventListener('keyup', keyup);
   get('pause').addEventListener('click', () => state.phase === 'paused' ? resume() : pause());
-  get('sound').addEventListener('click', () => { save.muted = !save.muted; unlockAudio(); persist(); renderUI(); if (!save.muted) tone(true); });
-  function visibility() { if (document.hidden) { if (state.phase === 'playing') pause(); resetInput(); previous = 0; accumulator = 0; void audio?.suspend().catch(() => {}); } }
+  get('sound').addEventListener('click', () => audio.toggle());
+  function visibility() { if (document.hidden) { if (state.phase === 'playing') pause(); resetInput(); previous = 0; accumulator = 0; audio.setPlaying(false); } }
   function blur() { pause(); resetInput(); }
   document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener(LANGUAGE_EVENT, renderUI);
   get('canvas').addEventListener('webglcontextlost', e => {
@@ -106,18 +95,19 @@ export function boot() {
     // Freeze both ordinary play and an in-flight fall before releasing WebGL.
     if (state.phase === 'playing' || state.phase === 'falling') state.phase = 'paused';
     resetInput(); accumulator = 0; lastPhase = state.phase;
-    view?.dispose(); view = null; renderUI();
+    audio.setPlaying(false);view?.dispose(); view = null; renderUI();
   });
   function frame(now: number) {
     const elapsed = previous ? Math.max(0, Math.min(0.1, (now - previous) / 1000)) : 0; previous = now;
     if (!document.hidden) {
       if (state.phase === 'playing' || state.phase === 'falling') {
+        if(state.phase==='playing'&&held('brake'))audio.cue('brake');
         accumulator += elapsed;
         while (accumulator >= STEP) { advance(state, { steer: Number(held('right')) - Number(held('left')), brake: held('brake') }); accumulator -= STEP; }
       } else accumulator = 0;
       if (state.phase !== lastPhase) {
-        if (state.phase === 'falling') { resetInput(); tone(false); }
-        if (state.phase === 'clear') { const best = save.best[state.stage]; if (best === null || state.time < best) save.best[state.stage] = state.time; persist(); resetInput(); tone(true); }
+        if (state.phase === 'falling') { audio.setPlaying(false);resetInput(); audio.cue('death'); }
+        if (state.phase === 'clear') { const best = save.best[state.stage]; if (best === null || state.time < best) save.best[state.stage] = state.time; persist(); audio.setPlaying(false);resetInput(); audio.cue('clear'); }
         lastPhase = state.phase; renderUI();
       }
       if (now - lastHUD > 60) { hud(); lastHUD = now; }
@@ -128,5 +118,5 @@ export function boot() {
   renderUI(); raf = requestAnimationFrame(frame);
   window.addEventListener('pagehide', () => { resetInput(); pause(); }, { once: false });
   // Normal page navigation releases WebGL and audio resources; bfcache can resume.
-  window.addEventListener('pagehide', e => { if (!e.persisted) { cancelAnimationFrame(raf); view?.dispose(); void audio?.close().catch(() => {}); } });
+  window.addEventListener('pagehide', e => { if (!e.persisted) { cancelAnimationFrame(raf); view?.dispose(); audio.dispose(); } });
 }
