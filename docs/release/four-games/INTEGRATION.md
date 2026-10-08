@@ -19,3 +19,9 @@ portal captures at 320/390/1280px in both languages.
 The four-game music/SFX implementation is now populated. See AUDIO.md for
 source/codec/mix records. Exact-candidate CI and independent parent review remain
 required before merging or deploying.
+
+Final generated-output audit also found missing OG tags on the two existing
+ActionGame routes. Both now use the same GameMeta component as the new games,
+including JA/EN title/description and canonical/OG image/URL. All four preview
+files exist, all four canonicals occur in the sitemap, and only the two prototype
+redirect outputs contain refresh tags. No game render, save or physics changed.
