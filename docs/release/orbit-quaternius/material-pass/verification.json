@@ -1,0 +1,59 @@
+{
+  "geometryBufferIdentical": true,
+  "reports": [
+    {
+      "file": "pbr2048.glb",
+      "bytes": 3689524,
+      "sha256": "5f9e3b0cf30c74d7efbc83c68c4a144674e51620a39045f323263f5f07b1cb6b",
+      "imageSize": [
+        2048,
+        2048
+      ],
+      "imageBytes": 3609657,
+      "geometryBufferHashes": [
+        "41fd802d06d78141ae85a81d9372003163390c570ae418fbf461e648f0f17ccb",
+        "f5891608f87620373dd0fe09af05028ac56db12f6a2c8587e59f175e3c656425",
+        "bf952853a7f5af3cca0b9261cc9377f54497217dff46db524b5b4158d0f98508",
+        "b9703b3122e9b70f02e2e305918d643e0151535fd8016402263644bba1b4c8f4"
+      ],
+      "sourceMaterial": {
+        "doubleSided": true,
+        "name": "Texture",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0
+        }
+      }
+    },
+    {
+      "file": "challenger.glb",
+      "bytes": 485248,
+      "sha256": "f98fa48dea5f8b82cc40c547bfb48cce242c9c894c2833815a9040999b762c71",
+      "imageSize": [
+        512,
+        512
+      ],
+      "imageBytes": 405385,
+      "geometryBufferHashes": [
+        "41fd802d06d78141ae85a81d9372003163390c570ae418fbf461e648f0f17ccb",
+        "f5891608f87620373dd0fe09af05028ac56db12f6a2c8587e59f175e3c656425",
+        "bf952853a7f5af3cca0b9261cc9377f54497217dff46db524b5b4158d0f98508",
+        "b9703b3122e9b70f02e2e305918d643e0151535fd8016402263644bba1b4c8f4"
+      ],
+      "sourceMaterial": {
+        "doubleSided": true,
+        "name": "Texture",
+        "pbrMetallicRoughness": {
+          "baseColorTexture": {
+            "index": 0
+          },
+          "metallicFactor": 0,
+          "roughnessFactor": 0
+        }
+      }
+    }
+  ]
+}
