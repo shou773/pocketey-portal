@@ -12,7 +12,7 @@ const games=[
 <section class="container shelf" aria-labelledby="games-title" id="games">
  <div class="shelf-heading"><h1 id="games-title"><T ja="ゲーム" en="Games"/></h1><p><T ja="4つのオリジナルゲーム" en="4 original games"/></p></div>
  <div class="game-grid">{games.map(g=><article class={`game-card ${g.kind}`}>
-  <a class="preview" href={`/games/${g.slug}/`} aria-label={g.name}><img src={`/games/covers/${g.slug}.png`} width="1200" height="720" loading="eager" alt={`${g.name} — composed cover using the game’s models`} data-alt-ja={`${g.name} — ゲームのモデルで構成した紹介画像`} data-alt-en={`${g.name} — composed cover using the game’s models`}/></a>
+  <a class="preview" href={`/games/${g.slug}/`} aria-label={g.name}><img src={`/games/covers/${g.slug}.png`} width="1200" height="720" loading="eager" alt={`${g.name} — composed cover using the game’s models`} data-alt-ja={`${g.name} — ゲームのモデルで構成した紹介画像`} data-alt-en={`${g.name} — composed cover using the game’s models`}/><img class="cover-title" src={`/games/covers/titles/${g.slug}.svg`} width="220" height="125" alt="" aria-hidden="true"/></a>
   <div class="card-caption"><h2><a href={`/games/${g.slug}/`}>{g.name}</a></h2><a class="play-link" href={`/games/${g.slug}/`}><T ja="遊ぶ" en="Play"/><ArrowUpRight/><span class="sr-only"> {g.name}</span></a></div>
  </article>)}</div>
  <div class="shelf-note"><p><T ja="スマホでも、キーボードでも。ダウンロード・アカウント不要。" en="Touch or keyboard. No download. No account."/></p><a href="#portal-help"><T ja="遊び方・対応環境" en="Controls & devices"/><ArrowUpRight/></a></div>
@@ -24,6 +24,19 @@ const games=[
 </div>
 <script>document.querySelector('.shelf-note a')?.addEventListener('click',()=>{const help=document.querySelector<HTMLDetailsElement>('#portal-help');if(help)help.open=true;});</script>
 <style>
+.preview .cover-title {
+  position: absolute;
+  top: 8%;
+  left: 10%;
+  width: 48%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+.amber .preview .cover-title { top: 7%; left: 7%; width: 51%; }
+.pulse .preview .cover-title { top: 8%; left: 9%; width: 48%; }
+.tilt .preview .cover-title { top: 8%; left: 11%; width: 46%; }
+
 .shelf {
   padding-top: 12px;
 }
@@ -62,6 +75,7 @@ const games=[
   transform: translateY(-3px);
 }
 .preview {
+  position: relative;
   display: block;
   aspect-ratio: 5/3;
   overflow: hidden;

@@ -1,0 +1,218 @@
+[
+  {
+    "width": 1440,
+    "height": 900,
+    "lang": "ja",
+    "overflow": false,
+    "cards": [
+      {
+        "name": "Orbit Ribbon",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 111.09375
+      },
+      {
+        "name": "Amber Step",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 111.09375
+      },
+      {
+        "name": "Pulse Drift",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 501.6875
+      },
+      {
+        "name": "TiltTrail",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 501.6875
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "height": 900,
+    "lang": "en",
+    "overflow": false,
+    "cards": [
+      {
+        "name": "Orbit Ribbon",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 111.09375
+      },
+      {
+        "name": "Amber Step",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 111.09375
+      },
+      {
+        "name": "Pulse Drift",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 501.6875
+      },
+      {
+        "name": "TiltTrail",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 501.6875
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "lang": "ja",
+    "overflow": false,
+    "cards": [
+      {
+        "name": "Orbit Ribbon",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Amber Step",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Pulse Drift",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 298
+      },
+      {
+        "name": "TiltTrail",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 298
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "lang": "en",
+    "overflow": false,
+    "cards": [
+      {
+        "name": "Orbit Ribbon",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Amber Step",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Pulse Drift",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 298
+      },
+      {
+        "name": "TiltTrail",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 298
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "lang": "ja",
+    "overflow": false,
+    "cards": [
+      {
+        "name": "Orbit Ribbon",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Amber Step",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Pulse Drift",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 290.5
+      },
+      {
+        "name": "TiltTrail",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 290.5
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "lang": "en",
+    "overflow": false,
+    "cards": [
+      {
+        "name": "Orbit Ribbon",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Amber Step",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 102.5
+      },
+      {
+        "name": "Pulse Drift",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 290.5
+      },
+      {
+        "name": "TiltTrail",
+        "visible": true,
+        "titleLoaded": true,
+        "titleContained": true,
+        "firstImageTop": 290.5
+      }
+    ]
+  }
+]

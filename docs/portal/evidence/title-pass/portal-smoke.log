@@ -1,0 +1,20 @@
+
+> pocketey-japan@0.1.0 test:portal
+> playwright test --config playwright.portal.config.ts --grep all four games|keyboard navigation|portal text|English default
+
+
+Running 4 tests using 1 worker
+
+(node:14414) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/portal/design.spec.ts:4:1 › all four games stay directly reachable at narrow and wide widths in both languages (10.9s)
+  ✓  2 tests/portal/design.spec.ts:42:1 › keyboard navigation exposes focus and activates a game while preserving language (1.8s)
+  ✓  3 tests/portal/design.spec.ts:62:1 › portal text and play buttons meet WCAG AA contrast (541ms)
+  ✓  4 tests/portal/portal.spec.ts:8:1 › English default, Japanese selection, navigation and reload retention (5.0s)
+
+  4 passed (20.0s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

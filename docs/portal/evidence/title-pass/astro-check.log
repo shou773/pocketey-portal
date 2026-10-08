@@ -1,0 +1,46 @@
+
+> pocketey-japan@0.1.0 check
+> astro check
+
+08:07:01 [content] Syncing content
+08:07:01 [content] Synced content
+08:07:02 [types] Generated 67ms
+08:07:02 [check] Getting diagnostics for Astro files in /workspace/pocketey-portal...
+[96mdocs/games/evidence/performance-investigation/local-dpr-diagnostic.mjs[0m:[93m18[0m:[93m106[0m - [93mwarning[0m[90m ts(80007): [0m'await' has no effect on the type of this expression.
+
+[7m18[0m await b.close();fs.writeFileSync(process.argv[2]||'/tmp/pocketey-diagnosis.json',JSON.stringify({browser:await b.version(),results},null,2));
+[7m  [0m [93m                                                                                                         ~~~~~~~~~~~~~~~~~[0m
+
+[96mdocs/games/evidence/ui-refresh/local-initial/effects-probe.mjs[0m:[93m2[0m:[93m124[0m - [93mwarning[0m[90m ts(6133): [0m'css' is declared but its value is never read.
+
+[7m2[0m const oldRoot='/tmp/pocketey-before-lighting';const h=fs.readFileSync(oldRoot+'/games/amber-step/index.html','utf8');const css=fs.readFileSync(oldRoot+h.match(/href="([^"]+\.css)"/)[1],'utf8');
+[7m [0m [93m                                                                                                                           ~~~[0m
+
+[96mscripts/capture-new-game-depth.mjs[0m:[93m9[0m:[93m47[0m - [93mwarning[0m[90m ts(6133): [0m'phase' is declared but its value is never read.
+
+[7m9[0m  const result=await page.evaluate(async({game,phase})=>{
+[7m [0m [93m                                              ~~~~~[0m
+
+[96mtests/games/browser.spec.ts[0m:[93m2[0m:[93m33[0m - [93mwarning[0m[90m ts(6133): [0m'Kind' is declared but its value is never read.
+
+[7m2[0m import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
+[7m [0m [93m                                ~~~~[0m
+[96mtests/games/browser.spec.ts[0m:[93m2[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'stages' is declared but its value is never read.
+
+[7m2[0m import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
+[7m [0m [93m         ~~~~~~[0m
+[96mtests/games/browser.spec.ts[0m:[93m1[0m:[93m26[0m - [93mwarning[0m[90m ts(6133): [0m'Page' is declared but its value is never read.
+
+[7m1[0m import {test,expect,type Page} from '@playwright/test';
+[7m [0m [93m                         ~~~~[0m
+
+Result (73 files):
+- 0 errors
+- 0 warnings
+- 6 hints
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

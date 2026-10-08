@@ -1,0 +1,656 @@
+[
+  {
+    "name": "orbit",
+    "camera": [
+      -2.7,
+      2.5,
+      -7.9
+    ],
+    "fov": 42,
+    "objects": [
+      {
+        "index": 0,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          -0.44999999999999996,
+          5.4,
+          -2.4000000000000004
+        ]
+      },
+      {
+        "index": 1,
+        "type": "HemisphereLight",
+        "children": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "type": "DirectionalLight",
+        "children": 0,
+        "position": [
+          -8,
+          15,
+          5
+        ]
+      },
+      {
+        "index": 3,
+        "type": "Group",
+        "children": 2,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 4,
+        "type": "Group",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 5,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          -1.5,
+          0,
+          -12
+        ]
+      },
+      {
+        "index": 6,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          8,
+          10.5,
+          -88
+        ]
+      },
+      {
+        "index": 7,
+        "type": "Group",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 8,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          -1.5,
+          0.045,
+          -12
+        ]
+      },
+      {
+        "index": 9,
+        "type": "Points",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          -12
+        ]
+      }
+    ],
+    "state": {
+      "kind": "orbit",
+      "stage": 0,
+      "x": 12,
+      "z": -1.5,
+      "y": 0,
+      "vy": 0,
+      "time": 1.7,
+      "grounded": true,
+      "coyote": 0.1,
+      "buffer": 0,
+      "status": "running",
+      "jumps": 0
+    },
+    "errors": []
+  },
+  {
+    "name": "amber",
+    "camera": [
+      11.6,
+      3.1,
+      5.6
+    ],
+    "fov": 38,
+    "objects": [
+      {
+        "index": 0,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          14.3,
+          5.6,
+          12
+        ]
+      },
+      {
+        "index": 1,
+        "type": "HemisphereLight",
+        "children": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "type": "DirectionalLight",
+        "children": 0,
+        "position": [
+          -8,
+          15,
+          5
+        ]
+      },
+      {
+        "index": 3,
+        "type": "Group",
+        "children": 3,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 4,
+        "type": "Group",
+        "children": 0,
+        "position": [
+          4.995,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 5,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          11.1,
+          1.45,
+          0
+        ]
+      },
+      {
+        "index": 6,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          21.1,
+          9,
+          -28
+        ]
+      },
+      {
+        "index": 7,
+        "type": "Group",
+        "children": 2,
+        "position": [
+          2.775,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 8,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          11.1,
+          0.045,
+          0
+        ]
+      }
+    ],
+    "state": {
+      "kind": "amber",
+      "stage": 0,
+      "x": 11.1,
+      "z": 0,
+      "y": 1.45,
+      "vy": 2,
+      "time": 2.2,
+      "grounded": false,
+      "coyote": 0.1,
+      "buffer": 0,
+      "status": "running",
+      "jumps": 0
+    },
+    "errors": []
+  },
+  {
+    "name": "tilt",
+    "camera": [
+      -3.3998518518518517,
+      2.5,
+      -14.2
+    ],
+    "fov": 40,
+    "objects": [
+      {
+        "index": 0,
+        "type": "HemisphereLight",
+        "children": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "index": 1,
+        "type": "DirectionalLight",
+        "children": 0,
+        "position": [
+          -6,
+          14,
+          8
+        ]
+      },
+      {
+        "index": 2,
+        "type": "Group",
+        "children": 2,
+        "position": [
+          -1.0998518518518519,
+          0.38,
+          -18
+        ]
+      },
+      {
+        "index": 3,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          -1.0998518518518519,
+          0.025,
+          -18
+        ]
+      },
+      {
+        "index": 4,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          -1.0998518518518519,
+          0.035,
+          -18
+        ]
+      },
+      {
+        "index": 5,
+        "type": "Group",
+        "children": 8,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "state": {
+      "stage": 0,
+      "phase": "playing",
+      "x": -1.0998518518518519,
+      "z": 18,
+      "y": 0.38,
+      "vx": 0,
+      "speed": 0,
+      "vy": 0,
+      "time": 3,
+      "fallTime": 0
+    },
+    "errors": []
+  },
+  {
+    "name": "pulse",
+    "camera": [
+      -2.5,
+      6,
+      2
+    ],
+    "fov": 32,
+    "objects": [
+      {
+        "index": 0,
+        "type": "HemisphereLight",
+        "children": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "index": 1,
+        "type": "DirectionalLight",
+        "children": 0,
+        "position": [
+          -4,
+          10,
+          4
+        ]
+      },
+      {
+        "index": 2,
+        "type": "Mesh",
+        "children": 1,
+        "position": [
+          0,
+          0.4,
+          -3.6
+        ]
+      },
+      {
+        "index": 3,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0.45,
+          -3.6
+        ]
+      },
+      {
+        "index": 4,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          -0.88,
+          -8
+        ]
+      },
+      {
+        "index": 5,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 6,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 7,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 8,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 9,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 10,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 11,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 12,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 13,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          3.3879513524411795,
+          0.45,
+          -1.999999999999958
+        ]
+      },
+      {
+        "index": 14,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          -3.5,
+          0.45,
+          -4.270833333333302
+        ]
+      },
+      {
+        "index": 15,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          1.1451629582912315,
+          0.45,
+          -6.541666666666603
+        ]
+      },
+      {
+        "index": 16,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          -0.9233370614479003,
+          0.45,
+          -8.812499999999938
+        ]
+      }
+    ],
+    "state": {
+      "stage": 1,
+      "time": 10.000000000000076,
+      "x": 0,
+      "y": 3.6,
+      "hp": 1,
+      "invulnerable": 0,
+      "status": "playing",
+      "score": 100,
+      "enemies": [
+        {
+          "id": 19,
+          "x": 3.3879513524411795,
+          "y": 1.999999999999958,
+          "vx": 0.1891058070538489,
+          "vy": -1.25,
+          "r": 0.44,
+          "hp": 3,
+          "shot": 0.13333333333333586,
+          "kind": "scout"
+        },
+        {
+          "id": 32,
+          "x": -3.5,
+          "y": 4.270833333333302,
+          "vx": -0.14565139279149983,
+          "vy": -1.25,
+          "r": 0.44,
+          "hp": 3,
+          "shot": 1.9500000000000006,
+          "kind": "scout"
+        },
+        {
+          "id": 46,
+          "x": 1.1451629582912315,
+          "y": 6.541666666666603,
+          "vx": -0.3464973738101559,
+          "vy": -1.25,
+          "r": 0.44,
+          "hp": 3,
+          "shot": 1.6500000000000017,
+          "kind": "fan"
+        },
+        {
+          "id": 63,
+          "x": -0.9233370614479003,
+          "y": 8.812499999999938,
+          "vx": -0.22877526730226416,
+          "vy": -1.25,
+          "r": 0.44,
+          "hp": 2,
+          "shot": 1.3500000000000028,
+          "kind": "scout"
+        }
+      ],
+      "bullets": [
+        {
+          "id": 53,
+          "x": -2.2021442106202964,
+          "y": 3.4153418527640813,
+          "vx": -1.6399937142029382,
+          "vy": -2.4521257344138885,
+          "r": 0.16
+        },
+        {
+          "id": 55,
+          "x": 1.657570113743828,
+          "y": 2.138494244372427,
+          "vx": -0.14591074993296024,
+          "vy": -2.9463893247590347,
+          "r": 0.16
+        },
+        {
+          "id": 70,
+          "x": -0.4773395104350192,
+          "y": 7.505043003779838,
+          "vx": 0.35793404417763236,
+          "vy": -2.9282047776784066,
+          "r": 0.16
+        },
+        {
+          "id": 73,
+          "x": 0.4950220851431042,
+          "y": 5.988160024907911,
+          "vx": -1.7272814814914919,
+          "vy": -2.3914428037685864,
+          "r": 0.16
+        },
+        {
+          "id": 74,
+          "x": 0.8218991412928491,
+          "y": 5.8135891519972365,
+          "vx": -1.0268306468848973,
+          "vy": -2.7655232457200474,
+          "r": 0.16
+        },
+        {
+          "id": 75,
+          "x": 1.183497274435219,
+          "y": 5.732531212140179,
+          "vx": -0.25197750443695727,
+          "vy": -2.939218831128047,
+          "r": 0.16
+        },
+        {
+          "id": 78,
+          "x": -3.022483038921683,
+          "y": 4.341227983354574,
+          "vx": 2.8651017664699046,
+          "vy": -0.7026320998723534,
+          "r": 0.16
+        }
+      ],
+      "shots": [
+        {
+          "id": 72,
+          "x": 0,
+          "y": 11.5,
+          "vx": 0,
+          "vy": 15,
+          "r": 0.12
+        },
+        {
+          "id": 76,
+          "x": 0,
+          "y": 9,
+          "vx": 0,
+          "vy": 15,
+          "r": 0.12
+        },
+        {
+          "id": 77,
+          "x": 0,
+          "y": 6.5,
+          "vx": 0,
+          "vy": 15,
+          "r": 0.12
+        }
+      ],
+      "beams": [],
+      "nextId": 79,
+      "spawn": 0.0666666666666681,
+      "fire": 0.01000000000000003,
+      "bossSpawned": false,
+      "hit": 0
+    },
+    "errors": []
+  }
+]

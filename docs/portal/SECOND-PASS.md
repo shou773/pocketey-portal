@@ -1,5 +1,7 @@
 # Second portal proposal: a shelf of four game covers
 
+Latest visual refinement: [original cover titles and stronger protagonist composition](TITLE-PASS.md). The images below record the earlier ff1f191 proposal for comparison.
+
 Base: `8714b3f7724df370326a45a615ca98e21f5607da`. Branch: `design/arcade-second-pass`. Draft visual review only; merge and deployment are not authorized yet.
 
 The published first proposal gave text and repeated controls priority over game images. At 1440px the first image began at y398; at 390px Japanese it began at y462. Three desktop thumbnails were only 239px wide, while the four games appeared three times as pills, image cards and description cards. The screenshots reduced already small player models and included HUD text in TiltTrail. The second proposal addresses composition before further CSS polish.
