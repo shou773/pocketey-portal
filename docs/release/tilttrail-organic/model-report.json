@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Wind-carved hanging rock",
+    "triangles": 140,
+    "vertices": 72,
+    "nonManifoldEdges": 0,
+    "connectedComponents": 1,
+    "bounds": [
+      [
+        -4.2912445068359375,
+        4.167660713195801
+      ],
+      [
+        -5.050000190734863,
+        1.2999999523162842
+      ],
+      [
+        -3.466224193572998,
+        2.6761415004730225
+      ]
+    ],
+    "bytes": 4664
+  },
+  {
+    "name": "Rooted observatory rock",
+    "triangles": 320,
+    "vertices": 160,
+    "nonManifoldEdges": 0,
+    "connectedComponents": 1,
+    "bounds": [
+      [
+        -4.244568347930908,
+        4.13458776473999
+      ],
+      [
+        -5.020393371582031,
+        3.3591156005859375
+      ],
+      [
+        -3.391817569732666,
+        2.665755271911621
+      ]
+    ],
+    "bytes": 8912
+  }
+]

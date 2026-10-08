@@ -1,0 +1,823 @@
+{
+  "end": {
+    "phase": "falling",
+    "stage": 1,
+    "x": -3.0971,
+    "z": 48.1352,
+    "vx": -2.0793,
+    "speed": 3.4728,
+    "time": 12.6833
+  },
+  "samples": [
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 0.0468,
+      "vx": 0,
+      "speed": 1.207,
+      "time": 0.0667,
+      "observedAt": 1791467073541
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 0.4419,
+      "vx": 0,
+      "speed": 3.237,
+      "time": 0.2333,
+      "observedAt": 1791467073803
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 0.4419,
+      "vx": 0,
+      "speed": 3.237,
+      "time": 0.2333,
+      "observedAt": 1791467073960
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 0.8088,
+      "vx": 0,
+      "speed": 3.9939,
+      "time": 0.3333,
+      "observedAt": 1791467074033
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 1.5507,
+      "vx": 0,
+      "speed": 4.7921,
+      "time": 0.5,
+      "observedAt": 1791467074170
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 2.0469,
+      "vx": 0,
+      "speed": 5.0898,
+      "time": 0.6,
+      "observedAt": 1791467074284
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 2.0469,
+      "vx": 0,
+      "speed": 5.0898,
+      "time": 0.6,
+      "observedAt": 1791467074355
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 2.5678,
+      "vx": 0,
+      "speed": 5.2995,
+      "time": 0.7,
+      "observedAt": 1791467074440
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 3.5644,
+      "vx": 0,
+      "speed": 5.5365,
+      "time": 0.8833,
+      "observedAt": 1791467074586
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 4.1225,
+      "vx": 0,
+      "speed": 5.6143,
+      "time": 0.9833,
+      "observedAt": 1791467074772
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 4.6871,
+      "vx": 0,
+      "speed": 5.6692,
+      "time": 1.0833,
+      "observedAt": 1791467074873
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 5.2562,
+      "vx": 0,
+      "speed": 5.7078,
+      "time": 1.1833,
+      "observedAt": 1791467074948
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 5.2562,
+      "vx": 0,
+      "speed": 5.7078,
+      "time": 1.1833,
+      "observedAt": 1791467075022
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 6.4991,
+      "vx": 0,
+      "speed": 5.7568,
+      "time": 1.4,
+      "observedAt": 1791467075161
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 6.9793,
+      "vx": 0,
+      "speed": 5.7677,
+      "time": 1.4833,
+      "observedAt": 1791467075236
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 7.3641,
+      "vx": 0,
+      "speed": 5.7745,
+      "time": 1.55,
+      "observedAt": 1791467075322
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 7.942,
+      "vx": 0,
+      "speed": 5.782,
+      "time": 1.65,
+      "observedAt": 1791467075399
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 7.942,
+      "vx": 0,
+      "speed": 5.782,
+      "time": 1.65,
+      "observedAt": 1791467075470
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 7.942,
+      "vx": 0,
+      "speed": 5.782,
+      "time": 1.65,
+      "observedAt": 1791467075550
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0,
+      "z": 8.5205,
+      "vx": 0,
+      "speed": 5.7873,
+      "time": 1.75,
+      "observedAt": 1791467075628
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.018,
+      "z": 9.5821,
+      "vx": 0.6066,
+      "speed": 5.7933,
+      "time": 1.9333,
+      "observedAt": 1791467075814
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.1084,
+      "z": 10.065,
+      "vx": 1.4465,
+      "speed": 5.795,
+      "time": 2.0167,
+      "observedAt": 1791467075888
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.7225,
+      "z": 11.6108,
+      "vx": 2.3374,
+      "speed": 5.798,
+      "time": 2.2833,
+      "observedAt": 1791467076190
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.0459,
+      "z": 12.7705,
+      "vx": 0.5446,
+      "speed": 5.799,
+      "time": 2.4833,
+      "observedAt": 1791467076394
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.775,
+      "z": 14.897,
+      "vx": -0.0033,
+      "speed": 5.7997,
+      "time": 2.85,
+      "observedAt": 1791467076735
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.8052,
+      "z": 15.2836,
+      "vx": 0.7878,
+      "speed": 5.7998,
+      "time": 2.9167,
+      "observedAt": 1791467076812
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.9372,
+      "z": 15.8636,
+      "vx": 1.7293,
+      "speed": 5.7998,
+      "time": 3.0167,
+      "observedAt": 1791467076905
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.9372,
+      "z": 15.8636,
+      "vx": 1.7293,
+      "speed": 5.7998,
+      "time": 3.0167,
+      "observedAt": 1791467077056
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.1923,
+      "z": 16.5403,
+      "vx": 2.5412,
+      "speed": 5.7999,
+      "time": 3.1333,
+      "observedAt": 1791467077160
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 2.5951,
+      "z": 19.2623,
+      "vx": 2.9513,
+      "speed": 4.5763,
+      "time": 3.6167,
+      "observedAt": 1791467077874
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.5666,
+      "z": 20.3954,
+      "vx": 2.1722,
+      "speed": 3.491,
+      "time": 3.9167,
+      "observedAt": 1791467078236
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.5666,
+      "z": 20.3954,
+      "vx": 2.1722,
+      "speed": 3.491,
+      "time": 3.9167,
+      "observedAt": 1791467078331
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.6898,
+      "z": 20.7219,
+      "vx": 0.5078,
+      "speed": 3.095,
+      "time": 4.0167,
+      "observedAt": 1791467078449
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.6899,
+      "z": 20.9206,
+      "vx": -0.3692,
+      "speed": 2.8983,
+      "time": 4.0833,
+      "observedAt": 1791467078534
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.6169,
+      "z": 21.1531,
+      "vx": -1.2586,
+      "speed": 2.709,
+      "time": 4.1667,
+      "observedAt": 1791467078677
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.231,
+      "z": 21.6918,
+      "vx": -1.9192,
+      "speed": 3.1872,
+      "time": 4.3667,
+      "observedAt": 1791467079023
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.1337,
+      "z": 22.2989,
+      "vx": 0.7679,
+      "speed": 2.7739,
+      "time": 4.5667,
+      "observedAt": 1791467079120
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.2639,
+      "z": 22.5658,
+      "vx": 1.7142,
+      "speed": 2.5897,
+      "time": 4.6667,
+      "observedAt": 1791467079212
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.4798,
+      "z": 23.0208,
+      "vx": 0.2259,
+      "speed": 2.6786,
+      "time": 4.8333,
+      "observedAt": 1791467079395
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.4505,
+      "z": 23.2376,
+      "vx": -0.7873,
+      "speed": 2.5449,
+      "time": 4.9167,
+      "observedAt": 1791467079537
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.2049,
+      "z": 23.66,
+      "vx": -1.4069,
+      "speed": 2.7495,
+      "time": 5.0833,
+      "observedAt": 1791467079799
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.1824,
+      "z": 24.0929,
+      "vx": 0.8492,
+      "speed": 2.4845,
+      "time": 5.25,
+      "observedAt": 1791467079987
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.5289,
+      "z": 24.6792,
+      "vx": 0.7445,
+      "speed": 2.6161,
+      "time": 5.4833,
+      "observedAt": 1791467080151
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.5432,
+      "z": 24.8499,
+      "vx": -0.1728,
+      "speed": 2.5191,
+      "time": 5.55,
+      "observedAt": 1791467080266
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.4642,
+      "z": 25.0956,
+      "vx": -1.2645,
+      "speed": 2.4101,
+      "time": 5.65,
+      "observedAt": 1791467080339
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 3.3255,
+      "z": 25.2933,
+      "vx": -1.9676,
+      "speed": 2.3443,
+      "time": 5.7333,
+      "observedAt": 1791467080517
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 2.9632,
+      "z": 26.0972,
+      "vx": -0.2834,
+      "speed": 3.1648,
+      "time": 6.0167,
+      "observedAt": 1791467080762
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 2.8654,
+      "z": 27.1567,
+      "vx": -1.7602,
+      "speed": 2.7226,
+      "time": 6.3667,
+      "observedAt": 1791467081166
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 2.6496,
+      "z": 27.4193,
+      "vx": -2.4642,
+      "speed": 2.5535,
+      "time": 6.4667,
+      "observedAt": 1791467081293
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.8282,
+      "z": 28.2659,
+      "vx": -2.11,
+      "speed": 3.782,
+      "time": 6.7667,
+      "observedAt": 1791467081644
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.8282,
+      "z": 28.2659,
+      "vx": -2.11,
+      "speed": 3.782,
+      "time": 6.7667,
+      "observedAt": 1791467081719
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.5504,
+      "z": 28.8274,
+      "vx": -1.3232,
+      "speed": 3.0607,
+      "time": 6.9333,
+      "observedAt": 1791467081810
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.4709,
+      "z": 29.0241,
+      "vx": -1.0979,
+      "speed": 2.8712,
+      "time": 7,
+      "observedAt": 1791467081890
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.203,
+      "z": 29.8132,
+      "vx": -1.6542,
+      "speed": 2.9689,
+      "time": 7.2667,
+      "observedAt": 1791467082194
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 1.0731,
+      "z": 30.0045,
+      "vx": -2.1631,
+      "speed": 2.7985,
+      "time": 7.3333,
+      "observedAt": 1791467082291
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": 0.0063,
+      "z": 31.5202,
+      "vx": -1.333,
+      "speed": 3.5715,
+      "time": 7.8,
+      "observedAt": 1791467082908
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -0.2439,
+      "z": 32.3633,
+      "vx": -0.8435,
+      "speed": 3.2618,
+      "time": 8.0667,
+      "observedAt": 1791467083159
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -0.3517,
+      "z": 32.6216,
+      "vx": -1.6342,
+      "speed": 2.9805,
+      "time": 8.15,
+      "observedAt": 1791467083234
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -0.5176,
+      "z": 32.8599,
+      "vx": -2.2603,
+      "speed": 2.7704,
+      "time": 8.2333,
+      "observedAt": 1791467083430
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.0856,
+      "z": 33.3779,
+      "vx": -3.2819,
+      "speed": 2.4581,
+      "time": 8.4333,
+      "observedAt": 1791467083515
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.3106,
+      "z": 33.5419,
+      "vx": -3.302,
+      "speed": 2.6008,
+      "time": 8.5,
+      "observedAt": 1791467083674
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.5888,
+      "z": 33.898,
+      "vx": -0.9793,
+      "speed": 2.5702,
+      "time": 8.6333,
+      "observedAt": 1791467083748
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.5843,
+      "z": 34.7695,
+      "vx": 0.104,
+      "speed": 3.278,
+      "time": 8.9333,
+      "observedAt": 1791467085198
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.6508,
+      "z": 35.7241,
+      "vx": -1.2422,
+      "speed": 3.525,
+      "time": 9.1833,
+      "observedAt": 1791467085422
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.977,
+      "z": 36.2536,
+      "vx": -2.5104,
+      "speed": 2.9173,
+      "time": 9.35,
+      "observedAt": 1791467085571
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -2.2072,
+      "z": 36.4874,
+      "vx": -2.9542,
+      "speed": 2.7232,
+      "time": 9.4333,
+      "observedAt": 1791467085666
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -2.9406,
+      "z": 37.1406,
+      "vx": -2.6303,
+      "speed": 3.4812,
+      "time": 9.6667,
+      "observedAt": 1791467085981
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.1033,
+      "z": 37.4663,
+      "vx": -0.8541,
+      "speed": 3.0881,
+      "time": 9.7667,
+      "observedAt": 1791467086057
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -2.7522,
+      "z": 38.8528,
+      "vx": 0.782,
+      "speed": 3.6333,
+      "time": 10.2,
+      "observedAt": 1791467086655
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -2.5967,
+      "z": 40.3478,
+      "vx": -0.5354,
+      "speed": 3.9708,
+      "time": 10.6,
+      "observedAt": 1791467087027
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -2.5967,
+      "z": 40.3478,
+      "vx": -0.5354,
+      "speed": 3.9708,
+      "time": 10.6,
+      "observedAt": 1791467087105
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -2.764,
+      "z": 40.8256,
+      "vx": -1.8152,
+      "speed": 3.2918,
+      "time": 10.7333,
+      "observedAt": 1791467087186
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.4683,
+      "z": 42.0391,
+      "vx": -1.3545,
+      "speed": 3.5991,
+      "time": 11.0833,
+      "observedAt": 1791467087557
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.676,
+      "z": 43.1659,
+      "vx": 0.5491,
+      "speed": 3.6163,
+      "time": 11.3833,
+      "observedAt": 1791467087890
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.5646,
+      "z": 43.5029,
+      "vx": 1.5489,
+      "speed": 3.1833,
+      "time": 11.4833,
+      "observedAt": 1791467088029
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.367,
+      "z": 43.8038,
+      "vx": 2.3045,
+      "speed": 2.8781,
+      "time": 11.5833,
+      "observedAt": 1791467088112
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.1981,
+      "z": 43.9898,
+      "vx": 2.7027,
+      "speed": 2.7266,
+      "time": 11.65,
+      "observedAt": 1791467088191
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -3.0052,
+      "z": 44.1669,
+      "vx": 3.033,
+      "speed": 2.6066,
+      "time": 11.7167,
+      "observedAt": 1791467088284
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.965,
+      "z": 45.1087,
+      "vx": 2.2784,
+      "speed": 3.3194,
+      "time": 12.05,
+      "observedAt": 1791467088571
+    },
+    {
+      "phase": "playing",
+      "stage": 1,
+      "x": -1.8247,
+      "z": 46.2943,
+      "vx": -1.6263,
+      "speed": 2.7728,
+      "time": 12.4167,
+      "observedAt": 1791467089067
+    },
+    {
+      "phase": "falling",
+      "stage": 1,
+      "x": -2.6812,
+      "z": 47.4407,
+      "vx": -2.0793,
+      "speed": 3.4728,
+      "time": 12.6833,
+      "observedAt": 1791467089511
+    }
+  ]
+}

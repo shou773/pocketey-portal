@@ -1,0 +1,61 @@
+{
+  "previousHead": "bcb4edac001c1ab308e582fa0725450c4793d2f8",
+  "models": [
+    {
+      "name": "wind-rock",
+      "trianglePositionsAndNormalsIdentical": true,
+      "triangles": 140,
+      "gpuVerticesBefore": 72,
+      "gpuVerticesAfter": 72,
+      "materials": 1,
+      "bytes": 4664
+    },
+    {
+      "name": "rooted-observatory",
+      "trianglePositionsAndNormalsIdentical": true,
+      "triangles": 320,
+      "gpuVerticesBefore": 160,
+      "gpuVerticesAfter": 160,
+      "materials": 1,
+      "bytes": 8912
+    }
+  ],
+  "matchedScenes": [
+    {
+      "scene": "stage1",
+      "mobile": true,
+      "sameStateCameraFramebuffer": true,
+      "calls": 11,
+      "triangles": 4654,
+      "errors": []
+    },
+    {
+      "scene": "stage1",
+      "mobile": false,
+      "sameStateCameraFramebuffer": true,
+      "calls": 11,
+      "triangles": 4654,
+      "errors": []
+    },
+    {
+      "scene": "-stage3",
+      "mobile": true,
+      "sameStateCameraFramebuffer": true,
+      "calls": 9,
+      "triangles": 5530,
+      "errors": []
+    },
+    {
+      "scene": "-stage3",
+      "mobile": false,
+      "sameStateCameraFramebuffer": true,
+      "calls": 11,
+      "triangles": 5830,
+      "errors": []
+    }
+  ],
+  "nativeTouchFrames": 5,
+  "nativePageErrors": [],
+  "runtimeSourceUnchanged": true,
+  "fullCi": "not run; awaiting design direction"
+}

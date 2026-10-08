@@ -1,0 +1,144 @@
+diff --git a/src/games/prototypes/ball/render.ts b/src/games/prototypes/ball/render.ts
+index 7185d65..95f3661 100644
+--- a/src/games/prototypes/ball/render.ts
++++ b/src/games/prototypes/ball/render.ts
+@@ -8,13 +8,33 @@ export function createView(canvas: HTMLCanvasElement) {
+   renderer.setClearColor(0x51788a);
+   renderer.outputColorSpace = THREE.SRGBColorSpace;
+   const scene = new THREE.Scene();
+-  scene.fog = new THREE.Fog(0x51788a, 36, 95);
++  // One static low-resolution backdrop: no scene lights or cloud meshes.
++  const skyCanvas = document.createElement('canvas'); skyCanvas.width = 256; skyCanvas.height = 512;
++  const sky = skyCanvas.getContext('2d')!;
++  const skyColor = sky.createLinearGradient(0, 0, 0, 512);
++  skyColor.addColorStop(0, '#81b8cc'); skyColor.addColorStop(.48, '#b5d6db'); skyColor.addColorStop(1, '#e4eee4');
++  sky.fillStyle = skyColor; sky.fillRect(0, 0, 256, 512);
++  // Broad cloud masses stay behind the course, with quiet edges and no detail noise.
++  sky.filter = 'blur(2px)';
++  for (const [x, y, w, h] of [[18, 105, 60, 22], [232, 166, 70, 25], [20, 332, 73, 20]]) {
++    sky.fillStyle = 'rgba(250, 249, 230, .48)'; sky.beginPath();
++    sky.ellipse(x, y, w, h, -.09, 0, Math.PI * 2); sky.fill();
++    sky.fillStyle = 'rgba(250, 249, 230, .25)'; sky.beginPath();
++    sky.ellipse(x + w * .22, y - h * .55, w * .55, h * .9, 0, 0, Math.PI * 2); sky.fill();
++  }
++  sky.filter = 'none';
++  sky.fillStyle = 'rgba(113, 160, 176, .15)'; sky.beginPath();
++  sky.moveTo(0, 432); sky.lineTo(24, 414); sky.lineTo(47, 426); sky.lineTo(72, 407); sky.lineTo(105, 440); sky.lineTo(0, 449); sky.closePath(); sky.fill();
++  sky.beginPath(); sky.moveTo(171, 461); sky.lineTo(206, 432); sky.lineTo(228, 449); sky.lineTo(256, 426); sky.lineTo(256, 468); sky.closePath(); sky.fill();
++  const skyTexture = new THREE.CanvasTexture(skyCanvas); skyTexture.colorSpace = THREE.SRGBColorSpace;
++  scene.background = skyTexture;
++  scene.fog = new THREE.Fog(0xb5d6db, 36, 95);
+   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 160);
+-  scene.add(new THREE.HemisphereLight(0xc9fff3, 0x142938, 2.3));
+-  const sun = new THREE.DirectionalLight(0xffecd0, 2.7); sun.position.set(-6, 14, 8); scene.add(sun);
+-  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0xe8ddc3, roughness: 0.48, metalness: 0, side: THREE.DoubleSide });
+-  const sideMaterial = new THREE.MeshLambertMaterial({ color: 0x427b7f });
+-  const gardenMaterial = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true });
++  scene.add(new THREE.HemisphereLight(0xe3f4ff, 0x314859, 2.0));
++  const sun = new THREE.DirectionalLight(0xfff1dc, 2.1); sun.position.set(-6, 14, 8); scene.add(sun);
++  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.34, metalness: 0, side: THREE.DoubleSide });
++  const sideMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
++  const gardenMaterial = new THREE.MeshLambertMaterial({ vertexColors: true });
+   const distantMaterial = new THREE.MeshLambertMaterial({ color: 0xb3c8bc });
+   const observatoryMaterial = new THREE.MeshLambertMaterial({ vertexColors: true });
+   const edgeMaterial = new THREE.MeshBasicMaterial({ color: 0xba713a });
+@@ -40,10 +60,11 @@ export function createView(canvas: HTMLCanvasElement) {
+   const finishMaterial = new THREE.MeshPhongMaterial({ color: 0x66b9a3, specular: 0xf4dfb3, shininess: 55 });
+   let course = new THREE.Group(); scene.add(course);
+   let stage = -1, lastZ = 0, lastX = 0;
++  let rockGeometry: THREE.BufferGeometry | null = null, courseIslands: THREE.InstancedMesh | null = null;
+   let disposed = false, observatoryGeometry: THREE.BufferGeometry | null = null, courseArches: THREE.InstancedMesh | null = null;
+   // The small original Blender asset enhances background architecture. A
+   // procedural arch remains usable if the asset cannot load; play never waits.
+-  const ready = new GLTFLoader().loadAsync('/games/tilttrail/models/observatory.glb').then(gltf => {
++  const observatoryReady = new GLTFLoader().loadAsync('/games/tilttrail/models/observatory.glb').then(gltf => {
+     const meshes: THREE.Mesh[] = [];
+     gltf.scene.traverse(o => { if (o instanceof THREE.Mesh) meshes.push(o); });
+     const geometry = meshes[0]?.geometry.clone();
+@@ -59,6 +80,19 @@ export function createView(canvas: HTMLCanvasElement) {
+       courseArches.boundingBox = null; courseArches.boundingSphere = null;
+     }
+   }).catch(() => { /* The unchanged procedural silhouette is the asset fallback. */ });
++  const rockReady = new GLTFLoader().loadAsync('/games/tilttrail/models/wind-rock.glb').then(gltf => {
++    let geometry: THREE.BufferGeometry | null = null;
++    gltf.scene.traverse(o => { if (o instanceof THREE.Mesh) {
++      if (!geometry) geometry = o.geometry.clone(); o.geometry.dispose();
++      (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => m.dispose());
++    } });
++    const rock = geometry as THREE.BufferGeometry | null;
++    if (!rock) return;
++    if (disposed) { rock.dispose(); return; }
++    rockGeometry = rock;
++    if (courseIslands) { courseIslands.geometry.dispose(); courseIslands.geometry = rock.clone(); courseIslands.boundingBox = null; courseIslands.boundingSphere = null; }
++  }).catch(() => {});
++  const ready = Promise.all([observatoryReady, rockReady]);
+   function ribbon(which: number, offset: number | null, stripWidth: number, material: THREE.Material) {
+     const positions: number[] = [], indices: number[] = [];
+     const sidePositions: number[] = [], sideIndices: number[] = [];
+@@ -72,12 +106,25 @@ export function createView(canvas: HTMLCanvasElement) {
+       if (i < count) { const k = i * 2; indices.push(k, k + 1, k + 2, k + 1, k + 3, k + 2); }
+     }
+     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); geometry.setIndex(indices); geometry.computeVertexNormals();
++    if (offset === null) {
++      const top = new THREE.Color(0xe6e1cf), joint = new THREE.Color(0xdfdbca), colors: number[] = [];
++      for (let i = 0; i <= count; i++) {
++        const z = i * length(which) / count;
++        const seam = Math.min(z % 6, 6 - z % 6) < .18;
++        const c = seam ? joint : top;
++        colors.push(c.r, c.g, c.b, c.r, c.g, c.b);
++      }
++      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
++    }
+     if (offset === null) course.add(new THREE.Mesh(geometry, material));
+     if(offset===null){
+       const wallCount=Math.ceil(length(which));
+       for(let i=0;i<=wallCount;i++){const z=i*length(which)/wallCount,road=track(which,z);sidePositions.push(road.x-road.width/2,0,-z,road.x-road.width/2,-.68,-z,road.x+road.width/2,0,-z,road.x+road.width/2,-.68,-z);if(i<wallCount){const k=i*4;sideIndices.push(k,k+4,k+1,k+1,k+4,k+5,k+2,k+3,k+6,k+3,k+7,k+6);}}
+       const end=wallCount*4;sideIndices.push(0,1,2,2,1,3,end,end+2,end+1,end+2,end+3,end+1);
+-      const side=new THREE.BufferGeometry();side.setAttribute('position',new THREE.Float32BufferAttribute(sidePositions,3));side.setIndex(sideIndices);side.computeVertexNormals();course.add(new THREE.Mesh(side,sideMaterial));
++      const side=new THREE.BufferGeometry();side.setAttribute('position',new THREE.Float32BufferAttribute(sidePositions,3));side.setIndex(sideIndices);side.computeVertexNormals();
++      const sideColors: number[] = [], upper = new THREE.Color(0x799da3), lower = new THREE.Color(0x436773);
++      for (let i=0;i<=wallCount;i++) for (const c of [upper, lower, upper, lower]) sideColors.push(c.r,c.g,c.b);
++      side.setAttribute('color',new THREE.Float32BufferAttribute(sideColors,3));course.add(new THREE.Mesh(side,sideMaterial));
+     }
+     return geometry;
+   }
+@@ -94,9 +141,9 @@ export function createView(canvas: HTMLCanvasElement) {
+     const end = length(which), road = track(which, end);
+     const arch = new THREE.Mesh(new THREE.TorusGeometry(2, 0.11, 6, 24, Math.PI), finishMaterial); arch.position.set(road.x, 0, -end); course.add(arch);
+     const line = new THREE.Mesh(new THREE.BoxGeometry(road.width, 0.025, 0.35), finishMaterial); line.position.set(road.x, 0.015, -end); course.add(line);
+-    // Garden tops stay at least 6 units below the road; their inner edges
+-    // remain outside its open drop. All scenery is visual, never support.
+-    // All four colored components share one instanced draw and one material.
++    // Rounded rock crowns remain 4.85 units below the road and outside its
++    // open drop. The public observatory rests on each dome; scenery is never support.
++    // The coarse public geometry is retained only as the loading fallback.
+     function colored(geometry: THREE.BufferGeometry, color: number) {
+       const value = new THREE.Color(color), colors = new Float32Array(geometry.getAttribute('position').count * 3);
+       for (let i = 0; i < colors.length; i += 3) { colors[i] = value.r; colors[i + 1] = value.g; colors[i + 2] = value.b; }
+@@ -108,7 +155,8 @@ export function createView(canvas: HTMLCanvasElement) {
+       colored(new THREE.CylinderGeometry(4.1, 4.1, .1, 8).scale(1, 1, 3.5 / 4.1), 0x94bba3),
+       ...[-1.6, 1.6].map(x => colored(new THREE.IcosahedronGeometry(1, 0).scale(.7, .65, .8).translate(x, .6, 1.2), 0x4c9384)),
+     ];
+-    const islands = new THREE.InstancedMesh(mergeGeometries(parts)!, gardenMaterial, 6);
++    const fallback = mergeGeometries(parts)!;
++    const islands = new THREE.InstancedMesh(rockGeometry?.clone() || fallback.clone(), gardenMaterial, 6); fallback.dispose(); courseIslands = islands;
+     parts.forEach(part => part.dispose());
+     // Reuse one hollow, thick arch rather than drawing separate columns.
+     const archShape = new THREE.Shape();
+@@ -124,7 +172,7 @@ export function createView(canvas: HTMLCanvasElement) {
+       const z = i * 22 + 8, road = track(which, z), x = road.x + (i % 2 ? 1 : -1) * (13 + i % 3 * 2);
+       temp.rotation.set(0, i * .45, 0); temp.position.set(x, -6.15, -z); temp.scale.set(1, 1, 1); temp.updateMatrix(); islands.setMatrixAt(i, temp.matrix);
+       if (i % 2 === 1) {
+-        temp.position.set(x, -6.1, -z - .5); temp.rotation.set(0, -.35, 0); temp.scale.set(1.5, 1.5, 1.5); temp.updateMatrix(); arches.setMatrixAt((i - 1) / 2, temp.matrix);
++        temp.position.set(x, -4.8, -z - .5); temp.rotation.set(0, -.35, 0); temp.scale.set(1.5, 1.5, 1.5); temp.updateMatrix(); arches.setMatrixAt((i - 1) / 2, temp.matrix);
+       }
+     }
+     course.add(islands, arches);
+@@ -151,6 +199,6 @@ export function createView(canvas: HTMLCanvasElement) {
+     camera.position.set(focus, height, -s.z + 10); camera.lookAt(focus, 0, -s.z - 11);
+     renderer.render(scene, camera);
+   }
+-  function dispose() { disposed = true; observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose(); } }); observatoryGeometry?.dispose(); [roadMaterial, sideMaterial, gardenMaterial, distantMaterial, observatoryMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); shadowMap.dispose(); (brakeRing.material as THREE.Material).dispose(); renderer.dispose(); }
++  function dispose() { disposed = true; observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose(); } }); observatoryGeometry?.dispose(); rockGeometry?.dispose(); skyTexture.dispose(); [roadMaterial, sideMaterial, gardenMaterial, distantMaterial, observatoryMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); shadowMap.dispose(); (brakeRing.material as THREE.Material).dispose(); renderer.dispose(); }
+   return { draw, dispose, renderer, ready };
+ }

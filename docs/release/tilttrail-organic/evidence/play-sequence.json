@@ -1,0 +1,253 @@
+{
+  "input": "native CDP multi-touch only; no keyboard/model/time writes",
+  "viewport": [
+    390,
+    844
+  ],
+  "errors": [],
+  "frames": [
+    {
+      "name": "01-braking",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "3.2260",
+          "vx": "0.0000",
+          "time": "1.5417",
+          "speed": "2.1509",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "brake"
+        ]
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "3.5845",
+          "vx": "0.0000",
+          "time": "1.7083",
+          "speed": "2.1505",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "brake"
+        ]
+      }
+    },
+    {
+      "name": "02-rolling",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "6.4155",
+          "vx": "0.0000",
+          "time": "3.0250",
+          "speed": "2.1500",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "brake"
+        ]
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "6.7021",
+          "vx": "0.0000",
+          "time": "3.1583",
+          "speed": "2.1500",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "brake"
+        ]
+      }
+    },
+    {
+      "name": "03-turning-braked",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-0.2972",
+          "z": "11.0042",
+          "vx": "-2.2271",
+          "time": "5.1083",
+          "speed": "2.4089",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "left",
+          "brake"
+        ]
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-0.7012",
+          "z": "11.3565",
+          "vx": "-3.0556",
+          "time": "5.2583",
+          "speed": "2.3032",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "left",
+          "brake"
+        ]
+      }
+    },
+    {
+      "name": "04-settling",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-1.6405",
+          "z": "12.2985",
+          "vx": "-1.7099",
+          "time": "5.6083",
+          "speed": "2.7103",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "brake"
+        ]
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-1.8475",
+          "z": "12.6855",
+          "vx": "-1.1235",
+          "time": "5.7583",
+          "speed": "2.4814",
+          "drawCalls": "12",
+          "triangles": "4702"
+        },
+        "held": [
+          "brake"
+        ]
+      }
+    },
+    {
+      "name": "05-released",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-2.1206",
+          "z": "14.1619",
+          "vx": "-0.3498",
+          "time": "6.1750",
+          "speed": "4.7405",
+          "drawCalls": "11",
+          "triangles": "4654"
+        },
+        "held": []
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-2.1590",
+          "z": "14.8240",
+          "vx": "-0.2408",
+          "time": "6.3083",
+          "speed": "5.1356",
+          "drawCalls": "11",
+          "triangles": "4654"
+        },
+        "held": []
+      }
+    }
+  ]
+}
