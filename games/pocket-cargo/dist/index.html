@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5ef">
+  <meta name="description" content="選んで、回して、ぴったり詰める。3便だけの小さな荷造りパズル。">
+  <title>ポケット荷造り | Pocketey Play</title>
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Pocketey Play ホーム">
+      <svg class="brand-icon" viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="5" width="34" height="30" rx="10" fill="currentColor"/><path d="M3 17h34M16 5v12h9V5" stroke="#f7f5ef" stroke-width="3"/><path d="m26 25 3 3 5-6" fill="none" stroke="#f7f5ef" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>pocketey<span class="brand-play">play</span></span>
+    </a>
+    <div class="header-actions"><button id="help" class="text-button" type="button">遊び方</button><button id="language" class="language-button" type="button" aria-label="Switch to English">EN</button><button id="sound" class="icon-button" type="button" aria-label="音をオンにする" aria-pressed="false">♪<span class="sound-slash"></span></button></div>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="title"><div class="eyebrow"><span></span><span id="eyebrow-text">A LITTLE BREAK, NICELY PACKED.</span></div><h1 id="title">ポケット荷造り<span class="title-dot">.</span></h1><p id="subtitle">選んで、回して、ぴったり詰める。<br class="mobile-break">3便だけの小さなパズル。</p></section>
+    <div class="game-layout">
+      <section class="game-panel" aria-label="荷造りゲーム">
+        <div class="panel-top"><div class="trip-heading"><span id="trip-label" class="small-label">荷造り中</span><strong id="trip-title">1便目</strong></div><div class="trip-track" id="trip-track" aria-label="全3便の進行"></div></div>
+        <div class="load-top"><span id="fill-text">積載 0 / 16</span><span id="turn-text">荷物 あと5個</span></div>
+        <div class="board-shell"><span class="truck-edge edge-top" aria-hidden="true"></span><div id="board" class="board" role="group" aria-label="4行4列の荷台"></div><span class="truck-edge edge-bottom" aria-hidden="true"></span><span class="wheel wheel-left" aria-hidden="true"></span><span class="wheel wheel-right" aria-hidden="true"></span></div>
+        <div class="board-note"><span id="status-text" role="status" aria-live="polite">荷物を選んで、荷台のマスをタップ。</span></div>
+        <div class="offer-heading"><span id="offer-label" class="small-label">次に積む荷物を選ぶ</span><button id="rotate" class="rotate-button" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.5 5.5A7 7 0 1 0 17 12M15.5 1.5v4.5H11"/></svg><span id="rotate-text">回転</span><kbd>R</kbd></button></div>
+        <div id="offers" class="offers" role="group" aria-label="荷物の候補"></div>
+        <div class="game-actions"><button id="undo" class="text-button" type="button">↶ ひとつ戻す</button><button id="depart" class="depart-button" type="button"><span id="depart-text">この便を出発</span><span aria-hidden="true">↗</span></button></div>
+      </section>
+      <aside class="sidebar">
+        <section class="score-card"><div class="small-label" id="score-label">今回のスコア</div><div class="score-number" id="score">0</div><div class="score-divider"></div><div class="best-row"><span id="best-label">自己ベスト</span><strong id="best">—</strong></div><div class="live-points"><span class="live-dot"></span><span id="live-score">この便の見込み +0</span></div></section>
+        <section class="tip-card"><div class="card-icon" aria-hidden="true">✦</div><h2 id="tip-title">すき間も、ひらめき。</h2><p id="tip-copy">1便につき荷物は5個。<br>16マスを埋めると<br>満載ボーナス！</p><div class="bonus-pill" id="bonus-label">満載 +40 pt</div></section>
+        <section class="mode-card"><span id="mode-label" class="small-label">遊ぶ荷物を選ぶ</span><button id="random-mode" class="mode-button active" type="button"><span aria-hidden="true">↗</span><span id="random-text">おまかせ便</span><span class="mode-check" aria-hidden="true">✓</span></button><button id="daily-mode" class="mode-button" type="button"><span aria-hidden="true">◷</span><span id="daily-text">今日の荷物</span><span class="mode-check" aria-hidden="true">✓</span></button><p id="mode-copy">毎回ちがう荷物で、ひと休み。</p></section>
+        <button id="restart" class="restart-button" type="button">同じ荷物でやり直す</button>
+      </aside>
+    </div>
+    <section class="how-strip" aria-label="遊び方の概要"><span id="step-one"><b>01</b> 荷物を選ぶ</span><span id="step-two"><b>02</b> 回して、詰める</span><span id="step-three"><b>03</b> 3便の合計で勝負</span></section>
+  </main>
+  <footer><span>POCKETEY PLAY</span><a href="./lab/index.html">4つのアクション試作室 ↗</a><span id="footer-text">3便で、ひと休み。</span><button id="about" class="text-button" type="button">このゲームについて</button></footer>
+  <dialog id="dialog"><div id="dialog-content"></div></dialog>
+  <noscript>このゲームを遊ぶにはJavaScriptを有効にしてください。</noscript>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
