@@ -7,10 +7,626 @@ const games=[
  {slug:'tilttrail',name:'TiltTrail',kind:'tilt',tag:'04 / 3D ROLL & BRAKE',ja:'慣性をつかんで、空の道へ。',en:'Catch the momentum. Stay on the trail.',copyJa:'左右でボールを転がし、曲がる前にブレーキ。空に浮かぶ3つの道を、縁から落ちずにゴールまで。',copyEn:'Steer a rolling ball and brake before bends. Follow three floating trails to the gate while keeping clear of the edges.',stagesJa:'01 はじめの曲がり道 → 02 波の回廊 → 03 空の尾根',stagesEn:'01 First bends → 02 Wave corridor → 03 Sky ridge'}
 ];
 ---
-<section class="container portal-hero"><p class="kicker">POCKETEY ORIGINALS / 01—04</p><h1><T ja={'小さな冒険を、\nポケットに。'} en={'Small worlds.\nOne more try.'}/></h1><div class="hero-bottom"><p><T ja="タップで遊べる、4つのオリジナルゲーム。ダウンロードも、アカウントも不要。" en="Four original games, ready in your browser. No download. No account. Just play."/></p><a href="#games" class="hero-link"><T ja="ゲームを選ぶ ↓" en="Choose your game ↓"/></a></div></section>
-<section class="container game-grid" id="games" aria-label="Pocketey games">{games.map(g=><article class={`game-card ${g.kind}`}><a class="preview" href={`/games/${g.slug}/`}><img src={`/games/previews/${g.slug}.png`} width="844" height="390" alt={`${g.name} gameplay`} data-alt-ja={`${g.name} のゲーム画面`} data-alt-en={`${g.name} gameplay`}/><span class="preview-badge"><T ja="実際のゲーム画面" en="In-game view"/></span></a><div class="card-copy"><p class="game-type">{g.tag}</p><h2><a href={`/games/${g.slug}/`}>{g.name}</a></h2><p class="game-tagline"><T ja={g.ja} en={g.en}/></p><p class="description"><T ja={g.copyJa} en={g.copyEn}/></p><p class="stage-list"><T ja={g.stagesJa} en={g.stagesEn}/></p><a class="play-link" href={`/games/${g.slug}/`}><T ja="今すぐ遊ぶ" en="Play now"/><img src="/games/assets/lucide/arrow-up-right.svg" width="18" height="18" alt=""/></a></div></article>)}</section>
+<div class="arcade">
+<section class="container portal-hero">
+ <div><p class="kicker"><span class="status-dot" aria-hidden="true"></span> POCKETEY ORIGINALS</p><h1><T ja={'小さな冒険を、\nポケットに。'} en={'Small worlds. One more try.'}/></h1><p class="hero-description"><T ja="4つの世界。ひとつ選んで、遊びに行こう。" en="Four little worlds. Pick one and jump in."/></p></div>
+ <a href="#how-to-play" class="hero-link"><T ja="はじめての方へ" en="How to play"/><span aria-hidden="true">↗</span></a>
+</section>
+<section class="container selection" aria-labelledby="games-title" id="games">
+ <div class="section-heading"><div><p class="kicker">PICK YOUR WORLD</p><h2 id="games-title"><T ja="今日は、どこで遊ぶ？" en="Where will you play today?"/></h2></div><span class="collection-count"><T ja="4つのオリジナルゲーム" en="4 original games"/></span></div>
+ <nav class="quick-picks" aria-label="Choose a game">{games.map(g=><a class={g.kind} href={`/games/${g.slug}/`}><span class="pick-dot" aria-hidden="true"></span>{g.name}<span aria-hidden="true">↗</span></a>)}</nav>
+ <div class="game-grid">{games.map((g,i)=><article class={`game-card ${g.kind} ${i===0?'feature':''}`}>
+ <a class="preview" href={`/games/${g.slug}/`}><img src={`/games/previews/${g.slug}.png`} width="844" height="390" loading={i===0?'eager':'lazy'} alt={`${g.name} gameplay`} data-alt-ja={`${g.name} のゲーム画面`} data-alt-en={`${g.name} gameplay`}/><span class="preview-badge"><T ja="ゲーム画面" en="In-game view"/></span><span class="image-index" aria-hidden="true">0{i+1}</span></a>
+ <div class="card-copy"><p class="game-type">{g.tag.split(' / ')[1]}</p><h3><a href={`/games/${g.slug}/`}>{g.name}</a></h3><p class="game-tagline"><T ja={g.ja} en={g.en}/></p><div class="card-bottom"><span class="card-facts"><T ja="3ステージ · タッチ / キー" en="3 stages · Touch / keys"/></span><a class="play-link" href={`/games/${g.slug}/`}><T ja="遊ぶ" en="Play"/><span aria-hidden="true">↗</span><span class="sr-only"> {g.name}</span></a></div></div>
+ </article>)}</div>
+ <div class="instant-note"><span aria-hidden="true">✦</span><T ja="ダウンロード不要。アカウント不要。ブラウザですぐ遊べます。" en="No downloads. No accounts. Just your browser and a little curiosity."/></div>
+</section>
+<section class="container worlds" aria-labelledby="worlds-title">
+ <div class="section-heading"><div><p class="kicker">FOUR WAYS TO PLAY</p><h2 id="worlds-title"><T ja="それぞれの世界に、楽しみ方。" en="A different kind of adventure."/></h2></div><a class="text-link" href="#games"><T ja="ゲームを選ぶ" en="Choose a game"/> ↑</a></div>
+ <div class="world-grid">{games.map((g,i)=><article class={`world-detail ${g.kind}`}><div class="world-title"><span class="world-number" aria-hidden="true">0{i+1}</span><h3>{g.name}</h3><a href={`/games/${g.slug}/`} ><span aria-hidden="true">↗</span><span class="sr-only"><T ja="遊ぶ" en="Play"/> {g.name}</span></a></div><p class="description"><T ja={g.copyJa} en={g.copyEn}/></p><div class="world-meta"><span><T ja="3つのステージ" en="THREE STAGES"/></span><p class="stage-list"><T ja={g.stagesJa} en={g.stagesEn}/></p></div><a class="text-link" href={`/games/${g.slug}/`}><T ja="遊び方を見て、はじめる" en="See the controls and play"/> →</a></article>)}</div>
+</section>
 <section class="container play-guide" id="how-to-play"><div><p class="kicker"><T ja="遊び方" en="HOW TO PLAY"/></p><h2><T ja="よけて、跳んで、転がして。" en="Move. Dodge. Roll. Try again."/></h2><p><T ja="各作品に3ステージ。Orbit RibbonとAmber Stepはクリアすると次が開きます。Pulse DriftとTiltTrailは3ステージすべて選べます。" en="Each game has three stages. Orbit Ribbon and Amber Step unlock the next course after a clear. All stages in Pulse Drift and TiltTrail are available from the start."/></p></div><div class="guide-grid"><article><b>01 / TOUCH</b><h3><T ja="両手で、リズムよく" en="Two hands, one good jump"/></h3><p><T ja="Orbit/Amberは左右＋JUMP。Pulse Driftはドラッグで移動し、自動射撃。TiltTrailは左右＋ブレーキ。同時押しに対応しています。" en="Orbit/Amber use arrows + JUMP. Drag in Pulse Drift; shooting is automatic. TiltTrail uses arrows + BRAKE. Movement and action buttons can be held together."/></p></article><article><b>02 / KEYBOARD</b><h3><T ja="キーボードでも" en="A keyboard works too"/></h3><p><T ja="Orbit/Amberは矢印/A,D＋Spaceでジャンプ。Pulse Driftは矢印/WASDで移動。TiltTrailは矢印/A,D＋Spaceで減速。各ゲームの遊び方をご確認ください。" en="Orbit/Amber: arrows or A,D + Space to jump. Pulse Drift: arrows or WASD. TiltTrail: arrows or A,D + Space to brake. Check each game’s controls before starting."/></p></article><article><b>03 / YOUR PACE</b><h3><T ja="ひと休みも、何度でも" en="Take a break. Take another try."/></h3><p><T ja="一時停止から同じ場所で再開できます。画面から離れると自動で一時停止。音は最初はOFF、いつでも切り替えられます。" en="Pause and resume from the same place. Switching away pauses play automatically. Sound starts off and can be toggled at any time."/></p></article></div></section>
 <section class="container practical"><article><h2><T ja="記録は、このブラウザに" en="Your progress stays here"/></h2><p><T ja="開放したステージ・自己ベスト・音設定は、このブラウザに保存されます。アカウント同期や公開ランキングはありません。別の端末やブラウザには引き継がれません。" en="Unlocked stages, personal bests and sound settings are saved in this browser. There are no accounts, cloud sync or public leaderboards. Progress does not transfer to another browser or device."/></p><p><T ja="サイトデータの消去・プライベートブラウズ等で記録が失われる場合があります。保存が使えないときも、その画面では遊べます。Orbit/Amberのリセットはその2作品の記録だけを消去し、新作の記録は保持します。" en="Clearing site data or using private browsing can remove progress. You can still play when storage is unavailable. The Orbit/Amber reset clears those two games only and preserves the new games’ records."/></p></article><article><h2><T ja="対応環境と困ったとき" en="Devices and troubleshooting"/></h2><p><T ja="WebGL 2対応のブラウザとJavaScriptが必要です。タッチ画面・キーボード、縦・横画面に対応しています。描画の滑らかさは端末とブラウザで異なります。" en="You need JavaScript and a browser that supports WebGL 2. Touch, keyboard, portrait and landscape layouts are supported. Rendering performance varies by device and browser."/></p><p><T ja="3D描画が中断されたときは、表示された再読み込みボタンを使ってください。保存済みの記録は保持されますが、その途中のプレイは再開できません。" en="If 3D rendering stops, use the reload button shown in the game. Saved progress is kept, but the interrupted run cannot resume."/></p><a href="/contact/?type=site"><T ja="不具合を報告する →" en="Report a problem →"/></a></article></section>
+</div>
 <style>
-.portal-hero{padding-block:55px 38px}.portal-hero h1{white-space:pre-line;max-width:850px;font-size:clamp(42px,7vw,82px);line-height:1.07;letter-spacing:-.05em;margin:18px 0 24px;font-weight:750}.hero-bottom{display:flex;justify-content:space-between;align-items:end;gap:24px}.hero-bottom p{max-width:560px;color:var(--muted);font-size:16px;margin:0}.hero-link{white-space:nowrap;font-size:13px;border-bottom:1px solid var(--ink);padding-bottom:4px}.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.game-card{border-radius:24px;overflow:hidden;background:#142438;color:#edf8f5;border:1px solid #203e48}.game-card.pulse{background:#132a3c;border-color:#356478}.game-card.tilt{background:#152f31;border-color:#517d72}.pulse .play-link{background:#89def4;color:#163243}.tilt .play-link{background:#b9eed1;color:#173b32}.game-card.amber{background:#322733;border-color:#695349;color:#fff2dc}.preview{display:block;position:relative}.preview img{width:100%;height:auto;aspect-ratio:844/390;object-fit:cover}.preview-badge{position:absolute;right:10px;bottom:10px;background:#101827e8;padding:4px 8px;border:1px solid #ffffff30;border-radius:6px;font-size:9px;color:white}.card-copy{padding:26px}.game-type{font-size:9px;letter-spacing:.15em;color:#a9d5c9;margin:0}.amber .game-type{color:#edca9b}.card-copy h2{font-size:32px;line-height:1.15;letter-spacing:-.03em;margin:12px 0}.game-tagline{font-size:15px;font-weight:650;margin:0 0 12px}.description{font-size:13px;line-height:1.8;color:#b4c8cf;min-height:72px}.amber .description{color:#d4c2bb}.stage-list{font-size:10px;line-height:1.8;color:#a9d5c9;margin:18px 0}.amber .stage-list{color:#edca9b}.play-link{display:flex;justify-content:space-between;align-items:center;min-height:48px;padding:10px 16px;background:#9cf2d5;color:#153830;border-radius:12px;font-size:14px;font-weight:750}.amber .play-link{background:#ffd393;color:#392a29}.play-link:hover{text-decoration:none;filter:brightness(1.05)}.play-guide{padding-top:76px;display:grid;grid-template-columns:.9fr 1.5fr;gap:50px}.play-guide h2{font-size:34px;line-height:1.25;letter-spacing:-.035em;margin:14px 0}.play-guide p,.practical p{font-size:14px;color:var(--muted)}.guide-grid{display:grid;gap:24px}.guide-grid article{border-top:1px solid var(--line);padding-top:17px}.guide-grid b{font-size:10px;letter-spacing:.14em;color:var(--accent)}.guide-grid h3{font-size:19px;margin:9px 0}.guide-grid p{margin:0}.practical{margin-top:70px;padding-top:30px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:48px}.practical h2{font-size:22px;line-height:1.35}.practical a{font-size:13px;text-decoration:underline;text-underline-offset:4px}@media(max-width:700px){.portal-hero{padding-block:32px}.hero-bottom{align-items:start;flex-direction:column;gap:18px}.hero-bottom p{font-size:14px}.game-grid{grid-template-columns:1fr}.card-copy{padding:23px}.description{min-height:0}.play-guide{grid-template-columns:1fr;gap:24px;padding-top:48px}.practical{grid-template-columns:1fr;gap:20px;margin-top:45px}.play-guide h2{font-size:29px}}@media(max-width:360px){.portal-hero h1{font-size:38px}.card-copy{padding:19px}.card-copy h2{font-size:29px}}
+.arcade {
+  padding-bottom: 16px;
+}
+.portal-hero {
+  padding-block: 38px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.kicker {
+  color: #a2e9d4;
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.19em;
+}
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #abf5d8;
+  margin-right: 5px;
+}
+.portal-hero h1 {
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1.25;
+  letter-spacing: -0.045em;
+  margin: 12px 0 10px;
+  font-weight: 780;
+}
+.hero-description {
+  color: #b3c1c5;
+  font-size: 14px;
+  margin: 0;
+}
+.hero-link {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: #d2dfdf;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 12px 16px;
+  border: 1px solid #35494f;
+  border-radius: 12px;
+}
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.section-heading h2 {
+  font-size: 25px;
+  letter-spacing: -0.035em;
+  line-height: 1.35;
+  margin: 7px 0 0;
+}
+.collection-count {
+  font-size: 11px;
+  color: #a6b9be;
+  white-space: nowrap;
+}
+.quick-picks {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.quick-picks a {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 1px solid #34474e;
+  border-radius: 10px;
+  background: #16262e;
+  font-size: 12px;
+  font-weight: 650;
+}
+.quick-picks a:hover {
+  background: #253a43;
+  text-decoration: none;
+}
+.quick-picks a > span:last-child {
+  color: #aabfc4;
+  margin-left: 8px;
+}
+.pick-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--game-color);
+}
+.orbit {
+  --game-color: #a5edda;
+}
+.amber {
+  --game-color: #ffd099;
+}
+.pulse {
+  --game-color: #99dff5;
+}
+.tilt {
+  --game-color: #bee5b3;
+}
+.game-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 14px;
+}
+.game-card {
+  display: grid;
+  grid-template-columns: 43% 1fr;
+  border: 1px solid #354953;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #172932;
+  min-width: 0;
+  transition:
+    border-color 0.18s,
+    transform 0.18s;
+}
+.game-card:hover {
+  border-color: var(--game-color);
+}
+.game-card.feature {
+  grid-row: span 3;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(130deg, #213944, #16282f);
+}
+.preview {
+  display: block;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #1c3441;
+}
+.preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s;
+}
+.game-card:hover .preview img {
+  transform: scale(1.035);
+}
+.feature .preview {
+  flex: 1;
+  min-height: 260px;
+}
+.feature .preview img {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+.preview-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #101c26e8;
+  padding: 4px 8px;
+  border: 1px solid #ffffff30;
+  border-radius: 6px;
+  font-size: 9px;
+  color: #e8f4f5;
+}
+.image-index {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  background: #101c26cc;
+  border-radius: 5px;
+}
+.card-copy {
+  padding: 16px;
+  min-width: 0;
+}
+.game-type {
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  color: var(--game-color);
+  margin: 0;
+  font-weight: 750;
+}
+.card-copy h3 {
+  font-size: 23px;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  margin: 7px 0;
+  color: #f3faf9;
+}
+.game-tagline {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #bccdd0;
+  margin: 0 0 12px;
+}
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card-facts {
+  font-size: 9px;
+  color: #a9bfc5;
+  line-height: 1.5;
+}
+.play-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  min-height: 42px;
+  padding: 8px 13px;
+  background: var(--game-color);
+  color: #152a30;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.play-link:hover {
+  text-decoration: none;
+  filter: brightness(1.08);
+}
+.feature .card-copy {
+  padding: 22px 24px;
+}
+.feature h3 {
+  font-size: 34px;
+  margin: 9px 0;
+}
+.feature .game-tagline {
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.feature .play-link {
+  min-height: 46px;
+  padding-inline: 20px;
+  font-size: 14px;
+  min-width: 150px;
+}
+.feature .card-facts {
+  font-size: 11px;
+}
+.instant-note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #aebfc4;
+  font-size: 12px;
+  padding: 20px 10px;
+}
+.instant-note > span:first-child {
+  color: #a5edda;
+}
+.worlds {
+  margin-top: 48px;
+}
+.world-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.world-detail {
+  border: 1px solid #34474e;
+  border-top: 2px solid var(--game-color);
+  border-radius: 13px;
+  background: #16262e;
+  padding: 20px;
+  min-width: 0;
+}
+.world-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.world-number {
+  font-size: 10px;
+  color: var(--game-color);
+  font-weight: 700;
+}
+.world-title h3 {
+  font-size: 17px;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  margin: 0;
+  flex: 1;
+}
+.world-title a {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 36px;
+  color: var(--game-color);
+}
+.description {
+  font-size: 12px;
+  line-height: 1.85;
+  color: #b8c9cd;
+  margin: 15px 0;
+  min-height: 112px;
+}
+.world-meta {
+  border-top: 1px solid #32434a;
+  padding-top: 14px;
+}
+.world-meta > span {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--game-color);
+}
+.stage-list {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #a5b9be;
+  margin: 6px 0 18px;
+  min-height: 54px;
+}
+.text-link {
+  font-size: 11px;
+  color: #b3f0dd;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.play-guide {
+  padding-top: 64px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.5fr;
+  gap: 50px;
+}
+.play-guide h2 {
+  font-size: 30px;
+  line-height: 1.3;
+  letter-spacing: -0.035em;
+  margin: 14px 0;
+}
+.play-guide p,
+.practical p {
+  font-size: 13px;
+  color: #afc0c5;
+}
+.guide-grid {
+  display: grid;
+  gap: 22px;
+}
+.guide-grid article {
+  border-top: 1px solid #34474e;
+  padding-top: 17px;
+}
+.guide-grid b {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #a5edda;
+}
+.guide-grid h3 {
+  font-size: 18px;
+  margin: 9px 0;
+}
+.guide-grid p {
+  margin: 0;
+}
+.practical {
+  margin-top: 55px;
+  padding-top: 26px;
+  border-top: 1px solid #34474e;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.practical h2 {
+  font-size: 21px;
+  line-height: 1.35;
+}
+.practical a {
+  font-size: 12px;
+  color: #b3f0dd;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (min-width: 1200px) {
+  .game-grid {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .game-card:not(.feature) {
+    min-height: 150px;
+  }
+}
+@media (max-width: 1000px) {
+  .world-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .description,
+  .stage-list {
+    min-height: 0;
+  }
+  .game-card {
+    grid-template-columns: 38% 1fr;
+  }
+  .card-copy {
+    padding: 13px;
+  }
+  .card-copy h3 {
+    font-size: 21px;
+  }
+  .card-facts {
+    max-width: 76px;
+  }
+}
+@media (max-width: 760px) {
+  .portal-hero {
+    padding-block: 25px 24px;
+  }
+  .hero-link {
+    display: none;
+  }
+  .portal-hero h1 {
+    max-width: 550px;
+  }
+  .game-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .game-card,
+  .game-card.feature {
+    grid-row: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .preview,
+  .feature .preview {
+    flex: none;
+    min-height: 0;
+    aspect-ratio: 844/390;
+  }
+  .preview img,
+  .feature .preview img {
+    position: static;
+    aspect-ratio: 844/390;
+    height: 100%;
+  }
+  .card-copy,
+  .feature .card-copy {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .feature h3,
+  .card-copy h3 {
+    font-size: 26px;
+  }
+  .feature .game-tagline,
+  .game-tagline {
+    font-size: 12px;
+  }
+  .card-bottom {
+    margin-top: auto;
+  }
+  .feature .play-link,
+  .play-link {
+    min-width: 0;
+    min-height: 42px;
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .feature .card-facts,
+  .card-facts {
+    font-size: 10px;
+    max-width: none;
+  }
+  .play-guide {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-top: 44px;
+  }
+  .practical {
+    gap: 28px;
+  }
+  .worlds {
+    margin-top: 30px;
+  }
+  .section-heading h2 {
+    font-size: 23px;
+  }
+}
+@media (max-width: 520px) {
+  .portal-hero h1 {
+    font-size: 30px;
+    white-space: pre-line;
+  }
+  .hero-description {
+    font-size: 12px;
+  }
+  .section-heading {
+    margin-bottom: 14px;
+  }
+  .collection-count {
+    display: none;
+  }
+  .quick-picks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+  .quick-picks a {
+    justify-content: start;
+    font-size: 11px;
+    padding: 8px 11px;
+  }
+  .quick-picks a > span:last-child {
+    margin-left: auto;
+  }
+  .game-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .card-copy,
+  .feature .card-copy {
+    padding: 17px 19px;
+  }
+  .game-tagline,
+  .feature .game-tagline {
+    margin-bottom: 14px;
+  }
+  .world-grid {
+    grid-template-columns: 1fr;
+  }
+  .world-detail {
+    padding: 18px;
+  }
+  .world-title h3 {
+    font-size: 19px;
+  }
+  .description {
+    margin: 10px 0;
+  }
+  .world-meta {
+    padding-top: 10px;
+  }
+  .stage-list {
+    margin-bottom: 10px;
+  }
+  .instant-note {
+    font-size: 10px;
+    padding: 17px 2px;
+    align-items: start;
+  }
+  .practical {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 38px;
+  }
+  .play-guide h2 {
+    font-size: 26px;
+  }
+  .worlds .section-heading {
+    align-items: start;
+  }
+  .worlds .section-heading h2 {
+    font-size: 22px;
+  }
+  .worlds .section-heading > .text-link {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-card,
+  .preview img {
+    transition: none;
+  }
+  .game-card:hover .preview img {
+    transform: none;
+  }
+}
 </style>
