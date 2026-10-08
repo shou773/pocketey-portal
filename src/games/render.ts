@@ -1,7 +1,7 @@
 import * as T from 'three';
 import { stages, type Kind, type State } from './model';
 import { loadArt, batchStatic, clearStatic, placeArt, createSky, type Art } from './art';
-import {paintOrbit, orbitPlanet, orbitEngine, orbitStation, loadOrbitRelay} from './orbit-art';
+import {paintOrbit, orbitPlanet, orbitEngine, orbitStation, loadOrbitRelay, loadOrbitShutter, placeOrbitShutter} from './orbit-art';
 import { createAmberCanyon, loadAmberLandmark, placeAmberPlants, placeSandstone } from './amber-scenery';
 export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const renderer = new T.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
@@ -88,6 +88,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     }
     for (const h of data.hazards) {
       if (kind === 'orbit') {
+        if (placeOrbitShutter(level,h.x,h.y,h.z,h.w,h.h,h.d)) continue;
         box(level, ...coord(h.x, h.y + (h.h-.09) / 2, h.z), h.w-.28, h.h-.09, h.d, mats.danger);
         // Warm equipment frames remain inside the existing collision envelope.
         for(const side of [-1,1]) box(level,...coord(h.x,h.y+h.h/2,h.z+side*(h.w/2-.07)),.14,h.h,h.d,orbitWarning);
@@ -116,7 +117,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     batchStatic(level, kind); batchStatic(backdrop, kind);
     temporaryGeometry.forEach(geometry => geometry.dispose());
   }
-  void Promise.all([loadArt(kind, canvas), kind === 'amber' ? loadAmberLandmark() : Promise.resolve(undefined), kind === 'orbit' ? loadOrbitRelay() : Promise.resolve(false)]).then(([loaded, landmark, relayReady]) => {
+  void Promise.all([loadArt(kind, canvas), kind === 'amber' ? loadAmberLandmark() : Promise.resolve(undefined), kind === 'orbit' ? loadOrbitRelay() : Promise.resolve(false), kind === 'orbit' ? loadOrbitShutter() : Promise.resolve(false)]).then(([loaded, landmark, relayReady, shutterReady]) => {
     if (kind === 'amber' && landmark) {
       clearStatic(horizon); horizon.position.set(0, 0, 0);
       createAmberCanyon(horizon, landmark); batchStatic(horizon, kind);
@@ -124,6 +125,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     } else if (kind === 'amber') canvas.dataset.amberLandmark = 'procedural';
     art = loaded;
     if(kind==='orbit')canvas.dataset.orbitRelay=relayReady?'ready':'fallback';
+    if(kind==='orbit')canvas.dataset.orbitShutter=shutterReady?'ready':'fallback';
     if(kind==='orbit')paintOrbit(art);
     const player = art.get(kind === 'orbit' ? 'craft_speederA' : 'character-oodi');
     if (player) {
