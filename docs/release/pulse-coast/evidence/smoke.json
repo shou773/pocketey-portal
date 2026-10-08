@@ -1,0 +1,47 @@
+{
+  "viewport": [
+    390,
+    844
+  ],
+  "baseURL": "http://127.0.0.1:4382",
+  "checks": [
+    "GLB-ready",
+    "keyboard-move",
+    "pause-frozen",
+    "bounded-resume",
+    "retry",
+    "stage-menu-relaunch"
+  ],
+  "state": {
+    "stage": 0,
+    "time": 0.44999999999999996,
+    "x": 0,
+    "y": 1.8,
+    "hp": 4,
+    "status": "playing",
+    "score": 0,
+    "enemies": [],
+    "bullets": [],
+    "beams": [],
+    "screen": {
+      "x": 195,
+      "y": 494.45416850655954
+    },
+    "limits": [
+      {
+        "x": 64.99326049927342,
+        "y": 523.0522646794547
+      },
+      {
+        "x": 299.1775859575359,
+        "y": 396.53883260333583
+      }
+    ],
+    "render": {
+      "calls": 11,
+      "triangles": 3532
+    }
+  },
+  "errors": [],
+  "sourceViewSHA256": "78fd26d9483c622bdf9fe53ba1202c818bdee760db4884a94443646e5b35c42e"
+}
