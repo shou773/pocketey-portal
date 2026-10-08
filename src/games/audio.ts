@@ -25,17 +25,17 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
   const buffers=new Map<Sample,AudioBuffer>(), voices=new Map<AudioBufferSourceNode,{cue:Cue;priority:number}>(), last=new Map<Cue,number>();
   let maxVoices=0, started=0;
   const enabled=()=>!settings.musicMuted||!settings.sfxMuted;
-  function diagnostics(){root.dataset.audio=ctx?.state??'off';root.dataset.music=loop?'playing':musicError?'unavailable':bgm?'ready':'idle';root.dataset.audioVoices=String(voices.size);root.dataset.audioMaxVoices=String(maxVoices);root.dataset.audioLoops=String(loop?1:0);root.dataset.audioStarts=String(started);}
+  function diagnostics(){root.dataset.audio=ctx?.state??'off';root.dataset.music=loop?'playing':musicError?'unavailable':bgm?'ready':'idle';root.dataset.audioSamples=String(buffers.size);root.dataset.audioVoices=String(voices.size);root.dataset.audioMaxVoices=String(maxVoices);root.dataset.audioLoops=String(loop?1:0);root.dataset.audioStarts=String(started);}
   function gains(){if(!ctx)return;effects.gain.setTargetAtTime(settings.sfxMuted?0:settings.sfx*.24,ctx.currentTime,.02);score.gain.setTargetAtTime(settings.musicMuted?0:settings.music*.2,ctx.currentTime,.06);}
   function persist(){try{let all:Record<string,unknown>={};try{all=JSON.parse(localStorage.getItem(KEY)||'{}');if(!all||typeof all!=='object'||Array.isArray(all))all={};}catch{/* Replace malformed settings. */}all[game]=settings;localStorage.setItem(KEY,JSON.stringify(all));}catch{/* Storage is optional. */}changed(enabled());gains();labels();}
   async function decode(url:string){const response=await fetch(url);if(!response.ok)throw new Error('Audio asset unavailable');return ctx!.decodeAudioData(await response.arrayBuffer());}
   function ensure(){
     if(disposed||!enabled())return;
     try{
-      if(!ctx){ctx=new AudioContext();master=ctx.createGain();master.gain.value=.85;master.connect(ctx.destination);effects=ctx.createGain();score=ctx.createGain();effects.connect(master);score.connect(master);gains();
+      if(!ctx){ctx=new AudioContext();master=ctx.createGain();master.gain.value=.85;master.connect(ctx.destination);effects=ctx.createGain();score=ctx.createGain();effects.gain.value=settings.sfxMuted?0:settings.sfx*.24;score.gain.value=settings.musicMuted?0:settings.music*.2;effects.connect(master);score.connect(master);
         ctx.addEventListener('statechange',()=>{if(ctx?.state==='running')playMusic();diagnostics();});
       }
-      void ctx.resume().then(()=>{playMusic();diagnostics();}).catch(()=>diagnostics());
+      if(ctx.state!=='running')void ctx.resume().then(()=>{playMusic();diagnostics();}).catch(()=>diagnostics());
       if(!loading){loading=(async()=>{
         await Promise.all(files.map(async file=>{try{buffers.set(file,await decode(`/games/audio/${file}.wav`));}catch{sfxError=true;}}));
         diagnostics();

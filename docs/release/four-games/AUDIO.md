@@ -37,3 +37,21 @@ codec compatibility and final mix peaks; record actual gameplay with audio; run
 all four gameplay and cross-browser/lifecycle checks on the final candidate.
 No direct auditory quality claim has been made. The reference soundtracks guide
 roles and thematic consistency only; none of their audio is reused.
+
+Additional checkpoint evidence: 15 Chromium audio/interaction checks passed,
+including decoding all nine delivered WAVs and simulated hidden-page lifecycle.
+Pulse's three stages cleared using both native keyboard and CDP touch input;
+eight UI/lifecycle cases and idle-loss/retry passed. A 13-second actual Pulse
+canvas capture with VP8 video + Opus audio was produced outside the repository
+at `/workspace/asset-intake/audio/pulse-effects-play.webm`. FFmpeg measured its
+SFX-only mix at -25.6dBTP/-42.8LUFS, max three simultaneous voices. This is a
+technical recorder proof, not a final music mix or auditory quality endorsement.
+
+Local WebKit/Firefox could not launch in this refreshed environment: WebKit
+reported missing GTK4/Graphene/Harfbuzz ICU/Manette/Hyphen/GLES libraries; Firefox
+reported that its temporary profile folder could not be found. CI installs the
+required browser dependencies and will provide application results. A previous
+checkpoint's new-game CI failed on an ambiguous Tilt Resume locator, now fixed;
+this was a test-selector error, not a gameplay or sound failure. The current
+head must pass the updated tests before acceptance. Tilt's imported 5px backdrop
+blur was removed to comply with the portal's established compositing budget.
