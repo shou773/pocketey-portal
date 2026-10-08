@@ -10,13 +10,13 @@ The toy-factory art implements the **user-approved written production specificat
 
 ## Toy-factory rendering
 
-- Fixed oblique camera, with the whole rounded tray occupying approximately 84% of the 390px screen width. All eight 44px tap targets remain separate at 320px.
+- Fixed oblique camera, with the whole rounded tray occupying approximately 85% of the 390px screen width. All eight 44px tap targets remain separate at 320px. The final review uses less yaw and a higher view to clarify the unchanged 4-column × 3-row grid.
 - Separate cream `#F1DFC1` rounded cell tops on a muted green tray; thin seams retain the grid.
 - Dark `#3F4545` belts, rounded teal `#5F9A8A` rails, shallow cross grooves and a few brass `#DDBD73` end caps. Bends use continuous quarter-circle bands; the white arrows and inlet bars rotate with the real ports.
 - Mint `#94CBBB` input and coral `#ED825E` output machines use extruded arched shells, recessed dark mouths, trays and small lamps. The receiving cavity faces the route. Neither station is a solid box across the parcel path.
 - The beveled parcel has two complete crossing bands. Its bottom is at 0.245 world units; the highest receiving belt is at 0.235. The inner arch clears the top of the box, and the back wall is beyond its final position. The delivered box remains visible on the tray.
 - Warm upper-left light, rough painted surfaces and subtle generated contact shadows; ivory desk, pale mint wall and one broad pipe silhouette. No purchased assets, bloom, shadow maps, plants or shelving.
-- Yellow `#FFC83E` is reserved for the primary Play control and selected tile. The interface identifies exactly one stage.
+- Yellow `#FFC83E` is reserved for the primary Play control and selected tile. The final selection frame sits above the rails, surrounds the chosen conveyor and adds a small turn mark beside its number without covering the path arrow. The interface identifies exactly one stage.
 
 Rounded rail and machine shapes receive most of the geometry budget. The twelve cream tops are instanced; straight/bend parts are merged by material into two shared blueprints; all repeated shapes and materials are reused. Tiny grooves and wrapping bands use simple boxes instead of spending rounded geometry on subpixel detail. Model rules, coordinates, rotations, the known solution and motion paths are unchanged from `a928587`.
 
@@ -86,4 +86,4 @@ The receiving environment read the current Library skill and `references/materia
 
 Neither initial attempt exposed an HTTP status code or response body, so **403 is not asserted**. Neither produced a readable local image. The second attempt was for a newly supplied user file. Later, after each of two user-confirmed allowlist changes, the user authorized one fresh check; both still failed at the official download step from `sdmntprbrazilsouth.oaiusercontent.com` with the same generic error. The worker made no permission changes, TLS changes or alternate-route transfers. Signed URLs and tokens are not retained here.
 
-The user then explicitly changed the workflow: the parent inspected the image, translated it into production specifications, and authorized the worker to implement that text without claiming image access. The first toy-factory render was inspected and shared before the final verification, then simplified from approximately 20,500 to under 15,000 triangles. The parent can now compare the returned screens against the image and request visual adjustments. Nothing has been published or merged to main, and no dependency updates were made.
+The user then explicitly changed the workflow: the parent inspected the image, translated it into production specifications, and authorized the worker to implement that text without claiming image access. The first toy-factory render was inspected and shared before the final verification, then simplified from approximately 20,500 to under 15,000 triangles. The parent reviewed the first art pass. One final adjustment reduced yaw, raised and slightly enlarged the camera view, made selection more explicit, and deepened the existing machine cavities. That final pass was verified at smartphone widths with the original model and interaction tests; further art work is stopped for final review. Nothing has been published or merged to main, and no dependency updates were made.

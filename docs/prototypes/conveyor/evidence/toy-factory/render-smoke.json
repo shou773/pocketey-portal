@@ -11,16 +11,16 @@
     "width": 376,
     "height": 360
   },
-  "sampleMs": 2019,
-  "measuredDraws": 43,
+  "sampleMs": 2004,
+  "measuredDraws": 41,
   "rafIntervalMs": {
-    "median": 33.399999999999636,
-    "p95": 83.29999999999927,
-    "max": 183.4000000000001
+    "median": 50,
+    "p95": 99.89999999999964,
+    "max": 116.69999999999982
   },
   "cpuSubmissionMs": {
-    "median": 0.9,
-    "p95": 1.5
+    "median": 1.1,
+    "p95": 3.5
   },
   "drawCalls": 77,
   "triangles": 12676,

@@ -11,7 +11,7 @@ export function createView(canvas: HTMLCanvasElement) {
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-3, 3, 3, -3, .1, 40);
-  camera.position.set(-2, 14, 8); camera.lookAt(0, 0, 0);
+  camera.position.set(-.85, 17, 7); camera.lookAt(0, 0, 0);
   scene.add(new THREE.HemisphereLight(0xfff7df, 0x91b7a6, 1.65));
   const sun = new THREE.DirectionalLight(0xffedd5, 2.2); sun.position.set(-5, 9, -3); scene.add(sun);
   const fill = new THREE.DirectionalLight(0xffffff, .55); fill.position.set(4, 3, 6); scene.add(fill);
@@ -19,8 +19,8 @@ export function createView(canvas: HTMLCanvasElement) {
   const materials = {
     tile: material(0xf1dfc1), tray: material(0x88a999), trim: material(0x729787), rail: material(0x5f9a8a),
     belt: material(0x3f4545), groove: material(0x454b48), brass: material(0xddbd73),
-    white: new THREE.MeshBasicMaterial({ color: 0xffffff }), selected: material(0xffc83e),
-    inlet: material(0x94cbbb), outlet: material(0xed825e), mouth: material(0x283c36),
+    white: new THREE.MeshBasicMaterial({ color: 0xffffff }), selected: new THREE.MeshBasicMaterial({ color: 0xffc83e, toneMapped: false }),
+    inlet: material(0x94cbbb), outlet: material(0xed825e), mouth: new THREE.MeshBasicMaterial({ color: 0x20362f, toneMapped: false }),
     paper: material(0xcc9a5e), tape: material(0xf5dfb3), lamp: material(0xe9f4d7),
     desk: material(0xf5ead5), wall: material(0xd7e7db), pipe: material(0xb3d0bd),
   };
@@ -117,11 +117,11 @@ export function createView(canvas: HTMLCanvasElement) {
     shadow(group,0,.147,0,1.10,1.07);
     blueprints[tile.kind].forEach(part=>mesh(group,part.geometry,part.material));tileViews.set(tile.id,group);
   }
-  // A single frame follows the selected cell and never crosses the 0.065-cell seams.
+  // Raise the single selection frame above the rails; keep ports and path arrows unobscured.
   const selection=new THREE.Group();scene.add(selection);
   for(const sign of [-1,1]){
-    box(selection,materials.selected,sign*.49,.158,0,.034,.026,1.005,.014);
-    box(selection,materials.selected,0,.158,sign*.49,1.005,.026,.034,.014);
+    box(selection,materials.selected,sign*.507,.335,0,.042,.025,1.055,.012);
+    box(selection,materials.selected,0,.335,sign*.507,1.055,.025,.042,.012);
   }
   const shellShape=new THREE.Shape();
   shellShape.moveTo(-.43,.145);shellShape.lineTo(-.43,.58);shellShape.quadraticCurveTo(-.43,.81,-.20,.81);shellShape.lineTo(.20,.81);shellShape.quadraticCurveTo(.43,.81,.43,.58);shellShape.lineTo(.43,.145);
@@ -136,7 +136,7 @@ export function createView(canvas: HTMLCanvasElement) {
     box(group,materials.belt,-side*.08,.222,0,.80,.026,.53,.018);
     mesh(group,shell,paint,side*.24,0,0);
     // The cavity is behind the parcel's endpoint, never a solid block through its path.
-    box(group,materials.mouth,side*.425,.405,0,.016,.40,.565,.03);
+    box(group,materials.mouth,side*.425,.405,0,.016,.44,.565,.03);
     box(group,materials.brass,side*.035,.695,0,.055,.055,.27,.017);
     const lamp=mesh(group,lampGeometry,materials.lamp,side*.24,.855,-.10);lamp.scale.set(1,.65,1);
     return lamp;
@@ -155,7 +155,7 @@ export function createView(canvas: HTMLCanvasElement) {
   function resize(){
     const rect=canvas.getBoundingClientRect(),nextWidth=Math.max(1,rect.width),nextHeight=Math.max(1,rect.height);
     if(width===nextWidth&&height===nextHeight)return;width=nextWidth;height=nextHeight;renderer.setSize(width,height,false);
-    const aspect=width/height,halfHeight=Math.max(2.4,3.02/aspect);
+    const aspect=width/height,halfHeight=Math.max(2.4,2.78/aspect);
     camera.left=-halfHeight*aspect;camera.right=halfHeight*aspect;camera.top=halfHeight;camera.bottom=-halfHeight;camera.updateProjectionMatrix();camera.updateMatrixWorld();
   }
   function project(cell:Cell,y=.24){const p=position(cell,y).project(camera);return{x:(p.x+1)*width/2,y:(1-p.y)*height/2};}
