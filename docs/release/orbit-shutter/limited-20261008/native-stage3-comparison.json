@@ -1,0 +1,185 @@
+{
+  "method": "Same unmodified existing native touch harness, stage3 once per build. Identical unlocked3/no-best storage fixture before load. No active state/clock/camera writes, no retries. Draw counters and RAF diagnostics are read-only. Sequential software-rendered local builds, not physical phones or a public HTTPS play check.",
+  "builds": [
+    {
+      "label": "published",
+      "sha": "7adf12ab464cfbb8e9d4e04917ad9f618a1a5f4b",
+      "menu": {
+        "state": {
+          "kind": "orbit",
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "mode": "menu",
+          "status": "running",
+          "x": "0.000",
+          "y": "0.000",
+          "z": "0.000",
+          "grounded": "true",
+          "jumps": "0",
+          "geometries": "9"
+        },
+        "stats": {
+          "calls": 9,
+          "triangles": 8700
+        },
+        "canvas": {
+          "width": 390,
+          "height": 690
+        }
+      },
+      "playResult": {
+        "terminal": {
+          "kind": "orbit",
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "mode": "result",
+          "status": "dead",
+          "x": "13.300",
+          "y": "0.000",
+          "z": "-1.458",
+          "grounded": "true",
+          "jumps": "0",
+          "geometries": "9"
+        },
+        "assertion": "orbit/3 {\"kind\":\"orbit\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"13.300\",\"y\":\"0.000\",\"z\":\"-1.458\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: \"clear\"\nReceived: \"dead\"",
+        "performance": {
+          "frames": 52,
+          "fps": 27.641069675951183,
+          "p95": 83.400146484375,
+          "max": 150
+        },
+        "errors": [],
+        "save": {
+          "version": 1,
+          "sound": false,
+          "orbit": {
+            "unlocked": 3,
+            "best": [
+              null,
+              null,
+              null
+            ],
+            "challengeBest": [
+              null,
+              null,
+              null
+            ]
+          },
+          "amber": {
+            "unlocked": 1,
+            "best": [
+              null,
+              null,
+              null
+            ],
+            "challengeBest": [
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      }
+    },
+    {
+      "label": "saved-pr22",
+      "sha": "09531213a46a24db850faab91ac44a8ed33d26c4",
+      "menu": {
+        "state": {
+          "kind": "orbit",
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "mode": "menu",
+          "status": "running",
+          "x": "0.000",
+          "y": "0.000",
+          "z": "0.000",
+          "grounded": "true",
+          "jumps": "0",
+          "geometries": "9"
+        },
+        "stats": {
+          "calls": 9,
+          "triangles": 14244
+        },
+        "canvas": {
+          "width": 390,
+          "height": 690
+        }
+      },
+      "playResult": {
+        "terminal": {
+          "kind": "orbit",
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "mode": "result",
+          "status": "dead",
+          "x": "13.475",
+          "y": "0.000",
+          "z": "-1.458",
+          "grounded": "true",
+          "jumps": "0",
+          "geometries": "9"
+        },
+        "assertion": "orbit/3 {\"kind\":\"orbit\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"13.475\",\"y\":\"0.000\",\"z\":\"-1.458\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\nexpect(received).toBe(expected) // Object.is equality\n\nExpected: \"clear\"\nReceived: \"dead\"",
+        "performance": {
+          "frames": 58,
+          "fps": 29.075162387875036,
+          "p95": 83.300048828125,
+          "max": 83.39990234375
+        },
+        "errors": [],
+        "save": {
+          "version": 1,
+          "sound": false,
+          "orbit": {
+            "unlocked": 3,
+            "best": [
+              null,
+              null,
+              null
+            ],
+            "challengeBest": [
+              null,
+              null,
+              null
+            ]
+          },
+          "amber": {
+            "unlocked": 1,
+            "best": [
+              null,
+              null,
+              null
+            ],
+            "challengeBest": [
+              null,
+              null,
+              null
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
