@@ -14,7 +14,7 @@ export function boot() {
   const pointers = new Map<number, string>(), keys = new Set<string>();
   let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0, wasBraking = false;
   function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch { storageOK = false; } }
-  const audio=createGameAudio('tilt',!save.muted,root,enabled=>{save.muted=!enabled;persist();renderUI();});audio.mount(get('sound'),pause);
+  const audio=createGameAudio('tilt',!save.muted,root,enabled=>{save.muted=!enabled;persist();renderUI();});audio.mount(get('sound'),pause,resetInput);
   const controlButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-tt-input]')];
   function held(control: string) { return [...pointers.values()].includes(control) || (control === 'left' ? keys.has('ArrowLeft') || keys.has('KeyA') : control === 'right' ? keys.has('ArrowRight') || keys.has('KeyD') : keys.has('Space') || keys.has('ArrowDown') || keys.has('KeyS')); }
   function reflectControls() { controlButtons.forEach(b => { const on = held(b.dataset.ttInput!); b.classList.toggle('held', on); b.setAttribute('aria-pressed', String(on)); }); }
@@ -99,7 +99,7 @@ export function boot() {
   });
   function frame(now: number) {
     const elapsed = previous ? Math.max(0, Math.min(0.1, (now - previous) / 1000)) : 0; previous = now;
-    if (!document.hidden) {
+    if (!document.hidden && !audio.settingsOpen()) {
       if (state.phase === 'playing' || state.phase === 'falling') {
         const braking=state.phase==='playing'&&held('brake');if(braking&&!wasBraking)audio.cue('brake');wasBraking=braking;
         accumulator += elapsed;

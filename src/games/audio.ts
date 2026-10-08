@@ -74,10 +74,27 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
   close.type='button';close.onclick=()=>dialog.close();dialog.append(heading,...rows.map(r=>r.row),notice,close);document.body.append(dialog);
   const settingsButton=document.createElement('button');settingsButton.type='button';settingsButton.className='audio-settings-button';settingsButton.textContent='♫';
   function labels(){heading.textContent=tr('音の設定','Audio settings');close.textContent=tr('閉じる','Close');notice.textContent=tr('音楽と効果音を個別に調整できます。','Adjust music and effects separately.');settingsButton.setAttribute('aria-label',tr('音量設定','Volume settings'));rows.forEach(({channel,text,range,mute})=>{text.textContent=channel==='music'?tr('音楽','Music'):tr('効果音','Effects');range.setAttribute('aria-label',text.textContent);const muted=settings[channel==='music'?'musicMuted':'sfxMuted'];mute.textContent=muted?tr('ミュート解除','Unmute'):tr('ミュート','Mute');mute.setAttribute('aria-pressed',String(muted));});}
-  function mount(button:HTMLElement,pause:()=>void){button.after(settingsButton);settingsButton.onclick=()=>{pause();silence();ensure();dialog.showModal();};}
+  let clearControls=()=>{}, previousInert=false;
+  const blockedKeys=new Set<string>();
+  function modalKey(e:KeyboardEvent){
+    if(dialog.open){
+      e.stopImmediatePropagation();
+      if(e.type==='keydown'){
+        blockedKeys.add(e.code);
+        if(e.code==='Escape'){e.preventDefault();dialog.close();}
+      }else blockedKeys.delete(e.code);
+    }else if(blockedKeys.has(e.code)){
+      // A key held in the dialog stays blocked until its physical release.
+      e.preventDefault();e.stopImmediatePropagation();
+      if(e.type==='keyup')blockedKeys.delete(e.code);
+    }
+  }
+  function modalPointer(e:Event){if(dialog.open&&!dialog.contains(e.target as Node)){e.preventDefault();e.stopImmediatePropagation();}}
+  dialog.addEventListener('close',()=>{root.inert=previousInert;clearControls();settingsButton.focus({preventScroll:true});});
+  function mount(button:HTMLElement,pause:()=>void,clear:()=>void){clearControls=clear;button.after(settingsButton);settingsButton.onclick=()=>{pause();clearControls();active=false;silence();ensure();previousInert=root.inert;dialog.showModal();root.inert=true;};}
   const hidden=()=>{if(document.hidden){active=false;silence();void ctx?.suspend().catch(()=>{});}};
   const hide=(e:PageTransitionEvent)=>{active=false;silence();if(!e.persisted)dispose();};
-  function dispose(){disposed=true;silence();void ctx?.close().catch(()=>{});document.removeEventListener('visibilitychange',hidden);window.removeEventListener('pagehide',hide);window.removeEventListener(LANGUAGE_EVENT,labels);dialog.remove();}
-  document.addEventListener('visibilitychange',hidden);window.addEventListener('pagehide',hide);window.addEventListener(LANGUAGE_EVENT,labels);labels();diagnostics();
-  return{cue,setPlaying,toggle,mount,enabled,unlock:ensure,dispose,settings:()=>({...settings}),reset(){settings=parse(null,false);if(game==='orbit'||game==='amber'){try{const all=JSON.parse(localStorage.getItem(KEY)||'{}');all[game==='orbit'?'amber':'orbit']=parse(null,false);localStorage.setItem(KEY,JSON.stringify(all));}catch{/* Optional storage. */}}persist();silence();},status:()=>({context:ctx?.state??'off',sfxError,musicError,voices:voices.size,loops:loop?1:0})};
+  function dispose(){disposed=true;silence();void ctx?.close().catch(()=>{});document.removeEventListener('visibilitychange',hidden);window.removeEventListener('pagehide',hide);window.removeEventListener(LANGUAGE_EVENT,labels);window.removeEventListener('keydown',modalKey,true);window.removeEventListener('keyup',modalKey,true);for(const type of ['pointerdown','pointermove','pointerup'])window.removeEventListener(type,modalPointer,true);if(dialog.open)root.inert=previousInert;dialog.remove();}
+  document.addEventListener('visibilitychange',hidden);window.addEventListener('pagehide',hide);window.addEventListener(LANGUAGE_EVENT,labels);window.addEventListener('keydown',modalKey,true);window.addEventListener('keyup',modalKey,true);for(const type of ['pointerdown','pointermove','pointerup'])window.addEventListener(type,modalPointer,true);labels();diagnostics();
+  return{cue,setPlaying,toggle,mount,enabled,settingsOpen:()=>dialog.open,unlock:ensure,dispose,settings:()=>({...settings}),reset(){settings=parse(null,false);if(game==='orbit'||game==='amber'){try{const all=JSON.parse(localStorage.getItem(KEY)||'{}');all[game==='orbit'?'amber':'orbit']=parse(null,false);localStorage.setItem(KEY,JSON.stringify(all));}catch{/* Optional storage. */}}persist();silence();},status:()=>({context:ctx?.state??'off',sfxError,musicError,voices:voices.size,loops:loop?1:0})};
 }

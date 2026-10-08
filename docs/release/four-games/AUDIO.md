@@ -69,3 +69,22 @@ The remaining Firefox Orbit settings test waited for sample decode during a live
 auto-run, allowing an idle fall before it asked for Resume. It now pauses through
 the ordinary Pause button before waiting for decoding. Final-head CI remains
 required; no performance or gameplay thresholds were relaxed.
+
+## Independent-review fix: volume dialog input isolation
+
+Review found that the modal did not intercept global R/P/Escape handlers, so a
+run could restart or resume behind it. The shared audio owner now captures modal
+keyboard input before game handlers, keeps native slider/Tab/Enter behavior,
+and handles Escape as close-only. The game root is inert while the dialog is
+open. Closing restores its previous inert state and clears game controls; keys
+held inside remain blocked until release. Opening from gameplay pauses it, while
+opening an already-paused screen never resumes it. Simulation loops also guard
+against an open settings dialog (including Tilt's in-flight fall).
+
+Four regression cases passed in Chromium: R/P/movement/jump keys and outside
+pointer input cannot change paused position/time; slider arrows still work;
+Escape and Close keep the pause; repeated held keys do not leak after explicit
+Resume. Tilt's existing physical inertia is preserved and decays normally.
+The previous fifteen audio/lifecycle checks also passed with this implementation.
+Astro check, game typecheck and production build passed. CI runs these four cases
+in Chromium, WebKit and Firefox; final-head cross-browser results remain required.

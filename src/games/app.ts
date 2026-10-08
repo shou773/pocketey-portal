@@ -36,7 +36,7 @@ export function boot() {
   let view: ReturnType<typeof createView>;
   try { view = createView($<HTMLCanvasElement>('scene'), kind); } catch { function unavailable(){ $('panel-title').textContent = tr('3D画面を起動できません', '3D could not start'); $('panel-copy').textContent = tr('WebGLに対応したブラウザで開き直してください。', 'Reopen this game in a browser that supports WebGL 2.'); $('reset').hidden = true; $<HTMLButtonElement>('sound').disabled = true;document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b=>{b.disabled=true;}); }unavailable();window.addEventListener(LANGUAGE_EVENT,unavailable);return; }
   const audio=createGameAudio(kind,save.sound,root,enabled=>{save.sound=enabled;persist();soundLabel();});
-  audio.mount($('sound'),pause);
+  audio.mount($('sound'),pause,clearInput);
   const keys = new Set<string>(), pointers = new Map<number, string>(); let jumpQueued = false;
   function clearInput() { keys.clear(); pointers.clear(); jumpQueued = false; document.querySelectorAll('.held').forEach(el => el.classList.remove('held')); }
   function axis() { const inputs = [...pointers.values()]; return Number(keys.has('ArrowRight') || keys.has('KeyD') || inputs.includes('right')) - Number(keys.has('ArrowLeft') || keys.has('KeyA') || inputs.includes('left')); }
@@ -104,7 +104,7 @@ export function boot() {
   let last = performance.now(), accumulator = 0;
   function frame(now: number) {
     const elapsed = Math.min((now - last) / 1000, .1); last = now;
-    if (mode === 'play') {
+    if (mode === 'play' && !audio.settingsOpen()) {
       accumulator += elapsed;
       while (accumulator >= DT && mode === 'play') {
         const previousJumps = state.jumps, wasGrounded = state.grounded; step(state, { axis: axis(), jump: jumpQueued }); jumpQueued = false; accumulator -= DT;
