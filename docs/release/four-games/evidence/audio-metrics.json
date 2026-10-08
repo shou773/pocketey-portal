@@ -74,7 +74,22 @@
       "loop20msRMSDBFS": -28.629655838012695
     }
   ],
-  "maximumVolumeMixBoundDBTP": -5.61295716768493,
+  "maximumVolumeMixBoundDBTP": -1.687214850763964,
+  "perGameMaximumVolumeBoundsDBTP": {
+    "orbit": -1.9194497004764057,
+    "amber": -1.8725033316385682,
+    "pulse": -1.9194497004764057,
+    "tilt": -1.687214850763964
+  },
+  "musicTrim": {
+    "orbit": 1,
+    "amber": 1.1,
+    "pulse": 1,
+    "tilt": 1.5
+  },
+  "effectsGain": 0.9,
+  "masterGain": 0.85,
+  "conservativeBudgetDBTP": -1.1548769916107018,
   "sfxMaxOversampledPeak": 0.25983285903930664,
   "voiceCap": 10,
   "perCueCap": 2,

@@ -31,8 +31,12 @@ for path in audio.glob('*.wav'):
     data = subprocess.check_output(['ffmpeg', '-v', 'error', '-i', str(path), '-ar', '192000', '-f', 'f32le', '-'])
     sfx_peak = max(sfx_peak, float(np.max(np.abs(np.frombuffer(data, dtype='<f4')))))
 music_peak = max(10**(m['truePeakDBTP']/20) for m in metrics)
-bound = .85*(10*sfx_peak*.2+music_peak*.2)
-result = {'measurement': 'FFmpeg 7.1.5 ebur128 true-peak; 44.1kHz stereo loop PCM; SFX 4x peak', 'tracks': metrics, 'maximumVolumeMixBoundDBTP': 20*math.log10(bound), 'sfxMaxOversampledPeak': sfx_peak, 'voiceCap':10, 'perCueCap':2, 'shotContactCooldownMS':100, 'listeningClaim':False}
+mix_bounds = {}
+for game, trim in {'orbit':1,'amber':1.1,'pulse':1,'tilt':1.5}.items():
+    effects = (1.03-.5*trim)/(.3*10)
+    mix_bounds[game] = 20*math.log10(.85*(10*sfx_peak*effects+music_peak*trim))
+bound = max(10**(value/20) for value in mix_bounds.values())
+result = {'measurement': 'FFmpeg 7.1.5 ebur128 true-peak; 44.1kHz stereo loop PCM; SFX 4x peak', 'tracks': metrics, 'maximumVolumeMixBoundDBTP': 20*math.log10(bound), 'perGameMaximumVolumeBoundsDBTP': mix_bounds, 'musicTrim': {'orbit':1,'amber':1.1,'pulse':1,'tilt':1.5}, 'effectsGain':.9, 'masterGain':.85, 'conservativeBudgetDBTP':20*math.log10(.85*1.03), 'sfxMaxOversampledPeak': sfx_peak, 'voiceCap':10, 'perCueCap':2, 'shotContactCooldownMS':100, 'listeningClaim':False}
 assert bound < 10**(-1/20)
 out.write_text(json.dumps(result,indent=2)+'\n')
 print(json.dumps(result,indent=2))

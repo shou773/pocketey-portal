@@ -1,0 +1,90 @@
+{
+  "measurement": "FFmpeg ebur128; actual OfflineAudioContext score/SFX buffers, maximum settings, worst case ten simultaneous voices without music duck",
+  "listened": false,
+  "files": [
+    {
+      "file": "amber-music-max.wav",
+      "bytes": 352844,
+      "sha256": "7ac681eec8cd4e592e27fa803de0c3bddc5267e53331dba03616d84d1042037f",
+      "truePeakDBTP": -7.2,
+      "integratedLUFS": -18.0
+    },
+    {
+      "file": "amber-sfx-max.wav",
+      "bytes": 352844,
+      "sha256": "4e0fc470dfe5192a5a2a474010436eb91458970b2ecbbeffdb93476f909bd577",
+      "truePeakDBTP": -17.7,
+      "integratedLUFS": -29.3
+    },
+    {
+      "file": "amber-worst-mix.wav",
+      "bytes": 352844,
+      "sha256": "ecc9ea9114e6696abf6abddd7f1ee7ec7c6cee4cc3976e50df59fa9af05c5380",
+      "truePeakDBTP": -7.2,
+      "integratedLUFS": -17.9
+    },
+    {
+      "file": "orbit-music-max.wav",
+      "bytes": 352844,
+      "sha256": "07a70a9a45c3a71bc0da0e2958c4aa8919df3fc3c9fd96b800e0958106257a5c",
+      "truePeakDBTP": -7.8,
+      "integratedLUFS": -18.2
+    },
+    {
+      "file": "orbit-sfx-max.wav",
+      "bytes": 352844,
+      "sha256": "dd5909abd598b95ee1ecff738597193a2e0c8b6db3d15e30cd40e8d715a24bb6",
+      "truePeakDBTP": -16.9,
+      "integratedLUFS": -28.4
+    },
+    {
+      "file": "orbit-worst-mix.wav",
+      "bytes": 352844,
+      "sha256": "cf6d206e5f6a98f99b7a18d0e600fc6e3a371284c0d1a2795660486fe038400a",
+      "truePeakDBTP": -7.8,
+      "integratedLUFS": -18.0
+    },
+    {
+      "file": "pulse-music-max.wav",
+      "bytes": 352844,
+      "sha256": "00e2a8b9bf58869ce2e47257fbb8fa36cb04e169e30ec50740790f6f7a83039c",
+      "truePeakDBTP": -8.1,
+      "integratedLUFS": -18.3
+    },
+    {
+      "file": "pulse-sfx-max.wav",
+      "bytes": 352844,
+      "sha256": "437a5656e2c266ec34ad345e39280864eff4ef612016d35716f9f14c85fa38e9",
+      "truePeakDBTP": -16.9,
+      "integratedLUFS": -28.4
+    },
+    {
+      "file": "pulse-worst-mix.wav",
+      "bytes": 352844,
+      "sha256": "509042d32cdf32c54c3ecad88886c02fbcf5f2813c969eada39acad356505d13",
+      "truePeakDBTP": -7.5,
+      "integratedLUFS": -18.1
+    },
+    {
+      "file": "tilt-music-max.wav",
+      "bytes": 352844,
+      "sha256": "188982aecc7a1ca1b962e9d6d7e140de99f144b410ba6b8e9022f1532a5a78ce",
+      "truePeakDBTP": -4.9,
+      "integratedLUFS": -15.6
+    },
+    {
+      "file": "tilt-sfx-max.wav",
+      "bytes": 352844,
+      "sha256": "9b62944932a94724fe26ecfd60ffd39228bab00b2bb4e183841b55bae6f69e8e",
+      "truePeakDBTP": -22.4,
+      "integratedLUFS": -33.9
+    },
+    {
+      "file": "tilt-worst-mix.wav",
+      "bytes": 352844,
+      "sha256": "de2c24b2f28a41d185f4729f4005d0e4b9dbce568dc11cb20ad587b38ad26115",
+      "truePeakDBTP": -4.9,
+      "integratedLUFS": -15.6
+    }
+  ]
+}
