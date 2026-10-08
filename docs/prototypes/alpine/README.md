@@ -4,11 +4,72 @@ Draft only. Review route: `/prototypes/alpine-drive/?lang=ja` (also `lang=en`).
 The route is unlisted, `noindex,nofollow`, and excluded from the sitemap by the
 existing prototype filter. No homepage or existing game page is changed.
 
-This delivery intentionally covers input and one playable greybox course.
-**The visual art pass, mountain scenery and B-reference matching have not started.**
-All visible models are local Three.js primitives; no purchased assets are used.
+This is one stage with an original mountain scene built from the parent's
+**written production brief**, not from retrieved reference-image pixels.
+The new art is implemented, but its real WebGL/browser acceptance is **blocked**
+in this execution environment. Do not treat the auxiliary previews as game
+screenshots or as approval of reference fidelity.
 
-![Real Three.js frame: first left turn queued](evidence/02-turn-queued.png)
+![Auxiliary Blender view of the implemented meshes and camera; not a WebGL game screenshot](evidence/art-pass/02-before-turn-blender-preview.png)
+
+## Current art pass, 2026-10-08
+
+- Yellow rally hatchback: tapered body and hood, slanted cabin, dark glazing,
+  four tires and wheel arches, rear lights, and a dark central stripe.
+- Model bounds fit inside the unchanged 0.96 m square collision footprint at
+  all three headings. Barrier bounds exactly match the existing obstacle X/Z
+  rectangles. The road's top coordinates, course and controls are unchanged.
+- Dark asphalt, warm stone edges and a faceted rock foundation; orange/ivory
+  barriers with black feet and amber lamps; timber finish posts and checkers.
+- Three shared fir meshes and three shared rock meshes, instanced off the road.
+  Three blue mountain layers and a lake; warm directional light and cool ambient
+  light. A subtle contact patch sits under the car. No paid assets or textures.
+- Camera direction remains fixed independently of steering. Perspective replaces
+  the greybox's orthographic lens to show the bounded car near 71% of the portrait
+  viewport while retaining the approaching turns.
+- The turn cue is narrower. The 440 px minimum page height was removed, the
+  compact layout retains the top safe area, and overflow panels align safely.
+  Pause, volume, localization and save logic are unchanged; only the art label
+  changed in `app.ts`. The header remains one stage (`01 / 01`).
+
+Current checks:
+
+| Layer | Current result | Limit |
+| --- | --- | --- |
+| Existing Alpine logic | 12/12 pass | Same model and input files as `459fcb3f229f0dee42698d91187f027b19c588a7` |
+| Geometry, clearance and framing | 4/4 pass | Car footprint, barrier rectangles, scenery clearance, triangle budget, imminent turn visibility |
+| Type check and production build | Pass | `check:games`, build and route guard |
+| Whole-scene static budget | 8,362 triangles / 46 mesh batches | Includes every instance; not measured GPU draw calls or FPS |
+| Auxiliary renders | Start, before first turn, near finish inspected | Blender Cycles CPU, same exported meshes/camera, different lighting, tone mapping and fog; no HTML UI |
+| Current browser input / real WebGL | **Blocked, not rerun** | Chromium SUID sandbox helper is owned by `nobody:nogroup`; a nested user namespace cannot write `uid_map`. No permissions or sandbox settings were changed |
+
+The first auxiliary render failed because this Blender build lacks
+OpenImageDenoise. The failure log is retained. Denoising was disabled for the
+CPU previews. One art composition revision lowered the camera angle so the
+mountains and lake are visible; this was not a performance acceptance loop.
+
+Representative auxiliary preview in Library: `libfile_0fb7da0bb4e08191b713c8403932295a`.
+
+Evidence: [scene audit](evidence/art-pass/scene-audit.json),
+[16 checks](evidence/art-pass/model-scene-tests.txt),
+[types/build](evidence/art-pass/types-build.log),
+[start](evidence/art-pass/01-start-blender-preview.png),
+[before turn](evidence/art-pass/02-before-turn-blender-preview.png),
+[near finish](evidence/art-pass/03-near-finish-blender-preview.png),
+[initial Blender failure](evidence/art-pass/blender-initial-failure.log).
+
+The completion requirement of three **actual game renders** remains open.
+The previous 6 browser tests and limited WebGL smoke below apply only to the
+saved greybox baseline, not the new art, revised camera or current mobile CSS.
+No current browser, device, GPU-performance or input-latency acceptance is claimed.
+
+Auxiliary reproduction (not a browser substitute):
+
+```sh
+node --import tsx --test tests/prototypes/alpine/model.test.ts tests/prototypes/alpine/scene.test.ts
+node --import tsx tests/prototypes/alpine/export-scene.mjs
+blender -b -t 4 --python tests/prototypes/alpine/render-preview.py
+```
 
 ## Controls and rules
 
@@ -23,13 +84,14 @@ All visible models are local Three.js primitives; no purchased assets are used.
   steering or automatic correction is applied between gates.
 - Four required commands: left, right, right, left. Red blocks sit on missed-turn
   paths. Correct commands, including at both ends of the allowed window, clear.
-- The square dark bumper is the collision footprint (0.96 × 0.96 metres).
-  Red boxes use axis-aligned rectangular collision; contact with the road edge
+- The fixed square collision footprint is 0.96 × 0.96 metres. The car model
+  fits within it at every allowed heading.
+  The orange/ivory barriers retain axis-aligned rectangular collision; contact with the road edge
   also fails. Collision is checked before the goal. There is no physics engine.
 - Pause with the top button or Esc / P. Blur, hidden tabs and audio settings
   pause and clear queued input. Resume explicitly, then enter a turn again if
   still in the yellow zone. Retry creates a fresh state immediately.
-- Camera position follows the car with a fixed oblique angle and orthographic
+- Camera position follows the car with a fixed oblique direction and perspective
   projection; it never turns with the car.
 
 ## Existing integration
@@ -41,7 +103,7 @@ Audio settings use the separate `alpine` member of `pocketey-audio-v1`.
 Clears and mute preference use `pocketey-alpine-prototype-v1`. Other game records
 are never migrated or reset. Storage failures leave the game playable in-tab.
 
-## Validation, 2026-10-08
+## Saved greybox baseline validation, 2026-10-08
 
 | Layer | Result | Meaning |
 | --- | --- | --- |
@@ -91,15 +153,20 @@ prototype. A later user reattachment (`libfile_750684ec7fe08191b8f0a43043768760`
 was tried once through the same official procedure. Preparation succeeded, but
 the download host `sdmntprsouthcentralus.oaiusercontent.com` returned only the
 helper error `download failed`, with no HTTP status or more specific cause.
-The local image was absent. There was no further attempt. Apply the image's art
-direction to this same course only after its actual pixels become available in
-this environment.
+The local image was absent. During recovery the parent authorized one attempt
+after adding the exact host and one after adding a wildcard domain. Both used
+the official Library procedure: preparation succeeded, but the download from
+`sdmntprsouthcentralus.oaiusercontent.com` failed with `download failed`, no HTTP
+status. Setting propagation could not be confirmed. No pixels were obtained.
+The parent then explicitly changed the input to a written production brief.
+This art pass follows that text only, with no new image request, alternate copy
+or claim to have viewed the reference. No TLS or domain setting was changed.
 
 ## Remaining checks and reproduction
 
 Unverified: real iOS/Android devices, Safari/Firefox, native hardware frame rate,
 end-to-end latency under load, subjective human difficulty, and final audio
-listening/mix. B-reference fidelity and mountain art are unstarted. The fixed
+listening/mix. Reference-image fidelity is not claimed; browser validation of the new mountain art is blocked. The fixed
 step loop bounds delayed-frame catch-up at 100 ms, so very slow renderers can
 slow simulation; no cloud SwiftShader FPS claim is made.
 

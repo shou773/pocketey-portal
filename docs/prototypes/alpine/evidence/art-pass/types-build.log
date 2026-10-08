@@ -1,0 +1,84 @@
+
+> pocketey-japan@0.1.0 check:games
+> tsc --noEmit -p tsconfig.games.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+> pocketey-japan@0.1.0 build
+> astro build && node scripts/check-portal.mjs
+
+18:03:03 [content] Syncing content
+18:03:03 [content] Synced content
+18:03:03 [types] Generated 87ms
+18:03:03 [build] output: "static"
+18:03:03 [build] mode: "static"
+18:03:03 [build] directory: /workspace/pocketey-portal/dist/
+18:03:03 [build] Collecting build info...
+18:03:03 [build] ✓ Completed in 168ms.
+18:03:03 [build] Building static entrypoints...
+18:03:06 [vite] ✓ built in 2.72s
+18:03:06 [build] ✓ Completed in 2.80s.
+
+ building client (vite) 
+18:03:06 [vite] transforming...
+18:03:11 [vite] ✓ 36 modules transformed.
+18:03:11 [vite] rendering chunks...
+18:03:12 [vite] computing gzip size...
+18:03:12 [vite] dist/_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js      0.05 kB │ gzip:   0.07 kB
+18:03:12 [vite] dist/_astro/locale.B1rKA6B7.js                                               1.48 kB │ gzip:   0.66 kB
+18:03:12 [vite] dist/_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js         3.99 kB │ gzip:   2.00 kB
+18:03:12 [vite] dist/_astro/alpine-drive.astro_astro_type_script_index_0_lang.C3CnFqSU.js   18.85 kB │ gzip:   8.68 kB
+18:03:12 [vite] dist/_astro/tilttrail.astro_astro_type_script_index_0_lang.rfmI_Nfy.js      20.09 kB │ gzip:   8.75 kB
+18:03:12 [vite] dist/_astro/pulse-drift.astro_astro_type_script_index_0_lang.CPaJ78yP.js    22.68 kB │ gzip:   9.88 kB
+18:03:12 [vite] dist/_astro/ActionGame.astro_astro_type_script_index_0_lang.CSNPUpku.js     35.35 kB │ gzip:  14.72 kB
+18:03:12 [vite] dist/_astro/GLTFLoader.DMIQO1w8.js                                          44.84 kB │ gzip:  13.53 kB
+18:03:12 [vite] dist/_astro/BufferGeometryUtils.CRhGK4u3.js                                646.54 kB │ gzip: 166.00 kB
+18:03:12 [WARN] [vite] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+18:03:12 [vite] ✓ built in 5.89s
+
+ generating static routes 
+18:03:12 ▶ src/pages/404.astro
+18:03:12   └─ /404.html (+31ms) 
+18:03:12 ▶ src/pages/about/index.astro
+18:03:12   └─ /about/index.html (+6ms) 
+18:03:12 ▶ src/pages/contact.astro
+18:03:12   └─ /contact/index.html (+5ms) 
+18:03:12 ▶ src/pages/games/amber-step.astro
+18:03:12   └─ /games/amber-step/index.html (+6ms) 
+18:03:12 ▶ src/pages/games/index.astro
+18:03:12   └─ /games/index.html (+8ms) 
+18:03:12 ▶ src/pages/games/orbit-ribbon.astro
+18:03:12   └─ /games/orbit-ribbon/index.html (+2ms) 
+18:03:12 ▶ src/pages/games/pulse-drift.astro
+18:03:12   └─ /games/pulse-drift/index.html (+5ms) 
+18:03:12 ▶ src/pages/games/tilttrail.astro
+18:03:12   └─ /games/tilttrail/index.html (+2ms) 
+18:03:12 ▶ src/pages/index.astro
+18:03:12   └─ /index.html (+6ms) 
+18:03:12 ▶ src/pages/privacy/index.astro
+18:03:12   └─ /privacy/index.html (+5ms) 
+18:03:12 ▶ src/pages/prototypes/alpine-drive.astro
+18:03:12   └─ /prototypes/alpine-drive/index.html (+4ms) 
+18:03:12 ▶ /games/prototypes/tilttrail
+18:03:12   └─ /games/prototypes/tilttrail/index.html (+3ms) 
+18:03:12 ▶ /prototypes/pulse-drift
+18:03:12   └─ /prototypes/pulse-drift/index.html (+2ms) 
+18:03:12 ✓ Completed in 131ms.
+
+18:03:12 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+18:03:12 [build] 11 page(s) built in 9.09s
+18:03:12 [build] Complete!
+Portal routes and retirement guard passed.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

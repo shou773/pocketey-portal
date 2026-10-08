@@ -60,7 +60,7 @@ export function boot() {
       '1. Enter a yellow zone\n2. Flick left or right as the arrow shows\n3. Turn 45° at the end line\nChange your queued turn until the line. Avoid red blocks and road edges.');
     get('instructions').hidden=p==='clear';
     get('save').textContent=storageOK?tr(`この端末のクリア回数：${save.clears}`,`Clears on this device: ${save.clears}`):tr('保存不可：記録はこのタブのみ。','Storage unavailable: records last for this tab.');
-    get('art').textContent=tr('操作試作・1面のみ。画面の仕上げは未着手。','One-stage input prototype. Visual art pass not started.');
+    get('art').textContent=tr('山岳ドライブ試作・1ステージ。','Original mountain-drive prototype · one stage.');
     get('controls-note').textContent=tr('画面を左右フリック\nボタン / ← → / A D も可','FLICK LEFT / RIGHT\nButtons / ← → / A D');
     get('label').textContent=tr('操作試作','INPUT PROTOTYPE');
     get('progress').setAttribute('aria-label',tr('ゴールまでの進行度','Progress to finish'));

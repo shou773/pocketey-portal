@@ -1,0 +1,67 @@
+{
+  "basis": "CPU traversal of complete scene; NOT measured WebGL draws, FPS or input latency",
+  "baseline": "459fcb3f229f0dee42698d91187f027b19c588a7",
+  "wholeSceneTriangles": 8362,
+  "meshBatches": 46,
+  "sceneryVariants": {
+    "trees": 3,
+    "rocks": 3
+  },
+  "carScreenCenter": {
+    "x": 0.5,
+    "y": 0.71247911386829
+  },
+  "carBoundsByHeading": [
+    {
+      "heading": -1,
+      "min": [
+        -0.4563612709352304,
+        0.0073348418809473515,
+        -0.4563612709352303
+      ],
+      "max": [
+        0.44221912772506666,
+        0.46549999713897705,
+        0.44221912772506666
+      ]
+    },
+    {
+      "heading": 0,
+      "min": [
+        -0.2800000011920929,
+        0.0073348418809473515,
+        -0.38499999046325684
+      ],
+      "max": [
+        0.2800000011920929,
+        0.46549999713897705,
+        0.36399999260902405
+      ]
+    },
+    {
+      "heading": 1,
+      "min": [
+        -0.44221912772506666,
+        0.0073348418809473515,
+        -0.4563612709352303
+      ],
+      "max": [
+        0.4563612709352304,
+        0.46549999713897705,
+        0.44221912772506666
+      ]
+    }
+  ],
+  "browserValidation": {
+    "status": "blocked",
+    "reason": "Existing Chromium SUID sandbox helper is owned by nobody:nogroup, rather than root. Nested unshare also cannot write /proc/self/uid_map. Security settings and permissions were not changed.",
+    "newBrowserInputRun": false,
+    "newWebGLRun": false
+  },
+  "auxiliaryPreview": {
+    "renderer": "Blender Cycles CPU",
+    "samples": 16,
+    "denoising": false,
+    "meaning": "Actual exported Three.js mesh geometry and camera. Different renderer, lighting, tone mapping and fog; no HTML UI. NOT a game screenshot or performance result."
+  }
+}
