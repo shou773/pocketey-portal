@@ -43,6 +43,7 @@ try {
   await page.goto(`http://127.0.0.1:${servers[variant].address().port}/games/${game}/`);
   await page.waitForFunction(() => { const canvas = document.querySelector('canvas'); return canvas && (!canvas.dataset.art || canvas.dataset.artAdopted === 'true'); });
   await page.waitForTimeout(300);
+  await page.locator('#sound').click();
   await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
   const before = await session.send('Performance.getMetrics');
   const sample = await page.evaluate(async () => {
@@ -60,6 +61,7 @@ try {
   await context.close();
   if(browser.contexts().length!==0) throw new Error('Browser contexts accumulated');
  }
+ for(const baseline of results.filter(x=>x.variant==='baseline')){const candidate=results.find(x=>x.round===baseline.round&&x.mobile===baseline.mobile&&x.game===baseline.game&&x.variant==='candidate');if(JSON.stringify(baseline.canvas)!==JSON.stringify(candidate.canvas))throw new Error('Paired framebuffers differ: '+baseline.game);}
  mkdirSync('performance-results',{recursive:true});
- writeFileSync('performance-results/comparison.json',JSON.stringify({...environment,description:'Three predeclared alternating rounds. Same browser, desktop 1280x720 and mobile 390x844 DPR1, stage 1 first 1500ms after asset adoption and equal 300ms menu dwell; first 10 callbacks excluded. Samples ending outside running state or with fewer than 10 measured callbacks after warm-up are marked invalid and retained, never silently discarded. Draw-submit timing is CPU/driver submission, not asynchronous GPU execution time. Triangle counts include submitted instanced geometry, not just visible fragments. Static initial segment only, not a stage-3 or touch-animation substitute. No threshold assertions or release-completion claim. Fresh closed context per sample.',results},null,2));
+ writeFileSync('performance-results/comparison.json',JSON.stringify({...environment,description:'Three predeclared alternating rounds. Sound enabled through the native button in both builds. Equal paired framebuffers asserted. Same browser, desktop 1280x720 and mobile 390x844 DPR1, stage 1 first 1500ms after asset adoption and equal 300ms menu dwell; first 10 callbacks excluded. Samples ending outside running state or with fewer than 10 measured callbacks after warm-up are marked invalid and retained, never silently discarded. Draw-submit timing is CPU/driver submission, not asynchronous GPU execution time. Triangle counts include submitted instanced geometry, not just visible fragments. Static initial segment only, not a stage-3 or touch-animation substitute. No threshold assertions or release-completion claim. Fresh closed context per sample.',results},null,2));
 } finally {await browser.close(); for(const server of servers) server.close();}

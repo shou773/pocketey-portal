@@ -47,12 +47,13 @@ jobs:
       - run: npm ci
       - run: npm run check && npm run check:games && npm test && npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Compare fixed baseline and candidate on the same runner
+      - name: Compare published main 711b53 and candidate on the same runner
         run: |
           mkdir -p "$RUNNER_TEMP/game-baseline"
-          git archive aa44ef3a2e6ab853f2c13a168e73dd0e56459907 | tar -x -C "$RUNNER_TEMP/game-baseline"
+          git archive 711b53dad512a5c09ac06d564ec5457e554f4ead | tar -x -C "$RUNNER_TEMP/game-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/game-baseline/node_modules"
           (cd "$RUNNER_TEMP/game-baseline" && npm run build)
+          cp tests/games/browser.spec.ts tests/games/input.ts "$RUNNER_TEMP/game-baseline/tests/games/"
           node scripts/games-performance.mjs "$RUNNER_TEMP/game-baseline/dist" dist
       - name: Measure public baseline through the same ordinary-input stage-3 gates
         continue-on-error: true
@@ -131,19 +132,40 @@ jobs:
           pactl load-module module-null-sink sink_name=pocketey_test_audio
           pactl set-default-sink pocketey_test_audio
           pactl info
-      - run: npx playwright test --config playwright.release.config.ts
-      - run: xvfb-run --auto-servernum env RELEASE_CROSS=1 npx playwright test --config playwright.release.config.ts
-      - run: npx playwright test --config tests/prototypes/ball/playwright.config.ts
+      - id: audio
+        continue-on-error: true
+        run: npx playwright test --config playwright.release.config.ts
+      - id: audio_cross
+        continue-on-error: true
+        run: xvfb-run --auto-servernum env RELEASE_CROSS=1 npx playwright test --config playwright.release.config.ts
+      - id: tilt
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/ball/playwright.config.ts
       - name: Pulse Drift ordinary keyboard/touch gameplay and lifecycle
+        id: pulse
+        continue-on-error: true
         run: |
           npm run preview -- --host 127.0.0.1 --port 4331 > /tmp/pulse-preview.log 2>&1 &
           for i in $(seq 1 30); do curl --silent --fail http://localhost:4331/ > /dev/null && break; sleep 1; done
-          node tests/prototypes/play.mjs
-          node tests/prototypes/ui.mjs
-          node tests/prototypes/loss.mjs
-          node tests/prototypes/performance.mjs
+          status=0
+          node tests/prototypes/play.mjs || status=1
+          node tests/prototypes/ui.mjs || status=1
+          node tests/prototypes/loss.mjs || status=1
+          node tests/prototypes/performance.mjs || status=1
+          exit "$status"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: four-game-audio-evidence
           path: test-results/
+
+      - name: Aggregate all four-game gate failures without skipping another game
+        if: always()
+        env:
+          AUDIO: ${{ steps.audio.outcome }}
+          AUDIO_CROSS: ${{ steps.audio_cross.outcome }}
+          TILT: ${{ steps.tilt.outcome }}
+          PULSE: ${{ steps.pulse.outcome }}
+        run: |
+          printf 'audio=%s cross=%s tilt=%s pulse=%s\n' "$AUDIO" "$AUDIO_CROSS" "$TILT" "$PULSE"
+          test "$AUDIO" = success && test "$AUDIO_CROSS" = success && test "$TILT" = success && test "$PULSE" = success

@@ -66,7 +66,7 @@ async function drive(page: Page, touch: boolean) {
   if (measurement) {
     const result = await measurement; await writeFile(`${evidence}/${touch ? 'mobile' : 'desktop'}-performance.json`, JSON.stringify(result, null, 2));
     expect(result.drawCalls).toBeLessThanOrEqual(16); expect(result.triangles).toBeLessThan(6000);
-    expect(result.fps).toBeGreaterThanOrEqual(45); expect(result.p95).toBeLessThanOrEqual(40);
+    expect.soft(result.fps).toBeGreaterThanOrEqual(45); expect.soft(result.p95).toBeLessThanOrEqual(40);
   }
   expect(end.phase, JSON.stringify(end)).toBe('clear');
   await expect(page.locator('#tt-stages')).toBeHidden();
@@ -91,7 +91,9 @@ for (const touch of [false, true]) test(`all three stages clear with ordinary ${
   expect(await page.evaluate(() => localStorage.getItem('pocketey-orbit-amber-v1'))).toBe('untouched-sentinel');
   await page.reload();
   await expect(page.locator('#tt-stages')).toContainText('BEST');
+  const reloaded=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);expect(reloaded).toEqual(saved);
   expect(errors).toEqual([]);
+  await writeFile(`${evidence}/${touch?'mobile':'desktop'}-functional-completion.json`,JSON.stringify({threeNativeClears:true,saved,reloaded,errors},null,2));
 });
 
 test('fall → instant retry, pause, input release, mute, language and rapid actions', async ({ page }) => {
