@@ -13,15 +13,12 @@ export async function loadAmberLandmark() {
 
 // Amber's original sandstone garden. All objects are opaque and enter the
 // existing static vertex-color batches; there are no lights or textures here.
-const stone = new T.MeshLambertMaterial({ color: 0xbb7b69 });
-const sand = new T.MeshLambertMaterial({ color: 0xf1d8a2 });
 const sage = new T.MeshLambertMaterial({ color: 0x799e86 });
 const bark = new T.MeshLambertMaterial({ color: 0x8d625b });
 const leaf = new T.SphereGeometry(1, 6, 4);
 const stem = new T.CylinderGeometry(.12, .22, 1, 5);
 const rockGeometry = new T.DodecahedronGeometry(1, 0);
 rockGeometry.setIndex(Array.from({ length: rockGeometry.getAttribute('position').count }, (_, i) => i));
-const capGeometry = new T.SphereGeometry(1, 7, 4);
 
 // Horizontal rings preserve the exact authored platform extent and flat top.
 // Only the undersides taper. A few large color bands communicate strata
@@ -84,13 +81,6 @@ export function placeAmberPlants(parent: T.Group, a: number, b: number, top: num
     if (hazards.every(h => Math.abs(h - x) > 1.6)) plant(parent, x, top, -1.48, .32);
   }
 }
-const mesaGeometry = strata(10, 7, [
-  { y: 0, inset: .7, color: 0xd9acb2 },
-  { y: -1, inset: .1, color: 0xb789a0 },
-  { y: -1.3, inset: .15, color: 0xd8afb6 },
-  { y: -4, inset: .6, color: 0x98758d },
-  { y: -7, inset: 1.7, color: 0x826c86 }
-]);
 const archShape = new T.Shape();
 archShape.moveTo(-4.5, 0); archShape.lineTo(-4.5, 4.2);
 for (let i = 0; i <= 10; i++) {
@@ -121,26 +111,22 @@ export function createAmberCanyon(horizon: T.Group, landmark?: T.Object3D) {
   }
   const archMaterial = new T.MeshLambertMaterial({ color: 0xc49caa });
   for (const x of [6, 35, 67, 99]) {
+    const formation = new T.Group(); formation.position.set(x, -2, -19); formation.rotation.y = -.16;
     const arch = landmark ? landmark.clone(true) : new T.Mesh(archGeometry, archMaterial);
-    arch.position.set(x, -2, -19); arch.rotation.y = -.16; horizon.add(arch);
+    formation.add(arch);
+    // Embed both squared feet in distant rock shoulders. The supports extend
+    // below the view and share the arch's existing static opaque batch.
+    for (const side of [-1, 1]) {
+      const root = new T.Mesh(rockGeometry, archMaterial);
+      root.position.set(side * 3.6, -27, .9); root.scale.set(2.2, 30, 2);
+      formation.add(root);
+    }
+    horizon.add(formation);
   }
   const cloudGeometry = new T.SphereGeometry(1, 6, 3), cloudMaterial = new T.MeshBasicMaterial({ color: 0xffeddb });
   for (let i = 0; i < 5; i++) for (let j = 0; j < 2; j++) {
     const cloud = new T.Mesh(cloudGeometry, cloudMaterial);
     cloud.scale.set(2.3, .28 + j * .1, .5);
     cloud.position.set(i * 16 - 22 + j * 1.3, 10 + i % 2 + j * .14, -31); horizon.add(cloud);
-  }
-}
-export function placeAmberGarden(parent: T.Group) {
-  for (let i = 0; i < 6; i++) {
-    // Set decorative surfaces well below gameplay tops: a background mesa
-    // aligned with a narrow gap must not read as an intermediate landing.
-    const x = i * 13 - 12, top = -3.3 - i % 3 * .35, z = -9 - i % 2 * 3;
-    const mesa = new T.Mesh(mesaGeometry, painted); mesa.position.set(x, top, z); mesa.scale.set(.7, .55, .7); parent.add(mesa);
-    plant(parent, x - 1.1, top, z, 1.1 + i % 2 * .25);
-    const rock = new T.Mesh(rockGeometry, stone);
-    rock.position.set(x + 1.7, top + .35, z + .4); rock.scale.set(.8, .55, .6); parent.add(rock);
-    const cap = new T.Mesh(capGeometry, sand);
-    cap.position.set(x + 1.7, top + .55, z + .4); cap.scale.set(.65, .12, .5); parent.add(cap);
   }
 }

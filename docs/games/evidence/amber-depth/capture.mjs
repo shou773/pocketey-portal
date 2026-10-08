@@ -7,13 +7,15 @@ if (!['before', 'after'].includes(phase)) throw Error('Expected before or after'
 const base = process.env.AMBER_BASE_URL || 'http://127.0.0.1:4344';
 const stage = process.env.AMBER_STAGE === '3' ? 3 : 1;
 const scenario = process.env.AMBER_CASE || '';
+const contactReview = process.env.AMBER_REVIEW === 'contact';
 if (scenario && (stage !== 3 || !['stop', 'early', 'late'].includes(scenario))) throw Error('Cases require stage3: stop, early, late');
-const out = new URL(`./${phase}${stage === 3 ? '-stage3' : ''}${scenario ? '-' + scenario : ''}/`, import.meta.url);
+const out = new URL(`./${contactReview ? 'contact-review/' : ''}${phase}${stage === 3 ? '-stage3' : ''}${scenario ? '-' + scenario : ''}/`, import.meta.url);
 await fs.mkdir(out, { recursive: true });
 const browser = await chromium.launch({ executablePath: '/usr/bin/chromium', args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 const results = [];
 try {
-  for (const viewport of [{ width: 390, height: 844 }, { width: 844, height: 390 }]) {
+  const viewports = contactReview ? [stage === 3 ? { width: 390, height: 844 } : { width: 844, height: 390 }] : [{ width: 390, height: 844 }, { width: 844, height: 390 }];
+  for (const viewport of viewports) {
     const context = await browser.newContext({ locale: 'ja-JP', viewport, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
     const page = await context.newPage(); const errors = [];
     if (stage === 3) await context.addInitScript(() => {
@@ -51,6 +53,7 @@ try {
       callback(window.amberCapture.now);
     });
     const capture = async name => {
+      if (contactReview && name !== (stage === 3 ? 'edge-spike' : 'start')) return;
       await page.screenshot({ path: new URL(`${viewport.width}-${name}.png`, out).pathname });
       results.push(await page.evaluate(({ name, viewport }) => {
         const canvas = document.querySelector('canvas'), gl = canvas.getContext('webgl2'), ext = gl.getExtension('WEBGL_debug_renderer_info');

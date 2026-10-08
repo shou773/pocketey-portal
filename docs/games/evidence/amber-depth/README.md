@@ -2,6 +2,8 @@
 
 Base: public main `a443ec37c33cae22021c82b7b20f3fb6e62f02c6`. Branch: `codex/amber-step-depth`. This is a draft visual candidate. Merge, publication, full all-stage browser/cross-browser CI and physical-device verification are pending visual approval.
 
+The snapshot below records `258e880`. The subsequent [two-point contact/gap revision](contact-review/README.md) supersedes its scenery images and draw counts. Performance for that revision is pending; the earlier low sample is preserved below.
+
 ## Result and scope
 
 The original long green deck and rectangular underside become a cream sandstone surface with warm strata and a tapered underside. Sparse sage shrubs, pink/lavender mesas, distant canyon walls, restrained clouds and a chamfered rock arch form an original sunset sandstone garden. The existing licensed Oodi, its animation/rig, contact shadow and sunset remain. Native warning edges and red spikes retain their positions and geometry. Platform shrubs have at least1.4m center clearance from gap endpoints and1.6m from spike centers; near background mesas are lowered to avoid suggesting intermediate landings inside gaps. No collectible or other mechanic is introduced.

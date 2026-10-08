@@ -1,7 +1,7 @@
 import * as T from 'three';
 import { stages, type Kind, type State } from './model';
 import { loadArt, batchStatic, clearStatic, placeArt, createSky, type Art } from './art';
-import { createAmberCanyon, loadAmberLandmark, placeAmberGarden, placeAmberPlants, placeSandstone } from './amber-scenery';
+import { createAmberCanyon, loadAmberLandmark, placeAmberPlants, placeSandstone } from './amber-scenery';
 export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const renderer = new T.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6));
@@ -107,7 +107,8 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
         }
       }
     }
-    if (kind === 'amber') placeAmberGarden(backdrop);
+    // Amber scenery stays in the distant canyon: near decorative islands
+    // can align with jump gaps and falsely suggest a landing surface.
     batchStatic(level, kind); batchStatic(backdrop, kind);
     temporaryGeometry.forEach(geometry => geometry.dispose());
   }
