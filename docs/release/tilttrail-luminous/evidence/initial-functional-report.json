@@ -51,7 +51,7 @@
       [
         "json",
         {
-          "outputFile": "evidence/functional-report.json"
+          "outputFile": "docs/release/tilttrail-luminous/evidence/functional-report.json"
         }
       ]
     ],
@@ -90,12 +90,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 5037,
+                  "duration": 5015,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T18:44:40.928Z",
+                  "startTime": "2026-10-08T18:24:33.963Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -124,12 +124,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3798,
+                  "duration": 3653,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T18:44:45.976Z",
+                  "startTime": "2026-10-08T18:24:38.995Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -166,12 +166,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 92853,
+                      "duration": 93611,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-08T18:43:07.575Z",
+                      "startTime": "2026-10-08T18:22:59.870Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -191,8 +191,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-08T18:43:07.199Z",
-    "duration": 102683.653,
+    "startTime": "2026-10-08T18:22:59.414Z",
+    "duration": 103340.68800000001,
     "expected": 3,
     "skipped": 0,
     "unexpected": 0,

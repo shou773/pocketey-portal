@@ -16,14 +16,16 @@ export function createView(canvas: HTMLCanvasElement) {
   skyColor.addColorStop(0, '#3b5e73'); skyColor.addColorStop(.08, '#3b5e73');
   skyColor.addColorStop(.26, '#8cc4df'); skyColor.addColorStop(.56, '#c7e2e7'); skyColor.addColorStop(1, '#f2ebd9');
   sky.fillStyle = skyColor; sky.fillRect(0, 0, 256, 512);
-  // Three thin, overlapping wind-shaped layers per cloud, painted just once.
-  // Asymmetric shoulders and blue undersides avoid separate white puff balls.
-  sky.filter = 'blur(2.5px)';
-  for (const [x, y, w, h] of [[19, 113, 78, 16], [233, 202, 86, 19], [12, 349, 94, 15]]) {
+  // A few large/medium/small wind-shaped layers give each cloud a warm crown
+  // and a cool underside. All depth is in this same once-painted texture.
+  sky.filter = 'blur(1.8px)';
+  for (const [x, y, w, h] of [[8, 113, 90, 30], [238, 208, 96, 38], [0, 345, 92, 28], [257, 392, 51, 17]]) {
     for (const [dx, dy, scale, fill] of [
-      [0, 7, 1.08, 'rgba(134, 181, 201, .18)'],
-      [0, 0, 1, 'rgba(244, 249, 245, .48)'],
-      [-9, -5, .78, 'rgba(255, 252, 239, .40)'],
+      [0, 9, 1.08, 'rgba(132, 173, 198, .32)'],
+      [0, 0, 1, 'rgba(239, 246, 244, .66)'],
+      [-12, -9, .74, 'rgba(255, 250, 231, .68)'],
+      [24, -4, .50, 'rgba(255, 251, 237, .52)'],
+      [-24, 13, .76, 'rgba(190, 217, 225, .30)'],
     ] as const) {
       sky.save(); sky.translate(x + dx, y + dy); sky.scale(w * scale, h * scale);
       sky.fillStyle = fill; sky.beginPath(); sky.moveTo(-1, .12);
@@ -36,7 +38,7 @@ export function createView(canvas: HTMLCanvasElement) {
     }
   }
   sky.filter = 'none';
-  sky.fillStyle = 'rgba(133, 170, 182, .09)'; sky.beginPath();
+  sky.fillStyle = 'rgba(126, 162, 181, .20)'; sky.beginPath();
   sky.moveTo(0, 432); sky.lineTo(24, 414); sky.lineTo(47, 426); sky.lineTo(72, 407); sky.lineTo(105, 440); sky.lineTo(0, 449); sky.closePath(); sky.fill();
   sky.beginPath(); sky.moveTo(171, 461); sky.lineTo(206, 432); sky.lineTo(228, 449); sky.lineTo(256, 426); sky.lineTo(256, 468); sky.closePath(); sky.fill();
   // The painted backdrop is already in display sRGB. Sample it directly;
@@ -84,17 +86,22 @@ export function createView(canvas: HTMLCanvasElement) {
   let stage = -1, lastZ = 0, lastX = 0;
   let rockGeometry: THREE.BufferGeometry | null = null, courseIslands: THREE.InstancedMesh | null = null;
   let disposed = false, observatoryGeometry: THREE.BufferGeometry | null = null, courseArches: THREE.InstancedMesh | null = null;
-  // Repaint the existing background vertices only: positions/normals/instances
-  // are untouched, and all six rocks still share a single geometry and draw.
+  // Give the existing rock triangles distinct paint. Deindexing lets adjacent
+  // faces own a color; rendered positions/normals and all six instances stay
+  // identical. This is still one shared rock geometry/material/draw.
   function paintRock(geometry: THREE.BufferGeometry) {
+    if (geometry.index) { const faces = geometry.toNonIndexed(); geometry.copy(faces); faces.dispose(); }
     const positions = geometry.getAttribute('position'); geometry.computeBoundingBox();
     const bounds = geometry.boundingBox!, colors: number[] = [];
-    const lower = new THREE.Color(0x6c879b), upper = new THREE.Color(0xa6bbc5);
-    for (let i = 0; i < positions.count; i++) {
-      const height = (positions.getY(i) - bounds.min.y) / (bounds.max.y - bounds.min.y);
-      const color = lower.clone().lerp(upper, THREE.MathUtils.smoothstep(height, .1, .95));
-      color.multiplyScalar(1 + .035 * Math.sin(positions.getX(i) * .9 + positions.getZ(i) * .5));
-      colors.push(color.r, color.g, color.b);
+    const lower = new THREE.Color(0x58768d), upper = new THREE.Color(0xa6bcc5);
+    const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), face = new THREE.Vector3();
+    for (let i = 0; i < positions.count; i += 3) {
+      a.fromBufferAttribute(positions, i); b.fromBufferAttribute(positions, i + 1); c.fromBufferAttribute(positions, i + 2);
+      const height = ((a.y + b.y + c.y) / 3 - bounds.min.y) / (bounds.max.y - bounds.min.y);
+      face.crossVectors(b.clone().sub(a), c.clone().sub(a)).normalize();
+      const color = lower.clone().lerp(upper, THREE.MathUtils.smoothstep(height, .15, .94));
+      color.multiplyScalar(.93 + .18 * Math.max(0, face.y) - .08 * face.x + .035 * face.z);
+      for (let vertex = 0; vertex < 3; vertex++) colors.push(color.r, color.g, color.b);
     }
     geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     return geometry;
@@ -111,6 +118,14 @@ export function createView(canvas: HTMLCanvasElement) {
     });
     if (!geometry) return;
     if (disposed) { geometry.dispose(); return; }
+    const positions = geometry.getAttribute('position'), normals = geometry.getAttribute('normal'), colors: number[] = [];
+    for (let i = 0; i < positions.count; i++) {
+      const front = Math.abs(normals.getZ(i)), top = Math.max(0, normals.getY(i));
+      const color = new THREE.Color(0x8d9fab).lerp(new THREE.Color(0xded6ba), Math.min(1, front * .78 + top * .45));
+      if (positions.getY(i) > 2.3) color.lerp(new THREE.Color(0xf0e5c9), .18);
+      colors.push(color.r, color.g, color.b);
+    }
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     observatoryGeometry = geometry;
     if (courseArches) {
       courseArches.geometry.dispose(); courseArches.geometry = observatoryGeometry.clone(); courseArches.material = observatoryMaterial;
