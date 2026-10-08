@@ -6,11 +6,12 @@ existing prototype filter. No homepage or existing game page is changed.
 
 This is one stage with an original mountain scene built from the parent's
 **written production brief**, not from retrieved reference-image pixels.
-The new art is implemented, but its real WebGL/browser acceptance is **blocked**
-in this execution environment. Do not treat the auxiliary previews as game
-screenshots or as approval of reference fidelity.
+The current art was verified in actual Chromium/Three.js in the receiving
+environment at source commit `b5183d9835b7b9c2ddbbbbd0e371c7a22639e5f0`.
+A full stage and retry passed with ordinary touch flicks and wall clock.
+Reference-image fidelity and physical-device performance remain unverified.
 
-![Auxiliary Blender view of the implemented meshes and camera; not a WebGL game screenshot](evidence/art-pass/02-before-turn-blender-preview.png)
+![Actual WebGL game screen after retry](evidence/webgl-b5183d9/07-full-run-retry.png)
 
 ## Current art pass, 2026-10-08
 
@@ -41,7 +42,8 @@ Current checks:
 | Type check and production build | Pass | `check:games`, build and route guard |
 | Whole-scene static budget | 8,362 triangles / 46 mesh batches | Includes every instance; not measured GPU draw calls or FPS |
 | Auxiliary renders | Start, before first turn, near finish inspected | Blender Cycles CPU, same exported meshes/camera, different lighting, tone mapping and fog; no HTML UI |
-| Current browser input / real WebGL | **Blocked, not rerun** | Chromium SUID sandbox helper is owned by `nobody:nogroup`; a nested user namespace cannot write `uid_map`. No permissions or sandbox settings were changed |
+| Current browser input | 6/6 pass, zero retries | Unchanged input suite; controlled clock and no-op renderer; not WebGL coverage |
+| Current actual WebGL | Pass | Chromium 151 / SwiftShader, ordinary clock, real CDP touch; full clear and retry in one attempt, plus pause/resume and 320×568 bounds |
 
 The first auxiliary render failed because this Blender build lacks
 OpenImageDenoise. The failure log is retained. Denoising was disabled for the
@@ -58,10 +60,35 @@ Evidence: [scene audit](evidence/art-pass/scene-audit.json),
 [near finish](evidence/art-pass/03-near-finish-blender-preview.png),
 [initial Blender failure](evidence/art-pass/blender-initial-failure.log).
 
-The completion requirement of three **actual game renders** remains open.
-The previous 6 browser tests and limited WebGL smoke below apply only to the
-saved greybox baseline, not the new art, revised camera or current mobile CSS.
-No current browser, device, GPU-performance or input-latency acceptance is claimed.
+The original art environment could not launch Chromium: its SUID sandbox helper
+was owned by `nobody:nogroup`, and a nested namespace could not write `uid_map`.
+That historical blocker was resolved by reviewing the same game source in the
+working conveyor environment, using its existing browser flags. No OS, TLS or
+permission settings were changed. The actual game renders now cover the start,
+first turn, near finish, goal and retry. Only documentation/evidence changed
+after `b5183d9`; no game behavior or art was changed for this review.
+
+The full-stage run used four normal flicks (left, right, right, left), no
+controlled clock, no state/input mutation and no renderer interception. It
+reached `z=50`, `gate=4`, saved exactly one clear, and the visible retry button
+reset the turn state. There were no page errors. The separate six-test input
+suite still substitutes rendering and controls time. Its log retains a blocked
+Astro development-toolbar resource caused by the temporary dependency symlink;
+all six game tests passed. The symlink was removed afterward.
+
+Current actual evidence: [review notes](evidence/webgl-b5183d9/README.md),
+[initial screen](evidence/webgl-b5183d9/01-ready-webgl.png),
+[first turn](evidence/webgl-b5183d9/04-full-run-first-turn.png),
+[near finish](evidence/webgl-b5183d9/05-full-run-near-finish.png),
+[goal](evidence/webgl-b5183d9/06-full-run-goal.png),
+[retry](evidence/webgl-b5183d9/07-full-run-retry.png),
+[full-stage result](evidence/webgl-b5183d9/complete-stage.json),
+[input suite](evidence/webgl-b5183d9/input6-report.json).
+
+The new actual screenshots are stored in this PR. Library helper discovery
+returned HTTP 401 before upload preparation; no further save was attempted and
+no new Library ID is claimed. Existing Library IDs below still identify their
+older auxiliary/greybox images.
 
 Auxiliary reproduction (not a browser substitute):
 
@@ -166,7 +193,8 @@ or claim to have viewed the reference. No TLS or domain setting was changed.
 
 Unverified: real iOS/Android devices, Safari/Firefox, native hardware frame rate,
 end-to-end latency under load, subjective human difficulty, and final audio
-listening/mix. Reference-image fidelity is not claimed; browser validation of the new mountain art is blocked. The fixed
+listening/mix. Reference-image fidelity is not claimed. Current actual WebGL
+verification is limited to the Chromium/SwiftShader environment above. The fixed
 step loop bounds delayed-frame catch-up at 100 ms, so very slow renderers can
 slow simulation; no cloud SwiftShader FPS claim is made.
 
