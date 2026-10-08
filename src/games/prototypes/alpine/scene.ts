@@ -9,14 +9,25 @@ function roadStrip(from: number, to: number, half: number, offset: number, y: nu
     [a-half,y,-from], [b+half,y,-to], [b-half,y,-to]]);
 }
 export function createAlpineScene() {
-  const scene=new THREE.Scene();scene.background=new THREE.Color(0xc2c9c7);
-  scene.fog=new THREE.Fog(0xc2c9c7,60,175);
+  const scene=new THREE.Scene();
+  // A tiny procedural sky texture keeps the upper view open without extra meshes.
+  const skyPixels=new Uint8Array(128*4),skyTop=new THREE.Color(0xaed7ef);
+  for(let y=0;y<128;y++) {
+    // The fixed camera's horizon occupies the upper fifth of the viewport.
+    const blend=THREE.MathUtils.clamp((y/127-.8)/.2,0,1);
+    const color=new THREE.Color(0xf5d8cb).lerp(skyTop,blend).convertLinearToSRGB();
+    skyPixels.set([Math.round(color.r*255),Math.round(color.g*255),Math.round(color.b*255),255],y*4);
+  }
+  const sky=new THREE.DataTexture(skyPixels,1,128);
+  sky.colorSpace=THREE.SRGBColorSpace;sky.magFilter=THREE.LinearFilter;
+  sky.minFilter=THREE.LinearFilter;sky.needsUpdate=true;scene.background=sky;
+  scene.fog=new THREE.Fog(0xc2d8df,60,175);
   // Fixed world direction. Perspective makes the small bounded car readable;
   // the camera never turns in response to steering.
   const camera=new THREE.PerspectiveCamera(42,1,.1,230);
   const materials:THREE.Material[]=[];
   const material=(hex:number) => {const m=new THREE.MeshLambertMaterial({color:hex,flatShading:true});materials.push(m);return m;};
-  const asphalt=material(0x55565a), stone=material(0xe6d9bb), cliff=material(0x9b9588);
+  const asphalt=material(0x515b64), stone=material(0xe6d9bb), cliff=material(0x9b9588);
   const grass=material(0x809347), dark=material(0x252c30), ivory=material(0xffedcb);
   const yellow=material(0xffc629), orange=material(0xf57532), wood=material(0x796449);
   const world=new Parts();
@@ -42,7 +53,7 @@ export function createAlpineScene() {
   }
   for(let z=-5;z<FINISH;z+=3) world.add(roadStrip(z,z+.8,.028,0,.017),stone);
   const zones=GATES.map(gate=>{
-    const m=material(0x887d4c);
+    const m=material(0xf0c987);m.transparent=true;m.opacity=.11;m.depthWrite=false;
     scene.add(new THREE.Mesh(roadStrip(gate.z-WINDOW,gate.z,ROAD_HALF-.14,0,.024),m));
     world.add(roadStrip(gate.z-.07,gate.z+.07,ROAD_HALF-.05,0,.033),yellow);
     const x=roadX(gate.z-2),z=-(gate.z-2),d=gate.direction;
@@ -102,28 +113,26 @@ export function createAlpineScene() {
   const vista=new THREE.Group();vista.name='distant-landscape';scene.add(vista);
   const lake=new THREE.Mesh(new THREE.PlaneGeometry(270,230),material(0x5e8d94));
   lake.rotation.x=-Math.PI/2;lake.position.set(0,-7.5,-60);vista.add(lake);
-  const mountainColors=[0xaebac2,0x839aaa,0x637f8c];
+  const mountainColors=[0xc4d9e7,0x9cbacb,0x789eaf];
+  const ridge=[2,0,6,2,8,1,5,0,7,2,6,1,3];
   for(let layer=0;layer<3;layer++) {
-    const points:Point[]=[],tints:number[]=[],base=new THREE.Color(mountainColors[layer]),z=-145+layer*30;
-    for(let i=0;i<18;i++) {
-      const x=-135+i*15,peak=9+noise(i+layer*41)*(20-layer*3),valley=2+noise(i*3+layer)*6;
-      const vertices:Point[]=[[x,-8,z],[x+7,peak,z-8],[x+15,valley,z],
-        [x,-8,z],[x+15,valley,z],[x+15,-8,z],
-        [x+7,peak,z-8],[x+15,-8,z],[x+17,peak*.53,z+4]];
-      points.push(...vertices);
-      for(let j=0;j<vertices.length;j++) {
-        const c=base.clone().multiplyScalar(j<3?1.08:j<6?.95:.82);tints.push(c.r,c.g,c.b);
-      }
+    const points:Point[]=[],z=-150+layer*30;
+    // Broad, low silhouettes: distant peaks stay pale and below the open sky.
+    const height=(i:number)=>1-layer*2+ridge[(i+layer*3)%ridge.length]*.8;
+    for(let i=0;i<12;i++) {
+      const x=-160+i*(320/12),next=x+320/12;
+      points.push([x,-15,z],[x,height(i),z],[next,height(i+1),z],
+        [x,-15,z],[next,height(i+1),z],[next,-15,z]);
     }
-    const g=triangles(points);g.setAttribute('color',new THREE.Float32BufferAttribute(tints,3));
-    const m=new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide});materials.push(m);vista.add(new THREE.Mesh(g,m));
+    const m=new THREE.MeshBasicMaterial({color:mountainColors[layer],side:THREE.DoubleSide,fog:false});
+    materials.push(m);vista.add(new THREE.Mesh(triangles(points),m));
   }
   const shadowMaterial=new THREE.MeshBasicMaterial({color:0x172d32,transparent:true,opacity:.17,depthWrite:false});materials.push(shadowMaterial);
   const carShadow=new THREE.Mesh(new THREE.CircleGeometry(1,16),shadowMaterial);
   carShadow.rotation.x=-Math.PI/2;carShadow.scale.set(.32,.45,1);scene.add(carShadow);
   const car=makeCar(material);scene.add(car);
-  scene.add(new THREE.HemisphereLight(0xbbc8e0,0x48513c,1.55));
-  const sun=new THREE.DirectionalLight(0xffd3a0,2.15);sun.position.set(18,28,12);scene.add(sun);
+  scene.add(new THREE.HemisphereLight(0xdeefff,0x788576,2));
+  const sun=new THREE.DirectionalLight(0xffdfbb,1.85);sun.position.set(18,28,12);scene.add(sun);
 
   function update(state:State,aspect:number) {
     car.position.set(state.x,0,-state.z);car.rotation.y=-state.heading*Math.PI/4;
@@ -132,13 +141,17 @@ export function createAlpineScene() {
     camera.position.set(state.x+2,6,-state.z+13);
     camera.lookAt(state.x-20/13,0,-state.z-10);camera.updateMatrixWorld();
     vista.position.set(state.x*.6,0,-state.z);
-    zones.forEach((m,i)=>m.color.setHex(i===state.gate&&windowOpen(state)?state.queued===null?0xc9a342:0x72a890:0x887d4c));
+    zones.forEach((m,i)=>{
+      const active=i===state.gate&&windowOpen(state);
+      m.color.setHex(active?state.queued===null?0xffcf6a:0x9bd7b4:0xf0c987);
+      m.opacity=active?.19:.11;
+    });
     scene.updateMatrixWorld(true);
   }
   function dispose() {
     const geometries=new Set<THREE.BufferGeometry>();
     scene.traverse(object=>{if(object instanceof THREE.Mesh)geometries.add(object.geometry);});
-    geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());
+    geometries.forEach(g=>g.dispose());materials.forEach(m=>m.dispose());sky.dispose();
   }
   return {scene,camera,car,barriers,update,dispose};
 }
