@@ -1,0 +1,115 @@
+{
+  "unchangedFiles": [
+    {
+      "path": "art/pulse/pulse-vehicles.blend",
+      "sha256": "5b893c4009e0919ff5062b0e41384d30caa9c5f51bfd34ea13bf3448e5afc8b4",
+      "sameAsD106": true
+    },
+    {
+      "path": "public/games/assets/pulse/pulse-vehicles.glb",
+      "sha256": "05f0d70d155b69a9d6c08557120e556b82f3d57f8864eb0653d40444386c160d",
+      "sameAsD106": true
+    },
+    {
+      "path": "scripts/blender/pulse_vehicles.py",
+      "sha256": "dd0788ce105ab234b0c9ba370551a1d99c6ee78c52a3407a6bcf694e640b85ce",
+      "sameAsD106": true
+    },
+    {
+      "path": "src/games/prototypes/shooter/model.ts",
+      "sha256": "2eff2b3b001dced76bcee9aca3394e721eb5181243e920aa8d12efe82365f560",
+      "sameAsD106": true
+    },
+    {
+      "path": "src/games/prototypes/shooter/app.ts",
+      "sha256": "32d97a237559d260e8d178f8ef33a5b82ffdbbaa3b0bea0352546d9adfb603dc",
+      "sameAsD106": true
+    }
+  ],
+  "instances": [
+    {
+      "i": 0,
+      "batch": 0,
+      "slot": 0
+    },
+    {
+      "i": 1,
+      "batch": 1,
+      "slot": 0
+    },
+    {
+      "i": 2,
+      "batch": 1,
+      "slot": 1
+    },
+    {
+      "i": 3,
+      "batch": 0,
+      "slot": 1
+    },
+    {
+      "i": 4,
+      "batch": 0,
+      "slot": 2
+    },
+    {
+      "i": 5,
+      "batch": 1,
+      "slot": 2
+    },
+    {
+      "i": 6,
+      "batch": 1,
+      "slot": 3
+    },
+    {
+      "i": 7,
+      "batch": 0,
+      "slot": 3
+    },
+    {
+      "i": 8,
+      "batch": 0,
+      "slot": 4
+    },
+    {
+      "i": 9,
+      "batch": 1,
+      "slot": 4
+    },
+    {
+      "i": 10,
+      "batch": 1,
+      "slot": 5
+    },
+    {
+      "i": 11,
+      "batch": 0,
+      "slot": 5
+    },
+    {
+      "i": 12,
+      "batch": 0,
+      "slot": 6
+    },
+    {
+      "i": 13,
+      "batch": 1,
+      "slot": 6
+    },
+    {
+      "i": 14,
+      "batch": 1,
+      "slot": 7
+    },
+    {
+      "i": 15,
+      "batch": 0,
+      "slot": 7
+    }
+  ],
+  "batchCounts": [
+    8,
+    8
+  ]
+}

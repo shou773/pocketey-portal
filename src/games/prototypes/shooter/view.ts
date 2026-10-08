@@ -81,7 +81,7 @@ export function createView(canvas:HTMLCanvasElement) {
  }
  waterGeometry.setAttribute('color',new THREE.Float32BufferAttribute(waterColors,3));
  const water=new THREE.Mesh(waterGeometry,terrain);water.position.set(0,-.84,-8);scene.add(water);
- // Three reusable eroded profiles: rounded shoulders, undercut wet toes and
+ // Two reusable eroded profiles: rounded shoulders, undercut wet toes and
  // sediment-colored crowns. Fixed seeds keep the authored coast repeatable.
  function erodedRock(seed:number){
   const segments=10,rings=[{y:0,r:.78},{y:.34,r:1.05},{y:.96,r:.94},{y:1.46,r:.62}];
@@ -102,7 +102,7 @@ export function createView(canvas:HTMLCanvasElement) {
   for(let j=0;j<segments;j++)indices.push(top,(rings.length-1)*segments+(j+1)%segments,(rings.length-1)*segments+j);
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));geometry.setIndex(indices);geometry.computeVertexNormals();return geometry;
  }
- const cliffs=[0,1,2].map((seed)=>{const mesh=new THREE.InstancedMesh(erodedRock(seed+1),terrain,seed===0?6:5);scene.add(mesh);return mesh;});
+ const cliffs=[0,2].map((seed)=>{const mesh=new THREE.InstancedMesh(erodedRock(seed+1),terrain,8);scene.add(mesh);return mesh;});
  const platformGeometry=assemble([
   {geometry:box(1.35,.22,2.8),color:0x626d69},
   {geometry:box(.06,.025,2.3),color:0x98a58c,position:[-.44,.125,0]},
@@ -168,7 +168,7 @@ export function createView(canvas:HTMLCanvasElement) {
  for(let i=0;i<16;i++){
   const side=i%2?1:-1,row=Math.floor(i/2),sx=.73+(i*7%5)*.13,sz=.74+(i*3%4)*.22,angle=(side<0?Math.PI:0)+(.5-(i*3%7)/6)*.8;
   const x=side*(5.62+(i*5%7)*.11),z=scroll(bankDistances[row]+(side<0?1.45:0));
-  temp.position.set(x,-1.25,z);temp.rotation.set(0,angle,0);temp.scale.set(sx,.58+(i*5%7)*.15,sz);temp.updateMatrix();cliffs[i%3].setMatrixAt(Math.floor(i/3),temp.matrix);
+  temp.position.set(x,-1.25,z);temp.rotation.set(0,angle,0);temp.scale.set(sx,.58+(i*5%7)*.15,sz);temp.updateMatrix();cliffs[(i+row)%2].setMatrixAt(row,temp.matrix);
   // Broken, low-contrast waterline strokes follow each rock's inner edge.
   temp.position.set(x-side*1.53*sx,-.83,z);temp.rotation.set(0,side<0?Math.PI:0,0);temp.scale.set(1,1,sz*.8);temp.updateMatrix();shore.setMatrixAt(i,temp.matrix);
  }

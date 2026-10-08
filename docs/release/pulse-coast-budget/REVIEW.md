@@ -1,5 +1,7 @@
 # Pulse boss/warning bounded budget check
 
+Historical d106 check: the final two-profile optimization and all alternating samples are recorded in [pulse-final/REVIEW.md](../pulse-final/REVIEW.md). Earlier single samples are preserved here, not presented as final-candidate evidence.
+
 Parent approved the e93 visual direction and requested one bounded performance/budget pass before any longCI, merge or publication. This record supersedes e93 coast geometry counts only; its aircraft/surface direction is retained. **No performance approval or release approval is claimed.**
 
 ## Results first
