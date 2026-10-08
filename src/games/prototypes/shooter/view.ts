@@ -65,7 +65,7 @@ export function createView(canvas:HTMLCanvasElement) {
  const ship=new THREE.Mesh(geometries.ship,materials.ship);scene.add(ship);
  const exhaustGeometry=assemble([-1,1].map(side=>({geometry:new THREE.ConeGeometry(.075,.32,6),color:0x71eaff,position:[side*.24,.10,.74] as [number,number,number],rotation:[Math.PI/2,0,0] as [number,number,number]})));
  const exhaust=new THREE.Mesh(exhaustGeometry,new THREE.MeshBasicMaterial({vertexColors:true}));ship.add(exhaust);
- // Preserve the original collision-plane marker position; draw it over the new hull.
+ // Keep the collision-plane marker readable while the damaged hull blinks.
  const core=new THREE.Mesh(new THREE.SphereGeometry(.18,12,8),new THREE.MeshBasicMaterial({color:0xffffff,depthTest:false,depthWrite:false}));core.renderOrder=10;scene.add(core);
  const temp=new THREE.Object3D();
  const terrain=new THREE.MeshLambertMaterial({vertexColors:true});
@@ -109,7 +109,7 @@ export function createView(canvas:HTMLCanvasElement) {
  function sync(key:string,kind:keyof typeof geometries,x:number,y:number,scale=1) {let m=meshes.get(key);if(!m){m=new THREE.Mesh(geometries[kind],materials[kind]);meshes.set(key,m);scene.add(m);}m.visible=true;m.position.set(x,kind==='beam'?0:.45,-y);m.scale.setScalar(scale);return m;}
  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(dimensions===`${w},${h}`)return;dimensions=`${w},${h}`;renderer.setSize(w,h,false);camera.aspect=w/h; // Keep the entire combat width visible at 320px and in landscape.
  camera.fov=camera.aspect<.65?64:48;camera.updateProjectionMatrix();}
- function draw(s:State){resize();ship.position.set(s.x,.4,-s.y);ship.rotation.z=-s.x*.025;exhaust.scale.z=.88+.12*Math.sin(s.time*24);ship.visible=s.invulnerable<=0||Math.floor(s.time*12)%2===0;core.position.set(s.x,.45,-s.y);core.visible=ship.visible;for(const m of meshes.values())m.visible=false;
+ function draw(s:State){resize();ship.position.set(s.x,.4,-s.y);ship.rotation.z=-s.x*.025;exhaust.scale.z=.88+.12*Math.sin(s.time*24);ship.visible=s.invulnerable<=0||Math.floor(s.time*12)%2===0;core.position.set(s.x,.45,-s.y);for(const m of meshes.values())m.visible=false;
  for(const e of s.enemies){const m=sync(`e${e.id}`,e.kind,e.x,e.y);m.rotation.y=0;m.rotation.z=Math.sin(s.time*1.8+e.id)*.04;}
  bulletPool=populate(bulletPool,'bullet',s.bullets);shotPool=populate(shotPool,'shot',s.shots);
  s.beams.forEach((b,i)=>{const m=sync(`beam${i}`,'beam',b.x,5.5);m.scale.set(b.wide,1,1);(m.material as THREE.MeshBasicMaterial).opacity=b.age<1.3?.15+.13*(Math.sin(b.age*18)+1):.85;});
