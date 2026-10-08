@@ -55,9 +55,11 @@ export function createView(canvas: HTMLCanvasElement) {
   }
   function resize() {
     const bounds = canvas.getBoundingClientRect();
-    // A fixed pixel budget protects large desktops and high-DPR phones equally.
-    // UI stays at native CSS resolution; only the 3D framebuffer is scaled.
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5, Math.sqrt(240000 / Math.max(1, bounds.width * bounds.height))));
+    // One fixed desktop reduction: keep touch/mobile at the existing budget.
+    // UI, geometry and camera remain at their existing dimensions.
+    const wideDesktop = bounds.width >= 1000 && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const maxPixels = wideDesktop ? 204000 : 240000;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5, Math.sqrt(maxPixels / Math.max(1, bounds.width * bounds.height))));
     renderer.setSize(bounds.width, bounds.height, false); camera.aspect = bounds.width / Math.max(1, bounds.height); camera.updateProjectionMatrix();
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();

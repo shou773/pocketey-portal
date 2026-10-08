@@ -134,3 +134,17 @@ That CI also exposed deferred dialog close-event timing: open became false befor
 Parent independently confirmed aa7540a audio: 41 Chromium and 56 WebKit/Firefox pass, with 26 intentional Chromium-only capture skips. Amber desktop 44.359fps/p95 33.4ms and Tilt desktop 44.739fps left subsequent save/reload and Pulse play unexecuted. No threshold is being lowered or hidden. Native-stage FPS/p95 assertions now use soft failures so clear/save/reload/reopen still execute. CI runs all audio, Tilt and Pulse steps independently and then fails an explicit final aggregate if any failed. Pulse also verifies persisted bests and Sound ON after reload.
 
 The prior baseline was aa44ef3, not published 711b53, and had a different framebuffer. The new baseline is exact published SHA 711b53dad512a5c09ac06d564ec5457e554f4ead; both use the candidate's ordinary input driver, identical viewport/DPR, native Sound ON and full three-stage checks. The premature 250k Amber desktop budget is reverted to published-main 280k for equal-framebuffer comparison. The short three-round alternating comparison asserts paired framebuffers match and records all samples. Its stage1 diagnostic is separate from complete stage3/functionality evidence. Production polish stops pending those facts; residual software-GPU ~44fps values remain visible for parent release judgment.
+
+## One final authorized Tilt desktop budget adjustment
+
+Parent accepted Amber44.707fps/p9533.4ms as identical to published main711b53.
+Final Tilt changes only its wide fine-pointer desktop pixel cap240,000→204,000
+(-15%); touch/mobile retains240,000. The native keyboard test now represents a
+fine-pointer desktop instead of the shared touch context. No other production
+game/audio/model change accompanies it. One same-camera stage03 canvas pair in
+evidence/tilt-desktop-budget/ preserves ball/drop-edge/narrow-bend readability;
+CSS/state match, desktop687x349→633x321 and mobile367x653 unchanged.
+Local keyboard native clear/save/reload all pass, while performance29.23fps/p95
+83.3ms remains failed and explicitly recorded. No further rendering experiments
+or adjustment are authorized for this release. Final exact SHA CI and parent
+publication judgment remain required.

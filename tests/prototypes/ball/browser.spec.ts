@@ -72,7 +72,9 @@ async function drive(page: Page, touch: boolean) {
   await expect(page.locator('#tt-stages')).toBeHidden();
 }
 
-for (const touch of [false, true]) test(`all three stages clear with ordinary ${touch ? 'multi-touch' : 'keyboard'}; bests persist independently`, async ({ page }) => {
+for (const touch of [false, true]) test.describe(touch ? 'touch device' : 'desktop keyboard', () => {
+  test.use({ hasTouch: touch, isMobile: touch });
+  test(`all three stages clear with ordinary ${touch ? 'multi-touch' : 'keyboard'}; bests persist independently`, async ({ page }) => {
   await mkdir(evidence, { recursive: true });
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
   await page.goto(`${route}?lang=en`);
@@ -94,7 +96,7 @@ for (const touch of [false, true]) test(`all three stages clear with ordinary ${
   const reloaded=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),SAVE_KEY);expect(reloaded).toEqual(saved);
   expect(errors).toEqual([]);
   await writeFile(`${evidence}/${touch?'mobile':'desktop'}-functional-completion.json`,JSON.stringify({threeNativeClears:true,saved,reloaded,errors},null,2));
-});
+});});
 
 test('fall → instant retry, pause, input release, mute, language and rapid actions', async ({ page }) => {
   await page.goto(`${route}?lang=en`); await page.getByRole('button', { name: 'Play this stage' }).click();
