@@ -1,0 +1,90 @@
+{
+  "runtimeBaseSha": "6339f1c54f5e743793e162ef15bce407b0ee5c10",
+  "command": "ASTRO_TELEMETRY_DISABLED=1 NEW_GAME_EVIDENCE=test-results/tilt-brake-sync-final npx playwright test --config tests/prototypes/ball/playwright.config.ts -g \"two-finger controls\" --repeat-each=3",
+  "environment": "Local Chromium with SwiftShader; 390x844; unchanged production build",
+  "result": "3 passed; no retries or skips",
+  "records": [
+    {
+      "start": {
+        "phase": "playing",
+        "stage": 0,
+        "x": -0.4153,
+        "z": 0.6321,
+        "vx": -2.331,
+        "speed": 2.1946,
+        "time": 0.3833
+      },
+      "end": {
+        "phase": "playing",
+        "stage": 0,
+        "x": -1.2274,
+        "z": 4.1587,
+        "vx": -0.0304,
+        "speed": 2.1533,
+        "time": 1.9333
+      },
+      "elapsedSimulationSeconds": 1.55,
+      "elapsedWallMilliseconds": 1799,
+      "requiredSimulationSeconds": 1.4,
+      "wallTimeoutMilliseconds": 5000,
+      "brakeSettled": true,
+      "brakeHeldAtEnd": "true",
+      "speedLimit": 2.2
+    },
+    {
+      "start": {
+        "phase": "playing",
+        "stage": 0,
+        "x": -0.6889,
+        "z": 1.7241,
+        "vx": -1.9941,
+        "speed": 3.5489,
+        "time": 0.6583
+      },
+      "end": {
+        "phase": "playing",
+        "stage": 0,
+        "x": -1.3789,
+        "z": 5.2457,
+        "vx": -0.0396,
+        "speed": 2.1638,
+        "time": 2.0583
+      },
+      "elapsedSimulationSeconds": 1.4,
+      "elapsedWallMilliseconds": 1455,
+      "requiredSimulationSeconds": 1.4,
+      "wallTimeoutMilliseconds": 5000,
+      "brakeSettled": true,
+      "brakeHeldAtEnd": "true",
+      "speedLimit": 2.2
+    },
+    {
+      "start": {
+        "phase": "playing",
+        "stage": 0,
+        "x": -0.5163,
+        "z": 1.1609,
+        "vx": -1.6065,
+        "speed": 3.4951,
+        "time": 0.5167
+      },
+      "end": {
+        "phase": "playing",
+        "stage": 0,
+        "x": -1.0744,
+        "z": 4.7872,
+        "vx": -0.0252,
+        "speed": 2.1587,
+        "time": 2
+      },
+      "elapsedSimulationSeconds": 1.4832999999999998,
+      "elapsedWallMilliseconds": 1490,
+      "requiredSimulationSeconds": 1.4,
+      "wallTimeoutMilliseconds": 5000,
+      "brakeSettled": true,
+      "brakeHeldAtEnd": "true",
+      "speedLimit": 2.2
+    }
+  ],
+  "limitations": "Limited input/lifecycle focus; not full CI or physical-phone performance. CI run 37744832694 initial speed and simulation elapsed time were not recorded, so its immediate cause is not asserted."
+}

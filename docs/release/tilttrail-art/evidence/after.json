@@ -1,0 +1,126 @@
+[
+  {
+    "mobile": true,
+    "errors": [],
+    "nativeBefore": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.0380",
+      "vx": "0.0000",
+      "time": "3.0333",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4654"
+    },
+    "nativeAfter": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.1813",
+      "vx": "0.0000",
+      "time": "3.1000",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4654"
+    },
+    "state": {
+      "stage": 2,
+      "phase": "playing",
+      "x": -3.6586070469394008,
+      "z": 21.237124945189787,
+      "y": 0.38,
+      "vx": -0.15773333445005608,
+      "speed": 2.150014657288539,
+      "vy": 0,
+      "time": 6.000000000000088,
+      "fallTime": 0
+    },
+    "css": {
+      "width": 390,
+      "height": 694
+    },
+    "framebuffer": [
+      367,
+      653
+    ],
+    "calls": 9,
+    "triangles": 5482
+  },
+  {
+    "mobile": false,
+    "errors": [],
+    "nativeBefore": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "5.9771",
+      "vx": "0.0000",
+      "time": "3.0333",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4654"
+    },
+    "nativeAfter": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.2638",
+      "vx": "0.0000",
+      "time": "3.1667",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4654"
+    },
+    "state": {
+      "stage": 2,
+      "phase": "playing",
+      "x": -3.6586070469394008,
+      "z": 21.237124945189787,
+      "y": 0.38,
+      "vx": -0.15773333445005608,
+      "speed": 2.150014657288539,
+      "vy": 0,
+      "time": 6.000000000000088,
+      "fallTime": 0
+    },
+    "css": {
+      "width": 1280,
+      "height": 750
+    },
+    "framebuffer": [
+      590,
+      345
+    ],
+    "calls": 11,
+    "triangles": 5782
+  }
+]

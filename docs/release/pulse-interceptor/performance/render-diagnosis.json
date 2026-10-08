@@ -1,0 +1,227 @@
+{
+  "protocol": "Isolated unchanged production-renderer/model fixed4s scene at578x556; one measured draw perRAF,160frames per ablation,30warmup. Temporary test-only visibility/material ablations are diagnostic, not gameplay verification.",
+  "counts": [
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.72,
+      "transparent": false,
+      "triangles": 208
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ffffff",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 24
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ffffff",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 168
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "163d48",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.68,
+      "transparent": false,
+      "triangles": 12
+    },
+    {
+      "instanced": true,
+      "instances": 16,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.95,
+      "transparent": false,
+      "triangles": 36
+    },
+    {
+      "instanced": true,
+      "instances": 3,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.72,
+      "transparent": false,
+      "triangles": 132
+    },
+    {
+      "instanced": true,
+      "instances": 3,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.72,
+      "transparent": false,
+      "triangles": 188
+    },
+    {
+      "instanced": true,
+      "instances": 5,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.72,
+      "transparent": false,
+      "triangles": 56
+    },
+    {
+      "instanced": true,
+      "instances": 12,
+      "color": "285059",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 12
+    },
+    {
+      "instanced": true,
+      "instances": 16,
+      "color": "72979c",
+      "type": "MeshBasicMaterial",
+      "transparent": true,
+      "triangles": 36
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.82,
+      "transparent": false,
+      "triangles": 116
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ffffff",
+      "type": "MeshStandardMaterial",
+      "roughness": 0.82,
+      "transparent": false,
+      "triangles": 52
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ff416d",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 80
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ff416d",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 80
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ff416d",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 80
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "ff416d",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 80
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "9affed",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 12
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "9affed",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 12
+    },
+    {
+      "instanced": false,
+      "instances": 1,
+      "color": "9affed",
+      "type": "MeshBasicMaterial",
+      "transparent": false,
+      "triangles": 12
+    }
+  ],
+  "records": [
+    {
+      "kind": "all",
+      "calls": 19,
+      "triangles": 3472,
+      "cpuMedian": 0.7999999988824129,
+      "cpuP95": 6.099999999627471,
+      "gpuMedian": 20.48445,
+      "gpuP95": 45.900681,
+      "gpuSamples": 126,
+      "fps": 32.93673083797171,
+      "p95": 66.69999999999982
+    },
+    {
+      "kind": "without-water",
+      "calls": 18,
+      "triangles": 3460,
+      "cpuMedian": 0.900000000372529,
+      "cpuP95": 6.399999998509884,
+      "gpuMedian": 20.47272,
+      "gpuP95": 40.379653,
+      "gpuSamples": 126,
+      "fps": 28.88167468935408,
+      "p95": 83.29999999999927
+    },
+    {
+      "kind": "without-cliffs",
+      "calls": 18,
+      "triangles": 2896,
+      "cpuMedian": 0.7000000011175871,
+      "cpuP95": 4,
+      "gpuMedian": 18.999995,
+      "gpuP95": 32.142855,
+      "gpuSamples": 126,
+      "fps": 35.505890124408225,
+      "p95": 50
+    },
+    {
+      "kind": "without-shore",
+      "calls": 18,
+      "triangles": 2896,
+      "cpuMedian": 0.40000000037252903,
+      "cpuP95": 1.200000001117587,
+      "gpuMedian": 17.368362,
+      "gpuP95": 35.900747,
+      "gpuSamples": 127,
+      "fps": 37.03597370158768,
+      "p95": 50.10000000000218
+    },
+    {
+      "kind": "lambert-surfaces",
+      "calls": 19,
+      "triangles": 3472,
+      "cpuMedian": 0.30000000074505806,
+      "cpuP95": 1.099999999627471,
+      "gpuMedian": 10.045937,
+      "gpuP95": 21.754331,
+      "gpuSamples": 127,
+      "fps": 57.76464266523373,
+      "p95": 16.799999999999272
+    }
+  ]
+}

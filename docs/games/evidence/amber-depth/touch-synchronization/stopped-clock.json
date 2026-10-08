@@ -1,0 +1,8 @@
+{
+  "protocol": "Native start/pause freezes clock; same bounded simulation wait must reject. No clock/state injection.",
+  "initialTime": 0.07,
+  "finalTime": 0.07,
+  "elapsedMs": 3011,
+  "errorName": "TimeoutError",
+  "mode": "pause"
+}

@@ -1,0 +1,6887 @@
+[
+  {
+    "case": "before",
+    "validForBlinkReview": true,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "input": "native touch left18CSSpx then release120ms",
+    "capture": "Unpaused asynchronous real frames; diagnostics are nearest previous observations",
+    "frames": [
+      {
+        "file": "frame-000.png",
+        "timestamp": 1791444612.375645,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 3.849999999999991,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-001.png",
+        "timestamp": 1791444612.416525,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 3.849999999999991,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-002.png",
+        "timestamp": 1791444612.466079,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 105,
+        "nearestDiagnostic": {
+          "time": 3.9999999999999907,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2688
+          }
+        }
+      },
+      {
+        "file": "frame-003.png",
+        "timestamp": 1791444612.512125,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 3.9999999999999907,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2688
+          }
+        }
+      },
+      {
+        "file": "frame-004.png",
+        "timestamp": 1791444612.558408,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 3.9999999999999907,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2688
+          }
+        }
+      },
+      {
+        "file": "frame-005.png",
+        "timestamp": 1791444612.596046,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.133333333333324,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-006.png",
+        "timestamp": 1791444612.659995,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 102,
+        "nearestDiagnostic": {
+          "time": 4.133333333333324,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-007.png",
+        "timestamp": 1791444612.740257,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 102,
+        "nearestDiagnostic": {
+          "time": 4.133333333333324,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-008.png",
+        "timestamp": 1791444612.788434,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 109,
+        "nearestDiagnostic": {
+          "time": 4.316666666666657,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-009.png",
+        "timestamp": 1791444612.837415,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 4.316666666666657,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-010.png",
+        "timestamp": 1791444612.889113,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.316666666666657,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-011.png",
+        "timestamp": 1791444612.947345,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 4.466666666666656,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-012.png",
+        "timestamp": 1791444612.983432,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.466666666666656,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-013.png",
+        "timestamp": 1791444613.027269,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.466666666666656,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-014.png",
+        "timestamp": 1791444613.070559,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 4.599999999999989,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-015.png",
+        "timestamp": 1791444613.117064,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.599999999999989,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-016.png",
+        "timestamp": 1791444613.170625,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.599999999999989,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 11,
+            "triangles": 2460
+          }
+        }
+      },
+      {
+        "file": "frame-017.png",
+        "timestamp": 1791444613.215948,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.733333333333322,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-018.png",
+        "timestamp": 1791444613.261222,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 107,
+        "nearestDiagnostic": {
+          "time": 4.733333333333322,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-019.png",
+        "timestamp": 1791444613.303866,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.733333333333322,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-020.png",
+        "timestamp": 1791444613.354762,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.883333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-021.png",
+        "timestamp": 1791444613.406553,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.883333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-022.png",
+        "timestamp": 1791444613.456948,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 4.883333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-023.png",
+        "timestamp": 1791444613.487941,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.883333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-024.png",
+        "timestamp": 1791444613.552874,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.016666666666654,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2924
+          }
+        }
+      },
+      {
+        "file": "frame-025.png",
+        "timestamp": 1791444613.614522,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.016666666666654,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2924
+          }
+        }
+      },
+      {
+        "file": "frame-026.png",
+        "timestamp": 1791444613.68864,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.016666666666654,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2924
+          }
+        }
+      },
+      {
+        "file": "frame-027.png",
+        "timestamp": 1791444613.737653,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 5.23333333333332,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-028.png",
+        "timestamp": 1791444613.768157,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.23333333333332,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-029.png",
+        "timestamp": 1791444613.828596,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.3833333333333195,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-030.png",
+        "timestamp": 1791444613.876595,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 5.3833333333333195,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-031.png",
+        "timestamp": 1791444613.914916,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 5.3833333333333195,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-032.png",
+        "timestamp": 1791444613.969551,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.516666666666652,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-033.png",
+        "timestamp": 1791444614.004355,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.516666666666652,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-034.png",
+        "timestamp": 1791444614.063161,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 5.516666666666652,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-035.png",
+        "timestamp": 1791444614.099385,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.516666666666652,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-036.png",
+        "timestamp": 1791444614.157774,
+        "coreWhitePixels": 0,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.649999999999985,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2364
+          }
+        }
+      },
+      {
+        "file": "frame-037.png",
+        "timestamp": 1791444614.201003,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 5.649999999999985,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2364
+          }
+        }
+      },
+      {
+        "file": "frame-038.png",
+        "timestamp": 1791444614.267768,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 5.816666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-039.png",
+        "timestamp": 1791444614.310094,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 5.816666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-040.png",
+        "timestamp": 1791444614.359342,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 5.816666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-041.png",
+        "timestamp": 1791444614.403047,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 107,
+        "nearestDiagnostic": {
+          "time": 5.816666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-042.png",
+        "timestamp": 1791444614.455764,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 101,
+        "nearestDiagnostic": {
+          "time": 5.949999999999984,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-043.png",
+        "timestamp": 1791444614.492833,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 5.949999999999984,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-044.png",
+        "timestamp": 1791444614.550536,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 5.949999999999984,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-045.png",
+        "timestamp": 1791444614.592228,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 6.099999999999984,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-046.png",
+        "timestamp": 1791444614.645324,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 6.099999999999984,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-047.png",
+        "timestamp": 1791444614.684997,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 6.099999999999984,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      }
+    ],
+    "diagnostics": [
+      {
+        "time": 3.849999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.849999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.849999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.849999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.9999999999999907,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2688
+        }
+      },
+      {
+        "time": 3.9999999999999907,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2688
+        }
+      },
+      {
+        "time": 3.9999999999999907,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2688
+        }
+      },
+      {
+        "time": 3.9999999999999907,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2688
+        }
+      },
+      {
+        "time": 4.133333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.133333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.133333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.133333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.133333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.133333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.466666666666656,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.466666666666656,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.466666666666656,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.466666666666656,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.599999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.599999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.599999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.599999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 11,
+          "triangles": 2460
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.883333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.883333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.883333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.883333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 5.016666666666654,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2924
+        }
+      },
+      {
+        "time": 5.016666666666654,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2924
+        }
+      },
+      {
+        "time": 5.016666666666654,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2924
+        }
+      },
+      {
+        "time": 5.016666666666654,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2924
+        }
+      },
+      {
+        "time": 5.016666666666654,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2924
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.3833333333333195,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.3833333333333195,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.3833333333333195,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.3833333333333195,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.516666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.516666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.516666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.516666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.649999999999985,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2364
+        }
+      },
+      {
+        "time": 5.649999999999985,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2364
+        }
+      },
+      {
+        "time": 5.649999999999985,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2364
+        }
+      },
+      {
+        "time": 5.649999999999985,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2364
+        }
+      },
+      {
+        "time": 5.649999999999985,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2364
+        }
+      },
+      {
+        "time": 5.816666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.816666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.816666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.816666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.816666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.949999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.949999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.949999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.949999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.2333333333333165,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 3084
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "case": "after-mobile",
+    "validForBlinkReview": true,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "input": "native touch left18CSSpx then release120ms",
+    "capture": "Unpaused asynchronous real frames; diagnostics are nearest previous observations",
+    "frames": [
+      {
+        "file": "frame-000.png",
+        "timestamp": 1791444626.189772,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 3.816666666666658,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-001.png",
+        "timestamp": 1791444626.237329,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 3.9166666666666576,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-002.png",
+        "timestamp": 1791444626.281828,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 3.9166666666666576,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-003.png",
+        "timestamp": 1791444626.326827,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 3.9166666666666576,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-004.png",
+        "timestamp": 1791444626.374816,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 3.9166666666666576,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-005.png",
+        "timestamp": 1791444626.406803,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 107,
+        "nearestDiagnostic": {
+          "time": 4.049999999999991,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-006.png",
+        "timestamp": 1791444626.473998,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 4.049999999999991,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-007.png",
+        "timestamp": 1791444626.510814,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 4.049999999999991,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-008.png",
+        "timestamp": 1791444626.551703,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.049999999999991,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-009.png",
+        "timestamp": 1791444626.591906,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 109,
+        "nearestDiagnostic": {
+          "time": 4.19999999999999,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-010.png",
+        "timestamp": 1791444626.648841,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 4.19999999999999,
+          "hp": 4,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-011.png",
+        "timestamp": 1791444626.686112,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.333333333333323,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2616
+          }
+        }
+      },
+      {
+        "file": "frame-012.png",
+        "timestamp": 1791444626.741422,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 4.333333333333323,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2616
+          }
+        }
+      },
+      {
+        "file": "frame-013.png",
+        "timestamp": 1791444626.774603,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 4.333333333333323,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2616
+          }
+        }
+      },
+      {
+        "file": "frame-014.png",
+        "timestamp": 1791444626.810887,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.4499999999999895,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2628
+          }
+        }
+      },
+      {
+        "file": "frame-015.png",
+        "timestamp": 1791444626.86375,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.4499999999999895,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2628
+          }
+        }
+      },
+      {
+        "file": "frame-016.png",
+        "timestamp": 1791444626.909296,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 4.4499999999999895,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2628
+          }
+        }
+      },
+      {
+        "file": "frame-017.png",
+        "timestamp": 1791444626.947846,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.583333333333322,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2860
+          }
+        }
+      },
+      {
+        "file": "frame-018.png",
+        "timestamp": 1791444626.98344,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.583333333333322,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2860
+          }
+        }
+      },
+      {
+        "file": "frame-019.png",
+        "timestamp": 1791444627.019484,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.583333333333322,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2860
+          }
+        }
+      },
+      {
+        "file": "frame-020.png",
+        "timestamp": 1791444627.074631,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 4.699999999999989,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-021.png",
+        "timestamp": 1791444627.11871,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.699999999999989,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-022.png",
+        "timestamp": 1791444627.160918,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.699999999999989,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-023.png",
+        "timestamp": 1791444627.20472,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.849999999999988,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-024.png",
+        "timestamp": 1791444627.265365,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 4.849999999999988,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-025.png",
+        "timestamp": 1791444627.303868,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 4.849999999999988,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-026.png",
+        "timestamp": 1791444627.349037,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2680
+          }
+        }
+      },
+      {
+        "file": "frame-027.png",
+        "timestamp": 1791444627.396636,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2680
+          }
+        }
+      },
+      {
+        "file": "frame-028.png",
+        "timestamp": 1791444627.471175,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2680
+          }
+        }
+      },
+      {
+        "file": "frame-029.png",
+        "timestamp": 1791444627.511977,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.149999999999987,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2692
+          }
+        }
+      },
+      {
+        "file": "frame-030.png",
+        "timestamp": 1791444627.54651,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.149999999999987,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2692
+          }
+        }
+      },
+      {
+        "file": "frame-031.png",
+        "timestamp": 1791444627.588769,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 5.149999999999987,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2692
+          }
+        }
+      },
+      {
+        "file": "frame-032.png",
+        "timestamp": 1791444627.643554,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 5.266666666666653,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2612
+          }
+        }
+      },
+      {
+        "file": "frame-033.png",
+        "timestamp": 1791444627.679864,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.266666666666653,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2612
+          }
+        }
+      },
+      {
+        "file": "frame-034.png",
+        "timestamp": 1791444627.723041,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 106,
+        "nearestDiagnostic": {
+          "time": 5.266666666666653,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2612
+          }
+        }
+      },
+      {
+        "file": "frame-035.png",
+        "timestamp": 1791444627.767293,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 5.399999999999986,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-036.png",
+        "timestamp": 1791444627.803851,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.399999999999986,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-037.png",
+        "timestamp": 1791444627.856995,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.399999999999986,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-038.png",
+        "timestamp": 1791444627.903317,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 5.549999999999986,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-039.png",
+        "timestamp": 1791444627.956189,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 111,
+        "nearestDiagnostic": {
+          "time": 5.549999999999986,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-040.png",
+        "timestamp": 1791444627.993805,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.549999999999986,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-041.png",
+        "timestamp": 1791444628.063939,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 103,
+        "nearestDiagnostic": {
+          "time": 5.6833333333333185,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-042.png",
+        "timestamp": 1791444628.095272,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 5.6833333333333185,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-043.png",
+        "timestamp": 1791444628.146119,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 107,
+        "nearestDiagnostic": {
+          "time": 5.6833333333333185,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-044.png",
+        "timestamp": 1791444628.190736,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 5.833333333333318,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2752
+          }
+        }
+      },
+      {
+        "file": "frame-045.png",
+        "timestamp": 1791444628.245142,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 110,
+        "nearestDiagnostic": {
+          "time": 5.833333333333318,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2752
+          }
+        }
+      },
+      {
+        "file": "frame-046.png",
+        "timestamp": 1791444628.28555,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 105,
+        "nearestDiagnostic": {
+          "time": 5.833333333333318,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2752
+          }
+        }
+      },
+      {
+        "file": "frame-047.png",
+        "timestamp": 1791444628.355383,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 100,
+        "nearestDiagnostic": {
+          "time": 5.966666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-048.png",
+        "timestamp": 1791444628.386278,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 104,
+        "nearestDiagnostic": {
+          "time": 5.966666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-049.png",
+        "timestamp": 1791444628.439913,
+        "coreWhitePixels": 104,
+        "hullBluePixels": 109,
+        "nearestDiagnostic": {
+          "time": 5.966666666666651,
+          "hp": 3,
+          "x": -0.550866069799673,
+          "y": 1.7999999999999963,
+          "screen": {
+            "x": 176.99999982511895,
+            "y": 494.4541685065596
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      }
+    ],
+    "diagnostics": [
+      {
+        "time": 3.816666666666658,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.816666666666658,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.816666666666658,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.9166666666666576,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.9166666666666576,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.9166666666666576,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.9166666666666576,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.9166666666666576,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 4.049999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 4.049999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 4.049999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 4.049999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 4.19999999999999,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.19999999999999,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.19999999999999,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.333333333333323,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2616
+        }
+      },
+      {
+        "time": 4.333333333333323,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2616
+        }
+      },
+      {
+        "time": 4.333333333333323,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2616
+        }
+      },
+      {
+        "time": 4.333333333333323,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2616
+        }
+      },
+      {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.583333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2860
+        }
+      },
+      {
+        "time": 4.583333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2860
+        }
+      },
+      {
+        "time": 4.583333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2860
+        }
+      },
+      {
+        "time": 4.699999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.699999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.699999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.699999999999989,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.849999999999988,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.849999999999988,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.849999999999988,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.849999999999988,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 5.149999999999987,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2692
+        }
+      },
+      {
+        "time": 5.149999999999987,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2692
+        }
+      },
+      {
+        "time": 5.149999999999987,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2692
+        }
+      },
+      {
+        "time": 5.266666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2612
+        }
+      },
+      {
+        "time": 5.266666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2612
+        }
+      },
+      {
+        "time": 5.266666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2612
+        }
+      },
+      {
+        "time": 5.266666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2612
+        }
+      },
+      {
+        "time": 5.399999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.399999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.399999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.399999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.549999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.549999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.549999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.549999999999986,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.6833333333333185,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.6833333333333185,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.6833333333333185,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.6833333333333185,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.833333333333318,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2752
+        }
+      },
+      {
+        "time": 5.833333333333318,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2752
+        }
+      },
+      {
+        "time": 5.833333333333318,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2752
+        }
+      },
+      {
+        "time": 5.833333333333318,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2752
+        }
+      },
+      {
+        "time": 5.966666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.966666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.966666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.966666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.966666666666651,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.11666666666665,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "status": "playing",
+        "screen": {
+          "x": 176.99999982511895,
+          "y": 494.4541685065596
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "case": "after-desktop",
+    "validForBlinkReview": false,
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "input": "native ArrowLeft 50ms then release",
+    "capture": "Unpaused asynchronous real frames; diagnostics are nearest previous observations",
+    "frames": [
+      {
+        "file": "frame-000.png",
+        "timestamp": 1791444643.60452,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 131,
+        "nearestDiagnostic": {
+          "time": 3.9666666666666575,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2344
+          }
+        }
+      },
+      {
+        "file": "frame-001.png",
+        "timestamp": 1791444643.827346,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 131,
+        "nearestDiagnostic": {
+          "time": 3.9666666666666575,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2344
+          }
+        }
+      },
+      {
+        "file": "frame-002.png",
+        "timestamp": 1791444643.998176,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 123,
+        "nearestDiagnostic": {
+          "time": 4.416666666666656,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2344
+          }
+        }
+      },
+      {
+        "file": "frame-003.png",
+        "timestamp": 1791444644.0953,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 129,
+        "nearestDiagnostic": {
+          "time": 4.416666666666656,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2344
+          }
+        }
+      },
+      {
+        "file": "frame-004.png",
+        "timestamp": 1791444644.627943,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 128,
+        "nearestDiagnostic": {
+          "time": 4.416666666666656,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2344
+          }
+        }
+      },
+      {
+        "file": "frame-005.png",
+        "timestamp": 1791444644.694439,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 133,
+        "nearestDiagnostic": {
+          "time": 4.733333333333322,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-006.png",
+        "timestamp": 1791444644.761578,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 126,
+        "nearestDiagnostic": {
+          "time": 4.733333333333322,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-007.png",
+        "timestamp": 1791444644.857599,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 4.733333333333322,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-008.png",
+        "timestamp": 1791444644.957507,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 127,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-009.png",
+        "timestamp": 1791444645.017179,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 123,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-010.png",
+        "timestamp": 1791444645.108545,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-011.png",
+        "timestamp": 1791444645.195854,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 124,
+        "nearestDiagnostic": {
+          "time": 4.983333333333321,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2396
+          }
+        }
+      },
+      {
+        "file": "frame-012.png",
+        "timestamp": 1791444645.270057,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 126,
+        "nearestDiagnostic": {
+          "time": 5.249999999999987,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2408
+          }
+        }
+      },
+      {
+        "file": "frame-013.png",
+        "timestamp": 1791444645.348593,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 5.249999999999987,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2408
+          }
+        }
+      },
+      {
+        "file": "frame-014.png",
+        "timestamp": 1791444645.419323,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 128,
+        "nearestDiagnostic": {
+          "time": 5.466666666666653,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2408
+          }
+        }
+      },
+      {
+        "file": "frame-015.png",
+        "timestamp": 1791444645.517897,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 123,
+        "nearestDiagnostic": {
+          "time": 5.466666666666653,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2408
+          }
+        }
+      },
+      {
+        "file": "frame-016.png",
+        "timestamp": 1791444645.585673,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 5.466666666666653,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2408
+          }
+        }
+      },
+      {
+        "file": "frame-017.png",
+        "timestamp": 1791444645.677906,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 131,
+        "nearestDiagnostic": {
+          "time": 5.466666666666653,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2408
+          }
+        }
+      },
+      {
+        "file": "frame-018.png",
+        "timestamp": 1791444645.861312,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 123,
+        "nearestDiagnostic": {
+          "time": 5.733333333333318,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2488
+          }
+        }
+      },
+      {
+        "file": "frame-019.png",
+        "timestamp": 1791444645.965259,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 5.733333333333318,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2488
+          }
+        }
+      },
+      {
+        "file": "frame-020.png",
+        "timestamp": 1791444646.055448,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 123,
+        "nearestDiagnostic": {
+          "time": 6.083333333333317,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2568
+          }
+        }
+      },
+      {
+        "file": "frame-021.png",
+        "timestamp": 1791444646.111171,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 127,
+        "nearestDiagnostic": {
+          "time": 6.083333333333317,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2568
+          }
+        }
+      },
+      {
+        "file": "frame-022.png",
+        "timestamp": 1791444646.243308,
+        "coreWhitePixels": 120,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 6.083333333333317,
+          "hp": 4,
+          "x": -0.21666666666666667,
+          "y": 1.8,
+          "screen": {
+            "x": 632.4446314089043,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2568
+          }
+        }
+      }
+    ],
+    "diagnostics": [
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 3.9666666666666575,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.416666666666656,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2344
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.733333333333322,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 4.983333333333321,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2396
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.249999999999987,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.466666666666653,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2408
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 5.733333333333318,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      },
+      {
+        "time": 6.083333333333317,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2568
+        }
+      },
+      {
+        "time": 6.083333333333317,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2568
+        }
+      },
+      {
+        "time": 6.083333333333317,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2568
+        }
+      },
+      {
+        "time": 6.083333333333317,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2568
+        }
+      },
+      {
+        "time": 6.083333333333317,
+        "hp": 4,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2568
+        }
+      },
+      {
+        "time": 6.349999999999983,
+        "hp": 3,
+        "x": -0.21666666666666667,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 632.4446314089043,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2488
+        }
+      }
+    ],
+    "errors": []
+  },
+  {
+    "case": "after-desktop-complete",
+    "validForBlinkReview": true,
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "input": "native ArrowLeft 50ms then release",
+    "capture": "Unpaused asynchronous real frames; diagnostics are nearest previous observations",
+    "frames": [
+      {
+        "file": "frame-000.png",
+        "timestamp": 1791444705.929645,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 139,
+        "nearestDiagnostic": {
+          "time": 3.983333333333324,
+          "hp": 4,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-001.png",
+        "timestamp": 1791444706.000214,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 136,
+        "nearestDiagnostic": {
+          "time": 3.983333333333324,
+          "hp": 4,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2700
+          }
+        }
+      },
+      {
+        "file": "frame-002.png",
+        "timestamp": 1791444706.07158,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 129,
+        "nearestDiagnostic": {
+          "time": 4.233333333333324,
+          "hp": 4,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-003.png",
+        "timestamp": 1791444706.176351,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 139,
+        "nearestDiagnostic": {
+          "time": 4.233333333333324,
+          "hp": 4,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-004.png",
+        "timestamp": 1791444706.25989,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 138,
+        "nearestDiagnostic": {
+          "time": 4.233333333333324,
+          "hp": 4,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2940
+          }
+        }
+      },
+      {
+        "file": "frame-005.png",
+        "timestamp": 1791444706.341608,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 129,
+        "nearestDiagnostic": {
+          "time": 4.483333333333323,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2628
+          }
+        }
+      },
+      {
+        "file": "frame-006.png",
+        "timestamp": 1791444706.416435,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.483333333333323,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2628
+          }
+        }
+      },
+      {
+        "file": "frame-007.png",
+        "timestamp": 1791444706.502511,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 137,
+        "nearestDiagnostic": {
+          "time": 4.483333333333323,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 12,
+            "triangles": 2628
+          }
+        }
+      },
+      {
+        "file": "frame-008.png",
+        "timestamp": 1791444706.574393,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.716666666666655,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-009.png",
+        "timestamp": 1791444706.656399,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 135,
+        "nearestDiagnostic": {
+          "time": 4.716666666666655,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-010.png",
+        "timestamp": 1791444706.740316,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.716666666666655,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 15,
+            "triangles": 2912
+          }
+        }
+      },
+      {
+        "file": "frame-011.png",
+        "timestamp": 1791444706.822663,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 129,
+        "nearestDiagnostic": {
+          "time": 4.966666666666654,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2680
+          }
+        }
+      },
+      {
+        "file": "frame-012.png",
+        "timestamp": 1791444706.90819,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 4.966666666666654,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2680
+          }
+        }
+      },
+      {
+        "file": "frame-013.png",
+        "timestamp": 1791444707.020895,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 140,
+        "nearestDiagnostic": {
+          "time": 4.966666666666654,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 13,
+            "triangles": 2680
+          }
+        }
+      },
+      {
+        "file": "frame-014.png",
+        "timestamp": 1791444707.078367,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.23333333333332,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-015.png",
+        "timestamp": 1791444707.159851,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 134,
+        "nearestDiagnostic": {
+          "time": 5.23333333333332,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-016.png",
+        "timestamp": 1791444707.257829,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.23333333333332,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-017.png",
+        "timestamp": 1791444707.32086,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 131,
+        "nearestDiagnostic": {
+          "time": 5.483333333333319,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2532
+          }
+        }
+      },
+      {
+        "file": "frame-018.png",
+        "timestamp": 1791444707.416297,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 0,
+        "nearestDiagnostic": {
+          "time": 5.483333333333319,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2532
+          }
+        }
+      },
+      {
+        "file": "frame-019.png",
+        "timestamp": 1791444707.5111,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 140,
+        "nearestDiagnostic": {
+          "time": 5.483333333333319,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 14,
+            "triangles": 2532
+          }
+        }
+      },
+      {
+        "file": "frame-020.png",
+        "timestamp": 1791444707.581858,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 129,
+        "nearestDiagnostic": {
+          "time": 5.749999999999985,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-021.png",
+        "timestamp": 1791444707.666292,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 133,
+        "nearestDiagnostic": {
+          "time": 5.749999999999985,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-022.png",
+        "timestamp": 1791444707.785112,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 139,
+        "nearestDiagnostic": {
+          "time": 5.749999999999985,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-023.png",
+        "timestamp": 1791444707.867431,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 129,
+        "nearestDiagnostic": {
+          "time": 5.749999999999985,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2764
+          }
+        }
+      },
+      {
+        "file": "frame-024.png",
+        "timestamp": 1791444707.956659,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 133,
+        "nearestDiagnostic": {
+          "time": 6.016666666666651,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      },
+      {
+        "file": "frame-025.png",
+        "timestamp": 1791444708.013639,
+        "coreWhitePixels": 117,
+        "hullBluePixels": 140,
+        "nearestDiagnostic": {
+          "time": 6.016666666666651,
+          "hp": 3,
+          "x": -0.43333333333333335,
+          "y": 1.8,
+          "screen": {
+            "x": 624.8892628178087,
+            "y": 530.9408030975515
+          },
+          "render": {
+            "calls": 16,
+            "triangles": 2844
+          }
+        }
+      }
+    ],
+    "diagnostics": [
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 3.983333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2700
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.233333333333324,
+        "hp": 4,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2940
+        }
+      },
+      {
+        "time": 4.483333333333323,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.483333333333323,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.483333333333323,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.483333333333323,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.483333333333323,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.483333333333323,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.716666666666655,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 15,
+          "triangles": 2912
+        }
+      },
+      {
+        "time": 4.966666666666654,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.966666666666654,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.966666666666654,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.966666666666654,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.966666666666654,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 4.966666666666654,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 13,
+          "triangles": 2680
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.23333333333332,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.483333333333319,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 14,
+          "triangles": 2532
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 5.749999999999985,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2764
+        }
+      },
+      {
+        "time": 6.016666666666651,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.016666666666651,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.016666666666651,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.016666666666651,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.016666666666651,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.016666666666651,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 2844
+        }
+      },
+      {
+        "time": 6.249999999999983,
+        "hp": 3,
+        "x": -0.43333333333333335,
+        "y": 1.8,
+        "status": "playing",
+        "screen": {
+          "x": 624.8892628178087,
+          "y": 530.9408030975515
+        },
+        "render": {
+          "calls": 16,
+          "triangles": 3084
+        }
+      }
+    ],
+    "errors": []
+  }
+]
