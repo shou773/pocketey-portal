@@ -24,6 +24,14 @@ test('Orbit shutter decoration stays inside every original collider and the face
       const ray=new T.Raycaster(new T.Vector3(hazard.z+horizontal*hazard.w,hazard.y+height*hazard.h,-hazard.x+hazard.d),new T.Vector3(0,0,-1));
       assert.ok(ray.intersectObject(group,true).length,'A shutter face must never suggest an opening');
     }
+    const frontAt=(x:number,y:number)=>new T.Raycaster(new T.Vector3(hazard.z+x,hazard.y+y,-hazard.x+hazard.d),new T.Vector3(0,0,-1)).intersectObject(group,true)[0].point.z;
+    const center=frontAt(0,hazard.h/2);
+    near(center,-hazard.x+hazard.d/2-.19);
+    for(const side of [-1,1])for(const y of [.22,hazard.h-.22]) {
+      const cap=frontAt(side*(hazard.w/2-.18),y);
+      near(cap,-hazard.x+hazard.d/2);
+      assert.ok(cap-center>.18,'Chunky corner caps must project in front of the recessed solid panel');
+    }
   }
 });
 
@@ -35,6 +43,12 @@ test('Orbit platform panels and skirts end at the original gap boundaries',()=>{
       const bounds=new T.Box3().setFromObject(piece);
       near(bounds.min.z,-platform.b);near(bounds.max.z,-platform.a);
       near(bounds.min.x,platform.z-platform.w/2);near(bounds.max.x,platform.z+platform.w/2);
+      near(bounds.min.y,platform.y-.86);near(bounds.max.y,platform.y+.031);
+      piece.updateMatrixWorld(true);
+      const top=new T.Raycaster(new T.Vector3(platform.z,3,-platform.a-1),new T.Vector3(0,-1,0)).intersectObject(piece,true)[0];
+      near(top.point.y,platform.y-.01);
+      const wall=new T.Raycaster(new T.Vector3(platform.z,platform.y-.43,-platform.a+1),new T.Vector3(0,0,-1)).intersectObject(piece,true)[0];
+      near(wall.point.z,-platform.a);
       group.add(piece);
     }
     group.updateMatrixWorld(true);

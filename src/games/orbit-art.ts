@@ -11,13 +11,12 @@ const paint = {
   canopy: new T.MeshLambertMaterial({color:0x102739}),
   glassEdge: new T.MeshLambertMaterial({color:0x72b5bc}),
   engine: new T.MeshLambertMaterial({color:0xffc779}),
-  deck: new T.MeshLambertMaterial({color:0x1b2c43}),
-  side: new T.MeshLambertMaterial({color:0x273e53}),
+  deck: new T.MeshLambertMaterial({color:0x263b52}),
   keel: new T.MeshLambertMaterial({color:0x142336}),
   seam: new T.MeshLambertMaterial({color:0x34495b}),
   mint: new T.MeshLambertMaterial({color:0x83d6c2}),
-  coral: new T.MeshLambertMaterial({color:0xe16c5e}),
-  panel: new T.MeshLambertMaterial({color:0x833d3d}),
+  vertex: new T.MeshLambertMaterial({color:0xffffff,vertexColors:true}),
+  floorLip: new T.MeshLambertMaterial({color:0xb6c7c3}),
   gold: new T.MeshLambertMaterial({color:0xd9af69}),
   station: new T.MeshLambertMaterial({color:0x16263b}),
   stationEdge: new T.MeshLambertMaterial({color:0x21364b}),
@@ -48,6 +47,24 @@ function bevel(w:number,h:number,d:number,b:number) {
   geometry.setIndex(Array.from({length:positions.length/3},(_,i)=>i));geometry.computeVertexNormals();return geometry;
 }
 const bevelUnit=bevel(1,1,1,.045);
+
+// Authored face colors reinforce the fixed key light without a draw call per
+// face. These geometries are separate from the unchanged capsule parts.
+function facePaint(source:T.BufferGeometry, top:number, front:number, side:number) {
+  const geometry=source.clone(),normal=geometry.getAttribute('normal');
+  const colors:number[]=[];
+  for(let i=0;i<normal.count;i++) {
+    const color=new T.Color(normal.getY(i)>.4?top:normal.getZ(i)>.5?front:side);
+    colors.push(color.r,color.g,color.b);
+  }
+  geometry.setAttribute('color',new T.Float32BufferAttribute(colors,3));return geometry;
+}
+const floorWall=facePaint(cube,0x485f73,0x435e78,0x344b63);
+const floorBacking=facePaint(cube,0x485f73,0x203348,0x26394f);
+const shutterCase=facePaint(bevelUnit,0xf29377,0xce6154,0x74363d);
+const shutterPanel=facePaint(bevelUnit,0xb25a4d,0x934940,0x622d34);
+const capShape=bevel(1,1,1,.12);
+const shutterCap=facePaint(capShape,0xffd58e,0xd9ae69,0x896538);capShape.dispose();
 
 // The previous normalized speeder occupied [-.4,.4] x [.12,.504] x [-.42,.42].
 // Keep that silhouette envelope and the existing forgiving center collider.
@@ -85,7 +102,14 @@ export function orbitCraft() {
 
 export function orbitPlatform(parent:T.Group,p:Platform) {
   const mid=-(p.a+p.b)/2,len=p.b-p.a;
-  box(parent,paint.side,p.z,p.y-.43,mid,p.w,.72,len);
+  // Recess the backing at each end. Three solid end panels and their shallow
+  // joints show a wall beneath the unchanged landing surface, within a/b.
+  part(parent,floorBacking,paint.vertex,p.z,p.y-.43,mid,p.w,.72,len-.08);
+  for(const z of [-p.a-.04,-p.b+.04]) {
+    for(const column of [-1,0,1])
+      part(parent,floorWall,paint.vertex,p.z+column*p.w/3,p.y-.43,z,p.w/3-.045,.72,.08);
+    box(parent,paint.floorLip,p.z,p.y-.10,z,p.w,.08,.08);
+  }
   box(parent,paint.keel,p.z,p.y-.76,mid,p.w-.18,.20,len);
   box(parent,paint.deck,p.z,p.y-.035,mid,p.w-.64,.05,len);
   for(const side of [-1,1]) {
@@ -106,12 +130,15 @@ export function orbitShutter(parent:T.Group,h:Hazard) {
   const shutter=new T.Group();shutter.position.set(h.z,h.y,-h.x);
   // A full opaque slab backs the recess. All decoration stays within the
   // original w/h/d bounds; the center cannot read as a passage underneath.
-  part(shutter,bevelUnit,paint.coral,0,h.h/2,-.06,h.w,h.h,h.d-.12);
-  part(shutter,frontPlane,paint.panel,0,h.h/2,h.d/2-.096,h.w-.40,h.h-.42);
+  part(shutter,shutterCase,paint.vertex,0,h.h/2,-.11,h.w,h.h,h.d-.22);
+  // A real 0.19-unit setback, with dark side reveals and a lit top shoulder.
+  part(shutter,shutterPanel,paint.vertex,0,h.h/2,h.d/2-.245,h.w-.48,h.h-.56,.11);
   for(const side of [-1,1]) {
-    part(shutter,bevelUnit,paint.gold,side*(h.w/2-.08),h.h/2,0,.16,h.h,h.d);
-    part(shutter,bevelUnit,paint.coral,0,side<0?.105:h.h-.105,h.d/2-.06,h.w-.28,.21,.12);
-    const stripe=part(shutter,frontPlane,paint.gold,side*h.w*.17,h.h*.5,h.d/2-.08,.095,h.h*.40);
+    part(shutter,shutterCase,paint.vertex,side*(h.w/2-.12),h.h/2,0,.24,h.h-.56,h.d);
+    part(shutter,shutterCase,paint.vertex,0,side<0?.14:h.h-.14,0,h.w-.48,.28,h.d);
+    for(const y of [.22,h.h-.22])
+      part(shutter,shutterCap,paint.vertex,side*(h.w/2-.18),y,0,.36,.44,h.d);
+    const stripe=part(shutter,frontPlane,paint.gold,side*h.w*.17,h.h*.5,h.d/2-.176,.095,h.h*.40);
     stripe.rotation.z=-.46;
   }
   parent.add(shutter);
