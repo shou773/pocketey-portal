@@ -1,0 +1,69 @@
+{
+  "baseline7a77": [
+    {
+      "name": "interceptor continuous lofts",
+      "POSITION": {
+        "count": 608,
+        "sha256": "b3065bd15cd04f263bdf6bd876180f5a04084df9bce07f772bd53adda1c3424e"
+      },
+      "NORMAL": {
+        "count": 608,
+        "sha256": "caebb8416db8470b887dac39b33993ed15020d34ae39b7d3d9f0f30e6edf21e9"
+      },
+      "INDEX": {
+        "count": 3504,
+        "sha256": "acdcea7f7ed15eb46e3d9f37288052974ae05cd11b6cbaabd68c83415aa95019"
+      }
+    },
+    {
+      "name": "manta_boss continuous lofts",
+      "POSITION": {
+        "count": 616,
+        "sha256": "c220d3929988803d74aa7d3964accf40630c00ec432977289f12834ef4ac5b30"
+      },
+      "NORMAL": {
+        "count": 616,
+        "sha256": "57514f96efa10c1fa0698cca56172973634367bdc6a737777875ade5ed9baa40"
+      },
+      "INDEX": {
+        "count": 3576,
+        "sha256": "95f7fe16b512db03f9bb2cb782619d23ca0f6e3fe332d402dc4cc548031f201a"
+      }
+    }
+  ],
+  "surfaceDraft": [
+    {
+      "name": "interceptor continuous lofts",
+      "POSITION": {
+        "count": 608,
+        "sha256": "b3065bd15cd04f263bdf6bd876180f5a04084df9bce07f772bd53adda1c3424e"
+      },
+      "NORMAL": {
+        "count": 608,
+        "sha256": "caebb8416db8470b887dac39b33993ed15020d34ae39b7d3d9f0f30e6edf21e9"
+      },
+      "INDEX": {
+        "count": 3504,
+        "sha256": "acdcea7f7ed15eb46e3d9f37288052974ae05cd11b6cbaabd68c83415aa95019"
+      }
+    },
+    {
+      "name": "manta_boss continuous lofts",
+      "POSITION": {
+        "count": 616,
+        "sha256": "c220d3929988803d74aa7d3964accf40630c00ec432977289f12834ef4ac5b30"
+      },
+      "NORMAL": {
+        "count": 616,
+        "sha256": "57514f96efa10c1fa0698cca56172973634367bdc6a737777875ade5ed9baa40"
+      },
+      "INDEX": {
+        "count": 3576,
+        "sha256": "95f7fe16b512db03f9bb2cb782619d23ca0f6e3fe332d402dc4cc548031f201a"
+      }
+    }
+  ],
+  "unchangedGeometry": true,
+  "GLBbytes": 60220,
+  "GLBsha256": "05f0d70d155b69a9d6c08557120e556b82f3d57f8864eb0653d40444386c160d"
+}

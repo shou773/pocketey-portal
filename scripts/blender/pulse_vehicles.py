@@ -25,6 +25,53 @@ def linear(hexcolor):
     c = tuple(int(hexcolor[i:i+2], 16)/255 for i in (0,2,4))
     return tuple(v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in c)+(1,)
 
+def clamp(v): return max(0,min(1,v))
+def mix(a,b,t): return tuple(x*(1-t)+y*t for x,y in zip(a,b))
+def rgb(hexcolor): return tuple(int(hexcolor[i:i+2],16)/255 for i in (0,2,4))
+def paint(hexcolor,co):
+    """Static surface design/AO/reflection colors, no extra geometry or materials."""
+    x,h,z=co.x,co.z,-co.y; ax=abs(x); c=rgb(hexcolor)
+    top=clamp((h-.03)/.22)
+    if hexcolor=='d9e4df':
+        c=mix(rgb('486473'),rgb('d8d9c5'),top)
+        # Cool recessed flank vs warm dorsal skin, darker at engine/wing joints.
+        recess=math.exp(-((ax-.135)/.045)**2)*clamp((z+.30)/.5)*.32
+        c=mix(c,rgb('264c61'),recess)
+        if -.50<z<-.20 and ax>.09 and h>.11: c=mix(c,rgb('bd8b59'),.45)
+    elif hexcolor=='3e83a0':
+        # Span/chord ramp makes the airfoil flow visible; shaded aft/root seam.
+        lead=-.38+1.05*max(0,ax-.075); u=clamp((z-lead)/max(.15,.85-.70*ax))
+        c=mix(rgb('244b67'),rgb('4687ab'),clamp((h-.025)/.09))
+        c=mix(c,rgb('d4d8bc'),clamp((.12-u)/.12)*.88)
+        c=mix(c,rgb('183448'),clamp((u-.64)/.36)*.50)
+        c=mix(c,rgb('213e50'),math.exp(-((ax-.13)/.10)**2)*.28)
+        if ax>.55 and .32<u<.75 and h>.055: c=mix(c,rgb('b38c62'),.62)
+    elif hexcolor=='c4d5d4':
+        c=mix(rgb('314657'),rgb('a9b8bb'),clamp((h-.03)/.15))
+        c=mix(c,rgb('203546'),math.exp(-((ax-.17)/.035)**2)*.45)
+        if .40<z<.52:c=mix(c,rgb('b69267'),.65)
+    elif hexcolor=='142c41':
+        # Narrow sky reflection on dark glass, baked rather than a PBR shader.
+        c=mix(rgb('081522'),rgb('22485f'),clamp((h-.20)/.10))
+        glint=math.exp(-((x+.045)/.035)**2)*clamp((h-.22)/.06)
+        c=mix(c,rgb('84b1be'),glint*.62)
+    elif hexcolor=='bca18a':
+        c=mix(rgb('494458'),rgb('bda486'),clamp((h-.03)/.35))
+        c=mix(c,rgb('393643'),math.exp(-((ax-.33)/.11)**2)*.25)
+    elif hexcolor=='a17d66':
+        c=mix(rgb('494553'),rgb('9b7963'),clamp((h-.02)/.20))
+        front=clamp((z+.52)/1.1)
+        c=mix(c,rgb('c3bca5'),clamp((front-.65)/.35)*.60)
+        c=mix(c,rgb('353746'),math.exp(-((ax-.46)/.17)**2)*.25)
+    elif hexcolor=='cfb69a':
+        c=mix(rgb('414657'),rgb('c0af94'),clamp((h-.12)/.23))
+        if .30<z<.59:c=mix(c,rgb('8e684d'),.40)
+    elif hexcolor=='333947':
+        c=mix(rgb('161c2c'),rgb('414d65'),clamp((h-.39)/.14))
+        c=mix(c,rgb('8f9bac'),math.exp(-((x+.10)/.09)**2)*clamp((h-.43)/.07)*.40)
+    # Dark engine recesses stay dark; cyan is confined to existing nozzle mouths.
+    return tuple(v/12.92 if v<=.04045 else ((v+.055)/1.055)**2.4 for v in c)+(1,)
+
 class Vehicle:
     def __init__(self, name):
         self.name, self.verts, self.faces, self.colors = name, [], [], []
@@ -38,7 +85,7 @@ class Vehicle:
             for k in range(n):
                 faces.append((offset+j*n+k, offset+j*n+(k+1)%n, offset+(j+1)*n+(k+1)%n, offset+(j+1)*n+k))
         faces.extend([tuple(offset+k for k in reversed(range(n))), tuple(offset+(len(rings)-1)*n+k for k in range(n))])
-        self.faces.extend(faces); self.colors.extend([linear(color)]*len(faces))
+        self.faces.extend(faces); self.colors.extend([color]*len(faces))
 
     def fuselage(self, sections, color, x=0, segments=16):
         # z, half-width, half-height, centre-height; smoothly tapered custom stations.
@@ -58,7 +105,7 @@ class Vehicle:
         attr = mesh.color_attributes.new(name='Paint', type='FLOAT_COLOR', domain='CORNER')
         for face, color in zip(mesh.polygons, self.colors):
             face.use_smooth = True
-            for i in face.loop_indices: attr.data[i].color = color
+            for i in face.loop_indices: attr.data[i].color = paint(color,mesh.vertices[mesh.loops[i].vertex_index].co)
         # Recalculate outward normals on all closed shells, then triangulate once.
         bpy.context.view_layer.objects.active = obj; obj.select_set(True)
         bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT'); bpy.ops.mesh.normals_make_consistent(inside=False); bpy.ops.object.mode_set(mode='OBJECT')
