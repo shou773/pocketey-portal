@@ -1,0 +1,71 @@
+
+> pocketey-japan@0.1.0 build
+> astro build && node scripts/check-portal.mjs
+
+06:45:39 [content] Syncing content
+06:45:40 [content] Synced content
+06:45:40 [types] Generated 140ms
+06:45:40 [build] output: "static"
+06:45:40 [build] mode: "static"
+06:45:40 [build] directory: /workspace/pocketey-portal/dist/
+06:45:40 [build] Collecting build info...
+06:45:40 [build] ✓ Completed in 175ms.
+06:45:40 [build] Building static entrypoints...
+06:45:46 [vite] ✓ built in 6.06s
+06:45:46 [build] ✓ Completed in 6.13s.
+
+ building client (vite) 
+06:45:46 [vite] transforming...
+06:45:49 [vite] ✓ 26 modules transformed.
+06:45:49 [vite] rendering chunks...
+06:45:50 [vite] computing gzip size...
+06:45:50 [vite] dist/_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js     0.05 kB │ gzip:   0.07 kB
+06:45:50 [vite] dist/_astro/locale.B1rKA6B7.js                                              1.48 kB │ gzip:   0.66 kB
+06:45:50 [vite] dist/_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js        3.99 kB │ gzip:   2.00 kB
+06:45:50 [vite] dist/_astro/pulse-drift.astro_astro_type_script_index_0_lang.Bf4poO4F.js   15.18 kB │ gzip:   6.87 kB
+06:45:50 [vite] dist/_astro/tilttrail.astro_astro_type_script_index_0_lang.DVBg5WOS.js     15.23 kB │ gzip:   6.76 kB
+06:45:50 [vite] dist/_astro/ActionGame.astro_astro_type_script_index_0_lang.KRFTMpHr.js    80.64 kB │ gzip:  27.64 kB
+06:45:50 [vite] dist/_astro/three.module.B8YCrfxJ.js                                      607.58 kB │ gzip: 154.71 kB
+06:45:50 [WARN] [vite] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+06:45:50 [vite] ✓ built in 4.21s
+
+ generating static routes 
+06:45:50 ▶ src/pages/404.astro
+06:45:50   └─ /404.html (+169ms) 
+06:45:50 ▶ src/pages/about/index.astro
+06:45:50   └─ /about/index.html (+145ms) 
+06:45:50 ▶ src/pages/contact.astro
+06:45:50   └─ /contact/index.html (+178ms) 
+06:45:51 ▶ src/pages/games/amber-step.astro
+06:45:51   └─ /games/amber-step/index.html (+16ms) 
+06:45:51 ▶ src/pages/games/index.astro
+06:45:51   └─ /games/index.html (+19ms) 
+06:45:51 ▶ src/pages/games/orbit-ribbon.astro
+06:45:51   └─ /games/orbit-ribbon/index.html (+1ms) 
+06:45:51 ▶ src/pages/games/pulse-drift.astro
+06:45:51   └─ /games/pulse-drift/index.html (+7ms) 
+06:45:51 ▶ src/pages/games/tilttrail.astro
+06:45:51   └─ /games/tilttrail/index.html (+1ms) 
+06:45:51 ▶ src/pages/index.astro
+06:45:51   └─ /index.html (+22ms) 
+06:45:51 ▶ src/pages/privacy/index.astro
+06:45:51   └─ /privacy/index.html (+16ms) 
+06:45:51 ▶ /games/prototypes/tilttrail
+06:45:51   └─ /games/prototypes/tilttrail/index.html (+34ms) 
+06:45:51 ▶ /prototypes/pulse-drift
+06:45:51   └─ /prototypes/pulse-drift/index.html (+0ms) 
+06:45:51 ✓ Completed in 883ms.
+
+06:45:51 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+06:45:51 [build] 10 page(s) built in 11.81s
+06:45:51 [build] Complete!
+Portal routes and retirement guard passed.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
