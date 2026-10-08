@@ -10,7 +10,9 @@ export function createView(canvas: HTMLCanvasElement) {
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 160);
   scene.add(new THREE.HemisphereLight(0xc9fff3, 0x142938, 2.3));
   const sun = new THREE.DirectionalLight(0xffecd0, 2.7); sun.position.set(-6, 14, 8); scene.add(sun);
-  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0x37697b, roughness: 0.85, side: THREE.DoubleSide });
+  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0x37697b, roughness: 0.72, metalness: 0.12, side: THREE.DoubleSide });
+  const sideMaterial = new THREE.MeshStandardMaterial({ color: 0x244354, roughness: 0.88, metalness: 0.15 });
+  const rockMaterial = new THREE.MeshStandardMaterial({ color: 0x314b5b, roughness: 0.95, flatShading: true });
   const edgeMaterial = new THREE.MeshBasicMaterial({ color: 0xffb767 });
   const stripeMaterial = new THREE.MeshBasicMaterial({ color: 0x83b5bb });
   const ball = new THREE.Group();
@@ -24,6 +26,7 @@ export function createView(canvas: HTMLCanvasElement) {
   let stage = -1, lastZ = 0, lastX = 0;
   function ribbon(which: number, offset: number | null, stripWidth: number, material: THREE.Material) {
     const positions: number[] = [], indices: number[] = [];
+    const sidePositions: number[] = [], sideIndices: number[] = [];
     const count = Math.ceil(length(which) * 3);
     for (let i = 0; i <= count; i++) {
       const z = i * length(which) / count, road = track(which, z);
@@ -35,9 +38,15 @@ export function createView(canvas: HTMLCanvasElement) {
     }
     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); geometry.setIndex(indices); geometry.computeVertexNormals();
     course.add(new THREE.Mesh(geometry, material));
+    if(offset===null){
+      const wallCount=Math.ceil(length(which));
+      for(let i=0;i<=wallCount;i++){const z=i*length(which)/wallCount,road=track(which,z);sidePositions.push(road.x-road.width/2,0,-z,road.x-road.width/2,-.42,-z,road.x+road.width/2,0,-z,road.x+road.width/2,-.42,-z);if(i<wallCount){const k=i*4;sideIndices.push(k,k+4,k+1,k+1,k+4,k+5,k+2,k+3,k+6,k+3,k+7,k+6);}}
+      const end=wallCount*4;sideIndices.push(0,1,2,2,1,3,end,end+2,end+1,end+2,end+3,end+1);
+      const side=new THREE.BufferGeometry();side.setAttribute('position',new THREE.Float32BufferAttribute(sidePositions,3));side.setIndex(sideIndices);side.computeVertexNormals();course.add(new THREE.Mesh(side,sideMaterial));
+    }
   }
   function rebuild(which: number) {
-    course.traverse(o => { if (o instanceof THREE.Mesh) { o.geometry.dispose(); } }); scene.remove(course); course = new THREE.Group(); scene.add(course);
+    course.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose(); o.geometry.dispose(); } }); scene.remove(course); course = new THREE.Group(); scene.add(course);
     ribbon(which, null, 0, roadMaterial); ribbon(which, -1, 0.1, edgeMaterial); ribbon(which, 1, 0.1, edgeMaterial);
     // Dashes mark the center. They are visual guidance, never hidden collision.
     const dashes = new THREE.InstancedMesh(new THREE.BoxGeometry(0.055, 0.018, 0.7), stripeMaterial, Math.floor(length(which) / 2));
@@ -47,10 +56,10 @@ export function createView(canvas: HTMLCanvasElement) {
     const end = length(which), road = track(which, end);
     const arch = new THREE.Mesh(new THREE.TorusGeometry(2, 0.11, 8, 40, Math.PI), finishMaterial); arch.position.set(road.x, 0, -end); course.add(arch);
     const line = new THREE.Mesh(new THREE.BoxGeometry(road.width, 0.025, 0.35), finishMaterial); line.position.set(road.x, 0.015, -end); course.add(line);
-    // Decorative floating rocks sit far beneath the playable ribbon.
-    const rocks = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 0), roadMaterial, 24);
+    // Six layered island clusters sit well outside/below the playable ribbon.
+    const rocks = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1, 0), rockMaterial, 24);
     const temp = new THREE.Object3D();
-    for (let i = 0; i < 24; i++) { temp.position.set((i % 2 ? 1 : -1) * (10 + i % 4 * 3), -6 - i % 3 * 3, -i * 7); temp.scale.set(2 + i % 3, 1.5 + i % 2, 2.4); temp.rotation.set(i, i * 0.7, 0.2); temp.updateMatrix(); rocks.setMatrixAt(i, temp.matrix); } course.add(rocks);
+    for (let i = 0; i < 24; i++) { const group=Math.floor(i/4),part=i%4,z=group*22+8,road=track(which,z);temp.position.set(road.x+(group%2?1:-1)*(11+group%3*2)+(part%2?1:-1)*1.8, -6-part*1.3, -z+(part-1.5)*2);temp.scale.set(3.8-part*.6,2.5+part*.5,3.6-part*.3);temp.rotation.set(i*.3,i*.7,.2);temp.updateMatrix();rocks.setMatrixAt(i,temp.matrix); } course.add(rocks);
     stage = which; lastZ = 0; lastX = 0; ball.rotation.set(0, 0, 0);
   }
   function resize() {
@@ -73,6 +82,6 @@ export function createView(canvas: HTMLCanvasElement) {
     camera.position.set(focus, height, -s.z + 10); camera.lookAt(focus, 0, -s.z - 11);
     renderer.render(scene, camera);
   }
-  function dispose() { observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) o.geometry.dispose(); }); [roadMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); renderer.dispose(); }
+  function dispose() { observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose(); } }); [roadMaterial, sideMaterial, rockMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); renderer.dispose(); }
   return { draw, dispose, renderer };
 }

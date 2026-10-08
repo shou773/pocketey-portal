@@ -1,7 +1,7 @@
 name: Games quality
 on:
   push:
-    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, main]
+    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, codex/new-games-depth, main]
     paths:
       - 'src/**'
       - 'public/**'
@@ -21,6 +21,8 @@ on:
       - 'playwright.cross.config.ts'
       - 'scripts/games-performance.mjs'
       - '.github/workflows/games-quality.yml'
+      - 'docs/release/new-games-depth/**'
+      - 'scripts/capture-new-game-depth.mjs'
       - 'docs/games/ART-REFRESH.md'
       - 'docs/games/evidence/art-refresh/**'
       - 'docs/games/DIFFICULTY-REFRESH.md'
