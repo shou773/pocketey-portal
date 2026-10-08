@@ -8,7 +8,7 @@
     "build": "astro build && node scripts/check-portal.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "tsx --test tests/games/model.test.ts",
+    "test": "tsx --test tests/games/model.test.ts tests/prototypes/shooter-model.test.ts tests/prototypes/ball/model.test.ts",
     "test:browser": "playwright test",
     "check:games": "tsc --noEmit -p tsconfig.games.json",
     "test:portal": "playwright test --config playwright.portal.config.ts"

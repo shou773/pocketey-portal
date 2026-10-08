@@ -1,0 +1,13 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {createState,step,STEP,overlaps,sweptHit,cleanSave,STAGES} from '../../src/games/prototypes/shooter/model';
+const run=(s:ReturnType<typeof createState>,seconds:number,input={x:s.x,y:s.y})=>{for(let i=0;i<seconds/STEP;i++)step(s,STEP,input);};
+test('movement is bounded, rate limited and deterministic',()=>{const a=createState(1),b=createState(1);step(a,STEP,{x:100,y:100});assert.ok(Math.hypot(a.x,a.y-1.8)<=6.5*STEP+1e-8);run(a,2,{x:99,y:99});run(b,2+STEP,{x:99,y:99});assert.deepEqual(a,b);assert.ok(a.x<=3.8&&a.y<=6.5);});
+test('circle and swept collisions catch travel without a broad visual hitbox',()=>{assert.equal(overlaps({x:0,y:0,r:.18},{x:.35,y:0,r:.16}),false);assert.ok(sweptHit({id:1,x:2,y:0,vx:0,vy:0,r:.16},-2,0,{x:0,y:0,r:.18}));});
+test('damage has grace period and terminal states cannot advance',()=>{const s=createState(0);s.invulnerable=0;s.bullets=[1,2,3].map(id=>({id,x:0,y:1.8,vx:0,vy:0,r:.16}));step(s,STEP,{x:0,y:1.8});assert.equal(s.hp,3);s.status='lost';const time=s.time;run(s,1);assert.equal(s.time,time);});
+test('beam warning lasts 1.3 seconds and expires',()=>{const s=createState(0);s.invulnerable=0;s.beams=[{x:0,age:0,wide:.65}];run(s,1.2);assert.equal(s.hp,4);run(s,.2);assert.equal(s.hp,3);run(s,.6);assert.equal(s.beams.length,0);});
+test('shots remove enemies and award score once',()=>{const s=createState(0);s.enemies=[{id:99,x:0,y:3,vx:0,vy:0,r:.44,hp:1,shot:99,kind:'scout'}];run(s,.2);assert.equal(s.enemies.length,0);assert.equal(s.score,100);});
+test('all stages spawn threats, stage 3 has one boss and a deadline',()=>{for(let i=0;i<3;i++){const s=createState(i);s.invulnerable=999;run(s,STAGES[i].duration);assert.equal(s.status,'won');assert.equal(s.bossSpawned,i===2);assert.ok(s.nextId>20);}});
+test('surviving boss at deadline fails',()=>{const s=createState(2);s.time=48-STEP;s.bossSpawned=true;s.enemies=[{id:9,x:0,y:9,vx:0,vy:0,r:1,hp:100,shot:99,kind:'boss'}];step(s,STEP,{x:0,y:1.8});assert.equal(s.status,'lost');});
+test('boss defeat clears stage and malformed save is bounded',()=>{const s=createState(2);s.bossSpawned=true;step(s,STEP,{x:0,y:1.8});assert.equal(s.status,'won');assert.deepEqual(cleanSave({best:[NaN,-2,Infinity],mute:'false'}),{best:[0,0,0],mute:true});assert.deepEqual(cleanSave(null),{best:[0,0,0],mute:true});});
+
+test('simultaneous fatal hit and boss defeat remains a loss',()=>{const s=createState(2);s.bossSpawned=true;s.hp=1;s.invulnerable=0;s.enemies=[{id:9,x:0,y:9,vx:0,vy:0,r:1,hp:1,shot:99,kind:'boss'}];s.bullets=[{id:8,x:0,y:1.8,vx:0,vy:0,r:.16}];s.shots=[{id:7,x:0,y:8.9,vx:0,vy:15,r:.12}];step(s,STEP,{x:0,y:1.8});assert.equal(s.hp,0);assert.equal(s.status,'lost');});

@@ -1,6 +1,7 @@
 ---
 const { kind, title, subtitle } = Astro.props;
 import LocaleHead from './LocaleHead.astro';
+import GameMeta from './GameMeta.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import T from './T.astro';
 const descriptionEn=kind==='orbit'?'An automatic 3D runner. Steer around pillars and jump the gaps across three short stages.':'A side-view 2.5D platformer. Move and jump across three short stages.';
@@ -9,7 +10,7 @@ import '../games/ui.css';
 ---
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><LocaleHead/><meta name="theme-color" content="#101429"/><title>{title} — Pocketey Games</title><meta name="description" content={descriptionEn} data-ja={subtitle} data-en={descriptionEn}/><link rel="icon" href="/favicon.svg"/><link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)}/>{['trophy','rotate-ccw','sparkles','check'].map(name => <link rel="preload" as="image" href={`/games/assets/lucide/${name}.svg`}/>)}</head>
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><LocaleHead/><meta name="theme-color" content="#101429"/><GameMeta name={title} description={descriptionEn} descriptionJa={subtitle} slug={kind==='orbit'?'orbit-ribbon':'amber-step'}/>{['trophy','rotate-ccw','sparkles','check'].map(name => <link rel="preload" as="image" href={`/games/assets/lucide/${name}.svg`}/>)}</head>
 <body class={kind}>
 <main id="game" data-kind={kind}>
   <header class="game-bar"><a href="/games/" class="wordmark">POCKETEY <span> / PLAY</span></a><div><button id="sound" aria-label="Toggle sound" aria-pressed="false"><T ja="音 OFF" en="Sound OFF"/></button><button id="pause" disabled><T ja="一時停止" en="Pause"/></button></div></header>

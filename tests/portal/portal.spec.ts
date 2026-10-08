@@ -29,7 +29,7 @@ test('blocked or corrupt language storage keeps selection and links usable',asyn
 
 test('retired URLs return 404 and sitemap contains only current pages',async({request,page})=>{
  for(const path of ['/news/','/news/2026-09-04-welcome-to-pocketey/','/guides/','/affiliate-disclosure/','/not-a-page/']){const response=await request.get(path,{maxRedirects:0});expect(response.status(),path).toBe(404);expect(response.headers().location).toBeUndefined();}
- const sitemap=await request.get('/sitemap-0.xml');expect(sitemap.status()).toBe(200);const xml=await sitemap.text();expect(xml).not.toMatch(/\/(news|guides|affiliate-disclosure|404)[/.<]/);for(const slug of ['games/orbit-ribbon/','games/amber-step/','about/','privacy/','contact/'])expect(xml).toContain(slug);
+ const sitemap=await request.get('/sitemap-0.xml');expect(sitemap.status()).toBe(200);const xml=await sitemap.text();expect(xml).not.toMatch(/\/(news|guides|affiliate-disclosure|404)[/.<]/);for(const slug of ['games/orbit-ribbon/','games/amber-step/','games/pulse-drift/','games/tilttrail/','about/','privacy/','contact/'])expect(xml).toContain(slug);
  await page.goto('/not-a-page/?lang=ja');await expect(page.getByRole('heading',{name:'このページは見つかりません。'})).toBeVisible();await page.getByRole('link',{name:'ゲーム一覧へ',exact:true}).click();await expect(page).toHaveURL(/\/games\/\?lang=ja/);
 });
 
@@ -84,4 +84,24 @@ test('contact without a challenge cannot send and offers the established email',
 test('unsupported WebGL shows a translated recovery explanation and usable exit',async({page})=>{
  await page.addInitScript(()=>Object.defineProperty(HTMLCanvasElement.prototype,'getContext',{value:()=>null}));
  await page.goto('/games/orbit-ribbon/?lang=ja');await expect(page.getByRole('heading',{name:'3D画面を起動できません'})).toBeVisible();await expect(page.locator('[data-input=jump]')).toBeDisabled();await page.getByRole('button',{name:'English',exact:true}).click();await expect(page.getByRole('heading',{name:'3D could not start'})).toBeVisible();await page.locator('.back-link').click();await expect(page).toHaveURL(/\/games\/\?lang=en/);
+});
+
+for(const slug of ['orbit-ribbon','amber-step','pulse-drift','tilttrail'])test(`${slug}: public metadata and four-card portal`,async({page,request})=>{
+ for(const lang of ['en','ja']){
+  await page.goto('/?lang='+lang);await expect(page.locator('.game-card')).toHaveCount(4);
+  await page.goto('/games/?lang='+lang);await expect(page.locator('.game-card')).toHaveCount(4);
+  await page.goto('/games/'+slug+'/?lang='+lang);await expect(page.locator('html')).toHaveAttribute('lang',lang);
+  await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href','https://www.pocketey.com/games/'+slug+'/');
+  expect(await page.locator('meta[name=robots]').count()).toBe(0);
+  expect(await page.locator('meta[name=description]').getAttribute('content')).toBe(await page.locator('meta[name=description]').getAttribute('data-'+lang));
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content','https://www.pocketey.com/games/'+slug+'/');
+  const image=await page.locator('meta[property="og:image"]').getAttribute('content');expect((await request.get(new URL(image!).pathname)).status()).toBe(200);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ }
+});
+test('only the two retired prototypes redirect to their public games',async({page,request})=>{
+ for(const [old,slug] of [['/prototypes/pulse-drift/','pulse-drift'],['/games/prototypes/tilttrail/','tilttrail']]){
+  await page.goto(old);await expect(page).toHaveURL(new RegExp('/games/'+slug+'/'));
+ }
+ expect(await (await request.get('/sitemap-0.xml')).text()).not.toContain('/prototypes/');
 });

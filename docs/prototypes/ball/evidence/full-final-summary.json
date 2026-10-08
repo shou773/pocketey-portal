@@ -1,0 +1,147 @@
+{
+  "recordedAt": "2026-10-07T19:25:28.113Z",
+  "codeCommit": "bf5aa9e689dcff1a2e6e7993e565004202abe262",
+  "codeChanged": false,
+  "unit": {
+    "passed": 6,
+    "failed": 0
+  },
+  "browser": {
+    "startTime": "2026-10-07T19:19:43.307Z",
+    "duration": 230956.391,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "all three stages clear with ordinary keyboard; bests persist independently",
+      "ok": true
+    },
+    {
+      "title": "all three stages clear with ordinary multi-touch; bests persist independently",
+      "ok": true
+    },
+    {
+      "title": "fall → instant retry, pause, input release, mute, language and rapid actions",
+      "ok": true
+    },
+    {
+      "title": "two-finger controls, touch cancellation, orientation and page return release input",
+      "ok": true
+    },
+    {
+      "title": "320 portrait and landscape panels fit; blocked storage and WebGL show honest fallback",
+      "ok": true
+    },
+    {
+      "title": "WebGL loss freezes play and fall; header, P, Esc and touch cannot resume before reload",
+      "ok": true
+    }
+  ],
+  "clears": [
+    {
+      "mode": "keyboard",
+      "stage": 0,
+      "phase": "clear",
+      "x": 0.0762,
+      "z": 80,
+      "vx": 0,
+      "speed": 0,
+      "time": 14.075
+    },
+    {
+      "mode": "keyboard",
+      "stage": 1,
+      "phase": "clear",
+      "x": -0.0613,
+      "z": 112,
+      "vx": 0,
+      "speed": 0,
+      "time": 42.45
+    },
+    {
+      "mode": "keyboard",
+      "stage": 2,
+      "phase": "clear",
+      "x": 0.0774,
+      "z": 122,
+      "vx": 0,
+      "speed": 0,
+      "time": 50.7333
+    },
+    {
+      "mode": "touch",
+      "stage": 0,
+      "phase": "clear",
+      "x": -0.0916,
+      "z": 80,
+      "vx": 0,
+      "speed": 0,
+      "time": 14.075
+    },
+    {
+      "mode": "touch",
+      "stage": 1,
+      "phase": "clear",
+      "x": 0.0154,
+      "z": 112,
+      "vx": 0,
+      "speed": 0,
+      "time": 33.15
+    },
+    {
+      "mode": "touch",
+      "stage": 2,
+      "phase": "clear",
+      "x": 0.0725,
+      "z": 122,
+      "vx": 0,
+      "speed": 0,
+      "time": 38.9
+    }
+  ],
+  "performance": {
+    "desktop": {
+      "fps": 45.94718776183138,
+      "p95": 33.400000000001455,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "viewport": [
+        1280,
+        800
+      ],
+      "framebuffer": [
+        687,
+        349
+      ],
+      "drawCalls": 10,
+      "triangles": 5188
+    },
+    "mobile": {
+      "fps": 59.30370473731951,
+      "p95": 16.700000000004366,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "viewport": [
+        390,
+        844
+      ],
+      "framebuffer": [
+        367,
+        653
+      ],
+      "drawCalls": 8,
+      "triangles": 4536
+    }
+  },
+  "sourceBlobs": {
+    "src/games/prototypes/ball/model.ts": "09f0b76aa7d799dc1f5c169f4fc988c14036ee6c",
+    "src/games/prototypes/ball/render.ts": "44c0189934f370372137fd2ced4b8415dd32446e",
+    "src/games/prototypes/ball/app.ts": "65c2c0630ef7ef083231fedd201611f0e60e1761",
+    "src/games/prototypes/ball/style.css": "3215c256e0e090721bbaa3f548a68e36c4a8bb3b",
+    "src/pages/games/prototypes/tilttrail.astro": "d0e98d21eeb2999588aa0ac65b483288d65eeccd",
+    "tests/prototypes/ball/model.test.ts": "406d4a4202e79ad36625e2e4dcb6bda82d5899bf",
+    "tests/prototypes/ball/browser.spec.ts": "8bc74ae77351ffd21b87746193d3e4743161a848",
+    "tests/prototypes/ball/playwright.config.ts": "3c300f7178ea86ece780e6170831b5cac9497352"
+  }
+}

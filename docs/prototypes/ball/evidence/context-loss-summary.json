@@ -1,0 +1,36 @@
+{
+  "recordedAt": "2026-10-07T19:11:27.978Z",
+  "baselineCommit": "9a88868add37a472e2fb9108b85ee977c4810091",
+  "scope": "WebGL context-loss follow-up; affected UI/lifecycle tests rerun, six stage/mode clears and performance reused from unchanged model/render baseline",
+  "stats": {
+    "startTime": "2026-10-07T19:09:00.331Z",
+    "duration": 18664.532,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "fall → instant retry, pause, input release, mute, language and rapid actions",
+      "ok": true
+    },
+    {
+      "title": "two-finger controls, touch cancellation, orientation and page return release input",
+      "ok": true
+    },
+    {
+      "title": "WebGL loss freezes play and fall; header, P, Esc and touch cannot resume before reload",
+      "ok": true
+    }
+  ],
+  "sourceBlobs": {
+    "src/games/prototypes/ball/app.ts": "65c2c0630ef7ef083231fedd201611f0e60e1761",
+    "tests/prototypes/ball/browser.spec.ts": "8bc74ae77351ffd21b87746193d3e4743161a848"
+  },
+  "checks": {
+    "gameTypeScript": "passed",
+    "AstroCheck": "0 errors, 0 warnings, 5 pre-existing hints",
+    "staticBuild": "passed"
+  }
+}

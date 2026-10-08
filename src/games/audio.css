@@ -1,0 +1,9 @@
+.audio-settings-button{min-width:32px;min-height:32px;padding:3px 8px!important;font-size:16px!important}
+.game-audio-settings{color:#f4f1e9;background:#14242b;border:1px solid #82969c;border-radius:16px;width:min(360px,calc(100vw - 32px));padding:22px;max-height:calc(100dvh - 32px);overflow:auto;box-sizing:border-box}
+.game-audio-settings::backdrop{background:#020c16b8}
+.game-audio-settings h2{margin:0 0 20px;font-size:22px}
+.game-audio-settings label{display:grid;grid-template-columns:1fr auto;gap:10px;margin-bottom:20px;align-items:center}
+.game-audio-settings input{grid-column:1/-1;width:100%;min-height:32px;accent-color:#acdcca;grid-row:2}
+.game-audio-settings button{border:1px solid #819398;background:#203b43;color:inherit;border-radius:7px;min-height:40px;padding:7px 12px;cursor:pointer}
+.game-audio-settings p{font-size:13px;line-height:1.5}
+.game-audio-settings :focus-visible{outline:2px solid #ffe09a;outline-offset:3px}

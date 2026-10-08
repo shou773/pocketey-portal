@@ -1,0 +1,15 @@
+---
+const {name,description,descriptionJa,slug}=Astro.props;
+const title=`${name} — Pocketey Games`;
+const titleJa=`${name} — Pocketey ゲーム`;
+const canonical=new URL(`/games/${slug}/`,Astro.site);
+---
+<title data-ja={titleJa} data-en={title}>{title}</title>
+<meta name="description" content={description} data-ja={descriptionJa} data-en={description}/>
+<link rel="canonical" href={canonical}/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content={title} data-ja={titleJa} data-en={title}/>
+<meta property="og:description" content={description} data-ja={descriptionJa} data-en={description}/>
+<meta property="og:url" content={canonical}/>
+<meta property="og:image" content={new URL(`/games/previews/${slug}.png`,Astro.site)}/>
+<link rel="icon" href="/favicon.svg"/>

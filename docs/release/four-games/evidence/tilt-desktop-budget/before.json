@@ -1,0 +1,82 @@
+[
+  {
+    "name": "desktop",
+    "css": {
+      "x": 0,
+      "y": 62,
+      "width": 1280,
+      "height": 650,
+      "top": 62,
+      "right": 1280,
+      "bottom": 712,
+      "left": 0
+    },
+    "framebuffer": [
+      687,
+      349
+    ],
+    "state": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "ready",
+      "stage": "2",
+      "x": "0.0000",
+      "z": "0.0000",
+      "vx": "0.0000",
+      "time": "0.0000",
+      "speed": "0.0000",
+      "drawCalls": "10",
+      "triangles": "4180"
+    },
+    "viewport": [
+      1280,
+      800
+    ],
+    "dpr": 1
+  },
+  {
+    "name": "mobile",
+    "css": {
+      "x": 0,
+      "y": 62,
+      "width": 390,
+      "height": 694,
+      "top": 62,
+      "right": 390,
+      "bottom": 756,
+      "left": 0
+    },
+    "framebuffer": [
+      367,
+      653
+    ],
+    "state": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "ready",
+      "stage": "2",
+      "x": "0.0000",
+      "z": "0.0000",
+      "vx": "0.0000",
+      "time": "0.0000",
+      "speed": "0.0000",
+      "drawCalls": "8",
+      "triangles": "4536"
+    },
+    "viewport": [
+      390,
+      844
+    ],
+    "dpr": 1
+  }
+]

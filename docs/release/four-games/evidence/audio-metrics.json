@@ -1,0 +1,98 @@
+{
+  "measurement": "FFmpeg 7.1.5 ebur128 true-peak; 44.1kHz stereo loop PCM; SFX 4x peak",
+  "tracks": [
+    {
+      "file": "orbit.ogg",
+      "bytes": 2280288,
+      "decodedSeconds": 130.28571428571428,
+      "truePeakDBTP": -6.3,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.14469704031944275,
+      "loop20msRMSDBFS": -21.087406158447266
+    },
+    {
+      "file": "orbit.mp3",
+      "bytes": 3128467,
+      "decodedSeconds": 130.28571428571428,
+      "truePeakDBTP": -6.9,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.13299453258514404,
+      "loop20msRMSDBFS": -21.244293212890625
+    },
+    {
+      "file": "amber.ogg",
+      "bytes": 2340572,
+      "decodedSeconds": 130.16950113378684,
+      "truePeakDBTP": -6.6,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.10858003795146942,
+      "loop20msRMSDBFS": -22.263601303100586
+    },
+    {
+      "file": "amber.mp3",
+      "bytes": 3125959,
+      "decodedSeconds": 130.16950113378684,
+      "truePeakDBTP": -7.1,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.10496014356613159,
+      "loop20msRMSDBFS": -22.361677169799805
+    },
+    {
+      "file": "pulse.ogg",
+      "bytes": 1885055,
+      "decodedSeconds": 104.22857142857143,
+      "truePeakDBTP": -6.6,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.14987236261367798,
+      "loop20msRMSDBFS": -23.8349609375
+    },
+    {
+      "file": "pulse.mp3",
+      "bytes": 2502782,
+      "decodedSeconds": 104.22857142857143,
+      "truePeakDBTP": -7.0,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.1538398712873459,
+      "loop20msRMSDBFS": -23.926279067993164
+    },
+    {
+      "file": "tilt.ogg",
+      "bytes": 2053683,
+      "decodedSeconds": 116.36365079365079,
+      "truePeakDBTP": -7.0,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.1176920235157013,
+      "loop20msRMSDBFS": -28.612430572509766
+    },
+    {
+      "file": "tilt.mp3",
+      "bytes": 2794309,
+      "decodedSeconds": 116.36365079365079,
+      "truePeakDBTP": -6.9,
+      "runtimeLoopBoundaryStep": 0.0,
+      "loopAdjacentStepMax": 0.10463359951972961,
+      "loop20msRMSDBFS": -28.629655838012695
+    }
+  ],
+  "maximumVolumeMixBoundDBTP": -1.687214850763964,
+  "perGameMaximumVolumeBoundsDBTP": {
+    "orbit": -1.9194497004764057,
+    "amber": -1.8725033316385682,
+    "pulse": -1.9194497004764057,
+    "tilt": -1.687214850763964
+  },
+  "musicTrim": {
+    "orbit": 1,
+    "amber": 1.1,
+    "pulse": 1,
+    "tilt": 1.5
+  },
+  "effectsGain": 0.9,
+  "masterGain": 0.85,
+  "conservativeBudgetDBTP": -1.1548769916107018,
+  "sfxMaxOversampledPeak": 0.25983285903930664,
+  "voiceCap": 10,
+  "perCueCap": 2,
+  "shotContactCooldownMS": 100,
+  "listeningClaim": false
+}

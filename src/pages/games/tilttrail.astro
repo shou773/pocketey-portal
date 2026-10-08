@@ -1,0 +1,22 @@
+---
+import LocaleHead from '../../components/LocaleHead.astro';
+import GameMeta from '../../components/GameMeta.astro';
+import LanguageSwitch from '../../components/LanguageSwitch.astro';
+import '../../games/prototypes/ball/style.css';
+---
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="theme-color" content="#091e2c"/><LocaleHead/><GameMeta name="TiltTrail" description="Steer a rolling ball, brake before bends and reach the gate across three floating trails." descriptionJa="左右でボールを転がし、曲がる前にブレーキ。空に浮かぶ3つの道をゴールまで走ろう。" slug="tilttrail"/><link rel="icon" href="/favicon.svg"/></head>
+<body>
+<main id="tilttrail">
+  <header class="tt-bar"><a href="/games/">POCKETEY <span> / PLAY</span></a><div><button id="tt-sound" aria-pressed="false">Sound OFF</button><button id="tt-pause" disabled>Pause</button></div></header>
+  <div class="tt-view"><canvas id="tt-canvas" aria-label="TiltTrail 3D"></canvas>
+    <div class="tt-hud"><div><small id="tt-stage"></small><strong id="tt-name"></strong></div><div><strong id="tt-time">0.00</strong><small id="tt-speed"></small></div></div>
+    <progress id="tt-progress" max="1" value="0" aria-label="Progress"></progress>
+    <p id="tt-hint"></p>
+    <div id="tt-overlay"><section class="tt-panel" aria-labelledby="tt-title"><div class="tt-panel-top"><span>POCKETEY · 03 STAGES</span><LanguageSwitch/></div><div class="tt-orb" aria-hidden="true"></div><p id="tt-eyebrow"></p><h1 id="tt-title">TiltTrail</h1><p id="tt-copy"></p><div id="tt-stages"></div><p id="tt-instructions"></p><div id="tt-actions"></div><p id="tt-save" role="status"></p><a id="tt-back" href="/games/">All games</a></section></div>
+  </div>
+  <footer class="tt-controls"><div class="tt-steer"><button data-tt-input="left" aria-label="Left">←</button><button data-tt-input="right" aria-label="Right">→</button></div><span id="tt-control-note"></span><button data-tt-input="brake" class="tt-brake">BRAKE</button></footer>
+</main>
+<script>import { boot } from '../../games/prototypes/ball/app'; boot();</script>
+</body></html>

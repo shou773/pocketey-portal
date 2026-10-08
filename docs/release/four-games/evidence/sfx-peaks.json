@@ -1,0 +1,41 @@
+{
+  "method": "FFmpeg ebur128=peak=true, decoded delivered WAVs. Actual mixed-play capture remains pending.",
+  "samples": [
+    {
+      "file": "clear.wav",
+      "truePeakDbTP": -13.5
+    },
+    {
+      "file": "click.wav",
+      "truePeakDbTP": -11.9
+    },
+    {
+      "file": "damage.wav",
+      "truePeakDbTP": -12.0
+    },
+    {
+      "file": "death.wav",
+      "truePeakDbTP": -11.7
+    },
+    {
+      "file": "jump.wav",
+      "truePeakDbTP": -12.0
+    },
+    {
+      "file": "land.wav",
+      "truePeakDbTP": -17.0
+    },
+    {
+      "file": "roll.wav",
+      "truePeakDbTP": -12.1
+    },
+    {
+      "file": "shot.wav",
+      "truePeakDbTP": -13.1
+    },
+    {
+      "file": "warning.wav",
+      "truePeakDbTP": -12.0
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "status": "All six stage clears observed; desktop performance gate failed; touch persistence and four lifecycle/layout cases passed. Not release approval.",
+  "stages": [
+    {
+      "input": "keyboard",
+      "stage": 1,
+      "end": {
+        "phase": "clear",
+        "stage": 0,
+        "x": -0.0377,
+        "z": 80,
+        "vx": 0,
+        "speed": 0,
+        "time": 14.075
+      },
+      "observations": 146,
+      "timestamped": true
+    },
+    {
+      "input": "keyboard",
+      "stage": 2,
+      "end": {
+        "phase": "clear",
+        "stage": 1,
+        "x": 0.0488,
+        "z": 112,
+        "vx": 0,
+        "speed": 0,
+        "time": 42.5167
+      },
+      "observations": 435,
+      "timestamped": true
+    },
+    {
+      "input": "keyboard",
+      "stage": 3,
+      "end": {
+        "phase": "clear",
+        "stage": 2,
+        "x": 0.0774,
+        "z": 122,
+        "vx": 0,
+        "speed": 0,
+        "time": 50.6417
+      },
+      "observations": 540,
+      "timestamped": true
+    },
+    {
+      "input": "touch",
+      "stage": 1,
+      "end": {
+        "phase": "clear",
+        "stage": 0,
+        "x": 0.0747,
+        "z": 80,
+        "vx": 0,
+        "speed": 0,
+        "time": 14.075
+      },
+      "observations": 123,
+      "timestamped": true
+    },
+    {
+      "input": "touch",
+      "stage": 2,
+      "end": {
+        "phase": "clear",
+        "stage": 1,
+        "x": -0.0697,
+        "z": 112,
+        "vx": 0,
+        "speed": 0,
+        "time": 34.2167
+      },
+      "observations": 283,
+      "timestamped": true
+    },
+    {
+      "input": "touch",
+      "stage": 3,
+      "end": {
+        "phase": "clear",
+        "stage": 2,
+        "x": -0.0684,
+        "z": 122,
+        "vx": 0,
+        "speed": 0,
+        "time": 40.575
+      },
+      "observations": 334,
+      "timestamped": true
+    }
+  ],
+  "performance": {
+    "desktop": {
+      "fps": 34.002040122407315,
+      "p95": 50,
+      "drawCalls": 10,
+      "triangles": 5188,
+      "viewport": [
+        1280,
+        800
+      ],
+      "framebuffer": [
+        687,
+        349
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "mobile": {
+      "fps": 50.24828564672504,
+      "p95": 33.400000000001455,
+      "drawCalls": 8,
+      "triangles": 4536,
+      "viewport": [
+        390,
+        844
+      ],
+      "framebuffer": [
+        367,
+        653
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  },
+  "keyboardPersistenceAfterPerformanceAssertion": "not reached",
+  "layoutRerun": "passed after build outputs were stable; initial layout run overlapped local rebuild and timed out"
+}

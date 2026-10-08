@@ -1,0 +1,70 @@
+{
+  "method": "Test-only start offset 400ms before actual decoded buffer end; 1100ms ordinary playback, unchanged single source/start count; recorded actual mix. Full track speed and length retained. Explicit non-bfcache pagehide releases decoded samples/context/score. No subjective rhythmic-continuity claim.",
+  "auditoryReview": false,
+  "loops": [
+    {
+      "test": "orbit: ogg actual score crosses its loop boundary once",
+      "duration": 130.28571428571428,
+      "bytes": 45964800,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.11617039144039154,
+      "maxNearZeroMS": 0.18140589569160998
+    },
+    {
+      "test": "orbit: mp3 actual score crosses its loop boundary once",
+      "duration": 130.28571428571428,
+      "bytes": 45964800,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.11788507550954819,
+      "maxNearZeroMS": 0.13605442176870747
+    },
+    {
+      "test": "amber: ogg actual score crosses its loop boundary once",
+      "duration": 130.16950113378684,
+      "bytes": 45923800,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.10858003795146942,
+      "maxNearZeroMS": 0.27210884353741494
+    },
+    {
+      "test": "amber: mp3 actual score crosses its loop boundary once",
+      "duration": 130.16950113378684,
+      "bytes": 45923800,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.10495997965335846,
+      "maxNearZeroMS": 0.11337868480725624
+    },
+    {
+      "test": "pulse: ogg actual score crosses its loop boundary once",
+      "duration": 104.22857142857143,
+      "bytes": 36771840,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.14033439382910728,
+      "maxNearZeroMS": 0.15873015873015872
+    },
+    {
+      "test": "pulse: mp3 actual score crosses its loop boundary once",
+      "duration": 104.22857142857143,
+      "bytes": 36771840,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.1469072848558426,
+      "maxNearZeroMS": 0.13605442176870747
+    },
+    {
+      "test": "tilt: ogg actual score crosses its loop boundary once",
+      "duration": 116.36365079365079,
+      "bytes": 41053096,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.1176920235157013,
+      "maxNearZeroMS": 0.18140589569160998
+    },
+    {
+      "test": "tilt: mp3 actual score crosses its loop boundary once",
+      "duration": 116.36365079365079,
+      "bytes": 41053096,
+      "boundaryStep": 0,
+      "maxAdjacentStep": 0.10463348776102066,
+      "maxNearZeroMS": 0.18140589569160998
+    }
+  ]
+}
