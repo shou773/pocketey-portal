@@ -1,0 +1,15 @@
+{
+  "actualStatement": "await page.waitForFunction(frozen=>{const game=document.querySelector('#pulse');return game.dataset.mode==='play'&&JSON.parse(game.dataset.state).time>frozen;},frozen,{timeout:3000});",
+  "unchangedTime": {
+    "status": "expected-timeout",
+    "elapsedMs": 3004.386023
+  },
+  "pausedWithAdvancedTime": {
+    "status": "expected-timeout",
+    "elapsedMs": 3001.9537740000005
+  },
+  "delayedUpdate": {
+    "status": "passed",
+    "elapsedMs": 1215.5856750000003
+  }
+}
