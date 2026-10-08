@@ -4,7 +4,7 @@ Base public main: `a443ec37c33cae22021c82b7b20f3fb6e62f02c6`. This is an unmerge
 
 The independent original interceptor has one pointed nose, swept blue wings, dark canopy and paired engines with cyan exhaust. Existing enemy roles gain narrow scout, broad fan fighter and armoured twin-barrel boss silhouettes. All are authored colored low-poly meshes in code, with one combined geometry per hull. No borrowed artwork, new asset/dependency or postprocessing.
 
-The location is a coastal industrial canyon: subdued water channel, stepped rock banks, serviced landing platforms, rounded generators and pipes. The combat centre stays quiet; taller structures sit at the sides. Repeated props are instanced. Existing model, controls, hit detection, difficulty, stages, camera, audio, saves and other three games are unchanged. Existing brief damage flash/blinking remains; final effects polish is pending visual direction review.
+The location is a coastal industrial canyon: subdued water channel, stepped rock banks, serviced landing platforms, rounded generators and pipes. The combat centre stays quiet; taller structures sit at the sides. Repeated props are instanced. Existing model, controls, hit detection, difficulty, stages, camera, audio, saves and other three games are unchanged. Existing brief damage flash/blinking remains. Parent approved the revision2 visuals; no additional art polish is planned.
 
 ## Ordinary mobile play comparison
 
@@ -27,7 +27,7 @@ On2026-10-08 the existing normal HTTPS proxy rejected all four supplied Konami U
 - GradiusII: https://www.konami.com/games/gradius/s/img/en/gradius2_01.jpg
 - GradiusIII: https://www.konami.com/games/gradius/s/img/en/gradius3_01.jpg
 
-Next: parent reviews the actual mobile silhouette/location comparison first. No merge or publication before review. Boss silhouette, desktop readability, bounded effects polish and functional/performance regression verification remain for the accepted direction.
+Revision2 visual review is approved. Performance regression blocked publication; see PERFORMANCE.md for the one bounded intervention, measurements and next-scope proposal. Public main is unchanged.
 
 ## Revision2 after parent review
 

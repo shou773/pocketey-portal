@@ -56,8 +56,9 @@ export function createView(canvas:HTMLCanvasElement) {
    {geometry:box(.18,.09,.55),color:0x363e4f,position:[side*.91,.18,-.17] as [number,number,number]}
   ]),{geometry:box(.32,.07,.26),color:0x2b3341,position:[0,.55,-.04]}
  ]);
- const painted=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.72,metalness:.15});
- const enemyPaint=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.82,metalness:.05,fog:false});
+ // Diffuse lighting keeps facet shading while avoiding unnecessary PBR fragment work.
+ const painted=new THREE.MeshLambertMaterial({vertexColors:true});
+ const enemyPaint=new THREE.MeshLambertMaterial({vertexColors:true,fog:false});
  const geometries={ship:shipGeometry,scout:scoutGeometry,fan:fanGeometry,bullet:new THREE.SphereGeometry(.16,8,6),shot:box(.09,.1,.5),beam:box(1,.03,13),boss:bossGeometry};
  const materials={ship:painted,scout:enemyPaint,fan:enemyPaint,bullet:new THREE.MeshBasicMaterial({color:0xff416d}),shot:new THREE.MeshBasicMaterial({color:0x9affed}),beam:new THREE.MeshBasicMaterial({color:0xffbc50,transparent:true,opacity:.35}),boss:enemyPaint};
  const ship=new THREE.Mesh(geometries.ship,materials.ship);scene.add(ship);
@@ -66,8 +67,8 @@ export function createView(canvas:HTMLCanvasElement) {
  // Preserve the original collision-plane marker position; draw it over the new hull.
  const core=new THREE.Mesh(new THREE.SphereGeometry(.18,12,8),new THREE.MeshBasicMaterial({color:0xffffff,depthTest:false,depthWrite:false}));core.renderOrder=10;scene.add(core);
  const temp=new THREE.Object3D();
- const terrain=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.95,metalness:0});
- const water=new THREE.Mesh(box(13.5,.08,24),new THREE.MeshStandardMaterial({color:0x163d48,roughness:.68,metalness:.12}));water.position.set(0,-.88,-8);scene.add(water);
+ const terrain=new THREE.MeshLambertMaterial({vertexColors:true});
+ const water=new THREE.Mesh(box(13.5,.08,24),new THREE.MeshLambertMaterial({color:0x163d48}));water.position.set(0,-.88,-8);scene.add(water);
  const cliffGeometry=assemble([
   {geometry:hull([[-1.5,-1.4],[1.2,-1.5],[1.6,-.3],[1.1,1.4],[-1.3,1.5],[-1.7,.2]],1.25,.82),color:0x3f5051},
   {geometry:hull([[-.9,-1],[.8,-.8],[1,.5],[.4,1],[-.9,.7]],.65,.7),color:0x59645e,position:[.3,1.1,0]}
@@ -94,14 +95,21 @@ export function createView(canvas:HTMLCanvasElement) {
  const ripples=new THREE.InstancedMesh(box(.018,.008,1.3),new THREE.MeshBasicMaterial({color:0x285059}),12);scene.add(ripples);
  const shoreGeometry=hull([[-.08,-1.35],[.12,-.75],[.02,-.1],[.18,.6],[-.02,1.3],[-.09,1.27],[.11,.58],[-.05,-.09],[.05,-.73],[-.15,-1.34]],.008);
  const shore=new THREE.InstancedMesh(shoreGeometry,new THREE.MeshBasicMaterial({color:0x72979c,transparent:true,opacity:.48,depthWrite:false}),16);scene.add(shore);
+ // Identical projectile geometry/materials share two draws; grow without dropping bodies.
+ function projectilePool(kind:'bullet'|'shot',capacity=32){const pool=new THREE.InstancedMesh(geometries[kind],materials[kind],capacity);pool.count=0;pool.frustumCulled=false;scene.add(pool);return pool;}
+ let bulletPool:THREE.InstancedMesh=projectilePool('bullet'),shotPool:THREE.InstancedMesh=projectilePool('shot');
+ function populate(pool:THREE.InstancedMesh,kind:'bullet'|'shot',bodies:{x:number;y:number}[]){
+  if(bodies.length>pool.instanceMatrix.count){const next=projectilePool(kind,2**Math.ceil(Math.log2(bodies.length)));scene.remove(pool);pool.dispose();pool=next;}
+  pool.count=bodies.length;temp.rotation.set(0,0,0);temp.scale.set(1,1,1);
+  bodies.forEach((b,i)=>{temp.position.set(b.x,.45,-b.y);temp.updateMatrix();pool.setMatrixAt(i,temp.matrix);});pool.instanceMatrix.needsUpdate=true;return pool;
+ }
  const meshes=new Map<string,THREE.Mesh>();let dimensions='';
  function sync(key:string,kind:keyof typeof geometries,x:number,y:number,scale=1) {let m=meshes.get(key);if(!m){m=new THREE.Mesh(geometries[kind],materials[kind]);meshes.set(key,m);scene.add(m);}m.visible=true;m.position.set(x,kind==='beam'?0:.45,-y);m.scale.setScalar(scale);return m;}
  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(dimensions===`${w},${h}`)return;dimensions=`${w},${h}`;renderer.setSize(w,h,false);camera.aspect=w/h; // Keep the entire combat width visible at 320px and in landscape.
  camera.fov=camera.aspect<.65?64:48;camera.updateProjectionMatrix();}
  function draw(s:State){resize();ship.position.set(s.x,.4,-s.y);ship.rotation.z=-s.x*.025;exhaust.scale.z=.88+.12*Math.sin(s.time*24);ship.visible=s.invulnerable<=0||Math.floor(s.time*12)%2===0;core.position.set(s.x,.45,-s.y);core.visible=ship.visible;for(const m of meshes.values())m.visible=false;
  for(const e of s.enemies){const m=sync(`e${e.id}`,e.kind,e.x,e.y);m.rotation.y=0;m.rotation.z=Math.sin(s.time*1.8+e.id)*.04;}
- for(const b of s.bullets)sync(`b${b.id}`,'bullet',b.x,b.y);
- for(const b of s.shots)sync(`s${b.id}`,'shot',b.x,b.y);
+ bulletPool=populate(bulletPool,'bullet',s.bullets);shotPool=populate(shotPool,'shot',s.shots);
  s.beams.forEach((b,i)=>{const m=sync(`beam${i}`,'beam',b.x,5.5);m.scale.set(b.wide,1,1);(m.material as THREE.MeshBasicMaterial).opacity=b.age<1.3?.15+.13*(Math.sin(b.age*18)+1):.85;});
  for(const [key,m] of meshes)if(!m.visible){scene.remove(m);meshes.delete(key);}
  // Uneven opposing shores; the same reusable rocks vary in height, width and phase.
