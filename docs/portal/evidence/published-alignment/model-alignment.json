@@ -37,13 +37,17 @@
           "referenceBlob": "ca988b7d5d6aa94fa4a3ef42feb723bb35c9a199",
           "targetBlob": "ca988b7d5d6aa94fa4a3ef42feb723bb35c9a199",
           "identical": true
+        },
+        {
+          "path": "public/games/assets/amber/stone-arch.glb",
+          "referenceBlob": "aa1607ddd43558ec812dbd9ab43903bcf14de470",
+          "targetBlob": "aa1607ddd43558ec812dbd9ab43903bcf14de470",
+          "identical": true
         }
       ],
       "landmarkNote": {
-        "cover": "Retained procedural fallback arch; cover reference did not include the GLB file.",
-        "published": "Primary Blender arch GLB added; procedural fallback remains byte-identical in the published scenery module.",
-        "coverArchGLB": "aa1607ddd43558ec812dbd9ab43903bcf14de470",
-        "publishedArchGLB": "aa1607ddd43558ec812dbd9ab43903bcf14de470"
+        "correction": "The previous fallback claim was wrong: both reference and main contain the same Blender GLB. Explicit published-main regeneration reports amberLandmark=blender and produces the identical approved PNG.",
+        "verification": "../amber-blender/verification.json"
       }
     },
     {

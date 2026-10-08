@@ -16,9 +16,10 @@
     {
       "file": "amber-step.png",
       "game": "Amber Step",
-      "referenceSHA": "2bde0bcb31d01b90d2bcccb23769703004f20793",
-      "referenceBranch": "codex/amber-step-depth",
-      "composition": "Stage 1 gap and thick sandstone platforms, existing airborne character enlarged 1.75x and turned to a three-quarter view; presentation camera leaves the character right of the title"
+      "referenceSHA": "1e071902bda809c4e0beaabffe7ebb81b99e4342",
+      "referenceBranch": "main",
+      "composition": "Stage 1 gap and thick sandstone platforms, existing airborne character enlarged 1.75x and turned to a three-quarter view; unchanged presentation camera. Published Blender stone-arch.glb explicitly loaded (amberLandmark=blender, asset HTTP 200). Regenerated image is byte-identical to the approved cover.",
+      "originalReferenceSHA": "2bde0bcb31d01b90d2bcccb23769703004f20793"
     },
     {
       "file": "pulse-drift.png",
@@ -36,7 +37,7 @@
     }
   ],
   "assetProvenance": "Existing project-authored geometry and existing licensed Kenney models; retain licenses in public/games/assets and the individual game-art reference reports",
-  "publicationNote": "Amber, Tilt and Pulse protagonists and game geometry align with published main 1e07190. Amber cover uses the published renderer’s retained procedural arch fallback rather than its primary Blender landmark. Orbit art aligns with candidate 2edb47c; wait for Orbit publication and parent final approval. Game renderers are not changed by this portal PR.",
+  "publicationNote": "Amber, Tilt and Pulse align with published main 1e07190. Amber published Blender landmark loading is verified; regeneration is byte-identical to the approved cover. Orbit art aligns with candidate 2edb47c; wait for Orbit publication and parent final approval. No game renderer changes are included in this portal PR.",
   "titleArtwork": "Original project-authored SVG path lettering, with mechanical slant for Orbit, warm rounded strokes for Amber, thinner angular SF lettering for Pulse, and light rounded rising lines for Tilt. Live decorative overlays; plain accessible titles remain below.",
   "alignmentVerifiedAgainst": {
     "publishedMain": "1e071902bda809c4e0beaabffe7ebb81b99e4342",

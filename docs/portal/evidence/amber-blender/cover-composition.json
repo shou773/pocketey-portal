@@ -1,0 +1,131 @@
+[
+  {
+    "name": "amber",
+    "landmark": "blender",
+    "art": "ready",
+    "actorScale": [
+      1.75,
+      1.75,
+      1.75
+    ],
+    "camera": [
+      11.6,
+      3.1,
+      5.6
+    ],
+    "fov": 38,
+    "objects": [
+      {
+        "index": 0,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          14.3,
+          5.6,
+          12
+        ]
+      },
+      {
+        "index": 1,
+        "type": "HemisphereLight",
+        "children": 0,
+        "position": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "index": 2,
+        "type": "DirectionalLight",
+        "children": 0,
+        "position": [
+          -8,
+          15,
+          5
+        ]
+      },
+      {
+        "index": 3,
+        "type": "Group",
+        "children": 3,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 4,
+        "type": "Group",
+        "children": 0,
+        "position": [
+          4.995,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 5,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          11.1,
+          1.45,
+          0
+        ]
+      },
+      {
+        "index": 6,
+        "type": "Group",
+        "children": 1,
+        "position": [
+          21.1,
+          9,
+          -28
+        ]
+      },
+      {
+        "index": 7,
+        "type": "Group",
+        "children": 2,
+        "position": [
+          2.775,
+          0,
+          0
+        ]
+      },
+      {
+        "index": 8,
+        "type": "Mesh",
+        "children": 0,
+        "position": [
+          11.1,
+          0.045,
+          0
+        ]
+      }
+    ],
+    "state": {
+      "kind": "amber",
+      "stage": 0,
+      "x": 11.1,
+      "z": 0,
+      "y": 1.45,
+      "vy": 2,
+      "time": 2.2,
+      "grounded": false,
+      "coyote": 0.1,
+      "buffer": 0,
+      "status": "running",
+      "jumps": 0
+    },
+    "assets": [
+      {
+        "url": "http://127.0.0.1:4385/games/assets/amber/stone-arch.glb",
+        "status": 200
+      }
+    ],
+    "errors": []
+  }
+]
