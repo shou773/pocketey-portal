@@ -5,7 +5,7 @@ import fs from 'node:fs/promises';
 
 const phase=process.argv[2];
 if(!['before','after'].includes(phase))throw Error('Expected before or after');
-const base=process.env.ORBIT_BASE_URL || 'http://127.0.0.1:4340';
+const base=process.env.ORBIT_BASE_URL || 'http://127.0.0.1:4344';
 const out='docs/release/orbit-capsule/evidence';
 await fs.mkdir(out,{recursive:true});
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
