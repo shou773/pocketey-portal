@@ -8,13 +8,13 @@ The location is a coastal industrial canyon: subdued water channel, stepped rock
 
 ## Ordinary mobile play comparison
 
-390×844, DPR1, actual route and controls, stage3, sound ON, native touchStart/move18CSSpx left/end after120ms. No state writes, DOM/camera overrides, pause or effects suppression. Capture times differ slightly (~4.02–4.13s baseline and4.15–4.35s candidate); these are ordinary play comparisons, not pixel-aligned identical simulation frames. Both have HP4. Adjacent JSON records states/render counters and no page errors.
+390×844, DPR1, actual route and controls, stage3, sound ON, native touchStart/move18CSSpx left/end after120ms. No state writes, DOM/camera overrides, pause or effects suppression. Capture times differ slightly (~4.02–4.13s baseline and4.10–4.37s revised candidate); these are ordinary play comparisons, not pixel-aligned identical simulation frames. Health is not forced: the revised capture starts with HP4 and its post-capture observation has HP3. Adjacent JSON records states/render counters and no page errors.
 
 | Published baseline | First candidate |
 | --- | --- |
 | ![Published Pulse native mobile play](evidence/before-mobile-native-play.png) | ![Candidate Pulse native mobile play](evidence/after-mobile-native-play.png) |
 
-Additional warning captures retain actual amber lane/red projectiles and native warning text. The candidate warning shot catches the existing invulnerability blink, so the ordinary4s screenshot above is the primary silhouette comparison.
+Additional warning and boss captures retain actual amber lane/red projectiles and native warning text. All are unpaused normal native play; the existing invulnerability blink is not suppressed.
 
 Harness: `scripts/capture-pulse-interceptor.mjs before|after`, run against the corresponding checkout using `PULSE_ART_BASE_URL`, `PULSE_ART_SHA`, optional `PULSE_ART_EVIDENCE`. It uses the existing local Chromium/SwiftShader. TypeScript game check and diff whitespace check passed. Long exact-SHA CI has deliberately not been started before art review; this branch is outside the existing automatic push branch list.
 
@@ -28,3 +28,17 @@ On2026-10-08 the existing normal HTTPS proxy rejected all four supplied Konami U
 - GradiusIII: https://www.konami.com/games/gradius/s/img/en/gradius3_01.jpg
 
 Next: parent reviews the actual mobile silhouette/location comparison first. No merge or publication before review. Boss silhouette, desktop readability, bounded effects polish and functional/performance regression verification remain for the accepted direction.
+
+## Revision2 after parent review
+
+- Restore the white collision marker from y.73 to the baseline y.45; depthTest/depthWrite disabled and renderOrder10 keep it visible over the new hull without shifting its projection. Its radius and all physics remain unchanged.
+- Enemy hull and wings now share a lighter ochre/beige paint. Enemy fog is disabled to preserve distant scout readability; pink projectiles retain their existing color/material. Polygon winding is normalized before extrusion, including mirrored wings, so side normals face outward.
+- Uneven rock width/height/depth/rotation and offset shore phases replace synchronized rows. Three staggered serviced pads and five pipe sections leave gaps. A wider water surface and broken muted waterline strokes mark the rock/water contact; the centre remains quiet. Repeated geometry remains instanced.
+
+![Revised native mobile warning](evidence/after-mobile-native-warning.png)
+
+![Revised native mobile boss and warning](evidence/after-mobile-native-boss.png)
+
+Boss capture uses ordinary native touch steering from stage3 launch to35.25s; it captures before35.25/after35.38s, HP4, live boss and warning age.25→.38. No state writes, pause, camera edits or damage suppression. `scripts/capture-pulse-interceptor-boss.mjs` preserves the existing bounded native-input test controller solely to reach the scene. No clear/save assertions were claimed by this art capture.
+
+Revised ordinary/warning/boss captures have no page errors and respectively22/18/21 draw calls with3644/3068/3660 triangles in their recorded scenes. These are scene counters, not an FPS pass or worst-case budget guarantee. `npm run check:games` and `git diff --check` pass. Long CI and merge remain pending independent visual review.
