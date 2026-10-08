@@ -1,0 +1,70 @@
+[
+  {
+    "mobile": true,
+    "state": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "5.7192",
+      "vx": "0.0000",
+      "time": "2.9417",
+      "speed": "2.1499",
+      "drawCalls": "13",
+      "triangles": "4800"
+    },
+    "canvas": {
+      "css": [
+        390,
+        694
+      ],
+      "framebuffer": [
+        367,
+        653
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "errors": [],
+    "protocol": "Built native route, ordinary launch + Space brake, Playwright clock runFor(3000), frozen clock screenshot; actual WebGL, not auxiliary render."
+  },
+  {
+    "mobile": false,
+    "state": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "5.7192",
+      "vx": "0.0000",
+      "time": "2.9417",
+      "speed": "2.1499",
+      "drawCalls": "13",
+      "triangles": "4800"
+    },
+    "canvas": {
+      "css": [
+        1280,
+        750
+      ],
+      "framebuffer": [
+        590,
+        345
+      ],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "errors": [],
+    "protocol": "Built native route, ordinary launch + Space brake, Playwright clock runFor(3000), frozen clock screenshot; actual WebGL, not auxiliary render."
+  }
+]
