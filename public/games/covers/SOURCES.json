@@ -1,0 +1,13 @@
+{
+  "kind": "Composed introduction covers using actual Pocketey game geometry and licensed models; not gameplay screenshots",
+  "dimensions": [1200, 720],
+  "capture": "Static isolated Three.js scene rendering, presentation camera and 2x supersampling; game source in this portal branch is unchanged",
+  "sources": [
+    {"file":"orbit-ribbon.png","game":"Orbit Ribbon","referenceSHA":"9a066c798d0bdd076084f07772d64527b369100d","referenceBranch":"art/orbit-ribbon-depth","composition":"Stage 1 geometry, foreground ship, diagonal runway and nearby obstacle; presentation camera"},
+    {"file":"amber-step.png","game":"Amber Step","referenceSHA":"2bde0bcb31d01b90d2bcccb23769703004f20793","referenceBranch":"codex/amber-step-depth","composition":"Stage 1 gap and thick sandstone platforms, existing airborne character turned to a three-quarter view; presentation camera"},
+    {"file":"pulse-drift.png","game":"Pulse Drift","referenceSHA":"8714b3f7724df370326a45a615ca98e21f5607da","referenceBranch":"main","composition":"Stage 2 geometry and simulated ordinary game state at 10 seconds, existing ship/enemies/bullets; collision indicator omitted from the introduction illustration; presentation camera"},
+    {"file":"tilttrail.png","game":"TiltTrail","referenceSHA":"6339f1c54f5e743793e162ef15bce407b0ee5c10","referenceBranch":"art/tilttrail-sculpted-landscape","composition":"Stage 1 road and striped ball at a bend, an existing observatory and its island rearranged into the background; presentation camera"}
+  ],
+  "assetProvenance": "Existing project-authored geometry and existing licensed Kenney models; retain licenses in public/games/assets and the individual game-art reference reports",
+  "publicationNote": "Orbit, Amber and Tilt covers reference separately reviewed art candidates. Final publication requires parent review and alignment with the actual published game art. No changes to those renderers are included here."
+}

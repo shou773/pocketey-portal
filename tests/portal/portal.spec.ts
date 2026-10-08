@@ -7,7 +7,7 @@ test.beforeEach(async({page})=>{await page.route('https://challenges.cloudflare.
 
 test('English default, Japanese selection, navigation and reload retention',async({page},info)=>{
  await page.goto('/');await expect(page.locator('html')).toHaveAttribute('lang','en');await expect(page).toHaveTitle('Pocketey Games — Small adventures, one more try');
- await expect(page.getByRole('heading',{name:'Small worlds. One more try.'})).toBeVisible();
+ await expect(page.locator('main').getByRole('heading',{name:'Games',exact:true})).toBeVisible();
  await expect(page.locator('.site-header a[href*="/news"]')).toHaveCount(0);
  await page.screenshot({path:info.outputPath('home-en-390.png'),fullPage:true});
  await page.getByRole('button',{name:'日本語',exact:true}).click();await expect(page.locator('html')).toHaveAttribute('lang','ja');await expect(page).toHaveTitle(/小さな冒険/);expect(await page.evaluate(k=>localStorage.getItem(k),LANGUAGE_KEY)).toBe('ja');

@@ -1,6 +1,140 @@
 ---
 import T from './T.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
+const {portal=false}=Astro.props;
 ---
-<header class="site-header"><div class="container bar"><a class="brand" href="/" aria-label="Pocketey Games"><span class="mark" aria-hidden="true">P</span><span><b>POCKETEY</b><small>SMALL WORLDS / BIG PLAY</small></span></a><nav aria-label="Pocketey"><a href="/games/"><T ja="ゲーム" en="Games"/></a><a href="/about/"><T ja="このサイトについて" en="About"/></a></nav><LanguageSwitch/></div></header>
-<style>.site-header{border-bottom:1px solid var(--line);background:var(--paper)}.bar{min-height:84px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-block:16px}.brand{display:flex;align-items:center;gap:10px}.mark{width:37px;height:37px;display:grid;place-items:center;background:var(--ink);color:var(--paper);border-radius:13px;font-weight:800}.brand b{font-size:14px;letter-spacing:.15em}.brand small{display:block;font-size:7px;letter-spacing:.14em;margin-top:2px;color:var(--muted)}nav{display:flex;gap:22px;margin-left:auto;font-size:13px}.bar :global(.language-switch){margin-left:8px}@media(max-width:600px){.bar{gap:12px;justify-content:space-between}.brand small{display:none}.brand b{font-size:12px}.mark{width:30px;height:30px;border-radius:10px}nav{order:3;width:100%;margin:0;justify-content:center;font-size:12px}.bar :global(.language-switch){margin-left:0}}</style>
+<header class:list={['site-header',{'shelf-header':portal}]}><div class="container bar">{portal?<a class="brand shelf-brand" href="/" aria-label="Pocketey Games"><svg class="pocket-mark" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M4 11C4 7 7 4 11 4h6c4 0 7 3 7 7v6c0 4-3 7-7 7h-6c-4 0-7-3-7-7z" fill="#b6f1da"/><path d="M10 9h5a4 4 0 0 1 0 8h-2v4h-3zm3 3v2h2a1 1 0 0 0 0-2z" fill="#17272b"/></svg><span class="shelf-wordmark">pocketey</span></a>:<a class="brand" href="/" aria-label="Pocketey Games"><span class="mark" aria-hidden="true">P</span><span><b>POCKETEY</b><small>SMALL WORLDS / BIG PLAY</small></span></a>}<nav aria-label="Pocketey"><a href="/games/"><T ja="ゲーム" en="Games"/></a><a href="/about/"><T ja="このサイトについて" en="About"/></a></nav><LanguageSwitch/></div></header>
+<style>
+.site-header {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.bar {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-block: 16px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mark {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 13px;
+  font-weight: 800;
+}
+.brand b {
+  font-size: 14px;
+  letter-spacing: 0.15em;
+}
+.brand small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 0.14em;
+  margin-top: 2px;
+  color: var(--muted);
+}
+nav {
+  display: flex;
+  gap: 22px;
+  margin-left: auto;
+  font-size: 13px;
+}
+.bar :global(.language-switch) {
+  margin-left: 8px;
+}
+@media (max-width: 600px) {
+  .bar {
+    gap: 12px;
+    justify-content: space-between;
+  }
+  .brand small {
+    display: none;
+  }
+  .brand b {
+    font-size: 12px;
+  }
+  .mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+  nav {
+    order: 3;
+    width: 100%;
+    margin: 0;
+    justify-content: center;
+    font-size: 12px;
+  }
+  .bar :global(.language-switch) {
+    margin-left: 0;
+  }
+}
+</style>
+
+<style>
+.shelf-header .bar {
+  min-height: 64px;
+  padding-block: 9px;
+}
+.shelf-brand {
+  gap: 7px;
+}
+.shelf-wordmark {
+  font:
+    900 32px/1 Arial,
+    ui-sans-serif,
+    sans-serif;
+  letter-spacing: -0.065em;
+  color: #f5f4f0;
+}
+.shelf-header nav {
+  font-size: 12px;
+  gap: 22px;
+}
+.shelf-header :global(.language-switch) {
+  border: 0;
+  background: #272b35;
+  border-radius: 8px;
+  padding: 3px;
+}
+.shelf-header :global(.language-switch button) {
+  font-size: 11px;
+  min-height: 32px;
+  padding: 6px 8px;
+  border-radius: 5px;
+}
+.shelf-header :global(.language-switch button[aria-pressed="true"]) {
+  background: #f3f2eb;
+  color: #202630;
+}
+@media (max-width: 600px) {
+  .shelf-header .bar {
+    min-height: 62px;
+    gap: 8px;
+    padding-block: 9px;
+  }
+  .shelf-wordmark {
+    font-size: 29px;
+  }
+  .pocket-mark {
+    width: 24px;
+    height: 24px;
+  }
+  .shelf-header nav {
+    display: none;
+  }
+  .shelf-header :global(.language-switch) {
+    margin-left: auto;
+  }
+}
+</style>
