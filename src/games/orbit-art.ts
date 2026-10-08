@@ -49,6 +49,22 @@ export function orbitEngine(parent:T.Group) {
 const hull=new T.MeshLambertMaterial({color:0x29445b});
 const deck=new T.MeshLambertMaterial({color:0x6b8c9a});
 const windows=new T.MeshBasicMaterial({color:0x77a9ae});
+let shutter:T.Group|undefined;
+export async function loadOrbitShutter() {
+  try {
+    const model=await new GLTFLoader().loadAsync('/games/assets/orbit/armored-shutter.glb');
+    model.scene.traverse(object=>{
+      if (!(object instanceof T.Mesh)) return;
+      const original=object.material as T.MeshStandardMaterial;
+      object.material=new T.MeshLambertMaterial({color:original.color});
+    });
+    shutter=model.scene;return true;
+  } catch {return false;}
+}
+export function placeOrbitShutter(parent:T.Group, x:number,y:number,z:number,w:number,h:number,d:number) {
+  if (!shutter) return false;
+  const model=shutter.clone(true);model.position.set(z,y,-x);model.scale.set(w,h,d);parent.add(model);return true;
+}
 let relay:T.Group|undefined;
 export async function loadOrbitRelay() {
   try {

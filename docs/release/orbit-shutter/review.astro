@@ -1,0 +1,12 @@
+<canvas width="720" height="640"></canvas>
+<style is:global>html,body{margin:0;background:#152541}canvas{display:block;width:720px;height:640px}</style>
+<script>
+import * as T from 'three';
+import {loadOrbitShutter,placeOrbitShutter} from '../games/orbit-art';
+import {batchStatic} from '../games/art';
+const canvas=document.querySelector('canvas')!;const scene=new T.Scene();scene.background=new T.Color(0x152541);
+scene.add(new T.HemisphereLight(0xe9f5ff,0x384b70,2.2));const sun=new T.DirectionalLight(0xffe4c5,2.1);sun.position.set(-8,15,5);scene.add(sun);
+await loadOrbitShutter();const model=new T.Group();placeOrbitShutter(model,0,0,0,2,2.8,1);const bounds=new T.Box3().setFromObject(model);batchStatic(model,'orbit');scene.add(model);
+const camera=new T.PerspectiveCamera(38,720/640,.1,50);camera.position.set(4.6,4.0,6.4);camera.lookAt(0,1.4,0);const renderer=new T.WebGLRenderer({canvas,antialias:false});renderer.setSize(720,640,false);renderer.render(scene,camera);
+(window as any).review={bounds:{min:bounds.min.toArray(),max:bounds.max.toArray()},calls:renderer.info.render.calls,triangles:renderer.info.render.triangles};canvas.dataset.ready='true';
+</script>
