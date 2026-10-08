@@ -1,0 +1,33 @@
+{
+  "rocks": [
+    {
+      "seed": 1,
+      "vertices": 41,
+      "triangles": 70,
+      "finitePositions": true,
+      "finiteColors": true,
+      "finiteNormals": true,
+      "maxNormalUnitError": 3.3399222054697475e-8
+    },
+    {
+      "seed": 2,
+      "vertices": 41,
+      "triangles": 70,
+      "finitePositions": true,
+      "finiteColors": true,
+      "finiteNormals": true,
+      "maxNormalUnitError": 4.0154468083919426e-8
+    },
+    {
+      "seed": 3,
+      "vertices": 41,
+      "triangles": 70,
+      "finitePositions": true,
+      "finiteColors": true,
+      "finiteNormals": true,
+      "maxNormalUnitError": 3.886973798383764e-8
+    }
+  ],
+  "waterTriangles": 96,
+  "aircraftUnchanged": true
+}

@@ -1,5 +1,7 @@
 # Pulse coast final visual trial
 
+Historical e93 visual record: subsequent bounded budget trim is documented in [pulse-coast-budget/REVIEW.md](../pulse-coast-budget/REVIEW.md). Its updated geometry counts supersede this record; visual captures here remain the original accepted e93.
+
 Follow-up to surface candidate `b656175d96801c4337d43c15c30c7632f567cbb1` in draft PR19. This is the final bounded full-scene direction trial for user judgment. No merge, publication, long CI or performance approval.
 
 ## Normal smartphone comparison first

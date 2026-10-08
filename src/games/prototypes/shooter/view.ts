@@ -71,7 +71,7 @@ export function createView(canvas:HTMLCanvasElement) {
  const temp=new THREE.Object3D();
  const terrain=new THREE.MeshLambertMaterial({vertexColors:true});
  // Shallow shelves fade into a quiet, darker channel; static vertex paint only.
- const waterGeometry=new THREE.PlaneGeometry(13.5,24,12,16);waterGeometry.rotateX(-Math.PI/2);
+ const waterGeometry=new THREE.PlaneGeometry(13.5,24,6,8);waterGeometry.rotateX(-Math.PI/2);
  const waterPositions=waterGeometry.getAttribute('position'),waterColors:number[]=[];
  const deepWater=new THREE.Color(0x173b45),shelfWater=new THREE.Color(0x285559);
  for(let i=0;i<waterPositions.count;i++){
@@ -84,7 +84,7 @@ export function createView(canvas:HTMLCanvasElement) {
  // Three reusable eroded profiles: rounded shoulders, undercut wet toes and
  // sediment-colored crowns. Fixed seeds keep the authored coast repeatable.
  function erodedRock(seed:number){
-  const segments=12,rings=[{y:0,r:.78},{y:.34,r:1.05},{y:.96,r:.94},{y:1.46,r:.62},{y:1.62,r:.25}];
+  const segments=10,rings=[{y:0,r:.78},{y:.34,r:1.05},{y:.96,r:.94},{y:1.46,r:.62}];
   const positions:number[]=[],colors:number[]=[],indices:number[]=[];
   const wet=new THREE.Color(0x263b40),side=new THREE.Color(0x4b5852),crown=new THREE.Color(0x727666);
   for(let row=0;row<rings.length;row++)for(let j=0;j<segments;j++){
@@ -99,7 +99,7 @@ export function createView(canvas:HTMLCanvasElement) {
    if(row<rings.length-1){const a=row*segments+j,b=row*segments+(j+1)%segments,c=a+segments,d=b+segments;indices.push(a,c,b,b,c,d);}
   }
   const top=positions.length/3;positions.push(.12*Math.sin(seed+1.6),1.66,.1*Math.cos(seed*.8+2.4));colors.push(crown.r,crown.g,crown.b);
-  for(let j=0;j<segments;j++)indices.push(top,4*segments+(j+1)%segments,4*segments+j);
+  for(let j=0;j<segments;j++)indices.push(top,(rings.length-1)*segments+(j+1)%segments,(rings.length-1)*segments+j);
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));geometry.setIndex(indices);geometry.computeVertexNormals();return geometry;
  }
  const cliffs=[0,1,2].map((seed)=>{const mesh=new THREE.InstancedMesh(erodedRock(seed+1),terrain,seed===0?6:5);scene.add(mesh);return mesh;});
