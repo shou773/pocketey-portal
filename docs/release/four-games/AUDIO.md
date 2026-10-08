@@ -21,7 +21,7 @@ for true-peak measurement of actual final play captures.
 
 Cue map uses actual gameplay events: Orbit/Amber start, jump, land, clear/death;
 Pulse auto-fire, scored enemy hit, warning-lane appearance, shield damage,
-clear/death; Tilt brake engagement intervals, fall and clear. No new gameplay
+clear/death; Tilt brake engagement, fall and clear. No new gameplay
 features were added for sound. Existing Sound ON/OFF remains one tap. A separate
 volume dialog offers Music/Effects sliders and individual mute, pauses play and
 leaves an explicit Resume action. Preferences are stored per game under
@@ -56,3 +56,16 @@ runner now supplies a PulseAudio null sink for a working audio output clock.
 This must be verified rather than accepted as an assumed environment cause.
 The current head must pass the updated tests before acceptance. Tilt's imported 5px backdrop
 blur was removed to comply with the portal's established compositing budget.
+
+Music transitions now have 40ms entry/exit fades and wait for the previous
+source to end before starting another. BGM transitions remain unverified until
+the originals arrive. Stage selection uses the sampled click cue; the initial
+select/start cue can wait for sample loading. Brake sound occurs on engagement,
+not repeatedly while held. Test output directories are separated so Tilt cannot
+remove Pulse or cross-browser evidence.
+
+CI with the audio sink passed 15 Chromium tests and 29/30 cross-browser tests.
+The remaining Firefox Orbit settings test waited for sample decode during a live
+auto-run, allowing an idle fall before it asked for Resume. It now pauses through
+the ordinary Pause button before waiting for decoding. Final-head CI remains
+required; no performance or gameplay thresholds were relaxed.

@@ -21,9 +21,12 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
   try { settings=parse(JSON.parse(localStorage.getItem(KEY)||'{}')[game],legacyEnabled); } catch { /* Tab-local settings remain usable. */ }
   let master: GainNode, effects: GainNode, score: GainNode;
   let active=false, disposed=false, loading: Promise<void>|null=null, bgm:AudioBuffer|null=null, loop:AudioBufferSourceNode|null=null;
+  let loopEnvelope:GainNode|null=null;
+  const fading=new Set<AudioBufferSourceNode>();
   let loopStarted=0, offset=0, musicError=false, sfxError=false;
   const buffers=new Map<Sample,AudioBuffer>(), voices=new Map<AudioBufferSourceNode,{cue:Cue;priority:number}>(), last=new Map<Cue,number>();
   let maxVoices=0, started=0;
+  let loaded=false,pending:Cue|null=null;
   const enabled=()=>!settings.musicMuted||!settings.sfxMuted;
   function diagnostics(){root.dataset.audio=ctx?.state??'off';root.dataset.music=loop?'playing':musicError?'unavailable':bgm?'ready':'idle';root.dataset.audioSamples=String(buffers.size);root.dataset.audioVoices=String(voices.size);root.dataset.audioMaxVoices=String(maxVoices);root.dataset.audioLoops=String(loop?1:0);root.dataset.audioStarts=String(started);}
   function gains(){if(!ctx)return;effects.gain.setTargetAtTime(settings.sfxMuted?0:settings.sfx*.24,ctx.currentTime,.02);score.gain.setTargetAtTime(settings.musicMuted?0:settings.music*.2,ctx.currentTime,.06);}
@@ -38,14 +41,15 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
       if(ctx.state!=='running')void ctx.resume().then(()=>{playMusic();diagnostics();}).catch(()=>diagnostics());
       if(!loading){loading=(async()=>{
         await Promise.all(files.map(async file=>{try{buffers.set(file,await decode(`/games/audio/${file}.wav`));}catch{sfxError=true;}}));
+        loaded=true;if(pending&&!disposed&&!document.hidden){const event=pending;pending=null;if(event!=='start'||active)cue(event);}
         diagnostics();
       })();}
       if(active&&!settings.musicMuted&&!bgm&&!musicError&&music[game]){musicError=true;void decode(music[game]!).then(buffer=>{bgm=buffer;musicError=false;playMusic();diagnostics();}).catch(()=>{musicError=true;diagnostics();});}
     }catch{/* Context creation or resume cannot interrupt gameplay. */}
     diagnostics();
   }
-  function playMusic(){if(disposed||!active||document.hidden||!ctx||ctx.state!=='running'||settings.musicMuted||!bgm||loop)return;loop=ctx.createBufferSource();loop.buffer=bgm;loop.loop=true;loop.connect(score);loopStarted=ctx.currentTime;loop.start(0,offset%bgm.duration);started++;diagnostics();}
-  function stopMusic(reset=false){if(loop&&ctx){offset=reset?0:(offset+ctx.currentTime-loopStarted)%(bgm?.duration||1);loop.stop();loop.disconnect();loop=null;}else if(reset)offset=0;diagnostics();}
+  function playMusic(){if(disposed||!active||document.hidden||!ctx||ctx.state!=='running'||settings.musicMuted||!bgm||loop||fading.size)return;loop=ctx.createBufferSource();loop.buffer=bgm;loop.loop=true;loopEnvelope=ctx.createGain();loopEnvelope.gain.setValueAtTime(0,ctx.currentTime);loopEnvelope.gain.linearRampToValueAtTime(1,ctx.currentTime+.04);loop.connect(loopEnvelope);loopEnvelope.connect(score);loopStarted=ctx.currentTime;loop.start(0,offset%bgm.duration);started++;diagnostics();}
+  function stopMusic(reset=false){if(loop&&ctx){offset=reset?0:(offset+ctx.currentTime-loopStarted)%(bgm?.duration||1);const source=loop,envelope=loopEnvelope!;loop=null;loopEnvelope=null;fading.add(source);envelope.gain.cancelScheduledValues(ctx.currentTime);envelope.gain.setValueAtTime(envelope.gain.value,ctx.currentTime);envelope.gain.linearRampToValueAtTime(0,ctx.currentTime+.035);source.onended=()=>{fading.delete(source);source.disconnect();envelope.disconnect();playMusic();diagnostics();};source.stop(ctx.currentTime+.04);}else if(reset)offset=0;diagnostics();}
   function silence(){stopMusic();for(const source of voices.keys()){try{source.stop();}catch{/* Already ended. */}source.disconnect();}voices.clear();diagnostics();}
   function setPlaying(value:boolean,restart=false){active=value;if(!value){silence();return;}if(restart)stopMusic(true);ensure();playMusic();}
   function cue(cue:Cue){
@@ -53,7 +57,7 @@ export function createGameAudio(game: AudioGame, legacyEnabled: boolean, root: H
     const now=ctx.currentTime, cooldown=cue==='shot'||cue==='hit'?.1:cue==='warning'?1:cue==='brake'?.65:.08;
     if(now-(last.get(cue)??-Infinity)<cooldown)return;
     const map:Record<Cue,Sample>={select:'click',start:'click',jump:game==='orbit'?'warning':'jump',land:'land',shot:'shot',hit:'roll',warning:'warning',damage:'damage',death:'death',clear:'clear',brake:'roll'};
-    const buffer=buffers.get(map[cue]);if(!buffer)return;
+    const buffer=buffers.get(map[cue]);if(!buffer){if(!loaded&&(cue==='start'||cue==='select'))pending=cue;return;}
     const priority=['warning','damage','death','clear'].includes(cue)?2:1;
     if([...voices.values()].filter(v=>v.cue===cue).length>=2)return;
     if(voices.size>=10){const victim=[...voices].find(([,v])=>v.priority<priority);if(!victim)return;victim[0].stop();victim[0].disconnect();voices.delete(victim[0]);}

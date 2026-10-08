@@ -12,13 +12,13 @@ export function boot() {
   let view: ReturnType<typeof createView> | null = null;
   try { view = createView(get<HTMLCanvasElement>('canvas')); } catch { /* A readable fallback replaces the playable menu. */ }
   const pointers = new Map<number, string>(), keys = new Set<string>();
-  let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0;
+  let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0, wasBraking = false;
   function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch { storageOK = false; } }
   const audio=createGameAudio('tilt',!save.muted,root,enabled=>{save.muted=!enabled;persist();renderUI();});audio.mount(get('sound'),pause);
   const controlButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-tt-input]')];
   function held(control: string) { return [...pointers.values()].includes(control) || (control === 'left' ? keys.has('ArrowLeft') || keys.has('KeyA') : control === 'right' ? keys.has('ArrowRight') || keys.has('KeyD') : keys.has('Space') || keys.has('ArrowDown') || keys.has('KeyS')); }
   function reflectControls() { controlButtons.forEach(b => { const on = held(b.dataset.ttInput!); b.classList.toggle('held', on); b.setAttribute('aria-pressed', String(on)); }); }
-  function resetInput() { pointers.clear(); keys.clear(); reflectControls(); }
+  function resetInput() { pointers.clear(); keys.clear(); wasBraking=false; reflectControls(); }
   function start(stage: number) {
     if (!view || document.hidden) return;
     selected = stage; state = createState(stage); state.phase = 'playing'; lastPhase = 'playing'; accumulator = 0; previous = performance.now(); resetInput(); audio.setPlaying(true,true);audio.cue('start'); renderUI();
@@ -47,7 +47,7 @@ export function boot() {
       const num = document.createElement('strong'); num.textContent = `0${i + 1}`;
       const label = document.createElement('span'); label.textContent = tr(...stage.name);
       const best = document.createElement('small'); best.textContent = save.best[i] ? `${tr('最速', 'BEST')} ${save.best[i]!.toFixed(2)}s` : tr('未クリア', 'Not cleared');
-      button.append(num, label, best); button.addEventListener('click', () => { selected = i; state = createState(i); renderUI(); get('stages').querySelector<HTMLButtonElement>(`[data-stage="${i}"]`)!.focus({ preventScroll: true }); }); get('stages').append(button);
+      button.append(num, label, best); button.addEventListener('click', () => { selected = i; state = createState(i); renderUI();audio.cue('select'); get('stages').querySelector<HTMLButtonElement>(`[data-stage="${i}"]`)!.focus({ preventScroll: true }); }); get('stages').append(button);
     });
     get('title').textContent = phase === 'paused' ? tr('ひと休み', 'Take a breath') : phase === 'failed' ? tr('もう一度、転がそう', 'One more roll') : phase === 'clear' ? tr('ゴール！', 'Trail complete!') : 'TiltTrail';
     get('eyebrow').textContent = phase === 'ready' ? tr('ころがる、曲がる、見きわめる', 'ROLL · STEER · FIND YOUR LINE') : `STAGE 0${state.stage + 1} · ${tr(...STAGES[state.stage].name)}`;
@@ -101,7 +101,7 @@ export function boot() {
     const elapsed = previous ? Math.max(0, Math.min(0.1, (now - previous) / 1000)) : 0; previous = now;
     if (!document.hidden) {
       if (state.phase === 'playing' || state.phase === 'falling') {
-        if(state.phase==='playing'&&held('brake'))audio.cue('brake');
+        const braking=state.phase==='playing'&&held('brake');if(braking&&!wasBraking)audio.cue('brake');wasBraking=braking;
         accumulator += elapsed;
         while (accumulator >= STEP) { advance(state, { steer: Number(held('right')) - Number(held('left')), brake: held('brake') }); accumulator -= STEP; }
       } else accumulator = 0;
