@@ -1,0 +1,91 @@
+{
+  "baselineHead": "7bd43ec3a7815919b92ec5581244f34e40ebc2b0",
+  "trialRendererSha256": "c4374c3e4cf1ca4dfa07b07391a9c02b110af0213be1dad79105c8f75a9b4cd6",
+  "trialRendererPublished": false,
+  "state": {
+    "stage": 0,
+    "phase": "playing",
+    "x": 0,
+    "z": 5.844645741977217,
+    "y": 0.38,
+    "vx": 0,
+    "speed": 2.149940796633898,
+    "vy": 0,
+    "time": 2.999999999999992,
+    "fallTime": 0
+  },
+  "css": {
+    "width": 390,
+    "height": 694
+  },
+  "framebuffer": [
+    367,
+    653
+  ],
+  "before": {
+    "calls": 11,
+    "triangles": 4654,
+    "errors": []
+  },
+  "after": {
+    "calls": 14,
+    "triangles": 5216,
+    "errors": []
+  },
+  "nativeAfterImageBracket": {
+    "before": {
+      "astroSourceFile": "/workspace/scratch/tilt-quaternius-local/src/pages/games/tilttrail.astro",
+      "astroSourceLoc": "11:22",
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.6571",
+      "vx": "0.0000",
+      "time": "3.0667",
+      "speed": "2.1500",
+      "drawCalls": "15",
+      "triangles": "5264"
+    },
+    "after": {
+      "astroSourceFile": "/workspace/scratch/tilt-quaternius-local/src/pages/games/tilttrail.astro",
+      "astroSourceLoc": "11:22",
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "7.4455",
+      "vx": "0.0000",
+      "time": "3.4333",
+      "speed": "2.1500",
+      "drawCalls": "15",
+      "triangles": "5264"
+    }
+  },
+  "exportedModels": [
+    {
+      "name": "CommonTree_3",
+      "triangles": 983,
+      "materials": 2,
+      "bytes": 282120
+    },
+    {
+      "name": "Rock_Medium_1",
+      "triangles": 119,
+      "materials": 1,
+      "bytes": 116348
+    }
+  ]
+}

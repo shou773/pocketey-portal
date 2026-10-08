@@ -1,0 +1,134 @@
+[
+  {
+    "mobile": true,
+    "errors": [],
+    "nativeBefore": {
+      "astroSourceFile": "/workspace/scratch/tilt-organic-before/src/pages/games/tilttrail.astro",
+      "astroSourceLoc": "11:22",
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.1346",
+      "vx": "0.0000",
+      "time": "3.0500",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4198"
+    },
+    "nativeAfter": {
+      "astroSourceFile": "/workspace/scratch/tilt-organic-before/src/pages/games/tilttrail.astro",
+      "astroSourceLoc": "11:22",
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.2780",
+      "vx": "0.0000",
+      "time": "3.1167",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4198"
+    },
+    "state": {
+      "stage": 0,
+      "phase": "playing",
+      "x": -0.5906049867864733,
+      "z": 15.76695130393854,
+      "y": 0.38,
+      "vx": -1.067039755934132,
+      "speed": 5.79984028859377,
+      "vy": 0,
+      "time": 2.999999999999992,
+      "fallTime": 0
+    },
+    "css": {
+      "width": 390,
+      "height": 694
+    },
+    "framebuffer": [
+      367,
+      653
+    ],
+    "calls": 11,
+    "triangles": 4150
+  },
+  {
+    "mobile": false,
+    "errors": [],
+    "nativeBefore": {
+      "astroSourceFile": "/workspace/scratch/tilt-organic-before/src/pages/games/tilttrail.astro",
+      "astroSourceLoc": "11:22",
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.0613",
+      "vx": "0.0000",
+      "time": "3.0583",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4198"
+    },
+    "nativeAfter": {
+      "astroSourceFile": "/workspace/scratch/tilt-organic-before/src/pages/games/tilttrail.astro",
+      "astroSourceLoc": "11:22",
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.3480",
+      "vx": "0.0000",
+      "time": "3.1917",
+      "speed": "2.1500",
+      "drawCalls": "12",
+      "triangles": "4198"
+    },
+    "state": {
+      "stage": 0,
+      "phase": "playing",
+      "x": -0.5906049867864733,
+      "z": 15.76695130393854,
+      "y": 0.38,
+      "vx": -1.067039755934132,
+      "speed": 5.79984028859377,
+      "vy": 0,
+      "time": 2.999999999999992,
+      "fallTime": 0
+    },
+    "css": {
+      "width": 1280,
+      "height": 750
+    },
+    "framebuffer": [
+      590,
+      345
+    ],
+    "calls": 11,
+    "triangles": 4150
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "errors": [],
+  "reports": [
+    {
+      "kind": "wind-rock",
+      "triangles": 140,
+      "calls": 1,
+      "camera": [
+        10.8,
+        6.7,
+        12.2
+      ],
+      "lighting": "same hemisphere/sun and Lambert vertex material as runtime"
+    },
+    {
+      "kind": "rooted-observatory",
+      "triangles": 320,
+      "calls": 1,
+      "camera": [
+        10.8,
+        6.7,
+        12.2
+      ],
+      "lighting": "same hemisphere/sun and Lambert vertex material as runtime"
+    }
+  ]
+}

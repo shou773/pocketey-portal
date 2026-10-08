@@ -1,0 +1,64 @@
+[
+  {
+    "mobile": true,
+    "errors": [],
+    "nativeBefore": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.2080",
+      "vx": "0.0000",
+      "time": "3.0417",
+      "speed": "2.1500",
+      "drawCalls": "13",
+      "triangles": "4800"
+    },
+    "nativeAfter": {
+      "audio": "off",
+      "music": "idle",
+      "audioSamples": "0",
+      "audioVoices": "0",
+      "audioMaxVoices": "0",
+      "audioLoops": "0",
+      "audioStarts": "0",
+      "phase": "playing",
+      "stage": "0",
+      "x": "0.0000",
+      "z": "6.3513",
+      "vx": "0.0000",
+      "time": "3.1083",
+      "speed": "2.1500",
+      "drawCalls": "13",
+      "triangles": "4800"
+    },
+    "state": {
+      "stage": 0,
+      "phase": "playing",
+      "x": 0,
+      "z": 5.844645741977217,
+      "y": 0.38,
+      "vx": 0,
+      "speed": 2.149940796633898,
+      "vy": 0,
+      "time": 2.999999999999992,
+      "fallTime": 0
+    },
+    "css": {
+      "width": 390,
+      "height": 694
+    },
+    "framebuffer": [
+      367,
+      653
+    ],
+    "calls": 12,
+    "triangles": 4752
+  }
+]

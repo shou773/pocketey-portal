@@ -1,0 +1,11 @@
+{
+  "triangles": 128,
+  "gpuVertices": 66,
+  "components": 1,
+  "nonManifoldEdges": 0,
+  "primitives": 1,
+  "materials": 1,
+  "textures": 0,
+  "bytes": 4376,
+  "sha256": "e3f23763ae29e8244de15ac6e16bfb9ae42976a041c1f13ee65a513d57021330"
+}
