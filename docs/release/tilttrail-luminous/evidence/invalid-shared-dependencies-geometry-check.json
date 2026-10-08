@@ -1,0 +1,375 @@
+{
+  "equal": true,
+  "report": [
+    {
+      "label": "public",
+      "entries": [
+        {
+          "stage": 0,
+          "state": {
+            "stage": 0,
+            "phase": "playing",
+            "x": 0,
+            "z": 5.844645741977217,
+            "y": 0.38,
+            "vx": 0,
+            "speed": 2.149940796633898,
+            "vy": 0,
+            "time": 2.999999999999992,
+            "fallTime": 0
+          },
+          "camera": {
+            "position": [
+              -0.22100353218894647,
+              17,
+              4.155354258022783
+            ],
+            "quaternion": [
+              -0.333732774306416,
+              0,
+              0,
+              0.9426677226646423
+            ],
+            "projection": [
+              3.4183630669692033,
+              0,
+              0,
+              0,
+              0,
+              1.9209821269711662,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 12,
+          "triangles": 4152,
+          "geometry": [
+            {
+              "positions": "0470f90da27b10dece588d89f21fc1a9917cce7eda9e44dd4e9cb38956dd93b5",
+              "indices": "220f0b5b4388de1d2f991f6c6b0c0381bdad5299e2bedf4ed99d39b10083083d",
+              "normals": "bdb580db31249a2eab3177ad8a7e3be4985f98f72c66b991d7ea8cf83847f986"
+            },
+            {
+              "positions": "7bd423bd30800db9af92284f0ac30157529e6bec6a2b599c7584f13c6f23e389",
+              "indices": "5ba9dc2541086da000c81a42bfebd4b8e55bce7d0e9f78040cfcee17274ed47d",
+              "normals": "6ed697cd27aa4ad269eb4ce746898af4c4f944726ffb9c4125bd0a9037c8a973"
+            }
+          ]
+        },
+        {
+          "stage": 1,
+          "state": {
+            "stage": 1,
+            "phase": "playing",
+            "x": 0,
+            "z": 5.844645741977217,
+            "y": 0.38,
+            "vx": 0,
+            "speed": 2.149940796633898,
+            "vy": 0,
+            "time": 2.999999999999992,
+            "fallTime": 0
+          },
+          "camera": {
+            "position": [
+              0.6845444074344863,
+              17,
+              4.155354258022783
+            ],
+            "quaternion": [
+              -0.333732774306416,
+              0,
+              0,
+              0.9426677226646423
+            ],
+            "projection": [
+              3.4183630669692033,
+              0,
+              0,
+              0,
+              0,
+              1.9209821269711662,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 10,
+          "triangles": 4748,
+          "geometry": [
+            {
+              "positions": "fa129e163e245216ee582736febc7eda72397dacdf7b643345e19e2d3f72d34b",
+              "indices": "1a2004e131b4044e906d0fd76823ab32e936925777b8015df350e6a14e405cf7",
+              "normals": "418658908dd6a94a16a09d8c59529b3909855657d474e0415e4f463cdde47268"
+            },
+            {
+              "positions": "7b6c8082bbc3b8288d3d8639f404f77a2727a793a28c067d09ceb23eb9686b8c",
+              "indices": "28f6a875fd9a655c8d60aa0f9e7b25b8dabdd4b8b11a00af255822ddeb5ef21f",
+              "normals": "b868c89d29b0f63b826a9177939c04e197d0587d729314ef40f8350fc5bc628a"
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "state": {
+            "stage": 2,
+            "phase": "playing",
+            "x": 0,
+            "z": 5.844645741977217,
+            "y": 0.38,
+            "vx": 0,
+            "speed": 2.149940796633898,
+            "vy": 0,
+            "time": 2.999999999999992,
+            "fallTime": 0
+          },
+          "camera": {
+            "position": [
+              -0.8265415537526317,
+              17,
+              4.155354258022783
+            ],
+            "quaternion": [
+              -0.333732774306416,
+              0,
+              0,
+              0.9426677226646423
+            ],
+            "projection": [
+              3.4183630669692033,
+              0,
+              0,
+              0,
+              0,
+              1.9209821269711662,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 10,
+          "triangles": 5028,
+          "geometry": [
+            {
+              "positions": "e8235668b7d63e0f4934dab687dc0f4dc20fc048c659b25fcd3e0ed3128f24a2",
+              "indices": "24708541be5683fe12ee0b7de8585b72ac193da3f4d5fdc1215b33d4492fe38b",
+              "normals": "4f4c7f7099fb75f517bfdf3e134efacbe5fd5275b394ae81dbccecbb63e8f4aa"
+            },
+            {
+              "positions": "14ce8261bf1d27c0b3bd593be48e42188c04c6317fb02b7df5a7ea736190957d",
+              "indices": "322aa06694c86edbc7deaece23fdcc4649903910e49af48b0c212d98371970dc",
+              "normals": "16b11d5b7324adb848b21a29138aa8f4f0b88d0fcd8528bcdd709f280f7b655c"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ceramic",
+      "entries": [
+        {
+          "stage": 0,
+          "state": {
+            "stage": 0,
+            "phase": "playing",
+            "x": 0,
+            "z": 5.844645741977217,
+            "y": 0.38,
+            "vx": 0,
+            "speed": 2.149940796633898,
+            "vy": 0,
+            "time": 2.999999999999992,
+            "fallTime": 0
+          },
+          "camera": {
+            "position": [
+              -0.22100353218894647,
+              17,
+              4.155354258022783
+            ],
+            "quaternion": [
+              -0.333732774306416,
+              0,
+              0,
+              0.9426677226646423
+            ],
+            "projection": [
+              3.4183630669692033,
+              0,
+              0,
+              0,
+              0,
+              1.9209821269711662,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 12,
+          "triangles": 4752,
+          "geometry": [
+            {
+              "positions": "0470f90da27b10dece588d89f21fc1a9917cce7eda9e44dd4e9cb38956dd93b5",
+              "indices": "220f0b5b4388de1d2f991f6c6b0c0381bdad5299e2bedf4ed99d39b10083083d",
+              "normals": "bdb580db31249a2eab3177ad8a7e3be4985f98f72c66b991d7ea8cf83847f986"
+            },
+            {
+              "positions": "7bd423bd30800db9af92284f0ac30157529e6bec6a2b599c7584f13c6f23e389",
+              "indices": "5ba9dc2541086da000c81a42bfebd4b8e55bce7d0e9f78040cfcee17274ed47d",
+              "normals": "6ed697cd27aa4ad269eb4ce746898af4c4f944726ffb9c4125bd0a9037c8a973"
+            }
+          ]
+        },
+        {
+          "stage": 1,
+          "state": {
+            "stage": 1,
+            "phase": "playing",
+            "x": 0,
+            "z": 5.844645741977217,
+            "y": 0.38,
+            "vx": 0,
+            "speed": 2.149940796633898,
+            "vy": 0,
+            "time": 2.999999999999992,
+            "fallTime": 0
+          },
+          "camera": {
+            "position": [
+              0.6845444074344863,
+              17,
+              4.155354258022783
+            ],
+            "quaternion": [
+              -0.333732774306416,
+              0,
+              0,
+              0.9426677226646423
+            ],
+            "projection": [
+              3.4183630669692033,
+              0,
+              0,
+              0,
+              0,
+              1.9209821269711662,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 10,
+          "triangles": 5348,
+          "geometry": [
+            {
+              "positions": "fa129e163e245216ee582736febc7eda72397dacdf7b643345e19e2d3f72d34b",
+              "indices": "1a2004e131b4044e906d0fd76823ab32e936925777b8015df350e6a14e405cf7",
+              "normals": "418658908dd6a94a16a09d8c59529b3909855657d474e0415e4f463cdde47268"
+            },
+            {
+              "positions": "7b6c8082bbc3b8288d3d8639f404f77a2727a793a28c067d09ceb23eb9686b8c",
+              "indices": "28f6a875fd9a655c8d60aa0f9e7b25b8dabdd4b8b11a00af255822ddeb5ef21f",
+              "normals": "b868c89d29b0f63b826a9177939c04e197d0587d729314ef40f8350fc5bc628a"
+            }
+          ]
+        },
+        {
+          "stage": 2,
+          "state": {
+            "stage": 2,
+            "phase": "playing",
+            "x": 0,
+            "z": 5.844645741977217,
+            "y": 0.38,
+            "vx": 0,
+            "speed": 2.149940796633898,
+            "vy": 0,
+            "time": 2.999999999999992,
+            "fallTime": 0
+          },
+          "camera": {
+            "position": [
+              -0.8265415537526317,
+              17,
+              4.155354258022783
+            ],
+            "quaternion": [
+              -0.333732774306416,
+              0,
+              0,
+              0.9426677226646423
+            ],
+            "projection": [
+              3.4183630669692033,
+              0,
+              0,
+              0,
+              0,
+              1.9209821269711662,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 10,
+          "triangles": 5628,
+          "geometry": [
+            {
+              "positions": "e8235668b7d63e0f4934dab687dc0f4dc20fc048c659b25fcd3e0ed3128f24a2",
+              "indices": "24708541be5683fe12ee0b7de8585b72ac193da3f4d5fdc1215b33d4492fe38b",
+              "normals": "4f4c7f7099fb75f517bfdf3e134efacbe5fd5275b394ae81dbccecbb63e8f4aa"
+            },
+            {
+              "positions": "14ce8261bf1d27c0b3bd593be48e42188c04c6317fb02b7df5a7ea736190957d",
+              "indices": "322aa06694c86edbc7deaece23fdcc4649903910e49af48b0c212d98371970dc",
+              "normals": "16b11d5b7324adb848b21a29138aa8f4f0b88d0fcd8528bcdd709f280f7b655c"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

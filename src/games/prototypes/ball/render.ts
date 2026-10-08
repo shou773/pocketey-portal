@@ -12,19 +12,31 @@ export function createView(canvas: HTMLCanvasElement) {
   const skyCanvas = document.createElement('canvas'); skyCanvas.width = 256; skyCanvas.height = 512;
   const sky = skyCanvas.getContext('2d')!;
   const skyColor = sky.createLinearGradient(0, 0, 0, 512);
-  skyColor.addColorStop(0, '#345568'); skyColor.addColorStop(.08, '#345568');
-  skyColor.addColorStop(.24, '#81b8cc'); skyColor.addColorStop(.48, '#b5d6db'); skyColor.addColorStop(1, '#e4eee4');
+  // Keep a quiet blue band behind the unchanged white HUD, opening into daylight.
+  skyColor.addColorStop(0, '#3b5e73'); skyColor.addColorStop(.08, '#3b5e73');
+  skyColor.addColorStop(.26, '#8cc4df'); skyColor.addColorStop(.56, '#c7e2e7'); skyColor.addColorStop(1, '#f2ebd9');
   sky.fillStyle = skyColor; sky.fillRect(0, 0, 256, 512);
-  // Broad cloud masses stay behind the course, with quiet edges and no detail noise.
-  sky.filter = 'blur(2px)';
-  for (const [x, y, w, h] of [[18, 105, 60, 22], [232, 166, 70, 25], [20, 332, 73, 20]]) {
-    sky.fillStyle = 'rgba(250, 249, 230, .48)'; sky.beginPath();
-    sky.ellipse(x, y, w, h, -.09, 0, Math.PI * 2); sky.fill();
-    sky.fillStyle = 'rgba(250, 249, 230, .25)'; sky.beginPath();
-    sky.ellipse(x + w * .22, y - h * .55, w * .55, h * .9, 0, 0, Math.PI * 2); sky.fill();
+  // Three thin, overlapping wind-shaped layers per cloud, painted just once.
+  // Asymmetric shoulders and blue undersides avoid separate white puff balls.
+  sky.filter = 'blur(2.5px)';
+  for (const [x, y, w, h] of [[19, 113, 78, 16], [233, 202, 86, 19], [12, 349, 94, 15]]) {
+    for (const [dx, dy, scale, fill] of [
+      [0, 7, 1.08, 'rgba(134, 181, 201, .18)'],
+      [0, 0, 1, 'rgba(244, 249, 245, .48)'],
+      [-9, -5, .78, 'rgba(255, 252, 239, .40)'],
+    ] as const) {
+      sky.save(); sky.translate(x + dx, y + dy); sky.scale(w * scale, h * scale);
+      sky.fillStyle = fill; sky.beginPath(); sky.moveTo(-1, .12);
+      sky.bezierCurveTo(-.85, -.28, -.6, -.18, -.43, -.35);
+      sky.bezierCurveTo(-.22, -.86, .02, -.71, .22, -.34);
+      sky.bezierCurveTo(.47, -.48, .61, -.05, 1, .09);
+      sky.bezierCurveTo(.68, .4, .31, .52, -.07, .43);
+      sky.bezierCurveTo(-.48, .56, -.75, .35, -1, .12);
+      sky.fill(); sky.restore();
+    }
   }
   sky.filter = 'none';
-  sky.fillStyle = 'rgba(113, 160, 176, .15)'; sky.beginPath();
+  sky.fillStyle = 'rgba(133, 170, 182, .09)'; sky.beginPath();
   sky.moveTo(0, 432); sky.lineTo(24, 414); sky.lineTo(47, 426); sky.lineTo(72, 407); sky.lineTo(105, 440); sky.lineTo(0, 449); sky.closePath(); sky.fill();
   sky.beginPath(); sky.moveTo(171, 461); sky.lineTo(206, 432); sky.lineTo(228, 449); sky.lineTo(256, 426); sky.lineTo(256, 468); sky.closePath(); sky.fill();
   // The painted backdrop is already in display sRGB. Sample it directly;
@@ -38,20 +50,20 @@ export function createView(canvas: HTMLCanvasElement) {
   });
   const skyMesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), skyMaterial);
   skyMesh.frustumCulled = false; skyMesh.renderOrder = -100; scene.add(skyMesh);
-  scene.fog = new THREE.Fog(0xb5d6db, 36, 95);
+  scene.fog = new THREE.Fog(0xc7e2e7, 36, 95);
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 160);
   scene.add(new THREE.HemisphereLight(0xe3f4ff, 0x314859, 2.0));
   const sun = new THREE.DirectionalLight(0xfff1dc, 2.1); sun.position.set(-6, 14, 8); scene.add(sun);
-  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.34, metalness: 0, side: THREE.DoubleSide });
+  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.46, metalness: 0, side: THREE.DoubleSide });
   const sideMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
   const gardenMaterial = new THREE.MeshLambertMaterial({ vertexColors: true });
-  const distantMaterial = new THREE.MeshLambertMaterial({ color: 0xb3c8bc });
+  const distantMaterial = new THREE.MeshLambertMaterial({ color: 0xa6b6bb });
   const observatoryMaterial = new THREE.MeshLambertMaterial({ vertexColors: true });
-  const edgeMaterial = new THREE.MeshBasicMaterial({ color: 0xba713a });
-  const stripeMaterial = new THREE.MeshBasicMaterial({ color: 0x438b8c });
+  const edgeMaterial = new THREE.MeshBasicMaterial({ color: 0xb57950 });
+  const stripeMaterial = new THREE.MeshBasicMaterial({ color: 0x629593 });
   const ball = new THREE.Group();
-  ball.add(new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 20, 12), new THREE.MeshPhongMaterial({ color: 0x168c8d, specular: 0xe3fff0, shininess: 90 })));
-  const band = new THREE.Mesh(new THREE.TorusGeometry(RADIUS - 0.004, 0.027, 6, 24), new THREE.MeshPhongMaterial({ color: 0xffebbf, specular: 0xffffff, shininess: 65 }));
+  ball.add(new THREE.Mesh(new THREE.SphereGeometry(RADIUS, 20, 12), new THREE.MeshPhongMaterial({ color: 0x148b8f, specular: 0x99d9d5, shininess: 48 })));
+  const band = new THREE.Mesh(new THREE.TorusGeometry(RADIUS - 0.004, 0.027, 6, 24), new THREE.MeshPhongMaterial({ color: 0xc6a363, specular: 0xf2dfb4, shininess: 40 }));
   ball.add(band); scene.add(ball);
   // A tiny radial decal gives soft contact without a shadow map or extra light.
   const shadowPixels = new Uint8Array(32 * 32 * 4);
@@ -72,6 +84,21 @@ export function createView(canvas: HTMLCanvasElement) {
   let stage = -1, lastZ = 0, lastX = 0;
   let rockGeometry: THREE.BufferGeometry | null = null, courseIslands: THREE.InstancedMesh | null = null;
   let disposed = false, observatoryGeometry: THREE.BufferGeometry | null = null, courseArches: THREE.InstancedMesh | null = null;
+  // Repaint the existing background vertices only: positions/normals/instances
+  // are untouched, and all six rocks still share a single geometry and draw.
+  function paintRock(geometry: THREE.BufferGeometry) {
+    const positions = geometry.getAttribute('position'); geometry.computeBoundingBox();
+    const bounds = geometry.boundingBox!, colors: number[] = [];
+    const lower = new THREE.Color(0x6c879b), upper = new THREE.Color(0xa6bbc5);
+    for (let i = 0; i < positions.count; i++) {
+      const height = (positions.getY(i) - bounds.min.y) / (bounds.max.y - bounds.min.y);
+      const color = lower.clone().lerp(upper, THREE.MathUtils.smoothstep(height, .1, .95));
+      color.multiplyScalar(1 + .035 * Math.sin(positions.getX(i) * .9 + positions.getZ(i) * .5));
+      colors.push(color.r, color.g, color.b);
+    }
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    return geometry;
+  }
   // The small original Blender asset enhances background architecture. A
   // procedural arch remains usable if the asset cannot load; play never waits.
   const observatoryReady = new GLTFLoader().loadAsync('/games/tilttrail/models/observatory.glb').then(gltf => {
@@ -99,7 +126,7 @@ export function createView(canvas: HTMLCanvasElement) {
     const rock = geometry as THREE.BufferGeometry | null;
     if (!rock) return;
     if (disposed) { rock.dispose(); return; }
-    rockGeometry = rock;
+    rockGeometry = paintRock(rock);
     if (courseIslands) { courseIslands.geometry.dispose(); courseIslands.geometry = rock.clone(); courseIslands.boundingBox = null; courseIslands.boundingSphere = null; }
     // Until the rounded rock loads, keep the public arch on the coarse crown.
     if (courseArches) {
@@ -123,7 +150,7 @@ export function createView(canvas: HTMLCanvasElement) {
     }
     const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3)); geometry.setIndex(indices); geometry.computeVertexNormals();
     if (offset === null) {
-      const top = new THREE.Color(0xe6e1cf), joint = new THREE.Color(0xdfdbca), colors: number[] = [];
+      const top = new THREE.Color(0xf0e6d1), joint = new THREE.Color(0xe6dcc8), colors: number[] = [];
       for (let i = 0; i <= count; i++) {
         const z = i * length(which) / count;
         const seam = Math.min(z % 6, 6 - z % 6) < .18;
@@ -138,7 +165,7 @@ export function createView(canvas: HTMLCanvasElement) {
       for(let i=0;i<=wallCount;i++){const z=i*length(which)/wallCount,road=track(which,z);sidePositions.push(road.x-road.width/2,0,-z,road.x-road.width/2,-.68,-z,road.x+road.width/2,0,-z,road.x+road.width/2,-.68,-z);if(i<wallCount){const k=i*4;sideIndices.push(k,k+4,k+1,k+1,k+4,k+5,k+2,k+3,k+6,k+3,k+7,k+6);}}
       const end=wallCount*4;sideIndices.push(0,1,2,2,1,3,end,end+2,end+1,end+2,end+3,end+1);
       const side=new THREE.BufferGeometry();side.setAttribute('position',new THREE.Float32BufferAttribute(sidePositions,3));side.setIndex(sideIndices);side.computeVertexNormals();
-      const sideColors: number[] = [], upper = new THREE.Color(0x799da3), lower = new THREE.Color(0x436773);
+      const sideColors: number[] = [], upper = new THREE.Color(0xb8b3a2), lower = new THREE.Color(0x657b88);
       for (let i=0;i<=wallCount;i++) for (const c of [upper, lower, upper, lower]) sideColors.push(c.r,c.g,c.b);
       side.setAttribute('color',new THREE.Float32BufferAttribute(sideColors,3));course.add(new THREE.Mesh(side,sideMaterial));
     }
@@ -171,7 +198,7 @@ export function createView(canvas: HTMLCanvasElement) {
       colored(new THREE.CylinderGeometry(4.1, 4.1, .1, 8).scale(1, 1, 3.5 / 4.1), 0x94bba3),
       ...[-1.6, 1.6].map(x => colored(new THREE.IcosahedronGeometry(1, 0).scale(.7, .65, .8).translate(x, .6, 1.2), 0x4c9384)),
     ];
-    const fallback = mergeGeometries(parts)!;
+    const fallback = paintRock(mergeGeometries(parts)!);
     const islands = new THREE.InstancedMesh(rockGeometry?.clone() || fallback.clone(), gardenMaterial, 6); fallback.dispose(); courseIslands = islands;
     parts.forEach(part => part.dispose());
     // Reuse one hollow, thick arch rather than drawing separate columns.
