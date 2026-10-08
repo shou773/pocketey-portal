@@ -43,6 +43,9 @@ test("keyboard navigation exposes focus and activates a game while preserving la
   page,
 }) => {
   await page.goto("/?lang=ja");
+  await expect(page.locator(".quick-picks svg[aria-hidden=true]")).toHaveCount(4);
+  await expect(page.locator(".play-link svg[aria-hidden=true]")).toHaveCount(4);
+  expect(await page.locator(".arcade").innerText()).not.toContain("↗");
   await page.keyboard.press("Tab");
   await expect(page.locator(".skip-link")).toBeFocused();
   await page.keyboard.press("Enter");

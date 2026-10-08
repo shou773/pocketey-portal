@@ -1,5 +1,6 @@
 ---
 import T from './T.astro';
+import ArrowUpRight from './ArrowUpRight.astro';
 const games=[
  {slug:'orbit-ribbon',name:'Orbit Ribbon',kind:'orbit',tag:'01 / 3D RUN & JUMP',ja:'自動で前進する、星の道。',en:'An endless-looking road. A reachable finish.',copyJa:'固定カメラの3Dラン。左右に柱をよけ、切れ目でジャンプ。3つの軌道を最後まで駆け抜けよう。',copyEn:'A fixed-camera 3D run with automatic forward movement. Steer around pillars and jump the gaps to finish three short courses.',stagesJa:'01 はじめの軌道 → 02 すれ違う光 → 03 星をつなぐ道',stagesEn:'01 First Orbit → 02 Crossing Lights → 03 Starbound Path'},
  {slug:'amber-step',name:'Amber Step',kind:'amber',tag:'02 / 2.5D PLATFORMER',ja:'一歩ずつ、琥珀色の空へ。',en:'Little jumps across a warm, open sky.',copyJa:'横から見る3Dアクション。左右に移動し、足場やトゲをジャンプで越えてゴールへ。3つの庭を、自分のペースで。',copyEn:'3D scenery with side-view movement. Move left or right and jump across gaps, steps and spikes. Reach the finish in three stages at your own pace.',stagesJa:'01 小さな一歩 → 02 空中の階段 → 03 琥珀の庭',stagesEn:'01 A Small Step → 02 Sky Steps → 03 Amber Garden'},
@@ -10,20 +11,20 @@ const games=[
 <div class="arcade">
 <section class="container portal-hero">
  <div><p class="kicker"><span class="status-dot" aria-hidden="true"></span> POCKETEY ORIGINALS</p><h1><T ja={'小さな冒険を、\nポケットに。'} en={'Small worlds. One more try.'}/></h1><p class="hero-description"><T ja="4つの世界。ひとつ選んで、遊びに行こう。" en="Four little worlds. Pick one and jump in."/></p></div>
- <a href="#how-to-play" class="hero-link"><T ja="はじめての方へ" en="How to play"/><span aria-hidden="true">↗</span></a>
+ <a href="#how-to-play" class="hero-link"><T ja="はじめての方へ" en="How to play"/><ArrowUpRight/></a>
 </section>
 <section class="container selection" aria-labelledby="games-title" id="games">
  <div class="section-heading"><div><p class="kicker">PICK YOUR WORLD</p><h2 id="games-title"><T ja="今日は、どこで遊ぶ？" en="Where will you play today?"/></h2></div><span class="collection-count"><T ja="4つのオリジナルゲーム" en="4 original games"/></span></div>
- <nav class="quick-picks" aria-label="Choose a game">{games.map(g=><a class={g.kind} href={`/games/${g.slug}/`}><span class="pick-dot" aria-hidden="true"></span>{g.name}<span aria-hidden="true">↗</span></a>)}</nav>
+ <nav class="quick-picks" aria-label="Choose a game">{games.map(g=><a class={g.kind} href={`/games/${g.slug}/`}><span class="pick-dot" aria-hidden="true"></span>{g.name}<ArrowUpRight/></a>)}</nav>
  <div class="game-grid">{games.map((g,i)=><article class={`game-card ${g.kind} ${i===0?'feature':''}`}>
  <a class="preview" href={`/games/${g.slug}/`}><img src={`/games/previews/${g.slug}.png`} width="844" height="390" loading={i===0?'eager':'lazy'} alt={`${g.name} gameplay`} data-alt-ja={`${g.name} のゲーム画面`} data-alt-en={`${g.name} gameplay`}/><span class="preview-badge"><T ja="ゲーム画面" en="In-game view"/></span><span class="image-index" aria-hidden="true">0{i+1}</span></a>
- <div class="card-copy"><p class="game-type">{g.tag.split(' / ')[1]}</p><h3><a href={`/games/${g.slug}/`}>{g.name}</a></h3><p class="game-tagline"><T ja={g.ja} en={g.en}/></p><div class="card-bottom"><span class="card-facts"><T ja="3ステージ · タッチ / キー" en="3 stages · Touch / keys"/></span><a class="play-link" href={`/games/${g.slug}/`}><T ja="遊ぶ" en="Play"/><span aria-hidden="true">↗</span><span class="sr-only"> {g.name}</span></a></div></div>
+ <div class="card-copy"><p class="game-type">{g.tag.split(' / ')[1]}</p><h3><a href={`/games/${g.slug}/`}>{g.name}</a></h3><p class="game-tagline"><T ja={g.ja} en={g.en}/></p><div class="card-bottom"><span class="card-facts"><T ja="3ステージ · タッチ / キー" en="3 stages · Touch / keys"/></span><a class="play-link" href={`/games/${g.slug}/`}><T ja="遊ぶ" en="Play"/><ArrowUpRight/><span class="sr-only"> {g.name}</span></a></div></div>
  </article>)}</div>
  <div class="instant-note"><span aria-hidden="true">✦</span><T ja="ダウンロード不要。アカウント不要。ブラウザですぐ遊べます。" en="No downloads. No accounts. Just your browser and a little curiosity."/></div>
 </section>
 <section class="container worlds" aria-labelledby="worlds-title">
  <div class="section-heading"><div><p class="kicker">FOUR WAYS TO PLAY</p><h2 id="worlds-title"><T ja="それぞれの世界に、楽しみ方。" en="A different kind of adventure."/></h2></div><a class="text-link" href="#games"><T ja="ゲームを選ぶ" en="Choose a game"/> ↑</a></div>
- <div class="world-grid">{games.map((g,i)=><article class={`world-detail ${g.kind}`}><div class="world-title"><span class="world-number" aria-hidden="true">0{i+1}</span><h3>{g.name}</h3><a href={`/games/${g.slug}/`} ><span aria-hidden="true">↗</span><span class="sr-only"><T ja="遊ぶ" en="Play"/> {g.name}</span></a></div><p class="description"><T ja={g.copyJa} en={g.copyEn}/></p><div class="world-meta"><span><T ja="3つのステージ" en="THREE STAGES"/></span><p class="stage-list"><T ja={g.stagesJa} en={g.stagesEn}/></p></div><a class="text-link" href={`/games/${g.slug}/`}><T ja="遊び方を見て、はじめる" en="See the controls and play"/> →</a></article>)}</div>
+ <div class="world-grid">{games.map((g,i)=><article class={`world-detail ${g.kind}`}><div class="world-title"><span class="world-number" aria-hidden="true">0{i+1}</span><h3>{g.name}</h3><a href={`/games/${g.slug}/`} ><ArrowUpRight/><span class="sr-only"><T ja="遊ぶ" en="Play"/> {g.name}</span></a></div><p class="description"><T ja={g.copyJa} en={g.copyEn}/></p><div class="world-meta"><span><T ja="3つのステージ" en="THREE STAGES"/></span><p class="stage-list"><T ja={g.stagesJa} en={g.stagesEn}/></p></div><a class="text-link" href={`/games/${g.slug}/`}><T ja="遊び方を見て、はじめる" en="See the controls and play"/> →</a></article>)}</div>
 </section>
 <section class="container play-guide" id="how-to-play"><div><p class="kicker"><T ja="遊び方" en="HOW TO PLAY"/></p><h2><T ja="よけて、跳んで、転がして。" en="Move. Dodge. Roll. Try again."/></h2><p><T ja="各作品に3ステージ。Orbit RibbonとAmber Stepはクリアすると次が開きます。Pulse DriftとTiltTrailは3ステージすべて選べます。" en="Each game has three stages. Orbit Ribbon and Amber Step unlock the next course after a clear. All stages in Pulse Drift and TiltTrail are available from the start."/></p></div><div class="guide-grid"><article><b>01 / TOUCH</b><h3><T ja="両手で、リズムよく" en="Two hands, one good jump"/></h3><p><T ja="Orbit/Amberは左右＋JUMP。Pulse Driftはドラッグで移動し、自動射撃。TiltTrailは左右＋ブレーキ。同時押しに対応しています。" en="Orbit/Amber use arrows + JUMP. Drag in Pulse Drift; shooting is automatic. TiltTrail uses arrows + BRAKE. Movement and action buttons can be held together."/></p></article><article><b>02 / KEYBOARD</b><h3><T ja="キーボードでも" en="A keyboard works too"/></h3><p><T ja="Orbit/Amberは矢印/A,D＋Spaceでジャンプ。Pulse Driftは矢印/WASDで移動。TiltTrailは矢印/A,D＋Spaceで減速。各ゲームの遊び方をご確認ください。" en="Orbit/Amber: arrows or A,D + Space to jump. Pulse Drift: arrows or WASD. TiltTrail: arrows or A,D + Space to brake. Check each game’s controls before starting."/></p></article><article><b>03 / YOUR PACE</b><h3><T ja="ひと休みも、何度でも" en="Take a break. Take another try."/></h3><p><T ja="一時停止から同じ場所で再開できます。画面から離れると自動で一時停止。音は最初はOFF、いつでも切り替えられます。" en="Pause and resume from the same place. Switching away pauses play automatically. Sound starts off and can be toggled at any time."/></p></article></div></section>
 <section class="container practical"><article><h2><T ja="記録は、このブラウザに" en="Your progress stays here"/></h2><p><T ja="開放したステージ・自己ベスト・音設定は、このブラウザに保存されます。アカウント同期や公開ランキングはありません。別の端末やブラウザには引き継がれません。" en="Unlocked stages, personal bests and sound settings are saved in this browser. There are no accounts, cloud sync or public leaderboards. Progress does not transfer to another browser or device."/></p><p><T ja="サイトデータの消去・プライベートブラウズ等で記録が失われる場合があります。保存が使えないときも、その画面では遊べます。Orbit/Amberのリセットはその2作品の記録だけを消去し、新作の記録は保持します。" en="Clearing site data or using private browsing can remove progress. You can still play when storage is unavailable. The Orbit/Amber reset clears those two games only and preserves the new games’ records."/></p></article><article><h2><T ja="対応環境と困ったとき" en="Devices and troubleshooting"/></h2><p><T ja="WebGL 2対応のブラウザとJavaScriptが必要です。タッチ画面・キーボード、縦・横画面に対応しています。描画の滑らかさは端末とブラウザで異なります。" en="You need JavaScript and a browser that supports WebGL 2. Touch, keyboard, portrait and landscape layouts are supported. Rendering performance varies by device and browser."/></p><p><T ja="3D描画が中断されたときは、表示された再読み込みボタンを使ってください。保存済みの記録は保持されますが、その途中のプレイは再開できません。" en="If 3D rendering stops, use the reload button shown in the game. Saved progress is kept, but the interrupted run cannot resume."/></p><a href="/contact/?type=site"><T ja="不具合を報告する →" en="Report a problem →"/></a></article></section>
@@ -116,7 +117,7 @@ const games=[
   background: #253a43;
   text-decoration: none;
 }
-.quick-picks a > span:last-child {
+.quick-picks a > :global(.arrow-icon) {
   color: #aabfc4;
   margin-left: 8px;
 }
@@ -564,7 +565,7 @@ const games=[
     font-size: 11px;
     padding: 8px 11px;
   }
-  .quick-picks a > span:last-child {
+  .quick-picks a > :global(.arrow-icon) {
     margin-left: auto;
   }
   .game-grid {

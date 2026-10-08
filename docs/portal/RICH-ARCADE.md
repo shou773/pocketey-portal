@@ -10,7 +10,7 @@ Only the two portal routes opt into `body.portal-page`. The existing light styli
 
 ## Visual review
 
-Before images use an isolated archive of the base commit. After images use the production build. Chromium captures use the same viewport and Japanese language for side-by-side comparisons. The Astro development toolbar was hidden for baseline captures.
+Before images use an isolated archive of the base commit. After images use the production build. Chromium captures use the same viewport and English language for the current side-by-side comparisons. The Astro development toolbar was hidden for baseline captures.
 
 - [Desktop comparison, 1440 × 1000 source viewports](evidence/rich-arcade/comparison-desktop.png)
 - [Mobile comparison, 390 × 844](evidence/rich-arcade/comparison-mobile.png)
@@ -36,3 +36,11 @@ npm run test:portal -- --grep 'all four games stay|keyboard navigation exposes|p
 ```
 
 Merge and deployment remain pending parent approval. Thumbnail alignment with new game artwork is pending those games' publication; this candidate accurately uses the current published art.
+
+## SVG arrow follow-up
+
+The initial visual review approved the layout and scope but found missing arrow glyphs in English. All upward-right decoration arrows in quick picks, play buttons, the desktop guide link and world-detail links now use an inline SVG with the paths from the existing Lucide `arrow-up-right.svg`. Each is `aria-hidden="true"` and `focusable="false"`; the existing readable and screen-reader link names remain. There is no font dependency for those arrows.
+
+The production build passed again. Three targeted checks passed: English language/navigation retention, keyboard activation (also asserting SVG decoration and absence of the text glyph), and text/button contrast. [Follow-up test log](evidence/rich-arcade/icon-tests.log). English full-page and viewport captures were refreshed once at desktop, mobile and 320px; the two comparison images now show English. Japanese and initial draft captures retain the first review state.
+
+An attempt to save the two comparison images formally to Library through the current skill upload helper failed with an authentication error (HTTP 401). No alternate upload route was attempted and no Library save is claimed. The committed PR images remain the review deliverables.
