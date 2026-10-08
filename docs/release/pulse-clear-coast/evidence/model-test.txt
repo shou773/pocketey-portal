@@ -1,0 +1,17 @@
+✔ movement is bounded, rate limited and deterministic (3.971478ms)
+✔ circle and swept collisions catch travel without a broad visual hitbox (0.186481ms)
+✔ damage has grace period and terminal states cannot advance (0.307052ms)
+✔ beam warning lasts 1.3 seconds and expires (1.702853ms)
+✔ shots remove enemies and award score once (0.242896ms)
+✔ all stages spawn threats, stage 3 has one boss and a deadline (38.16543ms)
+✔ surviving boss at deadline fails (0.205589ms)
+✔ boss defeat clears stage and malformed save is bounded (0.251599ms)
+✔ simultaneous fatal hit and boss defeat remains a loss (0.349627ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 216.940671

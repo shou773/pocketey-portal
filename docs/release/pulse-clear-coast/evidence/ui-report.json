@@ -1,0 +1,102 @@
+[
+  {
+    "size": {
+      "width": 320,
+      "height": 568
+    },
+    "status": "passed",
+    "checks": [
+      "layout-ja-en",
+      "launch",
+      "keyboard-stop",
+      "keyboard-depth",
+      "touch-depth",
+      "touch-cancel",
+      "pause",
+      "locale-mid-pause",
+      "blur-pause",
+      "rapid-retry",
+      "sound-save"
+    ],
+    "errors": []
+  },
+  {
+    "size": {
+      "width": 390,
+      "height": 844
+    },
+    "status": "passed",
+    "checks": [
+      "layout-ja-en",
+      "launch",
+      "keyboard-stop",
+      "keyboard-depth",
+      "touch-depth",
+      "touch-cancel",
+      "pause",
+      "locale-mid-pause",
+      "blur-pause",
+      "rapid-retry",
+      "sound-save"
+    ],
+    "errors": []
+  },
+  {
+    "size": {
+      "width": 844,
+      "height": 390
+    },
+    "status": "passed",
+    "checks": [
+      "layout-ja-en",
+      "launch",
+      "keyboard-stop",
+      "keyboard-depth",
+      "touch-depth",
+      "touch-cancel",
+      "pause",
+      "locale-mid-pause",
+      "blur-pause",
+      "rapid-retry",
+      "sound-save"
+    ],
+    "errors": []
+  },
+  {
+    "size": {
+      "width": 1280,
+      "height": 900
+    },
+    "status": "passed",
+    "checks": [
+      "layout-ja-en",
+      "launch",
+      "keyboard-stop",
+      "keyboard-depth",
+      "touch-depth",
+      "touch-cancel",
+      "pause",
+      "locale-mid-pause",
+      "blur-pause",
+      "rapid-retry",
+      "sound-save"
+    ],
+    "errors": []
+  },
+  {
+    "case": "corrupt",
+    "status": "passed"
+  },
+  {
+    "case": "blocked",
+    "status": "passed"
+  },
+  {
+    "case": "webgl",
+    "status": "passed"
+  },
+  {
+    "case": "context-loss",
+    "status": "passed"
+  }
+]
