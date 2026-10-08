@@ -1,0 +1,16 @@
+[
+  {
+    "mobile": true,
+    "sameState": true,
+    "sameCanvas": true,
+    "errorsBefore": [],
+    "errorsAfter": []
+  },
+  {
+    "mobile": false,
+    "sameState": true,
+    "sameCanvas": true,
+    "errorsBefore": [],
+    "errorsAfter": []
+  }
+]

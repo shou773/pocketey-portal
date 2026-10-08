@@ -10,23 +10,33 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const bg = kind === 'orbit' ? 0x152541 : 0xe9b391;
   scene.background = new T.Color(bg); scene.fog = new T.Fog(bg, kind === 'orbit' ? 48 : 30, 105);
   const sky = createSky(kind); scene.add(sky);
-  scene.add(new T.HemisphereLight(0xe9f5ff, kind === 'orbit' ? 0x384b70 : 0x91745b, 2.2));
-  const light = new T.DirectionalLight(0xffe4c5, 2.1); light.position.set(-8, 15, 5); scene.add(light);
+  scene.add(new T.HemisphereLight(kind === 'orbit' ? 0xe9f5ff : 0xffefd6, kind === 'orbit' ? 0x384b70 : 0x80738b, 2.2));
+  const light = new T.DirectionalLight(kind === 'orbit' ? 0xffe4c5 : 0xffe3b6, 2.1); light.position.set(-8, 15, 5); scene.add(light);
   const camera = new T.PerspectiveCamera(54, 1, .1, 160);
   const level = new T.Group(); scene.add(level);
   const backdrop = new T.Group(); scene.add(backdrop);
   const geo = new T.BoxGeometry(1, 1, 1);
   const spikeGeometry = new T.ConeGeometry(.4, .65, 4);
+  if (kind === 'amber') {
+    const positions = spikeGeometry.getAttribute('position'), colors: number[] = [];
+    for (let i = 0; i < positions.count; i++) {
+      const color = new T.Color(0xcb5876).lerp(new T.Color(0xffb0a0), (positions.getY(i) + .325) / .65);
+      if (positions.getX(i) < -.1) color.multiplyScalar(.88);
+      colors.push(color.r, color.g, color.b);
+    }
+    spikeGeometry.setAttribute('color', new T.Float32BufferAttribute(colors, 3));
+  }
   const mats = {
     floor: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x263f53 : 0xaf7858 }),
     edge: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x93f9da : 0xffdc9f, emissive: kind === 'orbit' ? 0x245d5a : 0x794521, emissiveIntensity: .65 }),
-    danger: new T.MeshLambertMaterial({ color: kind==='orbit'?0xe76f50:0xff687e, emissive: kind==='orbit'?0:0x7b143b, emissiveIntensity: .4 }),
+    danger: new T.MeshLambertMaterial({ color: kind==='orbit'?0xe76f50:0xffffff, vertexColors: kind === 'amber', emissive: kind==='orbit'?0:0x5f2039, emissiveIntensity: kind === 'orbit' ? .4 : .18 }),
     body: new T.MeshLambertMaterial({ color: 0xfff4de }),
     face: new T.MeshLambertMaterial({ color: 0x162b42 }),
     decor: new T.MeshLambertMaterial({ color: kind === 'orbit' ? 0x304967 : 0x97725d })
   };
   const orbitWarning=new T.MeshLambertMaterial({color:0xffc980});
   const orbitPanel=new T.MeshLambertMaterial({color:0x693747});
+  const amberJoint = kind === 'amber' ? new T.MeshLambertMaterial({color:0xc8af86}) : null;
   const box = (parent: T.Object3D, x: number, y: number, z: number, w: number, height: number, d: number, material: T.Material) => {
     const mesh = new T.Mesh(geo, material); mesh.position.set(x, y, z); mesh.scale.set(w, height, d); parent.add(mesh); return mesh;
   };
@@ -84,7 +94,10 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
       box(level, ...coord(p.a + .1, p.y + .025, p.z), kind === 'orbit' ? p.w : .18, .05, kind === 'orbit' ? .18 : 3.4, mats.edge);
       if (kind === 'orbit') for (const z of [-3.45, 3.45]) box(level, ...coord(mid, p.y + .025, z), .07, .05, len, mats.edge);
       // Small surface dashes communicate depth and forward speed.
-      for (let x = p.a + 2; x < p.b - 1; x += 3) box(level, ...coord(x, p.y + .03, 0), kind === 'orbit' ? .07 : .35, .03, kind === 'orbit' ? .4 : .07, mats.edge);
+      for (let x = p.a + 2; x < p.b - 1; x += 3) {
+        if (kind === 'amber') box(level, x, p.y + .008, 0, .026, .01, 3.18, amberJoint!);
+        else box(level, ...coord(x, p.y + .03, 0), .07, .03, .4, mats.edge);
+      }
     }
     for (const h of data.hazards) {
       if (kind === 'orbit') {

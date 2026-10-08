@@ -76,7 +76,7 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
               result.customProgramCacheKey = ()=>'single-bone-uniforms-v2-'+count;
               if(kind==='amber' && matrices) {
                 result=new T.ShaderMaterial({vertexColors:true,side:T.FrontSide,
-                  uniforms:{artBones:{value:matrices},artSky:{value:new T.Color(0xe9f5ff)},artGround:{value:new T.Color(0x91745b)},artSun:{value:new T.Color(0xffe4c5)},paintFog:{value:new T.Color(0xe9b391)},tint:{value:color}},
+                  uniforms:{artBones:{value:matrices},artSky:{value:new T.Color(0xffefd6)},artGround:{value:new T.Color(0x80738b)},artSun:{value:new T.Color(0xffe3b6)},paintFog:{value:new T.Color(0xe9b391)},tint:{value:color}},
                   // Animate the original skinned normals/positions, then use
                   // Gouraud Lambert lighting and vertex fog like the static
                   // batches. The authored rig is flat-faced and single-bone;
@@ -181,7 +181,7 @@ export function batchStatic(group: T.Group, kind: Kind) {
       // The batch shader applies the original fog limits and sRGB output at
       // vertices, retaining inexpensive interpolated flat-face colors.
       const backColors = new Float32Array(colors.length), normals = geometry.getAttribute('normal');
-      const sky = new T.Color(0xe9f5ff), ground = new T.Color(kind==='orbit'?0x384b70:0x91745b), sun = new T.Color(0xffe4c5);
+      const sky = new T.Color(kind==='orbit'?0xe9f5ff:0xffefd6), ground = new T.Color(kind==='orbit'?0x384b70:0x80738b), sun = new T.Color(kind==='orbit'?0xffe4c5:0xffe3b6);
       const direction = new T.Vector3(-8,15,5).normalize();
       for (let i=0;i<colors.length/3;i++) {
         const r=colors[i*3],g=colors[i*3+1],b=colors[i*3+2];
@@ -247,9 +247,9 @@ export function createSky(kind: Kind) {
   const sky = new T.Group();
   const geometry = new T.SphereGeometry(120, 24, 16);
   const colors: number[] = [], positions = geometry.attributes.position;
-  const top = new T.Color(kind === 'orbit' ? 0x080f29 : 0x405672);
+  const top = new T.Color(kind === 'orbit' ? 0x080f29 : 0xd89d94);
   const horizon = new T.Color(kind === 'orbit' ? 0x22385b : 0xffd9ad);
-  const bottom = new T.Color(kind === 'orbit' ? 0x090f22 : 0xd59377);
+  const bottom = new T.Color(kind === 'orbit' ? 0x090f22 : 0xe3ad91);
   for (let i = 0; i < positions.count; i++) {
     const y = positions.getY(i) / 120;
     const color = y >= 0 ? horizon.clone().lerp(top, Math.min(1, y * (kind === 'orbit' ? 2.4 : 6.5))) : horizon.clone().lerp(bottom, Math.min(1, -y * 3));

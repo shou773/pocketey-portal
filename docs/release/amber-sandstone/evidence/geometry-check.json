@@ -1,0 +1,694 @@
+{
+  "equal": true,
+  "protocol": "All Amber platform positions/normals/indices, character skin attributes/transforms, spike geometry/instances and both games cameras/states. Full Orbit scene mesh geometry, vertex paint, shader source and transforms across 3 stages.",
+  "reports": [
+    {
+      "label": "before",
+      "platforms": [
+        [
+          "329e30c1ffd444e2c3820d87891fdb4f296b4a77236de29e39290feb36014cea",
+          "9a2213f2387c82ab41d78ee4640280baa6fbb0a0d7fde5497e227e862e1c316a",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "a8becd7189ef5d5d80afba374c84a9530d49e07f6567912dc2739f49ea3f9ac4",
+          "d7e620e9584d02899407e41360e8a5523f7c6534ce65dfef5fe20678ac95e429"
+        ],
+        [
+          "3b80c0cd6b8fc4c1e549b2e4c5a558f865fa9cc253a19ea295335cb187e68fe6",
+          "940b4de7937d34fe8632943b39550e150256223a9f876e55e8f43dd7b5bfc171",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "9a2213f2387c82ab41d78ee4640280baa6fbb0a0d7fde5497e227e862e1c316a",
+          "e8b69e29f33a1e4c76529b48538c484bb8144128371a57c1851ace1110d4bf80"
+        ],
+        [
+          "329e30c1ffd444e2c3820d87891fdb4f296b4a77236de29e39290feb36014cea",
+          "1c6371c45e51f7200a47b50693cd32444456b44a3f7b3f490c76ed5c64a1af0e",
+          "940b4de7937d34fe8632943b39550e150256223a9f876e55e8f43dd7b5bfc171",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "9a2213f2387c82ab41d78ee4640280baa6fbb0a0d7fde5497e227e862e1c316a",
+          "704edeaee17182cfa4cca04d04cdf1d3753a27be448b83409f66d7358102bcbc",
+          "53ccb154c2a0999332ca36c773418b28bbf315640755f7975983156b9d9e2266",
+          "7e8a44fb2012d244cbc3cf6ea9da2813ff8ed3d01175b9ed53a5c391b2dc1522"
+        ]
+      ],
+      "entries": [
+        {
+          "kind": "amber",
+          "stage": 0,
+          "state": {
+            "kind": "amber",
+            "stage": 0,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              3.2,
+              5.6,
+              18.207317925138096
+            ],
+            "quaternion": [
+              -0.11569993710528025,
+              0,
+              0,
+              0.9932842113684454
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 5538,
+          "invariantHash": "042c2096026b02fc8b858e26325399fc1ffce7b357c00aa99faa04af936b5383"
+        },
+        {
+          "kind": "amber",
+          "stage": 1,
+          "state": {
+            "kind": "amber",
+            "stage": 1,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              3.2,
+              5.6,
+              18.207317925138096
+            ],
+            "quaternion": [
+              -0.11569993710528025,
+              0,
+              0,
+              0.9932842113684454
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 5870,
+          "invariantHash": "ba8cfa3f8958fc2e9bfbab482cda2db9039d559d991d97101fb13ec70b99e1d6"
+        },
+        {
+          "kind": "amber",
+          "stage": 2,
+          "state": {
+            "kind": "amber",
+            "stage": 2,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              3.2,
+              5.6,
+              18.207317925138096
+            ],
+            "quaternion": [
+              -0.11569993710528025,
+              0,
+              0,
+              0.9932842113684454
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 6522,
+          "invariantHash": "3d46ea514ac037c444b12f222617a00764a72e715eb8e8fff3f2dfdb5059a18b"
+        },
+        {
+          "kind": "orbit",
+          "stage": 0,
+          "state": {
+            "kind": "orbit",
+            "stage": 0,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              0,
+              5.4,
+              9.6
+            ],
+            "quaternion": [
+              -0.1200183046650315,
+              0,
+              0,
+              0.9927716789601382
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 7724,
+          "invariantHash": "a0fc38c83c531ce81bdc34404d0eb589e840a7d0b64d07fe399b41b9df54162f"
+        },
+        {
+          "kind": "orbit",
+          "stage": 1,
+          "state": {
+            "kind": "orbit",
+            "stage": 1,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              0,
+              5.4,
+              9.6
+            ],
+            "quaternion": [
+              -0.1200183046650315,
+              0,
+              0,
+              0.9927716789601382
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 8116,
+          "invariantHash": "2b49ee9da2bdfb92056e899183397ebd1ee14a3ebc14cd8aef5e861b500c5053"
+        },
+        {
+          "kind": "orbit",
+          "stage": 2,
+          "state": {
+            "kind": "orbit",
+            "stage": 2,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              0,
+              5.4,
+              9.6
+            ],
+            "quaternion": [
+              -0.1200183046650315,
+              0,
+              0,
+              0.9927716789601382
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 8700,
+          "invariantHash": "14210cfb5d71434de2f2000dac16b620419c5be00d91c13558d828ff54533832"
+        }
+      ]
+    },
+    {
+      "label": "after",
+      "platforms": [
+        [
+          "329e30c1ffd444e2c3820d87891fdb4f296b4a77236de29e39290feb36014cea",
+          "9a2213f2387c82ab41d78ee4640280baa6fbb0a0d7fde5497e227e862e1c316a",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "a8becd7189ef5d5d80afba374c84a9530d49e07f6567912dc2739f49ea3f9ac4",
+          "d7e620e9584d02899407e41360e8a5523f7c6534ce65dfef5fe20678ac95e429"
+        ],
+        [
+          "3b80c0cd6b8fc4c1e549b2e4c5a558f865fa9cc253a19ea295335cb187e68fe6",
+          "940b4de7937d34fe8632943b39550e150256223a9f876e55e8f43dd7b5bfc171",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "9a2213f2387c82ab41d78ee4640280baa6fbb0a0d7fde5497e227e862e1c316a",
+          "e8b69e29f33a1e4c76529b48538c484bb8144128371a57c1851ace1110d4bf80"
+        ],
+        [
+          "329e30c1ffd444e2c3820d87891fdb4f296b4a77236de29e39290feb36014cea",
+          "1c6371c45e51f7200a47b50693cd32444456b44a3f7b3f490c76ed5c64a1af0e",
+          "940b4de7937d34fe8632943b39550e150256223a9f876e55e8f43dd7b5bfc171",
+          "1a42f215f7d6848d154bad293ca99f2b975413f4b14ff3e0d9b4a27f75222950",
+          "9a2213f2387c82ab41d78ee4640280baa6fbb0a0d7fde5497e227e862e1c316a",
+          "704edeaee17182cfa4cca04d04cdf1d3753a27be448b83409f66d7358102bcbc",
+          "53ccb154c2a0999332ca36c773418b28bbf315640755f7975983156b9d9e2266",
+          "7e8a44fb2012d244cbc3cf6ea9da2813ff8ed3d01175b9ed53a5c391b2dc1522"
+        ]
+      ],
+      "entries": [
+        {
+          "kind": "amber",
+          "stage": 0,
+          "state": {
+            "kind": "amber",
+            "stage": 0,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              3.2,
+              5.6,
+              18.207317925138096
+            ],
+            "quaternion": [
+              -0.11569993710528025,
+              0,
+              0,
+              0.9932842113684454
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 5938,
+          "invariantHash": "042c2096026b02fc8b858e26325399fc1ffce7b357c00aa99faa04af936b5383"
+        },
+        {
+          "kind": "amber",
+          "stage": 1,
+          "state": {
+            "kind": "amber",
+            "stage": 1,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              3.2,
+              5.6,
+              18.207317925138096
+            ],
+            "quaternion": [
+              -0.11569993710528025,
+              0,
+              0,
+              0.9932842113684454
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 6270,
+          "invariantHash": "ba8cfa3f8958fc2e9bfbab482cda2db9039d559d991d97101fb13ec70b99e1d6"
+        },
+        {
+          "kind": "amber",
+          "stage": 2,
+          "state": {
+            "kind": "amber",
+            "stage": 2,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              3.2,
+              5.6,
+              18.207317925138096
+            ],
+            "quaternion": [
+              -0.11569993710528025,
+              0,
+              0,
+              0.9932842113684454
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 6922,
+          "invariantHash": "3d46ea514ac037c444b12f222617a00764a72e715eb8e8fff3f2dfdb5059a18b"
+        },
+        {
+          "kind": "orbit",
+          "stage": 0,
+          "state": {
+            "kind": "orbit",
+            "stage": 0,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              0,
+              5.4,
+              9.6
+            ],
+            "quaternion": [
+              -0.1200183046650315,
+              0,
+              0,
+              0.9927716789601382
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 7724,
+          "invariantHash": "a0fc38c83c531ce81bdc34404d0eb589e840a7d0b64d07fe399b41b9df54162f"
+        },
+        {
+          "kind": "orbit",
+          "stage": 1,
+          "state": {
+            "kind": "orbit",
+            "stage": 1,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              0,
+              5.4,
+              9.6
+            ],
+            "quaternion": [
+              -0.1200183046650315,
+              0,
+              0,
+              0.9927716789601382
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 8116,
+          "invariantHash": "2b49ee9da2bdfb92056e899183397ebd1ee14a3ebc14cd8aef5e861b500c5053"
+        },
+        {
+          "kind": "orbit",
+          "stage": 2,
+          "state": {
+            "kind": "orbit",
+            "stage": 2,
+            "x": 0,
+            "z": 0,
+            "y": 0,
+            "vy": 0,
+            "time": 1,
+            "grounded": true,
+            "coyote": 0.1,
+            "buffer": 0,
+            "status": "running",
+            "jumps": 0
+          },
+          "camera": {
+            "position": [
+              0,
+              5.4,
+              9.6
+            ],
+            "quaternion": [
+              -0.1200183046650315,
+              0,
+              0,
+              0.9927716789601382
+            ],
+            "projection": [
+              3.0194007777002314,
+              0,
+              0,
+              0,
+              0,
+              1.9626105055051506,
+              0,
+              0,
+              0,
+              0,
+              -1.0012507817385865,
+              -1,
+              0,
+              0,
+              -0.20012507817385866,
+              0
+            ]
+          },
+          "calls": 9,
+          "triangles": 8700,
+          "invariantHash": "14210cfb5d71434de2f2000dac16b620419c5be00d91c13558d828ff54533832"
+        }
+      ]
+    }
+  ]
+}
