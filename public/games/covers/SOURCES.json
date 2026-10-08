@@ -37,10 +37,10 @@
     }
   ],
   "assetProvenance": "Existing project-authored geometry and existing licensed Kenney models; retain licenses in public/games/assets and the individual game-art reference reports",
-  "publicationNote": "Amber, Tilt and Pulse align with published main 1e07190. Amber published Blender landmark loading is verified; regeneration is byte-identical to the approved cover. Orbit art aligns with candidate 2edb47c; wait for Orbit publication and parent final approval. No game renderer changes are included in this portal PR.",
+  "publicationNote": "All four games are published on main 857bc1d. Their artwork aligns with the cover references. Amber Blender landmark loading and byte-identical regeneration are explicitly verified. Game renderers are unchanged by this portal PR.",
   "titleArtwork": "Original project-authored SVG path lettering, with mechanical slant for Orbit, warm rounded strokes for Amber, thinner angular SF lettering for Pulse, and light rounded rising lines for Tilt. Live decorative overlays; plain accessible titles remain below.",
   "alignmentVerifiedAgainst": {
-    "publishedMain": "1e071902bda809c4e0beaabffe7ebb81b99e4342",
+    "publishedMain": "857bc1d9ae0006e32804e3b7e9f75b2d454d57fe",
     "orbitCandidate": "2edb47c0d72b2446b5fe110486d1a39828309dcc",
     "report": "docs/portal/PUBLISHED-ALIGNMENT.md"
   }
