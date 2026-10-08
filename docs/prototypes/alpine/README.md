@@ -7,11 +7,11 @@ existing prototype filter. No homepage or existing game page is changed.
 This is one stage with an original mountain scene built from the parent's
 **written production brief**, not from retrieved reference-image pixels.
 The current art was verified in actual Chromium/Three.js in the receiving
-environment at source commit `b5183d9835b7b9c2ddbbbbd0e371c7a22639e5f0`.
+environment at final scene commit `d66bc9350f68b839a50941ca463d9ebd725fe22a`.
 A full stage and retry passed with ordinary touch flicks and wall clock.
 Reference-image fidelity and physical-device performance remain unverified.
 
-![Actual WebGL game screen after retry](evidence/webgl-b5183d9/07-full-run-retry.png)
+![Actual WebGL game screen after retry](evidence/final-atmosphere/05-retry.png)
 
 ## Current art pass, 2026-10-08
 
@@ -23,8 +23,13 @@ Reference-image fidelity and physical-device performance remain unverified.
 - Dark asphalt, warm stone edges and a faceted rock foundation; orange/ivory
   barriers with black feet and amber lamps; timber finish posts and checkers.
 - Three shared fir meshes and three shared rock meshes, instanced off the road.
-  Three blue mountain layers and a lake; warm directional light and cool ambient
-  light. A subtle contact patch sits under the car. No paid assets or textures.
+  Three low, broad blue mountain ridges and a lake; pale blue to pink sky from
+  a tiny procedural texture. Brighter ambient light and a soft warm sun make
+  the car roof and tree tiers readable. A subtle contact patch sits under the
+  car. No paid assets or external textures.
+- The final atmosphere pass uses a cooler asphalt and transparent warm input
+  zone tint (11% inactive, 19% active). Zone bounds, yellow lines and arrows
+  remain unchanged; no course, collision or input timing was changed.
 - Camera direction remains fixed independently of steering. Perspective replaces
   the greybox's orthographic lens to show the bounded car near 71% of the portrait
   viewport while retaining the approaching turns.
@@ -40,9 +45,9 @@ Current checks:
 | Existing Alpine logic | 12/12 pass | Same model and input files as `459fcb3f229f0dee42698d91187f027b19c588a7` |
 | Geometry, clearance and framing | 4/4 pass | Car footprint, barrier rectangles, scenery clearance, triangle budget, imminent turn visibility |
 | Type check and production build | Pass | `check:games`, build and route guard |
-| Whole-scene static budget | 8,362 triangles / 46 mesh batches | Includes every instance; not measured GPU draw calls or FPS |
+| Initial actual render budget | 8,274 triangles / 47 draw calls | Includes the two-triangle gradient sky; not device FPS |
 | Auxiliary renders | Start, before first turn, near finish inspected | Blender Cycles CPU, same exported meshes/camera, different lighting, tone mapping and fog; no HTML UI |
-| Current browser input | 6/6 pass, zero retries | Unchanged input suite; controlled clock and no-op renderer; not WebGL coverage |
+| Saved browser input | 6/6 pass at b5183d9, zero retries | App/model/input are unchanged; controlled clock and no-op renderer; not WebGL coverage |
 | Current actual WebGL | Pass | Chromium 151 / SwiftShader, ordinary clock, real CDP touch; full clear and retry in one attempt, plus pause/resume and 320×568 bounds |
 
 The first auxiliary render failed because this Blender build lacks
@@ -65,8 +70,11 @@ was owned by `nobody:nogroup`, and a nested namespace could not write `uid_map`.
 That historical blocker was resolved by reviewing the same game source in the
 working conveyor environment, using its existing browser flags. No OS, TLS or
 permission settings were changed. The actual game renders now cover the start,
-first turn, near finish, goal and retry. Only documentation/evidence changed
-after `b5183d9`; no game behavior or art was changed for this review.
+first turn, near finish, goal and retry. After that check, the parent authorized
+one final atmosphere pass. Only `scene.ts` changed: lower mountains, gradient
+sky, subtler input tint and brighter lighting. The final source `d66bc93` was
+then verified in the same actual browser. Game behavior and geometry of the
+course, car and obstacles did not change.
 
 The full-stage run used four normal flicks (left, right, right, left), no
 controlled clock, no state/input mutation and no renderer interception. It
@@ -76,14 +84,16 @@ suite still substitutes rendering and controls time. Its log retains a blocked
 Astro development-toolbar resource caused by the temporary dependency symlink;
 all six game tests passed. The symlink was removed afterward.
 
-Current actual evidence: [review notes](evidence/webgl-b5183d9/README.md),
-[initial screen](evidence/webgl-b5183d9/01-ready-webgl.png),
-[first turn](evidence/webgl-b5183d9/04-full-run-first-turn.png),
-[near finish](evidence/webgl-b5183d9/05-full-run-near-finish.png),
-[goal](evidence/webgl-b5183d9/06-full-run-goal.png),
-[retry](evidence/webgl-b5183d9/07-full-run-retry.png),
-[full-stage result](evidence/webgl-b5183d9/complete-stage.json),
-[input suite](evidence/webgl-b5183d9/input6-report.json).
+Final actual evidence: [review notes](evidence/final-atmosphere/README.md),
+[start](evidence/final-atmosphere/01-start.png),
+[first turn](evidence/final-atmosphere/02-first-turn.png),
+[near finish](evidence/final-atmosphere/03-near-finish.png),
+[goal](evidence/final-atmosphere/04-goal.png),
+[retry](evidence/final-atmosphere/05-retry.png),
+[full-stage result](evidence/final-atmosphere/complete-stage.json).
+Earlier unchanged-control checks:
+[paused/narrow UI](evidence/webgl-b5183d9/review.json),
+[six input tests](evidence/webgl-b5183d9/input6-report.json).
 
 The new actual screenshots are stored in this PR. Library helper discovery
 returned HTTP 401 before upload preparation; no further save was attempted and
