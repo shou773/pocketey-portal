@@ -1,0 +1,532 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/pocketey-portal/node_modules/.bin/playwright",
+      "test",
+      "--grep",
+      "orbit|licensed UI|failure/retry"
+    ],
+    "configFile": "/workspace/pocketey-portal/playwright.config.ts",
+    "rootDir": "/workspace/pocketey-portal/tests/games",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/pocketey-portal/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/pocketey-portal/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/browser.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "ASTRO_TELEMETRY_DISABLED=1 npm run preview -- --host 127.0.0.1 --port 4322",
+      "url": "http://localhost:4322",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "licensed UI artwork loads and existing progress survives the visual refresh",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26696,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:20:39.144Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-fc362ed85c28fadd1392",
+          "file": "browser.spec.ts",
+          "line": 5,
+          "column": 1
+        },
+        {
+          "title": "failure/retry, pause/focus clears held input, restart cycles, orientation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11900,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:22:52.956Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-374452dc0e1ba620dca5",
+          "file": "browser.spec.ts",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "orbit: WebGL context loss freezes play until reload and preserves saved data",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 7879,
+                  "error": {
+                    "message": "Error: orbit/1 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"1\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"28.408\",\"y\":\"-4.015\",\"z\":\"0.875\",\"grounded\":\"false\",\"jumps\":\"0\",\"geometries\":\"8\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m",
+                    "stack": "Error: orbit/1 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"1\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"28.408\",\"y\":\"-4.015\",\"z\":\"0.875\",\"grounded\":\"false\",\"jumps\":\"0\",\"geometries\":\"8\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n    at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:101:2",
+                    "location": {
+                      "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                      "column": 133,
+                      "line": 39
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39minput.ts:39\n\n  37 |   await page.waitForTimeout(25);\n  38 |  }\n> 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  40 | }\n  41 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                        "column": 133,
+                        "line": 39
+                      },
+                      "message": "Error: orbit/1 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"1\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"28.408\",\"y\":\"-4.015\",\"z\":\"0.875\",\"grounded\":\"false\",\"jumps\":\"0\",\"geometries\":\"8\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n\n   at input.ts:39\n\n  37 |   await page.waitForTimeout(25);\n  38 |  }\n> 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  40 | }\n  41 |\n    at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:101:2"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:23:05.717Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/pocketey-portal/test-results/browser-orbit-WebGL-contex-f5e9f-ad-and-preserves-saved-data/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/pocketey-portal/test-results/browser-orbit-WebGL-contex-f5e9f-ad-and-preserves-saved-data/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                    "column": 133,
+                    "line": 39
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-57d8b28bb5baae658dab",
+          "file": "browser.spec.ts",
+          "line": 97,
+          "column": 46
+        },
+        {
+          "title": "orbit: 320x568 menus and clear screen remain scroll-accessible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28740,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:23:15.063Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-965d24c1446921c8fd75",
+          "file": "browser.spec.ts",
+          "line": 142,
+          "column": 46
+        },
+        {
+          "title": "orbit: simulated notch safe areas keep all controls inside every edge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3972,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:23:44.984Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-5db2a601f014721c2bd8",
+          "file": "browser.spec.ts",
+          "line": 180,
+          "column": 46
+        },
+        {
+          "title": "orbit: selected 3D art loads, animation and normal controls remain usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3054,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:23:48.998Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-2b9876b8e40215c7770f",
+          "file": "browser.spec.ts",
+          "line": 229,
+          "column": 2
+        },
+        {
+          "title": "orbit: failed GLBs retain fallback, controls, clear and saves",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18909,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T18:23:52.082Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-0db933a01ad1ccebe950",
+          "file": "browser.spec.ts",
+          "line": 283,
+          "column": 2
+        }
+      ],
+      "suites": [
+        {
+          "title": "orbit-keyboard",
+          "file": "browser.spec.ts",
+          "line": 29,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 90957,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m22.39747262203676\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m22.39747262203676\u001b[39m\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:46:305",
+                        "location": {
+                          "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                          "column": 305,
+                          "line": 46
+                        },
+                        "snippet": "  44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }\n  45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));\n> 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}\n     |                                                                                                                                                                                                                                                                                                                 ^\n  47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});\n  48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});\n  49 |  }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                            "column": 305,
+                            "line": 46
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m22.39747262203676\u001b[39m\n\n  44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }\n  45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));\n> 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}\n     |                                                                                                                                                                                                                                                                                                                 ^\n  47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});\n  48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});\n  49 |  }\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:46:305"
+                        },
+                        {
+                          "location": {
+                            "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                            "column": 361,
+                            "line": 46
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m40\u001b[39m\nReceived:    \u001b[31m83.29999999998836\u001b[39m\n\n  44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }\n  45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));\n> 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}\n     |                                                                                                                                                                                                                                                                                                                                                                         ^\n  47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});\n  48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});\n  49 |  }\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:46:361"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "orbit keyboard {\n  fps: \u001b[33m22.39747262203676\u001b[39m,\n  p95: \u001b[33m83.29999999998836\u001b[39m,\n  p99: \u001b[33m116.69999999999709\u001b[39m,\n  max: \u001b[33m133.39999999999418\u001b[39m\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-08T18:21:06.967Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/pocketey-portal/tests/games/browser.spec.ts",
+                        "column": 305,
+                        "line": 46
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-0cccad0b3bd723afeb9b",
+              "file": "browser.spec.ts",
+              "line": 31,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "orbit-touch",
+          "file": "browser.spec.ts",
+          "line": 29,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 11134,
+                      "error": {
+                        "message": "Error: orbit/1 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"1\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"14.875\",\"y\":\"-4.015\",\"z\":\"-3.583\",\"grounded\":\"false\",\"jumps\":\"0\",\"geometries\":\"8\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m",
+                        "stack": "Error: orbit/1 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"1\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"14.875\",\"y\":\"-4.015\",\"z\":\"-3.583\",\"grounded\":\"false\",\"jumps\":\"0\",\"geometries\":\"8\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n    at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:43:9",
+                        "location": {
+                          "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                          "column": 133,
+                          "line": 39
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39minput.ts:39\n\n  37 |   await page.waitForTimeout(25);\n  38 |  }\n> 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  40 | }\n  41 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                            "column": 133,
+                            "line": 39
+                          },
+                          "message": "Error: orbit/1 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"1\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"14.875\",\"y\":\"-4.015\",\"z\":\"-3.583\",\"grounded\":\"false\",\"jumps\":\"0\",\"geometries\":\"8\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n\n   at input.ts:39\n\n  37 |   await page.waitForTimeout(25);\n  38 |  }\n> 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  40 | }\n  41 |\n    at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:43:9"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-08T18:22:39.120Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                        "column": 133,
+                        "line": 39
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-622026855dbe0e8b1f41",
+              "file": "browser.spec.ts",
+              "line": 31,
+              "column": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T18:20:36.065Z",
+    "duration": 215195.08599999998,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

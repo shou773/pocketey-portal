@@ -1,0 +1,52 @@
+{
+  "src/games/model.ts": {
+    "unchanged": true,
+    "candidateSHA256": "44710256bd6ab17d6b0f9cb1799f33afbad4f5ec727d7c0463af74bcde9a6931",
+    "baselineSHA256": "44710256bd6ab17d6b0f9cb1799f33afbad4f5ec727d7c0463af74bcde9a6931"
+  },
+  "src/games/app.ts": {
+    "unchanged": true,
+    "candidateSHA256": "7bdb5ace0e9ee10f8d0791464878e4a3723c26d294d0665d14b553b3114fda92",
+    "baselineSHA256": "7bdb5ace0e9ee10f8d0791464878e4a3723c26d294d0665d14b553b3114fda92"
+  },
+  "src/games/audio.ts": {
+    "unchanged": true,
+    "candidateSHA256": "6e90fc04245b80c413f9ddff42cb8d3d2aa552d9d8a4332f0014e8e0c849e787",
+    "baselineSHA256": "6e90fc04245b80c413f9ddff42cb8d3d2aa552d9d8a4332f0014e8e0c849e787"
+  },
+  "src/games/audio-mix.ts": {
+    "unchanged": true,
+    "candidateSHA256": "99783effe1ea9e1a8ead670055dcfc26c8005840993e0d27bd09a16cc9d4c875",
+    "baselineSHA256": "99783effe1ea9e1a8ead670055dcfc26c8005840993e0d27bd09a16cc9d4c875"
+  },
+  "src/games/copy.ts": {
+    "unchanged": true,
+    "candidateSHA256": "d4023f51cd2191b68c58990308219c2c65b669f4778b475b29dfc1f470089ef9",
+    "baselineSHA256": "d4023f51cd2191b68c58990308219c2c65b669f4778b475b29dfc1f470089ef9"
+  },
+  "src/components/ActionGame.astro": {
+    "unchanged": true,
+    "candidateSHA256": "dc2fd557c22724bd9f4fad47e66baf3c267728cf29363bf322995bf20d0164d4",
+    "baselineSHA256": "dc2fd557c22724bd9f4fad47e66baf3c267728cf29363bf322995bf20d0164d4"
+  },
+  "src/pages/games/orbit-ribbon.astro": {
+    "unchanged": true,
+    "candidateSHA256": "fb7a72f4816b08cfd8f23641b3883ec3da043d413b603be098ded44e3c2e3717",
+    "baselineSHA256": "fb7a72f4816b08cfd8f23641b3883ec3da043d413b603be098ded44e3c2e3717"
+  },
+  "src/games/art.ts": {
+    "unchanged": false,
+    "candidateSHA256": "be8c8d546bf0d8161a0a5a3ce9d91bcafbfc01fe790e0fc64891be1bb38339b6",
+    "baselineSHA256": "032d9b808b96d7a1945a3a056494275ab37d4f3d19c12c364846bc838aad587a"
+  },
+  "src/games/orbit-art.ts": {
+    "unchanged": false,
+    "candidateSHA256": "d836ca93c7a01df64a919db5af1bfb2f8dd92f490a66932b6007cf04c1d2c505",
+    "baselineSHA256": "9c21e43f1d045d4635d7bc7b2548dd982f4f3256d632aebfb1655a579436f42d"
+  },
+  "src/games/render.ts": {
+    "unchanged": false,
+    "candidateSHA256": "11bd217287f2b6c7d38c9516893eff1d4c18e68722f25d2f1332cfb30ac74250",
+    "baselineSHA256": "ac209504592933c3b7450676c9e5a2898585d088df13c945a66f612be03a6fd6"
+  }
+}

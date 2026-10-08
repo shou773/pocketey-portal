@@ -1,0 +1,260 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/pocketey-portal/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "playwright.baseline.config.ts",
+      "--grep",
+      "orbit-(keyboard|touch)"
+    ],
+    "configFile": "/workspace/pocketey-portal/playwright.baseline.config.ts",
+    "rootDir": "/workspace/orbit-baseline/tests/games",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/pocketey-portal/baseline-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/orbit-baseline/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/browser.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "baseline-results/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 -m http.server 4323 --bind 127.0.0.1 --directory '/workspace/orbit-baseline/dist'",
+      "url": "http://localhost:4323",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "orbit-keyboard",
+          "file": "browser.spec.ts",
+          "line": 29,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 69993,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m16.765494846816317\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m16.765494846816317\u001b[39m\n    at /workspace/orbit-baseline/tests/games/browser.spec.ts:46:305",
+                        "location": {
+                          "file": "/workspace/orbit-baseline/tests/games/browser.spec.ts",
+                          "column": 305,
+                          "line": 46
+                        },
+                        "snippet": "  44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }\n  45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));\n> 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}\n     |                                                                                                                                                                                                                                                                                                                 ^\n  47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});\n  48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});\n  49 |  }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/orbit-baseline/tests/games/browser.spec.ts",
+                            "column": 305,
+                            "line": 46
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m45\u001b[39m\nReceived:    \u001b[31m16.765494846816317\u001b[39m\n\n  44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }\n  45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));\n> 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}\n     |                                                                                                                                                                                                                                                                                                                 ^\n  47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});\n  48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});\n  49 |  }\n    at /workspace/orbit-baseline/tests/games/browser.spec.ts:46:305"
+                        },
+                        {
+                          "location": {
+                            "file": "/workspace/orbit-baseline/tests/games/browser.spec.ts",
+                            "column": 361,
+                            "line": 46
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m40\u001b[39m\nReceived:    \u001b[31m100\u001b[39m\n\n  44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }\n  45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));\n> 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}\n     |                                                                                                                                                                                                                                                                                                                                                                         ^\n  47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});\n  48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});\n  49 |  }\n    at /workspace/orbit-baseline/tests/games/browser.spec.ts:46:361"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "orbit keyboard {\n  fps: \u001b[33m16.765494846816317\u001b[39m,\n  p95: \u001b[33m100\u001b[39m,\n  p99: \u001b[33m133.3000000000029\u001b[39m,\n  max: \u001b[33m133.3000000000029\u001b[39m\n}\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-08T18:32:52.509Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/baseline-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/baseline-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/orbit-baseline/tests/games/browser.spec.ts",
+                        "column": 305,
+                        "line": 46
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-0cccad0b3bd723afeb9b",
+              "file": "browser.spec.ts",
+              "line": 31,
+              "column": 2
+            }
+          ]
+        },
+        {
+          "title": "orbit-touch",
+          "file": "browser.spec.ts",
+          "line": 29,
+          "column": 83,
+          "specs": [
+            {
+              "title": "three stages through normal input, unlock and persistence",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 25543,
+                      "error": {
+                        "message": "Error: orbit/2 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"2\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"15.400\",\"y\":\"0.000\",\"z\":\"-1.458\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m",
+                        "stack": "Error: orbit/2 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"2\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"15.400\",\"y\":\"0.000\",\"z\":\"-1.458\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n    at play (/workspace/orbit-baseline/tests/games/input.ts:39:133)\n    at /workspace/orbit-baseline/tests/games/browser.spec.ts:43:9",
+                        "location": {
+                          "file": "/workspace/orbit-baseline/tests/games/input.ts",
+                          "column": 133,
+                          "line": 39
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39minput.ts:39\n\n  37 |   await page.waitForTimeout(25);\n  38 |  }\n> 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  40 | }\n  41 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/workspace/orbit-baseline/tests/games/input.ts",
+                            "column": 133,
+                            "line": 39
+                          },
+                          "message": "Error: orbit/2 {\"kind\":\"orbit\",\"audio\":\"running\",\"music\":\"ready\",\"audioSamples\":\"9\",\"audioVoices\":\"1\",\"audioMaxVoices\":\"2\",\"audioLoops\":\"0\",\"audioStarts\":\"2\",\"mode\":\"result\",\"status\":\"dead\",\"x\":\"15.400\",\"y\":\"0.000\",\"z\":\"-1.458\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\",\"musicCodec\":\"ogg\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mcl\u001b[27mea\u001b[7mr\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7md\u001b[27mea\u001b[7md\u001b[27m\"\u001b[39m\n\n   at input.ts:39\n\n  37 |   await page.waitForTimeout(25);\n  38 |  }\n> 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  40 | }\n  41 |\n    at play (/workspace/orbit-baseline/tests/games/input.ts:39:133)\n    at /workspace/orbit-baseline/tests/games/browser.spec.ts:43:9"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-08T18:34:04.320Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/workspace/pocketey-portal/baseline-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/workspace/pocketey-portal/baseline-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/workspace/orbit-baseline/tests/games/input.ts",
+                        "column": 133,
+                        "line": 39
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "fbeac1b2decfba2c3acd-622026855dbe0e8b1f41",
+              "file": "browser.spec.ts",
+              "line": 31,
+              "column": 2
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T18:32:51.297Z",
+    "duration": 100264.34700000001,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

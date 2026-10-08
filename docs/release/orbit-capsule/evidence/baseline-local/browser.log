@@ -1,0 +1,153 @@
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:51] "GET / HTTP/1.1" 200 -
+
+Running 2 tests using 1 worker
+
+(node:6630) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /games/orbit-ribbon/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.BHHdI9Sq.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /_astro/GLTFLoader.DWxNvIt7.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:53] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/kenney/space/rock.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/orbit/lunar-relay.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/kenney/space/meteor.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/kenney/space/craft_speederA.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/kenney/space/platform_small.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/orbit.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:55] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:56] "GET /favicon.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/click.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/jump.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/land.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/roll.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/clear.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/shot.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/warning.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/damage.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/death.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:32:57] "GET /games/audio/music/orbit.ogg HTTP/1.1" 200 -
+orbit keyboard {
+  fps: 16.765494846816317,
+  p95: 100,
+  p99: 133.3000000000029,
+  max: 133.3000000000029
+}
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:33:55] "GET /games/orbit-ribbon/ HTTP/1.1" 304 -
+  ✘  1 ../orbit-baseline/tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence (1.2m)
+(node:6839) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /games/orbit-ribbon/ HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /games/assets/lucide/trophy.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /_astro/ActionGame.astro_astro_type_script_index_0_lang.BHHdI9Sq.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /games/assets/lucide/rotate-ccw.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /_astro/amber-step.BVG8SpgS.css HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /games/assets/lucide/sparkles.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /games/assets/lucide/check.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /_astro/GLTFLoader.DWxNvIt7.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:06] "GET /_astro/locale.B1rKA6B7.js HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/kenney/space/craft_speederA.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/kenney/space/platform_small.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/kenney/space/meteor.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/kenney/space/rock.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/orbit.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/orbit/lunar-relay.glb HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/arrow-left.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/arrow-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/arrow-up-right.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/flag.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/play.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:08] "GET /games/assets/lucide/lock-keyhole.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:10] "GET /favicon.svg HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/shot.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/land.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/click.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/roll.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/jump.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/warning.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/clear.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/damage.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:11] "GET /games/audio/death.wav HTTP/1.1" 200 -
+[WebServer] 127.0.0.1 - - [08/Oct/2026 18:34:12] "GET /games/audio/music/orbit.ogg HTTP/1.1" 200 -
+  ✘  2 ../orbit-baseline/tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence (25.5s)
+
+
+  1) ../orbit-baseline/tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 45
+    Received:    16.765494846816317
+
+      44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+      45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                                 ^
+      47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      49 |  }
+        at /workspace/orbit-baseline/tests/games/browser.spec.ts:46:305
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 40
+    Received:    100
+
+      44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+      45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                                                                                         ^
+      47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      49 |  }
+        at /workspace/orbit-baseline/tests/games/browser.spec.ts:46:361
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    baseline-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: baseline-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md
+
+  2) ../orbit-baseline/tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence
+
+    Error: orbit/2 {"kind":"orbit","audio":"running","music":"ready","audioSamples":"9","audioVoices":"1","audioMaxVoices":"2","audioLoops":"0","audioStarts":"2","mode":"result","status":"dead","x":"15.400","y":"0.000","z":"-1.458","grounded":"true","jumps":"0","geometries":"9","musicCodec":"ogg"}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "clear"
+    Received: "dead"
+
+       at input.ts:39
+
+      37 |   await page.waitForTimeout(25);
+      38 |  }
+    > 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');
+         |                                                                                                                                     ^
+      40 | }
+      41 |
+        at play (/workspace/orbit-baseline/tests/games/input.ts:39:133)
+        at /workspace/orbit-baseline/tests/games/browser.spec.ts:43:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    baseline-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: baseline-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/error-context.md
+
+  2 failed
+    ../orbit-baseline/tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence
+    ../orbit-baseline/tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
