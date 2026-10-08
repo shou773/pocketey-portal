@@ -1,0 +1,11 @@
+AMBER_ARCH: 172 triangles, 88 vertices, 1 mesh, 1 material
+Info: Saved "stone-arch.blend"
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+06:44:08 | INFO: Starting glTF 2.0 export
+06:44:08 | INFO: Extracting primitive: Amber sandstone arch
+06:44:08 | INFO: Primitives created: 1
+06:44:08 | INFO: Finished glTF 2.0 export in 0.005957603454589844 s
+
+Blender 4.3.2
+
+Blender quit

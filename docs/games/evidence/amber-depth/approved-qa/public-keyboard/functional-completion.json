@@ -1,0 +1,39 @@
+{
+  "kind": "amber",
+  "touch": false,
+  "threeNativeClears": true,
+  "stored": {
+    "version": 1,
+    "sound": true,
+    "orbit": {
+      "unlocked": 1,
+      "best": [
+        null,
+        null,
+        null
+      ],
+      "challengeBest": [
+        null,
+        null,
+        null
+      ]
+    },
+    "amber": {
+      "unlocked": 3,
+      "best": [
+        null,
+        null,
+        null
+      ],
+      "challengeBest": [
+        10.508333333333377,
+        12.49999999999993,
+        17.374999999999655
+      ]
+    }
+  },
+  "reload": true,
+  "reopened": true,
+  "restartStage3": true,
+  "errors": []
+}

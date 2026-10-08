@@ -1,0 +1,66 @@
+
+> pocketey-japan@0.1.0 build
+> astro build && node scripts/check-portal.mjs
+
+06:53:45 [content] Syncing content
+06:53:45 [content] Synced content
+06:53:45 [types] Generated 31ms
+06:53:45 [build] output: "static"
+06:53:45 [build] mode: "static"
+06:53:45 [build] directory: /workspace/pocketey-portal/dist/
+06:53:45 [build] Collecting build info...
+06:53:45 [build] ✓ Completed in 44ms.
+06:53:45 [build] Building static entrypoints...
+06:53:45 [vite] ✓ built in 641ms
+06:53:45 [build] ✓ Completed in 666ms.
+
+ building client (vite)
+06:53:45 [vite] transforming...
+06:53:46 [vite] ✓ 27 modules transformed.
+06:53:46 [vite] rendering chunks...
+06:53:47 [vite] computing gzip size...
+06:53:47 [vite] dist/_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js     0.05 kB │ gzip:   0.07 kB
+06:53:47 [vite] dist/_astro/locale.B1rKA6B7.js                                              1.48 kB │ gzip:   0.66 kB
+06:53:47 [vite] dist/_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js        3.99 kB │ gzip:   2.00 kB
+06:53:47 [vite] dist/_astro/pulse-drift.astro_astro_type_script_index_0_lang.BFcPjZ5Q.js   15.18 kB │ gzip:   6.87 kB
+06:53:47 [vite] dist/_astro/tilttrail.astro_astro_type_script_index_0_lang.DL6lrwiP.js     15.23 kB │ gzip:   6.76 kB
+06:53:47 [vite] dist/_astro/ActionGame.astro_astro_type_script_index_0_lang.1r2y_Ji5.js    83.19 kB │ gzip:  28.60 kB
+06:53:47 [vite] dist/_astro/three.module.D8t_W072.js                                      637.58 kB │ gzip: 164.06 kB
+06:53:47 [WARN] [vite]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+06:53:47 [vite] ✓ built in 1.21s
+
+ generating static routes
+06:53:47 ▶ src/pages/404.astro
+06:53:47   └─ /404.html (+8ms)
+06:53:47 ▶ src/pages/about/index.astro
+06:53:47   └─ /about/index.html (+2ms)
+06:53:47 ▶ src/pages/contact.astro
+06:53:47   └─ /contact/index.html (+2ms)
+06:53:47 ▶ src/pages/games/amber-step.astro
+06:53:47   └─ /games/amber-step/index.html (+1ms)
+06:53:47 ▶ src/pages/games/index.astro
+06:53:47   └─ /games/index.html (+4ms)
+06:53:47 ▶ src/pages/games/orbit-ribbon.astro
+06:53:47   └─ /games/orbit-ribbon/index.html (+1ms)
+06:53:47 ▶ src/pages/games/pulse-drift.astro
+06:53:47   └─ /games/pulse-drift/index.html (+1ms)
+06:53:47 ▶ src/pages/games/tilttrail.astro
+06:53:47   └─ /games/tilttrail/index.html (+1ms)
+06:53:47 ▶ src/pages/index.astro
+06:53:47   └─ /index.html (+2ms)
+06:53:47 ▶ src/pages/privacy/index.astro
+06:53:47   └─ /privacy/index.html (+1ms)
+06:53:47 ▶ /games/prototypes/tilttrail
+06:53:47   └─ /games/prototypes/tilttrail/index.html (+1ms)
+06:53:47 ▶ /prototypes/pulse-drift
+06:53:47   └─ /prototypes/pulse-drift/index.html (+1ms)
+06:53:47 ✓ Completed in 37ms.
+
+06:53:47 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+06:53:47 [build] 10 page(s) built in 1.98s
+06:53:47 [build] Complete!
+Portal routes and retirement guard passed.

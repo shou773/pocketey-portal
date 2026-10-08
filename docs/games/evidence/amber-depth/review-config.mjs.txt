@@ -1,0 +1,2 @@
+import config from '/workspace/pocketey-portal/playwright.config.ts';
+export default {...config,testDir:'/workspace/pocketey-portal/tests/games',webServer:undefined,outputDir:'/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted',reporter:[['list'],['json',{outputFile:'/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted-report.json'}]],use:{...config.use,baseURL:'http://127.0.0.1:4344'}};

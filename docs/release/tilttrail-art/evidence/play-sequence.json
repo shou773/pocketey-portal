@@ -1,0 +1,290 @@
+{
+  "ordinaryInput": true,
+  "input": "native touch brake, native keyboard left/right",
+  "deliberatelyHeldRightOffRoad": true,
+  "errors": [],
+  "frames": [
+    {
+      "name": "01-braking",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "3.2871",
+          "vx": "0.0000",
+          "time": "1.5000",
+          "speed": "2.1559",
+          "drawCalls": "12",
+          "triangles": "4654"
+        },
+        "brakeHeld": "true",
+        "rightHeld": "false"
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "3.4308",
+          "vx": "0.0000",
+          "time": "1.5667",
+          "speed": "2.1547",
+          "drawCalls": "12",
+          "triangles": "4654"
+        },
+        "brakeHeld": "true",
+        "rightHeld": "false"
+      }
+    },
+    {
+      "name": "02-rolling",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "5.0087",
+          "vx": "0.0000",
+          "time": "2.3000",
+          "speed": "2.1504",
+          "drawCalls": "12",
+          "triangles": "4654"
+        },
+        "brakeHeld": "true",
+        "rightHeld": "false"
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "0.0000",
+          "z": "5.1520",
+          "vx": "0.0000",
+          "time": "2.3667",
+          "speed": "2.1503",
+          "drawCalls": "12",
+          "triangles": "4654"
+        },
+        "brakeHeld": "true",
+        "rightHeld": "false"
+      }
+    },
+    {
+      "name": "02b-turning-braked",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-0.3759",
+          "z": "10.6346",
+          "vx": "-2.4424",
+          "time": "4.9167",
+          "speed": "2.1500",
+          "drawCalls": "12",
+          "triangles": "4654"
+        },
+        "brakeHeld": "true",
+        "rightHeld": "false"
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-0.5228",
+          "z": "10.7780",
+          "vx": "-2.0265",
+          "time": "4.9833",
+          "speed": "2.1500",
+          "drawCalls": "12",
+          "triangles": "4654"
+        },
+        "brakeHeld": "true",
+        "rightHeld": "false"
+      }
+    },
+    {
+      "name": "03-released",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-0.9568",
+          "z": "11.8078",
+          "vx": "-0.7969",
+          "time": "5.3167",
+          "speed": "4.2785",
+          "drawCalls": "11",
+          "triangles": "4606"
+        },
+        "brakeHeld": "false",
+        "rightHeld": "false"
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "playing",
+          "stage": "0",
+          "x": "-1.0444",
+          "z": "12.4214",
+          "vx": "-0.5486",
+          "time": "5.4500",
+          "speed": "4.8459",
+          "drawCalls": "11",
+          "triangles": "4606"
+        },
+        "brakeHeld": "false",
+        "rightHeld": "false"
+      }
+    },
+    {
+      "name": "04-falling",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "falling",
+          "stage": "0",
+          "x": "1.3786",
+          "z": "17.2883",
+          "vx": "4.1949",
+          "time": "6.3250",
+          "speed": "5.7554",
+          "drawCalls": "11",
+          "triangles": "4606"
+        },
+        "brakeHeld": "false",
+        "rightHeld": "false"
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "falling",
+          "stage": "0",
+          "x": "1.5883",
+          "z": "17.5760",
+          "vx": "4.1949",
+          "time": "6.3250",
+          "speed": "5.7554",
+          "drawCalls": "10",
+          "triangles": "4604"
+        },
+        "brakeHeld": "false",
+        "rightHeld": "false"
+      }
+    },
+    {
+      "name": "05-failed",
+      "before": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "failed",
+          "stage": "0",
+          "x": "4.2801",
+          "z": "21.2691",
+          "vx": "4.1949",
+          "time": "6.3250",
+          "speed": "5.7554",
+          "drawCalls": "10",
+          "triangles": "4604"
+        },
+        "brakeHeld": "false",
+        "rightHeld": "false"
+      },
+      "after": {
+        "state": {
+          "audio": "off",
+          "music": "idle",
+          "audioSamples": "0",
+          "audioVoices": "0",
+          "audioMaxVoices": "0",
+          "audioLoops": "0",
+          "audioStarts": "0",
+          "phase": "failed",
+          "stage": "0",
+          "x": "4.2801",
+          "z": "21.2691",
+          "vx": "4.1949",
+          "time": "6.3250",
+          "speed": "5.7554",
+          "drawCalls": "10",
+          "triangles": "4604"
+        },
+        "brakeHeld": "false",
+        "rightHeld": "false"
+      }
+    }
+  ]
+}
