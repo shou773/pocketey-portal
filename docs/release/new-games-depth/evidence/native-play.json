@@ -1,0 +1,158 @@
+[
+  {
+    "name": "native-before-pulse-desktop",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "3",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "mode": "pause",
+      "state": "{\"stage\":2,\"time\":2.8166666666666615,\"x\":0,\"y\":1.8,\"hp\":4,\"status\":\"playing\",\"score\":100,\"enemies\":[{\"id\":19,\"x\":2.0295413051043503,\"y\":10.976666666666667,\"vx\":0.1891058070538489,\"vy\":-1.4000000000000001,\"r\":0.44,\"hp\":3,\"shot\":0.9833333333333333,\"kind\":\"scout\"}],\"bullets\":[],\"beams\":[],\"screen\":{\"x\":640,\"y\":530.9408030975515},\"limits\":[{\"x\":501.25960237542427,\"y\":561.4445246351643},{\"x\":751.1760802157196,\"y\":426.50090882638716}],\"render\":{\"calls\":46,\"triangles\":700}}",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-before-tilt-desktop",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "2",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "phase": "paused",
+      "stage": "2",
+      "x": "0.0000",
+      "z": "5.4684",
+      "vx": "0.0000",
+      "time": "2.8250",
+      "speed": "2.1499",
+      "drawCalls": "10",
+      "triangles": "5188",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-before-pulse-mobile",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "3",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "mode": "play",
+      "state": "{\"stage\":2,\"time\":2.799999999999995,\"x\":0,\"y\":1.8,\"hp\":4,\"status\":\"playing\",\"score\":100,\"enemies\":[],\"bullets\":[],\"beams\":[],\"screen\":{\"x\":195,\"y\":494.45416850655954},\"limits\":[{\"x\":64.99326049927342,\"y\":523.0522646794547},{\"x\":299.1775859575359,\"y\":396.53883260333583}],\"render\":{\"calls\":45,\"triangles\":692}}",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-before-tilt-mobile",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "3",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "phase": "paused",
+      "stage": "2",
+      "x": "0.0000",
+      "z": "5.6297",
+      "vx": "0.0000",
+      "time": "2.9000",
+      "speed": "2.1499",
+      "drawCalls": "8",
+      "triangles": "4536",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-after-pulse-desktop",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "3",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "mode": "play",
+      "state": "{\"stage\":2,\"time\":2.666666666666662,\"x\":0,\"y\":1.8,\"hp\":4,\"status\":\"playing\",\"score\":100,\"enemies\":[],\"bullets\":[],\"beams\":[],\"screen\":{\"x\":640,\"y\":530.9408030975515},\"limits\":[{\"x\":501.25960237542427,\"y\":561.4445246351643},{\"x\":751.1760802157196,\"y\":426.50090882638716}],\"render\":{\"calls\":12,\"triangles\":1292}}",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-after-tilt-desktop",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "2",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "phase": "paused",
+      "stage": "2",
+      "x": "0.0000",
+      "z": "5.6297",
+      "vx": "0.0000",
+      "time": "2.9000",
+      "speed": "2.1499",
+      "drawCalls": "11",
+      "triangles": "5680",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-after-pulse-mobile",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "3",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "mode": "pause",
+      "state": "{\"stage\":2,\"time\":2.8166666666666615,\"x\":0,\"y\":1.8,\"hp\":4,\"status\":\"playing\",\"score\":100,\"enemies\":[{\"id\":19,\"x\":2.0295413051043503,\"y\":10.976666666666667,\"vx\":0.1891058070538489,\"vy\":-1.4000000000000001,\"r\":0.44,\"hp\":3,\"shot\":0.9833333333333333,\"kind\":\"scout\"}],\"bullets\":[],\"beams\":[],\"screen\":{\"x\":195,\"y\":494.45416850655954},\"limits\":[{\"x\":64.99326049927342,\"y\":523.0522646794547},{\"x\":299.1775859575359,\"y\":396.53883260333583}],\"render\":{\"calls\":14,\"triangles\":1312}}",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  },
+  {
+    "name": "native-after-tilt-mobile",
+    "state": {
+      "audio": "running",
+      "music": "ready",
+      "audioSamples": "9",
+      "audioVoices": "0",
+      "audioMaxVoices": "3",
+      "audioLoops": "0",
+      "audioStarts": "1",
+      "phase": "paused",
+      "stage": "2",
+      "x": "0.0000",
+      "z": "5.5759",
+      "vx": "0.0000",
+      "time": "2.8750",
+      "speed": "2.1499",
+      "drawCalls": "9",
+      "triangles": "5028",
+      "musicCodec": "ogg"
+    },
+    "errors": []
+  }
+]

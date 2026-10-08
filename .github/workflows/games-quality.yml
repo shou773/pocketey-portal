@@ -1,7 +1,7 @@
 name: Games quality
 on:
   push:
-    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, main]
+    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, codex/new-games-depth, main]
     paths:
       - 'src/**'
       - 'public/**'
