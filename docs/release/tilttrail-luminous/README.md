@@ -13,7 +13,7 @@ Warm ivory ceramic, pale joints and warm upper/cool lower sides clarify the exis
 
 ## Validation
 
-- Existing 5 ball model tests, `npm run check:games`, production build/portal guard and `git diff --check` pass.
+- Existing 6 ball model tests, `npm run check:games`, production build/portal guard and `git diff --check` pass.
 - Three existing browser tests pass unchanged: ordinary multi-touch clears all three stages and persists best times independently; fall/retry/pause/input/mute/language; touch cancellation/orientation/page return/context loss. See `evidence/functional-report.json` and `mobile-functional-completion.json`. All original performance limits remain enforced.
 - `geometry-check.mjs` compares **every scene mesh's positions, indices, normals, world transform and instance matrix**, camera and model state in all three stages against public main. All hashes and draw counts match. No track, collision, input, UI, save, audio, other game or asset file was changed.
 - Forced rock/observatory/both loading failures remain playing without page errors (`fallback-check.json`). Existing fallback rocks receive the same palette.
