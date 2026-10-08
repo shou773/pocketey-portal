@@ -1,6 +1,6 @@
-export type MixGame='orbit'|'amber'|'pulse'|'tilt';
+export type MixGame='orbit'|'amber'|'pulse'|'tilt'|'alpine';
 export const MASTER_GAIN=.85;
-export const MUSIC_TRIM:Record<MixGame,number>={orbit:1,amber:1.1,pulse:1,tilt:1.5};
+export const MUSIC_TRIM:Record<MixGame,number>={orbit:1,amber:1.1,pulse:1,tilt:1.5,alpine:1.5};
 export const EFFECTS_GAIN=.9;
 // Conservative decoded/oversampled peaks: scores < .5, selected effects < .3.
 // Reserve the maximum score at all volume settings, including during ramps.

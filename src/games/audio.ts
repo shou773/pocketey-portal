@@ -2,7 +2,7 @@ import { LANGUAGE_EVENT, tr } from '../lib/locale';
 import './audio.css';
 import {MASTER_GAIN,effectsLevel,musicLevel} from './audio-mix';
 
-export type AudioGame = 'orbit' | 'amber' | 'pulse' | 'tilt';
+export type AudioGame = 'orbit' | 'amber' | 'pulse' | 'tilt' | 'alpine';
 export type Cue = 'select' | 'start' | 'jump' | 'land' | 'shot' | 'hit' | 'warning' | 'damage' | 'death' | 'clear' | 'brake';
 type Settings = { music: number; sfx: number; musicMuted: boolean; sfxMuted: boolean };
 const KEY = 'pocketey-audio-v1';
@@ -10,7 +10,7 @@ const files = ['click','jump','land','roll','clear','shot','warning','damage','d
 type Sample = typeof files[number];
 // Only the current game's score is fetched, after a user gesture starts play.
 // MP3 covers Safari versions without Vorbis; decode failure tries the other codec.
-const music: Record<AudioGame, string> = {orbit:'orbit',amber:'amber',pulse:'pulse',tilt:'tilt'};
+const music: Record<AudioGame, string> = {orbit:'orbit',amber:'amber',pulse:'pulse',tilt:'tilt',alpine:'tilt'};
 function parse(value: unknown, enabled: boolean): Settings {
   const s = value && typeof value === 'object' ? value as Partial<Settings> : {};
   const volume = (n: unknown, fallback: number) => typeof n === 'number' && Number.isFinite(n) ? Math.max(0,Math.min(1,n)) : fallback;

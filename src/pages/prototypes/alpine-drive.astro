@@ -1,0 +1,27 @@
+---
+import LocaleHead from '../../components/LocaleHead.astro';
+import LanguageSwitch from '../../components/LanguageSwitch.astro';
+import '../../games/prototypes/alpine/style.css';
+---
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="robots" content="noindex,nofollow"/><meta name="theme-color" content="#24383f"/><title>Alpine Drive · Pocketey prototype</title><LocaleHead/><link rel="icon" href="/favicon.svg"/></head>
+<body>
+<main id="alpine">
+  <header class="ad-bar"><a href="/games/">POCKETEY <small>/ LAB</small></a><div><button id="ad-sound" aria-pressed="false">Sound OFF</button><button id="ad-pause" disabled>Pause</button></div></header>
+  <div class="ad-view">
+    <canvas id="ad-canvas" tabindex="0" aria-label="Alpine Drive"></canvas>
+    <div class="ad-hud"><span>01 / 01 <small id="ad-label"></small></span><span id="ad-count"></span></div>
+    <progress id="ad-progress" max="50" value="0"></progress>
+    <div id="ad-cue"><strong id="ad-direction"></strong><span id="ad-timing"></span></div>
+    <p id="ad-feedback" role="status"></p>
+    <div id="ad-overlay"><section class="ad-panel" aria-labelledby="ad-title">
+      <div class="ad-panel-top"><span>INPUT PROTOTYPE</span><LanguageSwitch/></div>
+      <h1 id="ad-title">Alpine Drive</h1><p id="ad-copy"></p><p id="ad-instructions"></p>
+      <div id="ad-actions"></div><p id="ad-save" role="status"></p><p id="ad-art"></p>
+    </section></div>
+  </div>
+  <footer class="ad-controls"><button id="ad-left">←</button><span id="ad-controls-note"></span><button id="ad-right">→</button></footer>
+</main>
+<script>import { boot } from '../../games/prototypes/alpine/app'; boot();</script>
+</body></html>
