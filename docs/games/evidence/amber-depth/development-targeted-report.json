@@ -1,0 +1,261 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/pocketey-portal/node_modules/.bin/playwright",
+      "test",
+      "--config",
+      "/tmp/amber-review.config.mjs",
+      "--grep",
+      "amber: selected 3D|amber: failed GLBs|missing shared colormap"
+    ],
+    "configFile": "/tmp/amber-review.config.mjs",
+    "rootDir": "/workspace/pocketey-portal/tests/games",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/workspace/pocketey-portal/tests/games",
+        "testIgnore": [],
+        "testMatch": [
+          "**/browser.spec.ts"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted-report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "amber: selected 3D art loads, animation and normal controls remain usable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4389,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T06:38:37.123Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-4171e95ed0648bda8440",
+          "file": "browser.spec.ts",
+          "line": 217,
+          "column": 2
+        },
+        {
+          "title": "amber: failed GLBs retain fallback, controls, clear and saves",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 51047,
+                  "error": {
+                    "message": "Error: amber/1 {\"kind\":\"amber\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"play\",\"status\":\"running\",\"x\":\"0.000\",\"y\":\"0.000\",\"z\":\"0.000\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"clear\"\u001b[39m\nReceived: \u001b[31m\"running\"\u001b[39m",
+                    "stack": "Error: amber/1 {\"kind\":\"amber\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"play\",\"status\":\"running\",\"x\":\"0.000\",\"y\":\"0.000\",\"z\":\"0.000\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"clear\"\u001b[39m\nReceived: \u001b[31m\"running\"\u001b[39m\n    at play (/workspace/pocketey-portal/tests/games/input.ts:32:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:276:3",
+                    "location": {
+                      "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                      "column": 133,
+                      "line": 32
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39minput.ts:32\n\n  30 |   await page.waitForTimeout(25);\n  31 |  }\n> 32 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  33 | }\n  34 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                        "column": 133,
+                        "line": 32
+                      },
+                      "message": "Error: amber/1 {\"kind\":\"amber\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"play\",\"status\":\"running\",\"x\":\"0.000\",\"y\":\"0.000\",\"z\":\"0.000\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"clear\"\u001b[39m\nReceived: \u001b[31m\"running\"\u001b[39m\n\n   at input.ts:32\n\n  30 |   await page.waitForTimeout(25);\n  31 |  }\n> 32 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  33 | }\n  34 |\n    at play (/workspace/pocketey-portal/tests/games/input.ts:32:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:276:3"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T06:38:42.134Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted/browser-amber-failed-GLBs--93a5e-ck-controls-clear-and-saves/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted/browser-amber-failed-GLBs--93a5e-ck-controls-clear-and-saves/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                    "column": 133,
+                    "line": 32
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-7f0bf1fa7de1c06caed5",
+          "file": "browser.spec.ts",
+          "line": 271,
+          "column": 2
+        },
+        {
+          "title": "missing shared colormap retains Amber fallback and gameplay",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 52114,
+                  "error": {
+                    "message": "Error: amber/1 {\"kind\":\"amber\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"play\",\"status\":\"running\",\"x\":\"0.000\",\"y\":\"0.000\",\"z\":\"0.000\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"clear\"\u001b[39m\nReceived: \u001b[31m\"running\"\u001b[39m",
+                    "stack": "Error: amber/1 {\"kind\":\"amber\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"play\",\"status\":\"running\",\"x\":\"0.000\",\"y\":\"0.000\",\"z\":\"0.000\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"clear\"\u001b[39m\nReceived: \u001b[31m\"running\"\u001b[39m\n    at play (/workspace/pocketey-portal/tests/games/input.ts:32:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:285:63",
+                    "location": {
+                      "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                      "column": 133,
+                      "line": 32
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39minput.ts:32\n\n  30 |   await page.waitForTimeout(25);\n  31 |  }\n> 32 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  33 | }\n  34 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                        "column": 133,
+                        "line": 32
+                      },
+                      "message": "Error: amber/1 {\"kind\":\"amber\",\"audio\":\"off\",\"music\":\"idle\",\"audioSamples\":\"0\",\"audioVoices\":\"0\",\"audioMaxVoices\":\"0\",\"audioLoops\":\"0\",\"audioStarts\":\"0\",\"mode\":\"play\",\"status\":\"running\",\"x\":\"0.000\",\"y\":\"0.000\",\"z\":\"0.000\",\"grounded\":\"true\",\"jumps\":\"0\",\"geometries\":\"9\"}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"clear\"\u001b[39m\nReceived: \u001b[31m\"running\"\u001b[39m\n\n   at input.ts:32\n\n  30 |   await page.waitForTimeout(25);\n  31 |  }\n> 32 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');\n     |                                                                                                                                     ^\n  33 | }\n  34 |\n    at play (/workspace/pocketey-portal/tests/games/input.ts:32:133)\n    at /workspace/pocketey-portal/tests/games/browser.spec.ts:285:63"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-08T06:39:33.646Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted/browser-missing-shared-col-dd3c1-Amber-fallback-and-gameplay/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/workspace/pocketey-portal/docs/games/evidence/amber-depth/targeted/browser-missing-shared-col-dd3c1-Amber-fallback-and-gameplay/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/workspace/pocketey-portal/tests/games/input.ts",
+                    "column": 133,
+                    "line": 32
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-6bde0211496c718a1c64",
+          "file": "browser.spec.ts",
+          "line": 282,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-08T06:38:36.521Z",
+    "duration": 109911.664,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

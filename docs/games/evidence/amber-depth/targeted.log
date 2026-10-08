@@ -1,0 +1,8 @@
+
+Running 3 tests using 1 worker
+
+  ✓  1 tests/games/browser.spec.ts:217:2 › amber: selected 3D art loads, animation and normal controls remain usable (4.1s)
+  ✓  2 tests/games/browser.spec.ts:271:2 › amber: failed GLBs retain fallback, controls, clear and saves (14.1s)
+  ✓  3 tests/games/browser.spec.ts:282:1 › missing shared colormap retains Amber fallback and gameplay (11.7s)
+
+  3 passed (30.9s)

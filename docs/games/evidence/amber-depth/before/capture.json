@@ -1,0 +1,490 @@
+{
+  "phase": "before",
+  "base": "http://127.0.0.1:4345",
+  "browser": "151.0.7922.173",
+  "method": "Native start and ArrowRight; Space at frame 26. Held rAF at 60Hz, 105 frames. No physics writes. Actual canvas and full mobile page; DPR1.",
+  "results": [
+    {
+      "name": "start",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "idle"
+      },
+      "buffer": [
+        390,
+        690
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-026",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "2.167",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "walk"
+      },
+      "buffer": [
+        390,
+        690
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-038",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "3.167",
+        "y": "1.302",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "jump"
+      },
+      "buffer": [
+        390,
+        690
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-053",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "4.417",
+        "y": "1.691",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "fall"
+      },
+      "buffer": [
+        390,
+        690
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-083",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "6.917",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "walk"
+      },
+      "buffer": [
+        390,
+        690
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "gap",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "8.750",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "walk"
+      },
+      "buffer": [
+        390,
+        690
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "errors": []
+    },
+    {
+      "name": "start",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "0.000",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "idle"
+      },
+      "buffer": [
+        844,
+        341
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-026",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "2.167",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "0",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "walk"
+      },
+      "buffer": [
+        844,
+        341
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-038",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "3.167",
+        "y": "1.302",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "jump"
+      },
+      "buffer": [
+        844,
+        341
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-053",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "4.417",
+        "y": "1.691",
+        "z": "0.000",
+        "grounded": "false",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "fall"
+      },
+      "buffer": [
+        844,
+        341
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "motion-083",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "6.917",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "walk"
+      },
+      "buffer": [
+        844,
+        341
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "name": "gap",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "state": {
+        "kind": "amber",
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "mode": "play",
+        "status": "running",
+        "x": "8.750",
+        "y": "0.000",
+        "z": "0.000",
+        "grounded": "true",
+        "jumps": "1",
+        "geometries": "11"
+      },
+      "art": {
+        "engine": "three.js r186",
+        "art": "ready",
+        "artLoaded": "block-grass-low-long,character-oodi,flowers,rocks,tree",
+        "artAdopted": "true",
+        "artAnimation": "walk"
+      },
+      "buffer": [
+        844,
+        341
+      ],
+      "calls": 11,
+      "triangles": 7034,
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "errors": []
+    }
+  ]
+}

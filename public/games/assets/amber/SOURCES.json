@@ -1,0 +1,13 @@
+{
+  "asset": "stone-arch.glb",
+  "provenance": "Original low-poly sandstone arch authored locally with Blender 4.3.2; no third-party geometry, texture, or image was imported.",
+  "generator": "docs/games/evidence/amber-depth/create-arch.py",
+  "editable_source": "docs/games/evidence/amber-depth/stone-arch.blend",
+  "bytes": 13520,
+  "sha256": "d2df73e93e51a57ef0ae1fb73a6b10aad1798b3071012b64f17449493c50c2da",
+  "meshes": 1,
+  "materials": 1,
+  "triangles": 172,
+  "textures": 0,
+  "compression": "Uncompressed GLB. Draco is not installed; export succeeded without it."
+}
