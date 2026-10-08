@@ -34,7 +34,7 @@
 [7m1[0m import {test,expect,type Page} from '@playwright/test';
 [7m [0m [93m                         ~~~~[0m
 
-Result (73 files): 
+Result (73 files):
 - 0 errors
 - 0 warnings
 - 6 hints
