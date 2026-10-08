@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import type {State} from './model';
 export function createView(canvas:HTMLCanvasElement) {
  const renderer=new THREE.WebGLRenderer({canvas,antialias:false,alpha:false,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor(0x071323);
@@ -106,6 +107,25 @@ export function createView(canvas:HTMLCanvasElement) {
   bodies.forEach((b,i)=>{temp.position.set(b.x,.45,-b.y);temp.updateMatrix();pool.setMatrixAt(i,temp.matrix);});pool.instanceMatrix.needsUpdate=true;return pool;
  }
  const meshes=new Map<string,THREE.Mesh>();let dimensions='';
+ // Two authored Blender meshes share the existing inexpensive diffuse paints.
+ // Keep procedural silhouettes if loading fails; never gate gameplay on art.
+ let disposed=false;canvas.dataset.pulseArt='loading';
+ new GLTFLoader().loadAsync('/games/assets/pulse/pulse-vehicles.glb').then(gltf=>{
+  gltf.scene.updateMatrixWorld(true);const imported:THREE.Mesh[]=[];
+  gltf.scene.traverse(o=>{if(o instanceof THREE.Mesh)imported.push(o);});
+  const replacements=new Map<'ship'|'boss',THREE.BufferGeometry>();
+  try{
+   for(const [kind,name] of [['ship','interceptor'],['boss','manta_boss']] as const){
+    const mesh=imported.find(o=>o.name===name);
+    if(!mesh||!mesh.geometry.getAttribute('color')||!mesh.geometry.getAttribute('normal'))throw Error('Missing vehicle geometry');
+    const geometry=mesh.geometry.clone().applyMatrix4(mesh.matrixWorld);geometry.clearGroups();replacements.set(kind,geometry);
+   }
+   if(disposed){for(const g of replacements.values())g.dispose();return;}
+   for(const [kind,geometry] of replacements){const old=geometries[kind];geometries[kind]=geometry;if(kind==='ship')ship.geometry=geometry;else for(const m of meshes.values())if(m.geometry===old)m.geometry=geometry;old.dispose();}
+   canvas.dataset.pulseArt='ready';
+  }catch{for(const g of replacements.values())g.dispose();if(!disposed)canvas.dataset.pulseArt='fallback';}
+  finally{for(const mesh of imported){mesh.geometry.dispose();for(const material of Array.isArray(mesh.material)?mesh.material:[mesh.material])material.dispose();}}
+ }).catch(()=>{if(!disposed)canvas.dataset.pulseArt='fallback';});
  function sync(key:string,kind:keyof typeof geometries,x:number,y:number,scale=1) {let m=meshes.get(key);if(!m){m=new THREE.Mesh(geometries[kind],materials[kind]);meshes.set(key,m);scene.add(m);}m.visible=true;m.position.set(x,kind==='beam'?0:.45,-y);m.scale.setScalar(scale);return m;}
  function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(dimensions===`${w},${h}`)return;dimensions=`${w},${h}`;renderer.setSize(w,h,false);camera.aspect=w/h; // Keep the entire combat width visible at 320px and in landscape.
  camera.fov=camera.aspect<.65?64:48;camera.updateProjectionMatrix();}
@@ -133,6 +153,6 @@ export function createView(canvas:HTMLCanvasElement) {
  const ray=new THREE.Raycaster(),plane=new THREE.Plane(new THREE.Vector3(0,1,0),-.4),point=new THREE.Vector3();
  function pointer(x:number,y:number){const r=canvas.getBoundingClientRect();ray.setFromCamera(new THREE.Vector2((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1),camera);if(!ray.ray.intersectPlane(plane,point))return null;return {x:point.x,y:-point.z};}
  function project(x:number,y:number){const p=new THREE.Vector3(x,.4,-y).project(camera),r=canvas.getBoundingClientRect();return {x:r.left+(p.x+1)/2*r.width,y:r.top+(1-p.y)/2*r.height};}
- function dispose(){for(const g of Object.values(geometries))g.dispose();for(const m of Object.values(materials))m.dispose();scene.traverse(o=>{if(o instanceof THREE.Mesh){if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose();if(!Array.isArray(o.material))o.material.dispose();}});renderer.dispose();}
+ function dispose(){disposed=true;for(const g of Object.values(geometries))g.dispose();for(const m of Object.values(materials))m.dispose();scene.traverse(o=>{if(o instanceof THREE.Mesh){if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose();if(!Array.isArray(o.material))o.material.dispose();}});renderer.dispose();}
  return {draw,pointer,project,dispose,stats:()=>({calls:renderer.info.render.calls,triangles:renderer.info.render.triangles})};
 }

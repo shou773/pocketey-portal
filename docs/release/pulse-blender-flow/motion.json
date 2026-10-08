@@ -1,0 +1,668 @@
+{
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "input": "native touch left18CSSpx then release120ms",
+  "capture": "Unpaused asynchronous real frames; diagnostics are nearest previous observations",
+  "firstHit": 4.316666666666657,
+  "frames": [
+    {
+      "file": "frame-000.png",
+      "timestamp": 1791461123.961559,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 3.866666666666658,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3660
+        }
+      }
+    },
+    {
+      "file": "frame-001.png",
+      "timestamp": 1791461124.017675,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 199,
+      "nearestDiagnostic": {
+        "time": 3.866666666666658,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3660
+        }
+      }
+    },
+    {
+      "file": "frame-002.png",
+      "timestamp": 1791461124.076562,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.033333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3660
+        }
+      }
+    },
+    {
+      "file": "frame-003.png",
+      "timestamp": 1791461124.114407,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.033333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3660
+        }
+      }
+    },
+    {
+      "file": "frame-004.png",
+      "timestamp": 1791461124.158764,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 203,
+      "nearestDiagnostic": {
+        "time": 4.033333333333324,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3660
+        }
+      }
+    },
+    {
+      "file": "frame-005.png",
+      "timestamp": 1791461124.220876,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 4.149999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3900
+        }
+      }
+    },
+    {
+      "file": "frame-006.png",
+      "timestamp": 1791461124.268195,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 198,
+      "nearestDiagnostic": {
+        "time": 4.149999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3900
+        }
+      }
+    },
+    {
+      "file": "frame-007.png",
+      "timestamp": 1791461124.304567,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.149999999999991,
+        "hp": 4,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3900
+        }
+      }
+    },
+    {
+      "file": "frame-008.png",
+      "timestamp": 1791461124.358654,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      }
+    },
+    {
+      "file": "frame-009.png",
+      "timestamp": 1791461124.394718,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      }
+    },
+    {
+      "file": "frame-010.png",
+      "timestamp": 1791461124.453521,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 199,
+      "nearestDiagnostic": {
+        "time": 4.316666666666657,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      }
+    },
+    {
+      "file": "frame-011.png",
+      "timestamp": 1791461124.502009,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      }
+    },
+    {
+      "file": "frame-012.png",
+      "timestamp": 1791461124.551743,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      }
+    },
+    {
+      "file": "frame-013.png",
+      "timestamp": 1791461124.59284,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.4499999999999895,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 12,
+          "triangles": 2628
+        }
+      }
+    },
+    {
+      "file": "frame-014.png",
+      "timestamp": 1791461124.64885,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.583333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3820
+        }
+      }
+    },
+    {
+      "file": "frame-015.png",
+      "timestamp": 1791461124.690067,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 205,
+      "nearestDiagnostic": {
+        "time": 4.583333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3820
+        }
+      }
+    },
+    {
+      "file": "frame-016.png",
+      "timestamp": 1791461124.744901,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 4.583333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 14,
+          "triangles": 3820
+        }
+      }
+    },
+    {
+      "file": "frame-017.png",
+      "timestamp": 1791461124.788114,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 201,
+      "nearestDiagnostic": {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-018.png",
+      "timestamp": 1791461124.841101,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-019.png",
+      "timestamp": 1791461124.878688,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 4.733333333333322,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-020.png",
+      "timestamp": 1791461124.91348,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 4.866666666666655,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-021.png",
+      "timestamp": 1791461124.963661,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 200,
+      "nearestDiagnostic": {
+        "time": 4.866666666666655,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-022.png",
+      "timestamp": 1791461125.006076,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 4.866666666666655,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-023.png",
+      "timestamp": 1791461125.095962,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 4.866666666666655,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 15,
+          "triangles": 3872
+        }
+      }
+    },
+    {
+      "file": "frame-024.png",
+      "timestamp": 1791461125.15757,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 5.049999999999987,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3884
+        }
+      }
+    },
+    {
+      "file": "frame-025.png",
+      "timestamp": 1791461125.214299,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 5.049999999999987,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3884
+        }
+      }
+    },
+    {
+      "file": "frame-026.png",
+      "timestamp": 1791461125.273102,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 5.2166666666666535,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3804
+        }
+      }
+    },
+    {
+      "file": "frame-027.png",
+      "timestamp": 1791461125.330142,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 200,
+      "nearestDiagnostic": {
+        "time": 5.2166666666666535,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3804
+        }
+      }
+    },
+    {
+      "file": "frame-028.png",
+      "timestamp": 1791461125.392071,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 0,
+      "nearestDiagnostic": {
+        "time": 5.2166666666666535,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3804
+        }
+      }
+    },
+    {
+      "file": "frame-029.png",
+      "timestamp": 1791461125.478772,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 206,
+      "nearestDiagnostic": {
+        "time": 5.416666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3724
+        }
+      }
+    },
+    {
+      "file": "frame-030.png",
+      "timestamp": 1791461125.572834,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 5.416666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3724
+        }
+      }
+    },
+    {
+      "file": "frame-031.png",
+      "timestamp": 1791461125.632316,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 5.416666666666653,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3724
+        }
+      }
+    },
+    {
+      "file": "frame-032.png",
+      "timestamp": 1791461125.721579,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 5.666666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3712
+        }
+      }
+    },
+    {
+      "file": "frame-033.png",
+      "timestamp": 1791461125.786214,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 199,
+      "nearestDiagnostic": {
+        "time": 5.666666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3712
+        }
+      }
+    },
+    {
+      "file": "frame-034.png",
+      "timestamp": 1791461125.897854,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 5.666666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3712
+        }
+      }
+    },
+    {
+      "file": "frame-035.png",
+      "timestamp": 1791461125.946283,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 5.666666666666652,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3712
+        }
+      }
+    },
+    {
+      "file": "frame-036.png",
+      "timestamp": 1791461126.056937,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 201,
+      "nearestDiagnostic": {
+        "time": 5.899999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3724
+        }
+      }
+    },
+    {
+      "file": "frame-037.png",
+      "timestamp": 1791461126.113553,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 197,
+      "nearestDiagnostic": {
+        "time": 5.899999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3724
+        }
+      }
+    },
+    {
+      "file": "frame-038.png",
+      "timestamp": 1791461126.166701,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3804
+        }
+      }
+    },
+    {
+      "file": "frame-039.png",
+      "timestamp": 1791461126.215254,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 207,
+      "nearestDiagnostic": {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3804
+        }
+      }
+    },
+    {
+      "file": "frame-040.png",
+      "timestamp": 1791461126.322121,
+      "coreWhitePixels": 104,
+      "hullBluePixels": 201,
+      "nearestDiagnostic": {
+        "time": 6.099999999999984,
+        "hp": 3,
+        "x": -0.550866069799673,
+        "y": 1.7999999999999963,
+        "render": {
+          "calls": 16,
+          "triangles": 3804
+        }
+      }
+    }
+  ],
+  "errors": []
+}

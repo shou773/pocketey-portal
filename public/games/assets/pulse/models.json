@@ -1,0 +1,43 @@
+{
+  "author": "Original project-authored Blender geometry; no third-party art",
+  "Blender": "4.3.2",
+  "models": [
+    {
+      "name": "interceptor",
+      "triangles": 1168,
+      "vertices": 608,
+      "materials": 1,
+      "boundsBlender": [
+        [
+          -0.6200000047683716,
+          -0.6079999804496765,
+          -0.009999999776482582
+        ],
+        [
+          0.6200000047683716,
+          0.7699999809265137,
+          0.3100000023841858
+        ]
+      ]
+    },
+    {
+      "name": "manta_boss",
+      "triangles": 1192,
+      "vertices": 616,
+      "materials": 1,
+      "boundsBlender": [
+        [
+          -1.1299999952316284,
+          -0.8759999871253967,
+          0.0
+        ],
+        [
+          1.1299999952316284,
+          0.6499999761581421,
+          0.5299999713897705
+        ]
+      ]
+    }
+  ],
+  "bytes": 60220
+}
