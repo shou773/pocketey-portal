@@ -62,3 +62,8 @@ https://github.com/shou773/pocketey-portal/actions/runs/37735995384
 - Pulse all6touch/keyboard clears/save, UI8, idle failure/retry/stage select and performance script success. Touch HP4/4/4, keyboardHP4/2/3, keyboard boss win44.38s. Overall new-games job failure dueTilt; aggregateaudio=success,cross=success,tilt=failure,pulse=success. Overall CI failure, not green.
 
 This CI validates reviewed1805, not the subsequent material/instancing code. New code has typecheck/build/capture and paired performance evidence, but lacks its own full functional CI because it is not a publication candidate yet. Public main remainsa443ec37.
+
+
+## Later measurement correction
+
+See FLATTENING.md. An authorized flat-detail change and its first240frame test exposed a result-state sample and unequal simulation durations. Historical percentages above describe that protocol and are not conclusive exact code-level slowdown percentages. The new fixed5s-window comparison is the current qualified evidence; all original records are retained. No broad geometry search was performed.

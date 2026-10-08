@@ -21,6 +21,7 @@ export function createView(canvas:HTMLCanvasElement) {
   for(let i=0;i<n;i++){const j=(i+1)%n,a=[points[i][0],0,points[i][1]],b=[points[j][0],0,points[j][1]];tri(a,top[i],top[j]);tri(a,top[j],b);}
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));g.computeVertexNormals();return g;
  }
+ function flat(points:[number,number][]) {const g=new THREE.ShapeGeometry(new THREE.Shape(points.map(([x,z])=>new THREE.Vector2(x,-z))));g.rotateX(-Math.PI/2);return g;}
  const box=(x:number,y:number,z:number)=>new THREE.BoxGeometry(x,y,z);
  const cylinder=(r:number,length:number)=>new THREE.CylinderGeometry(r,r,length,8);
  const white=0xe1e8de,blue=0x357597,dark=0x172a38;
@@ -78,7 +79,7 @@ export function createView(canvas:HTMLCanvasElement) {
   {geometry:box(1.35,.22,2.8),color:0x626d69},
   {geometry:box(.06,.025,2.3),color:0x98a58c,position:[-.44,.125,0]},
   {geometry:box(.06,.025,2.3),color:0x98a58c,position:[.44,.125,0]},
-  {geometry:new THREE.TorusGeometry(.38,.025,4,12),color:0xc1b98c,position:[0,.13,.55],rotation:[Math.PI/2,0,0]}
+  {geometry:new THREE.RingGeometry(.355,.405,12),color:0xc1b98c,position:[0,.13,.55],rotation:[-Math.PI/2,0,0]}
  ]);
  const platforms=new THREE.InstancedMesh(platformGeometry,painted,3);scene.add(platforms);
  const facilityGeometry=assemble([
@@ -92,8 +93,9 @@ export function createView(canvas:HTMLCanvasElement) {
  const facilities=new THREE.InstancedMesh(facilityGeometry,painted,3);scene.add(facilities);
  const pipeGeometry=assemble([{geometry:cylinder(.075,2.6),color:0x778981,rotation:[Math.PI/2,0,0]},...[-1,1].map(z=>({geometry:box(.20,.3,.14),color:0x414c4a,position:[0,-.13,z] as [number,number,number]}))]);
  const pipes=new THREE.InstancedMesh(pipeGeometry,painted,5);scene.add(pipes);
- const ripples=new THREE.InstancedMesh(box(.018,.008,1.3),new THREE.MeshBasicMaterial({color:0x285059}),12);scene.add(ripples);
- const shoreGeometry=hull([[-.08,-1.35],[.12,-.75],[.02,-.1],[.18,.6],[-.02,1.3],[-.09,1.27],[.11,.58],[-.05,-.09],[.05,-.73],[-.15,-1.34]],.008);
+ const rippleGeometry=new THREE.PlaneGeometry(.018,1.3);rippleGeometry.rotateX(-Math.PI/2);
+ const ripples=new THREE.InstancedMesh(rippleGeometry,new THREE.MeshBasicMaterial({color:0x285059}),12);scene.add(ripples);
+ const shoreGeometry=flat([[-.08,-1.35],[.12,-.75],[.02,-.1],[.18,.6],[-.02,1.3],[-.09,1.27],[.11,.58],[-.05,-.09],[.05,-.73],[-.15,-1.34]]);
  const shore=new THREE.InstancedMesh(shoreGeometry,new THREE.MeshBasicMaterial({color:0x72979c,transparent:true,opacity:.48,depthWrite:false}),16);scene.add(shore);
  // Identical projectile geometry/materials share two draws; grow without dropping bodies.
  function projectilePool(kind:'bullet'|'shot',capacity=32){const pool=new THREE.InstancedMesh(geometries[kind],materials[kind],capacity);pool.count=0;pool.frustumCulled=false;scene.add(pool);return pool;}
