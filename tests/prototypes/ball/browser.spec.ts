@@ -130,7 +130,28 @@ test('two-finger controls, touch cancellation, orientation and page return relea
   // Brake speed converges smoothly, so test its settled value after releasing
   // steering rather than assuming an instantaneous cap after contact setup.
   await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [await point('brake', 1)] });
-  await page.waitForTimeout(1000); expect((await snapshot(page)).speed).toBeLessThan(2.2);
+  await expect(page.locator('[data-tt-input="brake"]')).toHaveAttribute('aria-pressed', 'true');
+  const brakeStart = await snapshot(page), brakeObservedAt = Date.now();
+  let brakeSettled = false;
+  try {
+    // From maximum speed, convergence below 2.2 needs >1.226 simulation
+    // seconds. Allow HUD/frame sampling margin without changing the limit.
+    await page.waitForFunction(start => {
+      const root = document.querySelector<HTMLElement>('#tilttrail')!;
+      if (root.dataset.phase !== 'playing' || root.querySelector('[data-tt-input="brake"]')!.getAttribute('aria-pressed') !== 'true')
+        throw new Error('Brake hold or active play interrupted before settling');
+      return Number(root.dataset.time) - start >= 1.4;
+    }, brakeStart.time, { polling: 50, timeout: 5000 });
+    brakeSettled = true;
+    expect((await snapshot(page)).speed).toBeLessThan(2.2);
+  } finally {
+    const end = await snapshot(page);
+    await mkdir(evidence, { recursive: true });
+    await writeFile(`${evidence}/brake-settling-${test.info().repeatEachIndex}.json`, JSON.stringify({ start: brakeStart, end,
+      elapsedSimulationSeconds: end.time - brakeStart.time, elapsedWallMilliseconds: Date.now() - brakeObservedAt,
+      requiredSimulationSeconds: 1.4, wallTimeoutMilliseconds: 5000, brakeSettled,
+      brakeHeldAtEnd: await page.locator('[data-tt-input="brake"]').getAttribute('aria-pressed'), speedLimit: 2.2 }, null, 2));
+  }
   await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await page.setViewportSize({ width: 844, height: 390 }); await page.waitForTimeout(150); await expect(page.locator('#tilttrail')).toHaveAttribute('data-phase', 'playing');
   // Simulate the pagehide/pageshow pair of a bfcache return; no state is set.
