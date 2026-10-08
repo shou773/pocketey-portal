@@ -2,8 +2,8 @@ import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { SAVE_KEY, track, length } from '../../../src/games/prototypes/ball/model';
 
-const route = '/games/prototypes/tilttrail/';
-const evidence = 'docs/prototypes/ball/evidence';
+const route = '/games/tilttrail/';
+const evidence = process.env.NEW_GAME_EVIDENCE || 'test-results/ball/evidence';
 async function snapshot(page: Page) {
   return page.locator('#tilttrail').evaluate(el => {
     const d = (el as HTMLElement).dataset;

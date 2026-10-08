@@ -1,7 +1,7 @@
 name: Games quality
 on:
   push:
-    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, main]
+    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, main]
     paths:
       - 'src/**'
       - 'public/**'
@@ -12,6 +12,9 @@ on:
       - 'src/components/ActionGame.astro'
       - 'src/components/Header.astro'
       - 'tests/games/**'
+      - 'tests/prototypes/**'
+      - 'tests/release/**'
+      - 'playwright.release.config.ts'
       - 'package*.json'
       - 'playwright.config.ts'
       - 'playwright.baseline.config.ts'
