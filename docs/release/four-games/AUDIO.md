@@ -50,8 +50,9 @@ technical recorder proof, not a final music mix or auditory quality endorsement.
 Local WebKit/Firefox could not launch in this refreshed environment: WebKit
 reported missing GTK4/Graphene/Harfbuzz ICU/Manette/Hyphen/GLES libraries; Firefox
 reported that its temporary profile folder could not be found. CI installs the
-required browser dependencies and will provide application results. A previous
-checkpoint's new-game CI failed on an ambiguous Tilt Resume locator, now fixed;
-this was a test-selector error, not a gameplay or sound failure. The current
-head must pass the updated tests before acceptance. Tilt's imported 5px backdrop
+required browser dependencies and will provide application results. The first audio checkpoint passed nine Chromium and nine WebKit checks in CI.
+Four Firefox checks failed because its AudioContext remained suspended; the CI
+runner now supplies a PulseAudio null sink for a working audio output clock.
+This must be verified rather than accepted as an assumed environment cause.
+The current head must pass the updated tests before acceptance. Tilt's imported 5px backdrop
 blur was removed to comply with the portal's established compositing budget.

@@ -123,6 +123,14 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npx playwright install --with-deps chromium webkit firefox
+      - name: Provide a real audio clock for Linux browser playback tests
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=pocketey_test_audio
+          pactl set-default-sink pocketey_test_audio
+          pactl info
       - run: npx playwright test --config playwright.release.config.ts
       - run: xvfb-run --auto-servernum env RELEASE_CROSS=1 npx playwright test --config playwright.release.config.ts
       - run: npx playwright test --config tests/prototypes/ball/playwright.config.ts
