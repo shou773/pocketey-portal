@@ -1,0 +1,176 @@
+{
+  "published_sha": "930e1c74392f87b201e2e610faabcd8380faf628",
+  "ci_failure": {
+    "run": 37762158935,
+    "job": 113260952149,
+    "state": {
+      "x": "3.375",
+      "y": "0.211",
+      "jumps": "1",
+      "status": "dead"
+    },
+    "input_latency_measured": false
+  },
+  "experiments": [
+    {
+      "name": "baseline",
+      "injected_first_jump_delay_ms": 0,
+      "first_jump_decision": {
+        "stage": 1,
+        "readStarted": 1791455978303,
+        "readFinished": 1791455978309,
+        "inputFinished": 1791455978351,
+        "x": "2.167",
+        "y": "0.000",
+        "z": "0.000",
+        "names": [
+          "right",
+          "jump"
+        ]
+      },
+      "first_native_jump_event": {
+        "at": 1791455978351,
+        "input": "jump",
+        "x": "2.417",
+        "y": "0.000",
+        "jumps": "0",
+        "status": "running",
+        "simTime": "0.70"
+      },
+      "final_state": {
+        "status": "clear",
+        "x": "52.292",
+        "y": "0.000",
+        "jumps": "9"
+      }
+    },
+    {
+      "name": "delay-200",
+      "injected_first_jump_delay_ms": 200,
+      "first_jump_decision": {
+        "stage": 1,
+        "readStarted": 1791456136574,
+        "readFinished": 1791456136584,
+        "inputFinished": 1791456136810,
+        "x": "2.083",
+        "y": "0.000",
+        "z": "0.000",
+        "names": [
+          "right",
+          "jump"
+        ]
+      },
+      "first_native_jump_event": {
+        "at": 1791456136809,
+        "input": "jump",
+        "x": "3.250",
+        "y": "0.000",
+        "jumps": "0",
+        "status": "running",
+        "simTime": "0.78"
+      },
+      "final_state": {
+        "status": "dead",
+        "x": "3.375",
+        "y": "0.211",
+        "jumps": "1"
+      }
+    },
+    {
+      "name": "delay-250",
+      "injected_first_jump_delay_ms": 250,
+      "first_jump_decision": {
+        "stage": 1,
+        "readStarted": 1791456116171,
+        "readFinished": 1791456116191,
+        "inputFinished": 1791456116563,
+        "x": "2.167",
+        "y": "0.000",
+        "z": "0.000",
+        "names": [
+          "right",
+          "jump"
+        ]
+      },
+      "first_native_jump_event": {
+        "at": 1791456116562,
+        "input": "jump",
+        "x": "3.375",
+        "y": "0.000",
+        "jumps": "0",
+        "status": "dead",
+        "simTime": "0.82"
+      },
+      "final_state": {
+        "status": "dead",
+        "x": "3.375",
+        "y": "0.000",
+        "jumps": "0"
+      }
+    },
+    {
+      "name": "fixed",
+      "injected_first_jump_delay_ms": 0,
+      "first_jump_decision": {
+        "stage": 1,
+        "readStarted": 1791456175332,
+        "readFinished": 1791456175351,
+        "inputFinished": 1791456175708,
+        "x": "2.167",
+        "y": "0.000",
+        "z": "0.000",
+        "names": [
+          "right",
+          "jump"
+        ]
+      },
+      "first_native_jump_event": {
+        "at": 1791456175491,
+        "input": "jump",
+        "x": "2.500",
+        "y": "0.000",
+        "jumps": "0",
+        "status": "running",
+        "simTime": "0.77"
+      },
+      "final_state": {
+        "status": "clear",
+        "x": "52.042",
+        "y": "0.000",
+        "jumps": "9"
+      }
+    },
+    {
+      "name": "fixed-delay-200",
+      "injected_first_jump_delay_ms": 200,
+      "first_jump_decision": {
+        "stage": 1,
+        "readStarted": 1791456206960,
+        "readFinished": 1791456206968,
+        "inputFinished": 1791456207541,
+        "x": "2.083",
+        "y": "0.000",
+        "z": "0.000",
+        "names": [
+          "right",
+          "jump"
+        ]
+      },
+      "first_native_jump_event": {
+        "at": 1791456207306,
+        "input": "jump",
+        "x": "2.417",
+        "y": "0.000",
+        "jumps": "0",
+        "status": "running",
+        "simTime": "1.04"
+      },
+      "final_state": {
+        "status": "clear",
+        "x": "52.042",
+        "y": "0.000",
+        "jumps": "9"
+      }
+    }
+  ]
+}

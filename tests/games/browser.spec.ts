@@ -72,7 +72,11 @@ test('corrupt/blocked storage and scoped confirmed reset',async({page})=>{
  const blocked=await page.context().newPage();await blocked.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new Error('blocked');}});});await blocked.goto('/games/amber-step/');await blocked.locator('#sound').click();await expect(blocked.locator('#save-note')).toContainText('保存を利用できません');await blocked.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await expect(blocked.locator('#game')).toHaveAttribute('data-mode','play');await blocked.close();
 });
 test('touch simultaneous move+jump, touch cancel, layout, renderer performance and site navigation',async({page,browser},info)=>{
- await page.goto('/');await page.locator('.site-header').getByRole('link',{name:'ゲーム',exact:true}).click();await expect(page).toHaveURL(/\/games\//);await page.locator('.amber .play-link').click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
+ await page.goto('/');
+ const gamesLink=page.locator('footer').getByRole('link',{name:'ゲーム一覧',exact:true});
+ await expect(gamesLink).toBeVisible();await gamesLink.click();
+ await expect(page).toHaveURL(/\/games\/\?lang=ja$/);
+ await page.locator('.amber .play-link').click();await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
  const session=await page.context().newCDPSession(page);const right=await page.locator('[data-input=right]').boundingBox(),jump=await page.locator('[data-input=jump]').boundingBox();
  await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:right!.x+20,y:right!.y+20,id:1},{x:jump!.x+20,y:jump!.y+20,id:2}]});
  const touchTime=Number(await page.locator('#timer').textContent());
@@ -84,6 +88,10 @@ test('touch simultaneous move+jump, touch cancel, layout, renderer performance a
  const perf=await page.evaluate(async()=>{const samples:number[]=[];let last=performance.now();await new Promise<void>(resolve=>{function frame(now:number){samples.push(now-last);last=now;if(samples.length<300)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});const sorted=samples.slice(10).sort((a,b)=>a-b);const canvas=document.querySelector('canvas')!;const gl=canvas.getContext('webgl2')!;const extension=gl.getExtension('WEBGL_debug_renderer_info');return{fps:1000/(sorted.reduce((a,b)=>a+b)/sorted.length),p95:sorted[Math.floor(sorted.length*.95)],renderer:extension?gl.getParameter(extension.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),viewport:[innerWidth,innerHeight],userAgent:navigator.userAgent};});
  fs.writeFileSync(info.outputPath('performance.json'),JSON.stringify({browser:browser.version(),...perf},null,2));console.log('PERFORMANCE',perf);expect(perf.fps).toBeGreaterThanOrEqual(45);expect(perf.p95).toBeLessThanOrEqual(40);
  for(const size of [{width:320,height:568},{width:844,height:390},{width:1440,height:900}]){await page.setViewportSize(size);await expect(page.locator('[data-input=jump]')).toBeInViewport();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:info.outputPath(`layout-${size.width}.png`)});}
+ await page.setViewportSize({width:390,height:844});
+ const back=page.locator('.game-bar .wordmark');await expect(back).toBeVisible();await back.click();
+ await expect(page).toHaveURL(/\/games\/\?lang=ja$/);await expect(page.locator('.game-card')).toHaveCount(4);
+ await page.locator('.site-header .brand').click();await expect(page).toHaveURL(/\/\?lang=ja$/);
 });
 
 for(const kind of ['orbit','amber'] as const)test(`${kind}: WebGL context loss freezes play until reload and preserves saved data`,async({page},info)=>{
@@ -283,8 +291,14 @@ for (const kind of ['orbit','amber'] as const) {
   expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);expect(errors).toEqual([]);
  });
 }
-test('missing shared colormap retains Amber fallback and gameplay',async({page})=>{
+test('missing shared colormap retains Amber fallback and gameplay',async({page},info)=>{
  await page.route('**/kenney/**/colormap.png',route=>route.abort('failed'));
  await page.goto('/games/amber-step/');await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
- await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'amber',0,true);
+ await page.evaluate(()=>{
+  const events:unknown[]=[];(window as unknown as {fallbackInputs:unknown[]}).fallbackInputs=events;
+  document.addEventListener('pointerdown',event=>{const input=(event.target as Element).closest<HTMLElement>('[data-input]')?.dataset.input;if(!input)return;const d=document.querySelector<HTMLElement>('#game')!.dataset;events.push({at:Date.now(),input,x:d.x,y:d.y,jumps:d.jumps,status:d.status,simTime:document.querySelector('#timer')?.textContent});},true);
+ });
+ const trace:unknown[]=[];
+ try {await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'amber',0,true,trace,true);}
+ finally {fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(trace,null,2));fs.writeFileSync(info.outputPath('native-input-events.json'),JSON.stringify(await page.evaluate(()=>(window as unknown as {fallbackInputs:unknown[]}).fallbackInputs),null,2));fs.writeFileSync(info.outputPath('final-state.json'),JSON.stringify(await read(page),null,2));}
 });

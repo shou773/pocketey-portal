@@ -1,7 +1,7 @@
 import {expect,type Page} from '@playwright/test';
 import {stages,type Kind} from '../../src/games/model';
 export const read = (page:Page) => page.locator('#game').evaluate(e=>({... (e as HTMLElement).dataset}));
-export async function play(page:Page,kind:Kind,index:number,touch=false,trace?:unknown[]){
+export async function play(page:Page,kind:Kind,index:number,touch=false,trace?:unknown[],settleAmberJumps=false){
  const level=stages[kind][index];const down=new Set<string>();let lastJump=-10;const started=Date.now();
  const session=touch?await page.context().newCDPSession(page):null;
  const points:Record<string,{x:number;y:number;id:number}>={};
@@ -25,7 +25,14 @@ export async function play(page:Page,kind:Kind,index:number,touch=false,trace?:u
   const spike=kind==='amber'&&level.hazards.some(h=>h.x-x<(tile && tile.b-h.x<.9?1.7:2.0)&&h.x-x>0);
   let axis=1;if(kind==='orbit'){const h=level.hazards.find(h=>h.x+h.d/2+.3>x);const target=h&&h.x-x<12?(h.z>=0?-1.85:1.85):0;axis=Math.abs(target-z)<.18?0:Math.sign(target-z);}
   const jump=(gap||spike)&&d.grounded==='true'&&t-lastJump>.3;if(jump)lastJump=t;
-  const names:string[]=[];if(axis)names.push(touch?(axis>0?'right':'left'):(axis>0?'ArrowRight':'ArrowLeft'));if(jump)names.push(touch?'jump':'Space');await input(names);
+  const names:string[]=[];if(axis)names.push(touch?(axis>0?'right':'left'):(axis>0?'ArrowRight':'ArrowLeft'));if(jump)names.push(touch?'jump':'Space');
+  if(settleAmberJumps&&kind==='amber'&&jump){
+   // Release movement while a native jump travels through CDP, then resume
+   // after physics confirms acceptance in the asset-fallback check.
+   await input([]);await input([touch?'jump':'Space']);
+   await expect.poll(async()=>{const state=await read(page);return Number(state.jumps)>Number(d.jumps)&&(!spike||Number(state.y)>=.65);},{timeout:1500}).toBe(true);
+  }
+  await input(names);
   trace?.push({stage:index+1,readStarted,readFinished,inputFinished:Date.now(),x:d.x,y:d.y,z:d.z,names});
   await page.waitForTimeout(25);
  }
