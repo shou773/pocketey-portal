@@ -1,7 +1,7 @@
 // Rendering evidence only. Route correctness is tested independently in model.test.ts.
 import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
-const directory = 'docs/prototypes/conveyor/evidence';
+const directory = 'docs/prototypes/conveyor/evidence/toy-factory';
 await fs.mkdir(directory, { recursive: true });
 const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || '/usr/bin/chromium',
   args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
@@ -18,7 +18,8 @@ try {
     for (let i = 0; i < count; i++) await page.locator(`[data-tile="${id}"]`).tap();
   }
   await page.waitForTimeout(100);
-  await page.screenshot({ path: `${directory}/conveyor-operation-prototype.png`, fullPage: true });
+  await page.screenshot({ path: `${directory}/conveyor-toy-factory.png`, fullPage: true });
+  const selected = await page.locator('#conveyor').evaluate(root => ({drawCalls:Number(root.dataset.drawCalls),triangles:Number(root.dataset.triangles)}));
   const startFrames = Number(await page.locator('#conveyor').getAttribute('data-frames'));
   await page.locator('#cv-play').tap();
   const measurement = await page.evaluate(async () => {
@@ -51,10 +52,10 @@ try {
     sampleMs: Math.round(measurement.intervals.reduce((a,b)=>a+b,0)), measuredDraws: measuredFrames,
     rafIntervalMs: { median: percentile(measurement.intervals,.5), p95: percentile(measurement.intervals,.95), max: Math.max(...measurement.intervals) },
     cpuSubmissionMs: { median: percentile(measurement.submissions,.5), p95: percentile(measurement.submissions,.95) },
-    drawCalls: measurement.drawCalls, triangles: measurement.triangles, idleDraws, errors,
-    designBudget: { drawCalls: 70, triangles: 2000, pixelRatioCap: 1.5, activeFpsCap: 30, shadowMaps: false, postprocessing: false },
+    drawCalls: measurement.drawCalls, triangles: measurement.triangles, selected, idleDraws, errors,
+    designBudget: { drawCalls: 90, triangles: 15000, pixelRatioCap: 1.5, activeFpsCap: 30, shadowMaps: false, postprocessing: false },
   };
   await fs.writeFile(`${directory}/render-smoke.json`, JSON.stringify(summary,null,2)+'\n');
   console.log(JSON.stringify(summary,null,2));
-  if (errors.length || idleDraws > 0 || summary.drawCalls > 70 || summary.triangles > 2000) process.exitCode = 1;
+  if (errors.length || idleDraws > 0 || Math.max(summary.drawCalls,selected.drawCalls) > 90 || Math.max(summary.triangles,selected.triangles) > 15000) process.exitCode = 1;
 } finally { await browser.close(); }

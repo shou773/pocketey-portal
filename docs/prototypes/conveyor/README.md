@@ -1,12 +1,24 @@
-# コンベア便 / Parcel Turn — one-stage interaction prototype
+# コンベア便 / Parcel Turn — one-stage toy factory
 
 This Draft PR adds `/prototypes/conveyor/` on branch `codex/conveyor-toy-factory`, based on `7adf12a`.
 It is an unlinked, `noindex,nofollow` prototype; the existing sitemap filter excludes it.
 No published game, home page, shared audio implementation, package manifest or deployment workflow is edited.
 
-**Art matching is blocked, not complete.** The neutral gray models in these images are independently made interaction placeholders. They are not an implementation of the approved toy-factory reference.
+The toy-factory art implements the **user-approved written production specification**. The parent inspected the selected image, supplied the specification, and will compare these real renders with that image. This receiving environment did not obtain or inspect the reference pixels. The user explicitly authorized this workflow; reference downloading is finished, and the work is no longer waiting on it.
 
-![Playable interaction prototype, 390px](evidence/conveyor-operation-prototype.png)
+![Toy factory with a selected conveyor, 390px](evidence/toy-factory/conveyor-toy-factory.png)
+
+## Toy-factory rendering
+
+- Fixed oblique camera, with the whole rounded tray occupying approximately 84% of the 390px screen width. All eight 44px tap targets remain separate at 320px.
+- Separate cream `#F1DFC1` rounded cell tops on a muted green tray; thin seams retain the grid.
+- Dark `#3F4545` belts, rounded teal `#5F9A8A` rails, shallow cross grooves and a few brass `#DDBD73` end caps. Bends use continuous quarter-circle bands; the white arrows and inlet bars rotate with the real ports.
+- Mint `#94CBBB` input and coral `#ED825E` output machines use extruded arched shells, recessed dark mouths, trays and small lamps. The receiving cavity faces the route. Neither station is a solid box across the parcel path.
+- The beveled parcel has two complete crossing bands. Its bottom is at 0.245 world units; the highest receiving belt is at 0.235. The inner arch clears the top of the box, and the back wall is beyond its final position. The delivered box remains visible on the tray.
+- Warm upper-left light, rough painted surfaces and subtle generated contact shadows; ivory desk, pale mint wall and one broad pipe silhouette. No purchased assets, bloom, shadow maps, plants or shelving.
+- Yellow `#FFC83E` is reserved for the primary Play control and selected tile. The interface identifies exactly one stage.
+
+Rounded rail and machine shapes receive most of the geometry budget. The twelve cream tops are instanced; straight/bend parts are merged by material into two shared blueprints; all repeated shapes and materials are reused. Tiny grooves and wrapping bands use simple boxes instead of spending rounded geometry on subpixel detail. Model rules, coordinates, rotations, the known solution and motion paths are unchanged from `a928587`.
 
 ## Play locally
 
@@ -53,17 +65,17 @@ node tests/prototypes/conveyor/render-smoke.mjs
 - 13 deterministic model/motion tests: known solution reached by ordinary taps, ports, wrong inlets/exits, empty cells, all four boundaries, synthetic cycle, route snapshots, running/paused guards, retry/reset, saves and animation sampling. A valid single-inlet source cannot enter a closed directed loop in the shipped layout; the cycle guard is exercised by a deliberately overlapping-source fixture.
 - 5 Chromium browser scenarios: touch failure → correction → success, selection, reload/save, reset, pause, settings, synthetic blur, mid-run cancellation, idle rendering, Japanese/English, keyboard, isolated audio settings, 320px touch targets, WebGL loss and blocked storage.
 - Existing game model suite: 24 tests. Full Astro check and game TypeScript check pass; Astro reports eight pre-existing hints. Build and existing portal/sitemap guards pass.
-- New CI workflow is scoped to this prototype and performs model, type, build and browser checks. It has no deployment step.
+- New CI workflow is scoped to this prototype and performs model, type, build and browser checks. It has no deployment step. The initial implementation passed run `37808664084`; the toy-factory revision was also checked locally with the same 13 model and 5 browser scenarios.
 
 The first 320px run found overlapping touch targets; a higher fixed oblique camera and 44px targets removed the overlap. Image review also caught a screenshot taken between resize and presentation. Unchanged canvas sizes now avoid clearing the buffer, and the browser captures wait for a presented frame.
 
-See [render-smoke.json](evidence/render-smoke.json) for the separate rendering measurement. This is Chromium/SwiftShader with a 390×844 viewport, **not a phone GPU benchmark**. Draws are capped at 30 fps, pixel ratio at 1.5, with no shadow maps or postprocessing. Editing does not continually redraw. Real iOS/Android frame pacing, Safari and touch feel remain unverified.
+See [render-smoke.json](evidence/toy-factory/render-smoke.json) for the separate rendering measurement, including selected and running geometry counts. This is Chromium/SwiftShader with a 390×844 viewport, **not a phone GPU benchmark**. The active cap is 30 fps, not a claim of sustained performance: the observed software renderer can run below that cap. Pixel ratio is capped at 1.5, with no shadow maps or postprocessing. Editing does not continually redraw. The geometry budget is 15,000 triangles and 90 draw calls, checked independently from rule tests. Real iOS/Android frame pacing, Safari and touch feel remain unverified.
 
-Screenshots: [initial](evidence/interaction-initial.png), [partial real render](evidence/interaction-slice.png), [solved layout with selection](evidence/conveyor-operation-prototype.png), [delivered](evidence/interaction-success.png). These were inspected as actual local pixels, only for geometry, arrows, selection and layout.
+Current screenshots: [initial](evidence/toy-factory/interaction-initial.png), [partial real render](evidence/toy-factory/interaction-slice.png), [solved layout with selection](evidence/toy-factory/conveyor-toy-factory.png), [delivered](evidence/toy-factory/interaction-success.png). These were inspected as actual local pixels for geometry, colors, arrows, selection, box clearance and layout. Direct comparison with the selected reference belongs to the parent review.
 
-The representative `conveyor-operation-prototype.png` was also saved to Library as **`libfile_84fbaf3bf818819189ff8959715ef2ff`** (`file_00000000e31c81f6b15d728b3c068d56`). The local file's Library identity metadata was applied successfully. This image documents the neutral operation prototype; it does not verify correspondence with the reference.
+The representative image uses Library identity **`libfile_84fbaf3bf818819189ff8959715ef2ff`**, updated from the gray interaction prototype to `conveyor-toy-factory.png` while preserving version history. The first toy-factory render was shared early as version 1; the verified representative is version 2. The gray screenshots in the parent evidence directory remain historical evidence for the initial interaction study.
 
-## Reference handoff blocker
+## Reference handoff history and revised workflow
 
 The receiving environment read the current Library skill and `references/materialization.md`, used `prepare_materialize` with its own explicit destination, and invoked the current official transfer helper unchanged. TLS verification was never disabled. No alternate transfer route was attempted.
 
@@ -72,6 +84,6 @@ The receiving environment read the current Library skill and `references/materia
 | `libfile_d37411920e6081918e09806b8da3148e` — `A-toy-factory.png` | `sdmntprwestus2.oaiusercontent.com` | Preparation succeeded; one official download failed with `library file transfer failed: download failed`. |
 | `libfile_66879d4646248191b43432074381a9b1` — `ChatGPT 画像 2026年10月9日 01_09_18.png` | `sdmntprbrazilsouth.oaiusercontent.com` | Preparation succeeded; one official download failed with the same message. |
 
-Neither attempt exposed an HTTP status code or response body, so **403 is not asserted**. Neither produced a readable local image. The second attempt was for a newly supplied user file, not a retry of the first transfer. There were no further attempts or permission changes. Signed URLs and tokens are not retained here.
+Neither initial attempt exposed an HTTP status code or response body, so **403 is not asserted**. Neither produced a readable local image. The second attempt was for a newly supplied user file. Later, after each of two user-confirmed allowlist changes, the user authorized one fresh check; both still failed at the official download step from `sdmntprbrazilsouth.oaiusercontent.com` with the same generic error. The worker made no permission changes, TLS changes or alternate-route transfers. Signed URLs and tokens are not retained here.
 
-The required cream rounded board, teal belts, coral/mint rounded machines, warm soft light and reference proportions remain unimplemented. Once this receiving environment can inspect the approved pixels, start with one straight/bend/station render, review it, and only then extend the art to the full board. The draft must not be promoted as art-complete in its current state. Nothing has been published or merged to main.
+The user then explicitly changed the workflow: the parent inspected the image, translated it into production specifications, and authorized the worker to implement that text without claiming image access. The first toy-factory render was inspected and shared before the final verification, then simplified from approximately 20,500 to under 15,000 triangles. The parent can now compare the returned screens against the image and request visual adjustments. Nothing has been published or merged to main, and no dependency updates were made.

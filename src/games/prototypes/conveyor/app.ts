@@ -57,9 +57,9 @@ export function boot() {
     root.dataset.result = phase === 'failed' || phase === 'success' ? state.route?.outcome ?? '' : '';
     root.dataset.selected = state.selected ?? ''; root.dataset.webgl = String(!!view);
     get('title').textContent = tr('コンベア便', 'Parcel Turn');
-    get('eyebrow').textContent = tr('01 / 01 · 操作プロトタイプ', '01 / 01 · INTERACTION STUDY');
+    get('eyebrow').textContent = tr('01 / 01 · おもちゃ工場', '01 / 01 · TOY FACTORY');
     get('intro').textContent = tr('タップで90°回転。白い矢印をつないで、箱を出荷口へ。', 'Tap to turn 90°. Connect the white arrows and send your parcel home.');
-    get('art-note').textContent = tr('仮形状 · 見た目は調整前', 'PLACEHOLDER GEOMETRY');
+    get('art-note').textContent = tr('ひとつずつ、届けよう。', 'ONE LITTLE DELIVERY');
     get('in').textContent = tr('入口', 'IN'); get('out').textContent = tr('出荷', 'OUT');
     get('board').setAttribute('aria-label', tr('コンベアのパズル盤面', 'Conveyor puzzle board'));
     get('tiles').setAttribute('aria-label', tr('タップでコンベアを時計回りに90度回転', 'Tap to rotate a conveyor 90 degrees clockwise'));
@@ -123,7 +123,7 @@ export function boot() {
     view.resize();
     tileButtons.forEach((button, index) => { const p = view!.project(STAGE.tiles[index]); button.style.left = `${p.x}px`; button.style.top = `${p.y}px`; });
     for (const [id, cell] of [['in', STAGE.source], ['out', STAGE.exit]] as const) {
-      const p = view.project(cell, .51); get(id).style.left = `${p.x}px`; get(id).style.top = `${p.y}px`;
+      const p = view.project({ ...cell, x: cell.x + (id === 'in' ? -.24 : .24) / 1.08 }, .91); get(id).style.left = `${p.x}px`; get(id).style.top = `${p.y}px`;
     }
     dirty = true; root.dataset.renderPending = 'true';
   }
