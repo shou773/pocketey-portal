@@ -1,7 +1,7 @@
 {
   "browser": "151.0.7922.173",
-  "base": "http://127.0.0.1:4345",
-  "source": "956d05ca2f4867b3c35c726a1941a713e2c52d2c",
+  "base": "http://127.0.0.1:4344",
+  "source": "47537b4b7726fcb4821cf31f7f8f5ecd25b55a5e",
   "method": "Real createView / draw WebGL renderer, fixed fixture states, original camera and canvas dimensions. No Blender, postprocessing, reference image or gameplay completion claim.",
   "reports": [
     {
@@ -30,7 +30,7 @@
       },
       "stats": {
         "calls": 8,
-        "triangles": 6766,
+        "triangles": 5696,
         "geometries": 8
       },
       "framebuffer": [
@@ -70,7 +70,7 @@
       },
       "stats": {
         "calls": 7,
-        "triangles": 6746,
+        "triangles": 5676,
         "geometries": 7
       },
       "framebuffer": [
@@ -110,7 +110,7 @@
       },
       "stats": {
         "calls": 8,
-        "triangles": 8206,
+        "triangles": 6552,
         "geometries": 8
       },
       "framebuffer": [
@@ -150,7 +150,7 @@
       },
       "stats": {
         "calls": 8,
-        "triangles": 6766,
+        "triangles": 5696,
         "geometries": 8
       },
       "framebuffer": [
@@ -190,7 +190,7 @@
       },
       "stats": {
         "calls": 7,
-        "triangles": 6746,
+        "triangles": 5676,
         "geometries": 7
       },
       "framebuffer": [
@@ -230,7 +230,7 @@
       },
       "stats": {
         "calls": 8,
-        "triangles": 8206,
+        "triangles": 6552,
         "geometries": 8
       },
       "framebuffer": [

@@ -41,7 +41,7 @@
   },
   "src/games/orbit-art.ts": {
     "unchanged": false,
-    "candidateSHA256": "9bb4f844fbf8b14f7f622477e7139e184fc4c98c18f83de1c49c8b5124a10bc6",
+    "candidateSHA256": "d836ca93c7a01df64a919db5af1bfb2f8dd92f490a66932b6007cf04c1d2c505",
     "baselineSHA256": "9c21e43f1d045d4635d7bc7b2548dd982f4f3256d632aebfb1655a579436f42d"
   },
   "src/games/render.ts": {
