@@ -1,5 +1,7 @@
 # Amber approved visual revision — integration QA
 
+[Subsequent approved touch-test synchronization](../touch-synchronization/README.md) records the limited CI-failure diagnosis and bounded game-clock wait. It supersedes this checkpoint's base and final-test status; its rebase includes Pulse PR16 without changing the approved Amber art.
+
 The parent approved the two-point visual revision at `2bde0bcb31d01b90d2bcccb23769703004f20793`. It was rebased cleanly onto main `8714b3f7724df370326a45a615ca98e21f5607da` (portal PR12 and Pulse PR11 included), producing runtime commit `49c9240d97115c727ea345c7b1de5931d2d59a6b`. The renderer, Amber scenery and Amber asset bytes are identical before/after rebase. This directory adds evidence only. Orbit's separate, unmerged revision is not imported. Merge and publication remain the parent's responsibility.
 
 `model.ts`, `app.ts`, `art.ts`, audio, shared UI, dependencies and workflows have no candidate diff against this main. No gameplay tuning accompanies the approved art.
