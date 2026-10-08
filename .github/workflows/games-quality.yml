@@ -21,6 +21,8 @@ on:
       - 'playwright.cross.config.ts'
       - 'scripts/games-performance.mjs'
       - '.github/workflows/games-quality.yml'
+      - 'docs/release/new-games-depth/**'
+      - 'scripts/capture-new-game-depth.mjs'
       - 'docs/games/ART-REFRESH.md'
       - 'docs/games/evidence/art-refresh/**'
       - 'docs/games/DIFFICULTY-REFRESH.md'

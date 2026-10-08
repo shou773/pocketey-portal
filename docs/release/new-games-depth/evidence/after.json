@@ -89,11 +89,11 @@
       "calls": 16,
       "triangles": 1468
     },
-    "width": 1280,
-    "height": 650,
+    "width": 578,
+    "height": 556,
     "css": {
-      "width": 1280,
-      "height": 650
+      "width": 578,
+      "height": 556
     }
   },
   {
@@ -114,11 +114,11 @@
       "calls": 11,
       "triangles": 5680
     },
-    "width": 633,
-    "height": 321,
+    "width": 590,
+    "height": 345,
     "css": {
       "width": 1280,
-      "height": 650
+      "height": 750
     }
   },
   {
@@ -211,11 +211,11 @@
       "calls": 16,
       "triangles": 1468
     },
-    "width": 390,
-    "height": 694,
+    "width": 364,
+    "height": 521,
     "css": {
-      "width": 390,
-      "height": 694
+      "width": 364,
+      "height": 521
     }
   },
   {

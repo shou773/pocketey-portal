@@ -4,8 +4,8 @@ const phase=process.argv[2];const out=process.env.DEPTH_EVIDENCE || 'docs/releas
 const browser=await chromium.launch({executablePath:'/usr/bin/chromium',args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const reports=[];
 for(const mobile of [false,true])for(const game of ['pulse','tilt']){
- const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1280,height:900},hasTouch:mobile,isMobile:mobile,deviceScaleFactor:1});const page=await context.newPage();await page.goto(process.env.DEPTH_BASE_URL || 'http://127.0.0.1:4332/');
- await page.setContent(`<canvas id="capture" style="width:${mobile?390:1280}px;height:${mobile?694:650}px;display:block"></canvas><style>body{margin:0}</style>`);
+ const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1280,height:900},hasTouch:mobile,isMobile:mobile,deviceScaleFactor:1});const base=process.env.DEPTH_BASE_URL || 'http://127.0.0.1:4332/';const sizing=await context.newPage();await sizing.goto(base+'games/'+(game==='pulse'?'pulse-drift':'tilttrail')+'/?lang=en');await sizing.locator('canvas').waitFor();const size=await sizing.locator('canvas').evaluate(c=>({width:c.clientWidth,height:c.clientHeight}));await sizing.close();const page=await context.newPage();await page.goto(base);
+ await page.setContent(`<canvas id="capture" style="width:${size.width}px;height:${size.height}px;display:block"></canvas><style>body{margin:0}</style>`);
  const result=await page.evaluate(async({game,phase})=>{
   const canvas=document.querySelector('canvas');let state,view;
   if(game==='pulse'){const m=await import('/src/games/prototypes/shooter/model.ts');const v=await import('/src/games/prototypes/shooter/view.ts');state=m.createState(2);for(let i=0;i<9*60;i++)m.step(state,m.STEP,{x:Math.sin(i/180)*2,y:1.8});view=v.createView(canvas);}
