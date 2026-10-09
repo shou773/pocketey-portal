@@ -74,7 +74,11 @@ test('every board keeps 44px separate touch targets at 320px and landscape, with
       for(const r of boxes){expect(r.w).toBeGreaterThanOrEqual(44);expect(r.h).toBeGreaterThanOrEqual(44);expect(r.x).toBeGreaterThanOrEqual(0);expect(r.x+r.w).toBeLessThanOrEqual(viewport.width);}
       for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++){const a=boxes[i],b=boxes[j];expect(Math.min(a.x+a.w,b.x+b.w)<=Math.max(a.x,b.x)||Math.min(a.y+a.h,b.y+b.h)<=Math.max(a.y,b.y)).toBeTruthy();}
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-      await page.screenshot({path:`test-results/conveyor/campaign-${id}-${viewport.width}.png`,fullPage:true});
+      if(viewport.width>viewport.height){
+        const board=await page.locator('#cv-board').boundingBox();expect(board!.height).toBeLessThanOrEqual(viewport.height);
+        expect(board!.y).toBeGreaterThanOrEqual(0);expect(board!.y+board!.height).toBeLessThanOrEqual(viewport.height);
+      }
+      await page.screenshot({path:`test-results/conveyor/campaign-${id}-${viewport.width}.png`,fullPage:viewport.width<viewport.height});
     }
   }
   await page.locator('[data-language="en"]').tap();await expect(page.locator('#cv-intro')).toContainText('starts from above');
@@ -100,5 +104,5 @@ test('Next restores focus and the new board at 320x568 instead of leaving the pl
   await page.locator('#cv-play').tap();await expect(page.locator('#conveyor')).toHaveAttribute('data-phase','success');
   await page.locator('#cv-next').tap();await expect(page.locator('button[data-mission="factory-loop"]')).toBeFocused();
   await budget(page);const board=await page.locator('#cv-board').boundingBox();expect(board!.y).toBeGreaterThanOrEqual(0);expect(board!.y+board!.height).toBeLessThanOrEqual(568);
-  await page.screenshot({path:'test-results/conveyor/campaign-next-320x568.png',fullPage:true});
+  await page.screenshot({path:'test-results/conveyor/campaign-next-320x568.png',fullPage:false});
 });

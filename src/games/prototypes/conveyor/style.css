@@ -17,3 +17,5 @@
 
 
 .cv-missions{display:flex;gap:8px;margin:16px 0 0}.cv-missions button{flex:1;min-height:44px;border:1px solid #b7cabc;border-radius:12px;background:#fffaf0;font-size:13px;font-weight:750;letter-spacing:.06em}.cv-missions button[aria-pressed=true]{background:#36574a;color:#fff;border-color:#36574a}.cv-missions button:disabled{opacity:.55}.cv-target{font-size:12px;font-weight:750;color:#775a14;margin:8px 0 0}.cv-target[data-earned=true]{color:#326349}.cv-actions .cv-next{grid-column:1/-1;background:#ffc83e;border-color:#efb72c;color:#3d462a;box-shadow:0 4px 0 #dba938}#conveyor[data-phase=success] .cv-actions .cv-primary{background:#fff;border-color:#c6d3c2;box-shadow:none}.cv-intro{min-height:3.5em}.cv-stage-tag{top:10px}
+
+@media(orientation:landscape) and (max-height:500px){.cv-board{height:clamp(230px,64svh,270px)}.cv-intro{min-height:0;font-size:12px;line-height:1.35;margin:4px 0}.cv-missions{margin-top:10px}.cv-title{margin-top:12px}}
