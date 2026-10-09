@@ -42,3 +42,15 @@ Official references considered for short-session learning, authored progression,
 - [Subway Surfers](https://subwaysurfers.com/)
 
 These inform quality questions, not a claim that this project matches their production scope. Do not copy their artwork, courses, branding or code.
+
+## Optional Orbit collection increment
+
+The three original courses keep their speed, platforms, hazards, jumps and clear conditions. Each gains three optional gold signals on outer lines. A direct safe route can finish with zero; a wider precision route can collect all three. This is a small replay objective, not an economy or a claim of deep branching progression.
+
+Acceptance:
+- Both 0/3 and 3/3 completed routes are independently feasible on every original course; ordinary keyboard/touch tests must prove them without state writes.
+- Collection bests are awarded only when the run clears, never on a failed/interrupted run. Retry starts empty; lower scores cannot overwrite a better completed score.
+- Stable course IDs use a separate versioned key. Existing stage unlocks, current/legacy clear times and Amber records retain their semantics. Unknown future signal versions stay read-only, including the explicit two-game reset.
+- The optional objective is readable in JA/EN and accessible from the stage cards, play HUD and result. Timer text is secondary. A single batched original mesh adds at most one draw and24 triangles; no new animation loop, shader effect or asset download.
+- Amber has no live signal mesh/HUD and never accesses signal storage during normal play; the existing explicit reset of both games includes signal records and says so.
+- The accepted Conveyor and Tilt production sources stay frozen. Before/after rendered scenes, shared-Amber regressions, unchanged performance thresholds and a source-marked reusable dist accompany review.

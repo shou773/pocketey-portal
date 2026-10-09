@@ -6,3 +6,9 @@
 @media(max-width:600px){.control-note{display:none}}
 .game-bar>div{flex-shrink:0}.game-bar button,.controls .jump{white-space:nowrap}#panel-title:focus{outline:none}
 @media(max-width:380px){.wordmark span{display:none}.controls .jump{font-size:11px;letter-spacing:.08em}.jump span{font-size:22px;margin-left:8px}}
+
+
+/* Optional Orbit objective stays in the HUD, separate from danger and controls. */
+.orbit .signal-hud{display:block;margin-top:8px;color:#ffe298;font-size:12px;font-weight:700;letter-spacing:.03em;font-variant-numeric:tabular-nums}.orbit .stages small{color:#ffe298}
+
+.orbit .time #timer{font-size:16px}
