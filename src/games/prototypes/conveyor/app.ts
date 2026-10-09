@@ -165,7 +165,11 @@ export function boot() {
     tileButtons.forEach((button, index) => { const p = view!.project(mission.tiles[index]); button.style.left = `${p.x}px`; button.style.top = `${p.y}px`; });
     for (const [id, cell] of [['in', mission.source], ['out', mission.exit]] as const) {
       const direction = id === 'in' ? mission.source.output : mission.exit.input, offset = STEP[opposite(direction)];
-      const p = view.project({ x: cell.x + offset.x * .24 / 1.08, z: cell.z + offset.z * .24 / 1.08 }, .91); get(id).style.left = `${p.x}px`; get(id).style.top = `${p.y}px`;
+      // Keep the north-facing receiver's badge on its painted rear panel,
+      // clear of the receiving tray and the delivered parcel above it.
+      const lowerFace = id === 'out' && direction === 0, distance = lowerFace ? .425 : .24;
+      const p = view.project({ x: cell.x + offset.x * distance / 1.08, z: cell.z + offset.z * distance / 1.08 }, lowerFace ? .405 : .91);
+      get(id).style.left = `${p.x}px`; get(id).style.top = `${p.y}px`;
     }
     dirty = true; root.dataset.renderPending = 'true';
   }
