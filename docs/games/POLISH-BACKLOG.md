@@ -62,3 +62,13 @@ Acceptance:
 - Acceptance: all three ordinary touch/keyboard routes at0%/100%, progressive unlock/Next,320×568 and844×390 JA/EN controls, failure/retry/pause/settings/context loss, all-course footprint/scenery/cue projection and <20k whole-scene triangles. Exact-head types/build/unit and native evidence required.
 - Capture before/after original course under fixed viewport/pointer/framebuffer/sound conditions and report all frame intervals. Historical Alpine native test was functional, explicitly not an FPS gate; timing diagnostics must not be presented as a previously enforced performance pass.
 - Existing art/terrain, music and input binding are reused. Course selection rebuilds/disposes only the changed scene; retry retains it. No additional decorative meshes or physics changes.
+
+## Reviewed preview ledger
+- Conveyor 3-board campaign:29424ba, exact2/7/6 targets and saved layouts.
+- Tilt 5-course progression:190772d; original3 preserved. Known software45FPS exceptions remain.
+- Orbit optional 3-signal goals:0740cb3; clear-only records, original geometry/physics unchanged. Known desktop performance failures remain.
+- Alpine 3-course timing challenge:a3c3fc6; 119 units and 12 ordinary 0%/100% keyboard/touch routes. Same-course software timing remains poor (two matched pairs: mobile28.54→26.64 and27.48→25.65; desktop22.67→21.24 and21.88→21.39FPS). Same original geometry 47 draws / 8274 visible triangles; course 3 max 67 / 10062. This is functional/visual preview acceptance, not a performance pass or physical-phone latency claim.
+
+## Amber guidance increment
+Preserve all three existing stage objects, collisions, movement, jump buffering, camera, art, save semantics and Orbit signals. Describe only observed spike/fall causes, with an edge-spike instruction for the actual three spike+gap combinations. Unknown terminal causes get neutral help. A dismissible first-spike lesson teaches stopping to line up and simultaneous movement+jump; it survives waiting, disappears only after a grounded crossing or dismissal, and is hidden on pause/results/recovery. No new storage, timing meter, collectible or animation.
+Acceptance: all 19 actual spike contact is classified correctly, the three edge-spike cases use their adjacent gap, falls do not receive an invented early/late diagnosis, first-use waiting and grounded crossing are tested, JA/EN cue and 44px dismiss control remain readable without covering controls, and shared Orbit collection/reset/lifecycle regressions remain covered. Use exact-head build/native evidence and retain existing 45 FPS / 40 ms gates without silently skipping shared-module checks.

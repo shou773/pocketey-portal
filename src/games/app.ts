@@ -1,6 +1,7 @@
 import {createGameAudio} from './audio';
 import { cleanSave, createState, DT, SAVE_KEY, stages, step, type Kind } from './model';
 import { createView } from './render';
+import { amberFailure, crossedFirstSpike, showAmberCoach } from './amber-guidance';
 import { SIGNAL_SAVE_KEY, createSignalRun, collectSignals, signalCount, recordSignalClear, parseSignalProgress, serializeSignalProgress } from './signals';
 import {installLocale,LANGUAGE_EVENT,tr} from '../lib/locale';
 import {stageName as localizedStageName,stageHint} from './copy';
@@ -45,6 +46,9 @@ export function boot() {
   }
   function note() { $('save-note').textContent = storageOkay ? tr('記録はこのブラウザに保存されます。', 'Progress is saved in this browser.') : mode === 'recovery' ? tr('保存を利用できません。再読み込みすると未保存の記録は失われます。', 'Storage is unavailable. Reloading loses unsaved progress.') : tr('保存を利用できません。この画面では続けて遊べます。', 'Storage is unavailable. You can keep playing here.'); const oldBest=save[kind].best[selected]; if(storageOkay && oldBest) $('save-note').textContent += tr(` 旧コースBEST ${oldBest.toFixed(2)}秒は別保存。`, ` Previous course BEST ${oldBest.toFixed(2)}s is kept separately.`); if (kind === 'orbit' && !signalStorageOkay) $('save-note').textContent += tr(' 通信片の記録は保存できません。この画面では遊べます。', ' Signal records cannot be saved. You can still play here.'); }
   let selected = 0, state = createState(kind, 0), mode: 'menu' | 'play' | 'pause' | 'result' | 'reset' | 'recovery' = 'menu';
+  const coach=kind==='amber'?$('amber-coach'):null;
+  let coachDismissed=kind==='amber'&&(save.amber.unlocked>1||save.amber.best[0]!==null||save.amber.challengeBest[0]!==null);
+  let coachWasVisible=false;
   let view: ReturnType<typeof createView>;
   try { view = createView($<HTMLCanvasElement>('scene'), kind); } catch { function unavailable(){ $('panel-title').textContent = tr('3D画面を起動できません', '3D could not start'); $('panel-copy').textContent = tr('WebGLに対応したブラウザで開き直してください。', 'Reopen this game in a browser that supports WebGL 2.'); $('reset').hidden = true; $<HTMLButtonElement>('sound').disabled = true;document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b=>{b.disabled=true;}); }unavailable();window.addEventListener(LANGUAGE_EVENT,unavailable);return; }
   const audio=createGameAudio(kind,save.sound,root,enabled=>{save.sound=enabled;persist();soundLabel();});
@@ -60,6 +64,7 @@ export function boot() {
     stages[kind].forEach((stage, i) => { const b = document.createElement('button'); b.disabled = i >= save[kind].unlocked; b.setAttribute('aria-label', tr(`ステージ ${i + 1} ${stage.name}`,`Stage ${i + 1} ${localizedStageName(kind,i)}`)); b.setAttribute('aria-pressed', String(i === selected)); const n = document.createElement('b'); n.textContent = `0${i + 1}`; const label = document.createElement('small'); label.textContent = b.disabled ? tr('ロック','LOCKED') : kind === 'orbit' ? tr(`通信片 ${signalProgress.best[i] ?? '—'} / 3`, `SIGNALS ${signalProgress.best[i] ?? '—'} / 3`) : save[kind].challengeBest[i] ? `${save[kind].challengeBest[i]!.toFixed(2)}s` : tr('挑戦可能','READY'); if (kind === 'orbit') b.setAttribute('aria-label', `${b.getAttribute('aria-label')} · ${b.disabled ? label.textContent : signalProgress.best[i] === null ? tr('通信片の記録なし', 'No completed signal record') : label.textContent}`); const name = document.createElement('span'); name.className = 'stage-name'; name.textContent = localizedStageName(kind,i); b.append(icon(b.disabled ? 'lock-keyhole' : save[kind].challengeBest[i] ? 'check' : 'flag', 'stage-symbol'), n, name, label); b.onclick = () => { selected = i; state = createState(kind, i); signalRun = createSignalRun(i); view.load(i); menu();audio.cue('select'); }; $('stages').append(b); });
   }
   function panel(heading: string, copy: string) {
+    if(coach)coach.hidden=true;
     clearInput(); $('overlay').dataset.screen = mode; $('overlay').dataset.result = state.status; $('panel-icon').style.setProperty('--icon', `url('/games/assets/lucide/${mode === 'result' ? state.status === 'clear' ? 'trophy' : 'rotate-ccw' : mode === 'pause' ? 'sparkles' : kind === 'orbit' ? 'orbit' : 'gem'}.svg')`); $('eyebrow').textContent = mode === 'result' && state.status === 'clear' ? `STAGE 0${selected + 1} COMPLETE` : kind === 'orbit' ? 'POCKETEY / COSMIC RUN' : 'POCKETEY / WARM ADVENTURE'; $('overlay').hidden = false; $('overlay').scrollTop = 0; $('panel-title').textContent = heading; $('panel-copy').textContent = copy; $('actions').replaceChildren(); $('stages').hidden = true; $('instructions').hidden = true; $('reset').hidden = true; $<HTMLButtonElement>('pause').disabled = mode !== 'pause'; $('hint').textContent = ''; note();
   }
   function menu() {
@@ -81,10 +86,30 @@ export function boot() {
       panel(selected === 2 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.challengeBest[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.challengeBest[selected]!.toFixed(2)}s`));
       if (kind === 'orbit') $('panel-copy').textContent = tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 · 通信片 ${signalCount(signalRun)} / 3（ベスト ${signalProgress.best[selected]} / 3）`, `${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s · SIGNALS ${signalCount(signalRun)} / 3 (BEST ${signalProgress.best[selected]} / 3)`);
       if (announce) audio.cue('clear'); if (selected < 2) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
-    } else { panel(tr('もう一度、いこう。', 'One more try.'), tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) audio.cue('death'); button(tr('すぐにリトライ', 'Retry now'), start, true); }
+    } else { panel(tr('もう一度、いこう。', 'One more try.'), kind==='amber'?amberRetryCopy():tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) audio.cue('death'); button(tr('すぐにリトライ', 'Retry now'), start, true); }
     if (kind === 'orbit' && state.status === 'dead' && signalCount(signalRun) > 0) $('panel-copy').textContent += tr(' 通信片の記録はゴールしたときだけ残ります。', ' Signal records only count when you reach the finish.');
     if (state.status === 'clear' && selected < 2) button(tr('もう一度', 'Play again'), start);
     button(tr('ステージ選択', 'Choose a stage'), menu);
+  }
+  function amberRetryCopy() {
+    const reason=amberFailure(state);
+    if(reason===null)return tr('着地先とトゲを確かめて、もう一度。手前で止まって準備できます。', 'Check the landing and spikes, then try again. You can stop to line up.');
+    if(reason==='fall')return tr('足場から落ちました。着地先を見て、ジャンプ中も移動を続けよう。手前で止まって準備できます。', 'You fell off the platforms. Look for the landing and keep moving through the jump. You can stop before the gap to line up.');
+    if(reason==='edge-spike')return tr('ふちのトゲに接触しました。トゲの手前から跳び、すき間も一度に越えよう。', 'You hit an edge spike. Jump before the spike and clear it together with the gap.');
+    return tr('トゲに接触しました。トゲの手前でJUMP。移動と同時押しで跳び越そう。', 'You hit a spike. Jump before it, holding movement and JUMP together to cross.');
+  }
+  function renderCoach() {
+    if(!coach)return;
+    if(crossedFirstSpike(state))coachDismissed=true;
+    const visible=mode==='play'&&showAmberCoach(state,coachDismissed);
+    coach.hidden=!visible;
+    if(visible)textIfChanged($('hint'),'');
+    else if(coachWasVisible&&mode==='play'&&state.time<=5)textIfChanged($('hint'),stageHint(kind,selected));
+    coachWasVisible=visible;
+  }
+  if(coach) {
+    $('scene').tabIndex=0;
+    $('amber-coach-dismiss').onclick=()=>{coachDismissed=true;renderCoach();$('scene').focus({preventScroll:true});};
   }
   function renderReset() { mode = 'reset'; panel(tr('記録をリセット？', 'Reset your records?'), tr('Orbit Ribbon と Amber Step のステージ・自己ベスト・通信片・音設定だけを消去します。ほかのゲームの記録は残ります。', 'This clears only the stages, personal bests, signal records and sound settings for Orbit Ribbon and Amber Step. Other games and your language preference are kept.')); button(tr('キャンセル', 'Cancel'), menu, true); button(tr('この2作品をリセット', 'Reset these two games'), () => { audio.reset(); save = cleanSave(null); signalProgress = parseSignalProgress(null); persistSignals(true); signalRun = createSignalRun(0); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); }
   $('reset').onclick = renderReset;
@@ -132,8 +157,10 @@ export function boot() {
       if (state.time > 5) textIfChanged(hint, '');
     }
     textIfChanged(stageLabel, `0${selected + 1} / 03`); textIfChanged(stageName, localizedStageName(kind,selected)); textIfChanged(timer, state.time.toFixed(2)); progressFill.style.transform = `scaleX(${Math.min(1, Math.max(0, state.x / stages[kind][selected].length))})`;
+    if (coach)renderCoach();
     if (kind === 'orbit') { textIfChanged($('signals'), tr(`通信片 ${signalCount(signalRun)} / 3 · 任意`, `SIGNALS ${signalCount(signalRun)} / 3 · OPTIONAL`)); root.dataset.signalMask = String(signalRun.mask); root.dataset.signals = String(signalCount(signalRun)); }
     // Read-only diagnostics for reproducible browser verification; no state setter or gameplay bypass.
+    if(kind==='amber')root.dataset.failure=amberFailure(state)??'';
     root.dataset.mode = mode; root.dataset.status = state.status; root.dataset.x = state.x.toFixed(3); root.dataset.y = state.y.toFixed(3); root.dataset.z = state.z.toFixed(3); root.dataset.grounded = String(state.grounded); root.dataset.jumps = String(state.jumps);
     if (mode !== 'recovery') view.draw(state, kind === 'orbit' ? signalRun.mask : 0); root.dataset.drawCalls = String(view.renderer.info.render.calls); root.dataset.triangles = String(view.renderer.info.render.triangles); root.dataset.geometries = String(view.renderer.info.memory.geometries); requestAnimationFrame(frame);
   }
@@ -142,6 +169,7 @@ export function boot() {
     $('pause').textContent=tr('一時停止','Pause');$('reset').textContent=tr('この2作品の記録をリセット','Reset both games’ records');
     $('scene').setAttribute('aria-label',tr(`${title} の3Dゲーム画面`,`${title} 3D game`));
     for(const [input,ja,en] of [['left','左へ移動','Move left'],['right','右へ移動','Move right'],['jump','ジャンプ','Jump']])document.querySelector(`[data-input=${input}]`)!.setAttribute('aria-label',tr(ja,en));
+    if(coach){coach.setAttribute('aria-label',tr('ジャンプのヒント','Jump tip'));$('amber-coach-copy').textContent=tr('止まって準備してOK。トゲの手前で、移動＋JUMPを同時押し。着地してから次のジャンプへ。','You can stop to line up. Before the spike, hold movement + JUMP together. Land before the next jump.');$('amber-coach-dismiss').setAttribute('aria-label',tr('ジャンプのヒントを閉じる','Dismiss jump tip'));}
     soundLabel();
   }
   window.addEventListener(LANGUAGE_EVENT,()=>{staticLabels();if(mode==='play')pause();else if(mode==='menu')menu();else if(mode==='pause')renderPause();else if(mode==='result')finish(false);else if(mode==='reset')renderReset();else renderRecovery();});

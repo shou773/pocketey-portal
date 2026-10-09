@@ -1,0 +1,75 @@
+name: Amber observed guidance
+on:
+  pull_request:
+    paths:
+      - 'src/games/**'
+      - 'src/components/ActionGame.astro'
+      - 'tests/games/**'
+      - 'scripts/capture-amber-guidance.mjs'
+      - '.github/workflows/amber-guidance.yml'
+permissions:
+  contents: read
+jobs:
+  guidance:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Preserve original physics, rendering and accepted separate games
+        run: git diff --exit-code a3c3fc6bb3d46cba1036fc660167435a5a0c22a1 HEAD -- src/games/model.ts src/games/render.ts src/games/signals.ts src/games/prototypes
+      - run: npm run check && npm run check:games && npm test && npm run build
+      - name: Mark exact source and built file digests
+        run: |
+          git rev-parse HEAD > dist/preview-source-sha.txt
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > dist-sha256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: amber-guidance-dist-${{ github.event.pull_request.head.sha }}
+          path: |
+            dist/
+            dist-sha256.txt
+          retention-days: 14
+      - run: npx playwright install --with-deps chromium
+      - name: Observed failure help and first-use lesson
+        id: guidance
+        continue-on-error: true
+        run: npx playwright test --config tests/games/amber-guidance.config.ts
+      - name: Shared Amber clears, save and retained interruption regressions
+        id: regressions
+        continue-on-error: true
+        run: npx playwright test --output=test-results/amber-guidance/retained --grep 'amber-(keyboard|touch)|failure/retry|corrupt/blocked|WebGL context loss'
+      - name: Actual before and after guidance pixels
+        id: captures
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/amber-guidance-baseline"
+          git archive a3c3fc6bb3d46cba1036fc660167435a5a0c22a1 | tar -x -C "$RUNNER_TEMP/amber-guidance-baseline"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/amber-guidance-baseline/node_modules"
+          (cd "$RUNNER_TEMP/amber-guidance-baseline" && npm run build)
+          node scripts/capture-amber-guidance.mjs "$RUNNER_TEMP/amber-guidance-baseline/dist"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amber-guidance-evidence
+          path: test-results/
+          retention-days: 14
+      - name: Keep every functional and existing performance result visible
+        if: always()
+        env:
+          GUIDANCE: ${{ steps.guidance.outcome }}
+          REGRESSIONS: ${{ steps.regressions.outcome }}
+          CAPTURES: ${{ steps.captures.outcome }}
+        run: |
+          printf 'guidance=%s regressions=%s captures=%s\n' "$GUIDANCE" "$REGRESSIONS" "$CAPTURES"
+          test "$GUIDANCE" = success && test "$REGRESSIONS" = success && test "$CAPTURES" = success

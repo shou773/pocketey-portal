@@ -12,3 +12,10 @@
 .orbit .signal-hud{display:block;margin-top:8px;color:#ffe298;font-size:12px;font-weight:700;letter-spacing:.03em;font-variant-numeric:tabular-nums}.orbit .stages small{color:#ffe298}
 
 .orbit .time #timer{font-size:16px}
+
+/* One dismissible first-spike lesson, only rendered by Amber. No animation. */
+#amber-coach{position:absolute;left:14px;right:14px;bottom:12px;width:min(420px,calc(100% - 28px));margin:auto;display:flex;align-items:center;gap:8px;padding:10px 10px 10px 14px;border:1px solid #ffd39380;border-radius:14px;background:#2c2139f2;color:#fff1db;box-shadow:0 3px 15px #0003}
+#amber-coach p{margin:0;font-size:12px;line-height:1.5}
+#amber-coach button{flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:0;font-size:24px;color:#ffd393}
+.amber #scene:focus-visible{outline:3px solid #ffd393;outline-offset:-3px}
+@media(max-height:540px) and (orientation:landscape){#amber-coach{bottom:72px;padding:6px 8px 6px 12px}#amber-coach p{font-size:11px}}
