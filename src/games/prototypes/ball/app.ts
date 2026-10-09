@@ -11,6 +11,15 @@ export function boot() {
   try { save = parseSave(localStorage.getItem(SAVE_KEY)); } catch { storageOK = false; }
   let view: ReturnType<typeof createView> | null = null;
   try { view = createView(get<HTMLCanvasElement>('canvas')); } catch { /* A readable fallback replaces the playable menu. */ }
+  const clearBurst = get('clear-burst'), reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let burstTimer = 0;
+  function stopBurst() { window.clearTimeout(burstTimer); burstTimer = 0; clearBurst.classList.remove('active'); }
+  function celebrateClear() {
+    stopBurst();
+    if (reducedMotion.matches || document.hidden) return;
+    clearBurst.classList.add('active'); burstTimer = window.setTimeout(stopBurst, 560);
+  }
+  reducedMotion.addEventListener('change', stopBurst);
   const pointers = new Map<number, string>(), keys = new Set<string>();
   let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0, wasBraking = false;
   function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch { storageOK = false; } }
@@ -21,11 +30,11 @@ export function boot() {
   function resetInput() { pointers.clear(); keys.clear(); wasBraking=false; reflectControls(); }
   function start(stage: number) {
     if (!view || document.hidden) return;
-    selected = stage; state = createState(stage); state.phase = 'playing'; lastPhase = 'playing'; accumulator = 0; previous = performance.now(); resetInput(); audio.setPlaying(true,true);audio.cue('start'); renderUI();
+    stopBurst(); view.resetEffects(); selected = stage; state = createState(stage); state.phase = 'playing'; lastPhase = 'playing'; accumulator = 0; previous = performance.now(); resetInput(); audio.setPlaying(true,true);audio.cue('start'); renderUI();
     get<HTMLButtonElement>('pause').focus({ preventScroll: true });
   }
-  function menu() { audio.setPlaying(false);state = createState(selected); lastPhase = 'ready'; resetInput(); renderUI(); }
-  function pause() { if (state.phase !== 'playing') return; state.phase = 'paused';audio.setPlaying(false); resetInput(); accumulator = 0; renderUI(); }
+  function menu() { stopBurst(); view?.resetEffects(); audio.setPlaying(false);state = createState(selected); lastPhase = 'ready'; resetInput(); renderUI(); }
+  function pause() { if (state.phase !== 'playing') return; stopBurst(); view?.resetEffects(); state.phase = 'paused';audio.setPlaying(false); resetInput(); accumulator = 0; renderUI(); }
   function resume() { if (!view || state.phase !== 'paused' || document.hidden) return; state.phase = 'playing'; resetInput(); previous = performance.now(); accumulator = 0; audio.setPlaying(true); renderUI(); get<HTMLButtonElement>('pause').focus({ preventScroll: true }); }
   function action(text: string, callback: () => void, primary = false) {
     const b = document.createElement('button'); b.textContent = text; b.type = 'button'; if (primary) b.className = 'primary'; b.addEventListener('click', callback); get('actions').append(b);
@@ -64,6 +73,7 @@ export function boot() {
   function hud() {
     root.dataset.phase = state.phase; root.dataset.stage = String(state.stage); root.dataset.x = state.x.toFixed(4); root.dataset.z = state.z.toFixed(4); root.dataset.vx = state.vx.toFixed(4); root.dataset.time = state.time.toFixed(4); root.dataset.speed = state.speed.toFixed(4);
     root.dataset.drawCalls = String(view?.renderer.info.render.calls ?? 0); root.dataset.triangles = String(view?.renderer.info.render.triangles ?? 0);
+    root.dataset.trailPoints = String(view?.trailPoints ?? 0); root.dataset.trailLength = String(view?.trailLength ?? 0); root.dataset.brakeOpacity = String(view?.brakeOpacity ?? 0);
     root.dataset.audio = audio.status().context;
     get('stage').textContent = `0${state.stage + 1} / 03`; get('name').textContent = tr(...STAGES[state.stage].name); get('time').textContent = state.time.toFixed(2);
     get('speed').textContent = `${tr('速度', 'SPEED')} ${state.speed.toFixed(1)} m/s`;
@@ -87,11 +97,11 @@ export function boot() {
   window.addEventListener('keydown', keydown); window.addEventListener('keyup', keyup);
   get('pause').addEventListener('click', () => state.phase === 'paused' ? resume() : pause());
   get('sound').addEventListener('click', () => audio.toggle());
-  function visibility() { if (document.hidden) { if (state.phase === 'playing') pause(); resetInput(); previous = 0; accumulator = 0; audio.setPlaying(false); } }
+  function visibility() { if (document.hidden) { stopBurst(); view?.resetEffects(); if (state.phase === 'playing') pause(); resetInput(); previous = 0; accumulator = 0; audio.setPlaying(false); } }
   function blur() { pause(); resetInput(); }
   document.addEventListener('visibilitychange', visibility); window.addEventListener('blur', blur); window.addEventListener(LANGUAGE_EVENT, renderUI);
   get('canvas').addEventListener('webglcontextlost', e => {
-    e.preventDefault();
+    e.preventDefault(); stopBurst();
     // Freeze both ordinary play and an in-flight fall before releasing WebGL.
     if (state.phase === 'playing' || state.phase === 'falling') state.phase = 'paused';
     resetInput(); accumulator = 0; lastPhase = state.phase;
@@ -109,14 +119,15 @@ export function boot() {
         if (state.phase === 'falling') { audio.setPlaying(false);resetInput(); audio.cue('death'); }
         if (state.phase === 'clear') { const best = save.best[state.stage]; if (best === null || state.time < best) save.best[state.stage] = state.time; persist(); audio.setPlaying(false);resetInput(); audio.cue('clear'); }
         lastPhase = state.phase; renderUI();
+        if (state.phase === 'clear') celebrateClear();
       }
       if (now - lastHUD > 60) { hud(); lastHUD = now; }
-      view?.draw(state);
+      view?.draw(state, elapsed);
     }
     raf = requestAnimationFrame(frame);
   }
   renderUI(); raf = requestAnimationFrame(frame);
-  window.addEventListener('pagehide', () => { resetInput(); pause(); }, { once: false });
+  window.addEventListener('pagehide', () => { stopBurst(); view?.resetEffects(); resetInput(); pause(); }, { once: false });
   // Normal page navigation releases WebGL and audio resources; bfcache can resume.
-  window.addEventListener('pagehide', e => { if (!e.persisted) { cancelAnimationFrame(raf); view?.dispose(); audio.dispose(); } });
+  window.addEventListener('pagehide', e => { if (!e.persisted) { cancelAnimationFrame(raf); reducedMotion.removeEventListener('change', stopBurst); view?.dispose(); audio.dispose(); } });
 }

@@ -14,7 +14,7 @@ import '../../games/prototypes/ball/style.css';
     <div class="tt-hud"><div><small id="tt-stage"></small><strong id="tt-name"></strong></div><div><strong id="tt-time">0.00</strong><small id="tt-speed"></small></div></div>
     <progress id="tt-progress" max="1" value="0" aria-label="Progress"></progress>
     <p id="tt-hint"></p>
-    <div id="tt-overlay"><section class="tt-panel" aria-labelledby="tt-title"><div class="tt-panel-top"><span>POCKETEY · 03 STAGES</span><LanguageSwitch/></div><div class="tt-orb" aria-hidden="true"></div><p id="tt-eyebrow"></p><h1 id="tt-title">TiltTrail</h1><p id="tt-copy"></p><div id="tt-stages"></div><p id="tt-instructions"></p><div id="tt-actions"></div><p id="tt-save" role="status"></p><a id="tt-back" href="/games/">All games</a></section></div>
+    <div id="tt-overlay"><section class="tt-panel" aria-labelledby="tt-title"><div class="tt-panel-top"><span>POCKETEY · 03 STAGES</span><LanguageSwitch/></div><div class="tt-orb" aria-hidden="true"><span id="tt-clear-burst">{Array.from({ length: 8 }, (_, i) => <i style={`--x:${Math.cos(i * Math.PI / 4) * 34}px;--y:${Math.sin(i * Math.PI / 4) * 34}px;--r:${i * 45}deg`}/>)}</span></div><p id="tt-eyebrow"></p><h1 id="tt-title">TiltTrail</h1><p id="tt-copy"></p><div id="tt-stages"></div><p id="tt-instructions"></p><div id="tt-actions"></div><p id="tt-save" role="status"></p><a id="tt-back" href="/games/">All games</a></section></div>
   </div>
   <footer class="tt-controls"><div class="tt-steer"><button data-tt-input="left" aria-label="Left">←</button><button data-tt-input="right" aria-label="Right">→</button></div><span id="tt-control-note"></span><button data-tt-input="brake" class="tt-brake">BRAKE</button></footer>
 </main>

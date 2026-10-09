@@ -83,6 +83,60 @@ export function createView(canvas: HTMLCanvasElement) {
   const brakeControl = canvas.closest('#tilttrail')?.querySelector('[data-tt-input="brake"]');
   const brakeRing = new THREE.Mesh(new THREE.RingGeometry(RADIUS * 1.22, RADIUS * 1.34, 24), new THREE.MeshBasicMaterial({ color: 0xcb762d, transparent: true, opacity: .85, depthWrite: false }));
   brakeRing.rotation.x = -Math.PI / 2; brakeRing.visible = false; scene.add(brakeRing);
+  // Eight reusable points form one faint ribbon, never a particle system.
+  // At most 14 triangles and one draw; no allocations in the frame update.
+  const trailLimit = 8, trailLifetime = .2, trailDistance = 1.2;
+  const trailX = new Float32Array(trailLimit), trailZ = new Float32Array(trailLimit), trailTime = new Float64Array(trailLimit);
+  const trailPositions = new Float32Array(trailLimit * 6), trailIndices = new Uint16Array((trailLimit - 1) * 6);
+  for (let i = 0; i < trailLimit - 1; i++) { const v = i * 2, k = i * 6; trailIndices.set([v, v + 1, v + 2, v + 1, v + 3, v + 2], k); }
+  const trailGeometry = new THREE.BufferGeometry();
+  const trailAttribute = new THREE.BufferAttribute(trailPositions, 3).setUsage(THREE.DynamicDrawUsage);
+  trailGeometry.setAttribute('position', trailAttribute); trailGeometry.setIndex(new THREE.BufferAttribute(trailIndices, 1)); trailGeometry.setDrawRange(0, 0);
+  const trailMaterial = new THREE.MeshBasicMaterial({ color: 0x68c2b8, transparent: true, opacity: .18, depthWrite: false });
+  const trail = new THREE.Mesh(trailGeometry, trailMaterial); trail.frustumCulled = false; trail.visible = false; scene.add(trail);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let trailCount = 0, trailLength = 0, brakeOpacity = 0;
+  function resetEffects() {
+    trailCount = 0; trailLength = 0; trail.visible = false; trailGeometry.setDrawRange(0, 0);
+    brakeOpacity = 0; brakeRing.visible = false; brakeRing.material.opacity = 0;
+  }
+  reducedMotion.addEventListener('change', resetEffects);
+  function removeTrailPoint() {
+    for (let i = 1; i < trailCount; i++) { trailX[i - 1] = trailX[i]; trailZ[i - 1] = trailZ[i]; trailTime[i - 1] = trailTime[i]; }
+    trailCount--;
+  }
+  function updateEffects(s: State, elapsed: number) {
+    if (s.phase !== 'playing') { resetEffects(); return; }
+    const braking = brakeControl?.getAttribute('aria-pressed') === 'true';
+    const targetOpacity = braking ? .85 : 0;
+    brakeOpacity = reducedMotion.matches ? targetOpacity : brakeOpacity + (targetOpacity - brakeOpacity) * (1 - Math.exp(-elapsed / .04));
+    brakeRing.material.opacity = brakeOpacity; brakeRing.visible = brakeOpacity > .005;
+    brakeRing.position.set(s.x, .035, -s.z);
+    if (reducedMotion.matches) { trailCount = 0; trailLength = 0; trail.visible = false; trailGeometry.setDrawRange(0, 0); return; }
+    if (trailCount && s.time < trailTime[trailCount - 1]) { trailCount = 0; }
+    while (trailCount && s.time - trailTime[0] > trailLifetime) removeTrailPoint();
+    if (!trailCount || s.time - trailTime[trailCount - 1] >= trailLifetime / (trailLimit - 1)) {
+      if (trailCount === trailLimit) removeTrailPoint();
+      trailX[trailCount] = s.x; trailZ[trailCount] = s.z; trailTime[trailCount] = s.time; trailCount++;
+    }
+    trailLength = 0;
+    for (let i = trailCount - 1; i > 0; i--) {
+      trailLength += Math.hypot(trailX[i] - trailX[i - 1], trailZ[i] - trailZ[i - 1]);
+      if (trailLength > trailDistance) { while (i > 0 && trailCount > 1) { removeTrailPoint(); i--; } break; }
+    }
+    trailLength = 0;
+    for (let i = 0; i < trailCount; i++) {
+      const before = Math.max(0, i - 1), after = Math.min(trailCount - 1, i + 1);
+      const dx = trailX[after] - trailX[before], dz = trailZ[after] - trailZ[before];
+      const magnitude = Math.hypot(dx, dz), width = .065 * i / Math.max(1, trailCount - 1);
+      const nx = magnitude ? dz / magnitude * width : width, nz = magnitude ? dx / magnitude * width : 0, k = i * 6;
+      trailPositions[k] = trailX[i] - nx; trailPositions[k + 1] = .027; trailPositions[k + 2] = -trailZ[i] - nz;
+      trailPositions[k + 3] = trailX[i] + nx; trailPositions[k + 4] = .027; trailPositions[k + 5] = -trailZ[i] + nz;
+      if (i) trailLength += Math.hypot(trailX[i] - trailX[i - 1], trailZ[i] - trailZ[i - 1]);
+    }
+    trailGeometry.setDrawRange(0, Math.max(0, trailCount - 1) * 6); trailAttribute.needsUpdate = true;
+    trail.visible = trailCount > 1 && trailLength > .015;
+  }
   const finishMaterial = new THREE.MeshPhongMaterial({ color: 0x66b9a3, specular: 0xf4dfb3, shininess: 55 });
   let course = new THREE.Group(); scene.add(course);
   let stage = -1, lastZ = 0, lastX = 0;
@@ -189,6 +243,7 @@ export function createView(canvas: HTMLCanvasElement) {
     return geometry;
   }
   function rebuild(which: number) {
+    resetEffects();
     course.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose(); o.geometry.dispose(); } }); scene.remove(course); course = new THREE.Group(); scene.add(course);
     ribbon(which, null, 0, roadMaterial);
     const leftEdge = ribbon(which, -1, .1, edgeMaterial), rightEdge = ribbon(which, 1, .1, edgeMaterial);
@@ -248,17 +303,17 @@ export function createView(canvas: HTMLCanvasElement) {
     renderer.setSize(bounds.width, bounds.height, false); camera.aspect = bounds.width / Math.max(1, bounds.height); camera.updateProjectionMatrix();
   }
   const observer = new ResizeObserver(resize); observer.observe(canvas); resize();
-  function draw(s: State) {
+  function draw(s: State, elapsed = 0) {
     if (stage !== s.stage) rebuild(s.stage);
-    if (s.z < lastZ) { ball.rotation.set(0, 0, 0); lastZ = s.z; lastX = s.x; }
+    if (s.z < lastZ) { resetEffects(); ball.rotation.set(0, 0, 0); lastZ = s.z; lastX = s.x; }
     ball.rotation.x -= (s.z - lastZ) / RADIUS; ball.rotation.z -= (s.x - lastX) / RADIUS; lastZ = s.z; lastX = s.x;
     ball.position.set(s.x, s.y, -s.z); shadow.position.set(s.x, 0.025, -s.z); shadow.visible = s.phase !== 'falling' && s.phase !== 'failed';
-    brakeRing.position.set(s.x, .035, -s.z); brakeRing.visible = s.phase === 'playing' && brakeControl?.getAttribute('aria-pressed') === 'true';
+    updateEffects(s, elapsed);
     const focus = track(s.stage, s.z + 9).x * 0.45 + s.x * 0.55;
     const height = camera.aspect < 0.7 ? 17 : camera.aspect < 1 ? 14 : 10;
     camera.position.set(focus, height, -s.z + 10); camera.lookAt(focus, 0, -s.z - 11);
     renderer.render(scene, camera);
   }
-  function dispose() { disposed = true; observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose(); } }); observatoryGeometry?.dispose(); rockGeometry?.dispose(); skyTexture.dispose(); skyMaterial.dispose(); [roadMaterial, sideMaterial, gardenMaterial, distantMaterial, observatoryMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); shadowMap.dispose(); (brakeRing.material as THREE.Material).dispose(); renderer.dispose(); }
-  return { draw, dispose, renderer, ready };
+  function dispose() { disposed = true; reducedMotion.removeEventListener('change', resetEffects); trailMaterial.dispose(); observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose(); } }); observatoryGeometry?.dispose(); rockGeometry?.dispose(); skyTexture.dispose(); skyMaterial.dispose(); [roadMaterial, sideMaterial, gardenMaterial, distantMaterial, observatoryMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); shadowMap.dispose(); (brakeRing.material as THREE.Material).dispose(); renderer.dispose(); }
+  return { draw, dispose, renderer, ready, resetEffects, get trailPoints() { return trail.visible ? trailCount : 0; }, get trailLength() { return trailLength; }, get brakeOpacity() { return brakeRing.visible ? brakeOpacity : 0; } };
 }
