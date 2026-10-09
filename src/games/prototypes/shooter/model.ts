@@ -9,11 +9,19 @@ export const STAGES = [ {ja:'01 夜明けの回廊',en:'01 Dawn corridor',durati
 export function createState(stage:number):State {return {stage:clamp(Math.floor(stage),0,2),time:0,x:0,y:1.8,hp:4,invulnerable:1,status:'playing',score:0,enemies:[],bullets:[],shots:[],beams:[],nextId:1,spawn:1,fire:0,bossSpawned:false,hit:0};}
 export function overlaps(a:{x:number;y:number;r:number},b:{x:number;y:number;r:number}) {return Math.hypot(a.x-b.x,a.y-b.y)<a.r+b.r;}
 export function sweptHit(a:Body,oldX:number,oldY:number,b:{x:number;y:number;r:number}) {const dx=a.x-oldX,dy=a.y-oldY; const t=clamp(((b.x-oldX)*dx+(b.y-oldY)*dy)/(dx*dx+dy*dy||1),0,1);return overlaps({x:oldX+dx*t,y:oldY+dy*t,r:a.r},b);}
+// Final existing spawn slots form one left-to-right sweep. Timing, drift and kinds stay unchanged.
+// These n values are audited from the original fixed-step schedule, not extra spawns.
+export const FINAL_SWEEP_SLOTS = [[13,14,15],[17,18,19],[13,14,15]] as const;
+export function spawnX(stage:number,n:number) {
+ const slot=(FINAL_SWEEP_SLOTS[stage] as readonly number[]).indexOf(n);
+ return slot<0?Math.sin(n*2.4)*3:[-2.6,0,2.6][slot];
+}
+// End authored spawn positions.
 export function step(s:State,dt:number,input:{x:number;y:number}) {
  if(s.status!=='playing')return;dt=clamp(dt,0,STEP);s.time+=dt;s.invulnerable=Math.max(0,s.invulnerable-dt);s.hit=Math.max(0,s.hit-dt);
  const dx=input.x-s.x,dy=input.y-s.y,d=Math.hypot(dx,dy),travel=Math.min(d,6.5*dt);if(d){s.x+=dx/d*travel;s.y+=dy/d*travel;}s.x=clamp(s.x,-3.8,3.8);s.y=clamp(s.y,.7,6.5);
  s.fire-=dt;if(s.fire<=0){s.fire=.16;s.shots.push({id:s.nextId++,x:s.x,y:s.y+.4,vx:0,vy:15,r:.12});}
- s.spawn-=dt;if(s.spawn<=0&&s.time<(s.stage===2?29:STAGES[s.stage].duration-5)){s.spawn= s.stage===0?2.3:1.8;const n=Math.floor(s.time/1.8);s.enemies.push({id:s.nextId++,x:Math.sin(n*2.4)*3,y:11,vx:Math.cos(n)*.35,vy:-1.1-s.stage*.15,r:.44,hp:3,shot:1,kind:s.stage>0&&n%3===0?'fan':'scout'});}
+ s.spawn-=dt;if(s.spawn<=0&&s.time<(s.stage===2?29:STAGES[s.stage].duration-5)){s.spawn= s.stage===0?2.3:1.8;const n=Math.floor(s.time/1.8);s.enemies.push({id:s.nextId++,x:spawnX(s.stage,n),y:11,vx:Math.cos(n)*.35,vy:-1.1-s.stage*.15,r:.44,hp:3,shot:1,kind:s.stage>0&&n%3===0?'fan':'scout'});}
  if(s.stage===2&&s.time>=30&&!s.bossSpawned){s.bossSpawned=true;s.enemies.push({id:s.nextId++,x:0,y:9,vx:0,vy:0,r:1,hp:32,shot:1,kind:'boss'});}
  for(const e of s.enemies){e.y+=e.vy*dt;e.x=e.kind==='boss'?Math.sin(s.time*.6)*2.5:clamp(e.x+e.vx*dt,-3.5,3.5);e.shot-=dt;if(e.shot<=0&&e.y>3){e.shot=e.kind==='boss'?1.2:2.1;const angle=Math.atan2(s.y-e.y,s.x-e.x);const spread=e.kind==='scout'?[0]:[-.27,0,.27];for(const a of spread)s.bullets.push({id:s.nextId++,x:e.x,y:e.y,vx:Math.cos(angle+a)*(2.7+s.stage*.25),vy:Math.sin(angle+a)*(2.7+s.stage*.25),r:.16});}}
  // Fixed, visibly telegraphed lanes; no beam tracks the player after warning begins.

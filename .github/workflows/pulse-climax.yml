@@ -1,0 +1,80 @@
+name: Pulse authored climax
+on:
+  pull_request:
+    paths:
+      - 'src/games/prototypes/shooter/**'
+      - 'src/pages/games/pulse-drift.astro'
+      - 'tests/prototypes/shooter/**'
+      - 'scripts/capture-pulse-climax.mjs'
+      - '.github/workflows/pulse-climax.yml'
+permissions:
+  contents: read
+jobs:
+  climax:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Preserve accepted rendering and other five games
+        run: git diff --exit-code 4a402190229a9aa208aa58cd6cddbdd9fb7df56d HEAD -- src/games/prototypes/shooter/view.ts src/games/model.ts src/games/render.ts src/games/signals.ts src/games/app.ts src/games/game.css src/games/amber-guidance.ts src/components/ActionGame.astro src/games/prototypes/ball src/games/prototypes/alpine src/games/prototypes/conveyor
+      - run: npm run check && npm run check:games && npm test && npm run build
+      - name: Mark exact source and built file digests
+        run: |
+          git rev-parse HEAD > dist/preview-source-sha.txt
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > dist-sha256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pulse-climax-dist-${{ github.event.pull_request.head.sha }}
+          path: |
+            dist/
+            dist-sha256.txt
+          retention-days: 14
+      - run: npx playwright install --with-deps chromium
+      - name: Ordinary all-course routes and compact lifecycle checks
+        id: native
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/shooter/climax.config.ts
+      - name: Retained Pulse input, language, storage and context checks
+        id: retained
+        continue-on-error: true
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4331 > /tmp/pulse-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" || true' EXIT
+          for i in {1..30}; do curl --fail --silent http://localhost:4331/games/pulse-drift/ > /dev/null && break; sleep 1; done
+          node tests/prototypes/ui.mjs
+      - name: Matched original and authored climax pixels
+        id: captures
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/pulse-climax-baseline"
+          git archive 4a402190229a9aa208aa58cd6cddbdd9fb7df56d | tar -x -C "$RUNNER_TEMP/pulse-climax-baseline"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/pulse-climax-baseline/node_modules"
+          (cd "$RUNNER_TEMP/pulse-climax-baseline" && npm run build)
+          npx tsx scripts/capture-pulse-climax.mjs "$RUNNER_TEMP/pulse-climax-baseline/dist"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pulse-climax-evidence
+          path: test-results/
+          retention-days: 14
+      - name: Preserve all verification outcomes
+        if: always()
+        env:
+          NATIVE: ${{ steps.native.outcome }}
+          RETAINED: ${{ steps.retained.outcome }}
+          CAPTURES: ${{ steps.captures.outcome }}
+        run: |
+          printf 'native=%s retained=%s captures=%s\n' "$NATIVE" "$RETAINED" "$CAPTURES"
+          test "$NATIVE" = success && test "$RETAINED" = success && test "$CAPTURES" = success
