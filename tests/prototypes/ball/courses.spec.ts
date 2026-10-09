@@ -10,7 +10,7 @@ for(const touch of [false,true])test.describe(touch?'touch courses':'keyboard co
   test('legacy stage3 clear opens4; ordinary controls clear4→5 and preserve every original record',async({page})=>{
     test.setTimeout(240000);await mkdir(evidence,{recursive:true});const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
     await page.addInitScript(({key,old})=>{if(!localStorage.getItem(key))localStorage.setItem(key,old);},{key:SAVE_KEY,old});
-    await page.goto(url);await expect(page.locator('#tt-stages button')).toHaveCount(5);
+    await page.goto(url);await expect(page.locator('#tt-stages button')).toHaveCount(5);await expect(page.locator('.tt-panel-top')).toContainText('05 STAGES');
     await expect(page.locator('button[data-stage="3"]')).toBeEnabled();await expect(page.locator('button[data-stage="4"]')).toBeDisabled();
     await page.locator('button[data-stage="4"]').dispatchEvent('click');await expect(page.locator('#tilttrail')).toHaveAttribute('data-stage','0');
     await page.locator('button[data-stage="3"]').click();await page.getByRole('button',{name:'Play this stage',exact:true}).click();

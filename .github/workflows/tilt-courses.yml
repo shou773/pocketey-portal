@@ -57,7 +57,7 @@ jobs:
           git archive 29424ba7300e5ded81bc07b9f2e73f05f078a137 | tar -x -C "$RUNNER_TEMP/tilt-course-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/tilt-course-baseline/node_modules"
           (cd "$RUNNER_TEMP/tilt-course-baseline" && npm run build)
-          node scripts/capture-tilt-courses.mjs "$RUNNER_TEMP/tilt-course-baseline/dist"
+          npx tsx scripts/capture-tilt-courses.mjs "$RUNNER_TEMP/tilt-course-baseline/dist"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -12,3 +12,5 @@
 /* Auto margins keep an expanded course menu centred when it fits and make its
    top reachable when the five-course panel is taller than a short viewport. */
 .tt-panel{margin:auto}#tt-stages button:disabled{opacity:.65;border-style:dashed}#tt-stages button:disabled strong{color:#9caeaf}
+
+#tt-stages button:disabled small{white-space:normal}
