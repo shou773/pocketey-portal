@@ -28,7 +28,7 @@ test('fresh player earns all three stars with ordinary taps, Next, replay and re
     await solve(page,index);await budget(page);
     await page.locator('#cv-play').tap();
     if(index===0||index===2){
-      await expect.poll(async()=>Number(await root.getAttribute('data-elapsed'))).toBeGreaterThan(index===0?1:3.5);
+      await expect.poll(async()=>Number(await root.getAttribute('data-elapsed')), {intervals:[25]}).toBeGreaterThan(index===0?1.15:3.85);
       await page.locator('#cv-play').tap();await expect(root).toHaveAttribute('data-phase','paused');await budget(page);
       await page.screenshot({path:`test-results/conveyor/campaign-${index+1}-approach-390.png`,fullPage:true});
       await page.locator('#cv-play').tap();
