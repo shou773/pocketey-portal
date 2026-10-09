@@ -10,12 +10,12 @@ async function drive(page:Page,course:number,mode:'keyboard'|'touch',target:numb
   const measurement=page.evaluate(async()=>{
     const intervals:number[]=[],counters:{calls:number;triangles:number}[]=[],pointers:unknown[]=[];let previous=performance.now();
     const surface=document.querySelector('canvas')!;
-    const observe=(event:PointerEvent)=>pointers.push({type:event.type,at:event.timeStamp,wall:performance.now(),pointerType:event.pointerType,state:{...document.querySelector<HTMLElement>('#alpine')!.dataset}});
-    for(const type of ['pointerdown','pointerup','pointercancel'])surface.addEventListener(type,observe as EventListener);
+    const observe=(event:Event)=>{if(event instanceof PointerEvent)pointers.push({type:event.type,at:event.timeStamp,wall:performance.now(),pointerType:event.pointerType,state:{...document.querySelector<HTMLElement>('#alpine')!.dataset}});};
+    for(const type of ['pointerdown','pointerup','pointercancel'])surface.addEventListener(type,observe);
     await new Promise<void>(resolve=>{const tick=(now:number)=>{const d=document.querySelector<HTMLElement>('#alpine')!.dataset;
       intervals.push(now-previous);previous=now;counters.push({calls:Number(d.drawCalls),triangles:Number(d.triangles)});
       if(d.phase==='playing')requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});
-    for(const type of ['pointerdown','pointerup','pointercancel'])surface.removeEventListener(type,observe as EventListener);
+    for(const type of ['pointerdown','pointerup','pointercancel'])surface.removeEventListener(type,observe);
     const canvas=document.querySelector('canvas')!,sorted=[...intervals].sort((a,b)=>a-b);
     return{intervals,pointers,fps:1000*intervals.length/intervals.reduce((a,b)=>a+b,0),p95:sorted[Math.floor(sorted.length*.95)],
       maxDraws:Math.max(...counters.map(c=>c.calls)),maxTriangles:Math.max(...counters.map(c=>c.triangles)),
