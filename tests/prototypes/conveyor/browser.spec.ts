@@ -86,10 +86,37 @@ test('WebGL loss cancels interaction and gives an explicit reload fallback', asy
   await expect(page.locator('#conveyor')).toHaveAttribute('data-phase','paused');
   await expect(page.locator('#cv-unavailable')).toBeVisible(); await expect(page.locator('#cv-play')).toBeDisabled();
 });
-test('malformed and blocked storage still allow a fresh playable board', async ({ browser }) => {
+test('malformed audio JSON recovers on edits and retains preferences after reload', async ({ page }) => {
+  const errors: string[]=[]; page.on('pageerror', error=>errors.push(error.message));
+  await page.addInitScript(()=>{
+    // Seed once so a reload verifies the repaired value instead of corrupting it again.
+    if (localStorage.getItem('pocketey-audio-v1') === null) localStorage.setItem('pocketey-audio-v1','{');
+  });
+  await ready(page);
+  expect(await page.evaluate(()=>localStorage.getItem('pocketey-audio-v1'))).toBe('{');
+  await expect(page.locator('#cv-sound')).toHaveAttribute('aria-pressed','false');
+  await page.locator('#cv-sound').tap();
+  await expect(page.locator('#cv-sound')).toHaveAttribute('aria-pressed','true');
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pocketey-audio-v1')!))).toEqual({conveyor:{sfx:.8,sfxMuted:false}});
+  await page.locator('#cv-settings').tap();
+  await page.locator('#cv-volume').fill('35'); await page.locator('#cv-audio-close').tap();
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pocketey-audio-v1')!))).toEqual({conveyor:{sfx:.35,sfxMuted:false}});
+  await page.reload();
+  await expect(page.locator('#conveyor')).toHaveAttribute('data-webgl','true');
+  await expect(page.locator('#cv-sound')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#cv-settings').tap(); await expect(page.locator('#cv-volume')).toHaveValue('35');
+  await page.locator('#cv-audio-close').tap(); await page.locator('#cv-sound').tap();
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pocketey-audio-v1')!))).toEqual({conveyor:{sfx:.35,sfxMuted:true}});
+  expect(errors).toEqual([]);
+});
+test('blocked storage still allows a fresh playable board', async ({ browser }) => {
   const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true});
   await context.addInitScript(()=>{Storage.prototype.getItem=()=>{throw new DOMException('blocked','SecurityError');};Storage.prototype.setItem=()=>{throw new DOMException('blocked','SecurityError');};});
   const page=await context.newPage();await ready(page);
-  await expect(page.locator('#cv-save')).toContainText('保存できません'); await solve(page); await page.locator('#cv-play').tap();
+  await expect(page.locator('#cv-save')).toContainText('保存できません');
+  await page.locator('#cv-sound').tap(); await expect(page.locator('#cv-sound')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#cv-settings').tap(); await page.locator('#cv-volume').fill('35');
+  await expect(page.locator('#cv-volume')).toHaveValue('35'); await page.locator('#cv-audio-close').tap();
+  await solve(page); await page.locator('#cv-play').tap();
   await expect(page.locator('#conveyor')).toHaveAttribute('data-phase','success');await context.close();
 });

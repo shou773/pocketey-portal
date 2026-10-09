@@ -14,8 +14,14 @@ export function createSound(onChange: () => void) {
   function stop() { samples.forEach(sample => { sample.pause(); sample.currentTime = 0; }); }
   function persist() {
     try {
-      let all = JSON.parse(localStorage.getItem(AUDIO_KEY) ?? '{}');
-      if (!all || typeof all !== 'object' || Array.isArray(all)) all = {};
+      // Keep storage access outside the parse recovery: an unreadable envelope
+      // must not be overwritten, but malformed JSON should not prevent a save.
+      const raw = localStorage.getItem(AUDIO_KEY);
+      let all: Record<string, unknown> = {};
+      try {
+        const parsed: unknown = JSON.parse(raw ?? '{}');
+        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) all = parsed as Record<string, unknown>;
+      } catch { /* The next user edit replaces an invalid JSON envelope. */ }
       all.conveyor = { sfx: volume, sfxMuted: muted };
       localStorage.setItem(AUDIO_KEY, JSON.stringify(all));
     } catch { /* Audio remains usable without persistence. */ }
