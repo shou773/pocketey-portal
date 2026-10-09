@@ -118,7 +118,9 @@ const farGeometry = strata(16, 8, [
 ]);
 export function createAmberCanyon(horizon: T.Group, landmark?: T.Object3D) {
   const farMaterials = [0xe0c6cc, 0xd3b4bc, 0xc8a5b0].map(color => new T.MeshBasicMaterial({ color, vertexColors: true }));
-  for (let row = 0; row < 3; row++) for (let i = -2; i < 8; i++) {
+  // These opaque layers are merged in insertion order. Near rows first let
+  // depth testing reject covered far-row fragments without changing the view.
+  for (let row = 2; row >= 0; row--) for (let i = -2; i < 8; i++) {
     const mesh = new T.Mesh(farGeometry, farMaterials[row]);
     mesh.position.set(i * 16 + (row - 1) * 8, (i + 2) % 3 * 1.3 + (2 - row) * 1.1, -63 + row * 15);
     mesh.scale.set(1.1, 1, 1.2); horizon.add(mesh);

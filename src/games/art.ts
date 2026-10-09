@@ -245,6 +245,9 @@ export function placeGrass(parent:T.Group, art:Art, mid:number, top:number, leng
 
 export function createSky(kind: Kind) {
   const sky = new T.Group();
+  // Amber's opaque world writes depth first; retain the same projected sky
+  // gradient only where the depth buffer is still clear.
+  if (kind === 'amber') sky.renderOrder = 100;
   const geometry = new T.SphereGeometry(120, 24, 16);
   const colors: number[] = [], positions = geometry.attributes.position;
   const top = new T.Color(kind === 'orbit' ? 0x080f29 : 0xd89d94);
@@ -260,7 +263,8 @@ export function createSky(kind: Kind) {
     side:T.BackSide, vertexColors:true, depthWrite:false,
     // Colors are converted once on the CPU; sky pixels need no lighting,
     // texture fetches or per-fragment color-space conversion.
-    vertexShader:'varying vec3 skyColor; void main() { skyColor = color; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    // Pin Amber behind even the canyon geometry outside the sky sphere.
+    vertexShader:'varying vec3 skyColor; void main() { skyColor = color; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); '+(kind === 'amber' ? 'gl_Position.z = gl_Position.w; ' : '')+'}',
     fragmentShader:'varying vec3 skyColor; void main() { gl_FragColor = vec4(skyColor, 1.0); }'
   })));
   return sky;

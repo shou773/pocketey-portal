@@ -46,12 +46,14 @@ export function createView(canvas: HTMLCanvasElement) {
   const skyTexture = new THREE.CanvasTexture(skyCanvas);
   skyTexture.generateMipmaps = false; skyTexture.minFilter = THREE.LinearFilter;
   const skyMaterial = new THREE.ShaderMaterial({
-    uniforms: { skyMap: { value: skyTexture } }, depthTest: false, depthWrite: false,
+    uniforms: { skyMap: { value: skyTexture } }, depthTest: true, depthWrite: false,
     vertexShader: 'varying vec2 skyUv; void main() { skyUv = uv; gl_Position = vec4(position.xy, 1., 1.); }',
     fragmentShader: 'uniform sampler2D skyMap; varying vec2 skyUv; void main() { gl_FragColor = texture2D(skyMap, skyUv); }',
   });
   const skyMesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), skyMaterial);
-  skyMesh.frustumCulled = false; skyMesh.renderOrder = -100; scene.add(skyMesh);
+  // Draw the far-depth backdrop after opaque geometry so covered samples fail
+  // depth testing before texture sampling; transparent decals still draw last.
+  skyMesh.frustumCulled = false; skyMesh.renderOrder = 100; scene.add(skyMesh);
   scene.fog = new THREE.Fog(0xc7e2e7, 36, 95);
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 160);
   scene.add(new THREE.HemisphereLight(0xe3f4ff, 0x314859, 2.0));
