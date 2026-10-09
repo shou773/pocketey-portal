@@ -1,0 +1,50 @@
+name: Tilt FrontSide comparison
+
+on:
+  push:
+    branches: [codex/tilt-front-side-comparison]
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+      TILT_BASELINE_SHA: aed68c9933c281a62401535fb5822156cdb335d6
+      TILT_BASELINE_DIR: ${{ runner.temp }}/tilt-front-side-baseline
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Provide the same real Linux audio clock as Games quality
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=pocketey_test_audio
+          pactl set-default-sink pocketey_test_audio
+          pactl info
+      - name: Prepare the exact PR 29 baseline with shared dependencies
+        run: |
+          mkdir -p "$TILT_BASELINE_DIR"
+          git archive "$TILT_BASELINE_SHA" | tar -x -C "$TILT_BASELINE_DIR"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$TILT_BASELINE_DIR/node_modules"
+      - name: Build both variants, run six native samples, then capture diagnostic scenes
+        run: node scripts/tilt-front-side-comparison.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tilt-front-side-comparison-${{ github.sha }}
+          path: test-results/tilt-front-side-comparison/
+          if-no-files-found: error
+          retention-days: 14

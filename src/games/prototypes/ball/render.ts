@@ -58,7 +58,7 @@ export function createView(canvas: HTMLCanvasElement) {
   const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 160);
   scene.add(new THREE.HemisphereLight(0xe3f4ff, 0x314859, 2.0));
   const sun = new THREE.DirectionalLight(0xfff1dc, 2.1); sun.position.set(-6, 14, 8); scene.add(sun);
-  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.46, metalness: 0, side: THREE.DoubleSide });
+  const roadMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.46, metalness: 0, side: THREE.FrontSide });
   const sideMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
   const gardenMaterial = new THREE.MeshLambertMaterial({ vertexColors: true });
   const distantMaterial = new THREE.MeshLambertMaterial({ color: 0xa6b6bb });
