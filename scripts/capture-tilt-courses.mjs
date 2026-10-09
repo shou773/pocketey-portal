@@ -15,7 +15,8 @@ const servers=[await serve(before,4356),await serve(path.resolve('dist'),4357)];
 async function fixedCourseComparison(browser,port){
  const results=[];
  for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
-  const context=await browser.newContext({viewport,deviceScaleFactor:1,hasTouch:true,locale:'en-US'});
+  const touch=viewport.width<700;
+  const context=await browser.newContext({viewport,deviceScaleFactor:1,hasTouch:touch,isMobile:touch,locale:'en-US'});
   try{
    const page=await context.newPage();
    const loaded=Promise.all(['observatory.glb','wind-rock.glb'].map(name=>page.waitForResponse(r=>r.url().endsWith(name)&&r.status()===200)));
@@ -26,9 +27,9 @@ async function fixedCourseComparison(browser,port){
     await new Promise(resolve=>{function frame(now){intervals.push(now-previous);previous=now;if(intervals.length<180)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});
     const sorted=intervals.slice(10).sort((a,b)=>a-b),canvas=document.querySelector('canvas'),gl=canvas.getContext('webgl2'),ext=gl.getExtension('WEBGL_debug_renderer_info');
     const fps=1000/(sorted.reduce((a,b)=>a+b,0)/sorted.length),p95=sorted[Math.floor(sorted.length*.95)];
-    return {fps,p95,passesExistingBudget:fps>=45&&p95<=40,intervals,framebuffer:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),state:{...document.querySelector('#tilttrail').dataset}};
+    return {hover:matchMedia('(hover:hover)').matches,finePointer:matchMedia('(pointer:fine)').matches,maxTouchPoints:navigator.maxTouchPoints,fps,p95,passesExistingBudget:fps>=45&&p95<=40,intervals,framebuffer:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),state:{...document.querySelector('#tilttrail').dataset}};
    });
-   await page.keyboard.up('Space');results.push({viewport,...result});
+   await page.keyboard.up('Space');results.push({viewport,hasTouch:touch,isMobile:touch,...result});
    if(result.state.phase!=='playing')throw new Error('Fixed course3 timing interrupted');
   }finally{await context.close();}
  }

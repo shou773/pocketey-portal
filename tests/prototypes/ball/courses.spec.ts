@@ -45,6 +45,7 @@ test('five-course menu stays reachable at320x568 and landscape in both languages
     for(const lang of ['en','ja']){
       await page.locator(`[data-language="${lang}"]`).click();
       const overlay=page.locator('#tt-overlay');await overlay.evaluate(el=>el.scrollTop=0);
+      for(const card of await page.locator('#tt-stages button').all()){const box=await card.boundingBox();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(viewport.width);}
       await page.screenshot({path:`${evidence}/menu-${viewport.width}-${lang}-top.png`});
       await page.getByRole('button',{name:lang==='en'?'Play this stage':'このステージを遊ぶ',exact:true}).scrollIntoViewIfNeeded();
       const action=await page.getByRole('button',{name:lang==='en'?'Play this stage':'このステージを遊ぶ',exact:true}).boundingBox();expect(action!.y).toBeGreaterThanOrEqual(0);expect(action!.y+action!.height).toBeLessThanOrEqual(viewport.height);
