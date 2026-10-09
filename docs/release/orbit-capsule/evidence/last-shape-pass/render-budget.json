@@ -1,0 +1,126 @@
+{
+  "runtimeCommit": "956d05ca2f4867b3c35c726a1941a713e2c52d2c",
+  "records": [
+    {
+      "name": "after-desktop-approach",
+      "sameStateCameraAndFramebuffer": true,
+      "main": {
+        "calls": 9,
+        "triangles": 7724,
+        "geometries": 9
+      },
+      "previousDraft": {
+        "calls": 8,
+        "triangles": 5696,
+        "geometries": 8
+      },
+      "lastPass": {
+        "calls": 8,
+        "triangles": 6766,
+        "geometries": 8
+      },
+      "insideMainGeometryBudget": true
+    },
+    {
+      "name": "after-desktop-gap",
+      "sameStateCameraAndFramebuffer": true,
+      "main": {
+        "calls": 8,
+        "triangles": 7704,
+        "geometries": 8
+      },
+      "previousDraft": {
+        "calls": 7,
+        "triangles": 5676,
+        "geometries": 7
+      },
+      "lastPass": {
+        "calls": 7,
+        "triangles": 6746,
+        "geometries": 7
+      },
+      "insideMainGeometryBudget": true
+    },
+    {
+      "name": "after-desktop-stage3",
+      "sameStateCameraAndFramebuffer": true,
+      "main": {
+        "calls": 9,
+        "triangles": 8700,
+        "geometries": 9
+      },
+      "previousDraft": {
+        "calls": 8,
+        "triangles": 6552,
+        "geometries": 8
+      },
+      "lastPass": {
+        "calls": 8,
+        "triangles": 8206,
+        "geometries": 8
+      },
+      "insideMainGeometryBudget": true
+    },
+    {
+      "name": "after-mobile-approach",
+      "sameStateCameraAndFramebuffer": true,
+      "main": {
+        "calls": 9,
+        "triangles": 7724,
+        "geometries": 9
+      },
+      "previousDraft": {
+        "calls": 8,
+        "triangles": 5696,
+        "geometries": 8
+      },
+      "lastPass": {
+        "calls": 8,
+        "triangles": 6766,
+        "geometries": 8
+      },
+      "insideMainGeometryBudget": true
+    },
+    {
+      "name": "after-mobile-gap",
+      "sameStateCameraAndFramebuffer": true,
+      "main": {
+        "calls": 8,
+        "triangles": 7704,
+        "geometries": 8
+      },
+      "previousDraft": {
+        "calls": 7,
+        "triangles": 5676,
+        "geometries": 7
+      },
+      "lastPass": {
+        "calls": 7,
+        "triangles": 6746,
+        "geometries": 7
+      },
+      "insideMainGeometryBudget": true
+    },
+    {
+      "name": "after-mobile-stage3",
+      "sameStateCameraAndFramebuffer": true,
+      "main": {
+        "calls": 9,
+        "triangles": 8700,
+        "geometries": 9
+      },
+      "previousDraft": {
+        "calls": 8,
+        "triangles": 6552,
+        "geometries": 8
+      },
+      "lastPass": {
+        "calls": 8,
+        "triangles": 8206,
+        "geometries": 8
+      },
+      "insideMainGeometryBudget": true
+    }
+  ],
+  "scope": "Six fixed-state WebGL renders. Counts only; no frame-rate or ordinary-input acceptance claim."
+}

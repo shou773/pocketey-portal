@@ -6,7 +6,7 @@ import type { Kind } from './model';
 // Only the selected files are requested. Physics never waits for art: every
 // object has a procedural fallback, including failed textures or malformed GLBs.
 export const artNames = {
-  orbit: ['craft_speederA', 'platform_small', 'meteor', 'rock'],
+  orbit: ['meteor', 'rock'],
   amber: ['character-oodi', 'block-grass-low-long', 'tree', 'rocks', 'flowers']
 } as const;
 export type Art = Map<string, GLTF>;
@@ -52,7 +52,7 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
           if (!materials.has(source)) {
             const m = source as T.MeshStandardMaterial;
             if (kind === 'amber' && !m.map) throw new Error('Required colormap missing');
-            const color = name === 'platform_small' ? new T.Color(m.name === 'metalRed' ? 0x426272 : m.name === 'metal' ? 0x708695 : 0x344b60) : m.color;
+            const color = m.color;
             let result: T.MeshLambertMaterial | T.ShaderMaterial = new T.MeshLambertMaterial({ color, map: kind === 'amber' ? null : m.map, vertexColors: kind === 'amber' || m.vertexColors, side: ['character-oodi', 'block-grass-low-long', 'rocks'].includes(name) ? T.FrontSide : m.side, transparent: m.transparent, opacity: m.opacity });
             // This exported rig binds every vertex to one bone in channel X.
             // Validate that fact before omitting the three zero-weight fetches;
@@ -76,7 +76,7 @@ export async function loadArt(kind: Kind, canvas: HTMLCanvasElement): Promise<Ar
               result.customProgramCacheKey = ()=>'single-bone-uniforms-v2-'+count;
               if(kind==='amber' && matrices) {
                 result=new T.ShaderMaterial({vertexColors:true,side:T.FrontSide,
-                  uniforms:{artBones:{value:matrices},artSky:{value:new T.Color(0xe9f5ff)},artGround:{value:new T.Color(0x91745b)},artSun:{value:new T.Color(0xffe4c5)},paintFog:{value:new T.Color(0xe9b391)},tint:{value:color}},
+                  uniforms:{artBones:{value:matrices},artSky:{value:new T.Color(0xffefd6)},artGround:{value:new T.Color(0x80738b)},artSun:{value:new T.Color(0xffe3b6)},paintFog:{value:new T.Color(0xe9b391)},tint:{value:color}},
                   // Animate the original skinned normals/positions, then use
                   // Gouraud Lambert lighting and vertex fog like the static
                   // batches. The authored rig is flat-faced and single-bone;
@@ -181,7 +181,7 @@ export function batchStatic(group: T.Group, kind: Kind) {
       // The batch shader applies the original fog limits and sRGB output at
       // vertices, retaining inexpensive interpolated flat-face colors.
       const backColors = new Float32Array(colors.length), normals = geometry.getAttribute('normal');
-      const sky = new T.Color(0xe9f5ff), ground = new T.Color(kind==='orbit'?0x384b70:0x91745b), sun = new T.Color(0xffe4c5);
+      const sky = new T.Color(kind==='orbit'?0xe9f5ff:0xffefd6), ground = new T.Color(kind==='orbit'?0x384b70:0x80738b), sun = new T.Color(kind==='orbit'?0xffe4c5:0xffe3b6);
       const direction = new T.Vector3(-8,15,5).normalize();
       for (let i=0;i<colors.length/3;i++) {
         const r=colors[i*3],g=colors[i*3+1],b=colors[i*3+2];
@@ -245,11 +245,14 @@ export function placeGrass(parent:T.Group, art:Art, mid:number, top:number, leng
 
 export function createSky(kind: Kind) {
   const sky = new T.Group();
+  // Amber's opaque world writes depth first; retain the same projected sky
+  // gradient only where the depth buffer is still clear.
+  if (kind === 'amber') sky.renderOrder = 100;
   const geometry = new T.SphereGeometry(120, 24, 16);
   const colors: number[] = [], positions = geometry.attributes.position;
-  const top = new T.Color(kind === 'orbit' ? 0x080f29 : 0x405672);
+  const top = new T.Color(kind === 'orbit' ? 0x080f29 : 0xd89d94);
   const horizon = new T.Color(kind === 'orbit' ? 0x22385b : 0xffd9ad);
-  const bottom = new T.Color(kind === 'orbit' ? 0x090f22 : 0xd59377);
+  const bottom = new T.Color(kind === 'orbit' ? 0x090f22 : 0xe3ad91);
   for (let i = 0; i < positions.count; i++) {
     const y = positions.getY(i) / 120;
     const color = y >= 0 ? horizon.clone().lerp(top, Math.min(1, y * (kind === 'orbit' ? 2.4 : 6.5))) : horizon.clone().lerp(bottom, Math.min(1, -y * 3));
@@ -260,7 +263,8 @@ export function createSky(kind: Kind) {
     side:T.BackSide, vertexColors:true, depthWrite:false,
     // Colors are converted once on the CPU; sky pixels need no lighting,
     // texture fetches or per-fragment color-space conversion.
-    vertexShader:'varying vec3 skyColor; void main() { skyColor = color; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    // Pin Amber behind even the canyon geometry outside the sky sphere.
+    vertexShader:'varying vec3 skyColor; void main() { skyColor = color; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); '+(kind === 'amber' ? 'gl_Position.z = gl_Position.w; ' : '')+'}',
     fragmentShader:'varying vec3 skyColor; void main() { gl_FragColor = vec4(skyColor, 1.0); }'
   })));
   return sky;

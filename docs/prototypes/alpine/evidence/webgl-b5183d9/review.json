@@ -1,0 +1,178 @@
+{
+  "head": "b5183d9835b7b9c2ddbbbbd0e371c7a22639e5f0",
+  "sourceEdits": false,
+  "clock": "ordinary wall clock; no interception or mocked renderer",
+  "browserFlags": [
+    "--no-sandbox",
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader"
+  ],
+  "errors": [],
+  "checks": {
+    "touchQueued": true,
+    "firstTurn": true,
+    "pause": true,
+    "resume": true,
+    "narrowNoHorizontalOverflow": true,
+    "actionsVisible": true,
+    "webgl": true,
+    "noPageErrors": true
+  },
+  "browser": "151.0.7922.173",
+  "ready": {
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "phase": "ready",
+    "z": "0.000",
+    "x": "0.000",
+    "gate": "0",
+    "queued": "null",
+    "heading": "0",
+    "reason": "",
+    "window": "false",
+    "drawCalls": "46",
+    "triangles": "8362"
+  },
+  "webgl": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "canvasWidth": 390,
+    "canvasHeight": 712
+  },
+  "queued": {
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "phase": "playing",
+    "z": "5.967",
+    "x": "0.000",
+    "gate": "0",
+    "queued": "-1",
+    "heading": "0",
+    "reason": "",
+    "window": "true",
+    "drawCalls": "42",
+    "triangles": "7938"
+  },
+  "afterTurn": {
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "phase": "playing",
+    "z": "10.233",
+    "x": "-0.233",
+    "gate": "1",
+    "queued": "null",
+    "heading": "-1",
+    "reason": "",
+    "window": "false",
+    "drawCalls": "42",
+    "triangles": "7938"
+  },
+  "paused": {
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "phase": "paused",
+    "z": "10.700",
+    "x": "-0.700",
+    "gate": "1",
+    "queued": "null",
+    "heading": "-1",
+    "reason": "",
+    "window": "false",
+    "drawCalls": "42",
+    "triangles": "7938"
+  },
+  "pauseLater": {
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "phase": "paused",
+    "z": "10.700",
+    "x": "-0.700",
+    "gate": "1",
+    "queued": "null",
+    "heading": "-1",
+    "reason": "",
+    "window": "false",
+    "drawCalls": "42",
+    "triangles": "7938"
+  },
+  "narrowUI": {
+    "width": 320,
+    "height": 568,
+    "scrollWidth": 320,
+    "actions": [
+      {
+        "text": "再開",
+        "x": 29,
+        "y": 339.40625,
+        "width": 262,
+        "height": 44
+      },
+      {
+        "text": "最初から",
+        "x": 29,
+        "y": 391.40625,
+        "width": 262,
+        "height": 44
+      }
+    ],
+    "controls": [
+      {
+        "x": 16,
+        "y": 514,
+        "width": 70,
+        "height": 44
+      },
+      {
+        "x": 234,
+        "y": 514,
+        "width": 70,
+        "height": 44
+      }
+    ]
+  },
+  "final": {
+    "audio": "off",
+    "music": "idle",
+    "audioSamples": "0",
+    "audioVoices": "0",
+    "audioMaxVoices": "0",
+    "audioLoops": "0",
+    "audioStarts": "0",
+    "phase": "playing",
+    "z": "11.600",
+    "x": "-1.600",
+    "gate": "1",
+    "queued": "null",
+    "heading": "-1",
+    "reason": "",
+    "window": "false",
+    "drawCalls": "42",
+    "triangles": "7938"
+  },
+  "success": true
+}

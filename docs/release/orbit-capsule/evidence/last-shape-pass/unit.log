@@ -1,0 +1,25 @@
+✔ fixed-step accumulator yields same movement and jump at 30/60/120 Hz (24.050411ms)
+✔ coyote jump after leaving edge works, late jump cannot fly (0.483524ms)
+✔ buffered jump launches on landing, pressing in air does not double jump (0.569944ms)
+✔ fall and pillar collision fail, raised-platform sides are solid (13.896059ms)
+✔ all stages are feasible with ordinary movement and jumps in simulation (123.760285ms)
+✔ save sanitation tolerates corrupt values and bounds unlocks (4.653992ms)
+✔ Orbit side pillars block fixed-edge bypasses while alternating routes remain feasible (11.269675ms)
+✔ course refresh retains legacy records and separates challenge records (7.99159ms)
+✔ each gap has a usable running-jump window, including edge-spike combinations (91.802471ms)
+✔ Orbit capsule retains the published visual envelope in one opaque batch (33.503088ms)
+✔ Orbit shutter decoration stays inside every original collider and the face is closed (35.414988ms)
+✔ Orbit platform panels and skirts end at the original gap boundaries (45.380575ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1487.222011
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

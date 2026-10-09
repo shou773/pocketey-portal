@@ -5,7 +5,18 @@ export async function loadAmberLandmark() {
   try {
     const { scene } = await new GLTFLoader().loadAsync('/games/assets/amber/stone-arch.glb');
     scene.traverse(object => {
-      if (object instanceof T.Mesh) object.material = new T.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
+      if (object instanceof T.Mesh) {
+        // Keep the authored large stone blocks and their seams; warm their
+        // existing paint instead of adding masonry meshes or nearer supports.
+        const colors = object.geometry.getAttribute('color'), normals = object.geometry.getAttribute('normal');
+        if (colors) for (let i = 0; i < colors.count; i++) {
+          const luminance = colors.getX(i) * .3 + colors.getY(i) * .5 + colors.getZ(i) * .2;
+          const color = new T.Color(0x9c8076).lerp(new T.Color(0xd9c59e), T.MathUtils.clamp(luminance * 1.7, 0, 1));
+          if (normals.getY(i) > .6) color.lerp(new T.Color(0xeee0bd), .16);
+          colors.setXYZ(i, color.r, color.g, color.b);
+        }
+        object.material = new T.MeshLambertMaterial({ color: 0xffffff, vertexColors: true });
+      }
     });
     return scene;
   } catch { return undefined; } // The original procedural arch remains usable.
@@ -41,8 +52,11 @@ function strata(length: number, depth: number, rings: { y: number; inset: number
     const a = ring(r), b = ring(r + 1);
     for (let i = 0; i < 8; i++) {
       const j = (i + 1) % 8;
-      triangle(a[i], a[j], b[j], rings[r + 1].color);
-      triangle(a[i], b[j], b[i], rings[r + 1].color);
+      // Broad, quiet face variation on the same triangles gives each layer
+      // weight without stones, bumps, or changes to the platform outline.
+      const face = new T.Color(rings[r + 1].color);
+      triangle(a[i], a[j], b[j], face.clone().multiplyScalar(i % 3 === 0 ? .96 : 1).getHex());
+      triangle(a[i], b[j], b[i], face.clone().multiplyScalar(i % 3 === 1 ? 1.035 : .985).getHex());
     }
   }
   const geometry = new T.BufferGeometry();
@@ -55,13 +69,13 @@ function strata(length: number, depth: number, rings: { y: number; inset: number
 const painted = new T.MeshLambertMaterial({ vertexColors: true });
 export function placeSandstone(parent: T.Group, mid: number, top: number, length: number) {
   const geometry = strata(length, 3.4, [
-    { y: 0, inset: 0, color: 0xf1d8a2 },
-    { y: -.18, inset: 0, color: 0xe1b785 },
-    { y: -.32, inset: .05, color: 0xa56958 },
-    { y: -.68, inset: .08, color: 0xc58b70 },
-    { y: -.78, inset: .1, color: 0xe2b08a },
-    { y: -1.45, inset: .32, color: 0xa76c60 },
-    { y: -1.95, inset: .65, color: 0x895a59 }
+    { y: 0, inset: 0, color: 0xedd2a0 },
+    { y: -.18, inset: 0, color: 0xdab17c },
+    { y: -.32, inset: .05, color: 0xa86e53 },
+    { y: -.68, inset: .08, color: 0xc18c61 },
+    { y: -.78, inset: .1, color: 0xd4a776 },
+    { y: -1.45, inset: .32, color: 0xa66a54 },
+    { y: -1.95, inset: .65, color: 0x855a58 }
   ]);
   const mesh = new T.Mesh(geometry, painted); mesh.position.set(mid, top, 0); parent.add(mesh);
   // batchStatic clones this one-off geometry; release it after adoption.
@@ -99,17 +113,19 @@ archGeometry.setIndex(Array.from({ length: archGeometry.getAttribute('position')
 // Their broad silhouettes need much less geometry than near mesas.
 const farGeometry = strata(16, 8, [
   { y: 0, inset: 2.2, color: 0xffffff },
-  { y: -1.4, inset: .2, color: 0xffffff },
-  { y: -60, inset: 1, color: 0xffffff }
+  { y: -1.4, inset: .2, color: 0xf1dce0 },
+  { y: -60, inset: 1, color: 0xe2c4c6 }
 ]);
 export function createAmberCanyon(horizon: T.Group, landmark?: T.Object3D) {
-  const farMaterials = [0xd5c4d1, 0xcab2ba].map(color => new T.MeshBasicMaterial({ color }));
-  for (let row = 0; row < 2; row++) for (let i = -2; i < 8; i++) {
+  const farMaterials = [0xe0c6cc, 0xd3b4bc, 0xc8a5b0].map(color => new T.MeshBasicMaterial({ color, vertexColors: true }));
+  // These opaque layers are merged in insertion order. Near rows first let
+  // depth testing reject covered far-row fragments without changing the view.
+  for (let row = 2; row >= 0; row--) for (let i = -2; i < 8; i++) {
     const mesh = new T.Mesh(farGeometry, farMaterials[row]);
-    mesh.position.set(i * 16 + row * 8, (i + 2) % 3 * 1.3, -48 + row * 15);
+    mesh.position.set(i * 16 + (row - 1) * 8, (i + 2) % 3 * 1.3 + (2 - row) * 1.1, -63 + row * 15);
     mesh.scale.set(1.1, 1, 1.2); horizon.add(mesh);
   }
-  const archMaterial = new T.MeshLambertMaterial({ color: 0xc49caa });
+  const archMaterial = new T.MeshLambertMaterial({ color: 0xc7ad8c });
   for (const x of [6, 35, 67, 99]) {
     const formation = new T.Group(); formation.position.set(x, -2, -19); formation.rotation.y = -.16;
     const arch = landmark ? landmark.clone(true) : new T.Mesh(archGeometry, archMaterial);

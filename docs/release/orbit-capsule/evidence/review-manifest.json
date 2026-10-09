@@ -1,0 +1,28 @@
+{
+  "base": "7adf12ab464cfbb8e9d4e04917ad9f618a1a5f4b",
+  "reviewedRuntimeCommit": "956d05ca2f4867b3c35c726a1941a713e2c52d2c",
+  "method": "Final requested shape pass only: production build, TypeScript, 12 model/geometry tests, six fixed-state renderer captures and one native production-page screenshot. No repetition of the failed 9 browser cases or timing rounds. Previous 47537b4 failures are retained; final ordinary-input/performance validation is delegated to the parent environment.",
+  "productionJavaScriptSHA256": {
+    "dist/_astro/ActionGame.astro_astro_type_script_index_0_lang.B_GMrhUi.js": "1928937072a125ec8eb2cdcb0c87c8f61c5ec917425824684c929e039beb8a49",
+    "dist/_astro/GLTFLoader.C-CBXnQG.js": "bfdb4b8172484683217b9ce211a36e36f58b5fb86922c91e2e46d930e02267a1",
+    "dist/_astro/contact.astro_astro_type_script_index_0_lang.DVY2PwA7.js": "9e3fdc1c76e16a4e193dde86c185160c37d6ddd8e748ed5b5cfe3a7c433ce229",
+    "dist/_astro/tilttrail.astro_astro_type_script_index_0_lang.D9116dDG.js": "371eea7a542ca497f387ba528adbb365ee3e21f5f333c1779793f5273e5150e9",
+    "dist/_astro/BaseLayout.astro_astro_type_script_index_0_lang.f-Bx0cor.js": "7f1cae817c58cb8f1a13f860320b0edd2d7bf3ff23b3e982aff41dd37d043a16",
+    "dist/_astro/pulse-drift.astro_astro_type_script_index_0_lang.4SaPNb1c.js": "017cfbb246175e21bc7add8d3489c97e361cd3eb2b66c7bb17ba4d4854e95987",
+    "dist/_astro/locale.B1rKA6B7.js": "9bc5859e9796f0fe659f6febdabaa6e074dd73939426542c3aa92cbc6884f841"
+  },
+  "unchangedValidationConfigurationSHA256": {
+    "playwright.config.ts": "bb21fcbbe77f327bbf0ba40e1de25589f61da0d08b505189cd69019ef68d3301",
+    "playwright.baseline.config.ts": "bdc22fb6eb8e3d2b17538c5bdfb7bbe5a3148cecf8e3fe8e812369ca77423bfa",
+    "tests/games/browser.spec.ts": "5dce177152ae796ad5434f85e5822b75e9bb4cbb42d162f6ef74bd946d208e6e",
+    "tests/games/input.ts": "d94d8efec495a27b0fb537060bd1ac1d68c5537d127eed736291b8532f18edcf"
+  },
+  "limitedValidation": {
+    "unitPassed": 12,
+    "fixedWebGLRendersPassed": 6,
+    "nativeScreenshotRunning": true,
+    "fullBrowserTestsRerun": false,
+    "frameTimingRerun": false,
+    "parentAcceptancePending": true
+  }
+}
