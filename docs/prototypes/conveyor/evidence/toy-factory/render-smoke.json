@@ -1,0 +1,41 @@
+{
+  "browser": "151.0.7922.173",
+  "environment": "Headless Chromium, SwiftShader software renderer; mobile viewport emulation, not a phone GPU benchmark",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "deviceScaleFactor": 1,
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "canvas": {
+    "width": 376,
+    "height": 360
+  },
+  "sampleMs": 2004,
+  "measuredDraws": 41,
+  "rafIntervalMs": {
+    "median": 50,
+    "p95": 99.89999999999964,
+    "max": 116.69999999999982
+  },
+  "cpuSubmissionMs": {
+    "median": 1.1,
+    "p95": 3.5
+  },
+  "drawCalls": 77,
+  "triangles": 12676,
+  "selected": {
+    "drawCalls": 81,
+    "triangles": 13108
+  },
+  "idleDraws": 0,
+  "errors": [],
+  "designBudget": {
+    "drawCalls": 90,
+    "triangles": 15000,
+    "pixelRatioCap": 1.5,
+    "activeFpsCap": 30,
+    "shadowMaps": false,
+    "postprocessing": false
+  }
+}

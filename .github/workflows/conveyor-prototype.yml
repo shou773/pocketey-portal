@@ -1,0 +1,32 @@
+name: Conveyor prototype
+on:
+  pull_request:
+    paths:
+      - 'src/games/prototypes/conveyor/**'
+      - 'src/pages/prototypes/conveyor.astro'
+      - 'tests/prototypes/conveyor/**'
+      - '.github/workflows/conveyor-prototype.yml'
+permissions:
+  contents: read
+jobs:
+  interaction:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx tsx --test tests/prototypes/conveyor/model.test.ts
+      - run: npm run check:games && npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --config tests/prototypes/conveyor/playwright.config.ts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: conveyor-interaction-evidence
+          path: test-results/conveyor/
