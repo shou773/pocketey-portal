@@ -1,0 +1,9 @@
+{
+  "browser": "151.0.7922.173",
+  "rendering": "Real Three.js / SwiftShader",
+  "clock": "Controlled for repeatable screenshots; NOT a performance result",
+  "errors": [],
+  "screenshots": [],
+  "passed": false,
+  "failure": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4341/prototypes/alpine-drive/?lang=ja\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4341/prototypes/alpine-drive/?lang=ja\", waiting until \"load\"\u001b[22m\n"
+}

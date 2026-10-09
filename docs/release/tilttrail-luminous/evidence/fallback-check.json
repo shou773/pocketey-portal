@@ -1,0 +1,88 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "blocked": [
+        "wind-rock.glb"
+      ],
+      "state": {
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "phase": "playing",
+        "stage": "0",
+        "x": "0.0000",
+        "z": "4.0956",
+        "vx": "0.0000",
+        "time": "2.0167",
+        "speed": "2.1495",
+        "drawCalls": "13",
+        "triangles": "4656"
+      },
+      "errors": [],
+      "failed": [
+        "http://127.0.0.1:4381/games/tilttrail/models/wind-rock.glb"
+      ]
+    },
+    {
+      "blocked": [
+        "observatory.glb"
+      ],
+      "state": {
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "phase": "playing",
+        "stage": "0",
+        "x": "0.0000",
+        "z": "4.4711",
+        "vx": "0.0000",
+        "time": "2.0500",
+        "speed": "2.1509",
+        "drawCalls": "13",
+        "triangles": "4344"
+      },
+      "errors": [],
+      "failed": [
+        "http://127.0.0.1:4381/games/tilttrail/models/observatory.glb"
+      ]
+    },
+    {
+      "blocked": [
+        "wind-rock.glb",
+        "observatory.glb"
+      ],
+      "state": {
+        "audio": "off",
+        "music": "idle",
+        "audioSamples": "0",
+        "audioVoices": "0",
+        "audioMaxVoices": "0",
+        "audioLoops": "0",
+        "audioStarts": "0",
+        "phase": "playing",
+        "stage": "0",
+        "x": "0.0000",
+        "z": "3.9866",
+        "vx": "0.0000",
+        "time": "2.0083",
+        "speed": "2.1491",
+        "drawCalls": "13",
+        "triangles": "4200"
+      },
+      "errors": [],
+      "failed": [
+        "http://127.0.0.1:4381/games/tilttrail/models/observatory.glb",
+        "http://127.0.0.1:4381/games/tilttrail/models/wind-rock.glb"
+      ]
+    }
+  ]
+}

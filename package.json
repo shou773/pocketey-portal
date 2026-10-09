@@ -8,7 +8,9 @@
     "build": "astro build && node scripts/check-portal.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "tsx --test tests/games/model.test.ts tests/prototypes/shooter-model.test.ts tests/prototypes/ball/model.test.ts",
+    "test": "tsx --test tests/games/model.test.ts tests/games/orbit-art.test.ts tests/prototypes/shooter-model.test.ts tests/prototypes/ball/model.test.ts tests/prototypes/alpine/model.test.ts tests/prototypes/alpine/scene.test.ts tests/prototypes/conveyor/model.test.ts",
+    "test:alpine:input": "playwright test --config tests/prototypes/alpine/playwright.config.ts",
+    "test:alpine:render": "node tests/prototypes/alpine/render-smoke.mjs",
     "test:browser": "playwright test",
     "check:games": "tsc --noEmit -p tsconfig.games.json",
     "test:portal": "playwright test --config playwright.portal.config.ts"

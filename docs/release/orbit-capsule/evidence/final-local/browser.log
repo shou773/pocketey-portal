@@ -1,0 +1,159 @@
+[WebServer] (node:7100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:7122) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 9 tests using 1 worker
+
+(node:7134) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh (17.0s)
+(node:7282) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+orbit keyboard {
+  fps: 19.655917983095904,
+  p95: 100,
+  p99: 150,
+  max: 183.29999999999563
+}
+  ✘  2 tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence (1.2m)
+(node:7456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence (14.0s)
+(node:7604) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 tests/games/browser.spec.ts:57:1 › failure/retry, pause/focus clears held input, restart cycles, orientation (12.2s)
+  ✘  5 tests/games/browser.spec.ts:97:46 › orbit: WebGL context loss freezes play until reload and preserves saved data (7.1s)
+(node:7793) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  6 tests/games/browser.spec.ts:142:46 › orbit: 320x568 menus and clear screen remain scroll-accessible (26.1s)
+  ✓  7 tests/games/browser.spec.ts:180:46 › orbit: simulated notch safe areas keep all controls inside every edge (4.2s)
+  ✓  8 tests/games/browser.spec.ts:229:2 › orbit: selected 3D art loads, animation and normal controls remain usable (4.5s)
+  ✓  9 tests/games/browser.spec.ts:283:2 › orbit: failed GLBs retain fallback, controls, clear and saves (20.1s)
+
+
+  1) tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh
+
+    Error: orbit/1 {"kind":"orbit","audio":"running","music":"ready","audioSamples":"9","audioVoices":"1","audioMaxVoices":"2","audioLoops":"0","audioStarts":"2","mode":"result","status":"dead","x":"53.375","y":"-4.015","z":"-0.125","grounded":"false","jumps":"1","geometries":"8","musicCodec":"ogg"}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "clear"
+    Received: "dead"
+
+       at input.ts:39
+
+      37 |   await page.waitForTimeout(25);
+      38 |  }
+    > 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');
+         |                                                                                                                                     ^
+      40 | }
+      41 |
+        at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:24:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-licensed-UI-artwor-a9b62-survives-the-visual-refresh/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-licensed-UI-artwor-a9b62-survives-the-visual-refresh/error-context.md
+
+  2) tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence
+
+    Error: expect(received).toBeGreaterThanOrEqual(expected)
+
+    Expected: >= 45
+    Received:    19.655917983095904
+
+      44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+      45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                                 ^
+      47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      49 |  }
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:46:305
+
+    Error: expect(received).toBeLessThanOrEqual(expected)
+
+    Expected: <= 40
+    Received:    100
+
+      44 |   finally { fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(inputTrace)); }
+      45 |   if(measurement) fs.writeFileSync(info.outputPath('environment.json'),JSON.stringify({browser:browser.version(),contexts:browser.contexts().length,pages:page.context().pages().length,...await page.evaluate(()=>{const canvas=document.querySelector('canvas')!,gl=canvas.getContext('webgl2')!,ext=gl.getExtension('WEBGL_debug_renderer_info');return{viewport:[innerWidth,innerHeight],dpr:devicePixelRatio,canvas:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)};})},null,2));
+    > 46 |   if(measurement){const performance=await measurement;fs.writeFileSync(info.outputPath('stage3-performance.json'),JSON.stringify(performance,null,2));console.log(kind,touch?'touch':'keyboard',{fps:performance.fps,p95:performance.p95,p99:performance.p99,max:performance.max});expect.soft(performance.fps).toBeGreaterThanOrEqual(45);expect.soft(performance.p95).toBeLessThanOrEqual(40);}
+         |                                                                                                                                                                                                                                                                                                                                                                         ^
+      47 |   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
+      48 |   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
+      49 |  }
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:46:361
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-orbit-keyboard-thr-141d2-nput-unlock-and-persistence/error-context.md
+
+  3) tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence
+
+    Error: orbit/1 {"kind":"orbit","audio":"running","music":"ready","audioSamples":"9","audioVoices":"1","audioMaxVoices":"2","audioLoops":"0","audioStarts":"1","mode":"result","status":"dead","x":"53.375","y":"-4.015","z":"0.333","grounded":"false","jumps":"1","geometries":"8","musicCodec":"ogg"}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "clear"
+    Received: "dead"
+
+       at input.ts:39
+
+      37 |   await page.waitForTimeout(25);
+      38 |  }
+    > 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');
+         |                                                                                                                                     ^
+      40 | }
+      41 |
+        at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:43:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-orbit-touch-three--c2353-nput-unlock-and-persistence/error-context.md
+
+  4) tests/games/browser.spec.ts:97:46 › orbit: WebGL context loss freezes play until reload and preserves saved data
+
+    Error: orbit/1 {"kind":"orbit","audio":"running","music":"ready","audioSamples":"9","audioVoices":"1","audioMaxVoices":"2","audioLoops":"0","audioStarts":"1","mode":"result","status":"dead","x":"28.408","y":"-4.015","z":"-0.042","grounded":"false","jumps":"0","geometries":"8","musicCodec":"ogg"}
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "clear"
+    Received: "dead"
+
+       at input.ts:39
+
+      37 |   await page.waitForTimeout(25);
+      38 |  }
+    > 39 |  await input([]);await session?.detach();expect((await read(page)).status,`${kind}/${index+1} ${JSON.stringify(await read(page))}`).toBe('clear');
+         |                                                                                                                                     ^
+      40 | }
+      41 |
+        at play (/workspace/pocketey-portal/tests/games/input.ts:39:133)
+        at /workspace/pocketey-portal/tests/games/browser.spec.ts:101:2
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-orbit-WebGL-contex-f5e9f-ad-and-preserves-saved-data/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-orbit-WebGL-contex-f5e9f-ad-and-preserves-saved-data/error-context.md
+
+  4 failed
+    tests/games/browser.spec.ts:5:1 › licensed UI artwork loads and existing progress survives the visual refresh
+    tests/games/browser.spec.ts:31:2 › orbit-keyboard › three stages through normal input, unlock and persistence
+    tests/games/browser.spec.ts:31:2 › orbit-touch › three stages through normal input, unlock and persistence
+    tests/games/browser.spec.ts:97:46 › orbit: WebGL context loss freezes play until reload and preserves saved data
+  5 passed (3.2m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

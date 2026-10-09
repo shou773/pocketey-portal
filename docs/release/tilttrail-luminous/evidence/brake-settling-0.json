@@ -1,0 +1,27 @@
+{
+  "start": {
+    "phase": "playing",
+    "stage": 0,
+    "x": -0.5392,
+    "z": 0.5908,
+    "vx": -1.9798,
+    "speed": 2.3606,
+    "time": 0.4
+  },
+  "end": {
+    "phase": "playing",
+    "stage": 0,
+    "x": -1.2263,
+    "z": 3.7851,
+    "vx": -0.0334,
+    "speed": 2.1513,
+    "time": 1.8583
+  },
+  "elapsedSimulationSeconds": 1.4583,
+  "elapsedWallMilliseconds": 1478,
+  "requiredSimulationSeconds": 1.4,
+  "wallTimeoutMilliseconds": 5000,
+  "brakeSettled": true,
+  "brakeHeldAtEnd": "true",
+  "speedLimit": 2.2
+}

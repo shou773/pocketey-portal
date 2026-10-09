@@ -1,0 +1,24 @@
+[WebServer] (node:6484) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:6500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:6549) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 18:30:32 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+  ✓  1 tests/prototypes/alpine/input.spec.ts:36:1 › touch flicks clear the stage, save once, and retry resets every control (4.6s)
+[WebServer] 18:30:36 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+  ✓  2 tests/prototypes/alpine/input.spec.ts:48:1 › keyboard clears; missing input fails and retry remains playable (3.3s)
+[WebServer] 18:30:39 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+  ✓  3 tests/prototypes/alpine/input.spec.ts:53:1 › cancelled gesture, pause, and audio dialog cannot leak a queued turn (1.8s)
+[WebServer] 18:30:41 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+  ✓  4 tests/prototypes/alpine/input.spec.ts:66:1 › wrong direction fails; language and own audio settings persist without altering other games (1.5s)
+[WebServer] 18:30:43 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+[WebServer] 18:30:43 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+  ✓  5 tests/prototypes/alpine/input.spec.ts:78:1 › blocked storage and narrow layout leave instructions and controls usable (777ms)
+[WebServer] 18:30:44 [ERROR] [vite] The request url "/workspace/pocketey-portal/node_modules/astro/dist/runtime/client/dev-toolbar/entrypoint.js" is outside of Vite serving allow list.
+  ✓  6 tests/prototypes/alpine/input.spec.ts:86:1 › context loss freezes play and offers reload instead of a dead start button (770ms)
+
+  6 passed (18.3s)

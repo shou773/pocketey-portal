@@ -1,0 +1,24 @@
+✔ one authored route clears with all four ordinary turn commands (12.507439ms)
+✔ all early and all last-moment valid commands also clear (13.414945ms)
+✔ missed turn hits a block; a wrong turn hits the road edge (3.028314ms)
+✔ window boundaries, replacement, no stacking and exact commit line (0.29899ms)
+✔ a held/repeated direction cannot turn beyond the three headings (1.258096ms)
+✔ collision footprints agree at contact boundaries and before the goal (0.235893ms)
+✔ intended path has clearance for the full footprint at every sample (4.392089ms)
+✔ state is frozen outside play, retry reconstructs a clean state (2.051807ms)
+✔ 10/30/60/120 Hz simulation advances all pass without tunnelling (10.320162ms)
+✔ invalid elapsed time cannot change state; large jumps are bounded (1.288645ms)
+✔ flick rejects taps, vertical scroll, long drags; accepts both directions (1.081507ms)
+✔ malformed saves are optional and counts are sanitized (0.936938ms)
+✔ the complete car stays within the original collision footprint at all three headings (113.295703ms)
+✔ barrier mesh bounds match the existing obstacle rectangles without widening them (48.369376ms)
+✔ instanced scenery remains outside the road and the whole scene is below 20k triangles (72.912305ms)
+✔ fixed camera keeps the car near 70% and each imminent turn line visible in portrait (60.42499ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1269.566854

@@ -1,0 +1,38 @@
+[
+  {
+    name: 'after-desktop-approach',
+    stats: { calls: 8, triangles: 6766, geometries: 8 },
+    framebuffer: [ 889, 393 ],
+    errors: []
+  },
+  {
+    name: 'after-desktop-gap',
+    stats: { calls: 7, triangles: 6746, geometries: 7 },
+    framebuffer: [ 889, 393 ],
+    errors: []
+  },
+  {
+    name: 'after-desktop-stage3',
+    stats: { calls: 8, triangles: 8206, geometries: 8 },
+    framebuffer: [ 889, 393 ],
+    errors: []
+  },
+  {
+    name: 'after-mobile-approach',
+    stats: { calls: 8, triangles: 6766, geometries: 8 },
+    framebuffer: [ 390, 690 ],
+    errors: []
+  },
+  {
+    name: 'after-mobile-gap',
+    stats: { calls: 7, triangles: 6746, geometries: 7 },
+    framebuffer: [ 390, 690 ],
+    errors: []
+  },
+  {
+    name: 'after-mobile-stage3',
+    stats: { calls: 8, triangles: 8206, geometries: 8 },
+    framebuffer: [ 390, 690 ],
+    errors: []
+  }
+]

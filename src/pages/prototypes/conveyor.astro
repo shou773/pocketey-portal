@@ -1,0 +1,36 @@
+---
+import LocaleHead from '../../components/LocaleHead.astro';
+import LanguageSwitch from '../../components/LanguageSwitch.astro';
+import '../../games/prototypes/conveyor/style.css';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="robots" content="noindex,nofollow" /><meta name="theme-color" content="#faf5e9" />
+  <title data-ja="コンベア便 · Pocketey 試作" data-en="Parcel Turn · Pocketey prototype">Parcel Turn · Pocketey prototype</title>
+  <LocaleHead /><link rel="icon" href="/favicon.svg" />
+</head>
+<body>
+<main id="conveyor">
+  <header class="cv-header"><a href="/games/" aria-label="Pocketey games">POCKETEY<span> / LAB</span></a><LanguageSwitch /></header>
+  <div class="cv-title"><div><p id="cv-eyebrow">01 / 01 · PROTOTYPE</p><h1 id="cv-title">Parcel Turn</h1></div><div class="cv-sound-controls"><button id="cv-sound" type="button" aria-pressed="false">Sound OFF</button><button id="cv-settings" type="button" aria-label="Volume settings">♫</button></div></div>
+  <p class="cv-intro" id="cv-intro"></p>
+  <section class="cv-board" aria-label="Conveyor puzzle" id="cv-board">
+    <canvas id="cv-canvas" aria-hidden="true"></canvas>
+    <div id="cv-tiles" role="group" aria-label="Rotate conveyors"></div>
+    <span id="cv-in" class="cv-port-label">IN</span><span id="cv-out" class="cv-port-label">OUT</span>
+    <span class="cv-stage-tag">01</span><span id="cv-art-note" class="cv-art-note"></span>
+    <div id="cv-unavailable" hidden><p id="cv-unavailable-copy"></p><button id="cv-reload" type="button"></button></div>
+  </section>
+  <section class="cv-bottom">
+    <div class="cv-counter"><span id="cv-turns"></span><span id="cv-best"></span></div>
+    <div class="cv-feedback" aria-live="polite" aria-atomic="true"><strong id="cv-status"></strong><p id="cv-detail"></p></div>
+    <div class="cv-actions"><button id="cv-reset" type="button"></button><button id="cv-play" class="cv-primary" type="button"></button></div>
+    <details class="cv-rules"><summary id="cv-rules-title"></summary><p id="cv-rules-copy"></p></details>
+    <p id="cv-save" role="status"></p>
+  </section>
+  <dialog id="cv-audio"><h2 id="cv-audio-title"></h2><label><span id="cv-volume-label"></span><input id="cv-volume" type="range" min="0" max="100" step="5" /></label><p id="cv-audio-note"></p><button id="cv-audio-close" type="button"></button></dialog>
+</main>
+<script>import { boot } from '../../games/prototypes/conveyor/app'; boot();</script>
+</body></html>

@@ -1,7 +1,7 @@
 name: Games quality
 on:
   push:
-    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, codex/new-games-depth, main]
+    branches: [codex/orbit-and-amber, codex/game-ui-refresh, codex/bilingual-game-portal, codex/3d-art-refresh, codex/four-game-release, codex/new-games-depth, codex/six-game-integration-draft, main]
     paths:
       - 'src/**'
       - 'public/**'
@@ -155,19 +155,29 @@ jobs:
           node tests/prototypes/loss.mjs || status=1
           node tests/prototypes/performance.mjs || status=1
           exit "$status"
+      - name: Alpine ordinary-input lifecycle (controlled clock; rendering isolated)
+        id: alpine_input
+        continue-on-error: true
+        run: npm run test:alpine:input
+      - name: Alpine real WebGL clear, save, reload and retry
+        id: alpine_rendered
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/alpine/rendered.config.ts
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: four-game-audio-evidence
           path: test-results/
 
-      - name: Aggregate all four-game gate failures without skipping another game
+      - name: Aggregate gameplay gate failures without skipping another game
         if: always()
         env:
           AUDIO: ${{ steps.audio.outcome }}
           AUDIO_CROSS: ${{ steps.audio_cross.outcome }}
           TILT: ${{ steps.tilt.outcome }}
           PULSE: ${{ steps.pulse.outcome }}
+          ALPINE_INPUT: ${{ steps.alpine_input.outcome }}
+          ALPINE_RENDERED: ${{ steps.alpine_rendered.outcome }}
         run: |
-          printf 'audio=%s cross=%s tilt=%s pulse=%s\n' "$AUDIO" "$AUDIO_CROSS" "$TILT" "$PULSE"
-          test "$AUDIO" = success && test "$AUDIO_CROSS" = success && test "$TILT" = success && test "$PULSE" = success
+          printf 'audio=%s cross=%s tilt=%s pulse=%s alpine_input=%s alpine_rendered=%s\n' "$AUDIO" "$AUDIO_CROSS" "$TILT" "$PULSE" "$ALPINE_INPUT" "$ALPINE_RENDERED"
+          test "$AUDIO" = success && test "$AUDIO_CROSS" = success && test "$TILT" = success && test "$PULSE" = success && test "$ALPINE_INPUT" = success && test "$ALPINE_RENDERED" = success
