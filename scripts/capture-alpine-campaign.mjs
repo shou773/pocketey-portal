@@ -38,7 +38,7 @@ try {
       const approach=await page.locator('#alpine').evaluate(el=>({...el.dataset}));await page.screenshot({path:`${out}/${label}-course${course+1}-approach-${viewport.width}.png`});
       await writeFile(`${out}/${label}-course${course+1}-approach-${viewport.width}.json`,JSON.stringify({approach,afterCapture:await page.locator('#alpine').evaluate(el=>({...el.dataset})),note:'Separate native retry diagnostic. No held input during screenshot. Main metrics and clear came from the uninterrupted run.'},null,2));
       await page.keyboard.press('Escape');
-      if(label==='after'&&course<2){await page.getByRole('button',{name:'Courses',exact:true}).click();await page.locator(`[data-course="${course+1}"]`).click();}
+      if(label==='after'&&course<2){await page.getByRole('button',{name:'Courses',exact:true}).click();await page.locator(`#ad-courses button[data-course="${course+1}"]`).click();}
     }
     if(errors.length)throw new Error(errors.join('\n'));await context.close();
   }

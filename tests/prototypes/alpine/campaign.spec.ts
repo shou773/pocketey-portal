@@ -43,7 +43,7 @@ test(`${mode}: all3 courses earn0 and100 with real inputs, unlock and save once`
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   if(mode==='keyboard')await page.setViewportSize({width:1280,height:800});
   await page.goto('/prototypes/alpine-drive/?lang=en');
-  await expect(page.locator('[data-course="1"]')).toBeDisabled();await expect(page.locator('[data-course="2"]')).toBeDisabled();
+  await expect(page.locator('#ad-courses button[data-course="1"]')).toBeDisabled();await expect(page.locator('#ad-courses button[data-course="2"]')).toBeDisabled();
   for(let course=0;course<3;course++) {
     await page.getByRole('button',{name:'Start driving',exact:true}).click();await drive(page,course,mode,4.7,info);
     await page.getByRole('button',{name:'Retry now',exact:true}).click();await drive(page,course,mode,2.35,info);
@@ -52,19 +52,19 @@ test(`${mode}: all3 courses earn0 and100 with real inputs, unlock and save once`
     if(course<2){
       if(mode==='touch'&&course===0)await page.setViewportSize({width:320,height:568});
       await page.getByRole('button',{name:'Next course',exact:true}).click();await expect(page.locator('#alpine')).toHaveAttribute('data-course',String(course+1));
-      await expect(page.locator(`[data-course="${course+1}"]`)).toBeFocused();
+      await expect(page.locator(`#ad-courses button[data-course="${course+1}"]`)).toBeFocused();
       if(mode==='touch'&&course===0){await page.screenshot({path:info.outputPath('next-course-320x568.png')});await page.setViewportSize({width:390,height:844});}
     }
   }
   expect(await page.evaluate(k=>localStorage.getItem(k),legacyKey)).toBeNull();await page.reload();
-  for(let i=0;i<3;i++)await expect(page.locator(`[data-course="${i}"]`)).toBeEnabled();
+  for(let i=0;i<3;i++)await expect(page.locator(`#ad-courses button[data-course="${i}"]`)).toBeEnabled();
   expect(errors).toEqual([]);
 });
 });
 test('legacy import, late future-version protection and concurrent best preservation',async({page})=>{
   const legacy='{"clears":7,"muted":true}';
   await page.addInitScript(({legacyKey,legacy})=>localStorage.setItem(legacyKey,legacy),{legacyKey,legacy});
-  await page.goto('/prototypes/alpine-drive/?lang=ja');await expect(page.locator('[data-course="1"]')).toBeEnabled();await expect(page.locator('[data-course="2"]')).toBeDisabled();
+  await page.goto('/prototypes/alpine-drive/?lang=ja');await expect(page.locator('#ad-courses button[data-course="1"]')).toBeEnabled();await expect(page.locator('#ad-courses button[data-course="2"]')).toBeDisabled();
   await expect(page.locator('#ad-save')).toContainText('最高精度 —');
   const better={version:2,muted:true,records:{'mountain-pass':{clears:12,best:100},'long-return':{clears:2,best:83}}};
   await page.evaluate(({key,better})=>localStorage.setItem(key,JSON.stringify(better)),{key,better});await page.locator('#ad-sound').click();
@@ -97,7 +97,7 @@ test('320x568 and landscape menus, Next focus and reduced-motion controls remain
       await card.scrollIntoViewIfNeeded();const r=(await card.boundingBox())!;
       expect(r.x).toBeGreaterThanOrEqual(0);expect(r.x+r.width).toBeLessThanOrEqual(viewport.width);expect(r.height).toBeGreaterThanOrEqual(44);
     }
-    await page.locator('[data-course="1"]').click();await expect(page.locator('[data-course="1"]')).toBeFocused();
+    await page.locator('#ad-courses button[data-course="1"]').click();await expect(page.locator('#ad-courses button[data-course="1"]')).toBeFocused();
     await page.locator('#ad-actions button').scrollIntoViewIfNeeded();await expect(page.locator('#ad-actions button')).toBeInViewport();
     await page.screenshot({path:info.outputPath(`menu-${viewport.width}x${viewport.height}-${language}.png`)});
     await page.locator('#ad-actions button').click();await page.keyboard.press('Escape');await expect(page.locator('#alpine')).toHaveAttribute('data-phase','paused');
