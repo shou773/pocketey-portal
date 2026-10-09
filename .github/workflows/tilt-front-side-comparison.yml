@@ -15,7 +15,6 @@ jobs:
       ASTRO_TELEMETRY_DISABLED: '1'
       CI: 'true'
       TILT_BASELINE_SHA: aed68c9933c281a62401535fb5822156cdb335d6
-      TILT_BASELINE_DIR: ${{ runner.temp }}/tilt-front-side-baseline
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,6 +35,8 @@ jobs:
           pactl info
       - name: Prepare the exact PR 29 baseline with shared dependencies
         run: |
+          TILT_BASELINE_DIR="$RUNNER_TEMP/tilt-front-side-baseline"
+          echo "TILT_BASELINE_DIR=$TILT_BASELINE_DIR" >> "$GITHUB_ENV"
           mkdir -p "$TILT_BASELINE_DIR"
           git archive "$TILT_BASELINE_SHA" | tar -x -C "$TILT_BASELINE_DIR"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$TILT_BASELINE_DIR/node_modules"
