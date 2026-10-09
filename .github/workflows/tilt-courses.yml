@@ -6,6 +6,9 @@ on:
       - 'tests/prototypes/ball/**'
       - 'scripts/capture-tilt-courses.mjs'
       - '.github/workflows/tilt-courses.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

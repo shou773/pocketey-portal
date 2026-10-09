@@ -7,6 +7,9 @@ on:
       - 'tests/games/**'
       - 'scripts/capture-amber-guidance.mjs'
       - '.github/workflows/amber-guidance.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
