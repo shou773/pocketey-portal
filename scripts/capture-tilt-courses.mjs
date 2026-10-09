@@ -26,8 +26,9 @@ async function fixedCourseComparison(browser,port){
     const intervals=[];let previous=performance.now();
     await new Promise(resolve=>{function frame(now){intervals.push(now-previous);previous=now;if(intervals.length<180)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});
     const sorted=intervals.slice(10).sort((a,b)=>a-b),canvas=document.querySelector('canvas'),gl=canvas.getContext('webgl2'),ext=gl.getExtension('WEBGL_debug_renderer_info');
-    const fps=1000/(sorted.reduce((a,b)=>a+b,0)/sorted.length),p95=sorted[Math.floor(sorted.length*.95)];
-    return {hover:matchMedia('(hover:hover)').matches,finePointer:matchMedia('(pointer:fine)').matches,maxTouchPoints:navigator.maxTouchPoints,fps,p95,passesExistingBudget:fps>=45&&p95<=40,intervals,framebuffer:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),state:{...document.querySelector('#tilttrail').dataset}};
+    const fps=1000/(sorted.reduce((a,b)=>a+b,0)/sorted.length),p95=sorted[Math.floor(sorted.length*.95)],full=intervals.slice().sort((a,b)=>a-b);
+    const uncensored={frames:full.length,fps:1000/(full.reduce((a,b)=>a+b,0)/full.length),p95:full[Math.floor(full.length*.95)],max:Math.max(...full)};
+    return {uncensored,legacyGateNote:'The retained budget excludes the first ten intervals; uncensored metrics retain every interval.',hover:matchMedia('(hover:hover)').matches,finePointer:matchMedia('(pointer:fine)').matches,maxTouchPoints:navigator.maxTouchPoints,fps,p95,passesExistingBudget:fps>=45&&p95<=40,intervals,framebuffer:[canvas.width,canvas.height],renderer:ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER),state:{...document.querySelector('#tilttrail').dataset}};
    });
    await page.keyboard.up('Space');results.push({viewport,hasTouch:touch,isMobile:touch,...result});
    if(result.state.phase!=='playing')throw new Error('Fixed course3 timing interrupted');
@@ -36,31 +37,34 @@ async function fixedCourseComparison(browser,port){
  return results;
 }
 async function captureMotifs(browser){
- const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,hasTouch:true,locale:'en-US'});
- // This unlock fixture only selects the diagnostic courses. Actual clear/save
- // proof is provided separately by the ordinary-input browser tests.
- await context.addInitScript(()=>localStorage.setItem('pocketey-tilttrail-campaign-v2',JSON.stringify({version:2,muted:true,records:{'sky-ridge':30,'breathing-bends':30}})));
  const result=[];
- try{for(const stage of [3,4]){
-  const page=await context.newPage();await page.goto('http://127.0.0.1:4357/games/tilttrail/?lang=en');
-  await page.locator(`button[data-stage="${stage}"]`).click();await page.getByRole('button',{name:'Play this stage',exact:true}).click();
-  const read=()=>page.locator('#tilttrail').evaluate(el=>Object.fromEntries(Object.entries(el.dataset).map(([k,v])=>[k,['x','z','vx','speed','time'].includes(k)?Number(v):v])));
-  let active=[];const started=Date.now(),target=stage===3?21:23;let state=await read();
-  while(state.phase==='playing'&&state.z<target&&Date.now()-started<50000){
-   const road=track(stage,state.z),future=track(stage,state.z+.7),diff=(future.x-road.x)/.7*state.speed+(road.x-state.x)*3-state.vx;
-   const keys=[diff>.3?'ArrowRight':diff<-.3?'ArrowLeft':'',road.width<4?'Space':''].filter(Boolean);
-   for(const key of active.filter(k=>!keys.includes(k)))await page.keyboard.up(key);
-   for(const key of keys.filter(k=>!active.includes(k)))await page.keyboard.down(key);
-   active=keys;await page.waitForTimeout(65);state=await read();
-  }
-  if(state.phase!=='playing'||state.z<target)throw new Error(`Native motif approach failed: ${JSON.stringify(state)}`);
-  // The overlay remains naturally hidden during ordinary active gameplay.
-  // Keep the current controls held for this one image; no timing or state writes.
-  await page.screenshot({path:`${out}/after-course${stage+1}-motif-native-390.png`});
-  const after=await read();result.push({stage:stage+1,before:state,after,held:active,note:'Diagnostic live screenshot, ordinary keyboard approach, unlock fixture only. Not a clear proof.'});
-  if(after.phase!=='playing')throw new Error(`Motif screenshot ended outside gameplay: ${JSON.stringify(after)}`);
-  for(const key of active)await page.keyboard.up(key);await page.close();
- }}finally{await context.close();}
+ for(const width of [320,390]){
+  const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,hasTouch:true,isMobile:true,locale:'en-US'});
+  // Selection-only fixture. Native tests separately earn course6 with keyboard and touch.
+  await context.addInitScript(()=>localStorage.setItem('pocketey-tilttrail-campaign-v2',JSON.stringify({version:2,muted:true,records:{'first-bends':10,'wave-corridor':20,'sky-ridge':30,'breathing-bends':40,'double-apex':50}})));
+  try{
+   const page=await context.newPage();await page.goto('http://127.0.0.1:4357/games/tilttrail/?lang=en');
+   await page.locator('button[data-stage="5"]').click();await page.getByRole('button',{name:'Play this stage',exact:true}).click();
+   const read=()=>page.locator('#tilttrail').evaluate(el=>Object.fromEntries(Object.entries(el.dataset).map(([k,v])=>[k,['x','z','vx','speed','time'].includes(k)?Number(v):v])));
+   let active=[],state=await read();const started=Date.now();
+   for(const [label,target] of [['neck1',25],['approach',35],['neck2',49]]){
+    while(state.phase==='playing'&&state.z<target&&Date.now()-started<90000){
+     const road=track(5,state.z),future=track(5,state.z+.7),diff=(future.x-road.x)/.7*state.speed+(road.x-state.x)*3-state.vx;
+     const keys=[diff>.3?'ArrowRight':diff<-.3?'ArrowLeft':'','Space'].filter(Boolean);
+     for(const key of active.filter(k=>!keys.includes(k)))await page.keyboard.up(key);
+     for(const key of keys.filter(k=>!active.includes(k)))await page.keyboard.down(key);
+     active=keys;await page.waitForTimeout(65);state=await read();
+    }
+    if(state.phase!=='playing'||state.z<target)throw new Error(`Native neck approach failed: ${JSON.stringify(state)}`);
+    // Straight neck: hold only the normal brake during capture to avoid lateral overshoot.
+    for(const key of active.filter(k=>k!=='Space'))await page.keyboard.up(key);active=['Space'];
+    const before=await read();await page.screenshot({path:`${out}/after-course6-${label}-native-${width}.png`});
+    state=await read();result.push({viewport:width,label,target,before,after:state,held:active,note:'Live diagnostic image, ordinary conservative keyboard input; only selection uses a save fixture. No hidden overlays or state writes.'});
+    if(state.phase!=='playing')throw new Error(`Neck image ended outside gameplay: ${JSON.stringify(state)}`);
+   }
+   for(const key of active)await page.keyboard.up(key);
+  }finally{await context.close();}
+ }
  return result;
 }
 const browser=await chromium.launch({args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});const samples=[];
@@ -75,4 +79,4 @@ try{for(const[label,port]of[['before',4356],['after',4357]]){
  await page.waitForTimeout(400);await page.screenshot({path:`${out}/${label}-original-course3-390.png`});await page.keyboard.up('Space');
  const state=await page.locator('#tilttrail').evaluate(el=>({...el.dataset}));samples.push({label,state,errors});
  if(errors.length)throw new Error(errors.join('\n'));await context.close();
-}const fixedComparison={before:await fixedCourseComparison(browser,4356),after:await fixedCourseComparison(browser,4357)};const motifs=await captureMotifs(browser);await writeFile(`${out}/report.json`,JSON.stringify({fixedComparison,motifs,baseline:'29424ba7300e5ded81bc07b9f2e73f05f078a137',browser:browser.version(),fileComparison,samples,note:'Actual production renders with both full assets loaded. Live original-course3 states are not pixel-matched. New-course captures use ordinary input and visible Pause/Resume. Software timing is not a physical-phone benchmark.'},null,2));}finally{await browser.close();for(const s of servers)s.close();}
+}const fixedComparison={before:await fixedCourseComparison(browser,4356),after:await fixedCourseComparison(browser,4357)};const motifs=await captureMotifs(browser);await writeFile(`${out}/report.json`,JSON.stringify({fixedComparison,motifs,baseline:'d00c2aea53b2c292fdccbaf69984d50f24d4a2e2',source:process.env.SOURCE_SHA??process.env.GITHUB_SHA??'local',browser:browser.version(),fileComparison,samples,note:'Actual production renders with both full assets loaded. Live original-course3 states are not pixel-matched. Course6 captures use ordinary conservative input and remain unobscured during active play. Software timing is not a physical-phone benchmark.'},null,2));}finally{await browser.close();for(const s of servers)s.close();}

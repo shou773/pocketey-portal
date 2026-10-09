@@ -30,8 +30,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Preserve accepted integration outside the reviewed courier-paint file
-        run: git diff --exit-code 3da9ca63377deabe372c911a47d6825cc6d2d15f HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/conveyor/render.ts'
+      - name: Preserve accepted integration outside reviewed Tilt files and count-only portal copy
+        run: git diff --exit-code d00c2aea53b2c292fdccbaf69984d50f24d4a2e2 HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/ball/model.ts' ':(exclude)src/games/prototypes/ball/progress.ts' ':(exclude)src/games/prototypes/ball/app.ts' ':(exclude)src/components/GamePortal.astro'
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact source and built file digests
         run: |

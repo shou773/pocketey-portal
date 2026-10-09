@@ -46,6 +46,21 @@ export const STAGES: Stage[] = [
     { z: 107, x: 0, width: 3.9 },
     { z: 116, x: 0, width: 4.8 },
   ] },
+  // Begin course 6: wide turn, straight neck, recovery.
+  { name: ["細道の入口", "Narrow passages"], hint: ["急カーブの前に減速。細道では向きを整えてからブレーキを離そう。", "Brake before the tight turn. Straighten up at the neck, then release."], knots: [
+    { z: 0, x: 0, width: 4.8 },
+    { z: 8, x: 0, width: 4.8 },
+    { z: 20, x: 3.2, width: 4.8 },
+    { z: 23, x: 3.2, width: 2.6 },
+    { z: 31, x: 3.2, width: 2.6 },
+    { z: 38, x: 3.2, width: 5 },
+    { z: 46, x: -3.2, width: 2.4 },
+    { z: 54, x: -3.2, width: 2.4 },
+    { z: 61, x: -3.2, width: 5 },
+    { z: 78, x: 0, width: 4.8 },
+    { z: 94, x: 0, width: 5 },
+  ] },
+  // End course 6.
 ];
 export function length(stage: number) { return STAGES[stage].knots.at(-1)!.z; }
 export function track(stage: number, z: number) {

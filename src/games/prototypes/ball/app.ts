@@ -2,14 +2,14 @@ import {createGameAudio} from '../../audio';
 import { LANGUAGE_EVENT, installLocale, tr } from '../../../lib/locale';
 import { advance, createState, length, SAVE_KEY, STAGES, STEP, type Phase } from './model';
 import { createView } from './render';
-import { PROGRESS_KEY, ORIGINAL_COURSE_COUNT, parseProgress, serializeProgress, stageUnlocked } from './progress';
+import { PROGRESS_KEY, PREVIOUS_PROGRESS_KEY, ORIGINAL_COURSE_COUNT, parseProgress, serializeProgress, stageUnlocked, mergeProgress } from './progress';
 
 export function boot() {
   installLocale();
   const root = document.querySelector<HTMLElement>('#tilttrail')!;
   const get = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(`tt-${id}`) as T;
   let state = createState(), selected = 0, save = parseProgress(null), storageOK = true;
-  try { save = parseProgress(localStorage.getItem(PROGRESS_KEY), localStorage.getItem(SAVE_KEY)); if (!save.writable) storageOK = false; } catch { storageOK = false; }
+  try { save = parseProgress(localStorage.getItem(PROGRESS_KEY), localStorage.getItem(SAVE_KEY), localStorage.getItem(PREVIOUS_PROGRESS_KEY)); if (!save.writable) storageOK = false; } catch { storageOK = false; }
   let view: ReturnType<typeof createView> | null = null;
   try { view = createView(get<HTMLCanvasElement>('canvas')); } catch { /* A readable fallback replaces the playable menu. */ }
   const clearBurst = get('clear-burst'), reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -23,7 +23,15 @@ export function boot() {
   reducedMotion.addEventListener('change', stopBurst);
   const pointers = new Map<number, string>(), keys = new Set<string>();
   let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0, wasBraking = false;
-  function persist() { if (!save.writable) { storageOK = false; return; } try { localStorage.setItem(PROGRESS_KEY, serializeProgress(save)); } catch { storageOK = false; } }
+  function persist() {
+    if (!save.writable) { storageOK = false; return; }
+    try {
+      const latest = parseProgress(localStorage.getItem(PROGRESS_KEY), localStorage.getItem(SAVE_KEY), localStorage.getItem(PREVIOUS_PROGRESS_KEY));
+      mergeProgress(save, latest);
+      if (!save.writable) { storageOK = false; return; }
+      localStorage.setItem(PROGRESS_KEY, serializeProgress(save));
+    } catch { storageOK = false; }
+  }
   const audio=createGameAudio('tilt',!save.muted,root,enabled=>{save.muted=!enabled;persist();renderUI();});audio.mount(get('sound'),pause,resetInput);
   const controlButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-tt-input]')];
   function held(control: string) { return [...pointers.values()].includes(control) || (control === 'left' ? keys.has('ArrowLeft') || keys.has('KeyA') : control === 'right' ? keys.has('ArrowRight') || keys.has('KeyD') : keys.has('Space') || keys.has('ArrowDown') || keys.has('KeyS')); }
