@@ -5,7 +5,7 @@ export default defineConfig({
   timeout: 45000, expect: { timeout: 10000 }, workers: 1, retries: 0,
   reporter: [['list'], ['json', { outputFile: 'test-results/conveyor/report.json' }]],
   use: {
-    baseURL: 'http://127.0.0.1:4341', viewport: { width: 390, height: 844 }, hasTouch: true, deviceScaleFactor: 1, locale: 'ja-JP',
+    screenshot: 'only-on-failure', baseURL: 'http://127.0.0.1:4341', viewport: { width: 390, height: 844 }, hasTouch: true, deviceScaleFactor: 1, locale: 'ja-JP',
     launchOptions: { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ?? (process.env.CI ? undefined : '/usr/bin/chromium'),
       args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] },
   },
