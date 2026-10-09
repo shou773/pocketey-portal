@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { STAGE, type Cell, type State, type Stage } from './model';
+import { STAGE, type Cell, type State, type Stage, type Tile } from './model';
 
 /** Self-made toy geometry from the approved written specification; no reference-image access. */
 export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
@@ -17,7 +17,7 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
   const fill = new THREE.DirectionalLight(0xffffff, .55); fill.position.set(4, 3, 6); scene.add(fill);
   const material = (color: number) => new THREE.MeshStandardMaterial({ color, roughness: .76, metalness: 0 });
   const materials = {
-    tile: material(0xf1dfc1), tray: material(0x88a999), trim: material(0x729787), rail: material(0x5f9a8a),
+    tile: material(0xf1dfc1), tray: material(0x88a999), trim: material(0x729787), rail: material(0x5f9a8a), twoWayRail: material(0x287aab),
     belt: material(0x3f4545), groove: material(0x454b48), brass: material(0xddbd73),
     white: new THREE.MeshBasicMaterial({ color: 0xffffff }), selected: new THREE.MeshBasicMaterial({ color: 0xffc83e, toneMapped: false }),
     inlet: material(0x94cbbb), outlet: material(0xed825e), mouth: new THREE.MeshBasicMaterial({ color: 0x20362f, toneMapped: false }),
@@ -79,7 +79,7 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
   const tailGeometry=own(new THREE.BoxGeometry(.04,.01,.30));
   const capGeometry=rounded(.065,.08,.11,.022);
   // Merge each tile's repeated parts by material; the resulting two blueprints are shared.
-  function tileBlueprint(kind:'straight'|'bend') {
+  function tileBlueprint(kind:Tile['kind']) {
     const draft=new THREE.Group();
     if(kind==='straight'){
       box(draft,materials.belt,0,.197,0,1.075,.05,.54,.022);
@@ -91,7 +91,8 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
       mesh(draft,arrow,materials.white,.025,.234,0);
     }else{
       mesh(draft,bendBelt,materials.belt,0,.176,0);
-      mesh(draft,innerRail,materials.rail,0,.145,0);mesh(draft,outerRail,materials.rail,0,.145,0);
+      const rail = kind === 'two-way' ? materials.twoWayRail : materials.rail;
+      mesh(draft,innerRail,rail,0,.145,0);mesh(draft,outerRail,rail,0,.145,0);
       mesh(draft,capGeometry,materials.brass,-.50,.235,-.32);
       const cap=mesh(draft,capGeometry,materials.brass,.32,.235,.50);cap.rotation.y=-Math.PI/2;
       for(let i=1;i<=6;i++){
@@ -99,10 +100,11 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
         const groove=mesh(draft,grooveGeometry,materials.groove,-.54+.54*Math.cos(a),.226,.54+.54*Math.sin(a));
         groove.rotation.y=-(a+Math.PI/2);
       }
-      const mark=mesh(draft,arrow,materials.white,-.06,.236,.225);mark.rotation.y=-Math.PI/2;mark.scale.setScalar(.88);
+      const mark=mesh(draft,arrow,materials.white,-.06,.236,.225);mark.rotation.y=-Math.PI/2;mark.scale.setScalar(kind === 'two-way' ? .65 : .88);
+      if (kind === 'two-way') { const reverse=mesh(draft,arrow,materials.white,-.30,.236,.015);reverse.rotation.y=Math.PI;reverse.scale.setScalar(.65); }
     }
     // The tail stays at the actual inlet, west before rotation.
-    mesh(draft,tailGeometry,materials.white,-.46,.235,0);
+    if (kind !== 'two-way') mesh(draft,tailGeometry,materials.white,-.46,.235,0);
     const parts=new Map<THREE.Material,THREE.BufferGeometry[]>();
     draft.updateMatrixWorld(true);
     for(const child of draft.children){const m=child as THREE.Mesh;const g=m.geometry.clone().applyMatrix4(m.matrixWorld);const list=parts.get(m.material as THREE.Material)??[];list.push(g);parts.set(m.material as THREE.Material,list);}
@@ -110,12 +112,13 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
     for(const [mat,gs] of parts){const geometry=own(mergeGeometries(gs.map(g=>g.index?g.toNonIndexed():g))!);gs.forEach(g=>g.dispose());result.push({geometry,material:mat});}
     return result;
   }
-  const blueprints={straight:tileBlueprint('straight'),bend:tileBlueprint('bend')};
+  const blueprints: Partial<Record<Tile['kind'],ReturnType<typeof tileBlueprint>>> = {straight:tileBlueprint('straight'),bend:tileBlueprint('bend')};
+  if (stage.tiles.some(tile => tile.kind === 'two-way')) blueprints['two-way']=tileBlueprint('two-way');
   const tileViews=new Map<string,THREE.Group>();
   for(const tile of stage.tiles){
     const group=new THREE.Group();group.position.copy(position(tile,0));scene.add(group);
     shadow(group,0,.147,0,1.10,1.07);
-    blueprints[tile.kind].forEach(part=>mesh(group,part.geometry,part.material));tileViews.set(tile.id,group);
+    blueprints[tile.kind]!.forEach(part=>mesh(group,part.geometry,part.material));tileViews.set(tile.id,group);
   }
   // Raise the single selection frame above the rails; keep ports and path arrows unobscured.
   const selection=new THREE.Group();scene.add(selection);

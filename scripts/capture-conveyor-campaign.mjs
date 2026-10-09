@@ -22,7 +22,7 @@ const report=[];
 try{
  for(const [label,port] of [['before',4352],['after',4353]]){
   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,hasTouch:true,locale:'en-US'});
-  if(label==='after')await context.addInitScript(()=>localStorage.setItem('pocketey-conveyor-v1',JSON.stringify({version:1,rotations:[1,0,3,0,0,2,1,3],turns:0,best:null})));
+  await context.addInitScript(()=>localStorage.setItem('pocketey-conveyor-v1',JSON.stringify({version:1,rotations:[1,0,3,0,0,2,1,3],turns:0,best:null})));
   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(`http://127.0.0.1:${port}/prototypes/conveyor/?lang=en`);
   const root=page.locator('#conveyor');await root.waitFor({state:'visible'});
@@ -38,5 +38,5 @@ try{
   report.push({label,viewport:{width:390,height:844},errors,rotations:await root.getAttribute('data-rotations'),phase:await root.getAttribute('data-phase'),drawCalls:await root.getAttribute('data-draw-calls'),triangles:await root.getAttribute('data-triangles'),renderer:await page.locator('#cv-canvas').evaluate(canvas=>{const gl=canvas.getContext('webgl2');const ext=gl.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER);})});
   if(errors.length)throw new Error(errors.join('\n'));await context.close();
  }
- await writeFile(`${out}/report.json`,JSON.stringify({baseline:'975d3acfb03b02ddd2d5ae1f79edca228e0b9f90',note:'Actual production WebGL renders. Before/after original-board captures use identical viewport, initial rotations and full assets; page layouts differ. New campaign captures come from ordinary-input browser tests. SwiftShader is not a physical-phone benchmark.',browser:browser.version(),fileComparison,samples:report},null,2));
+ await writeFile(`${out}/report.json`,JSON.stringify({source:process.env.SOURCE_SHA,baseline:'a6ad5893df21cf412fd261616d8d1757b27371f6',note:'Actual production WebGL renders. Before/after original-board captures use identical viewport, initial rotations and full assets; page layouts differ. New campaign captures come from ordinary-input browser tests. SwiftShader is not a physical-phone benchmark.',browser:browser.version(),fileComparison,samples:report},null,2));
 }finally{await browser.close();for(const s of servers)s.close();}

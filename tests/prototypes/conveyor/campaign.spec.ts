@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test';
-const url='/prototypes/conveyor/?lang=ja', key='pocketey-conveyor-campaign-v2';
+const url='/prototypes/conveyor/?lang=ja', key='pocketey-conveyor-campaign-v3';
 const solutions = [ [['a',1],['b',1]], [['a',3],['c',1],['d',1],['e',1],['g',1]], [['a',1],['b',1],['c',1],['d',1],['g',2]] ] as const;
 const ids=['first-dispatch','factory-loop','read-the-inlet'];
 async function ready(page: Page) {
@@ -17,7 +17,7 @@ async function budget(page: Page) {
 async function legacy(page: Page) {
   await page.addInitScript(()=>{ if (!localStorage.getItem('pocketey-conveyor-v1'))localStorage.setItem('pocketey-conveyor-v1',JSON.stringify({version:1,rotations:[1,0,3,0,0,2,1,3],turns:0,best:7})); });
 }
-test('fresh player earns all three stars with ordinary taps, Next, replay and reload',async({page})=>{
+test('fresh player earns all four stars with ordinary taps, Next, replay and reload',async({page})=>{
   test.setTimeout(90000); const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   await ready(page);const root=page.locator('#conveyor');
   await expect(page.locator('button[data-mission="factory-loop"]')).toBeDisabled();
@@ -38,14 +38,18 @@ test('fresh player earns all three stars with ordinary taps, Next, replay and re
     await page.screenshot({path:`test-results/conveyor/campaign-${index+1}-clear-390.png`,fullPage:true});
     if(index<2)await page.locator('#cv-next').tap();
   }
+  await expect(page.locator('#cv-next')).toBeVisible();await page.locator('#cv-next').tap();
+  await expect(root).toHaveAttribute('data-mission','choose-a-route');
+  for(const id of ['a','d','e'])await page.locator(`[data-tile="${id}"]`).tap();
+  await page.locator('#cv-play').tap();await expect(root).toHaveAttribute('data-phase','success');await budget(page);
   await expect(page.locator('#cv-next')).toBeHidden();
   const save=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),key);
-  expect(ids.map(id=>save.records[id].best)).toEqual([2,7,6]);
+  expect(ids.map(id=>save.records[id].best)).toEqual([2,7,6]);expect(save.records['choose-a-route'].best).toBe(3);
   expect(await page.evaluate(()=>localStorage.getItem('pocketey-conveyor-v1'))).toBeNull();
-  await page.reload();await expect(root).toHaveAttribute('data-mission','read-the-inlet');
+  await page.reload();await expect(root).toHaveAttribute('data-mission','choose-a-route');
   await expect(page.locator('#cv-target')).toHaveAttribute('data-earned','true');
   await page.locator('#cv-reset').tap();await expect(page.locator('#cv-turns')).toHaveText('回転 0 回');
-  await expect(page.locator('#cv-best')).toHaveText('最少 6 回で出荷');expect(errors).toEqual([]);
+  await expect(page.locator('#cv-best')).toHaveText('最少 3 回で出荷');expect(errors).toEqual([]);
 });
 test('legacy import stays untouched; switching cancels motion and keeps records isolated',async({page})=>{
   await legacy(page);await ready(page);const root=page.locator('#conveyor');
@@ -86,7 +90,7 @@ test('every board keeps 44px separate touch targets at 320px and landscape, with
   await page.locator('[data-language="ja"]').tap();await expect(page.locator('#cv-title')).toHaveText('コンベア便');
 });
 test('newer saves are never overwritten and the teaching delivery remains playable',async({page})=>{
-  await page.addInitScript(()=>localStorage.setItem('pocketey-conveyor-campaign-v2','{"version":99,"future":"preserve"}'));
+  await page.addInitScript(()=>localStorage.setItem('pocketey-conveyor-campaign-v3','{"version":99,"future":"preserve"}'));
   await ready(page);await solve(page,0);await page.locator('#cv-play').tap();await expect(page.locator('#conveyor')).toHaveAttribute('data-phase','success');
   expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe('{"version":99,"future":"preserve"}');
   await expect(page.locator('#cv-save')).toContainText('保存できません');

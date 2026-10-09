@@ -4,7 +4,7 @@ const rotationString = '0,0,0,1,1,2,2,3';
 async function ready(page: Page) {
   // Preserve the six original regression scenarios against the migrated v1 board.
   await page.addInitScript(() => { try {
-    if (!localStorage.getItem('pocketey-conveyor-campaign-v2') && !localStorage.getItem('pocketey-conveyor-v1'))
+    if (!localStorage.getItem('pocketey-conveyor-campaign-v3') && !localStorage.getItem('pocketey-conveyor-campaign-v2') && !localStorage.getItem('pocketey-conveyor-v1'))
       localStorage.setItem('pocketey-conveyor-v1', JSON.stringify({version:1,rotations:[1,0,3,0,0,2,1,3],turns:0,best:null}));
   } catch { /* Blocked-storage coverage starts on the new teaching board. */ } });
   await page.goto(url); await expect(page.locator('#conveyor')).toHaveAttribute('data-webgl','true');

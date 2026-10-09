@@ -15,6 +15,7 @@ jobs:
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
       CI: 'true'
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -25,6 +26,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Preserve the other five accepted games
+        run: git diff --exit-code a6ad5893df21cf412fd261616d8d1757b27371f6 HEAD -- src/games/model.ts src/games/render.ts src/games/signals.ts src/games/app.ts src/games/game.css src/games/amber-guidance.ts src/components/ActionGame.astro src/games/prototypes/ball src/games/prototypes/alpine src/games/prototypes/shooter
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact production source and file digests
         run: |
@@ -42,10 +45,10 @@ jobs:
         id: browser
         continue-on-error: true
         run: npx playwright test --config tests/prototypes/conveyor/playwright.config.ts
-      - name: Build immutable pre-campaign source for real before/after captures
+      - name: Build immutable three-board campaign source for real before/after captures
         run: |
           mkdir -p "$RUNNER_TEMP/conveyor-baseline"
-          git archive 975d3acfb03b02ddd2d5ae1f79edca228e0b9f90 | tar -x -C "$RUNNER_TEMP/conveyor-baseline"
+          git archive a6ad5893df21cf412fd261616d8d1757b27371f6 | tar -x -C "$RUNNER_TEMP/conveyor-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/conveyor-baseline/node_modules"
           (cd "$RUNNER_TEMP/conveyor-baseline" && npm run build)
           node scripts/capture-conveyor-campaign.mjs "$RUNNER_TEMP/conveyor-baseline/dist"

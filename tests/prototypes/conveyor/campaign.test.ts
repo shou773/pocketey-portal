@@ -38,7 +38,7 @@ test('original board is preserved byte-for-byte as mission two data', () => {
 });
 test('fresh campaign locks later boards and completion unlocks exactly the next', () => {
   const save = parseCampaign(null);
-  assert.equal(save.active, MISSIONS[0].id); assert.deepEqual(MISSIONS.map((_,i) => isUnlocked(save,i)), [true,false,false]);
+  assert.equal(save.active, MISSIONS[0].id); assert.deepEqual(MISSIONS.map((_,i) => isUnlocked(save,i)), [true,false,false,false]);
   assert.equal(isUnlocked(save,-1),false); assert.equal(isUnlocked(save,99),false);
   for (let index = 0; index < MISSIONS.length; index++) {
     const mission = MISSIONS[index], solution = solveMission(mission)!;
@@ -55,11 +55,11 @@ test('v1 layout, turns and best migrate to the exact original board; unrelated b
   assert.equal(save.active,'factory-loop'); assert.equal(save.legacyImported,true);
   assert.equal(save.records['factory-loop'].best,7); assert.equal(save.records['first-dispatch'].best,null);
   assert.equal(restoreMission(save,MISSIONS[1]).turns,7); assert.equal(trace(MISSIONS[1],restoreMission(save,MISSIONS[1]).tiles).outcome,'success');
-  assert.deepEqual(MISSIONS.map((_,i) => isUnlocked(save,i)),[true,true,true]);
+  assert.deepEqual(MISSIONS.map((_,i) => isUnlocked(save,i)),[true,true,true,false]);
   const unsolved = parseCampaign(null,JSON.stringify({version:1,rotations:STAGE.tiles.map(t=>t.rotation),turns:3,best:null}));
-  assert.deepEqual(MISSIONS.map((_,i) => isUnlocked(unsolved,i)),[true,true,false]);
+  assert.deepEqual(MISSIONS.map((_,i) => isUnlocked(unsolved,i)),[true,true,false,false]);
 });
-test('v2 records round trip independently; reset/replay preserve earned best', () => {
+test('current records round trip independently; reset/replay preserve earned best', () => {
   const save = parseCampaign(null); save.records['first-dispatch'].best=4; save.active='factory-loop';
   let state = reduce(createState(MISSIONS[1]),{type:'rotate',id:'a'},MISSIONS[1]); recordState(save,MISSIONS[1],state);
   const roundtrip = parseCampaign(JSON.stringify(save)); assert.deepEqual(roundtrip,save);
@@ -78,4 +78,37 @@ test('corrupt individual layouts do not erase valid records or unlock a locked a
     const fresh:any=parseCampaign(null);fresh.records['first-dispatch'].rotations[0]=invalid;
     assert.deepEqual(restoreMission(parseCampaign(JSON.stringify(fresh)),MISSIONS[0]),createState(MISSIONS[0]));
   }
+});
+test('route-choice board has exactly two delivered paths with optional 3/5 turn minima',()=>{
+ const mission=MISSIONS[3], routes=new Map<string,{count:number;minimum:number}>();
+ for(let code=0;code<4**mission.tiles.length;code++){
+  const tiles=mission.tiles.map((tile,i)=>({...tile,rotation:(Math.floor(code/4**i)%4) as Direction})),route=trace(mission,tiles);
+  if(route.outcome!=='success')continue;
+  const key=route.visits.filter(v=>v.tileId).map(v=>v.tileId).join(','),cost=tiles.reduce((n,t,i)=>n+(t.rotation-mission.tiles[i].rotation+4)%4,0),entry=routes.get(key)??{count:0,minimum:Infinity};entry.count++;entry.minimum=Math.min(entry.minimum,cost);routes.set(key,entry);
+ }
+ assert.deepEqual(Object.fromEntries(routes),{'a,d,e,f':{count:16,minimum:3},'a,b,c,f':{count:16,minimum:5}});
+ assert.equal(trace(mission,mission.tiles).outcome,'wrong-entry');assert.deepEqual(solveMission(mission)?.visited,['a','d','e','f']);
+ for(const rotations of [[0,3,0,2,1,3],[1,3,0,1,0,2]]){
+  let state=createState(mission);for(let i=0;i<rotations.length;i++)while(state.tiles[i].rotation!==rotations[i])state=reduce(state,{type:'rotate',id:state.tiles[i].id},mission);
+  state=reduce(reduce(state,{type:'play'},mission),{type:'finish'},mission);assert.equal(state.phase,'success');assert.equal(state.turns,rotations[0]===0?3:5);
+ }
+});
+test('v2 imports every original layout, turn count, best and active ID while mission4 starts unearned',()=>{
+ const prior={version:2,active:'read-the-inlet',legacyImported:false,records:Object.fromEntries(MISSIONS.slice(0,3).map((m,i)=>[m.id,{rotations:m.tiles.map(t=>t.rotation),turns:11+i,best:m.target}]))};
+ const raw=JSON.stringify(prior),save=parseCampaign(null,null,raw);assert.equal(save.version,3);assert.equal(save.active,prior.active);
+ for(const m of MISSIONS.slice(0,3))assert.deepEqual(save.records[m.id],prior.records[m.id]);
+ assert.equal(save.records['choose-a-route'].best,null);assert.equal(save.records['choose-a-route'].turns,0);assert.equal(isUnlocked(save,3),true);assert.equal(JSON.stringify(prior),raw);
+ prior.records['read-the-inlet'].best=null as any;assert.equal(isUnlocked(parseCampaign(null,null,JSON.stringify(prior)),3),false);
+});
+test('damaged v3 fields recover valid v2 progress without replacing better v3 records',()=>{
+ const previous=parseCampaign(null);previous.records['factory-loop']={rotations:[0,0,0,1,1,2,2,3],turns:11,best:11};previous.legacyImported=true;previous.active='factory-loop';const old=JSON.stringify({...previous,version:2});
+ const parsed=parseCampaign(JSON.stringify({version:3,records:{'factory-loop':{rotations:[99],turns:-1,best:null}}}),null,old);assert.deepEqual(parsed.records['factory-loop'],previous.records['factory-loop']);assert.equal(parsed.active,'factory-loop');
+ const better=parseCampaign(JSON.stringify({version:3,records:{'factory-loop':{rotations:[0,0,0,1,1,2,2,3],turns:7,best:7}}}),null,old);assert.equal(better.records['factory-loop'].best,7);
+});
+test('two-way routes record real entry/exit ports for forward and reverse parcel motion',()=>{
+ const mission=MISSIONS[3];
+ for(const rotations of [[0,3,0,2,1,3],[1,3,0,1,0,2]]){
+  const route=trace(mission,mission.tiles.map((tile,i)=>({...tile,rotation:rotations[i] as Direction})));assert.equal(route.outcome,'success');
+  const visits=route.visits.filter(v=>v.tileId);assert.equal(visits[0].input,3);assert.equal(visits[0].output,rotations[0]===0?2:0);assert.equal(visits.at(-1)?.input,rotations[0]===0?2:0);assert.equal(visits.at(-1)?.output,1);
+ }
 });

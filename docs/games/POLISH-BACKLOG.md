@@ -83,3 +83,15 @@ Acceptance: all 19 actual spike contact is classified correctly, the three edge-
 
 ### Pulse lane readability correction
 The first999deaa native milestone passed130 units, all six ordinary-input clears, eight retained UI cases and matched60FPS touch diagnostics. Actual handoff pixels nevertheless showed a faint olive beam strip against teal water; the old fogged amber material pulsed down to0.15 opacity. Before preview acceptance, change only that material to unfogged amber with a steady0.55 warning opacity; retain active0.85, geometry, width,1.3-second telegraph and collision. A normalized-renderer hash guards this scope. Recheck both native boss routes, lifecycle/compact/reduced motion, and unpaused normal/minimum-warning/handoff captures against exact999deaa. Original four survival-route proofs remain linked to that production-equivalent model/app source rather than rerunning unchanged routes.
+
+
+## Conveyor first route-choice delivery
+Append one six-tile4×3 board, `choose-a-route`, after the three preserved boards. A two-way elbow accepts either open port, with blue rails and two outward white arrowheads; the green directed belts retain their original single inlet/outlet. The upper and lower paths both deliver through four tiles. Exhaustive4096-state enumeration finds16 configurations per path: minimum5 turns above,3 below. Both successes are rewarded; the3-turn star is optional and unused belts may stay untouched. This is the first branching lesson, not a claim of deep route optimization.
+
+Acceptance:
+- Every complete old-board trace/visit remains identical; original mission objects and solver outputs are preserved. The branching solver explores orientations accepting the real incoming port. Motion keeps its existing real-entry/exit path construction.
+- Both paths clear through ordinary taps, with actual mid-delivery and success images. At320×568 and844×390 the two-way heads/rails and both routes are readable, with separate44px targets. JA/EN rules and accessible names distinguish bidirectional openings from a directed inlet. Existing station art, music/effects and lifecycle stay intact.
+- Separate `pocketey-conveyor-campaign-v3` imports all validv2 layouts/turns/bests/active IDs; oldv2/v1 remain read-only. No fourth clear is invented. Mission4 unlocks only after mission3. Valid backup fields survive damagedv3 records; rereading before every write protects newer versions and another tab's better records/layouts.
+- Old three renders must retain their geometry budgets; the fourth must stay within90 draws/15,000 triangles. Only the new tile's paint/arrows change; no scenery/particles. Exact-head types/build/unit/native checks and reusable dist accompany the review.
+
+Pulse a6ad589 is accepted after the material-only warning correction:131 units, both native boss routes and eight retained UI cases pass. Both boss clears retain4HP. Same-condition390px reduced-motion diagnostics are59.80→60.00FPS, p95 16.7ms, identical15 draws/6168 triangles; they do not imply a physical-phone result. The earlier999deaa evidence retains all six ordinary routes. Other software-performance limitations remain on the preview ledger.

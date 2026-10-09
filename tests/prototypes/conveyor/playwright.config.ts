@@ -1,6 +1,7 @@
 import { defineConfig } from '@playwright/test';
+import path from 'node:path';
 export default defineConfig({
-  testDir: '.', testMatch: ['browser.spec.ts', 'campaign.spec.ts'], outputDir: '../../../test-results/conveyor/run',
+  testDir: '.', testMatch: ['browser.spec.ts', 'campaign.spec.ts', 'choice.spec.ts'], outputDir: path.resolve('test-results/conveyor/run'),
   timeout: 45000, expect: { timeout: 10000 }, workers: 1, retries: 0,
   reporter: [['list'], ['json', { outputFile: 'test-results/conveyor/report.json' }]],
   use: {
