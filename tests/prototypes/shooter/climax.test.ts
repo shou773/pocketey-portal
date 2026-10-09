@@ -21,3 +21,7 @@ test('ordinary 4HP inputs clear every stage at 100/150/200ms observations, inclu
 test('boss notice has exact simulation bounds and cannot survive a result or appear in a survival stage',()=>{
  const s=createState(2);s.time=28.49;assert.equal(bossIncoming(s),false);s.time=28.5;assert.equal(bossIncoming(s),true);s.time=29.99;assert.equal(bossIncoming(s),true);s.time=30;assert.equal(bossIncoming(s),false);s.time=29;s.status='lost';assert.equal(bossIncoming(s),false);s.status='playing';s.bossSpawned=true;assert.equal(bossIncoming(s),false);s.bossSpawned=false;s.stage=1;assert.equal(bossIncoming(s),false);
 });
+test('warning-only renderer correction is unfogged and steady without changing geometry or any other rendering',()=>{
+ const source=readFileSync('src/games/prototypes/shooter/view.ts','utf8');assert.ok(source.includes('color:0xffbc50,transparent:true,opacity:.55,fog:false'));assert.ok(source.includes('b.age<1.3?.55:.85'));
+ const original=source.replace('color:0xffbc50,transparent:true,opacity:.55,fog:false','color:0xffbc50,transparent:true,opacity:.35').replace('b.age<1.3?.55:.85','b.age<1.3?.15+.13*(Math.sin(b.age*18)+1):.85');assert.equal(createHash('sha256').update(original).digest('hex'),'304fd7ccb3d9df5d73969d03c26da2b1db5542f3f61f8e7487cd39ddd66e2413');
+});

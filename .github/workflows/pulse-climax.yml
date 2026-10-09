@@ -27,7 +27,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Preserve accepted rendering and other five games
-        run: git diff --exit-code 4a402190229a9aa208aa58cd6cddbdd9fb7df56d HEAD -- src/games/prototypes/shooter/view.ts src/games/model.ts src/games/render.ts src/games/signals.ts src/games/app.ts src/games/game.css src/games/amber-guidance.ts src/components/ActionGame.astro src/games/prototypes/ball src/games/prototypes/alpine src/games/prototypes/conveyor
+        run: git diff --exit-code 999deaa0e2854babdea1acc9e159e01664e22f17 HEAD -- src/games/prototypes/shooter/model.ts src/games/prototypes/shooter/app.ts src/games/prototypes/shooter/briefing.ts src/games/prototypes/shooter/style.css src/pages/games/pulse-drift.astro src/games/model.ts src/games/render.ts src/games/signals.ts src/games/app.ts src/games/game.css src/games/amber-guidance.ts src/components/ActionGame.astro src/games/prototypes/ball src/games/prototypes/alpine src/games/prototypes/conveyor
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact source and built file digests
         run: |
@@ -41,10 +41,13 @@ jobs:
             dist-sha256.txt
           retention-days: 14
       - run: npx playwright install --with-deps chromium
-      - name: Ordinary all-course routes and compact lifecycle checks
+      - name: Material-only regression: both boss routes and compact lifecycle checks
         id: native
         continue-on-error: true
-        run: npx playwright test --config tests/prototypes/shooter/climax.config.ts
+        run: |
+          mkdir -p test-results/pulse-climax
+          printf '%s\n' 'Stage1/2 keyboard+touch routes reuse exact999deaa/run37997775310 evidence. The source guard proves all model/app/UI code unchanged; normalized-view unit proves only beam material/opacity changed. Both boss routes, compact/reduced-motion and real context loss rerun on this exact head.' > test-results/pulse-climax/reused-route-scope.txt
+          npx playwright test --config tests/prototypes/shooter/climax.config.ts --grep 'stage3|compact|retry, pause'
       - name: Retained Pulse input, language, storage and context checks
         id: retained
         continue-on-error: true
@@ -59,7 +62,7 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p "$RUNNER_TEMP/pulse-climax-baseline"
-          git archive 4a402190229a9aa208aa58cd6cddbdd9fb7df56d | tar -x -C "$RUNNER_TEMP/pulse-climax-baseline"
+          git archive 999deaa0e2854babdea1acc9e159e01664e22f17 | tar -x -C "$RUNNER_TEMP/pulse-climax-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/pulse-climax-baseline/node_modules"
           (cd "$RUNNER_TEMP/pulse-climax-baseline" && npm run build)
           npx tsx scripts/capture-pulse-climax.mjs "$RUNNER_TEMP/pulse-climax-baseline/dist"
