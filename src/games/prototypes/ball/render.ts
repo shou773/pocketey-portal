@@ -81,18 +81,18 @@ export function createView(canvas: HTMLCanvasElement) {
   const shadow = new THREE.Mesh(new THREE.PlaneGeometry(RADIUS * 3.1, RADIUS * 3.1), new THREE.MeshBasicMaterial({ map: shadowMap, transparent: true, depthWrite: false }));
   shadow.rotation.x = -Math.PI / 2; shadow.position.y = 0.02; scene.add(shadow);
   const brakeControl = canvas.closest('#tilttrail')?.querySelector('[data-tt-input="brake"]');
-  const brakeRing = new THREE.Mesh(new THREE.RingGeometry(RADIUS * 1.22, RADIUS * 1.34, 24), new THREE.MeshBasicMaterial({ color: 0xcb762d, transparent: true, opacity: .85, depthWrite: false }));
+  const brakeRing = new THREE.Mesh(new THREE.RingGeometry(RADIUS * 1.2, RADIUS * 1.52, 24), new THREE.MeshBasicMaterial({ color: 0xe88520, transparent: true, opacity: .95, depthWrite: false }));
   brakeRing.rotation.x = -Math.PI / 2; brakeRing.visible = false; scene.add(brakeRing);
-  // Eight reusable points form one faint ribbon, never a particle system.
+  // Eight reusable points form one readable ribbon, never a particle system.
   // At most 14 triangles and one draw; no allocations in the frame update.
-  const trailLimit = 8, trailLifetime = .2, trailDistance = 1.2;
+  const trailLimit = 8, trailLifetime = .32, trailDistance = 1.8;
   const trailX = new Float32Array(trailLimit), trailZ = new Float32Array(trailLimit), trailTime = new Float64Array(trailLimit);
   const trailPositions = new Float32Array(trailLimit * 6), trailIndices = new Uint16Array((trailLimit - 1) * 6);
   for (let i = 0; i < trailLimit - 1; i++) { const v = i * 2, k = i * 6; trailIndices.set([v, v + 1, v + 2, v + 1, v + 3, v + 2], k); }
   const trailGeometry = new THREE.BufferGeometry();
   const trailAttribute = new THREE.BufferAttribute(trailPositions, 3).setUsage(THREE.DynamicDrawUsage);
   trailGeometry.setAttribute('position', trailAttribute); trailGeometry.setIndex(new THREE.BufferAttribute(trailIndices, 1)); trailGeometry.setDrawRange(0, 0);
-  const trailMaterial = new THREE.MeshBasicMaterial({ color: 0x68c2b8, transparent: true, opacity: .18, depthWrite: false });
+  const trailMaterial = new THREE.MeshBasicMaterial({ color: 0x168b8e, transparent: true, opacity: .5, depthWrite: false });
   const trail = new THREE.Mesh(trailGeometry, trailMaterial); trail.frustumCulled = false; trail.visible = false; scene.add(trail);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let trailCount = 0, trailLength = 0, brakeOpacity = 0;
@@ -108,7 +108,7 @@ export function createView(canvas: HTMLCanvasElement) {
   function updateEffects(s: State, elapsed: number) {
     if (s.phase !== 'playing') { resetEffects(); return; }
     const braking = brakeControl?.getAttribute('aria-pressed') === 'true';
-    const targetOpacity = braking ? .85 : 0;
+    const targetOpacity = braking ? .95 : 0;
     brakeOpacity = reducedMotion.matches ? targetOpacity : brakeOpacity + (targetOpacity - brakeOpacity) * (1 - Math.exp(-elapsed / .04));
     brakeRing.material.opacity = brakeOpacity; brakeRing.visible = brakeOpacity > .005;
     brakeRing.position.set(s.x, .035, -s.z);
@@ -128,7 +128,7 @@ export function createView(canvas: HTMLCanvasElement) {
     for (let i = 0; i < trailCount; i++) {
       const before = Math.max(0, i - 1), after = Math.min(trailCount - 1, i + 1);
       const dx = trailX[after] - trailX[before], dz = trailZ[after] - trailZ[before];
-      const magnitude = Math.hypot(dx, dz), width = .065 * i / Math.max(1, trailCount - 1);
+      const magnitude = Math.hypot(dx, dz), width = .16 * i / Math.max(1, trailCount - 1);
       const nx = magnitude ? dz / magnitude * width : width, nz = magnitude ? dx / magnitude * width : 0, k = i * 6;
       trailPositions[k] = trailX[i] - nx; trailPositions[k + 1] = .027; trailPositions[k + 2] = -trailZ[i] - nz;
       trailPositions[k + 3] = trailX[i] + nx; trailPositions[k + 4] = .027; trailPositions[k + 5] = -trailZ[i] + nz;
@@ -317,3 +317,4 @@ export function createView(canvas: HTMLCanvasElement) {
   function dispose() { disposed = true; reducedMotion.removeEventListener('change', resetEffects); trailMaterial.dispose(); observer.disconnect(); scene.traverse(o => { if (o instanceof THREE.Mesh) { if(o instanceof THREE.InstancedMesh)o.dispose();o.geometry.dispose(); } }); observatoryGeometry?.dispose(); rockGeometry?.dispose(); skyTexture.dispose(); skyMaterial.dispose(); [roadMaterial, sideMaterial, gardenMaterial, distantMaterial, observatoryMaterial, edgeMaterial, stripeMaterial, finishMaterial].forEach(m => m.dispose()); ball.traverse(o => { if (o instanceof THREE.Mesh) (o.material as THREE.Material).dispose(); }); (shadow.material as THREE.Material).dispose(); shadowMap.dispose(); (brakeRing.material as THREE.Material).dispose(); renderer.dispose(); }
   return { draw, dispose, renderer, ready, resetEffects, get trailPoints() { return trail.visible ? trailCount : 0; }, get trailLength() { return trailLength; }, get brakeOpacity() { return brakeRing.visible ? brakeOpacity : 0; } };
 }
+

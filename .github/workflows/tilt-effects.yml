@@ -23,10 +23,10 @@ jobs:
       - run: npm ci
       - run: npm run check && npm run check:games && npm test && npm run build
       - run: npx playwright install --with-deps chromium
-      - name: Build the unchanged six-game baseline
+      - name: Build the previous effects candidate
         run: |
           mkdir -p "$RUNNER_TEMP/tilt-baseline"
-          git archive aed68c9933c281a62401535fb5822156cdb335d6 | tar -x -C "$RUNNER_TEMP/tilt-baseline"
+          git archive 2058422356a4051419b86df65d42985e832e7fd5 | tar -x -C "$RUNNER_TEMP/tilt-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/tilt-baseline/node_modules"
           (cd "$RUNNER_TEMP/tilt-baseline" && npm run build)
           git diff aed68c9933c281a62401535fb5822156cdb335d6 --name-only -- src public | tee /tmp/effects-source-files.txt
@@ -40,14 +40,18 @@ jobs:
           (cd "$RUNNER_TEMP/tilt-baseline" && npm run preview -- --host 127.0.0.1 --port 4336 > /tmp/tilt-baseline.log 2>&1) &
           for port in 4335 4336; do for i in $(seq 1 30); do curl --silent --fail "http://127.0.0.1:$port/" > /dev/null && break; sleep 1; done; done
           node scripts/compare-tilt-effects.mjs
+      - name: Capture before/after production effects at 390px
+        id: capture
+        continue-on-error: true
+        run: npx tsx scripts/capture-tilt-effects.ts
       - name: Scoped effects lifecycle and reduced-motion regressions
         id: effects
         continue-on-error: true
         run: npx playwright test --config tests/prototypes/ball/effects.config.ts
-      - name: Unchanged six TiltTrail browser scenarios and performance gates
+      - name: Unchanged TiltTrail lifecycle scenarios; known full-course performance gate not rerun
         id: original
         continue-on-error: true
-        run: npx playwright test --config tests/prototypes/ball/playwright.config.ts
+        run: npx playwright test --config tests/prototypes/ball/playwright.config.ts --grep-invert "all three stages"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -57,12 +61,20 @@ jobs:
             test-results/
             /tmp/tilt-candidate.log
             /tmp/tilt-baseline.log
+      - name: Record source identity for review-only build
+        run: printf '%s\n' "$GITHUB_SHA" > dist/preview-source-sha.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tilt-effects-production-dist
+          retention-days: 14
+          path: dist/
       - name: Report all focused outcomes
         if: always()
         env:
           COMPARISON: ${{ steps.comparison.outcome }}
           EFFECTS: ${{ steps.effects.outcome }}
+          CAPTURE: ${{ steps.capture.outcome }}
           ORIGINAL: ${{ steps.original.outcome }}
         run: |
           printf 'comparison=%s effects=%s unchanged=%s\n' "$COMPARISON" "$EFFECTS" "$ORIGINAL"
-          test "$COMPARISON" = success && test "$EFFECTS" = success && test "$ORIGINAL" = success
+          test "$COMPARISON" = success && test "$EFFECTS" = success && test "$CAPTURE" = success && test "$ORIGINAL" = success

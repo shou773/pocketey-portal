@@ -17,7 +17,7 @@ export function boot() {
   function celebrateClear() {
     stopBurst();
     if (reducedMotion.matches || document.hidden) return;
-    clearBurst.classList.add('active'); burstTimer = window.setTimeout(stopBurst, 560);
+    clearBurst.classList.add('active'); burstTimer = window.setTimeout(stopBurst, 800);
   }
   reducedMotion.addEventListener('change', stopBurst);
   const pointers = new Map<number, string>(), keys = new Set<string>();
@@ -131,3 +131,4 @@ export function boot() {
   // Normal page navigation releases WebGL and audio resources; bfcache can resume.
   window.addEventListener('pagehide', e => { if (!e.persisted) { cancelAnimationFrame(raf); reducedMotion.removeEventListener('change', stopBurst); view?.dispose(); audio.dispose(); } });
 }
+

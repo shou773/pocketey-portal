@@ -21,10 +21,10 @@ test('effects respect fall, retry, pause, menu, stage, hidden return and live re
   await page.keyboard.down('Space');
   await expect.poll(async () => (await sample(page)).trail).toBeGreaterThan(1);
   await expect.poll(async () => (await sample(page)).brake).toBeGreaterThan(.8);
-  const normal = await sample(page); expect(normal.trail).toBeLessThanOrEqual(8); expect(normal.trailLength).toBeLessThanOrEqual(1.2); expect(normal.calls).toBeLessThanOrEqual(16); expect(normal.triangles).toBeLessThan(6000);
+  const normal = await sample(page); expect(normal.trail).toBeLessThanOrEqual(8); expect(normal.trailLength).toBeLessThanOrEqual(1.8); expect(normal.calls).toBeLessThanOrEqual(16); expect(normal.triangles).toBeLessThan(6000);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect.poll(async () => (await sample(page)).trail).toBe(0);
-  await expect.poll(async () => (await sample(page)).brake).toBe(.85);
+  await expect.poll(async () => (await sample(page)).brake).toBe(.95);
   await page.keyboard.up('Space'); await noEffects(page);
   await page.emulateMedia({ reducedMotion: 'no-preference' }); await expect.poll(async () => (await sample(page)).trail).toBeGreaterThan(1);
   await page.keyboard.press('Escape'); await noEffects(page);
@@ -73,7 +73,7 @@ for (const reduced of [false, true]) test(`ordinary clear burst is one-shot; lan
     await writeFile(`${evidence}/production-clear-burst.png`, Buffer.from(shot.data, 'base64')); await session.detach();
   } else { await expect(burst).not.toHaveClass('active'); await expect(burst).toHaveAttribute('data-observed-starts', '0'); }
   const saved = await page.evaluate(key => localStorage.getItem(key), SAVE_KEY);
-  await page.waitForTimeout(650); await expect(burst).not.toHaveClass('active');
+  await page.waitForTimeout(850); await expect(burst).not.toHaveClass('active');
   await page.getByRole('button', { name: '日本語', exact: true }).click(); await page.locator('#tt-sound').click();
   await expect(burst).toHaveAttribute('data-observed-starts', reduced ? '0' : '8');
   // Sound preference may change, but a render never writes another best time.

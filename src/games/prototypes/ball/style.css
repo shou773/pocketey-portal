@@ -3,7 +3,7 @@
 .tt-view [hidden]{display:none!important}
 
 
-/* Eight one-shot flecks stay in the orb's margin, clear of copy and controls. */
-.tt-orb{position:relative}#tt-clear-burst{position:absolute;inset:0;pointer-events:none}#tt-clear-burst i{position:absolute;left:50%;top:50%;width:3px;height:5px;border-radius:2px;background:#b9f6df;opacity:0;pointer-events:none}#tt-clear-burst.active i{animation:tt-clear-fleck 560ms ease-out both}#tt-clear-burst i:nth-child(even){background:#efd29a}@keyframes tt-clear-fleck{0%{opacity:0;transform:translate(-50%,-50%) translate(calc(var(--x)*.62),calc(var(--y)*.62)) rotate(var(--r)) scale(.6)}20%{opacity:.8}100%{opacity:0;transform:translate(-50%,-50%) translate(var(--x),var(--y)) rotate(var(--r)) scale(.35)}}@media(prefers-reduced-motion:reduce){#tt-clear-burst{display:none}#tt-clear-burst.active i{animation:none}}
+/* More visible one-shot flecks stay in the orb's margin, clear of copy and controls. */
+.tt-orb{position:relative}#tilttrail[data-phase=clear] .tt-orb{margin:26px auto 24px}#tt-clear-burst{position:absolute;inset:0;pointer-events:none}#tt-clear-burst i{position:absolute;left:50%;top:50%;width:5px;height:9px;border-radius:2px;background:#d3fff0;opacity:0;pointer-events:none}#tt-clear-burst.active i{animation:tt-clear-fleck 800ms ease-out both}#tt-clear-burst i:nth-child(even){background:#ffd27a}@keyframes tt-clear-fleck{0%{opacity:0;transform:translate(-50%,-50%) translate(calc(var(--x)*.72),calc(var(--y)*.72)) rotate(var(--r)) scale(1)}12%,55%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) translate(var(--x),var(--y)) rotate(var(--r)) scale(.65)}}@media(prefers-reduced-motion:reduce){#tt-clear-burst{display:none}#tt-clear-burst.active i{animation:none}}
 
-@media(max-width:360px){#tt-clear-burst{transform:scale(.75)}}
+@media(max-width:360px){#tt-clear-burst{transform:scale(.8)}}
