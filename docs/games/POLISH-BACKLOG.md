@@ -17,7 +17,7 @@ Acceptance:
 - Every stage keeps independent layout, turn count and best. The old `pocketey-conveyor-v1` key is read only and preserved. Stable mission IDs live in the new versioned campaign key. No unearned first-stage clear is granted to legacy players.
 - Fixed station mouths and their labels face their actual source/exit ports. All eight targets remain separated and at least 44px at 320px. JA/EN text remains readable in portrait/landscape.
 - Pause, sound dialog, blur, canceled runs, stage changes, context loss, corrupt/blocked storage, future-version preservation and reduced motion remain safe.
-- Existing 90-draw / 15,000-triangle limits are unchanged. No geometry has been added; no idle redraw or extra game loop is introduced.
+- Existing 90-draw / 15,000-triangle limits are unchanged. Only two small single-sided interior planes distinguish real openings from painted rear walls; away-facing hoods are shallower so delivered parcels stay visible. No idle redraw or extra game loop is introduced.
 - Exact-head type/build/unit/browser checks, actual before/after production renders and a source-marked dist artifact are required before preview review. Real-device GPU performance remains a separate observation.
 
 ## Next priorities, in order of evidence and player value

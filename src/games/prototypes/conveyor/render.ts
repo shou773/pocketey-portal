@@ -126,7 +126,12 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
   const shellShape=new THREE.Shape();
   shellShape.moveTo(-.43,.145);shellShape.lineTo(-.43,.58);shellShape.quadraticCurveTo(-.43,.81,-.20,.81);shellShape.lineTo(.20,.81);shellShape.quadraticCurveTo(.43,.81,.43,.58);shellShape.lineTo(.43,.145);
   shellShape.lineTo(.29,.145);shellShape.lineTo(.29,.50);shellShape.quadraticCurveTo(.29,.655,.135,.655);shellShape.lineTo(-.135,.655);shellShape.quadraticCurveTo(-.29,.655,-.29,.50);shellShape.lineTo(-.29,.145);shellShape.closePath();
-  const shell=own(new THREE.ExtrudeGeometry(shellShape,{depth:.36,bevelEnabled:true,bevelThickness:.03,bevelSize:.025,bevelSegments:2,curveSegments:5,steps:1}));shell.translate(0,0,-.18);shell.rotateY(Math.PI/2);
+  function stationShell(depth:number) {
+    const geometry=own(new THREE.ExtrudeGeometry(shellShape,{depth,bevelEnabled:true,bevelThickness:.03,bevelSize:.025,bevelSegments:2,curveSegments:5,steps:1}));
+    geometry.translate(0,0,-depth/2);geometry.rotateY(Math.PI/2);return geometry;
+  }
+  const shell=stationShell(.36), shallowShell=stationShell(.16);
+  const innerWall=own(new THREE.PlaneGeometry(.54,.415));
   const lampGeometry=own(new THREE.SphereGeometry(.06,10,6));
   function station(cell:Cell,isExit:boolean,direction:number){
     const group=new THREE.Group();group.position.copy(position(cell,0));group.rotation.y=-(direction-(isExit?3:1))*Math.PI/2;scene.add(group);
@@ -134,11 +139,18 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
     shadow(group,side*.16,.148,.02,1.1,1.12);
     box(group,paint,0,.184,0,.97,.075,.80,.05,2);
     box(group,materials.belt,-side*.08,.222,0,.80,.026,.53,.018);
-    mesh(group,shell,paint,side*.24,0,0);
+    // A north-facing intake points away from the fixed camera. A shallower
+    // hood leaves its receiving tray and delivered parcel visible from above.
+    const away=direction===0;
+    mesh(group,away?shallowShell:shell,paint,side*(away?.31:.24),0,0);
     // The cavity is behind the parcel's endpoint, never a solid block through its path.
-    box(group,materials.mouth,side*.425,.405,0,.016,.44,.565,.03);
+    box(group,paint,side*.425,.405,0,.016,.44,.565,.03);
+    // Paint the exterior; only the inward-facing surface is dark. The rear
+    // must never look like a second usable opening when the station rotates.
+    const interior=mesh(group,innerWall,materials.mouth,side*.415,.405,0);
+    interior.rotation.y=-side*Math.PI/2;
     box(group,materials.brass,side*.035,.695,0,.055,.055,.27,.017);
-    const lamp=mesh(group,lampGeometry,materials.lamp,side*.24,.855,-.10);lamp.scale.set(1,.65,1);
+    const lamp=mesh(group,lampGeometry,materials.lamp,side*(away?.31:.24),.855,-.10);lamp.scale.set(1,.65,1);
     return lamp;
   }
   station(stage.source,false,stage.source.output);const exitLamp=station(stage.exit,true,stage.exit.input);
