@@ -1,6 +1,7 @@
 import { defineConfig } from '@playwright/test';
+import path from 'node:path';
 export default defineConfig({
-  testDir: '.', testMatch: 'campaign.spec.ts', outputDir: 'test-results/alpine-campaign/native',
+  testDir: '.', testMatch: 'campaign.spec.ts', outputDir: path.resolve('test-results/alpine-campaign/native'),
   timeout: 240000, expect: {timeout:10000}, workers: 1, retries: 0,
   reporter: [['list'],['json',{outputFile:'test-results/alpine-campaign/native-report.json'}]],
   use: {baseURL:'http://127.0.0.1:4346',viewport:{width:390,height:844},deviceScaleFactor:1,hasTouch:true,isMobile:true,
