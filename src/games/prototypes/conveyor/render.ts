@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { STAGE, type Cell, type State } from './model';
+import { STAGE, type Cell, type State, type Stage } from './model';
 
 /** Self-made toy geometry from the approved written specification; no reference-image access. */
-export function createView(canvas: HTMLCanvasElement) {
+export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -58,9 +58,9 @@ export function createView(canvas: HTMLCanvasElement) {
   box(scene,materials.tray,0,-.035,0,4.51,.15,3.46,.13,2);
   // Instanced tile tops keep all twelve cream cells separate without twelve draw calls.
   const tileGeometry=rounded(1.015,.12,1.015,.065,1);
-  const tileTops=new THREE.InstancedMesh(tileGeometry,materials.tile,STAGE.width*STAGE.height);
+  const tileTops=new THREE.InstancedMesh(tileGeometry,materials.tile,stage.width*stage.height);
   const transform=new THREE.Matrix4();
-  for(let z=0;z<STAGE.height;z++)for(let x=0;x<STAGE.width;x++)tileTops.setMatrixAt(z*STAGE.width+x,transform.makeTranslation(...position({x,z},.085).toArray()));
+  for(let z=0;z<stage.height;z++)for(let x=0;x<stage.width;x++)tileTops.setMatrixAt(z*stage.width+x,transform.makeTranslation(...position({x,z},.085).toArray()));
   scene.add(tileTops);
   function extrude(shape:THREE.Shape,height:number,bevel=.01) {
     const g=own(new THREE.ExtrudeGeometry(shape,{depth:height-2*bevel,bevelEnabled:bevel>0,bevelSize:bevel,bevelThickness:bevel,bevelSegments:1,curveSegments:4,steps:1}));
@@ -112,7 +112,7 @@ export function createView(canvas: HTMLCanvasElement) {
   }
   const blueprints={straight:tileBlueprint('straight'),bend:tileBlueprint('bend')};
   const tileViews=new Map<string,THREE.Group>();
-  for(const tile of STAGE.tiles){
+  for(const tile of stage.tiles){
     const group=new THREE.Group();group.position.copy(position(tile,0));scene.add(group);
     shadow(group,0,.147,0,1.10,1.07);
     blueprints[tile.kind].forEach(part=>mesh(group,part.geometry,part.material));tileViews.set(tile.id,group);
@@ -128,8 +128,8 @@ export function createView(canvas: HTMLCanvasElement) {
   shellShape.lineTo(.29,.145);shellShape.lineTo(.29,.50);shellShape.quadraticCurveTo(.29,.655,.135,.655);shellShape.lineTo(-.135,.655);shellShape.quadraticCurveTo(-.29,.655,-.29,.50);shellShape.lineTo(-.29,.145);shellShape.closePath();
   const shell=own(new THREE.ExtrudeGeometry(shellShape,{depth:.36,bevelEnabled:true,bevelThickness:.03,bevelSize:.025,bevelSegments:2,curveSegments:5,steps:1}));shell.translate(0,0,-.18);shell.rotateY(Math.PI/2);
   const lampGeometry=own(new THREE.SphereGeometry(.06,10,6));
-  function station(cell:Cell,isExit:boolean){
-    const group=new THREE.Group();group.position.copy(position(cell,0));scene.add(group);
+  function station(cell:Cell,isExit:boolean,direction:number){
+    const group=new THREE.Group();group.position.copy(position(cell,0));group.rotation.y=-(direction-(isExit?3:1))*Math.PI/2;scene.add(group);
     const side=isExit?1:-1,paint=isExit?materials.outlet:materials.inlet;
     shadow(group,side*.16,.148,.02,1.1,1.12);
     box(group,paint,0,.184,0,.97,.075,.80,.05,2);
@@ -141,7 +141,7 @@ export function createView(canvas: HTMLCanvasElement) {
     const lamp=mesh(group,lampGeometry,materials.lamp,side*.24,.855,-.10);lamp.scale.set(1,.65,1);
     return lamp;
   }
-  station(STAGE.source,false);const exitLamp=station(STAGE.exit,true);
+  station(stage.source,false,stage.source.output);const exitLamp=station(stage.exit,true,stage.exit.input);
   const parcel=new THREE.Group();scene.add(parcel);
   box(parcel,materials.paper,0,0,0,.35,.32,.35,.035,2);
   mesh(parcel,own(new THREE.BoxGeometry(.062,.009,.30)),materials.tape,0,.163,0);
@@ -170,3 +170,4 @@ export function createView(canvas: HTMLCanvasElement) {
   function dispose(){owned.forEach(g=>g.dispose());Object.values(materials).forEach(m=>m.dispose());shadowMaterial.dispose();shadowTexture.dispose();renderer.dispose();}
   resize();return{renderer,draw,project,resize,dispose};
 }
+
