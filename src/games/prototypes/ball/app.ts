@@ -1,14 +1,15 @@
 import {createGameAudio} from '../../audio';
 import { LANGUAGE_EVENT, installLocale, tr } from '../../../lib/locale';
-import { advance, createState, length, parseSave, SAVE_KEY, STAGES, STEP, type Phase } from './model';
+import { advance, createState, length, SAVE_KEY, STAGES, STEP, type Phase } from './model';
 import { createView } from './render';
+import { PROGRESS_KEY, ORIGINAL_COURSE_COUNT, parseProgress, serializeProgress, stageUnlocked } from './progress';
 
 export function boot() {
   installLocale();
   const root = document.querySelector<HTMLElement>('#tilttrail')!;
   const get = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(`tt-${id}`) as T;
-  let state = createState(), selected = 0, save = parseSave(null), storageOK = true;
-  try { save = parseSave(localStorage.getItem(SAVE_KEY)); } catch { storageOK = false; }
+  let state = createState(), selected = 0, save = parseProgress(null), storageOK = true;
+  try { save = parseProgress(localStorage.getItem(PROGRESS_KEY), localStorage.getItem(SAVE_KEY)); if (!save.writable) storageOK = false; } catch { storageOK = false; }
   let view: ReturnType<typeof createView> | null = null;
   try { view = createView(get<HTMLCanvasElement>('canvas')); } catch { /* A readable fallback replaces the playable menu. */ }
   const clearBurst = get('clear-burst'), reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -22,14 +23,14 @@ export function boot() {
   reducedMotion.addEventListener('change', stopBurst);
   const pointers = new Map<number, string>(), keys = new Set<string>();
   let lastPhase: Phase = 'ready', accumulator = 0, previous = 0, raf = 0, lastHUD = 0, wasBraking = false;
-  function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); } catch { storageOK = false; } }
+  function persist() { if (!save.writable) { storageOK = false; return; } try { localStorage.setItem(PROGRESS_KEY, serializeProgress(save)); } catch { storageOK = false; } }
   const audio=createGameAudio('tilt',!save.muted,root,enabled=>{save.muted=!enabled;persist();renderUI();});audio.mount(get('sound'),pause,resetInput);
   const controlButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-tt-input]')];
   function held(control: string) { return [...pointers.values()].includes(control) || (control === 'left' ? keys.has('ArrowLeft') || keys.has('KeyA') : control === 'right' ? keys.has('ArrowRight') || keys.has('KeyD') : keys.has('Space') || keys.has('ArrowDown') || keys.has('KeyS')); }
   function reflectControls() { controlButtons.forEach(b => { const on = held(b.dataset.ttInput!); b.classList.toggle('held', on); b.setAttribute('aria-pressed', String(on)); }); }
   function resetInput() { pointers.clear(); keys.clear(); wasBraking=false; reflectControls(); }
   function start(stage: number) {
-    if (!view || document.hidden) return;
+    if (!view || document.hidden || !stageUnlocked(save, stage)) return;
     stopBurst(); view.resetEffects(); selected = stage; state = createState(stage); state.phase = 'playing'; lastPhase = 'playing'; accumulator = 0; previous = performance.now(); resetInput(); audio.setPlaying(true,true);audio.cue('start'); renderUI();
     get<HTMLButtonElement>('pause').focus({ preventScroll: true });
   }
@@ -48,25 +49,26 @@ export function boot() {
     get('progress').setAttribute('aria-label', tr('ゴールまでの進行度', 'Progress to goal'));
     get('canvas').setAttribute('aria-label', tr('TiltTrail：空に浮かぶ道をボールで転がる3Dゲーム', 'TiltTrail: roll a ball along floating 3D trails'));
     get('instructions').textContent = tr('左右ボタン / ← → / A D：転がす\nブレーキ長押し / Space：減速 · Esc / P：一時停止', 'Left / right buttons or ← → / A D: steer\nHold BRAKE or Space: slow down · Esc / P: pause');
-    get('save').textContent = storageOK ? tr('記録はこの端末に保存。3ステージはすべて選べます。', 'Records stay on this device. All 3 stages are available.') : tr('保存できません。記録はこのタブでのみ保持します。', 'Storage unavailable. Records last for this tab only.');
+    get('save').textContent = storageOK ? tr(`全${STAGES.length}コース。最初の${ORIGINAL_COURSE_COUNT}つは選択可。追加コースは前のコースをクリアすると解放。記録はこの端末に保存。`, `${STAGES.length} courses. The original ${ORIGINAL_COURSE_COUNT} are open. Extra courses unlock after clearing the previous course. Records stay on this device.`) : tr('保存できません。記録はこのタブでのみ保持します。', 'Storage unavailable. Records last for this tab only.');
     get('stages').hidden = phase !== 'ready'; get('instructions').hidden = phase === 'clear';
     get('stages').replaceChildren();
     STAGES.forEach((stage, i) => {
       const button = document.createElement('button'); button.type = 'button'; button.dataset.stage = String(i); button.setAttribute('aria-pressed', String(i === selected));
-      const num = document.createElement('strong'); num.textContent = `0${i + 1}`;
+      const num = document.createElement('strong'); num.textContent = String(i + 1).padStart(2, '0');
       const label = document.createElement('span'); label.textContent = tr(...stage.name);
-      const best = document.createElement('small'); best.textContent = save.best[i] ? `${tr('最速', 'BEST')} ${save.best[i]!.toFixed(2)}s` : tr('未クリア', 'Not cleared');
-      button.append(num, label, best); button.addEventListener('click', () => { selected = i; state = createState(i); renderUI();audio.cue('select'); get('stages').querySelector<HTMLButtonElement>(`[data-stage="${i}"]`)!.focus({ preventScroll: true }); }); get('stages').append(button);
+      const unlocked = stageUnlocked(save, i); button.disabled = !unlocked;
+      const best = document.createElement('small'); best.textContent = !unlocked ? tr(`${String(i).padStart(2, '0')}をクリアで解放`, `Clear ${String(i).padStart(2, '0')} to unlock`) : save.best[i] ? `${tr('最速', 'BEST')} ${save.best[i]!.toFixed(2)}s` : tr('未クリア', 'Not cleared');
+      button.append(num, label, best); button.addEventListener('click', () => { if (!stageUnlocked(save, i)) return; selected = i; state = createState(i); renderUI();audio.cue('select'); get('stages').querySelector<HTMLButtonElement>(`[data-stage="${i}"]`)!.focus({ preventScroll: true }); }); get('stages').append(button);
     });
     get('title').textContent = phase === 'paused' ? tr('ひと休み', 'Take a breath') : phase === 'failed' ? tr('もう一度、転がそう', 'One more roll') : phase === 'clear' ? tr('ゴール！', 'Trail complete!') : 'TiltTrail';
-    get('eyebrow').textContent = phase === 'ready' ? tr('ころがる、曲がる、見きわめる', 'ROLL · STEER · FIND YOUR LINE') : `STAGE 0${state.stage + 1} · ${tr(...STAGES[state.stage].name)}`;
+    get('eyebrow').textContent = phase === 'ready' ? tr('ころがる、曲がる、見きわめる', 'ROLL · STEER · FIND YOUR LINE') : `STAGE ${String(state.stage + 1).padStart(2, '0')} · ${tr(...STAGES[state.stage].name)}`;
     get('copy').textContent = phase === 'ready' ? tr('左右でボールの慣性を操り、空の道をゴールまで。曲がる前にブレーキで減速しよう。', 'Guide a rolling ball along a trail in the sky. Catch its momentum, brake before bends, and reach the glowing gate.') : phase === 'paused' ? tr('再開するまでボールは止まっています。', 'Your ball stays still until you resume.') : phase === 'failed' ? tr('オレンジの縁を越えると落下します。曲がる前に減速し、早めに切り返そう。', 'The orange edges mark the drop. Brake before bends and counter-steer early.') : `${state.time.toFixed(2)}s · ${tr('ベスト', 'BEST')} ${save.best[state.stage]?.toFixed(2)}s`;
     get('actions').replaceChildren();
     if (!view) { get('title').textContent = tr('3D表示を開始できません', '3D view unavailable'); get('copy').textContent = tr('WebGLが使えるブラウザで開き直してください。', 'Reopen in a browser with WebGL enabled.'); action(tr('再読み込み', 'Reload'), () => location.reload(), true); }
     else if (phase === 'ready') action(tr('このステージを遊ぶ', 'Play this stage'), () => start(selected), true);
     else if (phase === 'paused') { action(tr('再開', 'Resume'), resume, true); action(tr('やり直す', 'Retry'), () => start(state.stage)); action(tr('ステージ選択', 'Stages'), menu); }
     else if (phase === 'failed') { action(tr('すぐリトライ', 'Retry now'), () => start(state.stage), true); action(tr('ステージ選択', 'Stages'), menu); }
-    else if (phase === 'clear') { if (state.stage < 2) action(tr('次のステージへ', 'Next stage'), () => start(state.stage + 1), true); else action(tr('ステージ選択', 'Stages'), menu, true); action(tr('もう一度', 'Roll again'), () => start(state.stage)); if (state.stage < 2) action(tr('ステージ選択', 'Stages'), menu); }
+    else if (phase === 'clear') { if (state.stage < STAGES.length - 1) action(tr('次のステージへ', 'Next stage'), () => start(state.stage + 1), true); else action(tr('ステージ選択', 'Stages'), menu, true); action(tr('もう一度', 'Roll again'), () => start(state.stage)); if (state.stage < STAGES.length - 1) action(tr('ステージ選択', 'Stages'), menu); }
     if (!overlay.hidden && phase !== 'ready') get('actions').querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
     hud();
   }
@@ -75,7 +77,7 @@ export function boot() {
     root.dataset.drawCalls = String(view?.renderer.info.render.calls ?? 0); root.dataset.triangles = String(view?.renderer.info.render.triangles ?? 0);
     root.dataset.trailPoints = String(view?.trailPoints ?? 0); root.dataset.trailLength = String(view?.trailLength ?? 0); root.dataset.brakeOpacity = String(view?.brakeOpacity ?? 0);
     root.dataset.audio = audio.status().context;
-    get('stage').textContent = `0${state.stage + 1} / 03`; get('name').textContent = tr(...STAGES[state.stage].name); get('time').textContent = state.time.toFixed(2);
+    get('stage').textContent = `${String(state.stage + 1).padStart(2, '0')} / ${String(STAGES.length).padStart(2, '0')}`; get('name').textContent = tr(...STAGES[state.stage].name); get('time').textContent = state.time.toFixed(2);
     get('speed').textContent = `${tr('速度', 'SPEED')} ${state.speed.toFixed(1)} m/s`;
     get<HTMLProgressElement>('progress').value = Math.min(1, state.z / length(state.stage));
     get('hint').hidden = state.phase !== 'playing' && state.phase !== 'falling';
@@ -131,4 +133,5 @@ export function boot() {
   // Normal page navigation releases WebGL and audio resources; bfcache can resume.
   window.addEventListener('pagehide', e => { if (!e.persisted) { cancelAnimationFrame(raf); reducedMotion.removeEventListener('change', stopBurst); view?.dispose(); audio.dispose(); } });
 }
+
 

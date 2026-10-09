@@ -1,6 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { track, SAVE_KEY } from '../../../src/games/prototypes/ball/model';
+import { track } from '../../../src/games/prototypes/ball/model';
+import { PROGRESS_KEY as SAVE_KEY } from '../../../src/games/prototypes/ball/progress';
 const evidence = 'test-results/ball-effects';
 async function open(page: Page) {
   const assets = Promise.all(['observatory.glb', 'wind-rock.glb'].map(name => page.waitForResponse(r => r.url().endsWith(name) && r.status() === 200)));
@@ -77,8 +78,9 @@ for (const reduced of [false, true]) test(`ordinary clear burst is one-shot; lan
   await page.getByRole('button', { name: '日本語', exact: true }).click(); await page.locator('#tt-sound').click();
   await expect(burst).toHaveAttribute('data-observed-starts', reduced ? '0' : '8');
   // Sound preference may change, but a render never writes another best time.
-  const before = JSON.parse(saved!).best, after = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).best, SAVE_KEY); expect(after).toEqual(before);
+  const before = JSON.parse(saved!).records, after = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!).records, SAVE_KEY); expect(after).toEqual(before);
   await page.getByRole('button', { name: 'もう一度', exact: true }).click(); await expect(burst).not.toHaveClass('active');
   expect(errors).toEqual([]);
   await writeFile(`${evidence}/clear-reduced-${reduced}.json`, JSON.stringify({ animationStarts: reduced ? 0 : 8, before, after, errors }, null, 2));
 });
+

@@ -1,0 +1,79 @@
+name: Tilt course progression
+on:
+  pull_request:
+    paths:
+      - 'src/games/prototypes/ball/**'
+      - 'tests/prototypes/ball/**'
+      - 'scripts/capture-tilt-courses.mjs'
+      - '.github/workflows/tilt-courses.yml'
+permissions:
+  contents: read
+jobs:
+  courses:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check && npm run check:games && npm test && npm run build
+      - name: Mark exact production source and file digests
+        run: |
+          git rev-parse HEAD > dist/preview-source-sha.txt
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > dist-sha256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tilt-courses-dist-${{ github.event.pull_request.head.sha }}
+          path: |
+            dist/
+            dist-sha256.txt
+          retention-days: 14
+      - run: npx playwright install --with-deps chromium
+      - name: New courses, save migration and unchanged performance budgets
+        id: courses
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/ball/courses.config.ts
+      - name: Retained ordinary-input lifecycle regressions
+        id: lifecycle
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/ball/playwright.config.ts --grep 'fall →|two-finger|320 portrait|WebGL loss'
+      - name: Retained visible effects, clear and reduced-motion regressions
+        id: effects
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/ball/effects.config.ts
+      - name: Real production before/after and unchanged-game file hashes
+        id: captures
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/tilt-course-baseline"
+          git archive 29424ba7300e5ded81bc07b9f2e73f05f078a137 | tar -x -C "$RUNNER_TEMP/tilt-course-baseline"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/tilt-course-baseline/node_modules"
+          (cd "$RUNNER_TEMP/tilt-course-baseline" && npm run build)
+          node scripts/capture-tilt-courses.mjs "$RUNNER_TEMP/tilt-course-baseline/dist"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tilt-courses-evidence
+          path: |
+            test-results/tilt-courses/
+            test-results/ball/
+            test-results/ball-effects/
+          retention-days: 14
+      - name: Preserve every scoped gate result
+        if: always()
+        env:
+          COURSES: ${{ steps.courses.outcome }}
+          LIFECYCLE: ${{ steps.lifecycle.outcome }}
+          EFFECTS: ${{ steps.effects.outcome }}
+          CAPTURES: ${{ steps.captures.outcome }}
+        run: |
+          printf 'courses=%s lifecycle=%s effects=%s captures=%s\n' "$COURSES" "$LIFECYCLE" "$EFFECTS" "$CAPTURES"
+          test "$COURSES" = success && test "$LIFECYCLE" = success && test "$EFFECTS" = success && test "$CAPTURES" = success
