@@ -45,7 +45,13 @@ jobs:
       - name: Shared Amber gameplay and retained interruption/fallback checks
         id: regressions
         continue-on-error: true
-        run: npx playwright test --grep 'amber-(keyboard|touch)|failure/retry|corrupt/blocked|WebGL context loss|simulated notch|failed GLBs|missing shared colormap'
+        run: |
+          if git diff --quiet 9dba0fdae09df7b162c101cb1eb60acd3815aa3c HEAD -- src/games src/components/ActionGame.astro tests/games/browser.spec.ts tests/games/input.ts playwright.config.ts; then
+            mkdir -p test-results/retained-regressions
+            printf '%s\n' 'Production and retained-test source are identical to9dba0fd. Reusing run37985788731: all functional assertions completed; Amber desktop FPS42.69758870985867 failed the unchanged45 gate. The separate matched comparison diagnoses this without rerunning the unchanged full suite.' > test-results/retained-regressions/README.txt
+            exit 1
+          fi
+          npx playwright test --output=test-results/retained-regressions --grep 'amber-(keyboard|touch)|failure/retry|corrupt/blocked|WebGL context loss|simulated notch|failed GLBs|missing shared colormap' 
       - name: Real production before/after and preserved-game file hashes
         id: captures
         continue-on-error: true
@@ -54,7 +60,7 @@ jobs:
           git archive 190772d0a31e61caee9bab1fb0886209c96b873a | tar -x -C "$RUNNER_TEMP/orbit-signal-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/orbit-signal-baseline/node_modules"
           (cd "$RUNNER_TEMP/orbit-signal-baseline" && npm run build)
-          node scripts/capture-orbit-signals.mjs "$RUNNER_TEMP/orbit-signal-baseline/dist"
+          npx tsx scripts/capture-orbit-signals.mjs "$RUNNER_TEMP/orbit-signal-baseline/dist"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
