@@ -29,8 +29,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Preserve accepted integration outside the reviewed boss-paint file
-        run: git diff --exit-code 284d8441a8235dd2eff27c31a21bded81919872e HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/shooter/view.ts'
+      - name: Preserve accepted integration outside the reviewed courier-paint file
+        run: git diff --exit-code 3da9ca63377deabe372c911a47d6825cc6d2d15f HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/conveyor/render.ts'
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact production source and file digests
         run: |
@@ -48,10 +48,10 @@ jobs:
         id: browser
         continue-on-error: true
         run: npx playwright test --config tests/prototypes/conveyor/playwright.config.ts
-      - name: Build immutable three-board campaign source for real before/after captures
+      - name: Build immutable accepted courier baseline for real before/after captures
         run: |
           mkdir -p "$RUNNER_TEMP/conveyor-baseline"
-          git archive a6ad5893df21cf412fd261616d8d1757b27371f6 | tar -x -C "$RUNNER_TEMP/conveyor-baseline"
+          git archive 3da9ca63377deabe372c911a47d6825cc6d2d15f | tar -x -C "$RUNNER_TEMP/conveyor-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/conveyor-baseline/node_modules"
           (cd "$RUNNER_TEMP/conveyor-baseline" && npm run build)
           node scripts/capture-conveyor-campaign.mjs "$RUNNER_TEMP/conveyor-baseline/dist"

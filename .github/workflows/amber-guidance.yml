@@ -29,8 +29,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Preserve accepted integration outside the reviewed boss-paint file
-        run: git diff --exit-code 284d8441a8235dd2eff27c31a21bded81919872e HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/shooter/view.ts'
+      - name: Preserve accepted integration outside the reviewed courier-paint file
+        run: git diff --exit-code 3da9ca63377deabe372c911a47d6825cc6d2d15f HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/conveyor/render.ts'
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact source and built file digests
         run: |

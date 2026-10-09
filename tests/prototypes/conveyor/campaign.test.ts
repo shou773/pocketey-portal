@@ -1,3 +1,4 @@
+import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { STAGE, createState, reduce, trace, type Direction } from '../../../src/games/prototypes/conveyor/model';
@@ -111,4 +112,11 @@ test('two-way routes record real entry/exit ports for forward and reverse parcel
   const route=trace(mission,mission.tiles.map((tile,i)=>({...tile,rotation:rotations[i] as Direction})));assert.equal(route.outcome,'success');
   const visits=route.visits.filter(v=>v.tileId);assert.equal(visits[0].input,3);assert.equal(visits[0].output,rotations[0]===0?2:0);assert.equal(visits.at(-1)?.input,rotations[0]===0?2:0);assert.equal(visits.at(-1)?.output,1);
  }
+});
+
+test('courier palette changes only two paints and the existing bay strip assignment',()=>{
+ let source=readFileSync('src/games/prototypes/conveyor/render.ts','utf8');
+ assert.equal(source.split("paper: material(0xe1b46a), tape: material(0x286458)").length,2);source=source.replace("paper: material(0xe1b46a), tape: material(0x286458)","paper: material(0xcc9a5e), tape: material(0xf5dfb3)");
+ assert.equal(source.split("box(group,materials.tape,side*.035,.695,0,.055,.055,.27,.017);").length,2);source=source.replace("box(group,materials.tape,side*.035,.695,0,.055,.055,.27,.017);","box(group,materials.brass,side*.035,.695,0,.055,.055,.27,.017);");
+ assert.equal(createHash('sha256').update(source).digest('hex'),'f26523848444e630146d01589b08df343ebf2e259c74fc7c76c28444a1724576');
 });

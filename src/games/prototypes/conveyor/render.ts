@@ -21,7 +21,7 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
     belt: material(0x3f4545), groove: material(0x454b48), brass: material(0xddbd73),
     white: new THREE.MeshBasicMaterial({ color: 0xffffff }), selected: new THREE.MeshBasicMaterial({ color: 0xffc83e, toneMapped: false }),
     inlet: material(0x94cbbb), outlet: material(0xed825e), mouth: new THREE.MeshBasicMaterial({ color: 0x20362f, toneMapped: false }),
-    paper: material(0xcc9a5e), tape: material(0xf5dfb3), lamp: material(0xe9f4d7),
+    paper: material(0xe1b46a), tape: material(0x286458), lamp: material(0xe9f4d7),
     desk: material(0xf5ead5), wall: material(0xd7e7db), pipe: material(0xb3d0bd),
   };
   const owned = new Set<THREE.BufferGeometry>();
@@ -152,7 +152,7 @@ export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
     // must never look like a second usable opening when the station rotates.
     const interior=mesh(group,innerWall,materials.mouth,side*.415,.405,0);
     interior.rotation.y=-side*Math.PI/2;
-    box(group,materials.brass,side*.035,.695,0,.055,.055,.27,.017);
+    box(group,materials.tape,side*.035,.695,0,.055,.055,.27,.017);
     const lamp=mesh(group,lampGeometry,materials.lamp,side*(away?.31:.24),.855,-.10);lamp.scale.set(1,.65,1);
     return lamp;
   }
