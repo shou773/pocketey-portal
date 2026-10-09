@@ -1,0 +1,72 @@
+name: Alpine course campaign
+on:
+  pull_request:
+    paths:
+      - 'src/games/prototypes/alpine/**'
+      - 'src/pages/prototypes/alpine-drive.astro'
+      - 'tests/prototypes/alpine/**'
+      - 'scripts/capture-alpine-campaign.mjs'
+      - '.github/workflows/alpine-campaign.yml'
+permissions:
+  contents: read
+jobs:
+  campaign:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run check && npm run check:games && npm test && npm run build
+      - name: Mark exact production source and file digests
+        run: |
+          git rev-parse HEAD > dist/preview-source-sha.txt
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > dist-sha256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: alpine-campaign-dist-${{ github.event.pull_request.head.sha }}
+          path: |
+            dist/
+            dist-sha256.txt
+          retention-days: 14
+      - run: npx playwright install --with-deps chromium
+      - name: Three courses, precision, migration and compact native play
+        id: campaign
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/alpine/campaign.config.ts
+      - name: Retained original input lifecycle and real-rendered clear
+        id: retained
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/alpine/playwright.config.ts && npx playwright test --config tests/prototypes/alpine/rendered.config.ts
+      - name: Matched original-course comparison and new-course readability
+        id: captures
+        continue-on-error: true
+        run: |
+          mkdir -p "$RUNNER_TEMP/alpine-campaign-baseline"
+          git archive 0740cb3272e92f934a350ba9a8d5f55a23cd7158 | tar -x -C "$RUNNER_TEMP/alpine-campaign-baseline"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/alpine-campaign-baseline/node_modules"
+          (cd "$RUNNER_TEMP/alpine-campaign-baseline" && npm run build)
+          npx tsx scripts/capture-alpine-campaign.mjs "$RUNNER_TEMP/alpine-campaign-baseline/dist"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: alpine-campaign-evidence
+          path: test-results/
+          retention-days: 14
+      - name: Preserve every scoped check result
+        if: always()
+        env:
+          CAMPAIGN: ${{ steps.campaign.outcome }}
+          RETAINED: ${{ steps.retained.outcome }}
+          CAPTURES: ${{ steps.captures.outcome }}
+        run: |
+          printf 'campaign=%s retained=%s captures=%s\n' "$CAMPAIGN" "$RETAINED" "$CAPTURES"
+          test "$CAMPAIGN" = success && test "$RETAINED" = success && test "$CAPTURES" = success

@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const saveKey = 'pocketey-alpine-prototype-v1';
+const saveKey = 'pocketey-alpine-campaign-v2';
 const snapshot = (page: Page) => page.locator('#alpine').evaluate(root => ({ ...(root as HTMLElement).dataset }));
 const saved = (page: Page) => page.evaluate(key => localStorage.getItem(key), saveKey);
 
@@ -31,7 +31,7 @@ test('real-rendered touch clear saves once, retries and survives reload', async 
       const d = document.querySelector<HTMLElement>('#alpine')?.dataset;
       return Number(d?.drawCalls) > 0 && Number(d?.triangles) > 0;
     });
-    await expect(page.locator('#ad-save')).toHaveText('この端末のクリア回数：0');
+    await expect(page.locator('#ad-save')).toContainText('このコースの完走：0');
     report.initial = await snapshot(page);
     await page.screenshot({ path: info.outputPath('01-ready.png'), fullPage: true });
     await page.getByRole('button', { name: 'ドライブ開始', exact: true }).click();
@@ -74,10 +74,11 @@ test('real-rendered touch clear saves once, retries and survives reload', async 
     expect(Number(goal.drawCalls)).toBeGreaterThan(0);
     expect(Number(goal.triangles)).toBeGreaterThan(0);
     await expect(page.locator('#ad-title')).toHaveText('ゴール！');
-    await expect(page.locator('#ad-save')).toHaveText('この端末のクリア回数：1');
+    await expect(page.locator('#ad-save')).toContainText('このコースの完走：1');
     const savedRaw = await saved(page);
     expect(savedRaw).not.toBeNull();
-    expect(JSON.parse(savedRaw!)).toEqual({ clears: 1, muted: true });
+    expect(JSON.parse(savedRaw!)).toMatchObject({version:2,muted:true,records:{'mountain-pass':{clears:1,best:0}}});
+    expect(await page.evaluate(()=>localStorage.getItem('pocketey-alpine-prototype-v1'))).toBeNull();
     await page.waitForTimeout(1200);
     expect(await saved(page)).toBe(savedRaw);
     report.goal = goal;
@@ -99,7 +100,7 @@ test('real-rendered touch clear saves once, retries and survives reload', async 
     await page.reload();
     await expect(root).toHaveAttribute('data-phase', 'ready');
     await page.waitForFunction(() => Number(document.querySelector<HTMLElement>('#alpine')!.dataset.drawCalls) > 0);
-    await expect(page.locator('#ad-save')).toHaveText('この端末のクリア回数：1');
+    await expect(page.locator('#ad-save')).toContainText('このコースの完走：1');
     expect(await saved(page)).toBe(savedRaw);
     expect(await snapshot(page)).toMatchObject({ phase: 'ready', gate: '0', heading: '0', queued: 'null', z: '0.000' });
     report.reloaded = await snapshot(page);

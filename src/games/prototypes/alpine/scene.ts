@@ -1,14 +1,17 @@
 import * as THREE from 'three';
-import { BLOCKS, FINISH, GATES, KNOTS, ROAD_HALF, WINDOW, roadX, windowOpen, type State } from './model';
+import { courseAt, FINISH, ROAD_HALF, WINDOW, roadX, windowOpen, type State } from './model';
 import { Parts, triangles, noise, makeCar, treeGeometry, rockGeometry, UP, type Point } from './meshes';
 
 // Original art from the written brief; no reference-image bytes or external assets.
-function roadStrip(from: number, to: number, half: number, offset: number, y: number) {
-  const a = roadX(from) + offset, b = roadX(to) + offset;
+function roadStrip(from: number, to: number, half: number, offset: number, y: number, course: number) {
+  const a = roadX(from, course) + offset, b = roadX(to, course) + offset;
   return triangles([[a-half,y,-from], [a+half,y,-from], [b+half,y,-to],
     [a-half,y,-from], [b+half,y,-to], [b-half,y,-to]]);
 }
-export function createAlpineScene() {
+export function createAlpineScene(course = 0) {
+  const { gates: GATES, knots: KNOTS, blocks: BLOCKS } = courseAt(course);
+  const strip = (from: number, to: number, half: number, offset: number, y: number) => roadStrip(from, to, half, offset, y, course);
+  const xAt = (z: number) => roadX(z, course);
   const scene=new THREE.Scene();
   // A tiny procedural sky texture keeps the upper view open without extra meshes.
   const skyPixels=new Uint8Array(128*4),skyTop=new THREE.Color(0xaed7ef);
@@ -33,12 +36,12 @@ export function createAlpineScene() {
   const world=new Parts();
   for(let i=1;i<KNOTS.length;i++) {
     const from=KNOTS[i-1].z,to=KNOTS[i].z;
-    world.add(roadStrip(from,to,ROAD_HALF,0,0),asphalt);
-    for(const side of [-1,1]) world.add(roadStrip(from,to,.065,side*(ROAD_HALF-.035),.014),stone);
+    world.add(strip(from,to,ROAD_HALF,0,0),asphalt);
+    for(const side of [-1,1]) world.add(strip(from,to,.065,side*(ROAD_HALF-.035),.014),stone);
   }
   // Faceted rock foundation and green shoulders lie below the unchanged road.
   for(let z=-8;z<58;z+=2) for(const side of [-1,1]) {
-    const to=Math.min(58,z+2),a=roadX(z),b=roadX(to),e=side*ROAD_HALF;
+    const to=Math.min(58,z+2),a=xAt(z),b=xAt(to),e=side*ROAD_HALF;
     const depth=1.1+.6*noise(z+side*61);
     const points:Point[]=[[a+e,-.02,-z],[b+e,-.02,-to],[b+e,-depth,-to],
       [a+e,-.02,-z],[b+e,-depth,-to],[a+e,-depth,-z]];
@@ -51,12 +54,12 @@ export function createAlpineScene() {
       [a+far,-1.9,-z],[b+side*13,-7,-to],[b+far,-1.9,-to]];
     if(side===-1)skirt.reverse();world.add(triangles(skirt),cliff);
   }
-  for(let z=-5;z<FINISH;z+=3) world.add(roadStrip(z,z+.8,.028,0,.017),stone);
+  for(let z=-5;z<FINISH;z+=3) world.add(strip(z,z+.8,.028,0,.017),stone);
   const zones=GATES.map(gate=>{
     const m=material(0xf0c987);m.transparent=true;m.opacity=.11;m.depthWrite=false;
-    scene.add(new THREE.Mesh(roadStrip(gate.z-WINDOW,gate.z,ROAD_HALF-.14,0,.024),m));
-    world.add(roadStrip(gate.z-.07,gate.z+.07,ROAD_HALF-.05,0,.033),yellow);
-    const x=roadX(gate.z-2),z=-(gate.z-2),d=gate.direction;
+    scene.add(new THREE.Mesh(strip(gate.z-WINDOW,gate.z,ROAD_HALF-.14,0,.024),m));
+    world.add(strip(gate.z-.07,gate.z+.07,ROAD_HALF-.05,0,.033),yellow);
+    const x=xAt(gate.z-2),z=-(gate.z-2),d=gate.direction;
     world.box(ivory,[x,.041,z],[1.28,.018,.14]);
     const points:Point[]=[[x+d*1.1,.053,z],[x+d*.45,.053,z-.43],[x+d*.45,.053,z+.43]];
     if(d===-1)points.reverse();world.add(triangles(points),ivory);return m;
@@ -83,7 +86,7 @@ export function createAlpineScene() {
     world.box((x+y)%2?dark:ivory,[-ROAD_HALF+(x+.5)*(ROAD_HALF*2/16),2.48+y*.23,-FINISH],
       [ROAD_HALF*2/16,.23,.025]);
   }
-  for(let i=0;i<16;i++)world.add(roadStrip(FINISH-.15,FINISH+.15,ROAD_HALF/16,
+  for(let i=0;i<16;i++)world.add(strip(FINISH-.15,FINISH+.15,ROAD_HALF/16,
     -ROAD_HALF+(i+.5)*ROAD_HALF/8,.036),i%2?dark:ivory);
   world.finish(scene);
 
@@ -92,11 +95,11 @@ export function createAlpineScene() {
   for(let i=0;i<42;i++) {
     const z=-6+i*1.5,side=i%2?1:-1,offset=6+noise(i*11)*1.2;
     const group=i%7===0?3+i%3:i%3;
-    placements[group].push({x:roadX(z)+side*offset,z,scale:.75+noise(i*17)*.48,rotation:noise(i*23)*Math.PI*2});
+    placements[group].push({x:xAt(z)+side*offset,z,scale:.75+noise(i*17)*.48,rotation:noise(i*23)*Math.PI*2});
   }
   for(let i=0;i<18;i++) {
     const z=-5+i*3.3,side=i%2?1:-1;
-    placements[3+i%3].push({x:roadX(z)+side*(5.1+noise(i)*1.1),z,scale:.45+noise(i*19)*.48,rotation:noise(i*7)*6});
+    placements[3+i%3].push({x:xAt(z)+side*(5.1+noise(i)*1.1),z,scale:.45+noise(i*19)*.48,rotation:noise(i*7)*6});
   }
   const matrix=new THREE.Matrix4();
   for(let variant=0;variant<6;variant++) {
@@ -104,7 +107,7 @@ export function createAlpineScene() {
     const instances=new THREE.InstancedMesh(geometry,vertexMaterial,placements[variant].length);
     instances.name=variant<3?`fir-variant-${variant}`:`rock-variant-${variant-3}`;
     placements[variant].forEach((p,i)=>{
-      const y=-.1-(Math.abs(p.x-roadX(p.z))-(ROAD_HALF+.02))*1.8/(7.5-ROAD_HALF-.02);
+      const y=-.1-(Math.abs(p.x-xAt(p.z))-(ROAD_HALF+.02))*1.8/(7.5-ROAD_HALF-.02);
       matrix.compose(new THREE.Vector3(p.x,y,-p.z),new THREE.Quaternion().setFromAxisAngle(UP,p.rotation),new THREE.Vector3(p.scale,p.scale,p.scale));
       instances.setMatrixAt(i,matrix);
     });
