@@ -41,7 +41,7 @@ jobs:
             dist-sha256.txt
           retention-days: 14
       - run: npx playwright install --with-deps chromium
-      - name: Material-only regression: both boss routes and compact lifecycle checks
+      - name: Material-only boss routes and compact lifecycle checks
         id: native
         continue-on-error: true
         run: |
