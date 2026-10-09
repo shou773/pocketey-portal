@@ -29,8 +29,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Preserve the other five accepted games
-        run: git diff --exit-code a6ad5893df21cf412fd261616d8d1757b27371f6 HEAD -- src/games/model.ts src/games/render.ts src/games/signals.ts src/games/app.ts src/games/game.css src/games/amber-guidance.ts src/components/ActionGame.astro src/games/prototypes/ball src/games/prototypes/alpine src/games/prototypes/shooter
+      - name: Preserve accepted integration outside the reviewed boss-paint file
+        run: git diff --exit-code 284d8441a8235dd2eff27c31a21bded81919872e HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/shooter/view.ts'
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact production source and file digests
         run: |

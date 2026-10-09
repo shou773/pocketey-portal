@@ -1,3 +1,4 @@
+import * as THREE from 'three';import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {createState,step,STEP,spawnX,FINAL_SWEEP_SLOTS} from '../../../src/games/prototypes/shooter/model';
 import {bossIncoming} from '../../../src/games/prototypes/shooter/briefing';import {chooseLane} from './controller';
@@ -21,7 +22,37 @@ test('ordinary 4HP inputs clear every stage at 100/150/200ms observations, inclu
 test('boss notice has exact simulation bounds and cannot survive a result or appear in a survival stage',()=>{
  const s=createState(2);s.time=28.49;assert.equal(bossIncoming(s),false);s.time=28.5;assert.equal(bossIncoming(s),true);s.time=29.99;assert.equal(bossIncoming(s),true);s.time=30;assert.equal(bossIncoming(s),false);s.time=29;s.status='lost';assert.equal(bossIncoming(s),false);s.status='playing';s.bossSpawned=true;assert.equal(bossIncoming(s),false);s.bossSpawned=false;s.stage=1;assert.equal(bossIncoming(s),false);
 });
+
+const acceptedBossPaint = "    const top=THREE.MathUtils.smoothstep(y,.02,.38);\n    if(y>.37&&ax<.25)color=new THREE.Color(0x223b50).lerp(new THREE.Color(0x667f90),top*.65);\n    else color=new THREE.Color(0x3c5365).lerp(new THREE.Color(ax>.49?0x9c8367:0x8295a0),top).lerp(original,.18);\n    if(z>.85)color=original;";
+const reviewedBossPaint = "    // Boss paint: violet upper shell, blue lower panels, restrained pale wing edge.\n    const top=THREE.MathUtils.smoothstep(y,.02,.38);\n    if(y>.37&&ax<.25)color=new THREE.Color(0x22314f).lerp(new THREE.Color(0x7769ae),top*.65);\n    else {\n     color=new THREE.Color(0x263e5b).lerp(new THREE.Color(0x7758b5),top);\n     if(ax>.49)color.lerp(new THREE.Color(0xc3c3dc),.24*THREE.MathUtils.smoothstep(y,.16,.36));\n     color.lerp(original,.08);\n    }\n    if(z>.85)color=original;\n    // End boss paint.";
+function restoreBossPaint(source:string) {
+ assert.equal(source.split(reviewedBossPaint).length,2,'Only the exact reviewed color calculation is permitted');
+ return source.replace(reviewedBossPaint,acceptedBossPaint);
+}
 test('warning-only renderer correction is unfogged and steady without changing geometry or any other rendering',()=>{
  const source=readFileSync('src/games/prototypes/shooter/view.ts','utf8');assert.ok(source.includes('color:0xffbc50,transparent:true,opacity:.55,fog:false'));assert.ok(source.includes('b.age<1.3?.55:.85'));
- const original=source.replace('color:0xffbc50,transparent:true,opacity:.55,fog:false','color:0xffbc50,transparent:true,opacity:.35').replace('b.age<1.3?.55:.85','b.age<1.3?.15+.13*(Math.sin(b.age*18)+1):.85');assert.equal(createHash('sha256').update(original).digest('hex'),'304fd7ccb3d9df5d73969d03c26da2b1db5542f3f61f8e7487cd39ddd66e2413');
+ const original=restoreBossPaint(source).replace('color:0xffbc50,transparent:true,opacity:.55,fog:false','color:0xffbc50,transparent:true,opacity:.35').replace('b.age<1.3?.55:.85','b.age<1.3?.15+.13*(Math.sin(b.age*18)+1):.85');assert.equal(createHash('sha256').update(original).digest('hex'),'304fd7ccb3d9df5d73969d03c26da2b1db5542f3f61f8e7487cd39ddd66e2413');
+});
+
+test('boss paint is the sole change from the accepted warning renderer',()=>{
+ const source=restoreBossPaint(readFileSync('src/games/prototypes/shooter/view.ts','utf8'));
+ assert.equal(createHash('sha256').update(source).digest('hex'),'6a93584154b58144b0bc1579cce3b5bdd7ac5732f28c0d392a22a5d17dff91d0');
+});
+test('loaded boss paint changes only colors; ship and every position/normal/index stay identical',async()=>{
+ const source=readFileSync('src/games/prototypes/shooter/view.ts','utf8');
+ const extract=(text:string)=>text.slice(text.indexOf(' function paintVehicle('),text.indexOf(" paintVehicle(geometries.ship,'ship')"))
+  .replace("geometry:THREE.BufferGeometry,kind:'ship'|'boss'",'geometry,kind').replace('colors:number[]=[]','colors=[]').replace('let color:THREE.Color;','let color;');
+ const paint=new Function('THREE',`return (${extract(source)})`)(THREE),oldPaint=new Function('THREE',`return (${extract(restoreBossPaint(source))})`)(THREE);
+ const bytes=readFileSync('public/games/assets/pulse/pulse-vehicles.glb');
+ const gltf=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');gltf.scene.updateMatrixWorld(true);
+ for(const[kind,name]of[['ship','interceptor'],['boss','manta_boss']]as const){
+  const mesh=gltf.scene.getObjectByName(name)as THREE.Mesh;assert.ok(mesh?.geometry);
+  const geometry=mesh.geometry.clone().applyMatrix4(mesh.matrixWorld),baseline=geometry.clone();
+  const snapshot=()=>({position:Array.from(geometry.getAttribute('position').array),normal:Array.from(geometry.getAttribute('normal').array),index:geometry.index?Array.from(geometry.index.array):null});
+  const before=snapshot();paint(geometry,kind);oldPaint(baseline,kind);assert.deepEqual(snapshot(),before);
+  const colors=Array.from(geometry.getAttribute('color').array),oldColors=Array.from(baseline.getAttribute('color').array);
+  assert.ok(colors.every(Number.isFinite));assert.equal(colors.length,oldColors.length);
+  if(kind==='boss')assert.notDeepEqual(colors,oldColors);else assert.deepEqual(colors,oldColors);
+  geometry.dispose();baseline.dispose();
+ }
 });

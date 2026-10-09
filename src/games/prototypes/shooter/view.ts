@@ -157,10 +157,16 @@ export function createView(canvas:HTMLCanvasElement) {
      color.lerp(original,.16);
     }
    }else{
+    // Boss paint: violet upper shell, blue lower panels, restrained pale wing edge.
     const top=THREE.MathUtils.smoothstep(y,.02,.38);
-    if(y>.37&&ax<.25)color=new THREE.Color(0x223b50).lerp(new THREE.Color(0x667f90),top*.65);
-    else color=new THREE.Color(0x3c5365).lerp(new THREE.Color(ax>.49?0x9c8367:0x8295a0),top).lerp(original,.18);
+    if(y>.37&&ax<.25)color=new THREE.Color(0x22314f).lerp(new THREE.Color(0x7769ae),top*.65);
+    else {
+     color=new THREE.Color(0x263e5b).lerp(new THREE.Color(0x7758b5),top);
+     if(ax>.49)color.lerp(new THREE.Color(0xc3c3dc),.24*THREE.MathUtils.smoothstep(y,.16,.36));
+     color.lerp(original,.08);
+    }
     if(z>.85)color=original;
+    // End boss paint.
    }
    colors.push(color.r,color.g,color.b);
   }

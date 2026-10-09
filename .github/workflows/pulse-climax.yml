@@ -6,6 +6,7 @@ on:
       - 'src/pages/games/pulse-drift.astro'
       - 'tests/prototypes/shooter/**'
       - 'scripts/capture-pulse-climax.mjs'
+      - 'scripts/profile-alpine-callbacks.mjs'
       - '.github/workflows/pulse-climax.yml'
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -29,8 +30,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Preserve accepted rendering and other five games
-        run: git diff --exit-code 999deaa0e2854babdea1acc9e159e01664e22f17 HEAD -- src/games/prototypes/shooter/model.ts src/games/prototypes/shooter/app.ts src/games/prototypes/shooter/briefing.ts src/games/prototypes/shooter/style.css src/pages/games/pulse-drift.astro src/games/model.ts src/games/render.ts src/games/signals.ts src/games/app.ts src/games/game.css src/games/amber-guidance.ts src/components/ActionGame.astro src/games/prototypes/ball src/games/prototypes/alpine src/games/prototypes/conveyor
+      - name: Preserve accepted integration outside the reviewed boss-paint file
+        run: git diff --exit-code 284d8441a8235dd2eff27c31a21bded81919872e HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/shooter/view.ts'
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact source and built file digests
         run: |
@@ -44,12 +45,12 @@ jobs:
             dist-sha256.txt
           retention-days: 14
       - run: npx playwright install --with-deps chromium
-      - name: Material-only boss routes and compact lifecycle checks
+      - name: Boss-paint ordinary routes and compact lifecycle checks
         id: native
         continue-on-error: true
         run: |
           mkdir -p test-results/pulse-climax
-          printf '%s\n' 'Stage1/2 keyboard+touch routes reuse exact999deaa/run37997775310 evidence. The source guard proves all model/app/UI code unchanged; normalized-view unit proves only beam material/opacity changed. Both boss routes, compact/reduced-motion and real context loss rerun on this exact head.' > test-results/pulse-climax/reused-route-scope.txt
+          printf '%s\n' 'Stage1/2 keyboard+touch routes reuse exact999deaa/run37997775310 evidence. The source guard proves all model/app/UI code unchanged; normalized-view and loaded-mesh units prove only boss colors changed after the accepted warning correction. Both boss routes, compact/reduced-motion and real context loss rerun on this exact head.' > test-results/pulse-climax/reused-route-scope.txt
           npx playwright test --config tests/prototypes/shooter/climax.config.ts --grep 'stage3|compact|retry, pause'
       - name: Retained Pulse input, language, storage and context checks
         id: retained
@@ -65,10 +66,14 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p "$RUNNER_TEMP/pulse-climax-baseline"
-          git archive 999deaa0e2854babdea1acc9e159e01664e22f17 | tar -x -C "$RUNNER_TEMP/pulse-climax-baseline"
+          git archive 284d8441a8235dd2eff27c31a21bded81919872e | tar -x -C "$RUNNER_TEMP/pulse-climax-baseline"
           ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/pulse-climax-baseline/node_modules"
           (cd "$RUNNER_TEMP/pulse-climax-baseline" && npm run build)
           npx tsx scripts/capture-pulse-climax.mjs "$RUNNER_TEMP/pulse-climax-baseline/dist"
+      - name: Bounded callback profile of the immutable accepted Alpine build
+        id: alpine_profile
+        continue-on-error: true
+        run: npx tsx scripts/profile-alpine-callbacks.mjs "$RUNNER_TEMP/pulse-climax-baseline/dist"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -81,6 +86,7 @@ jobs:
           NATIVE: ${{ steps.native.outcome }}
           RETAINED: ${{ steps.retained.outcome }}
           CAPTURES: ${{ steps.captures.outcome }}
+          ALPINE_PROFILE: ${{ steps.alpine_profile.outcome }}
         run: |
           printf 'native=%s retained=%s captures=%s\n' "$NATIVE" "$RETAINED" "$CAPTURES"
-          test "$NATIVE" = success && test "$RETAINED" = success && test "$CAPTURES" = success
+          test "$NATIVE" = success && test "$RETAINED" = success && test "$CAPTURES" = success && test "$ALPINE_PROFILE" = success
