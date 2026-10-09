@@ -1,0 +1,32 @@
+name: Build isolated six-game preview artifact
+on:
+  push:
+    branches: [codex/six-game-preview-build]
+    paths: ['.github/workflows/six-game-preview-build.yml']
+permissions:
+  contents: read
+jobs:
+  preview-artifact:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: aed68c9933c281a62401535fb5822156cdb335d6
+      - name: Confirm candidate source
+        run: test "$(git rev-parse HEAD)" = aed68c9933c281a62401535fb5822156cdb335d6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Record exact source
+        run: printf '%s\n' aed68c9933c281a62401535fb5822156cdb335d6 > dist/preview-source-sha.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: six-game-preview-dist-aed68c9
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30
