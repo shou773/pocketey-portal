@@ -20,8 +20,8 @@ async function legacy(page: Page) {
 test('fresh player earns all three stars with ordinary taps, Next, replay and reload',async({page})=>{
   test.setTimeout(90000); const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
   await ready(page);const root=page.locator('#conveyor');
-  await expect(page.locator('[data-mission="factory-loop"]')).toBeDisabled();
-  await page.locator('[data-mission="factory-loop"]').dispatchEvent('click');await expect(root).toHaveAttribute('data-mission',ids[0]);
+  await expect(page.locator('button[data-mission="factory-loop"]')).toBeDisabled();
+  await page.locator('button[data-mission="factory-loop"]').dispatchEvent('click');await expect(root).toHaveAttribute('data-mission',ids[0]);
   for(let index=0;index<3;index++){
     await expect(root).toHaveAttribute('data-mission',ids[index]);await budget(page);
     await page.screenshot({path:`test-results/conveyor/campaign-${index+1}-start-390.png`,fullPage:true});
@@ -44,13 +44,13 @@ test('legacy import stays untouched; switching cancels motion and keeps records 
   await legacy(page);await ready(page);const root=page.locator('#conveyor');
   const old=await page.evaluate(()=>localStorage.getItem('pocketey-conveyor-v1'));
   await expect(root).toHaveAttribute('data-mission','factory-loop');await expect(page.locator('#cv-best')).toHaveText('最少 7 回で出荷');
-  await page.locator('#cv-play').tap();await page.locator('[data-mission="first-dispatch"]').tap();
+  await page.locator('#cv-play').tap();await page.locator('button[data-mission="first-dispatch"]').tap();
   await expect(root).toHaveAttribute('data-mission','first-dispatch');await expect(root).toHaveAttribute('data-phase','editing');
   await page.waitForTimeout(1000);await expect(root).toHaveAttribute('data-phase','editing');
-  await page.locator('#cv-settings').tap();await page.locator('[data-mission="read-the-inlet"]').dispatchEvent('click');
+  await page.locator('#cv-settings').tap();await page.locator('button[data-mission="read-the-inlet"]').dispatchEvent('click');
   await expect(root).toHaveAttribute('data-mission','first-dispatch');await page.locator('#cv-audio-close').tap();
-  for(let n=0;n<6;n++)await page.locator(`[data-mission="${ids[(n+1)%3]}"]`).tap();
-  await page.locator('[data-mission="first-dispatch"]').tap();await solve(page,0);
+  for(let n=0;n<6;n++)await page.locator(`button[data-mission="${ids[(n+1)%3]}"]`).tap();
+  await page.locator('button[data-mission="first-dispatch"]').tap();await solve(page,0);
   await page.locator('#cv-play').tap();await expect(root).toHaveAttribute('data-phase','success');
   await page.locator('#cv-play').tap();await expect(root).toHaveAttribute('data-phase','editing');
   await budget(page);const frames=await root.getAttribute('data-frames');await page.waitForTimeout(250);await expect(root).toHaveAttribute('data-frames',frames!);
@@ -62,7 +62,7 @@ test('every board keeps 44px separate touch targets at 320px and landscape, with
   for(const viewport of [{width:320,height:740},{width:844,height:390}]){
     await page.setViewportSize(viewport);
     for(const id of ids){
-      await page.locator(`[data-mission="${id}"]`).tap();await budget(page);
+      await page.locator(`button[data-mission="${id}"]`).tap();await budget(page);
       const boxes=await page.locator('.cv-tile').evaluateAll(items=>items.map(item=>{const r=item.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height};}));
       for(const r of boxes){expect(r.w).toBeGreaterThanOrEqual(44);expect(r.h).toBeGreaterThanOrEqual(44);expect(r.x).toBeGreaterThanOrEqual(0);expect(r.x+r.w).toBeLessThanOrEqual(viewport.width);}
       for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++){const a=boxes[i],b=boxes[j];expect(Math.min(a.x+a.w,b.x+b.w)<=Math.max(a.x,b.x)||Math.min(a.y+a.h,b.y+b.h)<=Math.max(a.y,b.y)).toBeTruthy();}
@@ -91,7 +91,7 @@ test('reduced motion retains ordinary delivery, pause and no unexpected effects'
 test('Next restores focus and the new board at 320x568 instead of leaving the player below it',async({page})=>{
   await page.setViewportSize({width:320,height:568});await ready(page);await solve(page,0);
   await page.locator('#cv-play').tap();await expect(page.locator('#conveyor')).toHaveAttribute('data-phase','success');
-  await page.locator('#cv-next').tap();await expect(page.locator('[data-mission="factory-loop"]')).toBeFocused();
+  await page.locator('#cv-next').tap();await expect(page.locator('button[data-mission="factory-loop"]')).toBeFocused();
   await budget(page);const board=await page.locator('#cv-board').boundingBox();expect(board!.y).toBeGreaterThanOrEqual(0);expect(board!.y+board!.height).toBeLessThanOrEqual(568);
   await page.screenshot({path:'test-results/conveyor/campaign-next-320x568.png',fullPage:true});
 });
