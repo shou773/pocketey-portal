@@ -1,7 +1,8 @@
 import * as THREE from 'three';import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import {test} from 'node:test';import assert from 'node:assert/strict';import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';
 import {createState,step,STEP,spawnX,FINAL_SWEEP_SLOTS} from '../../../src/games/prototypes/shooter/model';
-import {bossIncoming} from '../../../src/games/prototypes/shooter/briefing';import {chooseLane} from './controller';
+import {chooseTimeoutLane} from './timeout-driver';
+import {bossIncoming,bossTimedOut} from '../../../src/games/prototypes/shooter/briefing';import {chooseLane} from './controller';
 test('the full original model is unchanged except for authored initial spawn positions',()=>{
  const source=readFileSync('src/games/prototypes/shooter/model.ts','utf8').replace(/\/\/ Final existing spawn slots[\s\S]*?\/\/ End authored spawn positions\.\n/,'').replace('x:spawnX(s.stage,n),y:11','x:Math.sin(n*2.4)*3,y:11');
  assert.equal(createHash('sha256').update(source).digest('hex'),'2eff2b3b001dced76bcee9aca3394e721eb5181243e920aa8d12efe82365f560');
@@ -54,5 +55,22 @@ test('loaded boss paint changes only colors; ship and every position/normal/inde
   assert.ok(colors.every(Number.isFinite));assert.equal(colors.length,oldColors.length);
   if(kind==='boss')assert.notDeepEqual(colors,oldColors);else assert.deepEqual(colors,oldColors);
   geometry.dispose();baseline.dispose();
+ }
+});
+
+test('boss timeout requires a living boss, surviving shields and the exact model deadline',()=>{
+  const s=createState(2);s.status='lost';s.time=47.99999999999856;
+  s.enemies=[{id:1,x:0,y:9,vx:0,vy:0,r:1,hp:20,shot:1,kind:'boss'}];
+  const before=structuredClone(s);assert.equal(bossTimedOut(s),true);assert.deepEqual(s,before);
+  s.time=48-1e-8;assert.equal(bossTimedOut(s),false);s.time=48;s.hp=0;assert.equal(bossTimedOut(s),false);
+  s.hp=4;s.enemies[0].hp=0;assert.equal(bossTimedOut(s),false);s.enemies=[];assert.equal(bossTimedOut(s),false);
+  s.enemies=before.enemies;s.status='won';assert.equal(bossTimedOut(s),false);s.status='playing';assert.equal(bossTimedOut(s),false);
+  s.status='lost';s.stage=1;assert.equal(bossTimedOut(s),false);
+});
+
+test('ordinary four-shield avoidance reaches the true boss deadline without a fabricated death',()=>{
+ for(const cadence of [.05,.1,.15,.2]){const s=createState(2);let target=0,next=0;
+  while(s.status==='playing'){if(s.time>=next){target=chooseTimeoutLane(s);next+=cadence;}step(s,STEP,{x:target,y:1.8});}
+  assert.equal(s.status,'lost');assert.ok(s.hp>0);assert.equal(bossTimedOut(s),true);assert.ok(s.time+1e-9>=48);
  }
 });

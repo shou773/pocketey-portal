@@ -1,3 +1,4 @@
+import {chooseTimeoutLane} from './timeout-driver';
 import {test,expect} from '@playwright/test';import fs from 'node:fs';import {readPulse,drivePulse} from './native-driver';
 const open=async(page:any,lang='en')=>{await page.goto(`/games/pulse-drift/?lang=${lang}`);await expect(page.locator('#pulse')).toHaveAttribute('data-mode','menu');};
 for(const touch of[true,false])for(let stage=0;stage<3;stage++)test(`${touch?'touch':'keyboard'} stage${stage+1} clears with original shields, saves and reloads`,async({browser},info)=>{
@@ -11,4 +12,25 @@ test('compact JA/EN objectives and menu edges stay reachable under reduced motio
 });
 test('retry, pause and real context loss reset or hide the new notice and retain saved scores',async({page})=>{
  await open(page);await page.getByRole('button',{name:'Stage 3',exact:true}).click();await page.getByRole('button',{name:'Launch',exact:true}).click();await page.waitForFunction(()=>JSON.parse(document.querySelector<HTMLElement>('#pulse')!.dataset.state!).time>.2);await page.keyboard.press('p');await expect(page.locator('#pulse')).toHaveAttribute('data-mode','pause');await page.waitForTimeout(150);const frozen=(await readPulse(page)).time;await page.waitForTimeout(300);expect((await readPulse(page)).time).toBe(frozen);await expect(page.locator('#arrival')).toBeHidden();await page.getByRole('button',{name:'Retry from start',exact:true}).click();expect((await readPulse(page)).time).toBeLessThan(1);await expect(page.locator('#arrival')).toBeHidden();const saved=await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'));await page.evaluate(()=>{const gl=document.querySelector('canvas')!.getContext('webgl2')!;gl.getExtension('WEBGL_lose_context')!.loseContext();});await expect(page.locator('#pulse')).toHaveAttribute('data-mode','error');await expect(page.locator('#arrival')).toBeHidden();expect(await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'))).toBe(saved);
+});
+
+
+test('stage3 observed deadline and damage help survive language changes and retry without saving a loss',async({browser},info)=>{
+ test.setTimeout(120000);
+ const context=await browser.newContext({viewport:{width:320,height:568},hasTouch:true,isMobile:true,deviceScaleFactor:1,reducedMotion:'reduce'}),page=await context.newPage(),errors:string[]=[];
+ page.on('pageerror',e=>errors.push(e.message));await page.goto('http://localhost:4322/games/pulse-drift/?lang=en');
+ await page.getByRole('button',{name:'Stage 3',exact:true}).click();const saved=await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'));
+ await page.getByRole('button',{name:'Launch',exact:true}).click();await page.waitForFunction(()=>JSON.parse(document.querySelector<HTMLElement>('#pulse')!.dataset.state!).time>.1);
+ const route=await drivePulse(page,true,undefined,chooseTimeoutLane);fs.writeFileSync(info.outputPath('deadline-route.json'),JSON.stringify({source:process.env.SOURCE_SHA,...route,errors},null,2));
+ expect(route.final.status).toBe('lost');expect(route.final.hp).toBeGreaterThan(0);expect(route.final.time+1e-9).toBeGreaterThanOrEqual(48);expect(route.final.enemies.some(e=>e.kind==='boss'&&e.hp>0)).toBe(true);
+ await expect(page.locator('#overlay')).toContainText('Time ran out.');await expect(page.locator('#overlay')).toContainText('Line up with the boss');
+ await page.screenshot({path:info.outputPath('deadline-320-en.png')});await page.getByRole('button',{name:'日本語',exact:true}).click();await expect(page.locator('#overlay')).toContainText('時間切れ');await page.screenshot({path:info.outputPath('deadline-320-ja.png')});
+ expect(await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'))).toBe(saved);
+ await page.getByRole('button',{name:'もう一度',exact:true}).click();await expect(page.locator('#pulse')).toHaveAttribute('data-mode','play');expect((await readPulse(page)).time).toBeLessThan(1);await expect(page.locator('#overlay')).not.toContainText('時間切れ');
+ // No steering: a real zero-shield death must keep ordinary damage guidance.
+ await page.waitForFunction(()=>JSON.parse(document.querySelector<HTMLElement>('#pulse')!.dataset.state!).status==='lost',null,{timeout:30000});const damage=await readPulse(page);
+ expect(damage.hp).toBe(0);expect(damage.time).toBeLessThan(48);await expect(page.locator('#overlay')).not.toContainText('時間切れ');
+ await page.getByRole('button',{name:'English',exact:true}).click();await expect(page.locator('#overlay')).toContainText('Sidestep red bullets');await expect(page.locator('#overlay')).not.toContainText('Time ran out.');
+ await page.screenshot({path:info.outputPath('damage-320-en.png')});expect(await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'))).toBe(saved);expect(errors).toEqual([]);
+ fs.writeFileSync(info.outputPath('loss-save-proof.json'),JSON.stringify({saved,damage,errors},null,2));await context.close();
 });

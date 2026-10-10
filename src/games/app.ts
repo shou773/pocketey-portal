@@ -1,3 +1,4 @@
+import { orbitFailure } from './orbit-guidance';
 import { AMBER_CAMPAIGN_KEY, parseAmberCampaign, mergeAmberCampaign, serializeAmberCampaign } from './amber-campaign';
 import {createGameAudio} from './audio';
 import { cleanSave, createState, DT, SAVE_KEY, stages, step, type Kind } from './model';
@@ -103,11 +104,19 @@ export function boot() {
       panel(selected === stages[kind].length-1 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.challengeBest[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.challengeBest[selected]!.toFixed(2)}s`));
       if (kind === 'orbit') $('panel-copy').textContent = tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 · 通信片 ${signalCount(signalRun)} / 3（ベスト ${signalProgress.best[selected]} / 3）`, `${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s · SIGNALS ${signalCount(signalRun)} / 3 (BEST ${signalProgress.best[selected]} / 3)`);
       if (announce) audio.cue('clear'); if (selected < stages[kind].length-1) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
-    } else { panel(tr('もう一度、いこう。', 'One more try.'), kind==='amber'?amberRetryCopy():tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) audio.cue('death'); button(tr('すぐにリトライ', 'Retry now'), start, true); }
+    } else { panel(tr('もう一度、いこう。', 'One more try.'), kind==='amber'?amberRetryCopy():orbitRetryCopy()); if (announce) audio.cue('death'); button(tr('すぐにリトライ', 'Retry now'), start, true); }
     if (kind === 'orbit' && state.status === 'dead' && signalCount(signalRun) > 0) $('panel-copy').textContent += tr(' 通信片の記録はゴールしたときだけ残ります。', ' Signal records only count when you reach the finish.');
     if (state.status === 'clear' && selected < stages[kind].length-1) button(tr('もう一度', 'Play again'), start);
     button(tr('ステージ選択', 'Choose a stage'), menu);
   }
+  // Observed Orbit retry help. No movement, record or lifecycle changes.
+  function orbitRetryCopy() {
+    const reason=orbitFailure(state);
+    if(reason==='pillar')return tr('柱にぶつかりました。左右に動いて柱をよけよう。', 'You hit a pillar. Steer left or right to go around it.');
+    if(reason==='fall')return tr('道から落ちました。次の足場を確かめよう。すき間を越えるときは、光るふちの近くでジャンプ。', 'You fell off the path. Check the next platform. When crossing a gap, jump near its glowing edge.');
+    return tr('進む先の柱と足場を確かめて、もう一度。', 'Check the pillars and platforms ahead, then try again.');
+  }
+  // End observed Orbit retry help.
   function amberRetryCopy() {
     const reason=amberFailure(state);
     if(reason===null)return tr('着地先とトゲを確かめて、もう一度。手前で止まって準備できます。', 'Check the landing and spikes, then try again. You can stop to line up.');

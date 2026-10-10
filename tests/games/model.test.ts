@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { orbitFailure } from '../../src/games/orbit-guidance';
 import { createState, step, stages, cleanSave, DT } from '../../src/games/model';
 
 test('fixed-step accumulator yields same movement and jump at 30/60/120 Hz', () => {
@@ -83,4 +86,47 @@ test('each gap has a usable running-jump window, including edge-spike combinatio
    assert.ok(successful>=6,`${kind}/${index+1} gap${i+1}: ${successful} feasible 0.1m takeoff samples`);
   }
  }
+});
+
+test('Orbit observes actual pillar deaths and both gap and lateral falls without changing the state',()=>{
+  for(let course=0;course<3;course++)for(let target=0;target<stages.orbit[course].hazards.length;target++){
+    const s=createState('orbit',course),level=stages.orbit[course];let input={axis:0,jump:false},lastJump=-10;
+    for(let n=0;n<4000&&s.status==='running';n++){
+      if(n%6===0){const index=level.hazards.findIndex(h=>h.x+h.d/2+.3>s.x),h=level.hazards[index];
+        const z=h&&h.x-s.x<12?(index===target?h.z:(h.z>=0?-1.85:1.85)):0;
+        const tile=level.platforms.find(p=>s.x>=p.a-.23&&s.x<=p.b+.23);
+        const jump=!!tile&&tile.b<level.length&&tile.b-s.x<1.1&&tile.b-s.x>-.15&&s.grounded&&s.time-lastJump>.3;
+        if(jump)lastJump=s.time;input={axis:Math.abs(z-s.z)<.14?0:Math.sign(z-s.z),jump};}
+      step(s,input);input.jump=false;
+    }
+    assert.equal(s.status,'dead');const before={...s};assert.equal(orbitFailure(s),'pillar');assert.deepEqual(s,before);
+    assert.ok(Math.abs(s.x-level.hazards[target].x)<.7);
+  }
+  for(const lateral of [false,true]){
+    const s=createState('orbit',0);while(s.status==='running'&&s.time<10){const h=stages.orbit[0].hazards.find(h=>h.x+h.d/2+.3>s.x),z=h&&h.x-s.x<12?(h.z>=0?-1.85:1.85):0;step(s,{axis:lateral?1:Math.abs(z-s.z)<.14?0:Math.sign(z-s.z),jump:false});}
+    assert.equal(s.status,'dead');assert.equal(orbitFailure(s),'fall');assert.ok(s.y<-4);
+  }
+});
+test('Orbit observed help stays neutral for unknown terminal states and excludes Amber and non-results',()=>{
+  const s=createState('orbit',0);assert.equal(orbitFailure(s),null);s.status='clear';assert.equal(orbitFailure(s),null);s.status='dead';assert.equal(orbitFailure(s),null);
+  s.kind='amber';s.y=-5;assert.equal(orbitFailure(s),null);
+});
+test('retry help and compact header are the only changes in the five reviewed runtime files',()=>{
+  { let source=readFileSync("src/games/app.ts",'utf8');
+    {const fragment="import { orbitFailure } from './orbit-guidance';\n";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"");}
+    {const fragment="  // Observed Orbit retry help. No movement, record or lifecycle changes.\n  function orbitRetryCopy() {\n    const reason=orbitFailure(state);\n    if(reason==='pillar')return tr('柱にぶつかりました。左右に動いて柱をよけよう。', 'You hit a pillar. Steer left or right to go around it.');\n    if(reason==='fall')return tr('道から落ちました。次の足場を確かめよう。すき間を越えるときは、光るふちの近くでジャンプ。', 'You fell off the path. Check the next platform. When crossing a gap, jump near its glowing edge.');\n    return tr('進む先の柱と足場を確かめて、もう一度。', 'Check the pillars and platforms ahead, then try again.');\n  }\n  // End observed Orbit retry help.\n";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"");}
+    {const fragment="orbitRetryCopy()";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')");}
+    assert.equal(createHash('sha256').update(source).digest('hex'),"23bbc6f40c28cb322b0e6d82594b7e57617aee4fb8130696a057fd3be596a9aa"); }
+  { let source=readFileSync("src/games/game.css",'utf8');
+    {const fragment="\n/* Compact shared header: preserve full labels, 44px targets and focus room. */\n@media(max-width:380px){\n .game-bar{padding-left:max(8px,env(safe-area-inset-left));padding-right:max(8px,env(safe-area-inset-right));gap:6px}\n .game-bar>div{gap:6px}\n .game-bar button{min-width:44px;min-height:44px;padding-inline:6px}\n}\n/* End compact shared header. */\n";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"");}
+    assert.equal(createHash('sha256').update(source).digest('hex'),"ffc4cadd837af1003cd30a372468704b9147aad48e4bd57c7b9b6cf453b600b8"); }
+  { let source=readFileSync("src/games/prototypes/shooter/briefing.ts",'utf8');
+    {const fragment="import {STAGES,type State} from './model';";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"import type {State} from './model';");}
+    {const fragment="\n/** Only the observed deadline with shields and a living boss gets timeout advice. */\nexport function bossTimedOut(s:State) {\n return s.stage===2&&s.status==='lost'&&s.hp>0&&s.time+1e-9>=STAGES[2].duration&&s.enemies.some(e=>e.kind==='boss'&&e.hp>0);\n}\n";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"");}
+    assert.equal(createHash('sha256').update(source).digest('hex'),"800a8674ab7888c79df2d605735b8d65bacb1145a7eb14a904ad638568f55721"); }
+  { let source=readFileSync("src/games/prototypes/shooter/app.ts",'utf8');
+    {const fragment="import {bossIncoming,bossTimedOut} from './briefing';";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"import {bossIncoming} from './briefing';");}
+    {const fragment="(bossTimedOut(s)?tr('時間切れです。弾をよける合間にボスと左右の位置を合わせ、自動射撃を当てよう。','Time ran out. Line up with the boss between dodges so your auto-fire hits.'):tr('赤い弾は小さく横に避ける。予告線は1.3秒後に発射。','Sidestep red bullets. Warning lanes fire after 1.3 seconds.'))";assert.equal(source.split(fragment).length,2);source=source.replace(fragment,"tr('赤い弾は小さく横に避ける。予告線は1.3秒後に発射。','Sidestep red bullets. Warning lanes fire after 1.3 seconds.')");}
+    assert.equal(createHash('sha256').update(source).digest('hex'),"64d1b3659130cb281c5726b1e0f84ee1f0f5ac223a6ae0f068e0f417c07b6081"); }
+  assert.equal(createHash('sha256').update(readFileSync('src/games/orbit-guidance.ts')).digest('hex'),"db71e2edd6a61717b053fe4d405ed3511e5ef59a580d072beda0cd67d0f939f5");
 });

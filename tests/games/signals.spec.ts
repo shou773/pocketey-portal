@@ -57,3 +57,41 @@ test('optional objective and cards remain readable at320x568 and landscape inJA/
   await expect(page.locator('#signals')).toContainText(lang==='en'?'OPTIONAL':'任意');await page.keyboard.press('Escape');await page.getByRole('button',{name:lang==='en'?'Choose a stage':'ステージ選択',exact:true}).click();
  }}
 });
+
+
+test('observed pillar and lateral fall retry help stays truthful through language changes and retry',async({page},info)=>{
+ await page.setViewportSize({width:320,height:568});await page.goto(url);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ const before=await page.evaluate(keys=>keys.map(k=>localStorage.getItem(k)),[SAVE_KEY,SIGNAL_SAVE_KEY]);
+ await page.getByRole('button',{name:'Start stage 1',exact:true}).click();await expect(page.locator('#game')).toHaveAttribute('data-status','dead',{timeout:6000});
+ const pillar=await readSignals(page);expect(Number(pillar.y)).toBeGreaterThanOrEqual(-4);await expect(page.locator('#panel-copy')).toContainText('You hit a pillar.');await expect(page.locator('#panel-copy')).toContainText('Steer left or right');await expect(page.locator('#panel-copy')).not.toContainText('Jump');
+ await page.screenshot({path:info.outputPath('pillar-320-en.png')});await page.locator('[data-language="ja"]').click();await expect(page.locator('#panel-copy')).toContainText('柱にぶつかりました');await page.screenshot({path:info.outputPath('pillar-320-ja.png')});
+ await page.getByRole('button',{name:'すぐにリトライ',exact:true}).click();await expect(page.locator('#game')).toHaveAttribute('data-status','running');await expect(page.locator('#overlay')).toBeHidden();
+ const session=await page.context().newCDPSession(page),r=(await page.locator('[data-input="right"]').boundingBox())!;
+ await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:r.x+r.width/2,y:r.y+r.height/2,id:1}]});
+ await expect(page.locator('#game')).toHaveAttribute('data-status','dead',{timeout:6000});await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await session.detach();const fall=await readSignals(page);expect(Number(fall.y)).toBeLessThan(-4);
+ await expect(page.locator('#panel-copy')).toContainText('道から落ちました');await page.locator('[data-language="en"]').click();await expect(page.locator('#panel-copy')).toContainText('You fell off the path.');await expect(page.locator('#panel-copy')).not.toContainText('hit a pillar');await page.screenshot({path:info.outputPath('fall-320-en.png')});
+ expect(await page.evaluate(keys=>keys.map(k=>localStorage.getItem(k)),[SAVE_KEY,SIGNAL_SAVE_KEY])).toEqual(before);expect(errors).toEqual([]);
+ await writeFile(info.outputPath('observed-losses.json'),JSON.stringify({pillar,fall,before,errors},null,2));
+});
+
+test('compact shared header keeps full JA EN ON OFF labels and44px focused targets visible',async({page},info)=>{
+ await page.setViewportSize({width:320,height:568});await page.emulateMedia({reducedMotion:'reduce'});const reports:unknown[]=[];
+ for(const game of ['orbit-ribbon','amber-step'])for(const lang of ['en','ja']){
+  await page.goto(`/games/${game}/?lang=${lang}`);const sound=page.locator('#sound');if(await sound.getAttribute('aria-pressed')==='true')await sound.click();
+  await page.getByRole('button',{name:lang==='en'?'Start stage 1':'ステージ 1 をはじめる',exact:true}).click();await page.keyboard.press('Escape');
+  for(const enabled of [false,true]){
+   if((await sound.getAttribute('aria-pressed')==='true')!==enabled)await sound.click();await expect(sound).toHaveText(lang==='en'?`Sound ${enabled?'ON':'OFF'}`:`音 ${enabled?'ON':'OFF'}`);
+   const mark=(await page.locator('.wordmark').boundingBox())!,rects=[];
+   // Keyboard modality makes focus-visible explicit before checking its full outline.
+   await page.keyboard.press('Tab');
+   for(const selector of ['#sound','.audio-settings-button','#pause']){
+    const button=page.locator(selector);await button.focus();const r=(await button.boundingBox())!;const outline=await button.evaluate(e=>{const s=getComputedStyle(e);return{width:parseFloat(s.outlineWidth),offset:parseFloat(s.outlineOffset),style:s.outlineStyle};});
+    expect(r.width).toBeGreaterThanOrEqual(44);expect(r.height).toBeGreaterThanOrEqual(44);expect(outline.style).not.toBe('none');const extent=outline.width+outline.offset;
+    expect(r.x-extent).toBeGreaterThanOrEqual(0);expect(r.x+r.width+extent).toBeLessThanOrEqual(320);expect(r.y-extent).toBeGreaterThanOrEqual(0);expect(r.x).toBeGreaterThanOrEqual(mark.x+mark.width);rects.push(r);
+   }
+   for(let i=1;i<rects.length;i++)expect(rects[i].x).toBeGreaterThanOrEqual(rects[i-1].x+rects[i-1].width);
+   reports.push({game,lang,enabled,mark,rects});await page.screenshot({path:info.outputPath(`header-${game}-${lang}-${enabled?'on':'off'}-320.png`)});
+  }
+ }
+ await writeFile(info.outputPath('header-bounds.json'),JSON.stringify(reports,null,2));
+});

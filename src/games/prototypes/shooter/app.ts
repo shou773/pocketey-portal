@@ -2,7 +2,7 @@ import {createGameAudio} from '../../audio';
 import {installLocale,LANGUAGE_EVENT,tr} from '../../../lib/locale';
 import {createState,step,STEP,STAGES,SAVE_KEY,cleanSave,clamp,type Save} from './model';
 import {createView} from './view';
-import {bossIncoming} from './briefing';
+import {bossIncoming,bossTimedOut} from './briefing';
 export function boot(){
  installLocale();const root=document.querySelector<HTMLElement>('#pulse')!,canvas=document.querySelector<HTMLCanvasElement>('#field')!,overlay=document.querySelector<HTMLElement>('#overlay')!;
  const el=(id:string)=>document.getElementById(id)!;let view:ReturnType<typeof createView>;
@@ -23,7 +23,7 @@ export function boot(){
  const row=document.createElement('div');row.className='stage-buttons';for(let i=0;i<3;i++){const b=document.createElement('button');b.textContent=tr(`ステージ ${i+1}`,`Stage ${i+1}`);b.setAttribute('aria-pressed',String(selected===i));b.onclick=()=>{selected=i;s=createState(i);renderPanel();overlay.querySelector<HTMLButtonElement>('.stage-buttons [aria-pressed=true]')?.focus();audio.cue('select');};row.append(b);}overlay.append(row);const goal=document.createElement('p');goal.className='mission-goal';goal.textContent=objective();overlay.append(goal);
  button(tr('出撃する','Launch'),start,true);const detail=document.createElement('p');detail.className='detail';detail.textContent=tr('4シールド · 矢印 / WASD · Pで一時停止 · 全3ステージ選択可能','4 shields · Arrows / WASD · P to pause · All 3 stages available');overlay.append(detail);
  }else if(mode==='pause'){text(tr('一時停止','Paused'),tr('指を離してひと休み。再開すると同じ場所から続きます。','Take a breath. Resume from the same position.'));button(tr('再開','Resume'),()=>{if(document.hidden)return;clearInput();mode='play';last=0;acc=0;renderPanel();audio.setPlaying(true);audio.cue('select');},true);button(tr('最初から再挑戦','Retry from start'),start);button(tr('ステージ選択','Stage select'),menu);
- }else if(mode==='result'){const won=s.status==='won';text(won?tr('信号を確保！','Signal secured!'):tr('信号が途切れた','Signal lost'),won?tr(`ステージ ${selected+1} クリア · スコア ${s.score}`,`Stage ${selected+1} clear · Score ${s.score}`):tr('赤い弾は小さく横に避ける。予告線は1.3秒後に発射。','Sidestep red bullets. Warning lanes fire after 1.3 seconds.')+' '+objective());
+ }else if(mode==='result'){const won=s.status==='won';text(won?tr('信号を確保！','Signal secured!'):tr('信号が途切れた','Signal lost'),won?tr(`ステージ ${selected+1} クリア · スコア ${s.score}`,`Stage ${selected+1} clear · Score ${s.score}`):(bossTimedOut(s)?tr('時間切れです。弾をよける合間にボスと左右の位置を合わせ、自動射撃を当てよう。','Time ran out. Line up with the boss between dodges so your auto-fire hits.'):tr('赤い弾は小さく横に避ける。予告線は1.3秒後に発射。','Sidestep red bullets. Warning lanes fire after 1.3 seconds.'))+' '+objective());
  if(won&&selected<2)button(tr('次のステージ','Next stage'),()=>{selected++;start();},true);button(tr('もう一度','Retry'),start,!won||selected===2);button(tr('ステージ選択','Stage select'),menu);
  }else{text(tr('3D表示が停止しました','3D rendering stopped'),tr('ページを再読込して再開してください。','Reload this page to start again.'));button(tr('再読込','Reload'),()=>location.reload(),true);}
  }
