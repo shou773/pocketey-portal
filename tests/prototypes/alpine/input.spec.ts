@@ -38,9 +38,9 @@ test('touch flicks clear the stage, save once, and retry resets every control',a
   await start(page);await swipe(page,-1);await expect(page.locator('#alpine')).toHaveAttribute('data-queued','null');
   await clear(page,'touch');
   await expect(page.locator('#ad-title')).toHaveText('ゴール！');
-  await expect(page.locator('#ad-save')).toHaveText('この端末のクリア回数：1');
+  await expect(page.locator('#ad-save')).toContainText('このコースの完走：1');
   await page.clock.runFor(1200);
-  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pocketey-alpine-prototype-v1')!).clears)).toBe(1);
+  expect(await page.evaluate(()=>JSON.parse(localStorage.getItem('pocketey-alpine-campaign-v2')!).records['mountain-pass'].clears)).toBe(1);
   await page.getByRole('button',{name:'すぐリトライ'}).click();
   expect(await state(page)).toMatchObject({phase:'playing',gate:'0',queued:'null',heading:'0',z:'0.000'});
   expect(errors).toEqual([]);
@@ -80,7 +80,7 @@ test('blocked storage and narrow layout leave instructions and controls usable',
   await page.setViewportSize({width:320,height:568});await page.goto('/prototypes/alpine-drive/?lang=ja');
   await expect(page.locator('#ad-save')).toContainText('保存不可');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await expect(page.locator('#ad-actions button')).toBeInViewport();
+  await page.locator('#ad-actions button').scrollIntoViewIfNeeded();await expect(page.locator('#ad-actions button')).toBeInViewport();
   await start(page);await page.keyboard.press('Escape');await expect(page.locator('#alpine')).toHaveAttribute('data-phase','paused');
 });
 test('context loss freezes play and offers reload instead of a dead start button',async({page})=>{

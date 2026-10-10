@@ -1,3 +1,4 @@
+import { AMBER_CAMPAIGN_KEY, AMBER_IDS } from '../../src/games/amber-campaign';
 import {test,expect,type Page} from '@playwright/test';
 import { stages, SAVE_KEY, type Kind } from '../../src/games/model';
 import fs from 'node:fs';
@@ -47,9 +48,12 @@ for(const kind of ['orbit','amber'] as const)for(const touch of [false,true])tes
   await page.locator('.hero-mark').evaluate(async e=>{await Promise.all(e.getAnimations().map(a=>a.finished));});
   await page.screenshot({path:info.outputPath(`${kind}-${i+1}-clear.png`)});
  }
+ if(kind==='amber'){await page.getByRole('button',{name:'次のステージ'}).click();await expect(page.locator('#stage-label')).toHaveText('04 / 04');await page.locator('#pause').click();}
  await page.getByRole('button',{name:'ステージ選択'}).click();await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
  await page.reload();await expect(page.locator('#sound')).toHaveText('音 ON');await expect(page.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
- const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),SAVE_KEY);expect(stored[kind].challengeBest.every((x:number)=>x>0)).toBeTruthy();
+ const stored=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!),kind==='amber'?AMBER_CAMPAIGN_KEY:SAVE_KEY);
+ if(kind==='amber'){for(const id of AMBER_IDS.slice(0,3))expect(stored.records[id].challengeBest).toBeGreaterThan(0);expect(stored.records['landing-beats'].challengeBest).toBeNull();await expect(page.locator('#stages button').nth(3)).toBeEnabled();}
+ else expect(stored[kind].challengeBest.every((x:number)=>x>0)).toBeTruthy();
  const reopened=await page.context().newPage();await reopened.goto(page.url());await expect(reopened.locator('#stages').getByRole('button',{name:/ステージ 3 /})).toBeEnabled();await reopened.close();expect(errors).toEqual([]);
  await page.locator('#stages').getByRole('button',{name:/ステージ 3 /}).click();await page.getByRole('button',{name:'ステージ 3 をはじめる'}).click();await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
  fs.writeFileSync(info.outputPath('functional-completion.json'),JSON.stringify({kind,touch,threeNativeClears:true,stored,reload:true,reopened:true,restartStage3:true,errors},null,2));
@@ -99,7 +103,7 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: WebGL context loss f
  await page.locator('#sound').click();
  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
  await play(page,kind,0,true);
- const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);
+ const saveKey=kind==='amber'?AMBER_CAMPAIGN_KEY:SAVE_KEY;const saved=await page.evaluate(k=>localStorage.getItem(k),saveKey);
  await page.getByRole('button',{name:'次のステージ'}).click();
  await page.keyboard.down('ArrowRight');
  await page.waitForTimeout(150);
@@ -124,7 +128,7 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: WebGL context loss f
  await page.waitForTimeout(300);
  expect((await read(page)).x).toBe(frozen.x);expect((await read(page)).y).toBe(frozen.y);
  expect(await page.locator('#timer').textContent()).toBe(time);
- expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);
+ expect(await page.evaluate(k=>localStorage.getItem(k),saveKey)).toBe(saved);
  await page.screenshot({path:info.outputPath(`${kind}-context-loss.png`)});
  // Even an actual restoration must not silently restart the interrupted simulation.
  await page.evaluate(()=>(window as unknown as {restoreTestContext:()=>void}).restoreTestContext());
@@ -134,7 +138,7 @@ for(const kind of ['orbit','amber'] as const)test(`${kind}: WebGL context loss f
  await page.getByRole('button',{name:'再読み込み',exact:true}).click();
  await expect(page.locator('#game')).toHaveAttribute('data-mode','menu');
  await expect(page.locator('#sound')).toHaveText('音 ON');
- expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);
+ expect(await page.evaluate(k=>localStorage.getItem(k),saveKey)).toBe(saved);
  await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
  await expect(page.locator('#game')).toHaveAttribute('data-mode','play');
 });
@@ -286,9 +290,9 @@ for (const kind of ['orbit','amber'] as const) {
   await page.goto(route);await expect(page.locator('canvas')).toHaveAttribute('data-art','fallback');
   await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
   await play(page,kind,0,true);await page.screenshot({path:info.outputPath(`${kind}-fallback-clear.png`)});
-  const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);expect(saved).toBeTruthy();
+  const saveKey=kind==='amber'?AMBER_CAMPAIGN_KEY:SAVE_KEY;const saved=await page.evaluate(k=>localStorage.getItem(k),saveKey);expect(saved).toBeTruthy();
   await page.reload();await expect(page.getByRole('button',{name:/ステージ 2 /})).toBeEnabled();
-  expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);expect(errors).toEqual([]);
+  expect(await page.evaluate(k=>localStorage.getItem(k),saveKey)).toBe(saved);expect(errors).toEqual([]);
  });
 }
 test('missing shared colormap retains Amber fallback and gameplay',async({page},info)=>{
@@ -302,3 +306,4 @@ test('missing shared colormap retains Amber fallback and gameplay',async({page},
  try {await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();await play(page,'amber',0,true,trace,true);}
  finally {fs.writeFileSync(info.outputPath('input-timing.json'),JSON.stringify(trace,null,2));fs.writeFileSync(info.outputPath('native-input-events.json'),JSON.stringify(await page.evaluate(()=>(window as unknown as {fallbackInputs:unknown[]}).fallbackInputs),null,2));fs.writeFileSync(info.outputPath('final-state.json'),JSON.stringify(await read(page),null,2));}
 });
+

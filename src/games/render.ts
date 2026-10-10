@@ -1,5 +1,6 @@
 import * as T from 'three';
 import { stages, type Kind, type State } from './model';
+import { SIGNALS, SIGNAL_HEIGHT } from './signals';
 import { loadArt, batchStatic, clearStatic, placeArt, createSky, type Art } from './art';
 import {orbitCraft, orbitPlanet, orbitPlatform, orbitShutter, orbitStation, paintOrbitScenery} from './orbit-art';
 import { createAmberCanyon, loadAmberLandmark, placeAmberPlants, placeSandstone } from './amber-scenery';
@@ -14,6 +15,11 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   const light = new T.DirectionalLight(kind === 'orbit' ? 0xffe4c5 : 0xffe3b6, 2.1); light.position.set(-8, 15, 5); scene.add(light);
   const camera = new T.PerspectiveCamera(54, 1, .1, 160);
   const level = new T.Group(); scene.add(level);
+  // Three original gold diamonds share one tiny draw call. They do not bob,
+  // emit particles or use the path-edge/hazard colors. Collected ones disappear.
+  const signalMesh = kind === 'orbit' ? new T.InstancedMesh(new T.OctahedronGeometry(.34, 0), new T.MeshLambertMaterial({color:0xffdf78,emissive:0x75500b,emissiveIntensity:.75}), 3) : null;
+  const signalTransform = new T.Object3D(); let previousSignalMask = -1;
+  if (signalMesh) { signalMesh.frustumCulled = false; scene.add(signalMesh); }
   const backdrop = new T.Group(); scene.add(backdrop);
   const geo = new T.BoxGeometry(1, 1, 1);
   const spikeGeometry = new T.ConeGeometry(.4, .65, 4);
@@ -71,7 +77,7 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   for (let i = 0; i < 220; i++) points.push(Math.sin(i * 82.7) * 80, 4 + ((i * 17) % 35), -100 + ((i * 31) % 170));
   particles.setAttribute('position', new T.Float32BufferAttribute(points, 3)); const stars = new T.Points(particles, new T.PointsMaterial({ color: 0xc1d5e8, size: .085, sizeAttenuation:true })); if (kind === 'orbit') scene.add(stars);
   function load(index: number) {
-    currentStage = index;
+    currentStage = index; previousSignalMask = -1;
     previousTime = 0; previousX = 0; courier.rotation.y = 0;
     mixer?.stopAllAction(); activeAction = undefined;
     clearStatic(level); clearStatic(backdrop); backdrop.position.set(0,0,0);
@@ -147,7 +153,14 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
     if (w !== width || h !== height) { width = w; height = h; resized = true; }
   });
   resizeObserver.observe(canvas);
-  function draw(s: State) {
+  function draw(s: State, signalMask = 0) {
+    if (signalMesh && signalMask !== previousSignalMask) {
+      SIGNALS[currentStage].forEach((signal, i) => {
+        signalTransform.position.set(signal.z, SIGNAL_HEIGHT, -signal.x); signalTransform.rotation.set(0, Math.PI / 4, 0);
+        signalTransform.scale.setScalar(signalMask & (1 << i) ? 0 : 1); signalTransform.updateMatrix(); signalMesh.setMatrixAt(i, signalTransform.matrix);
+      });
+      signalMesh.instanceMatrix.needsUpdate = true; signalMesh.visible = signalMask !== 7; previousSignalMask = signalMask;
+    }
     // Wide canvases use a modestly smaller render buffer; DOM text/controls
     // retain native resolution, and narrower canvases keep 450k.
     const maxPixels = width >= 1000 ? (kind === 'amber' ? 280000 : 350000) : 450000;
@@ -185,3 +198,4 @@ export function createView(canvas: HTMLCanvasElement, kind: Kind) {
   }
   return { load, draw, renderer };
 }
+

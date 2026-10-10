@@ -8,11 +8,12 @@ export function createView(canvas: HTMLCanvasElement) {
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
-  const view = createAlpineScene();
+  let course = 0, view = createAlpineScene(course);
   let width = 0, height = 0;
   return {
     renderer,
     draw(state: State) {
+      if (state.course !== course) { view.dispose(); course = state.course; view = createAlpineScene(course); }
       const w = Math.max(1, canvas.clientWidth), h = Math.max(1, canvas.clientHeight);
       if (w !== width || h !== height) {
         width = w; height = h;

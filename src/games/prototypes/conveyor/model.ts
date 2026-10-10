@@ -1,7 +1,7 @@
 /** Grid coordinates: x grows right, z grows down. No rendering or wall clock here. */
 export type Direction = 0 | 1 | 2 | 3; // north, east, south, west
 export type Cell = { x: number; z: number };
-export type Tile = Cell & { id: string; kind: 'straight' | 'bend'; rotation: Direction };
+export type Tile = Cell & { id: string; kind: 'straight' | 'bend' | 'two-way'; rotation: Direction };
 export type Stage = {
   width: number; height: number; tiles: readonly Tile[];
   source: Cell & { output: Direction }; exit: Cell & { input: Direction };
@@ -12,6 +12,12 @@ export const opposite = (direction: Direction) => turn(direction + 2);
 export function ports(tile: Tile) {
   // Both base shapes enter from west; a bend turns right (west -> south).
   return { input: turn(3 + tile.rotation), output: turn((tile.kind === 'straight' ? 1 : 2) + tile.rotation) };
+}
+/** Directed belts keep their original inlet. A two-way elbow may be entered at either open port. */
+export function exitFor(tile: Tile, input: Direction): Direction | null {
+  const connection = ports(tile);
+  if (input === connection.input) return connection.output;
+  return tile.kind === 'two-way' && input === connection.output ? connection.input : null;
 }
 export const STAGE: Stage = {
   width: 4, height: 3,
@@ -52,13 +58,13 @@ export function trace(stage: Stage, tiles: readonly Tile[]): Route {
     if (same(next, stage.exit)) return finish(input === stage.exit.input ? 'success' : 'wrong-exit');
     const tile = grid.get(`${next.x},${next.z}`);
     if (!tile) return finish('empty');
-    const connection = ports(tile);
-    if (connection.input !== input) return finish('wrong-entry', tile.id);
+    const output = exitFor(tile, input);
+    if (output === null) return finish('wrong-entry', tile.id);
     const key = `${tile.x},${tile.z},${input}`;
     if (visited.has(key)) return finish('loop', tile.id);
     visited.add(key);
-    visits.push({ x: tile.x, z: tile.z, input, output: connection.output, tileId: tile.id });
-    cell = tile; heading = connection.output;
+    visits.push({ x: tile.x, z: tile.z, input, output, tileId: tile.id });
+    cell = tile; heading = output;
   }
 }
 
@@ -109,3 +115,4 @@ export function restore(save: Save): State {
   state.turns = save.turns;
   return state;
 }
+

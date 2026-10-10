@@ -56,7 +56,7 @@ test('state is frozen outside play, retry reconstructs a clean state',()=>{
     const s=createState();s.phase=phase;const before={...s};advance(s);assert.deepEqual(s,before);assert.equal(queueTurn(s,-1),false);
   }
   const failed=playing();failed.phase='failed';failed.x=99;failed.queued=1;
-  assert.deepEqual(createState(),{phase:'ready',x:0,z:0,heading:0,gate:0,queued:null,time:0,reason:null});
+  assert.deepEqual(createState(),{phase:'ready',x:0,z:0,heading:0,gate:0,queued:null,time:0,reason:null,course:0,firstInput:null,precise:0,recorded:false});
 });
 test('10/30/60/120 Hz simulation advances all pass without tunnelling',()=>{
   for(const dt of [.1,1/30,1/60,STEP])assert.equal(drive(playing(),dt).phase,'clear');

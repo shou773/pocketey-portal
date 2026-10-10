@@ -19,6 +19,48 @@ export const STAGES: Stage[] = [
     { z: 36, x: 3.8, width: 2.6 }, { z: 51, x: -3.5, width: 2.5 }, { z: 66, x: 3.8, width: 2.5 },
     { z: 81, x: -3.5, width: 2.4 }, { z: 96, x: 3.2, width: 2.6 }, { z: 111, x: 0, width: 3.8 }, { z: 122, x: 0, width: 4.8 },
   ] },
+  { name: ["息つぎのカーブ", "Breathing bends"], hint: ["曲がる前に減速。広い直線ではブレーキを離そう。", "Brake before bends. Release on wide straights."], knots: [
+    { z: 0, x: 0, width: 4.8 },
+    { z: 10, x: 0, width: 4.8 },
+    { z: 22, x: 3, width: 3.4 },
+    { z: 30, x: 3, width: 4.8 },
+    { z: 42, x: -3, width: 3.2 },
+    { z: 50, x: -3, width: 4.8 },
+    { z: 62, x: 2.8, width: 3.1 },
+    { z: 70, x: 2.8, width: 4.8 },
+    { z: 84, x: 0, width: 4.8 },
+    { z: 94, x: 0, width: 4.8 },
+  ] },
+  { name: ["ふたつの頂点", "Double apex"], hint: ["一度曲がっても油断しないで。短い切り返しのあと、もう一度。", "Hold your line through paired bends, then catch the next reversal."], knots: [
+    { z: 0, x: 0, width: 4.4 },
+    { z: 8, x: 0, width: 4.4 },
+    { z: 19, x: -3.2, width: 2.9 },
+    { z: 26, x: -1.7, width: 3.7 },
+    { z: 34, x: -3.7, width: 2.6 },
+    { z: 47, x: 3.6, width: 2.6 },
+    { z: 55, x: 1.8, width: 3.6 },
+    { z: 63, x: 3.8, width: 2.5 },
+    { z: 76, x: -3.2, width: 2.6 },
+    { z: 84, x: -1.5, width: 3.6 },
+    { z: 92, x: -3.8, width: 2.5 },
+    { z: 107, x: 0, width: 3.9 },
+    { z: 116, x: 0, width: 4.8 },
+  ] },
+  // Begin course 6: wide turn, straight neck, recovery.
+  { name: ["細道の入口", "Narrow passages"], hint: ["急カーブの前に減速。細道では向きを整えてからブレーキを離そう。", "Brake before the tight turn. Straighten up at the neck, then release."], knots: [
+    { z: 0, x: 0, width: 4.8 },
+    { z: 8, x: 0, width: 4.8 },
+    { z: 20, x: 3.2, width: 4.8 },
+    { z: 23, x: 3.2, width: 2.6 },
+    { z: 31, x: 3.2, width: 2.6 },
+    { z: 38, x: 3.2, width: 5 },
+    { z: 46, x: -3.2, width: 2.4 },
+    { z: 54, x: -3.2, width: 2.4 },
+    { z: 61, x: -3.2, width: 5 },
+    { z: 78, x: 0, width: 4.8 },
+    { z: 94, x: 0, width: 5 },
+  ] },
+  // End course 6.
 ];
 export function length(stage: number) { return STAGES[stage].knots.at(-1)!.z; }
 export function track(stage: number, z: number) {
@@ -33,7 +75,7 @@ export function track(stage: number, z: number) {
 export interface State { stage: number; phase: Phase; x: number; z: number; y: number; vx: number; speed: number; vy: number; time: number; fallTime: number }
 export interface Input { steer: number; brake: boolean }
 export function createState(stage = 0): State {
-  return { stage: Math.max(0, Math.min(2, Math.floor(stage))), phase: 'ready', x: 0, z: 0, y: RADIUS, vx: 0, speed: 0, vy: 0, time: 0, fallTime: 0 };
+  return { stage: Math.max(0, Math.min(STAGES.length - 1, Number.isFinite(stage) ? Math.floor(stage) : 0)), phase: 'ready', x: 0, z: 0, y: RADIUS, vx: 0, speed: 0, vy: 0, time: 0, fallTime: 0 };
 }
 export function supported(s: State) {
   const road = track(s.stage, s.z);
@@ -67,3 +109,4 @@ export function parseSave(raw: string | null): Save {
     return { best: [0, 1, 2].map(i => typeof parsed.best[i] === 'number' && Number.isFinite(parsed.best[i]) && parsed.best[i] > 0 ? parsed.best[i] : null), muted: parsed.muted !== false };
   } catch { return empty; }
 }
+

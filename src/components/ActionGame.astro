@@ -4,7 +4,9 @@ import LocaleHead from './LocaleHead.astro';
 import GameMeta from './GameMeta.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import T from './T.astro';
-const descriptionEn=kind==='orbit'?'An automatic 3D runner. Steer around pillars and jump the gaps across three short stages.':'A side-view 2.5D platformer. Move and jump across three short stages.';
+import {stages} from '../games/model';
+const count=kind==='orbit'?stages.orbit.length:stages.amber.length;
+const descriptionEn=kind==='orbit'?'An automatic 3D runner. Steer around pillars and jump the gaps across three short stages. Collect optional gold signals and finish to keep your record.':'A side-view 2.5D platformer. Move and jump across four short stages.';
 import '../games/game.css';
 import '../games/ui.css';
 ---
@@ -15,13 +17,15 @@ import '../games/ui.css';
 <main id="game" data-kind={kind}>
   <header class="game-bar"><a href="/games/" class="wordmark">POCKETEY <span> / PLAY</span></a><div><button id="sound" aria-label="Toggle sound" aria-pressed="false"><T ja="音 OFF" en="Sound OFF"/></button><button id="pause" disabled><T ja="一時停止" en="Pause"/></button></div></header>
   <div id="view"><canvas id="scene" aria-label={`${title} 3D game`}></canvas><div class="vignette"></div>
-    <div class="hud"><div><span id="stage-label">01 / 03</span><strong id="stage-name"></strong></div><div class="time"><span id="timer">0.00</span><small>SECONDS</small></div></div>
+    <div class="hud"><div><span id="stage-label">{`01 / ${String(count).padStart(2,'0')}`}</span><strong id="stage-name"></strong>{kind==='orbit' && <small id="signals" class="signal-hud" aria-live="polite"></small>}</div><div class="time"><span id="timer">0.00</span><small>SECONDS</small></div></div>
     <div class="progress"><div id="progress-fill"></div></div>
-    <div id="overlay" class="overlay"><section class="panel" aria-labelledby="panel-title"><div class="game-language"><LanguageSwitch/></div><p id="eyebrow">POCKETEY ORIGINAL · 3 STAGES</p><div class="hero-mark" aria-hidden="true"><span id="panel-icon" class="asset-icon" style={`--icon: url('/games/assets/lucide/${kind === 'orbit' ? 'orbit' : 'gem'}.svg')`}></span></div><h1 id="panel-title">{title}</h1><p id="panel-copy"><T ja={subtitle} en={descriptionEn}/></p><div id="stages" class="stages"></div><p id="instructions"></p><div id="actions"></div><p id="save-note" role="status"></p><button id="reset" class="text-button">この2作品の記録をリセット</button><div class="panel-links"><a href="/games/" class="back-link"><T ja="ゲーム一覧へ" en="All games"/></a><a href="/games/assets/lucide/LICENSE.txt" class="asset-credit" target="_blank" rel="noopener" data-no-locale><T ja="素材ライセンス" en="Artwork licenses"/></a></div></section></div>
+    <div id="overlay" class="overlay"><section class="panel" aria-labelledby="panel-title"><div class="game-language"><LanguageSwitch/></div><p id="eyebrow">{`POCKETEY ORIGINAL · ${count} STAGES`}</p><div class="hero-mark" aria-hidden="true"><span id="panel-icon" class="asset-icon" style={`--icon: url('/games/assets/lucide/${kind === 'orbit' ? 'orbit' : 'gem'}.svg')`}></span></div><h1 id="panel-title">{title}</h1><p id="panel-copy"><T ja={subtitle} en={descriptionEn}/></p><div id="stages" class="stages"></div><p id="instructions"></p><div id="actions"></div><p id="save-note" role="status"></p><button id="reset" class="text-button">この2作品の記録をリセット</button><div class="panel-links"><a href="/games/" class="back-link"><T ja="ゲーム一覧へ" en="All games"/></a><a href="/games/assets/lucide/LICENSE.txt" class="asset-credit" target="_blank" rel="noopener" data-no-locale><T ja="素材ライセンス" en="Artwork licenses"/></a></div></section></div>
     <div id="landing-cue" aria-hidden="true"></div>
     <p id="hint"></p>
+    {kind==='amber' && <aside id="amber-coach" hidden role="note" aria-live="polite" aria-label="Jump tip"><p id="amber-coach-copy"></p><button id="amber-coach-dismiss" type="button" aria-label="Dismiss jump tip">×</button></aside>}
   </div>
   <footer class="controls"><div class="direction"><button data-input="left" aria-label="Move left"><span class="asset-icon" aria-hidden="true" style="--icon:url('/games/assets/lucide/arrow-left.svg')"></span></button><button data-input="right" aria-label="Move right"><span class="asset-icon" aria-hidden="true" style="--icon:url('/games/assets/lucide/arrow-right.svg')"></span></button></div><span class="control-note">MOVE<br/><small>← → / A D</small></span><button data-input="jump" class="jump" aria-label="Jump">JUMP <span class="asset-icon" aria-hidden="true" style="--icon:url('/games/assets/lucide/arrow-up-right.svg')"></span></button></footer>
 </main>
 <script>import { boot } from '../games/app'; boot();</script>
 </body></html>
+

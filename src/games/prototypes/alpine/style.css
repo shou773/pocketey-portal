@@ -46,3 +46,22 @@ a{color:inherit;text-decoration:none}
 .ad-hud{text-shadow:0 1px 8px #f4eddaa8;top:8px}
 #ad-progress{top:47px}
 }
+
+/* Compact, scrollable course choice; fixed-size touch controls remain outside it. */
+.ad-panel h1{font-size:30px;margin:16px 0 10px}
+#ad-courses{display:grid;gap:6px;margin:12px 0}
+#ad-courses[hidden]{display:none}
+#ad-courses button{min-width:0;text-align:left;padding:8px 10px;white-space:normal;overflow-wrap:anywhere}
+#ad-courses button[aria-pressed="true"]{border-color:#f5d779;background:#405c60}
+#ad-courses strong,#ad-courses span{display:block}
+#ad-courses strong{font-size:13px}
+#ad-courses span{font-size:10px;margin-top:3px;color:#d2dede}
+.ad-hud>span:last-child{text-align:right}
+#ad-precision{font-size:9px}
+#ad-target{height:8px;position:relative;background:#4e6563;border-radius:4px;margin:9px 6px 5px}
+#ad-target i{position:absolute;left:44%;width:32%;height:100%;background:#61b6a6;border:1px solid #173f39}
+#ad-needle{position:absolute;width:3px;height:14px;top:-3px;transform:translateX(-50%);background:#fff;border:1px solid #24413f}
+#ad-target[data-locked="true"] #ad-needle{width:7px}
+#ad-target-note{font-size:9px;display:block}
+#ad-target[hidden],#ad-target-note[hidden]{display:none}
+@media(max-height:650px){.ad-panel h1{font-size:25px;margin:10px 0 8px}.ad-panel p{line-height:1.5}#ad-courses{margin:8px 0}#ad-actions{margin:12px 0}#ad-cue{padding:6px 10px}#ad-cue strong{font-size:14px}#ad-cue span{font-size:10px}}

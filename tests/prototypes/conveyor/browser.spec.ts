@@ -2,6 +2,11 @@ import { test, expect, type Page } from '@playwright/test';
 const url = '/prototypes/conveyor/?lang=ja';
 const rotationString = '0,0,0,1,1,2,2,3';
 async function ready(page: Page) {
+  // Preserve the six original regression scenarios against the migrated v1 board.
+  await page.addInitScript(() => { try {
+    if (!localStorage.getItem('pocketey-conveyor-campaign-v3') && !localStorage.getItem('pocketey-conveyor-campaign-v2') && !localStorage.getItem('pocketey-conveyor-v1'))
+      localStorage.setItem('pocketey-conveyor-v1', JSON.stringify({version:1,rotations:[1,0,3,0,0,2,1,3],turns:0,best:null}));
+  } catch { /* Blocked-storage coverage starts on the new teaching board. */ } });
   await page.goto(url); await expect(page.locator('#conveyor')).toHaveAttribute('data-webgl','true');
   await expect(page.locator('#conveyor')).toHaveAttribute('data-frames',/^[1-9]/);
   await expect(page.locator('#conveyor')).toHaveAttribute('data-render-pending','false');
@@ -117,6 +122,8 @@ test('blocked storage still allows a fresh playable board', async ({ browser }) 
   await page.locator('#cv-sound').tap(); await expect(page.locator('#cv-sound')).toHaveAttribute('aria-pressed','true');
   await page.locator('#cv-settings').tap(); await page.locator('#cv-volume').fill('35');
   await expect(page.locator('#cv-volume')).toHaveValue('35'); await page.locator('#cv-audio-close').tap();
-  await solve(page); await page.locator('#cv-play').tap();
+  for (let n=0;n<1;n++) await page.locator('[data-tile="a"]').tap();
+  await page.locator('[data-tile="b"]').tap(); await page.locator('#cv-play').tap();
   await expect(page.locator('#conveyor')).toHaveAttribute('data-phase','success');await context.close();
 });
+

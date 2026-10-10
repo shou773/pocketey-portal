@@ -15,18 +15,20 @@ import '../../games/prototypes/conveyor/style.css';
 <main id="conveyor">
   <header class="cv-header"><a href="/games/" aria-label="Pocketey games">POCKETEY<span> / LAB</span></a><LanguageSwitch /></header>
   <div class="cv-title"><div><p id="cv-eyebrow">01 / 01 · PROTOTYPE</p><h1 id="cv-title">Parcel Turn</h1></div><div class="cv-sound-controls"><button id="cv-sound" type="button" aria-pressed="false">Sound OFF</button><button id="cv-settings" type="button" aria-label="Volume settings">♫</button></div></div>
+  <nav id="cv-missions" class="cv-missions" aria-label="Choose a delivery"></nav>
   <p class="cv-intro" id="cv-intro"></p>
   <section class="cv-board" aria-label="Conveyor puzzle" id="cv-board">
     <canvas id="cv-canvas" aria-hidden="true"></canvas>
     <div id="cv-tiles" role="group" aria-label="Rotate conveyors"></div>
     <span id="cv-in" class="cv-port-label">IN</span><span id="cv-out" class="cv-port-label">OUT</span>
-    <span class="cv-stage-tag">01</span><span id="cv-art-note" class="cv-art-note"></span>
+    <span class="cv-stage-tag" id="cv-stage-tag">01</span><span id="cv-art-note" class="cv-art-note"></span>
     <div id="cv-unavailable" hidden><p id="cv-unavailable-copy"></p><button id="cv-reload" type="button"></button></div>
   </section>
   <section class="cv-bottom">
     <div class="cv-counter"><span id="cv-turns"></span><span id="cv-best"></span></div>
+    <p id="cv-target" class="cv-target"></p>
     <div class="cv-feedback" aria-live="polite" aria-atomic="true"><strong id="cv-status"></strong><p id="cv-detail"></p></div>
-    <div class="cv-actions"><button id="cv-reset" type="button"></button><button id="cv-play" class="cv-primary" type="button"></button></div>
+    <div class="cv-actions"><button id="cv-reset" type="button"></button><button id="cv-play" class="cv-primary" type="button"></button><button id="cv-next" class="cv-next" type="button" hidden></button></div>
     <details class="cv-rules"><summary id="cv-rules-title"></summary><p id="cv-rules-copy"></p></details>
     <p id="cv-save" role="status"></p>
   </section>
@@ -34,3 +36,4 @@ import '../../games/prototypes/conveyor/style.css';
 </main>
 <script>import { boot } from '../../games/prototypes/conveyor/app'; boot();</script>
 </body></html>
+

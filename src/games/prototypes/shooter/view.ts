@@ -62,7 +62,7 @@ export function createView(canvas:HTMLCanvasElement) {
  const painted=new THREE.MeshLambertMaterial({vertexColors:true});
  const enemyPaint=new THREE.MeshLambertMaterial({vertexColors:true,fog:false});
  const geometries={ship:shipGeometry,scout:scoutGeometry,fan:fanGeometry,bullet:new THREE.SphereGeometry(.16,8,6),shot:box(.09,.1,.5),beam:box(1,.03,13),boss:bossGeometry};
- const materials={ship:painted,scout:enemyPaint,fan:enemyPaint,bullet:new THREE.MeshBasicMaterial({color:0xff416d}),shot:new THREE.MeshBasicMaterial({color:0x9affed}),beam:new THREE.MeshBasicMaterial({color:0xffbc50,transparent:true,opacity:.35}),boss:enemyPaint};
+ const materials={ship:painted,scout:enemyPaint,fan:enemyPaint,bullet:new THREE.MeshBasicMaterial({color:0xff416d}),shot:new THREE.MeshBasicMaterial({color:0x9affed}),beam:new THREE.MeshBasicMaterial({color:0xffbc50,transparent:true,opacity:.55,fog:false}),boss:enemyPaint};
  const ship=new THREE.Mesh(geometries.ship,materials.ship);scene.add(ship);
  const exhaustGeometry=assemble([-1,1].map(side=>({geometry:new THREE.ConeGeometry(.075,.32,6),color:0x71eaff,position:[side*.24,.10,.74] as [number,number,number],rotation:[Math.PI/2,0,0] as [number,number,number]})));
  const exhaust=new THREE.Mesh(exhaustGeometry,new THREE.MeshBasicMaterial({vertexColors:true}));ship.add(exhaust);
@@ -157,10 +157,16 @@ export function createView(canvas:HTMLCanvasElement) {
      color.lerp(original,.16);
     }
    }else{
+    // Boss paint: violet upper shell, blue lower panels, restrained pale wing edge.
     const top=THREE.MathUtils.smoothstep(y,.02,.38);
-    if(y>.37&&ax<.25)color=new THREE.Color(0x223b50).lerp(new THREE.Color(0x667f90),top*.65);
-    else color=new THREE.Color(0x3c5365).lerp(new THREE.Color(ax>.49?0x9c8367:0x8295a0),top).lerp(original,.18);
+    if(y>.37&&ax<.25)color=new THREE.Color(0x22314f).lerp(new THREE.Color(0x7769ae),top*.65);
+    else {
+     color=new THREE.Color(0x263e5b).lerp(new THREE.Color(0x7758b5),top);
+     if(ax>.49)color.lerp(new THREE.Color(0xc3c3dc),.24*THREE.MathUtils.smoothstep(y,.16,.36));
+     color.lerp(original,.08);
+    }
     if(z>.85)color=original;
+    // End boss paint.
    }
    colors.push(color.r,color.g,color.b);
   }
@@ -192,7 +198,7 @@ export function createView(canvas:HTMLCanvasElement) {
  function draw(s:State){resize();ship.position.set(s.x,.4,-s.y);ship.rotation.z=-s.x*.025;exhaust.scale.z=.88+.12*Math.sin(s.time*24);ship.visible=s.invulnerable<=0||Math.floor(s.time*12)%2===0;core.position.set(s.x,.45,-s.y);for(const m of meshes.values())m.visible=false;
  for(const e of s.enemies){const m=sync(`e${e.id}`,e.kind,e.x,e.y);m.rotation.y=0;m.rotation.z=Math.sin(s.time*1.8+e.id)*.04;}
  bulletPool=populate(bulletPool,'bullet',s.bullets);shotPool=populate(shotPool,'shot',s.shots);
- s.beams.forEach((b,i)=>{const m=sync(`beam${i}`,'beam',b.x,5.5);m.scale.set(b.wide,1,1);(m.material as THREE.MeshBasicMaterial).opacity=b.age<1.3?.15+.13*(Math.sin(b.age*18)+1):.85;});
+ s.beams.forEach((b,i)=>{const m=sync(`beam${i}`,'beam',b.x,5.5);m.scale.set(b.wide,1,1);(m.material as THREE.MeshBasicMaterial).opacity=b.age<1.3?.55:.85;});
  for(const [key,m] of meshes)if(!m.visible){scene.remove(m);meshes.delete(key);}
  // Uneven opposing shores; the same reusable rocks vary in height, width and phase.
  const scroll=(distance:number)=>-((distance-s.time*1.2)%24+24)%24+2;

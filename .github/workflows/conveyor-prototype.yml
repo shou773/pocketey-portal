@@ -5,7 +5,11 @@ on:
       - 'src/games/prototypes/conveyor/**'
       - 'src/pages/prototypes/conveyor.astro'
       - 'tests/prototypes/conveyor/**'
+      - 'scripts/capture-conveyor-campaign.mjs'
       - '.github/workflows/conveyor-prototype.yml'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -14,21 +18,51 @@ jobs:
     env:
       ASTRO_TELEMETRY_DISABLED: '1'
       CI: 'true'
+      SOURCE_SHA: ${{ github.event.pull_request.head.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npx tsx --test tests/prototypes/conveyor/model.test.ts
-      - run: npm run check:games && npm run build
+      - name: Preserve accepted integration outside exact-guarded retry help and compact header
+        run: git diff --exit-code f39361caddbf992179f21edf62d59925dc214866 HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/orbit-guidance.ts' ':(exclude)src/games/app.ts' ':(exclude)src/games/game.css' ':(exclude)src/games/prototypes/shooter/briefing.ts' ':(exclude)src/games/prototypes/shooter/app.ts'
+      - run: npm run check && npm run check:games && npm test && npm run build
+      - name: Mark exact production source and file digests
+        run: |
+          git rev-parse HEAD > dist/preview-source-sha.txt
+          find dist -type f -print0 | sort -z | xargs -0 sha256sum > dist-sha256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: six-game-polish-dist-${{ github.event.pull_request.head.sha }}
+          path: |
+            dist/
+            dist-sha256.txt
+          retention-days: 14
       - run: npx playwright install --with-deps chromium
-      - run: npx playwright test --config tests/prototypes/conveyor/playwright.config.ts
+      - name: Conveyor ordinary-input campaign and retained regression gates
+        id: browser
+        continue-on-error: true
+        run: npx playwright test --config tests/prototypes/conveyor/playwright.config.ts
+      - name: Build immutable accepted courier baseline for real before/after captures
+        run: |
+          mkdir -p "$RUNNER_TEMP/conveyor-baseline"
+          git archive 3da9ca63377deabe372c911a47d6825cc6d2d15f | tar -x -C "$RUNNER_TEMP/conveyor-baseline"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/conveyor-baseline/node_modules"
+          (cd "$RUNNER_TEMP/conveyor-baseline" && npm run build)
+          node scripts/capture-conveyor-campaign.mjs "$RUNNER_TEMP/conveyor-baseline/dist"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: conveyor-interaction-evidence
+          name: conveyor-campaign-evidence
           path: test-results/conveyor/
+          retention-days: 14
+      - name: Preserve browser gate result
+        if: always()
+        env:
+          BROWSER: ${{ steps.browser.outcome }}
+        run: test "$BROWSER" = success

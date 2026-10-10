@@ -1,6 +1,8 @@
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { SAVE_KEY, track, length } from '../../../src/games/prototypes/ball/model';
+import { track, length } from '../../../src/games/prototypes/ball/model';
+
+import { PROGRESS_KEY as SAVE_KEY, STAGE_IDS } from '../../../src/games/prototypes/ball/progress';
 
 const route = '/games/tilttrail/';
 const evidence = process.env.NEW_GAME_EVIDENCE || 'test-results/ball/evidence';
@@ -89,7 +91,8 @@ for (const touch of [false, true]) test.describe(touch ? 'touch device' : 'deskt
   await drive(page, touch);
   await page.screenshot({ path: `${evidence}/${touch ? 'mobile' : 'desktop'}-all-clear.png` });
   const saved = await page.evaluate(key => JSON.parse(localStorage.getItem(key)!), SAVE_KEY);
-  expect(saved.best.every((v: unknown) => typeof v === 'number' && v > 0)).toBe(true);
+  expect(STAGE_IDS.slice(0,3).every(id => typeof saved.records[id] === 'number' && saved.records[id] > 0)).toBe(true);
+  expect(saved.records['breathing-bends']).toBeNull(); expect(saved.records['double-apex']).toBeNull();
   expect(await page.evaluate(() => localStorage.getItem('pocketey-orbit-amber-v1'))).toBe('untouched-sentinel');
   await page.reload();
   await expect(page.locator('#tt-stages')).toContainText('BEST');
@@ -208,3 +211,4 @@ test('WebGL loss freezes play and fall; header, P, Esc and touch cannot resume b
     await page.waitForTimeout(150); expect((await snapshot(page)).z).toBeGreaterThan(0);
   }
 });
+

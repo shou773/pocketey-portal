@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { STAGE, type Cell, type State } from './model';
+import { STAGE, type Cell, type State, type Stage, type Tile } from './model';
 
 /** Self-made toy geometry from the approved written specification; no reference-image access. */
-export function createView(canvas: HTMLCanvasElement) {
+export function createView(canvas: HTMLCanvasElement, stage: Stage = STAGE) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'low-power' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -17,11 +17,11 @@ export function createView(canvas: HTMLCanvasElement) {
   const fill = new THREE.DirectionalLight(0xffffff, .55); fill.position.set(4, 3, 6); scene.add(fill);
   const material = (color: number) => new THREE.MeshStandardMaterial({ color, roughness: .76, metalness: 0 });
   const materials = {
-    tile: material(0xf1dfc1), tray: material(0x88a999), trim: material(0x729787), rail: material(0x5f9a8a),
+    tile: material(0xf1dfc1), tray: material(0x88a999), trim: material(0x729787), rail: material(0x5f9a8a), twoWayRail: material(0x287aab),
     belt: material(0x3f4545), groove: material(0x454b48), brass: material(0xddbd73),
     white: new THREE.MeshBasicMaterial({ color: 0xffffff }), selected: new THREE.MeshBasicMaterial({ color: 0xffc83e, toneMapped: false }),
     inlet: material(0x94cbbb), outlet: material(0xed825e), mouth: new THREE.MeshBasicMaterial({ color: 0x20362f, toneMapped: false }),
-    paper: material(0xcc9a5e), tape: material(0xf5dfb3), lamp: material(0xe9f4d7),
+    paper: material(0xe1b46a), tape: material(0x286458), lamp: material(0xe9f4d7),
     desk: material(0xf5ead5), wall: material(0xd7e7db), pipe: material(0xb3d0bd),
   };
   const owned = new Set<THREE.BufferGeometry>();
@@ -58,9 +58,9 @@ export function createView(canvas: HTMLCanvasElement) {
   box(scene,materials.tray,0,-.035,0,4.51,.15,3.46,.13,2);
   // Instanced tile tops keep all twelve cream cells separate without twelve draw calls.
   const tileGeometry=rounded(1.015,.12,1.015,.065,1);
-  const tileTops=new THREE.InstancedMesh(tileGeometry,materials.tile,STAGE.width*STAGE.height);
+  const tileTops=new THREE.InstancedMesh(tileGeometry,materials.tile,stage.width*stage.height);
   const transform=new THREE.Matrix4();
-  for(let z=0;z<STAGE.height;z++)for(let x=0;x<STAGE.width;x++)tileTops.setMatrixAt(z*STAGE.width+x,transform.makeTranslation(...position({x,z},.085).toArray()));
+  for(let z=0;z<stage.height;z++)for(let x=0;x<stage.width;x++)tileTops.setMatrixAt(z*stage.width+x,transform.makeTranslation(...position({x,z},.085).toArray()));
   scene.add(tileTops);
   function extrude(shape:THREE.Shape,height:number,bevel=.01) {
     const g=own(new THREE.ExtrudeGeometry(shape,{depth:height-2*bevel,bevelEnabled:bevel>0,bevelSize:bevel,bevelThickness:bevel,bevelSegments:1,curveSegments:4,steps:1}));
@@ -79,7 +79,7 @@ export function createView(canvas: HTMLCanvasElement) {
   const tailGeometry=own(new THREE.BoxGeometry(.04,.01,.30));
   const capGeometry=rounded(.065,.08,.11,.022);
   // Merge each tile's repeated parts by material; the resulting two blueprints are shared.
-  function tileBlueprint(kind:'straight'|'bend') {
+  function tileBlueprint(kind:Tile['kind']) {
     const draft=new THREE.Group();
     if(kind==='straight'){
       box(draft,materials.belt,0,.197,0,1.075,.05,.54,.022);
@@ -91,7 +91,8 @@ export function createView(canvas: HTMLCanvasElement) {
       mesh(draft,arrow,materials.white,.025,.234,0);
     }else{
       mesh(draft,bendBelt,materials.belt,0,.176,0);
-      mesh(draft,innerRail,materials.rail,0,.145,0);mesh(draft,outerRail,materials.rail,0,.145,0);
+      const rail = kind === 'two-way' ? materials.twoWayRail : materials.rail;
+      mesh(draft,innerRail,rail,0,.145,0);mesh(draft,outerRail,rail,0,.145,0);
       mesh(draft,capGeometry,materials.brass,-.50,.235,-.32);
       const cap=mesh(draft,capGeometry,materials.brass,.32,.235,.50);cap.rotation.y=-Math.PI/2;
       for(let i=1;i<=6;i++){
@@ -99,10 +100,11 @@ export function createView(canvas: HTMLCanvasElement) {
         const groove=mesh(draft,grooveGeometry,materials.groove,-.54+.54*Math.cos(a),.226,.54+.54*Math.sin(a));
         groove.rotation.y=-(a+Math.PI/2);
       }
-      const mark=mesh(draft,arrow,materials.white,-.06,.236,.225);mark.rotation.y=-Math.PI/2;mark.scale.setScalar(.88);
+      const mark=mesh(draft,arrow,materials.white,-.06,.236,.225);mark.rotation.y=-Math.PI/2;mark.scale.setScalar(kind === 'two-way' ? .65 : .88);
+      if (kind === 'two-way') { const reverse=mesh(draft,arrow,materials.white,-.30,.236,.015);reverse.rotation.y=Math.PI;reverse.scale.setScalar(.65); }
     }
     // The tail stays at the actual inlet, west before rotation.
-    mesh(draft,tailGeometry,materials.white,-.46,.235,0);
+    if (kind !== 'two-way') mesh(draft,tailGeometry,materials.white,-.46,.235,0);
     const parts=new Map<THREE.Material,THREE.BufferGeometry[]>();
     draft.updateMatrixWorld(true);
     for(const child of draft.children){const m=child as THREE.Mesh;const g=m.geometry.clone().applyMatrix4(m.matrixWorld);const list=parts.get(m.material as THREE.Material)??[];list.push(g);parts.set(m.material as THREE.Material,list);}
@@ -110,12 +112,13 @@ export function createView(canvas: HTMLCanvasElement) {
     for(const [mat,gs] of parts){const geometry=own(mergeGeometries(gs.map(g=>g.index?g.toNonIndexed():g))!);gs.forEach(g=>g.dispose());result.push({geometry,material:mat});}
     return result;
   }
-  const blueprints={straight:tileBlueprint('straight'),bend:tileBlueprint('bend')};
+  const blueprints: Partial<Record<Tile['kind'],ReturnType<typeof tileBlueprint>>> = {straight:tileBlueprint('straight'),bend:tileBlueprint('bend')};
+  if (stage.tiles.some(tile => tile.kind === 'two-way')) blueprints['two-way']=tileBlueprint('two-way');
   const tileViews=new Map<string,THREE.Group>();
-  for(const tile of STAGE.tiles){
+  for(const tile of stage.tiles){
     const group=new THREE.Group();group.position.copy(position(tile,0));scene.add(group);
     shadow(group,0,.147,0,1.10,1.07);
-    blueprints[tile.kind].forEach(part=>mesh(group,part.geometry,part.material));tileViews.set(tile.id,group);
+    blueprints[tile.kind]!.forEach(part=>mesh(group,part.geometry,part.material));tileViews.set(tile.id,group);
   }
   // Raise the single selection frame above the rails; keep ports and path arrows unobscured.
   const selection=new THREE.Group();scene.add(selection);
@@ -126,22 +129,34 @@ export function createView(canvas: HTMLCanvasElement) {
   const shellShape=new THREE.Shape();
   shellShape.moveTo(-.43,.145);shellShape.lineTo(-.43,.58);shellShape.quadraticCurveTo(-.43,.81,-.20,.81);shellShape.lineTo(.20,.81);shellShape.quadraticCurveTo(.43,.81,.43,.58);shellShape.lineTo(.43,.145);
   shellShape.lineTo(.29,.145);shellShape.lineTo(.29,.50);shellShape.quadraticCurveTo(.29,.655,.135,.655);shellShape.lineTo(-.135,.655);shellShape.quadraticCurveTo(-.29,.655,-.29,.50);shellShape.lineTo(-.29,.145);shellShape.closePath();
-  const shell=own(new THREE.ExtrudeGeometry(shellShape,{depth:.36,bevelEnabled:true,bevelThickness:.03,bevelSize:.025,bevelSegments:2,curveSegments:5,steps:1}));shell.translate(0,0,-.18);shell.rotateY(Math.PI/2);
+  function stationShell(depth:number) {
+    const geometry=own(new THREE.ExtrudeGeometry(shellShape,{depth,bevelEnabled:true,bevelThickness:.03,bevelSize:.025,bevelSegments:2,curveSegments:5,steps:1}));
+    geometry.translate(0,0,-depth/2);geometry.rotateY(Math.PI/2);return geometry;
+  }
+  const shell=stationShell(.36), shallowShell=stationShell(.16);
+  const innerWall=own(new THREE.PlaneGeometry(.54,.415));
   const lampGeometry=own(new THREE.SphereGeometry(.06,10,6));
-  function station(cell:Cell,isExit:boolean){
-    const group=new THREE.Group();group.position.copy(position(cell,0));scene.add(group);
+  function station(cell:Cell,isExit:boolean,direction:number){
+    const group=new THREE.Group();group.position.copy(position(cell,0));group.rotation.y=-(direction-(isExit?3:1))*Math.PI/2;scene.add(group);
     const side=isExit?1:-1,paint=isExit?materials.outlet:materials.inlet;
     shadow(group,side*.16,.148,.02,1.1,1.12);
     box(group,paint,0,.184,0,.97,.075,.80,.05,2);
     box(group,materials.belt,-side*.08,.222,0,.80,.026,.53,.018);
-    mesh(group,shell,paint,side*.24,0,0);
+    // A north-facing intake points away from the fixed camera. A shallower
+    // hood leaves its receiving tray and delivered parcel visible from above.
+    const away=direction===0;
+    mesh(group,away?shallowShell:shell,paint,side*(away?.31:.24),0,0);
     // The cavity is behind the parcel's endpoint, never a solid block through its path.
-    box(group,materials.mouth,side*.425,.405,0,.016,.44,.565,.03);
-    box(group,materials.brass,side*.035,.695,0,.055,.055,.27,.017);
-    const lamp=mesh(group,lampGeometry,materials.lamp,side*.24,.855,-.10);lamp.scale.set(1,.65,1);
+    box(group,paint,side*.425,.405,0,.016,.44,.565,.03);
+    // Paint the exterior; only the inward-facing surface is dark. The rear
+    // must never look like a second usable opening when the station rotates.
+    const interior=mesh(group,innerWall,materials.mouth,side*.415,.405,0);
+    interior.rotation.y=-side*Math.PI/2;
+    box(group,materials.tape,side*.035,.695,0,.055,.055,.27,.017);
+    const lamp=mesh(group,lampGeometry,materials.lamp,side*(away?.31:.24),.855,-.10);lamp.scale.set(1,.65,1);
     return lamp;
   }
-  station(STAGE.source,false);const exitLamp=station(STAGE.exit,true);
+  station(stage.source,false,stage.source.output);const exitLamp=station(stage.exit,true,stage.exit.input);
   const parcel=new THREE.Group();scene.add(parcel);
   box(parcel,materials.paper,0,0,0,.35,.32,.35,.035,2);
   mesh(parcel,own(new THREE.BoxGeometry(.062,.009,.30)),materials.tape,0,.163,0);
@@ -170,3 +185,4 @@ export function createView(canvas: HTMLCanvasElement) {
   function dispose(){owned.forEach(g=>g.dispose());Object.values(materials).forEach(m=>m.dispose());shadowMaterial.dispose();shadowTexture.dispose();renderer.dispose();}
   resize();return{renderer,draw,project,resize,dispose};
 }
+

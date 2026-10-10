@@ -42,7 +42,7 @@ test('finish on the road clears exactly once; pause and ready freeze simulation'
   });
   for (const phase of ['ready', 'paused'] as const) { const s = createState(); s.phase = phase; const before = { ...s }; advance(s, { steer: 1, brake: false }); assert.deepEqual(s, before); }
 });
-test('all three trails can be cleared by discrete steering and braking', () => {
+test('all authored trails can be cleared by discrete steering and braking', () => {
   STAGES.forEach((_, stage) => {
     const s = createState(stage); s.phase = 'playing';
     for (let frame = 0; frame < 15000 && s.phase === 'playing'; frame++) {
@@ -60,3 +60,4 @@ test('save validation rejects damaged/non-finite values and retry is clean', () 
   assert.deepEqual(parseSave('{"best":[1e400,0,15]}').best, [null, null, 15]);
   assert.deepEqual(createState(2), { stage: 2, phase: 'ready', x: 0, z: 0, y: RADIUS, vx: 0, speed: 0, vy: 0, time: 0, fallTime: 0 });
 });
+

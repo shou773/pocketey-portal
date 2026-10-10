@@ -8,7 +8,7 @@
     "build": "astro build && node scripts/check-portal.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "tsx --test tests/games/model.test.ts tests/games/orbit-art.test.ts tests/prototypes/shooter-model.test.ts tests/prototypes/ball/model.test.ts tests/prototypes/alpine/model.test.ts tests/prototypes/alpine/scene.test.ts tests/prototypes/conveyor/model.test.ts",
+    "test": "tsx --test tests/games/model.test.ts tests/games/orbit-art.test.ts tests/games/signals.test.ts tests/games/amber-guidance.test.ts tests/prototypes/shooter-model.test.ts tests/prototypes/shooter/climax.test.ts tests/prototypes/ball/model.test.ts tests/prototypes/ball/progress.test.ts tests/prototypes/alpine/model.test.ts tests/prototypes/alpine/campaign.test.ts tests/prototypes/alpine/scene.test.ts tests/prototypes/conveyor/model.test.ts tests/prototypes/conveyor/campaign.test.ts",
     "test:alpine:input": "playwright test --config tests/prototypes/alpine/playwright.config.ts",
     "test:alpine:render": "node tests/prototypes/alpine/render-smoke.mjs",
     "test:browser": "playwright test",
@@ -28,3 +28,4 @@
     "typescript": "^5.9.3"
   }
 }
+
