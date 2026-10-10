@@ -43,6 +43,7 @@ export const COURSES: readonly Course[] = [
       {x:-5.5,z:42,halfX:.9,halfZ:.7},{x:3,z:47.5,halfX:.9,halfZ:.7}] },
 ];
 export const PRECISION_NEAR = 1.2, PRECISION_FAR = 2.8;
+const PRECISION_ROUNDOFF = 1e-9; // Metres: accumulated float noise, not an extra input frame.
 export function courseAt(index = 0) { return COURSES[Math.max(0, Math.min(COURSES.length - 1, Number.isFinite(index) ? Math.floor(index) : 0))]; }
 export interface State {
   phase: Phase; x: number; z: number; heading: Heading; gate: number;
@@ -87,7 +88,7 @@ export function advance(s: State, dt = STEP) {
     if (gate && s.z + distance >= gate.z - 1e-9) {
       const before = Math.max(0, gate.z - s.z);
       s.x += s.heading * before; s.z = gate.z; distance -= before;
-      if (s.queued === gate.direction && s.firstInput !== null && s.firstInput >= PRECISION_NEAR && s.firstInput <= PRECISION_FAR) s.precise++;
+      if (s.queued === gate.direction && s.firstInput !== null && s.firstInput + PRECISION_ROUNDOFF >= PRECISION_NEAR && s.firstInput - PRECISION_ROUNDOFF <= PRECISION_FAR) s.precise++;
       s.firstInput = null;
       if (s.queued !== null) s.heading = Math.max(-1, Math.min(1, s.heading + s.queued)) as Heading;
       s.queued = null; s.gate++;

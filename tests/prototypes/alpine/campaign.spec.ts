@@ -7,6 +7,7 @@ const stored=(page:Page)=>page.evaluate(k=>localStorage.getItem(k),key);
 async function drive(page:Page,course:number,mode:'keyboard'|'touch',target:number,info:TestInfo,aim=false) {
   const turns:unknown[]=[],deliveryDistances:number[]=[],session=mode==='touch'?await page.context().newCDPSession(page):null;
   const rect=session?(await page.locator('canvas').boundingBox())!:null;
+  let expectedCredits=0;
   const measurement=page.evaluate(async()=>{
     const intervals:number[]=[],counters:{calls:number;triangles:number}[]=[],pointers:unknown[]=[];let previous=performance.now();
     const surface=document.querySelector('canvas')!;
@@ -26,37 +27,43 @@ async function drive(page:Page,course:number,mode:'keyboard'|'touch',target:numb
       await page.waitForFunction(({i,z,target})=>{const d=document.querySelector<HTMLElement>('#alpine')!.dataset;
         return d.phase==='failed'||(Number(d.gate)===i&&Number(d.z)>=z-target);},{i,z:g.z,target},{timeout:20000});
       const before=await snapshot(page);expect(before.phase).toBe('playing');expect(Number(before.z)).toBeLessThan(g.z-1);
+      expect(Number(before.precise)).toBe(expectedCredits);
       if(session) {
         const r=rect!,x=r.x+r.width*.5,y=r.y+r.height*.68;
         await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y,id:1}]});
         await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:x+g.direction*70,y:y+2,id:1}]});
         await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
       } else await page.keyboard.press(g.direction<0?'ArrowLeft':'ArrowRight');
-      const queued=await snapshot(page);turns.push({i,direction:g.direction,before,queued});
+      const queued=await snapshot(page),accepted=Number(queued.firstInput);
+      const expectedCredit=Number.isFinite(accepted)&&accepted+1e-9>=1.2&&accepted-1e-9<=2.8;
+      turns.push({i,direction:g.direction,before,queued,accepted,expectedCredit});
       deliveryDistances.push(Math.max(0,g.z-Number(before.z)-Number(queued.firstInput)));
       await writeFile(info.outputPath(`course${course+1}-${aim?'precision':'early'}-${mode}-turns.json`),JSON.stringify({turns,target,deliveryDistances},null,2));
-      expect(queued.queued).toBe(String(g.direction));
+      expect(Number.isFinite(accepted)).toBe(true);expect(accepted).toBeGreaterThan(0);expect(accepted).toBeLessThanOrEqual(5);
+      expect(queued.queued).toBe(String(g.direction));expectedCredits+=Number(expectedCredit);
     }
     await expect(page.locator('#alpine')).toHaveAttribute('data-phase','clear',{timeout:20000});
     const end=await snapshot(page),metrics=await measurement;
-    await writeFile(info.outputPath(`course${course+1}-${aim?'precision':'early'}-${mode}.json`),JSON.stringify({source:process.env.GITHUB_SHA,course,mode,target,aim,turns,deliveryDistances,end,metrics,note:'Ordinary real-rendered wall-clock inputs. Touch precision onset compensates the median observed CDP delivery distance from the preceding early-input run; release remains scored by the unchanged first-input band. These are software-emulator observations, not physical-phone latency or an FPS gate.'},null,2));
+    await writeFile(info.outputPath(`course${course+1}-${aim?'precision':'early'}-${mode}.json`),JSON.stringify({source:process.env.SOURCE_SHA??process.env.GITHUB_SHA,course,mode,target,aim,expectedCredits,turns,deliveryDistances,end,metrics,note:'Ordinary real-rendered wall-clock inputs. Touch precision onset compensates the median observed CDP delivery distance from the preceding early-input run; release remains scored by the existing first-input band with roundoff tolerance only. Requested aim is not accepted timing: expected credit comes from each actual latch. These are software-emulator observations, not physical-phone latency, guaranteed100% timing or an FPS gate.'},null,2));
     await page.screenshot({path:info.outputPath(`course${course+1}-${aim?'precision':'early'}-${mode}-clear.png`)});
-    expect(Number(end.precise)).toBe(aim?COURSES[course].gates.length:0);
+    expect(Number(end.precise)).toBe(expectedCredits);
     expect(metrics.maxTriangles).toBeLessThan(20000);expect(metrics.maxDraws).toBeGreaterThan(0);
-    return deliveryDistances.sort((a,b)=>a-b)[Math.floor(deliveryDistances.length/2)];
+    return {delivery:deliveryDistances.sort((a,b)=>a-b)[Math.floor(deliveryDistances.length/2)],percent:Math.round(100*expectedCredits/COURSES[course].gates.length),credits:expectedCredits,misses:COURSES[course].gates.length-expectedCredits};
   } finally {await session?.detach();}
 }
 for(const mode of ['keyboard','touch'] as const)test.describe(mode,()=>{
 test.use({hasTouch:mode==='touch',isMobile:mode==='touch'});
-test(`${mode}: all3 courses earn0 and100 with real inputs, unlock and save once`,async({page},info)=>{
+test(`${mode}: all3 courses credit actual accepted inputs, unlock and save once`,async({page},info)=>{
   const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+  let credits=0,misses=0;const observed:unknown[]=[];
   if(mode==='keyboard')await page.setViewportSize({width:1280,height:800});
   await page.goto('/prototypes/alpine-drive/?lang=en');
   await expect(page.locator('#ad-courses button[data-course="1"]')).toBeDisabled();await expect(page.locator('#ad-courses button[data-course="2"]')).toBeDisabled();
   for(let course=0;course<3;course++) {
-    await page.getByRole('button',{name:'Start driving',exact:true}).click();const delivery=await drive(page,course,mode,4.7,info);
-    await page.getByRole('button',{name:'Retry now',exact:true}).click();await drive(page,course,mode,mode==='touch'?Math.min(4.8,2+delivery):2.35,info,true);
-    const raw=await stored(page),saved=JSON.parse(raw!);expect(saved.records[COURSES[course].id]).toEqual({clears:2,best:100});
+    await page.getByRole('button',{name:'Start driving',exact:true}).click();const early=await drive(page,course,mode,4.7,info);
+    await page.getByRole('button',{name:'Retry now',exact:true}).click();const aimed=await drive(page,course,mode,mode==='touch'?Math.min(4.8,2+early.delivery):2.35,info,true);
+    credits+=early.credits+aimed.credits;misses+=early.misses+aimed.misses;observed.push({course,early,aimed});
+    const raw=await stored(page),saved=JSON.parse(raw!);expect(saved.records[COURSES[course].id]).toEqual({clears:2,best:Math.max(early.percent,aimed.percent)});
     await page.waitForTimeout(150);expect(await stored(page)).toBe(raw);
     if(course<2){
       if(mode==='touch'&&course===0)await page.setViewportSize({width:320,height:568});
@@ -65,6 +72,8 @@ test(`${mode}: all3 courses earn0 and100 with real inputs, unlock and save once`
       if(mode==='touch'&&course===0){await page.screenshot({path:info.outputPath('next-course-320x568.png')});await page.setViewportSize({width:390,height:844});}
     }
   }
+  await writeFile(info.outputPath('observed-score-coverage.json'),JSON.stringify({mode,credits,misses,observed},null,2));
+  expect(credits).toBeGreaterThan(0);expect(misses).toBeGreaterThan(0);
   expect(await page.evaluate(k=>localStorage.getItem(k),legacyKey)).toBeNull();await page.reload();
   for(let i=0;i<3;i++)await expect(page.locator(`#ad-courses button[data-course="${i}"]`)).toBeEnabled();
   expect(errors).toEqual([]);

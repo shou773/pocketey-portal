@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { advance, BLOCKS, COURSES, createState, GATES, KNOTS, queueTurn, roadX, collision, STEP, type State } from '../../../src/games/prototypes/alpine/model';
 import { mergeRecords, parseProgress, precision, recordClear, serializeProgress, unlocked } from '../../../src/games/prototypes/alpine/progress';
 
@@ -75,4 +77,31 @@ test('newer saves are read-only and conservative merge never lowers another tab 
 });
 test('invalid course indices clamp safely',()=>{
   assert.equal(createState(-1).course,0);assert.equal(createState(Infinity).course,0);assert.equal(createState(999).course,2);
+});
+
+// Only accumulated numeric noise at the existing inclusive edges receives tolerance.
+test('accepted Alpine model restores exactly outside the reviewed precision comparisons',()=>{
+  const source=readFileSync('src/games/prototypes/alpine/model.ts','utf8')
+    .replace('const PRECISION_ROUNDOFF = 1e-9; // Metres: accumulated float noise, not an extra input frame.\n','')
+    .replace('s.firstInput + PRECISION_ROUNDOFF >= PRECISION_NEAR && s.firstInput - PRECISION_ROUNDOFF <= PRECISION_FAR','s.firstInput >= PRECISION_NEAR && s.firstInput <= PRECISION_FAR');
+  assert.equal(createHash('sha256').update(source).digest('hex'),'2c67578c555ee3ef51e792e1307adb2356739eec653e987f8a238fc391340678');
+});
+test('inclusive precision edges absorb float noise but reject real early and late latches',()=>{
+  for(let course=0;course<COURSES.length;course++)for(const [distance,credit] of [
+    [1.2,1],[1.1999999999999567,1],[2.8,1],[2.80000000000004,1],
+    [1.1,0],[2.9,0],[1.2-1e-8,0],[2.8+1e-8,0],
+  ]) {
+    const s=createState(course),gate=COURSES[course].gates[0];s.phase='playing';s.z=gate.z-distance;
+    assert.ok(queueTurn(s,gate.direction));const first=s.firstInput;
+    s.z=gate.z-1;queueTurn(s,gate.direction);assert.equal(s.firstInput,first);
+    s.z=gate.z-4*STEP;advance(s);assert.equal(s.precise,credit,`${course}/${distance}`);
+    advance(s);assert.equal(s.precise,credit,'one award per crossing');
+  }
+});
+test('numeric tolerance never awards missing or wrong-direction input',()=>{
+  for(const direction of [null,1] as const) {
+    const s=createState();s.phase='playing';s.z=8;
+    if(direction!==null)queueTurn(s,direction);
+    s.z=10-4*STEP;advance(s);assert.equal(s.precise,0);
+  }
 });

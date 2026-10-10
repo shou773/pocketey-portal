@@ -43,6 +43,6 @@ try {
     if(errors.length)throw new Error(errors.join('\n'));await context.close();
   }
 } finally {
-  await writeFile(`${out}/report.json`,JSON.stringify({source:process.env.GITHUB_SHA,baseline:'0740cb3272e92f934a350ba9a8d5f55a23cd7158',browser:browser.version(),fileComparison,samples,note:'Fixed matched viewport/input/sound-OFF conditions. Full ordinary-keyboard clears and uncensored wall-clock frame intervals. Baseline Alpine had no existing FPS gate: measurements are diagnostic, not a new all-green performance claim.'},null,2));
+  await writeFile(`${out}/report.json`,JSON.stringify({source:process.env.SOURCE_SHA??process.env.GITHUB_SHA,baseline:'2e1f9dad2ef4a74e2e43622b4cbc4d7f28455d8b',browser:browser.version(),fileComparison,samples,note:'Fixed matched viewport/input/sound-OFF conditions. Full ordinary-keyboard clears and uncensored wall-clock frame intervals. Baseline Alpine had no existing FPS gate: measurements are diagnostic, not a new all-green performance claim.'},null,2));
   await browser.close();for(const server of servers)server.close();
 }

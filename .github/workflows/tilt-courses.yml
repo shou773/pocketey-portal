@@ -23,8 +23,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - name: Preserve accepted integration outside reviewed Amber campaign and shared count/reset files
-        run: git diff --exit-code f681d495d572747012de7c176f09f01d0144039c HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/model.ts' ':(exclude)src/games/amber-campaign.ts' ':(exclude)src/games/app.ts' ':(exclude)src/games/copy.ts' ':(exclude)src/components/ActionGame.astro' ':(exclude)src/components/GamePortal.astro'
+      - name: Preserve accepted integration outside the exact-guarded Alpine precision comparison
+        run: git diff --exit-code 2e1f9dad2ef4a74e2e43622b4cbc4d7f28455d8b HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/alpine/model.ts'
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
