@@ -1,14 +1,15 @@
+import './amber-campaign.test';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { amberFailure, crossedFirstSpike, showAmberCoach } from '../../src/games/amber-guidance';
 import { createState, stages, step, DT } from '../../src/games/model';
 test('original stage geometry and hazards remain byte-for-byte serialized data',()=>{
-  assert.equal(createHash('sha256').update(JSON.stringify(stages)).digest('hex'),'ef69e447ad37527d07305e5934a983233fc8075206ea64f10d6fc2165c358552');
+  assert.equal(createHash('sha256').update(JSON.stringify({orbit:stages.orbit,amber:stages.amber.slice(0,3)})).digest('hex'),'ef69e447ad37527d07305e5934a983233fc8075206ea64f10d6fc2165c358552');
 });
 test('every actual spike collision identifies the struck hazard without changing state',()=>{
   let edge=0,ordinary=0;
-  for(const [index,level] of stages.amber.entries())for(const h of level.hazards){
+  for(const [index,level] of stages.amber.slice(0,3).entries())for(const h of level.hazards){
     const s=createState('amber',index);s.x=h.x;s.y=h.y;step(s,{axis:0,jump:false});
     assert.equal(s.status,'dead');const before={...s},reason=amberFailure(s);
     const expected=index===2&&[19.4,40.4,63.4].includes(h.x)?'edge-spike':'spike';

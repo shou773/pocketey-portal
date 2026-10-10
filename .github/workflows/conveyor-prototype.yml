@@ -29,8 +29,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Preserve accepted integration outside reviewed Tilt files and count-only portal copy
-        run: git diff --exit-code d00c2aea53b2c292fdccbaf69984d50f24d4a2e2 HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/prototypes/ball/model.ts' ':(exclude)src/games/prototypes/ball/progress.ts' ':(exclude)src/games/prototypes/ball/app.ts' ':(exclude)src/components/GamePortal.astro'
+      - name: Preserve accepted integration outside reviewed Amber campaign and shared count/reset files
+        run: git diff --exit-code f681d495d572747012de7c176f09f01d0144039c HEAD -- src public package.json package-lock.json 'astro.config.*' 'tsconfig*.json' ':(exclude)src/games/model.ts' ':(exclude)src/games/amber-campaign.ts' ':(exclude)src/games/app.ts' ':(exclude)src/games/copy.ts' ':(exclude)src/components/ActionGame.astro' ':(exclude)src/components/GamePortal.astro'
       - run: npm run check && npm run check:games && npm test && npm run build
       - name: Mark exact production source and file digests
         run: |

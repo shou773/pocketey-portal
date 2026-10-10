@@ -115,3 +115,12 @@ One bounded Conveyor comparison changes warm-kraft body paint and bold ink-teal 
 - A conservative all-brake route and a faster brake-before-turn/release route must clear with ordinary keyboard and touch. Model-only observations at65/100/150/200ms support both policies; native proof remains a separate gate.
 - Read-only v1/v2 import into stable-ID v3. Preserve all five old bests, never invent course6 completion, and reread/merge before each write. Native separate-tab checks must retain faster current/other-course bests and protect a future-format replacement after boot.
 - Accept only with legible320/390px live necks, reachable six-card JA/EN menus, old-course matched renders, and unchanged≤14draw/<6,000triangle new-course budgets. Retain45FPS/p95≤40ms historical assertions; report both their existing first-ten-frame exclusion and full uncensored intervals. Known software failures remain explicit, with no resolution adjustment or retry-until-green.
+
+
+## Amber fourth course: landing / relaunch rhythm (candidate)
+
+- Append Landing Beats: 70 m, seven platforms, two short hazard-free landing pads (3.6 m lower, 3.8 m rising), wide recovery. Original three Amber and all Orbit layouts, motion and renderer stay exact. This is a cadence variation, not a claim of the hardest course or mandatory stopping.
+- Separate stable-ID Amber campaign key imports historical and current-layout times separately. Only a current course-3 clear unlocks course 4. Normal Amber play leaves the shared legacy key untouched; normal Orbit does not access the Amber key. Reread/fastest-merge and future-format protection apply before every write; explicit two-game reset preserves unknown future formats and reports partial failures.
+- Acceptance: four ordinary keyboard/touch clears (continuous cadence and stopped-pad relaunch), real discrete jump edges / held-pointer traces, earned 3→4 transition, both-tab save safety, explicit reset from Orbit, retained Orbit3/3 and old Amber clears, 320/390 approach and grounded-pad pixels, compact JA/EN menus, source-marked build.
+- Performance: keep historical 45 FPS / p95 ≤40 ms assertions. Include raw intervals and a same-pointer/framebuffer original-course comparison; a stationary diagnostic is not a full-course or phone result. Known software-renderer failures remain open.
+- Deferred: Orbit collision-specific retry copy, Pulse objective-specific failure help, and a possible Orbit split-landing branch. No such changes are bundled here.

@@ -1,3 +1,4 @@
+import { AMBER_CAMPAIGN_KEY, parseAmberCampaign, mergeAmberCampaign, serializeAmberCampaign } from './amber-campaign';
 import {createGameAudio} from './audio';
 import { cleanSave, createState, DT, SAVE_KEY, stages, step, type Kind } from './model';
 import { createView } from './render';
@@ -15,24 +16,39 @@ export function boot() {
     const span = document.createElement('span'); span.className = `asset-icon ${className}`;
     span.setAttribute('aria-hidden', 'true'); span.style.setProperty('--icon', `url('/games/assets/lucide/${name}.svg')`); return span;
   }
-  let save = cleanSave(null), storageOkay = true;
+  let save = cleanSave(null), storageOkay = true, resetKeptNewer = false;
+  let amberCampaign = parseAmberCampaign(null);
   let signalProgress = parseSignalProgress(null), signalStorageOkay = true, signalRun = createSignalRun(0);
   if (kind === 'orbit') { try { signalProgress = parseSignalProgress(localStorage.getItem(SIGNAL_SAVE_KEY)); signalStorageOkay = signalProgress.writable; } catch { signalStorageOkay = false; } }
   function persistSignals(reset = false) {
-    if (!signalProgress.writable) { signalStorageOkay = false; return; }
+    if (!signalProgress.writable) { signalStorageOkay = false; if(reset)resetKeptNewer=true; return; }
     try {
       const latest = parseSignalProgress(localStorage.getItem(SIGNAL_SAVE_KEY));
-      if (!latest.writable) { signalProgress.writable = false; signalStorageOkay = false; return; }
+      if (!latest.writable) { signalProgress.writable = false; signalStorageOkay = false; if(reset)resetKeptNewer=true; return; }
       if (!reset) signalProgress.best = signalProgress.best.map((n, i) => n === null ? latest.best[i] : Math.max(n, latest.best[i] ?? 0));
       localStorage.setItem(SIGNAL_SAVE_KEY, serializeSignalProgress(signalProgress)); signalStorageOkay = true;
     } catch { signalStorageOkay = false; }
   }
-  try { save = cleanSave(JSON.parse(localStorage.getItem(SAVE_KEY) || 'null')); } catch { storageOkay = false; }
-  function persist(reset = false) {
+  try { const value=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');save=cleanSave(value);if(Number.isSafeInteger(value?.version)&&value.version>1)storageOkay=false; } catch { storageOkay = false; }
+  function adoptAmber() { save.amber = { unlocked: amberCampaign.unlocked, best: amberCampaign.best, challengeBest: amberCampaign.challengeBest }; save.sound = amberCampaign.sound; }
+  if(kind==='amber') {
+    try { amberCampaign=parseAmberCampaign(localStorage.getItem(AMBER_CAMPAIGN_KEY),localStorage.getItem(SAVE_KEY)); adoptAmber(); if(!amberCampaign.writable)storageOkay=false; } catch { storageOkay=false; }
+  }
+  function persistAmber(reset=false) {
     try {
+      const latest=parseAmberCampaign(localStorage.getItem(AMBER_CAMPAIGN_KEY),localStorage.getItem(SAVE_KEY));
+      const current=reset?parseAmberCampaign(null):{...save.amber,sound:save.sound,writable:amberCampaign.writable};
+      if(!latest.writable||!current.writable) { current.writable=false;storageOkay=false;if(reset)resetKeptNewer=true; }
+      else { if(!reset)mergeAmberCampaign(current,latest);localStorage.setItem(AMBER_CAMPAIGN_KEY,serializeAmberCampaign(current));storageOkay=true; }
+      if(kind==='amber'){amberCampaign=current;adoptAmber();}
+    } catch { storageOkay=false; }
+  }
+  function persist(reset = false) {
+    if(kind==='amber'&&!reset){persistAmber();note();return;}
+    try {
+      const raw=localStorage.getItem(SAVE_KEY);let value;try{value=JSON.parse(raw||'null');}catch{}if(Number.isSafeInteger(value?.version)&&value.version>1){if(reset)resetKeptNewer=true;throw new Error('Newer legacy save retained');}
       if (!reset) {
-        let latest = cleanSave(null);
-        try { latest = cleanSave(JSON.parse(localStorage.getItem(SAVE_KEY) || 'null')); } catch { /* Replace malformed saves. */ }
+        const latest = cleanSave(value);
         for (const game of ['orbit', 'amber'] as const) {
           save[game].unlocked = Math.max(save[game].unlocked, latest[game].unlocked);
           for (const key of ['best', 'challengeBest'] as const) {
@@ -42,9 +58,10 @@ export function boot() {
       }
       localStorage.setItem(SAVE_KEY, JSON.stringify(save)); storageOkay = true;
     } catch { storageOkay = false; }
+    if(reset){const sharedOkay=storageOkay;persistAmber(true);storageOkay=sharedOkay&&storageOkay;}
     note();
   }
-  function note() { $('save-note').textContent = storageOkay ? tr('記録はこのブラウザに保存されます。', 'Progress is saved in this browser.') : mode === 'recovery' ? tr('保存を利用できません。再読み込みすると未保存の記録は失われます。', 'Storage is unavailable. Reloading loses unsaved progress.') : tr('保存を利用できません。この画面では続けて遊べます。', 'Storage is unavailable. You can keep playing here.'); const oldBest=save[kind].best[selected]; if(storageOkay && oldBest) $('save-note').textContent += tr(` 旧コースBEST ${oldBest.toFixed(2)}秒は別保存。`, ` Previous course BEST ${oldBest.toFixed(2)}s is kept separately.`); if (kind === 'orbit' && !signalStorageOkay) $('save-note').textContent += tr(' 通信片の記録は保存できません。この画面では遊べます。', ' Signal records cannot be saved. You can still play here.'); }
+  function note() { $('save-note').textContent = storageOkay ? tr('記録はこのブラウザに保存されます。', 'Progress is saved in this browser.') : mode === 'recovery' ? tr('保存を利用できません。再読み込みすると未保存の記録は失われます。', 'Storage is unavailable. Reloading loses unsaved progress.') : tr('保存を利用できません。この画面では続けて遊べます。', 'Storage is unavailable. You can keep playing here.'); const oldBest=save[kind].best[selected]; if(storageOkay && oldBest) $('save-note').textContent += tr(` 旧コースBEST ${oldBest.toFixed(2)}秒は別保存。`, ` Previous course BEST ${oldBest.toFixed(2)}s is kept separately.`); if (kind === 'orbit' && !signalStorageOkay) $('save-note').textContent += tr(' 通信片の記録は保存できません。この画面では遊べます。', ' Signal records cannot be saved. You can still play here.'); if(resetKeptNewer)$('save-note').textContent+=tr(' 新しい形式の記録は消去せず残しました。',' Newer-format records were kept.'); }
   let selected = 0, state = createState(kind, 0), mode: 'menu' | 'play' | 'pause' | 'result' | 'reset' | 'recovery' = 'menu';
   const coach=kind==='amber'?$('amber-coach'):null;
   let coachDismissed=kind==='amber'&&(save.amber.unlocked>1||save.amber.best[0]!==null||save.amber.challengeBest[0]!==null);
@@ -82,19 +99,19 @@ export function boot() {
     mode = 'result';audio.setPlaying(false);
     if (state.status === 'clear') {
       if (kind === 'orbit' && recordSignalClear(signalProgress, signalRun, state) && announce) persistSignals();
-      const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(3, selected + 2)); progress.challengeBest[selected] = Math.min(progress.challengeBest[selected] ?? Infinity, state.time); if (announce) persist();
-      panel(selected === 2 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.challengeBest[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.challengeBest[selected]!.toFixed(2)}s`));
+      const progress = save[kind]; progress.unlocked = Math.max(progress.unlocked, Math.min(stages[kind].length, selected + 2)); progress.challengeBest[selected] = Math.min(progress.challengeBest[selected] ?? Infinity, state.time); if (announce) persist();
+      panel(selected === stages[kind].length-1 ? tr('全ステージクリア！','ALL CLEAR!') : tr('クリア！','STAGE CLEAR'), tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 / BEST ${progress.challengeBest[selected]!.toFixed(2)}秒`,`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s / BEST ${progress.challengeBest[selected]!.toFixed(2)}s`));
       if (kind === 'orbit') $('panel-copy').textContent = tr(`${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}秒 · 通信片 ${signalCount(signalRun)} / 3（ベスト ${signalProgress.best[selected]} / 3）`, `${localizedStageName(kind,selected)} · ${state.time.toFixed(2)}s · SIGNALS ${signalCount(signalRun)} / 3 (BEST ${signalProgress.best[selected]} / 3)`);
-      if (announce) audio.cue('clear'); if (selected < 2) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
+      if (announce) audio.cue('clear'); if (selected < stages[kind].length-1) button(tr('次のステージ', 'Next stage'), () => { selected++; start(); }, true); else button(tr('もう一度', 'Play again'), start, true);
     } else { panel(tr('もう一度、いこう。', 'One more try.'), kind==='amber'?amberRetryCopy():tr('すき間の光るふちでジャンプ。左右の足場も確かめよう。', 'Jump near a glowing gap edge. Check the next platform, too.')); if (announce) audio.cue('death'); button(tr('すぐにリトライ', 'Retry now'), start, true); }
     if (kind === 'orbit' && state.status === 'dead' && signalCount(signalRun) > 0) $('panel-copy').textContent += tr(' 通信片の記録はゴールしたときだけ残ります。', ' Signal records only count when you reach the finish.');
-    if (state.status === 'clear' && selected < 2) button(tr('もう一度', 'Play again'), start);
+    if (state.status === 'clear' && selected < stages[kind].length-1) button(tr('もう一度', 'Play again'), start);
     button(tr('ステージ選択', 'Choose a stage'), menu);
   }
   function amberRetryCopy() {
     const reason=amberFailure(state);
     if(reason===null)return tr('着地先とトゲを確かめて、もう一度。手前で止まって準備できます。', 'Check the landing and spikes, then try again. You can stop to line up.');
-    if(reason==='fall')return tr('足場から落ちました。着地先を見て、ジャンプ中も移動を続けよう。手前で止まって準備できます。', 'You fell off the platforms. Look for the landing and keep moving through the jump. You can stop before the gap to line up.');
+    if(reason==='fall')return tr('足場から落ちました。着地先を見て、空中でも左右の移動で位置を合わせよう。足場の上では止まって準備できます。', 'You fell off the platforms. Use left and right movement in the air to aim for solid ground. You can stop on a platform to line up the next jump.');
     if(reason==='edge-spike')return tr('ふちのトゲに接触しました。トゲの手前から跳び、すき間も一度に越えよう。', 'You hit an edge spike. Jump before the spike and clear it together with the gap.');
     return tr('トゲに接触しました。トゲの手前でJUMP。移動と同時押しで跳び越そう。', 'You hit a spike. Jump before it, holding movement and JUMP together to cross.');
   }
@@ -111,7 +128,7 @@ export function boot() {
     $('scene').tabIndex=0;
     $('amber-coach-dismiss').onclick=()=>{coachDismissed=true;renderCoach();$('scene').focus({preventScroll:true});};
   }
-  function renderReset() { mode = 'reset'; panel(tr('記録をリセット？', 'Reset your records?'), tr('Orbit Ribbon と Amber Step のステージ・自己ベスト・通信片・音設定だけを消去します。ほかのゲームの記録は残ります。', 'This clears only the stages, personal bests, signal records and sound settings for Orbit Ribbon and Amber Step. Other games and your language preference are kept.')); button(tr('キャンセル', 'Cancel'), menu, true); button(tr('この2作品をリセット', 'Reset these two games'), () => { audio.reset(); save = cleanSave(null); signalProgress = parseSignalProgress(null); persistSignals(true); signalRun = createSignalRun(0); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); }
+  function renderReset() { mode = 'reset'; panel(tr('記録をリセット？', 'Reset your records?'), tr('Orbit Ribbon と Amber Step のステージ・自己ベスト・通信片・音設定だけを消去します。ほかのゲームの記録は残ります。', 'This clears only the stages, personal bests, signal records and sound settings for Orbit Ribbon and Amber Step. Other games and your language preference are kept.')); button(tr('キャンセル', 'Cancel'), menu, true); button(tr('この2作品をリセット', 'Reset these two games'), () => { resetKeptNewer=false;audio.reset(); save = cleanSave(null); signalProgress = parseSignalProgress(null); persistSignals(true); signalRun = createSignalRun(0); selected = 0; state = createState(kind, 0); view.load(0); persist(true); soundLabel(); menu(); }); }
   $('reset').onclick = renderReset;
   document.querySelectorAll<HTMLButtonElement>('[data-input]').forEach(b => {
     b.addEventListener('pointerdown', e => { e.preventDefault(); if (mode !== 'play') return; b.setPointerCapture(e.pointerId); pointers.set(e.pointerId, b.dataset.input!); b.classList.add('held'); if (b.dataset.input === 'jump') jumpQueued = true; });
@@ -156,7 +173,7 @@ export function boot() {
       }
       if (state.time > 5) textIfChanged(hint, '');
     }
-    textIfChanged(stageLabel, `0${selected + 1} / 03`); textIfChanged(stageName, localizedStageName(kind,selected)); textIfChanged(timer, state.time.toFixed(2)); progressFill.style.transform = `scaleX(${Math.min(1, Math.max(0, state.x / stages[kind][selected].length))})`;
+    textIfChanged(stageLabel, `0${selected + 1} / ${String(stages[kind].length).padStart(2,'0')}`); textIfChanged(stageName, localizedStageName(kind,selected)); textIfChanged(timer, state.time.toFixed(2)); progressFill.style.transform = `scaleX(${Math.min(1, Math.max(0, state.x / stages[kind][selected].length))})`;
     if (coach)renderCoach();
     if (kind === 'orbit') { textIfChanged($('signals'), tr(`通信片 ${signalCount(signalRun)} / 3 · 任意`, `SIGNALS ${signalCount(signalRun)} / 3 · OPTIONAL`)); root.dataset.signalMask = String(signalRun.mask); root.dataset.signals = String(signalCount(signalRun)); }
     // Read-only diagnostics for reproducible browser verification; no state setter or gameplay bypass.

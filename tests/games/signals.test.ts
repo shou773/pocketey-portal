@@ -5,7 +5,7 @@ import { createState, stages, step } from '../../src/games/model';
 import { SIGNALS, SIGNAL_RADIUS, SIGNAL_COURSE_IDS, createSignalRun, collectSignals, signalCount, recordSignalClear, parseSignalProgress, serializeSignalProgress } from '../../src/games/signals';
 
 test('all original Orbit and Amber course data remains unchanged', () => {
-  assert.equal(createHash('sha256').update(JSON.stringify(stages)).digest('hex'), 'ef69e447ad37527d07305e5934a983233fc8075206ea64f10d6fc2165c358552');
+  assert.equal(createHash('sha256').update(JSON.stringify({orbit:stages.orbit,amber:stages.amber.slice(0,3)})).digest('hex'), 'ef69e447ad37527d07305e5934a983233fc8075206ea64f10d6fc2165c358552');
 });
 
 test('nine optional signals sit on real platforms outside hazard footprints and inside visible edges', () => {

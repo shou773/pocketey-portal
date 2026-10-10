@@ -95,6 +95,8 @@ test('reread merge retains faster current/other-course records and protects futu
 
 test('portal update is limited to accurate Tilt count and appended name in both languages',()=>{
  let source=readFileSync('src/components/GamePortal.astro','utf8');
+ const amberOnly=[["3つの庭を、自分のペースで。", "4つの庭を、自分のペースで。"], ["Reach the finish in three stages at your own pace.", "Reach the finish in four stages at your own pace."], ["03 琥珀の庭'", "03 琥珀の庭 → 04 着地の間合い'"], ["03 Amber Garden'", "03 Amber Garden → 04 Landing Beats'"], ["Orbit Ribbon・Amber Step・Pulse Driftは3ステージ。", "Orbit Ribbon・Pulse Driftは3ステージ、Amber Stepは4ステージ。"], ["Orbit Ribbon, Amber Step and Pulse Drift have three stages.", "Orbit Ribbon and Pulse Drift have three stages; Amber Step has four."]];
+ for(const [before,after] of amberOnly){assert.equal(source.split(after).length-1,1);source=source.replace(after,before);}
  const replacements=[["空に浮かぶ5つの道を", "空に浮かぶ6つの道を"], ["Follow five floating trails", "Follow six floating trails"], ["05 ふたつの頂点'", "05 ふたつの頂点 → 06 細道の入口'"], ["05 Double apex'", "05 Double apex → 06 Narrow passages'"], ["TiltTrailは5コースで", "TiltTrailは6コースで"], ["4・5は前のコース", "4〜6は前のコース"], ["TiltTrail has five courses", "TiltTrail has six courses"], ["courses 4 and 5 unlock", "courses 4–6 unlock"]];
  for(const [before,after] of replacements){assert.equal(source.split(after).length-1,1);source=source.replace(after,before);}
  assert.equal(createHash('sha256').update(source).digest('hex'),'3611b21e5e27845a3d912a8576028b147333a11ec18bf4a8f6f1fe556c327a54');
