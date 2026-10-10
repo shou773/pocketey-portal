@@ -62,7 +62,7 @@ jobs:
         continue-on-error: true
         run: |
           npx playwright install --with-deps firefox webkit
-          npx playwright test --config playwright.cross.config.ts --output=test-results/amber-campaign/cross
+          xvfb-run --auto-servernum npx playwright test --config playwright.cross.config.ts --output=test-results/amber-campaign/cross
       - name: Actual before and after guidance pixels
         id: captures
         continue-on-error: true
