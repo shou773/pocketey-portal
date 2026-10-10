@@ -57,6 +57,12 @@ jobs:
         id: regressions
         continue-on-error: true
         run: npx playwright test --output=test-results/amber-guidance/retained --grep 'amber-(keyboard|touch)|failure/retry|corrupt/blocked|WebGL context loss'
+      - name: Retained Firefox and WebKit original-course save and recovery matrix
+        id: cross
+        continue-on-error: true
+        run: |
+          npx playwright install --with-deps firefox webkit
+          npx playwright test --config playwright.cross.config.ts --output=test-results/amber-campaign/cross
       - name: Actual before and after guidance pixels
         id: captures
         continue-on-error: true
@@ -79,7 +85,9 @@ jobs:
         if: always()
         with:
           name: amber-guidance-evidence
-          path: test-results/
+          path: |
+            test-results/
+            cross-results/report.json
           retention-days: 14
       - name: Keep every functional and existing performance result visible
         if: always()
@@ -89,7 +97,9 @@ jobs:
           CAPTURES: ${{ steps.captures.outcome }}
           CAMPAIGN: ${{ steps.campaign.outcome }}
           CAMPAIGN_CAPTURES: ${{ steps.campaign_captures.outcome }}
+          CROSS: ${{ steps.cross.outcome }}
         run: |
           printf 'guidance=%s regressions=%s captures=%s\n' "$GUIDANCE" "$REGRESSIONS" "$CAPTURES"
           printf 'campaign=%s campaign_captures=%s\n' "$CAMPAIGN" "$CAMPAIGN_CAPTURES"
-          test "$GUIDANCE" = success && test "$REGRESSIONS" = success && test "$CAPTURES" = success && test "$CAMPAIGN" = success && test "$CAMPAIGN_CAPTURES" = success
+          printf 'cross=%s\n' "$CROSS"
+          test "$CROSS" = success && test "$GUIDANCE" = success && test "$REGRESSIONS" = success && test "$CAPTURES" = success && test "$CAMPAIGN" = success && test "$CAMPAIGN_CAPTURES" = success

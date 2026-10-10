@@ -1,3 +1,4 @@
+import {AMBER_CAMPAIGN_KEY,AMBER_IDS} from '../../src/games/amber-campaign';
 import {test,expect} from '@playwright/test';
 import {SAVE_KEY} from '../../src/games/model';
 import {play,read} from './input';
@@ -22,8 +23,8 @@ for(const kind of ['orbit','amber'] as const){
   await page.locator('#sound').click();await page.reload();
   await expect(page.locator('#sound')).toHaveText('音 ON');
   await expect(page.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();
-  const saved=await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY);
-  expect(JSON.parse(saved!)[kind].challengeBest.every((n:number)=>n>0)).toBe(true);
+  const saveKey=kind==='amber'?AMBER_CAMPAIGN_KEY:SAVE_KEY;const saved=await page.evaluate(k=>localStorage.getItem(k),saveKey);
+  const record=JSON.parse(saved!);if(kind==='amber'){expect(AMBER_IDS.slice(0,3).every(id=>record.records[id].challengeBest>0)).toBe(true);expect(record.records['landing-beats'].challengeBest).toBeNull();await expect(page.locator('#stages button').nth(3)).toBeEnabled();}else expect(record[kind].challengeBest.every((n:number)=>n>0)).toBe(true);
   const reopened=await page.context().newPage();await reopened.goto(route);
   await expect(reopened.getByRole('button',{name:/ステージ 3 /})).toBeEnabled();await reopened.close();
   await page.getByRole('button',{name:'ステージ 1 をはじめる'}).click();
@@ -36,10 +37,10 @@ for(const kind of ['orbit','amber'] as const){
   await expect(page.locator('#pause')).toBeDisabled();await expect(page.locator('[data-input=jump]')).toBeDisabled();
   const frozen=await read(page);await page.keyboard.press('KeyR');await page.waitForTimeout(200);
   expect((await read(page)).x).toBe(frozen.x);
-  expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);
+  expect(await page.evaluate(k=>localStorage.getItem(k),saveKey)).toBe(saved);
   await page.getByRole('button',{name:'再読み込み',exact:true}).click();
   await expect(page.locator('#game')).toHaveAttribute('data-mode','menu');
-  expect(await page.evaluate(k=>localStorage.getItem(k),SAVE_KEY)).toBe(saved);
+  expect(await page.evaluate(k=>localStorage.getItem(k),saveKey)).toBe(saved);
   expect(errors).toEqual([]);
   await info.attach('engine',{body:JSON.stringify({browser:browser.version(),viewport:page.viewportSize(),input:'keyboard; phone dimensions, not physical touch'}),contentType:'application/json'});
  });
@@ -83,3 +84,4 @@ test('corrupt storage and scoped reset',async({page})=>{
  expect(await page.evaluate(()=>localStorage.getItem('unrelated'))).toBe('keep');
  expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)!).amber.unlocked,SAVE_KEY)).toBe(1);
 });
+
