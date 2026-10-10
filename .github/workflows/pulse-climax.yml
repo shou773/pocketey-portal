@@ -50,7 +50,7 @@ jobs:
         continue-on-error: true
         run: |
           mkdir -p test-results/pulse-climax
-          printf '%s\n' 'Stage1/2 keyboard+touch routes reuse exact999deaa/run37997775310 evidence. The source fence and exact-restoration units preserve all combat/model/rendering code; the reviewed app change only selects observed deadline advice. Existing boss paint and warning identity checks remain intact. Both boss routes, compact/reduced-motion and real context loss rerun on this exact head.' > test-results/pulse-climax/reused-route-scope.txt
+          printf '%s\n' 'Stage1/2 keyboard+touch routes reuse exact999deaa/run37997775310 evidence. The source fence and exact-restoration units preserve all combat/model/rendering code; the reviewed app changes select observed deadline advice and round the displayed countdown at the same deadline. Existing boss paint and warning identity checks remain intact. Both boss routes, compact/reduced-motion and real context loss rerun on this exact head.' > test-results/pulse-climax/reused-route-scope.txt
           npx playwright test --config tests/prototypes/shooter/climax.config.ts --grep 'stage3|compact|retry, pause'
       - name: Retained Pulse input, language, storage and context checks
         id: retained

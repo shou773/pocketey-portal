@@ -21,9 +21,9 @@ test('stage3 observed deadline and damage help survive language changes and retr
  page.on('pageerror',e=>errors.push(e.message));await page.goto('http://localhost:4322/games/pulse-drift/?lang=en');
  await page.getByRole('button',{name:'Stage 3',exact:true}).click();const saved=await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'));
  await page.getByRole('button',{name:'Launch',exact:true}).click();await page.waitForFunction(()=>JSON.parse(document.querySelector<HTMLElement>('#pulse')!.dataset.state!).time>.1);
- const route=await drivePulse(page,true,undefined,chooseTimeoutLane);fs.writeFileSync(info.outputPath('deadline-route.json'),JSON.stringify({source:process.env.SOURCE_SHA,...route,errors},null,2));
+ const route=await drivePulse(page,true,undefined,chooseTimeoutLane),displayedRemaining=await page.locator('#clock').textContent();fs.writeFileSync(info.outputPath('deadline-route.json'),JSON.stringify({source:process.env.SOURCE_SHA,...route,displayedRemaining,errors},null,2));
  expect(route.final.status).toBe('lost');expect(route.final.hp).toBeGreaterThan(0);expect(route.final.time+1e-9).toBeGreaterThanOrEqual(48);expect(route.final.enemies.some(e=>e.kind==='boss'&&e.hp>0)).toBe(true);
- await expect(page.locator('#overlay')).toContainText('Time ran out.');await expect(page.locator('#overlay')).toContainText('Line up with the boss');
+ await expect(page.locator('#clock')).toHaveText('0s');await expect(page.locator('#overlay')).toContainText('Time ran out.');await expect(page.locator('#overlay')).toContainText('Line up with the boss');
  await page.screenshot({path:info.outputPath('deadline-320-en.png')});await page.getByRole('button',{name:'日本語',exact:true}).click();await expect(page.locator('#overlay')).toContainText('時間切れ');await page.screenshot({path:info.outputPath('deadline-320-ja.png')});
  expect(await page.evaluate(()=>localStorage.getItem('pocketey-pulse-drift-v1'))).toBe(saved);
  await page.getByRole('button',{name:'もう一度',exact:true}).click();await expect(page.locator('#pulse')).toHaveAttribute('data-mode','play');expect((await readPulse(page)).time).toBeLessThan(1);await expect(page.locator('#overlay')).not.toContainText('時間切れ');
