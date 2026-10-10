@@ -2,6 +2,7 @@ import { expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { stages } from '../../src/games/model';
 import { SIGNALS } from '../../src/games/signals';
+import { signalHazardTarget } from './signal-policy';
 export const evidence = 'test-results/orbit-signals';
 export const readSignals = (page: Page) => page.locator('#game').evaluate(el => ({ ...(el as HTMLElement).dataset }));
 /** Observe diagnostics only. Every movement and jump uses keyboard/CDP touch. */
@@ -36,7 +37,7 @@ export async function driveSignals(page: Page, index: number, collect: boolean, 
     if(d.status!=='running')break;
     const x=Number(d.x),z=Number(d.z),tile=level.platforms.find(p=>x>=p.a-.23&&x<=p.b+.23);
     const gap=!!tile&&tile.b<level.length&&tile.b-x<1.1&&tile.b-x>-.15;
-    const h=level.hazards.find(h=>h.x+h.d/2+.3>x);let target=h&&h.x-x<12?(h.z>=0?-1.85:1.85):0;
+    const h=level.hazards.find(h=>h.x+h.d/2+.3>x);let target=signalHazardTarget(h,x,z);
     const signal=SIGNALS[index].find(p=>p.x+.65>x);if(collect&&signal&&signal.x-x<8)target=signal.z;
     const axis=Math.abs(target-z)<.14?0:Math.sign(target-z),jump=gap&&d.grounded==='true'&&x/7-lastJump>.3;if(jump)lastJump=x/7;
     await input([axis>0?'right':axis<0?'left':'',jump?'jump':''].filter(Boolean));await page.waitForTimeout(25);

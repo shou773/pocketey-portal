@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { signalHazardTarget } from './signal-policy';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createState, stages, step } from '../../src/games/model';
@@ -25,7 +26,7 @@ for (const interval of [.025, .05, .075]) for (const collect of [false, true]) f
       const tile = level.platforms.find(p => s.x >= p.a - .23 && s.x <= p.b + .23);
       const gap = !!tile && tile.b < level.length && tile.b - s.x < 1.1 && tile.b - s.x > -.15;
       const h = level.hazards.find(h => h.x + h.d / 2 + .3 > s.x);
-      let target = h && h.x - s.x < 12 ? (h.z >= 0 ? -1.85 : 1.85) : 0;
+      let target = signalHazardTarget(h, s.x, s.z);
       const signal = SIGNALS[index].find(p => p.x + .65 > s.x);
       if (collect && signal && signal.x - s.x < 8) target = signal.z;
       const jump = gap && s.grounded && s.time - lastJump > .3; if (jump) lastJump = s.time;
@@ -64,4 +65,43 @@ test('stable IDs validate optional records; old timer-shaped data does not inven
   for (const invalid of [-1,4,1.5,'3',null]) assert.deepEqual(parseSignalProgress(JSON.stringify({version:1,records:{'first-orbit':invalid}})).best,[null,null,null]);
   for (const raw of ['{','[]','null','{"version":1,"records":[]}']) assert.deepEqual(parseSignalProgress(raw).best,[null,null,null]);
   assert.equal(parseSignalProgress('{"version":2,"records":{"future":7}}').writable, false);
+});
+
+test('signal driver keeps either safe side of a centered pillar and preserves the default route', () => {
+  const center = stages.orbit[1].hazards[0];
+  assert.equal(signalHazardTarget(center, 14.7, 17 / 6), 17 / 6);
+  assert.equal(signalHazardTarget(center, 14.7, -17 / 6), -17 / 6);
+  assert.equal(signalHazardTarget(center, 5, 0), -1.85, 'zero-pickup start retains the original left route');
+  assert.equal(signalHazardTarget(center, 4, 0), 0, 'look-ahead boundary remains twelve metres');
+  assert.equal(signalHazardTarget(undefined, 14.7, 17 / 6), 0);
+  for (const h of stages.orbit[1].hazards.filter(h => h.z !== 0)) {
+    for (const z of [-2.9, 0, 2.9]) assert.equal(signalHazardTarget(h, h.x - 5, z), h.z > 0 ? -1.85 : 1.85);
+  }
+});
+
+test('exact failed post-pickup fixture reproduces the old collision and the corrected policy stays clear of it', () => {
+  // Retained 00f63f1 keyboard-all-course2 trace, immediately after signal 1.
+  // Fixture state is model-only; native routes still use ordinary controls from launch.
+  const fixture = () => Object.assign(createState('orbit', 1), { x: 14.7, z: 17 / 6, time: 2.1 });
+  const failed = fixture();
+  for (let tick = 0; tick < 33; tick++) step(failed, { axis: -1, jump: false });
+  assert.equal(failed.status, 'dead');
+  assert.ok(Math.abs(failed.x - 16.625) < 1e-10);
+  assert.ok(Math.abs(failed.z - 35 / 24) < 1e-10);
+  for (const side of [-1, 1]) for (const observeEvery of [3, 12, 18, 24]) {
+    const safe = fixture(); safe.z *= side;
+    const run = createSignalRun(1); run.mask = 1;
+    let axis = 0;
+    for (let tick = 0; tick < 48; tick++) {
+      if (tick % observeEvery === 0) {
+        const h = stages.orbit[1].hazards.find(h => h.x + h.d / 2 + .3 > safe.x);
+        const target = signalHazardTarget(h, safe.x, safe.z);
+        axis = Math.abs(target - safe.z) < .14 ? 0 : Math.sign(target - safe.z);
+      }
+      step(safe, { axis, jump: false }); collectSignals(run, safe);
+      assert.equal(safe.status, 'running');
+    }
+    assert.ok(safe.x > 16.7, 'passed the full pillar collision region');
+    assert.equal(signalCount(run), 1);
+  }
 });
